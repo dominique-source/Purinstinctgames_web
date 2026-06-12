@@ -389,6 +389,25 @@ h1,h2,h3,.disp{
 .j-stop.in .j-lvl:nth-child(4){animation-delay:.24s}.j-stop.in .j-lvl:nth-child(5){animation-delay:.32s}
 .j-stop.in .j-lvl:nth-child(6){animation-delay:.4s}
 @keyframes lvlUp{from{transform:scaleY(.2);transform-origin:bottom;opacity:0}to{transform:none;opacity:1}}
+.j-lvl{cursor:pointer;transition:background .25s,border-color .25s,transform .2s;font:inherit;color:inherit}
+.j-lvl:hover{border-color:rgba(204,255,0,.5);transform:translateY(-3px)}
+.j-lvl.sel{background:linear-gradient(180deg,rgba(204,255,0,.32),rgba(204,255,0,.08));border-color:var(--lime);
+  box-shadow:0 0 16px rgba(204,255,0,.35)}
+.j-lvl.sel i{color:var(--lime)}
+.j-lvl:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.j-lvl-detail{margin-top:14px;background:#101010;border:1px solid rgba(204,255,0,.3);border-radius:14px;
+  padding:16px 18px;max-width:330px;animation:lvlDetailIn .35s cubic-bezier(.16,1,.3,1);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%)}
+@keyframes lvlDetailIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.lvl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.lvl-tag{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:14px;letter-spacing:.12em;color:#0A0A0A;background:var(--lime);padding:3px 12px;
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.lvl-close{background:none;border:1px solid rgba(255,255,255,.2);border-radius:50%;width:26px;height:26px;
+  color:var(--muted);cursor:pointer;font-size:12px;line-height:1;transition:border-color .2s,color .2s}
+.lvl-close:hover{border-color:var(--lime);color:var(--lime)}
+.lvl-svg svg{width:100%;height:auto;display:block;border-radius:8px}
+.lvl-rule{margin-top:10px;font-size:14.5px;color:var(--muted);line-height:1.5}
 @media(max-width:860px){
   .j-stop{grid-template-columns:64px 1fr;padding:clamp(30px,7vw,48px) 0}
   .j-node{grid-column:1;width:44px;height:44px}
@@ -914,13 +933,21 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
       <div class="j-node"><span>02</span></div>
       <div class="j-card">
-        <div class="j-levels" aria-hidden="true">
-          <div class="j-lvl" style="--h:22%"><i>N1</i></div>
-          <div class="j-lvl" style="--h:36%"><i>N2</i></div>
-          <div class="j-lvl" style="--h:50%"><i>N3</i></div>
-          <div class="j-lvl" style="--h:64%"><i>N4</i></div>
-          <div class="j-lvl" style="--h:80%"><i>N5</i></div>
-          <div class="j-lvl on" style="--h:100%"><i>N6</i></div>
+        <div class="j-levels" role="tablist" aria-label="6 niveaux de difficulté">
+          <button class="j-lvl" type="button" data-lvl="1" style="--h:22%"><i>N1</i></button>
+          <button class="j-lvl" type="button" data-lvl="2" style="--h:36%"><i>N2</i></button>
+          <button class="j-lvl" type="button" data-lvl="3" style="--h:50%"><i>N3</i></button>
+          <button class="j-lvl" type="button" data-lvl="4" style="--h:64%"><i>N4</i></button>
+          <button class="j-lvl" type="button" data-lvl="5" style="--h:80%"><i>N5</i></button>
+          <button class="j-lvl on" type="button" data-lvl="6" style="--h:100%"><i>N6</i></button>
+        </div>
+        <div class="j-lvl-detail" id="lvlDetail" hidden>
+          <div class="lvl-head">
+            <span class="lvl-tag" id="lvlTag">Niveau 1</span>
+            <button class="lvl-close" id="lvlClose" type="button" aria-label="Fermer">✕</button>
+          </div>
+          <div class="lvl-svg" id="lvlSvg"></div>
+          <p class="lvl-rule" id="lvlRule"></p>
         </div>
         <div class="j-copy">
           <span class="j-step" data-i18n="j_learn_s">LE SPORT</span>
@@ -1386,6 +1413,7 @@ function applyLang(){
   });
   renderZoneCard(currentZone);
   if(window.__arena3dSetLang) window.__arena3dSetLang(lang);
+  if(window.__lvlRefresh) window.__lvlRefresh();
 }
 document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";applyLang();});
 document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";applyLang();});
@@ -2020,7 +2048,142 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
   let jrT; window.addEventListener("resize", ()=>{ clearTimeout(jrT); jrT = setTimeout(build, 150); });
   /* rebuild once fonts/images settle */
   window.addEventListener("load", build);
+  window.__journeyRebuild = build;
   build();
+})();
+
+/* ====================================================== */
+/* 6 difficulty levels — clickable, illustrated rules */
+/* ====================================================== */
+(function(){
+  const detail=document.getElementById("lvlDetail");
+  if(!detail) return;
+  const tagEl=document.getElementById("lvlTag"), svgEl=document.getElementById("lvlSvg"), ruleEl=document.getElementById("lvlRule");
+  const bars=[...document.querySelectorAll(".j-lvl")];
+
+  const RULES={
+    fr:["Toutes les passes sont permises.",
+        "Les passes vers l'avant sont interdites pour marquer (dernière passe).",
+        "Les passes avant sont interdites passé le centre de l'aire de jeu.",
+        "Aucune passe avant dans l'aire de jeu — seulement des coups de poing, des bottés et des redirections pour avancer le ballon.",
+        "Aucun poke dans la zone des buts.",
+        "Sur les bottés dans la zone des buts, le receveur doit être à l'extérieur de la zone au moment du coup de pied."],
+    en:["All passes are allowed.",
+        "Forward passes are forbidden on the scoring play (the final pass).",
+        "Forward passes are forbidden past the centre of the playing area.",
+        "No forward passes anywhere — only punches, kicks and redirections to advance the ball.",
+        "No pokes in the goal zone.",
+        "On kicks into the goal zone, the receiver must be outside the zone at the moment of the kick."]
+  };
+  const LBL={
+    fr:{gz:"ZONE DES BUTS",ok:"PERMIS",no:"INTERDIT",punch:"POING",kick:"BOTTÉ",redir:"REDIRECTION",poke:"POKE",recv:"RECEVEUR",lvl:"Niveau",centre:"CENTRE"},
+    en:{gz:"GOAL ZONE",ok:"ALLOWED",no:"FORBIDDEN",punch:"PUNCH",kick:"KICK",redir:"REDIRECT",poke:"POKE",recv:"RECEIVER",lvl:"Level",centre:"CENTRE"}
+  };
+
+  const LIME="#CCFF00", RED="#FF4438", MUT="rgba(255,255,255,.55)";
+  function arrow(x1,y1,x2,y2,c,dash){
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="2.5" ${dash?'stroke-dasharray="6 5"':''} marker-end="url(#ah${c===RED?'r':'l'})"/>`;
+  }
+  function curve(x1,y1,x2,y2,c){
+    const mx=(x1+x2)/2, my=Math.min(y1,y2)-46;
+    return `<path d="M ${x1} ${y1} Q ${mx} ${my} ${x2} ${y2}" fill="none" stroke="${c}" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#ah${c===RED?'r':'l'})"/>`;
+  }
+  function cross(x,y){
+    return `<g stroke="${RED}" stroke-width="3.4" stroke-linecap="round"><line x1="${x-8}" y1="${y-8}" x2="${x+8}" y2="${y+8}"/><line x1="${x-8}" y1="${y+8}" x2="${x+8}" y2="${y-8}"/></g>`;
+  }
+  function check(x,y){
+    return `<path d="M ${x-7} ${y} l 5 6 l 10 -12" fill="none" stroke="${LIME}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
+  function player(x,y,c){ return `<circle cx="${x}" cy="${y}" r="8" fill="${c||LIME}" stroke="#0A0A0A" stroke-width="2"/>`; }
+  function ball(x,y){ return `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff"/>`; }
+  function txt(x,y,t,c,sz,anchor){
+    return `<text x="${x}" y="${y}" fill="${c||MUT}" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-style="italic" font-size="${sz||12}" text-anchor="${anchor||'middle'}" letter-spacing="1">${t}</text>`;
+  }
+  function field(L,inner,opts){
+    opts=opts||{};
+    return `<svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        <marker id="ahl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${LIME}"/></marker>
+        <marker id="ahr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${RED}"/></marker>
+      </defs>
+      <rect x="6" y="6" width="328" height="188" rx="10" fill="#0d130a" stroke="rgba(204,255,0,.55)" stroke-width="2"/>
+      <rect x="264" y="8" width="68" height="184" fill="rgba(204,255,0,.10)"/>
+      <line x1="264" y1="8" x2="264" y2="192" stroke="${LIME}" stroke-width="1.6" opacity=".7"/>
+      ${opts.centre?`<line x1="170" y1="8" x2="170" y2="192" stroke="#fff" stroke-width="${opts.centreBold?2.4:1.2}" stroke-dasharray="8 7" opacity="${opts.centreBold?.9:.35}"/>`:""}
+      ${txt(298,103,L.gz,"rgba(204,255,0,.75)",13)}
+      ${inner}
+    </svg>`;
+  }
+
+  const DIAGRAMS=[
+    (L)=> field(L, [
+      player(120,100), ball(131,93),
+      arrow(134,92,210,58,LIME), arrow(134,100,215,100,LIME), arrow(128,112,80,160,LIME), arrow(116,90,70,55,LIME),
+      check(228,52), check(232,98), check(64,168), check(54,50),
+      txt(120,135,L.ok,LIME,14)
+    ].join(""), {centre:true}),
+    (L)=> field(L, [
+      player(195,80), ball(206,73),
+      arrow(209,72,288,52,RED), cross(250,60),
+      txt(214,38,L.no,RED,13),
+      arrow(193,92,150,150,LIME), player(143,158,"#fff"), check(122,148),
+      curve(152,150,295,150,LIME),
+      txt(150,182,L.ok,LIME,13)
+    ].join(""), {centre:true}),
+    (L)=> field(L, [
+      player(52,110), ball(63,103),
+      arrow(66,102,130,75,LIME), check(146,68),
+      player(205,110), ball(216,103),
+      arrow(219,102,285,75,RED), cross(252,86),
+      txt(170,28,L.centre,"#fff",12),
+      txt(95,150,L.ok,LIME,13), txt(245,150,L.no,RED,13)
+    ].join(""), {centre:true,centreBold:true}),
+    (L)=> field(L, [
+      arrow(60,48,140,30,RED), cross(100,38), txt(170,55,L.no+" — PASSE",RED,12,"middle"),
+      player(60,105), arrow(72,103,108,98,LIME), txt(88,128,L.punch,LIME,12),
+      player(150,105), curve(160,100,225,92,LIME), txt(188,128,L.kick,LIME,12),
+      player(228,105), arrow(237,98,258,72,LIME), arrow(235,108,266,122,LIME), txt(240,144,L.redir,LIME,12)
+    ].join(""), {centre:false}),
+    (L)=> field(L, [
+      player(280,90), ball(291,84),
+      arrow(293,83,318,70,RED), cross(305,76),
+      txt(298,130,L.poke,RED,13),
+      player(180,120), ball(191,113), arrow(194,112,250,95,LIME), check(243,121),
+      txt(185,150,L.ok,LIME,13)
+    ].join(""), {centre:true}),
+    (L)=> field(L, [
+      player(120,135), ball(131,128),
+      curve(134,127,290,75,LIME), txt(180,42,L.kick,LIME,13),
+      player(238,160,"#fff"), txt(238,184,L.recv,LIME,11),
+      arrow(247,153,285,120,LIME,true), check(222,142),
+      player(305,150,"#fff"), cross(305,128)
+    ].join(""), {centre:true})
+  ];
+
+  let cur=null;
+  function render(){
+    if(cur===null) return;
+    const L=LBL[lang], i=cur-1;
+    tagEl.textContent=L.lvl+" "+cur;
+    ruleEl.textContent=RULES[lang][i];
+    svgEl.innerHTML=DIAGRAMS[i](L);
+  }
+  function open(n){
+    cur=n;
+    bars.forEach(b=>b.classList.toggle("sel", +b.dataset.lvl===n));
+    detail.hidden=false;
+    render();
+    if(window.__journeyRebuild) setTimeout(window.__journeyRebuild,380);
+  }
+  function close(){
+    cur=null;
+    detail.hidden=true;
+    bars.forEach(b=>b.classList.remove("sel"));
+    if(window.__journeyRebuild) setTimeout(window.__journeyRebuild,50);
+  }
+  bars.forEach(b=>b.addEventListener("click",()=>{ +b.dataset.lvl===cur ? close() : open(+b.dataset.lvl); }));
+  document.getElementById("lvlClose").addEventListener("click",close);
+  window.__lvlRefresh=render;
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" defer></script>
