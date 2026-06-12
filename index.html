@@ -325,6 +325,18 @@ h1,h2,h3,.disp{
   clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
   filter:drop-shadow(0 0 10px rgba(204,255,0,.8))}
 .j-pod.p2{height:72%}.j-pod.p3{height:52%}
+/* difficulty levels ladder */
+.j-levels{display:flex;align-items:flex-end;gap:7px;height:150px;max-width:330px}
+.j-lvl{flex:1;height:var(--h);background:#161616;border:1px solid rgba(255,255,255,.1);border-bottom:none;
+  border-radius:6px 6px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:7px}
+.j-lvl i{font-family:var(--display);font-style:italic;font-weight:900;font-size:13px;color:rgba(255,255,255,.45)}
+.j-lvl.on{background:linear-gradient(180deg,rgba(204,255,0,.25),rgba(204,255,0,.05));border-color:rgba(204,255,0,.55)}
+.j-lvl.on i{color:var(--lime)}
+.j-stop.in .j-lvl{animation:lvlUp .7s cubic-bezier(.16,1,.3,1) both}
+.j-stop.in .j-lvl:nth-child(2){animation-delay:.08s}.j-stop.in .j-lvl:nth-child(3){animation-delay:.16s}
+.j-stop.in .j-lvl:nth-child(4){animation-delay:.24s}.j-stop.in .j-lvl:nth-child(5){animation-delay:.32s}
+.j-stop.in .j-lvl:nth-child(6){animation-delay:.4s}
+@keyframes lvlUp{from{transform:scaleY(.2);transform-origin:bottom;opacity:0}to{transform:none;opacity:1}}
 @media(max-width:860px){
   .j-stop{grid-template-columns:64px 1fr;padding:clamp(30px,7vw,48px) 0}
   .j-node{grid-column:1;width:44px;height:44px}
@@ -845,99 +857,146 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
       <div class="j-node"><span>02</span></div>
       <div class="j-card">
-        <div class="j-media">
-          <img src="assets/render-field.jpg" alt="Terrain PürInstinct" loading="lazy">
+        <div class="j-levels" aria-hidden="true">
+          <div class="j-lvl" style="--h:22%"><i>N1</i></div>
+          <div class="j-lvl" style="--h:36%"><i>N2</i></div>
+          <div class="j-lvl" style="--h:50%"><i>N3</i></div>
+          <div class="j-lvl" style="--h:64%"><i>N4</i></div>
+          <div class="j-lvl" style="--h:80%"><i>N5</i></div>
+          <div class="j-lvl on" style="--h:100%"><i>N6</i></div>
         </div>
         <div class="j-copy">
-          <span class="j-step" data-i18n="j_pi_s">LE SPORT</span>
-          <h3 data-i18n="j_pi_t">Comprendre PürInstinct</h3>
-          <p data-i18n="j_pi_b">D'abord, le terrain signature : traverser en 3 contre 2, sans contact, sans échapper le ballon. Tu comprends le sport en le jouant.</p>
+          <span class="j-step" data-i18n="j_learn_s">LE SPORT</span>
+          <h3 data-i18n="j_learn_t">Apprendre PürInstinct</h3>
+          <p data-i18n="j_learn_b">6 niveaux de difficulté pour maîtriser le sport signature : tu progresses à ton rythme, du premier essai jusqu'au niveau élite.</p>
         </div>
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="left" style="--zc:var(--red)">
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
       <div class="j-node"><span>03</span></div>
+      <div class="j-card">
+        <div class="j-media">
+          <img src="assets/render-field.jpg" alt="Terrain PürInstinct" loading="lazy">
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_play_s">LE MATCH</span>
+          <h3 data-i18n="j_play_t">Joue à PürInstinct</h3>
+          <p data-i18n="j_play_b">Équipe aléatoire : tu es jumelé à de nouveaux coéquipiers. Traverse le terrain en 3 contre 2, sans contact, sans échapper le ballon.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="right" style="--zc:var(--red)">
+      <div class="j-node"><span>04</span></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-speed.mp4">
           <img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy">
           <span class="j-play" aria-hidden="true"></span>
         </div>
         <div class="j-copy">
-          <span class="j-step" data-i18n="z1_en">SPEED</span>
-          <h3 data-i18n="z1_t">Vitesse</h3>
-          <p data-i18n="z1_b">Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.</p>
+          <span class="j-step" data-i18n="z1_en"></span>
+          <h3 data-i18n="z1_t"></h3>
+          <p data-i18n="z1_b"></p>
           <span class="mfnote" data-i18n="mf_note">+ Station augmentée Moment Factory</span>
         </div>
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="right" style="--zc:var(--blue)">
-      <div class="j-node"><span>04</span></div>
+    <article class="j-stop obs" data-side="left" style="--zc:var(--blue)">
+      <div class="j-node"><span>05</span></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-hand.mp4">
           <img src="assets/render-hand.jpg" alt="Zone Agilité des mains" loading="lazy">
           <span class="j-play" aria-hidden="true"></span>
         </div>
         <div class="j-copy">
-          <span class="j-step" data-i18n="z2_en">HAND SKILLS</span>
-          <h3 data-i18n="z2_t">Agilité des mains</h3>
-          <p data-i18n="z2_b">Arène de lancers, équipes de 3. Précision, réaction au ballon.</p>
+          <span class="j-step" data-i18n="z2_en"></span>
+          <h3 data-i18n="z2_t"></h3>
+          <p data-i18n="z2_b"></p>
           <span class="mfnote" data-i18n="mf_note2">+ Station augmentée Moment Factory</span>
         </div>
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="left" style="--zc:var(--green)">
-      <div class="j-node"><span>05</span></div>
+    <article class="j-stop obs" data-side="right" style="--zc:var(--green)">
+      <div class="j-node"><span>06</span></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-foot.mp4">
           <img src="assets/render-foot.jpg" alt="Zone Agilité des pieds" loading="lazy">
           <span class="j-play" aria-hidden="true"></span>
         </div>
         <div class="j-copy">
-          <span class="j-step" data-i18n="z3_en">FOOT SKILLS</span>
-          <h3 data-i18n="z3_t">Agilité des pieds</h3>
-          <p data-i18n="z3_b">Plaques lumineuses réactives, duels 1 contre 1.</p>
+          <span class="j-step" data-i18n="z3_en"></span>
+          <h3 data-i18n="z3_t"></h3>
+          <p data-i18n="z3_b"></p>
           <span class="mfnote" data-i18n="mf_note3">+ Station augmentée Moment Factory</span>
         </div>
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="right" style="--zc:var(--yellow)">
-      <div class="j-node"><span>06</span></div>
+    <article class="j-stop obs" data-side="left" style="--zc:var(--yellow)">
+      <div class="j-node"><span>07</span></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-agility.mp4">
           <img src="assets/render-agility.jpg" alt="Zone Agilité générale" loading="lazy">
           <span class="j-play" aria-hidden="true"></span>
         </div>
         <div class="j-copy">
-          <span class="j-step" data-i18n="z4_en">AGILITY</span>
-          <h3 data-i18n="z4_t">Agilité générale</h3>
-          <p data-i18n="z4_b">Arène de tag avec obstacles, équipes de 3.</p>
+          <span class="j-step" data-i18n="z4_en"></span>
+          <h3 data-i18n="z4_t"></h3>
+          <p data-i18n="z4_b"></p>
           <span class="mfnote" data-i18n="mf_note4">+ Station augmentée Moment Factory</span>
         </div>
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="left" style="--zc:var(--purple)">
-      <div class="j-node"><span>07</span></div>
+    <article class="j-stop obs" data-side="right" style="--zc:var(--purple)">
+      <div class="j-node"><span>08</span></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-iq.mp4">
           <img src="assets/render-iq.jpg" alt="Zone IQ de jeu" loading="lazy">
           <span class="j-play" aria-hidden="true"></span>
         </div>
         <div class="j-copy">
-          <span class="j-step" data-i18n="z5_en">GAME IQ</span>
-          <h3 data-i18n="z5_t">IQ de jeu</h3>
-          <p data-i18n="z5_b">Stratégie rapide 3 contre 3 avec ballon.</p>
+          <span class="j-step" data-i18n="z5_en"></span>
+          <h3 data-i18n="z5_t"></h3>
+          <p data-i18n="z5_b"></p>
           <span class="mfnote" data-i18n="mf_note5">+ Station augmentée Moment Factory</span>
         </div>
       </div>
     </article>
 
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
+      <div class="j-node"><span>09</span></div>
+      <div class="j-card">
+        <div class="j-media">
+          <img src="assets/render-mf1.jpg" alt="Reaction Wall — Moment Factory" loading="lazy">
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_mf_s">AUGMENTÉ — MOMENT FACTORY</span>
+          <h3 data-i18n="j_mf1_t">Reaction Wall</h3>
+          <p data-i18n="j_mf1_b">Mur de cibles lumineuses : touche les tiennes plus vite que ton adversaire. Réflexes purs, propulsé par Moment Factory.</p>
+        </div>
+      </div>
+    </article>
+
     <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
-      <div class="j-node j-node-finish"><span>08</span></div>
+      <div class="j-node"><span>10</span></div>
+      <div class="j-card">
+        <div class="j-media">
+          <img src="assets/render-mf2.jpg" alt="Zone immersive — Moment Factory" loading="lazy">
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_mf_s2">AUGMENTÉ — MOMENT FACTORY</span>
+          <h3 data-i18n="j_mf2_t">Zone immersive</h3>
+          <p data-i18n="j_mf2_b">Projections 360°, environnements dynamiques au sol et aux murs. Habileté, agilité et décisions rapides.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
+      <div class="j-node j-node-finish"><span>11</span></div>
       <div class="j-card">
         <div class="j-podium" aria-hidden="true">
           <div class="j-pod p2"><i>2</i></div>
@@ -1120,7 +1179,7 @@ fr:{
   a_eyebrow:"L'arène",a_title:"9 stations. Une arène.",
   a_sub:"Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 terrains augmentés Moment Factory.",
   a_hint:"Glisse pour tourner à 360° · Touche une station pour explorer sa zone",
-  i_eyebrow:"Le parcours athlète",i_title:"De l'inscription au podium.",i_sub2:"Suis le parcours d'un athlète : une session de 75 minutes, un dossard, neuf stations — et un seul score.",j_bib:"TON NOM",j_reg_s:"DÉPART",j_reg_t:"Inscription",j_reg_b:"Reçois ton dossard et ton profil. Ton score individuel te suit partout dans l'arène, en temps réel.",j_pi_s:"LE SPORT",j_pi_t:"Comprendre PürInstinct",j_pi_b:"D'abord, le terrain signature : traverser en 3 contre 2, sans contact, sans échapper le ballon. Tu comprends le sport en le jouant.",j_fin_s:"ARRIVÉE",j_fin_t:"Le podium",j_fin_b:"Chaque zone a nourri ton score. Le leaderboard décide : les trois premiers s'illuminent en lime.",j_fin_cta:"Voir le leaderboard",
+  i_eyebrow:"Le parcours athlète",i_title:"De l'inscription au podium.",i_sub2:"Suis le parcours d'un athlète : une session de 75 minutes, un dossard, neuf stations — et un seul score.",j_bib:"TON NOM",j_reg_s:"DÉPART",j_reg_t:"Inscription",j_reg_b:"Reçois ton dossard et ton profil. Ton score individuel te suit partout dans l'arène, en temps réel.",j_learn_s:"LE SPORT",j_learn_t:"Apprendre PürInstinct",j_learn_b:"6 niveaux de difficulté pour maîtriser le sport signature : tu progresses à ton rythme, du premier essai jusqu'au niveau élite.",j_play_s:"LE MATCH",j_play_t:"Joue à PürInstinct",j_play_b:"Équipe aléatoire : tu es jumelé à de nouveaux coéquipiers. Traverse le terrain en 3 contre 2, sans contact, sans échapper le ballon.",j_mf_s:"AUGMENTÉ — MOMENT FACTORY",j_mf_s2:"AUGMENTÉ — MOMENT FACTORY",j_mf1_t:"Reaction Wall",j_mf1_b:"Mur de cibles lumineuses : touche les tiennes plus vite que ton adversaire. Réflexes purs, propulsé par Moment Factory.",j_mf2_t:"Zone immersive",j_mf2_b:"Projections 360°, environnements dynamiques au sol et aux murs. Habileté, agilité et décisions rapides.",j_fin_s:"ARRIVÉE",j_fin_t:"Le podium",j_fin_b:"Chaque zone a nourri ton score. Le leaderboard décide : les trois premiers s'illuminent en lime.",j_fin_cta:"Voir le leaderboard",
   z1_en:"SPEED",z1_t:"Vitesse",z1_b:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",
   z2_en:"HAND SKILLS",z2_t:"Agilité des mains",z2_b:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",
   z3_en:"FOOT SKILLS",z3_t:"Agilité des pieds",z3_b:"Plaques lumineuses réactives, duels 1 contre 1.",
@@ -1160,7 +1219,7 @@ en:{
   a_eyebrow:"The arena",a_title:"9 stations. One arena.",
   a_sub:"Fly over the complex: 5 skill zones, 2 PürInstinct courts at center, 2 Moment Factory augmented courts.",
   a_hint:"Drag to spin 360° · Tap a station to explore its zone",
-  i_eyebrow:"The athlete journey",i_title:"From sign-up to the podium.",i_sub2:"Follow one athlete's journey: a 75-minute session, one bib, nine stations — and a single score.",j_bib:"YOUR NAME",j_reg_s:"START",j_reg_t:"Registration",j_reg_b:"Get your bib and your profile. Your individual score follows you across the arena, in real time.",j_pi_s:"THE SPORT",j_pi_t:"Understand PürInstinct",j_pi_b:"First, the signature field: cross 3 v 2, no contact, never drop the ball. You learn the sport by playing it.",j_fin_s:"FINISH",j_fin_t:"The podium",j_fin_b:"Every zone fed your score. The leaderboard decides: the top three ignite in lime.",j_fin_cta:"See the leaderboard",
+  i_eyebrow:"The athlete journey",i_title:"From sign-up to the podium.",i_sub2:"Follow one athlete's journey: a 75-minute session, one bib, nine stations — and a single score.",j_bib:"YOUR NAME",j_reg_s:"START",j_reg_t:"Registration",j_reg_b:"Get your bib and your profile. Your individual score follows you across the arena, in real time.",j_learn_s:"THE SPORT",j_learn_t:"Learn PürInstinct",j_learn_b:"6 difficulty levels to master the signature sport — progress at your own pace, from first try to elite.",j_play_s:"THE MATCH",j_play_t:"Play PürInstinct",j_play_b:"Random team: you're matched with new teammates. Cross the field 3 v 2, no contact, never drop the ball.",j_mf_s:"AUGMENTED — MOMENT FACTORY",j_mf_s2:"AUGMENTED — MOMENT FACTORY",j_mf1_t:"Reaction Wall",j_mf1_b:"A wall of light targets: hit yours faster than your opponent. Pure reflexes, powered by Moment Factory.",j_mf2_t:"Immersive Zone",j_mf2_b:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",j_fin_s:"FINISH",j_fin_t:"The podium",j_fin_b:"Every zone fed your score. The leaderboard decides: the top three ignite in lime.",j_fin_cta:"See the leaderboard",
   z1_en:"VITESSE",z1_t:"Speed",z1_b:"40m sprint, 5 handicap levels: everyone starts on equal footing.",
   z2_en:"AGILITÉ DES MAINS",z2_t:"Hand skills",z2_b:"Ball-throwing arena, teams of 3. Precision, ball reaction.",
   z3_en:"AGILITÉ DES PIEDS",z3_t:"Foot skills",z3_b:"Reactive light-pad system, 1v1 duels.",
