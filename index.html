@@ -236,6 +236,22 @@ h1,h2,h3,.disp{
   position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);
   padding:clamp(48px,7vw,86px) 0;
 }
+/* parallax photo layer */
+.zone-panel .zp-photo{
+  position:absolute;inset:-30% 0;
+  background-size:cover;background-position:center;background-attachment:fixed;
+  opacity:0;transition:opacity 1.2s ease;
+  z-index:0;
+}
+/* dark overlay so text stays readable */
+.zone-panel .zp-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(6,7,15,.92) 0%,rgba(6,7,15,.75) 55%,rgba(6,7,15,.5) 100%);
+}
+.zone-panel.in .zp-photo{opacity:1;}
+/* push existing content above photo */
+.zone-panel .wrap{position:relative;z-index:2;}
+.zone-panel::before{z-index:1;}
 .zone-panel .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,64px);align-items:center}
 @media(max-width:860px){.zone-panel .wrap{grid-template-columns:1fr}}
 .zone-panel h3{font-size:clamp(48px,7vw,96px);color:var(--zc)}
@@ -616,6 +632,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
 
   <article class="zone-panel obs" style="--zc:var(--red)">
+    <div class="zp-photo" style="background-image:url('assets/terrain-drone-0.png')"></div>
     <span class="zone-num">01</span>
     <div class="wrap">
       <div class="reveal">
@@ -630,6 +647,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </article>
 
   <article class="zone-panel obs" style="--zc:var(--blue)">
+    <div class="zp-photo" style="background-image:url('assets/terrain-drone-1.png')"></div>
     <span class="zone-num">02</span>
     <div class="wrap">
       <div class="reveal">
@@ -644,6 +662,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </article>
 
   <article class="zone-panel obs" style="--zc:var(--green)">
+    <div class="zp-photo" style="background-image:url('assets/terrain-drone-2.png')"></div>
     <span class="zone-num">03</span>
     <div class="wrap">
       <div class="reveal">
@@ -658,6 +677,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </article>
 
   <article class="zone-panel obs" style="--zc:var(--yellow)">
+    <div class="zp-photo" style="background-image:url('assets/terrain-1.png')"></div>
     <span class="zone-num">04</span>
     <div class="wrap">
       <div class="reveal">
@@ -672,6 +692,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </article>
 
   <article class="zone-panel obs" style="--zc:var(--purple)">
+    <div class="zp-photo" style="background-image:url('assets/terrain-2.png')"></div>
     <span class="zone-num">05</span>
     <div class="wrap">
       <div class="reveal">
