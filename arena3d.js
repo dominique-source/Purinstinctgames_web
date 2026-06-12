@@ -303,39 +303,108 @@
   court("pieds", -32, 17, GREEN, "#2EE06A", "Pieds", true);
   court("iq", 32, 17, PURPLE, "#A45CFF", "IQ de jeu", false);
 
-  /* ---------- Moment Factory augmented zones (animated light floors) ---------- */
+  /* ---------- Moment Factory zone 1 : REACTION WALL ---------- */
   const mfTiles = [];
-  function mfZone(key, x, z, name){
+  (function(){
     const g = new THREE.Group();
-    const W = 16.6, D = 15.5, N = 6;
-    const base = new THREE.Mesh(new THREE.PlaneGeometry(W+1, D+1), mat(0x0a0a0a));
-    base.rotation.x = -Math.PI/2; base.position.y = 0.05; base.receiveShadow = true; g.add(base);
-    const tw = W/N, td = D/N;
-    for(let i=0;i<N;i++)for(let j=0;j<N;j++){
-      const m2 = new THREE.MeshBasicMaterial({color:(i+j)%3===0 ? PURPLE : LIME, transparent:true, opacity:0.25});
-      const tile = new THREE.Mesh(new THREE.PlaneGeometry(tw-0.25, td-0.25), m2);
-      tile.rotation.x = -Math.PI/2;
-      tile.position.set(-W/2+tw/2+i*tw, 0.09, -D/2+td/2+j*td);
-      g.add(tile);
-      mfTiles.push({m:m2, phase:(i+j)*0.6 + (key==="mf2"?2.1:0)});
+    const W = 16.6, D = 15.5;
+    /* platform */
+    const deck = new THREE.Mesh(new THREE.BoxGeometry(W, 0.5, D*0.6), mat(0x0e0e0e, {roughness:0.8}));
+    deck.position.set(0, 0.25, D*0.12); deck.receiveShadow = true; deck.castShadow = true; g.add(deck);
+    /* low boards around platform */
+    const bm = mat(0x101010);
+    const lm = new THREE.MeshBasicMaterial({color:LIME});
+    [[0, D*0.12+D*0.3+0.15, W+0.5, 0.3],[-W/2-0.15, D*0.12, 0.3, D*0.6],[W/2+0.15, D*0.12, 0.3, D*0.6]].forEach(([bx,bz,sx,sz])=>{
+      const b = new THREE.Mesh(new THREE.BoxGeometry(sx, 0.9, sz), bm);
+      b.position.set(bx, 0.45, bz); b.castShadow = true; g.add(b);
+      const top = new THREE.Mesh(new THREE.BoxGeometry(sx, 0.06, sz), lm);
+      top.position.set(bx, 0.93, bz); g.add(top);
+    });
+    /* the wall */
+    const wallH = 7.2, wallW = 13.5;
+    const wall = new THREE.Mesh(new THREE.BoxGeometry(wallW, wallH, 0.9), mat(0x0b0b0b, {roughness:0.6}));
+    wall.position.set(0, wallH/2+0.5, -D*0.18); wall.castShadow = true; g.add(wall);
+    /* lime edge strips */
+    [-1,1].forEach(s=>{
+      const e = new THREE.Mesh(new THREE.BoxGeometry(0.22, wallH, 0.95), lm);
+      e.position.set(s*(wallW/2+0.05), wallH/2+0.5, -D*0.18); g.add(e);
+    });
+    /* header strip */
+    const head = new THREE.Mesh(new THREE.BoxGeometry(wallW, 1.5, 0.92), mat(0x060606));
+    head.position.set(0, wallH+0.5-0.75, -D*0.18+0.02); g.add(head);
+    /* light targets : blue half / red half, pulsing */
+    const rows = 4, cols = 5;
+    for(let r2=0;r2<rows;r2++)for(let c2=0;c2<cols;c2++){
+      const isBlue = c2 < Math.ceil(cols/2);
+      const m2 = new THREE.MeshBasicMaterial({color:isBlue?BLUE:RED, transparent:true, opacity:0.4});
+      const tgt = new THREE.Mesh(new THREE.CircleGeometry(0.62, 20), m2);
+      tgt.position.set(-wallW/2+1.9+c2*(wallW-3.8)/(cols-1), 1.9+r2*1.32, -D*0.18+0.48);
+      g.add(tgt);
+      mfTiles.push({m:m2, phase:(r2*cols+c2)*0.9});
     }
-    /* corner light pillars */
-    for(const [cx,cz] of [[-W/2,-D/2],[W/2,-D/2],[-W/2,D/2],[W/2,D/2]]){
-      const p = new THREE.Mesh(new THREE.BoxGeometry(0.5, 4.4, 0.5), mat(0x111111));
-      p.position.set(cx, 2.2, cz); p.castShadow = true; g.add(p);
-      const glow = new THREE.Mesh(new THREE.BoxGeometry(0.18, 4.0, 0.18), new THREE.MeshBasicMaterial({color:LIME}));
-      glow.position.set(cx+0.27, 2.2, cz); g.add(glow);
-    }
-    g.position.set(x, 0, z);
+    g.position.set(-9.6, 0, 17);
     scene.add(g);
-    const label = makeLabel(name, "#CCFF00");
-    label.position.set(x, 5.2, z);
+    const label = makeLabel("Reaction Wall", "#CCFF00");
+    label.position.set(-9.6, 9.6, 17);
     scene.add(label);
-    registerPick(key, x, z, W+2, D+2, 5);
-    stations[key] = {label:label, highlight:()=>{}};
-  }
-  mfZone("mf1", -9.6, 17, "Augmenté 1");
-  mfZone("mf2", 9.6, 17, "Augmenté 2");
+    registerPick("mf1", -9.6, 17, W+2, D+2, 8);
+    stations.mf1 = {label:label, highlight:()=>{}};
+  })();
+
+  /* ---------- Moment Factory zone 2 : IMMERSIVE ZONE (360° projection room) ---------- */
+  (function(){
+    const g = new THREE.Group();
+    const W = 16.6, D = 15.5, H = 5.6;
+    function projTex(stops){
+      return canvasTex(256, 128, (c,w,h)=>{
+        const gr = c.createLinearGradient(0,0,w,h);
+        stops.forEach(([p,col])=>gr.addColorStop(p,col));
+        c.fillStyle = gr; c.fillRect(0,0,w,h);
+        for(let i=0;i<40;i++){
+          c.fillStyle = `rgba(255,255,255,${Math.random()*0.25})`;
+          c.fillRect(Math.random()*w, Math.random()*h, 2.5, 2.5);
+        }
+      });
+    }
+    /* projected floor */
+    const floorM = new THREE.MeshBasicMaterial({map:projTex([[0,"#2a0a55"],[0.5,"#0b2a66"],[1,"#0a4a55"]]), transparent:true, opacity:0.85});
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(W-1, D-1), floorM);
+    floor.rotation.x = -Math.PI/2; floor.position.y = 0.08; g.add(floor);
+    mfTiles.push({m:floorM, phase:0.5, base:0.7, amp:0.25});
+    /* projection walls : back (city purple), left (lava), right (ice) */
+    const wallDefs = [
+      {tex:[[0,"#3b0a72"],[0.5,"#171a6e"],[1,"#5a0a8a"]], x:0, z:-D/2+0.2, ry:0, w:W},
+      {tex:[[0,"#5a1205"],[0.5,"#a23508"],[1,"#3a0a02"]], x:-W/2+0.2, z:0, ry:Math.PI/2, w:D},
+      {tex:[[0,"#062a5a"],[0.5,"#0a5a8a"],[1,"#03182e"]], x:W/2-0.2, z:0, ry:-Math.PI/2, w:D}
+    ];
+    wallDefs.forEach((wd,i)=>{
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(wd.w, H, 0.4), mat(0x0b0b0b, {roughness:0.6}));
+      frame.position.set(wd.x, H/2, wd.z); frame.rotation.y = wd.ry; frame.castShadow = true; g.add(frame);
+      const m2 = new THREE.MeshBasicMaterial({map:projTex(wd.tex), transparent:true, opacity:0.9});
+      const screen = new THREE.Mesh(new THREE.PlaneGeometry(wd.w-0.8, H-0.7), m2);
+      screen.position.set(wd.x, H/2, wd.z).add(new THREE.Vector3(Math.sin(wd.ry)*0.25, 0, Math.cos(wd.ry)*0.25));
+      screen.rotation.y = wd.ry;
+      g.add(screen);
+      mfTiles.push({m:m2, phase:1.2+i*0.8, base:0.75, amp:0.2});
+    });
+    /* lime corner trim */
+    [[-W/2,-D/2],[W/2,-D/2],[-W/2,D/2],[W/2,D/2]].forEach(([cx,cz])=>{
+      const p = new THREE.Mesh(new THREE.BoxGeometry(0.45, H+0.4, 0.45), mat(0x111111));
+      p.position.set(cx, (H+0.4)/2, cz); p.castShadow = true; g.add(p);
+      const glow = new THREE.Mesh(new THREE.BoxGeometry(0.16, H, 0.16), new THREE.MeshBasicMaterial({color:LIME}));
+      glow.position.set(cx+0.25, H/2, cz); g.add(glow);
+    });
+    /* entrance ramp */
+    const ramp = new THREE.Mesh(new THREE.BoxGeometry(4.5, 0.3, 2.6), mat(0x141414));
+    ramp.position.set(0, 0.15, D/2+1.3); g.add(ramp);
+    g.position.set(9.6, 0, 17);
+    scene.add(g);
+    const label = makeLabel("Zone immersive", "#CCFF00");
+    label.position.set(9.6, 8.4, 17);
+    scene.add(label);
+    registerPick("mf2", 9.6, 17, W+2, D+2, 7);
+    stations.mf2 = {label:label, highlight:()=>{}};
+  })();
 
   /* ---------- scoreboard ---------- */
   (function(){
@@ -397,8 +466,8 @@
   /* ---------- language hook for labels ---------- */
   window.__arena3dSetLang = function(lng){
     const names = {
-      fr:{vitesse:"Vitesse", mains:"Mains", pieds:"Pieds", agilite:"Agilité", iq:"IQ de jeu", pi1:"PürInstinct 1", pi2:"PürInstinct 2", mf1:"Augmenté 1", mf2:"Augmenté 2"},
-      en:{vitesse:"Speed", mains:"Hands", pieds:"Feet", agilite:"Agility", iq:"Game IQ", pi1:"PürInstinct 1", pi2:"PürInstinct 2", mf1:"Augmented 1", mf2:"Augmented 2"}
+      fr:{vitesse:"Vitesse", mains:"Mains", pieds:"Pieds", agilite:"Agilité", iq:"IQ de jeu", pi1:"PürInstinct 1", pi2:"PürInstinct 2", mf1:"Reaction Wall", mf2:"Zone immersive"},
+      en:{vitesse:"Speed", mains:"Hands", pieds:"Feet", agilite:"Agility", iq:"Game IQ", pi1:"PürInstinct 1", pi2:"PürInstinct 2", mf1:"Reaction Wall", mf2:"Immersive Zone"}
     };
     const colors = {vitesse:"#FF4438", mains:"#2D7DFF", pieds:"#2EE06A", agilite:"#FFC400", iq:"#A45CFF", pi1:"#CCFF00", pi2:"#CCFF00", mf1:"#CCFF00", mf2:"#CCFF00"};
     Object.keys(stations).forEach(k=>{
@@ -431,7 +500,11 @@
     if(!reduceMotion){
       for(let i=0;i<mfTiles.length;i++){
         const tile = mfTiles[i];
-        tile.m.opacity = 0.18 + Math.max(0, Math.sin(t*1.8 + tile.phase))*0.55;
+        if(tile.base !== undefined){
+          tile.m.opacity = tile.base + Math.sin(t*1.4 + tile.phase)*tile.amp;
+        }else{
+          tile.m.opacity = 0.25 + Math.max(0, Math.sin(t*1.8 + tile.phase))*0.65;
+        }
       }
     }
     controls.update();
