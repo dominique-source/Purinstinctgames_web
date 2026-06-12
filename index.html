@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PürInstinct Games — Ton instinct. Ton arène.</title>
+<meta name="description" content="PürInstinct Games — l'arène portable de 9 stations. Le Hyrox des sports instinctifs. Réserve ta session.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --white:#F4F4F2;
+  --muted:#9C9C96;
+  --line:rgba(204,255,0,.18);
+  --red:#FF4438;
+  --blue:#2D7DFF;
+  --green:#2EE06A;
+  --yellow:#FFC400;
+  --purple:#A45CFF;
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+  --slash:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.55;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+h1,h2,h3,.disp{
+  font-family:var(--display);
+  font-weight:900;
+  font-style:italic;
+  text-transform:uppercase;
+  letter-spacing:-.015em;
+  line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.section{position:relative;padding:clamp(72px,10vw,140px) 0}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lead{color:var(--muted);max-width:62ch}
+.lime{color:var(--lime)}
+
+/* slanted section divider */
+.slash-top{--cut:clamp(28px,4vw,64px);clip-path:polygon(0 var(--cut),100% 0,100% 100%,0 100%);margin-top:calc(var(--cut)*-1);padding-top:calc(clamp(72px,10vw,140px) + var(--cut))}
+.divider-streak{position:absolute;left:-10%;top:0;width:120%;height:3px;background:linear-gradient(90deg,transparent,var(--lime) 35%,var(--lime) 65%,transparent);transform:rotate(-2.6deg);transform-origin:left;opacity:0}
+.in .divider-streak{animation:streak .9s cubic-bezier(.2,.9,.2,1) forwards}
+@keyframes streak{0%{opacity:0;clip-path:inset(0 100% 0 0)}25%{opacity:1}100%{opacity:.9;clip-path:inset(0 0 0 0)}}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
+  transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,transparent 30%,rgba(10,10,10,.78) 90%);z-index:1}
+.hero .wrap{padding-top:90px}
+.hero h1{font-size:clamp(58px,11vw,164px)}
+.hero h1 .word{display:inline-block;opacity:0;transform:translateX(-60px) skewX(-12deg);animation:slam .55s cubic-bezier(.16,1,.3,1) forwards}
+.hero h1 .word:nth-child(2){animation-delay:.12s;transform:translateX(60px) skewX(-12deg)}
+.hero h1 .word.arene{color:var(--lime);animation-delay:.24s;transform:translateX(-60px) skewX(-12deg)}
+@keyframes slam{to{opacity:1;transform:none}}
+.hero .sub{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(20px,3vw,30px);color:var(--muted);margin:14px 0 30px;
+  opacity:0;animation:fadeUp .6s .42s forwards;
+}
+.hero .sub b{color:var(--white);font-weight:900}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.cta{
+  display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(19px,2.4vw,25px);background:var(--lime);color:#0A0A0A;
+  padding:15px 36px 17px;letter-spacing:.02em;
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
+  transition:transform .15s;
+  position:relative;
+}
+.cta:hover{transform:translateY(-2px);animation:padPulse 1s infinite}
+@keyframes padPulse{0%,100%{filter:drop-shadow(0 0 2px rgba(204,255,0,.35))}50%{filter:drop-shadow(0 0 16px rgba(204,255,0,.85))}}
+.hero .cta{opacity:0;animation:fadeUp .6s .55s forwards}
+.hero .cta:hover{opacity:1;animation:padPulse 1s infinite}
+.counter-strip{
+  margin-top:clamp(40px,7vh,72px);display:flex;flex-wrap:wrap;gap:0;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  opacity:0;animation:fadeUp .6s .7s forwards;
+}
+.counter-strip .chip{
+  display:flex;align-items:baseline;gap:8px;padding:10px 26px 12px;border:1px solid var(--line);
+  border-right:0;background:rgba(10,10,10,.55);backdrop-filter:blur(4px);
+}
+.counter-strip .chip:first-child{clip-path:polygon(14px 0,100% 0,100% 100%,0 100%)}
+.counter-strip .chip:last-child{border-right:1px solid var(--line);clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.counter-strip .num{font-size:clamp(26px,3.4vw,40px);color:var(--lime)}
+.counter-strip .lbl{font-size:clamp(13px,1.5vw,16px);color:var(--muted);letter-spacing:.05em}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;color:var(--lime);font-family:var(--display);font-style:italic;font-weight:900;font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;animation:hintBob 1.8s infinite}
+@keyframes hintBob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ============ REVEALS ============ */
+.reveal{opacity:0;transform:perspective(900px) translateY(56px) rotateX(7deg) scale(.97);transform-origin:50% 100%;transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.in .reveal,.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+/* ============ CONCEPT ============ */
+#concept{background:var(--bg-2)}
+.kinetic{font-size:clamp(44px,7.6vw,104px);margin:8px 0 34px}
+.kinetic .line{display:block;overflow:hidden}
+.kinetic .line span{display:inline-block;opacity:0;transform:translateX(-90px) skewX(-14deg);transition:all .65s cubic-bezier(.16,1,.3,1)}
+.kinetic .line:nth-child(2n) span{transform:translateX(90px) skewX(-14deg)}
+.in .kinetic .line:nth-child(1) span{transition-delay:.05s}
+.in .kinetic .line:nth-child(2) span{transition-delay:.2s}
+.in .kinetic .line:nth-child(3) span{transition-delay:.35s}
+.in .kinetic .line span{opacity:1;transform:none}
+.kinetic .alt{color:var(--lime)}
+.concept-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,5vw,70px);align-items:start}
+.concept-points{display:grid;gap:18px}
+.cpoint{border-left:3px solid var(--lime);padding:6px 0 6px 18px}
+.cpoint h3{font-size:22px;margin-bottom:4px;letter-spacing:.02em}
+.cpoint p{color:var(--muted);font-size:15.5px}
+@media(max-width:860px){.concept-grid{grid-template-columns:1fr}}
+
+/* ============ ARENA MAP ============ */
+#arena{overflow:hidden}
+.arena-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,56px);align-items:stretch}
+@media(max-width:920px){.arena-grid{grid-template-columns:1fr}}
+.arena-svg-wrap{position:relative}
+.arena-svg-wrap svg{width:100%;height:auto;filter:drop-shadow(0 20px 60px rgba(0,0,0,.6))}
+.station{cursor:pointer;transition:filter .25s}
+.station rect.body{transition:all .25s}
+.station:hover rect.body,.station.active rect.body{filter:brightness(1.5)}
+.station text{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;pointer-events:none}
+.st-label{fill:#fff;font-size:17px}
+.st-tag{fill:rgba(255,255,255,.55);font-size:11px;letter-spacing:.1em}
+.mf-glow{animation:mfPulse 2.4s infinite}
+@keyframes mfPulse{0%,100%{opacity:.25}50%{opacity:.7}}
+.zone-card{
+  background:#101010;border:1px solid rgba(255,255,255,.08);position:relative;
+  padding:clamp(24px,3vw,38px);display:flex;flex-direction:column;gap:14px;justify-content:center;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%);
+  min-height:340px;
+}
+.zone-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--zc,#CCFF00);transition:background .3s}
+.zone-card .zc-tag{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:14px;letter-spacing:.14em;color:var(--zc,#CCFF00);transition:color .3s}
+.zone-card h3{font-size:clamp(34px,4vw,52px)}
+.zone-card p{color:var(--muted)}
+.zone-card .zc-mf{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--lime);font-weight:600}
+.zone-card .zc-mf::before{content:"";width:9px;height:9px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 12px var(--lime)}
+.zone-card .swap{animation:cardIn .35s cubic-bezier(.16,1,.3,1)}
+@keyframes cardIn{from{opacity:0;transform:translateX(26px) skewX(-4deg)}to{opacity:1;transform:none}}
+.arena-hint{margin-top:14px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px}
+.arena-hint::before{content:"";width:22px;height:2px;background:var(--lime);transform:skewX(-30deg)}
+
+/* ============ INSTINCTS ============ */
+.zone-panel{
+  position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);
+  padding:clamp(48px,7vw,86px) 0;
+}
+.zone-panel .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,64px);align-items:center}
+@media(max-width:860px){.zone-panel .wrap{grid-template-columns:1fr}}
+.zone-panel h3{font-size:clamp(48px,7vw,96px);color:var(--zc)}
+.zone-panel h3 small{display:block;font-size:clamp(15px,1.6vw,19px);color:var(--white);opacity:.6;letter-spacing:.18em;margin-bottom:4px}
+.zone-panel p{color:var(--muted);margin-top:14px;max-width:54ch}
+.zone-panel .mfnote{margin-top:14px;color:var(--lime);font-weight:600;font-size:14.5px;display:flex;align-items:center;gap:9px}
+.zone-panel .mfnote::before{content:"";width:9px;height:9px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 10px var(--lime)}
+.zone-panel::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 78% 50%,color-mix(in srgb,var(--zc) 13%,transparent),transparent 70%);pointer-events:none}
+.zone-num{position:absolute;right:-1.5%;top:50%;transform:translateY(-50%) skewX(-10deg);font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(160px,26vw,340px);color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--zc) 35%,transparent);line-height:1;pointer-events:none;user-select:none}
+.motif{position:relative;height:clamp(180px,24vw,280px)}
+/* speed lines */
+.m-speed i{position:absolute;height:3px;background:linear-gradient(90deg,transparent,var(--zc));transform:skewX(-30deg);animation:dash 1.4s linear infinite;opacity:.85}
+@keyframes dash{from{transform:translateX(-140%) skewX(-30deg)}to{transform:translateX(260%) skewX(-30deg)}}
+/* ball arcs */
+.m-arcs svg path{stroke:var(--zc);stroke-width:3;fill:none;stroke-dasharray:8 10;animation:arcFlow 2.2s linear infinite}
+.m-arcs svg circle{fill:var(--zc)}
+@keyframes arcFlow{to{stroke-dashoffset:-72}}
+/* light pads */
+.m-pads{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-content:center;height:100%}
+.m-pads i{aspect-ratio:1;background:color-mix(in srgb,var(--zc) 14%,#0f0f0f);border:1px solid color-mix(in srgb,var(--zc) 35%,transparent);clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);animation:pad 1.8s infinite}
+@keyframes pad{0%,70%,100%{background:color-mix(in srgb,var(--zc) 12%,#0f0f0f);box-shadow:none}78%,88%{background:var(--zc);box-shadow:0 0 26px var(--zc)}}
+/* cubes */
+.m-cubes{display:flex;gap:16px;align-items:center;justify-content:center;height:100%}
+.m-cubes i{width:clamp(40px,6vw,68px);aspect-ratio:1;border:2px solid var(--zc);background:color-mix(in srgb,var(--zc) 10%,transparent);animation:cube 2.6s ease-in-out infinite}
+@keyframes cube{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-26px) rotate(12deg)}}
+/* IQ grid */
+.m-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-content:center;height:100%}
+.m-grid i{aspect-ratio:1;background:color-mix(in srgb,var(--zc) 10%,#0e0e0e);border:1px solid color-mix(in srgb,var(--zc) 25%,transparent);animation:flick 2.4s steps(2) infinite}
+@keyframes flick{0%,60%,100%{background:color-mix(in srgb,var(--zc) 10%,#0e0e0e)}65%,80%{background:var(--zc);box-shadow:0 0 16px var(--zc)}}
+
+/* ============ LEADERBOARD ============ */
+#leaderboard{background:var(--bg-2)}
+.lb-shell{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:900px){.lb-shell{grid-template-columns:1fr}}
+.lb-card{
+  position:relative;background:rgba(16,16,16,.7);backdrop-filter:blur(8px);
+  border:1px solid rgba(204,255,0,.25);padding:22px 0 16px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 60px rgba(204,255,0,.04);
+}
+.lb-head{display:flex;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid rgba(255,255,255,.08);font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase}
+.lb-head .t{font-size:21px}.lb-head .live{color:var(--lime);display:flex;gap:8px;align-items:center;font-size:15px}
+.lb-head .live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--lime);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.lb-rows{position:relative;height:528px}
+.lb-row{
+  position:absolute;left:0;right:0;height:48px;display:flex;align-items:center;gap:14px;
+  padding:0 26px;transition:top .65s cubic-bezier(.2,.8,.2,1);
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:19px;text-transform:uppercase;
+}
+.lb-row .rk{width:30px;color:var(--muted);font-size:17px}
+.lb-row .nm{flex:1;letter-spacing:.02em}
+.lb-row .sc{color:var(--white);font-variant-numeric:tabular-nums}
+.lb-row.top .rk,.lb-row.top .sc{color:var(--lime)}
+.lb-row.top .nm{color:var(--white)}
+.lb-row.top{text-shadow:0 0 22px rgba(204,255,0,.25)}
+.lb-divider{position:absolute;left:26px;right:26px;height:2px;background:var(--lime);box-shadow:0 0 14px rgba(204,255,0,.7);top:158px;transition:top .65s}
+.lb-copy h2{font-size:clamp(42px,6vw,84px)}
+.lb-copy p{margin-top:18px}
+
+/* ============ MOMENT FACTORY ============ */
+#mf{position:relative;overflow:hidden}
+#mf::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(115deg,transparent 0 90px,rgba(204,255,0,.04) 90px 92px)}
+#mf h2{font-size:clamp(40px,6vw,80px)}
+#mf .mf-name{color:var(--lime)}
+.mf-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,70px);align-items:center}
+@media(max-width:860px){.mf-grid{grid-template-columns:1fr}}
+.mf-visual{position:relative;height:clamp(220px,28vw,330px);border:1px solid var(--line);overflow:hidden;clip-path:polygon(0 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%)}
+.mf-visual i{position:absolute;width:160%;height:3px;left:-30%;background:linear-gradient(90deg,transparent,var(--lime),transparent);transform:rotate(-18deg);animation:beamSweep 3.4s linear infinite;opacity:.7}
+.mf-visual i:nth-child(2){animation-delay:1.1s;transform:rotate(14deg)}
+.mf-visual i:nth-child(3){animation-delay:2.2s;transform:rotate(-6deg)}
+@keyframes beamSweep{from{top:-12%}to{top:112%}}
+
+/* ============ STATS ============ */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.07)}
+@media(max-width:860px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg);padding:clamp(28px,4vw,52px) clamp(18px,2.5vw,34px);position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-18px;top:-18px;width:46px;height:46px;background:var(--lime);transform:rotate(45deg);opacity:.12}
+.stat .n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(48px,6.5vw,86px);color:var(--lime);line-height:1;font-variant-numeric:tabular-nums}
+.stat .l{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--white);font-size:clamp(16px,1.8vw,21px);margin-top:6px;letter-spacing:.05em}
+.stats-tag{margin-top:30px;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3vw,34px)}
+.stats-tag .lime{color:var(--lime)}
+
+/* ============ PRICING ============ */
+#billets{background:var(--bg-2)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:42px}
+@media(max-width:860px){.price-grid{grid-template-columns:1fr}}
+.price-card{
+  position:relative;background:#0e0e0e;border:1px solid rgba(255,255,255,.09);
+  padding:clamp(28px,3vw,40px);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%);
+  display:flex;flex-direction:column;gap:14px;transition:.25s;
+}
+.price-card:hover{border-color:rgba(204,255,0,.5);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 30px rgba(204,255,0,.12)}
+.price-card.featured{border-color:rgba(204,255,0,.55);background:linear-gradient(170deg,#121405,#0e0e0e 55%)}
+.price-card .tier{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:23px;letter-spacing:.05em}
+.price-card .amount{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(56px,6vw,84px);line-height:1;color:var(--lime)}
+.price-card .per{color:var(--muted);font-size:14.5px}
+.price-card ul{list-style:none;display:grid;gap:9px;margin:6px 0 8px;color:var(--muted);font-size:15px}
+.price-card li{display:flex;gap:10px;align-items:baseline}
+.price-card li::before{content:"";width:10px;height:2.5px;background:var(--lime);transform:skewX(-30deg);flex:none;position:relative;top:-3px}
+.price-card .cta{font-size:19px;text-align:center;margin-top:auto}
+.session-note{margin-top:26px;color:var(--muted);font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(16px,2vw,21px);letter-spacing:.04em}
+.session-note b{color:var(--lime)}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .kinetic .line span{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="#top" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#concept" data-i18n="nav_concept">Le concept</a>
+    <a href="#arena" data-i18n="nav_arena">L'arène</a>
+    <a href="#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <a href="#billets" data-i18n="nav_tickets">Billets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <a class="nav-cta" href="#billets" data-i18n="nav_cta">Réserve</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <canvas id="heroCanvas"></canvas>
+  <div class="wrap" style="z-index:2">
+    <h1>
+      <span class="word" data-i18n="h1_a">TON INSTINCT.</span><br>
+      <span class="word arene" data-i18n="h1_b">TON ARÈNE.</span>
+    </h1>
+    <p class="sub" data-i18n="h1_sub">Le <b>Hyrox</b> des sports instinctifs</p>
+    <a class="cta" href="#billets" data-i18n="h1_cta">Réserve ta session</a>
+    <div class="counter-strip">
+      <div class="chip"><span class="num">9</span><span class="lbl" data-i18n="strip_st">Stations</span></div>
+      <div class="chip"><span class="num">300</span><span class="lbl" data-i18n="strip_ath">Athlètes / session</span></div>
+      <div class="chip"><span class="num">1</span><span class="lbl" data-i18n="strip_lb">Leaderboard</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint" data-i18n="scroll_hint">Descends dans l'arène</div>
+</header>
+
+<!-- ============ CONCEPT ============ -->
+<section class="section slash-top obs" id="concept">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="c_eyebrow">Le concept</span>
+    <h2 class="kinetic">
+      <span class="line"><span data-i18n="c_l1">Ici, on ne regarde pas.</span></span>
+      <span class="line"><span class="alt" data-i18n="c_l2">On compétitionne.</span></span>
+      <span class="line"><span data-i18n="c_l3">On bouge. Ensemble.</span></span>
+    </h2>
+    <div class="concept-grid">
+      <p class="lead reveal" data-i18n="c_body">PürInstinct Games n'est pas un spectacle. C'est une arène portable de 9 stations qui tourne de ville en ville — et tout le monde y est athlète. Le sport signature : un 3 c. 2 hybride sans contact (basketball + soccer + football) bâti sur 5 instincts naturels. Les défenseurs touchent le ballon, jamais le joueur. Autour : une technologie immersive qui fait bouger les gens dans le vrai monde — au lieu de les laisser fixer chacun leur écran. Même le championnat est un lieu de participation.</p>
+      <div class="concept-points">
+        <div class="cpoint reveal d1"><h3 data-i18n="c_p1t">Sport enregistré 3 c. 2</h3><p data-i18n="c_p1b">Traverse le terrain sans être touché, sans échapper le ballon. Strictement sans contact.</p></div>
+        <div class="cpoint reveal d2"><h3 data-i18n="c_p2t">5 instincts naturels</h3><p data-i18n="c_p2b">Vitesse, agilité des mains, agilité des pieds, agilité générale, IQ de jeu.</p></div>
+        <div class="cpoint reveal d3"><h3 data-i18n="c_p3t">Un classement vivant</h3><p data-i18n="c_p3b">Chaque station alimente ton score individuel, en temps réel.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARENA MAP ============ -->
+<section class="section obs" id="arena">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="a_eyebrow">L'arène</span>
+    <h2 class="disp reveal" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="a_title">9 stations. Une arène.</h2>
+    <p class="lead reveal d1" style="margin:14px 0 36px" data-i18n="a_sub">Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 terrains augmentés Moment Factory.</p>
+    <div class="arena-grid">
+      <div class="arena-svg-wrap reveal d2">
+        <svg id="arenaSvg" viewBox="0 0 900 560" role="img" aria-label="Plan de l'arène PürInstinct Games">
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- arena shell -->
+          <polygon points="20,40 880,10 880,540 20,520" fill="#0E0E0E" stroke="rgba(204,255,0,.25)" stroke-width="2"/>
+          <polygon points="20,40 880,10 880,30 20,60" fill="rgba(204,255,0,.07)"/>
+          <!-- Z1 VITESSE : long sprint strip -->
+          <g class="station" data-zone="vitesse">
+            <rect class="body" x="50" y="60" width="800" height="74" fill="rgba(255,68,56,.16)" stroke="#FF4438" stroke-width="2"/>
+            <line x1="60" y1="97" x2="840" y2="97" stroke="#FF4438" stroke-width="1.5" stroke-dasharray="14 12" opacity=".6"/>
+            <text class="st-label" x="66" y="92" fill="#FF4438">VITESSE</text>
+            <text class="st-tag" x="66" y="112">40 M — 5 NIVEAUX</text>
+          </g>
+          <!-- Z2 MAINS -->
+          <g class="station" data-zone="mains">
+            <rect class="body" x="50" y="158" width="190" height="170" fill="rgba(45,125,255,.16)" stroke="#2D7DFF" stroke-width="2"/>
+            <text class="st-label" x="64" y="190" fill="#2D7DFF">MAINS</text>
+            <text class="st-tag" x="64" y="208">LANCERS · 3 V 3</text>
+          </g>
+          <!-- Z3 PIEDS -->
+          <g class="station" data-zone="pieds">
+            <rect class="body" x="50" y="352" width="190" height="166" fill="rgba(46,224,106,.15)" stroke="#2EE06A" stroke-width="2"/>
+            <text class="st-label" x="64" y="384" fill="#2EE06A">PIEDS</text>
+            <text class="st-tag" x="64" y="402">DUELS 1 V 1</text>
+          </g>
+          <!-- Z4 AGILITÉ -->
+          <g class="station" data-zone="agilite">
+            <rect class="body" x="660" y="158" width="190" height="170" fill="rgba(255,196,0,.14)" stroke="#FFC400" stroke-width="2"/>
+            <text class="st-label" x="674" y="190" fill="#FFC400">AGILITÉ</text>
+            <text class="st-tag" x="674" y="208">TAG · CUBES</text>
+          </g>
+          <!-- Z5 IQ -->
+          <g class="station" data-zone="iq">
+            <rect class="body" x="660" y="352" width="190" height="166" fill="rgba(164,92,255,.15)" stroke="#A45CFF" stroke-width="2"/>
+            <text class="st-label" x="674" y="384" fill="#A45CFF">IQ DE JEU</text>
+            <text class="st-tag" x="674" y="402">STRATÉGIE 3 V 3</text>
+          </g>
+          <!-- PI terrains center -->
+          <g class="station" data-zone="pi1">
+            <rect class="body" x="268" y="158" width="176" height="170" fill="rgba(204,255,0,.07)" stroke="#CCFF00" stroke-width="2.5"/>
+            <line x1="356" y1="166" x2="356" y2="320" stroke="#CCFF00" stroke-width="1.5" opacity=".5" stroke-dasharray="8 8"/>
+            <text class="st-label" x="282" y="190" fill="#CCFF00">PÜRINSTINCT 1</text>
+            <text class="st-tag" x="282" y="208">3 V 2 · SANS CONTACT</text>
+          </g>
+          <g class="station" data-zone="pi2">
+            <rect class="body" x="456" y="158" width="176" height="170" fill="rgba(204,255,0,.07)" stroke="#CCFF00" stroke-width="2.5"/>
+            <line x1="544" y1="166" x2="544" y2="320" stroke="#CCFF00" stroke-width="1.5" opacity=".5" stroke-dasharray="8 8"/>
+            <text class="st-label" x="470" y="190" fill="#CCFF00">PÜRINSTINCT 2</text>
+            <text class="st-tag" x="470" y="208">3 V 2 · SANS CONTACT</text>
+          </g>
+          <!-- MF terrains bottom -->
+          <g class="station" data-zone="mf1">
+            <rect class="mf-glow" x="262" y="346" width="188" height="178" fill="#CCFF00" opacity=".35"/>
+            <rect class="body" x="268" y="352" width="176" height="166" fill="rgba(204,255,0,.12)" stroke="#CCFF00" stroke-width="2.5" filter="url(#glow)"/>
+            <text class="st-label" x="282" y="384" fill="#CCFF00">AUGMENTÉ 1</text>
+            <text class="st-tag" x="282" y="402">MOMENT FACTORY</text>
+          </g>
+          <g class="station" data-zone="mf2">
+            <rect class="mf-glow" x="450" y="346" width="188" height="178" fill="#CCFF00" opacity=".35"/>
+            <rect class="body" x="456" y="352" width="176" height="166" fill="rgba(204,255,0,.12)" stroke="#CCFF00" stroke-width="2.5" filter="url(#glow)"/>
+            <text class="st-label" x="470" y="384" fill="#CCFF00">AUGMENTÉ 2</text>
+            <text class="st-tag" x="470" y="402">MOMENT FACTORY</text>
+          </g>
+        </svg>
+        <p class="arena-hint" data-i18n="a_hint">Touche une station pour explorer sa zone</p>
+      </div>
+      <aside class="zone-card reveal d3" id="zoneCard" style="--zc:#CCFF00">
+        <div id="zoneCardInner" class="swap">
+          <span class="zc-tag" data-role="tag">Zone signature</span>
+          <h3 data-role="name">L'Arène</h3>
+          <p data-role="desc">Sélectionne une des 9 stations sur le plan pour découvrir son gameplay.</p>
+          <span class="zc-mf" data-role="mf" style="display:none"></span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTINCTS ============ -->
+<section id="instincts">
+  <div class="wrap" style="padding-top:clamp(60px,8vw,110px)">
+    <span class="eyebrow" data-i18n="i_eyebrow">Les 5 instincts</span>
+    <h2 class="disp obs reveal in-place" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="i_title">Cinq zones. Cinq réflexes.</h2>
+  </div>
+
+  <article class="zone-panel obs" style="--zc:var(--red)">
+    <span class="zone-num">01</span>
+    <div class="wrap">
+      <div class="reveal">
+        <h3><small data-i18n="z1_en">SPEED</small><span data-i18n="z1_t">Vitesse</span></h3>
+        <p data-i18n="z1_b">Sprint de 40 m, 5 niveaux de handicap — tout le monde part à chances égales. Stations : blocs de départ, course labyrinthe, course aux lumières.</p>
+        <span class="mfnote" data-i18n="mf_note">+ Station augmentée Moment Factory</span>
+      </div>
+      <div class="motif m-speed reveal d2" aria-hidden="true">
+        <i style="top:18%;width:62%;animation-delay:0s"></i>
+        <i style="top:38%;width:80%;animation-delay:.25s"></i>
+        <i style="top:58%;width:50%;animation-delay:.5s"></i>
+        <i style="top:78%;width:70%;animation-delay:.75s"></i>
+      </div>
+    </div>
+  </article>
+
+  <article class="zone-panel obs" style="--zc:var(--blue)">
+    <span class="zone-num">02</span>
+    <div class="wrap">
+      <div class="reveal">
+        <h3><small data-i18n="z2_en">HAND SKILLS</small><span data-i18n="z2_t">Agilité des mains</span></h3>
+        <p data-i18n="z2_b">Arène de lancers, équipes de 3. Précision, réaction au ballon, Ultimatum Ball.</p>
+        <span class="mfnote" data-i18n="mf_note2">+ Station augmentée Moment Factory</span>
+      </div>
+      <div class="motif m-arcs reveal d2" aria-hidden="true">
+        <svg viewBox="0 0 400 240" style="width:100%;height:100%">
+          <path d="M20,210 Q120,20 230,150"/>
+          <path d="M90,220 Q220,-10 380,170" style="animation-delay:.6s"/>
+          <circle cx="230" cy="150" r="8"/>
+          <circle cx="380" cy="170" r="8"/>
+        </svg>
+      </div>
+    </div>
+  </article>
+
+  <article class="zone-panel obs" style="--zc:var(--green)">
+    <span class="zone-num">03</span>
+    <div class="wrap">
+      <div class="reveal">
+        <h3><small data-i18n="z3_en">FOOT SKILLS</small><span data-i18n="z3_t">Agilité des pieds</span></h3>
+        <p data-i18n="z3_b">Plaques lumineuses réactives, duels 1 c. 1. Soccer 1 c. 1, puck shuffle, habiletés de balle. Aucun ballon dans les stations de réaction lumineuse — tes pieds répondent à la lumière.</p>
+        <span class="mfnote" data-i18n="mf_note3">+ Station augmentée Moment Factory</span>
+      </div>
+      <div class="motif reveal d2" aria-hidden="true">
+        <div class="m-pads">
+          <i></i><i style="animation-delay:.3s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.5s"></i>
+          <i style="animation-delay:1.2s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.7s"></i><i style="animation-delay:1.5s"></i>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="zone-panel obs" style="--zc:var(--yellow)">
+    <span class="zone-num">04</span>
+    <div class="wrap">
+      <div class="reveal">
+        <h3><small data-i18n="z4_en">AGILITY</small><span data-i18n="z4_t">Agilité générale</span></h3>
+        <p data-i18n="z4_b">Arène de tag avec obstacles cubiques, équipes de 3. Ultimatum tag, cage d'agilité, react attack.</p>
+        <span class="mfnote" data-i18n="mf_note4">+ Station augmentée Moment Factory</span>
+      </div>
+      <div class="motif reveal d2" aria-hidden="true">
+        <div class="m-cubes">
+          <i></i><i style="animation-delay:.4s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:1.2s"></i>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="zone-panel obs" style="--zc:var(--purple)">
+    <span class="zone-num">05</span>
+    <div class="wrap">
+      <div class="reveal">
+        <h3><small data-i18n="z5_en">GAME IQ</small><span data-i18n="z5_t">IQ de jeu</span></h3>
+        <p data-i18n="z5_b">Stratégie rapide 3 c. 3, tag sécuritaire sans contact avec ballon. Mémoire de cartes, mur lumineux rapide, reconnaissance de motifs.</p>
+        <span class="mfnote" data-i18n="mf_note5">+ Station augmentée Moment Factory</span>
+      </div>
+      <div class="motif reveal d2" aria-hidden="true">
+        <div class="m-grid">
+          <i></i><i style="animation-delay:.2s"></i><i style="animation-delay:.5s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:1.1s"></i>
+          <i style="animation-delay:.7s"></i><i style="animation-delay:1.4s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.6s"></i><i style="animation-delay:1s"></i><i style="animation-delay:.4s"></i>
+          <i style="animation-delay:1.3s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:1.6s"></i><i style="animation-delay:.55s"></i><i style="animation-delay:1.2s"></i>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ LEADERBOARD ============ -->
+<section class="section slash-top obs" id="leaderboard">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <div class="lb-shell">
+      <div class="lb-copy reveal">
+        <span class="eyebrow" data-i18n="lb_eyebrow">Le leaderboard vivant</span>
+        <h2 data-i18n="lb_title">Chaque geste compte.</h2>
+        <p class="lead" data-i18n="lb_body">Un seul classement individuel traverse toute l'arène : chaque sprint, chaque lancer, chaque réaction à chaque station alimente ton score en direct. 300 athlètes par session — un seul tableau. Les trois premiers s'illuminent en lime.</p>
+      </div>
+      <div class="lb-card reveal d2">
+        <div class="lb-head">
+          <span class="t" data-i18n="lb_card_t">Classement en direct</span>
+          <span class="live" data-i18n="lb_live">En direct</span>
+        </div>
+        <div class="lb-rows" id="lbRows"><div class="lb-divider" id="lbDivider"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOMENT FACTORY ============ -->
+<section class="section obs" id="mf">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <div class="mf-grid">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="mf_eyebrow">Partenaire technologique</span>
+        <h2 data-i18n="mf_title_a">Propulsé par <span class="mf-name">Moment Factory</span></h2>
+        <p class="lead" style="margin-top:18px" data-i18n="mf_body">Studio montréalais de renommée mondiale, Moment Factory signe des expériences immersives sportives et événementielles de classe mondiale. Dans l'arène, sa technologie ne se regarde pas : elle se joue. Deux terrains augmentés et une station immersive dans chaque zone transforment la lumière, le son et l'interactivité en mouvement collectif — une technologie qui fait bouger les gens, ensemble, dans le vrai monde.</p>
+      </div>
+      <div class="mf-visual reveal d2" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="section obs" id="preuve">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="s_eyebrow">10 ans de preuve</span>
+    <h2 class="disp reveal" style="font-size:clamp(42px,6.5vw,88px);margin-bottom:38px" data-i18n="s_title">Le sport est validé.</h2>
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="n"><span class="count" data-to="10">0</span></div><div class="l" data-i18n="s1">Ans de développement</div></div>
+      <div class="stat reveal d1"><div class="n"><span class="count" data-to="150">0</span>+</div><div class="l" data-i18n="s2">Écoles partenaires</div></div>
+      <div class="stat reveal d2"><div class="n"><span class="count" data-to="10000" data-fmt="k">0</span>+</div><div class="l" data-i18n="s3">Participants</div></div>
+      <div class="stat reveal d3"><div class="n"><span class="count" data-to="5">0</span></div><div class="l" data-i18n="s4">Disciplines</div></div>
+    </div>
+    <p class="stats-tag reveal d4"><span data-i18n="s_tag_a">Bâti dans les écoles du Québec, sans capital externe.</span> <span class="lime" data-i18n="s_tag_b">Les Games sont le prochain chapitre.</span></p>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section slash-top obs" id="billets">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="p_eyebrow">Sessions &amp; billets</span>
+    <h2 class="disp reveal" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="p_title">Entre dans l'arène.</h2>
+    <div class="price-grid">
+      <div class="price-card reveal d1">
+        <span class="tier" data-i18n="p1_t">Jeunesse</span>
+        <div><span class="amount">20&nbsp;$</span><div class="per" data-i18n="p_per1">par athlète / session</div></div>
+        <ul>
+          <li data-i18n="p_f1">Accès aux 9 stations</li>
+          <li data-i18n="p_f2">Score individuel en direct</li>
+          <li data-i18n="p_f3">Terrains augmentés Moment Factory</li>
+        </ul>
+        <a class="cta" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Jeunesse" data-i18n="p_cta1">Réserve</a>
+      </div>
+      <div class="price-card featured reveal d2">
+        <span class="tier" data-i18n="p2_t">Adulte</span>
+        <div><span class="amount">30&nbsp;$</span><div class="per" data-i18n="p_per2">par athlète / session</div></div>
+        <ul>
+          <li data-i18n="p_f1b">Accès aux 9 stations</li>
+          <li data-i18n="p_f2b">Score individuel en direct</li>
+          <li data-i18n="p_f3b">Terrains augmentés Moment Factory</li>
+        </ul>
+        <a class="cta" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Adulte" data-i18n="p_cta2">Réserve</a>
+      </div>
+      <div class="price-card reveal d3">
+        <span class="tier" data-i18n="p3_t">Corporatif</span>
+        <div><span class="amount">75&nbsp;$</span><div class="per" data-i18n="p_per3">par athlète / session</div></div>
+        <ul>
+          <li data-i18n="p_f1c">Sessions privées d'équipe</li>
+          <li data-i18n="p_f2c">Classement d'entreprise dédié</li>
+          <li data-i18n="p_f3c">Expérience augmentée complète</li>
+        </ul>
+        <a class="cta" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Corporatif" data-i18n="p_cta3">Réserve</a>
+      </div>
+    </div>
+    <p class="session-note" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="#billets" data-i18n="f_book">Réserver une session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ====================================================== */
+/* i18n */
+/* ====================================================== */
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",
+  h1_a:"TON INSTINCT.",h1_b:"TON ARÈNE.",h1_sub:"Le <b>Hyrox</b> des sports instinctifs",h1_cta:"Réserve ta session",
+  strip_st:"Stations",strip_ath:"Athlètes / session",strip_lb:"Leaderboard",scroll_hint:"Descends dans l'arène",
+  c_eyebrow:"Le concept",c_l1:"Ici, on ne regarde pas.",c_l2:"On compétitionne.",c_l3:"On bouge. Ensemble.",
+  c_body:"PürInstinct Games n'est pas un spectacle. C'est une arène portable de 9 stations qui tourne de ville en ville — et tout le monde y est athlète. Le sport signature : un 3 c. 2 hybride sans contact (basketball + soccer + football) bâti sur 5 instincts naturels. Les défenseurs touchent le ballon, jamais le joueur. Autour : une technologie immersive qui fait bouger les gens dans le vrai monde — au lieu de les laisser fixer chacun leur écran. Même le championnat est un lieu de participation.",
+  c_p1t:"Sport enregistré 3 c. 2",c_p1b:"Traverse le terrain sans être touché, sans échapper le ballon. Strictement sans contact.",
+  c_p2t:"5 instincts naturels",c_p2b:"Vitesse, agilité des mains, agilité des pieds, agilité générale, IQ de jeu.",
+  c_p3t:"Un classement vivant",c_p3b:"Chaque station alimente ton score individuel, en temps réel.",
+  a_eyebrow:"L'arène",a_title:"9 stations. Une arène.",
+  a_sub:"Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 terrains augmentés Moment Factory.",
+  a_hint:"Touche une station pour explorer sa zone",
+  i_eyebrow:"Les 5 instincts",i_title:"Cinq zones. Cinq réflexes.",
+  z1_en:"SPEED",z1_t:"Vitesse",z1_b:"Sprint de 40 m, 5 niveaux de handicap — tout le monde part à chances égales. Stations : blocs de départ, course labyrinthe, course aux lumières.",
+  z2_en:"HAND SKILLS",z2_t:"Agilité des mains",z2_b:"Arène de lancers, équipes de 3. Précision, réaction au ballon, Ultimatum Ball.",
+  z3_en:"FOOT SKILLS",z3_t:"Agilité des pieds",z3_b:"Plaques lumineuses réactives, duels 1 c. 1. Soccer 1 c. 1, puck shuffle, habiletés de balle. Aucun ballon dans les stations de réaction lumineuse — tes pieds répondent à la lumière.",
+  z4_en:"AGILITY",z4_t:"Agilité générale",z4_b:"Arène de tag avec obstacles cubiques, équipes de 3. Ultimatum tag, cage d'agilité, react attack.",
+  z5_en:"GAME IQ",z5_t:"IQ de jeu",z5_b:"Stratégie rapide 3 c. 3, tag sécuritaire sans contact avec ballon. Mémoire de cartes, mur lumineux rapide, reconnaissance de motifs.",
+  mf_note:"+ Station augmentée Moment Factory",mf_note2:"+ Station augmentée Moment Factory",mf_note3:"+ Station augmentée Moment Factory",mf_note4:"+ Station augmentée Moment Factory",mf_note5:"+ Station augmentée Moment Factory",
+  lb_eyebrow:"Le leaderboard vivant",lb_title:"Chaque geste compte.",
+  lb_body:"Un seul classement individuel traverse toute l'arène : chaque sprint, chaque lancer, chaque réaction à chaque station alimente ton score en direct. 300 athlètes par session — un seul tableau. Les trois premiers s'illuminent en lime.",
+  lb_card_t:"Classement en direct",lb_live:"En direct",
+  mf_eyebrow:"Partenaire technologique",mf_title_a:'Propulsé par <span class="mf-name">Moment Factory</span>',
+  mf_body:"Studio montréalais de renommée mondiale, Moment Factory signe des expériences immersives sportives et événementielles de classe mondiale. Dans l'arène, sa technologie ne se regarde pas : elle se joue. Deux terrains augmentés et une station immersive dans chaque zone transforment la lumière, le son et l'interactivité en mouvement collectif — une technologie qui fait bouger les gens, ensemble, dans le vrai monde.",
+  s_eyebrow:"10 ans de preuve",s_title:"Le sport est validé.",
+  s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
+  s_tag_a:"Bâti dans les écoles du Québec, sans capital externe.",s_tag_b:"Les Games sont le prochain chapitre.",
+  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",
+  p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
+  p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
+  p_f1:"Accès aux 9 stations",p_f2:"Score individuel en direct",p_f3:"Terrains augmentés Moment Factory",
+  p_f1b:"Accès aux 9 stations",p_f2b:"Score individuel en direct",p_f3b:"Terrains augmentés Moment Factory",
+  p_f1c:"Sessions privées d'équipe",p_f2c:"Classement d'entreprise dédié",p_f3c:"Expérience augmentée complète",
+  p_cta1:"Réserve",p_cta2:"Réserve",p_cta3:"Réserve",
+  p_note:"<b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard",
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur.",
+  zc_default_tag:"Zone signature",zc_default_name:"L'Arène",zc_default_desc:"Sélectionne une des 9 stations sur le plan pour découvrir son gameplay.",
+  zc_mf:"Station augmentée Moment Factory incluse"
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",
+  h1_a:"YOUR INSTINCT.",h1_b:"YOUR ARENA.",h1_sub:"The <b>Hyrox</b> of instinctive sports",h1_cta:"Book your session",
+  strip_st:"Stations",strip_ath:"Athletes / session",strip_lb:"Leaderboard",scroll_hint:"Descend into the arena",
+  c_eyebrow:"The concept",c_l1:"Nobody here watches.",c_l2:"Everybody competes.",c_l3:"We move. Together.",
+  c_body:"PürInstinct Games is not a show. It's a portable 9-station arena touring city to city — and everyone in it is an athlete. The signature sport: a no-contact 3v2 hybrid (basketball + soccer + football) built on 5 natural instincts. Defenders touch the ball, never the player. Around it: immersive technology that makes people move in the real world — instead of staring at individual screens. Even the championship is a place of participation.",
+  c_p1t:"Registered 3v2 sport",c_p1b:"Cross the field without being touched, without dropping the ball. Strictly no contact.",
+  c_p2t:"5 natural instincts",c_p2b:"Speed, hand skills, foot skills, agility, game IQ.",
+  c_p3t:"One living leaderboard",c_p3b:"Every station feeds your individual score, in real time.",
+  a_eyebrow:"The arena",a_title:"9 stations. One arena.",
+  a_sub:"Fly over the complex: 5 skill zones, 2 PürInstinct courts at center, 2 Moment Factory augmented courts.",
+  a_hint:"Tap a station to explore its zone",
+  i_eyebrow:"The 5 instincts",i_title:"Five zones. Five reflexes.",
+  z1_en:"VITESSE",z1_t:"Speed",z1_b:"40m sprint, 5 handicap levels — everyone races on equal footing. Stations: starting blocks, maze run, light run.",
+  z2_en:"AGILITÉ DES MAINS",z2_t:"Hand skills",z2_b:"Ball-throwing arena, teams of 3. Precision skills, ball reaction, Ultimatum Ball.",
+  z3_en:"AGILITÉ DES PIEDS",z3_t:"Foot skills",z3_b:"Reactive light-pad system, 1v1 duels. Soccer 1v1, puck shuffle, ball skills. No balls in the light-reaction stations — your feet answer the light.",
+  z4_en:"AGILITÉ GÉNÉRALE",z4_t:"Agility",z4_b:"Tag arena with cube obstacles, teams of 3. Ultimatum tag, agility cage, react attack.",
+  z5_en:"IQ DE JEU",z5_t:"Game IQ",z5_b:"3v3 rapid strategy, safe no-contact tag with a ball. Card memory, fast wall light, pattern recognition.",
+  mf_note:"+ Moment Factory augmented station",mf_note2:"+ Moment Factory augmented station",mf_note3:"+ Moment Factory augmented station",mf_note4:"+ Moment Factory augmented station",mf_note5:"+ Moment Factory augmented station",
+  lb_eyebrow:"The living leaderboard",lb_title:"Every move counts.",
+  lb_body:"One individual ranking runs across the whole arena: every sprint, every throw, every reaction at every station feeds your live score. 300 athletes per session — one board. The top three ignite in lime.",
+  lb_card_t:"Live ranking",lb_live:"Live",
+  mf_eyebrow:"Technology partner",mf_title_a:'Powered by <span class="mf-name">Moment Factory</span>',
+  mf_body:"A world-renowned Montreal studio, Moment Factory creates world-class immersive sport and event experiences. In the arena, its technology isn't watched: it's played. Two augmented courts and one immersive station in every zone turn light, sound and interactivity into collective movement — technology that makes people move, together, in the real world.",
+  s_eyebrow:"10 years of proof",s_title:"The sport is validated.",
+  s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
+  s_tag_a:"Built in Quebec schools, with no outside capital.",s_tag_b:"The Games are the next chapter.",
+  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",
+  p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
+  p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
+  p_f1:"Access to all 9 stations",p_f2:"Live individual score",p_f3:"Moment Factory augmented courts",
+  p_f1b:"Access to all 9 stations",p_f2b:"Live individual score",p_f3b:"Moment Factory augmented courts",
+  p_f1c:"Private team sessions",p_f2c:"Dedicated company leaderboard",p_f3c:"Full augmented experience",
+  p_cta1:"Book",p_cta2:"Book",p_cta3:"Book",
+  p_note:"<b>7 sessions per day</b> · 300 participants per session · One leaderboard",
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player.",
+  zc_default_tag:"Signature zone",zc_default_name:"The Arena",zc_default_desc:"Select one of the 9 stations on the map to discover its gameplay.",
+  zc_mf:"Moment Factory augmented station included"
+}};
+
+/* Zone data for the interactive map card */
+const ZONES = {
+  vitesse:{color:"#FF4438",fr:{tag:"Zone 01 — Vitesse",name:"Vitesse",desc:"Sprint de 40 m, 5 niveaux de handicap — tout le monde part à chances égales. Blocs de départ, course labyrinthe, course aux lumières.",mf:true},
+           en:{tag:"Zone 01 — Speed",name:"Speed",desc:"40m sprint, 5 handicap levels — everyone races on equal footing. Starting blocks, maze run, light run.",mf:true}},
+  mains:{color:"#2D7DFF",fr:{tag:"Zone 02 — Agilité des mains",name:"Mains",desc:"Arène de lancers, équipes de 3. Précision, réaction au ballon, Ultimatum Ball.",mf:true},
+         en:{tag:"Zone 02 — Hand skills",name:"Hands",desc:"Ball-throwing arena, teams of 3. Precision skills, ball reaction, Ultimatum Ball.",mf:true}},
+  pieds:{color:"#2EE06A",fr:{tag:"Zone 03 — Agilité des pieds",name:"Pieds",desc:"Plaques lumineuses réactives, duels 1 c. 1. Soccer 1 c. 1, puck shuffle, habiletés de balle. Aucun ballon dans les stations de réaction lumineuse.",mf:true},
+         en:{tag:"Zone 03 — Foot skills",name:"Feet",desc:"Reactive light-pad system, 1v1 duels. Soccer 1v1, puck shuffle, ball skills. No balls in light-reaction stations.",mf:true}},
+  agilite:{color:"#FFC400",fr:{tag:"Zone 04 — Agilité générale",name:"Agilité",desc:"Arène de tag avec obstacles cubiques, équipes de 3. Ultimatum tag, cage d'agilité, react attack.",mf:true},
+           en:{tag:"Zone 04 — Agility",name:"Agility",desc:"Tag arena with cube obstacles, teams of 3. Ultimatum tag, agility cage, react attack.",mf:true}},
+  iq:{color:"#A45CFF",fr:{tag:"Zone 05 — IQ de jeu",name:"IQ de jeu",desc:"Stratégie rapide 3 c. 3, tag sécuritaire sans contact avec ballon. Mémoire de cartes, mur lumineux rapide, reconnaissance de motifs.",mf:true},
+      en:{tag:"Zone 05 — Game IQ",name:"Game IQ",desc:"3v3 rapid strategy, safe no-contact tag with a ball. Card memory, fast wall light, pattern recognition.",mf:true}},
+  pi1:{color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 1",desc:"Le sport signature 3 c. 2 : traverse le terrain sans être touché et sans échapper le ballon. Les défenseurs touchent le ballon, jamais le joueur.",mf:false},
+       en:{tag:"Signature court",name:"PürInstinct 1",desc:"The signature 3v2 sport: cross the field without being touched or dropping the ball. Defenders touch the ball, never the player.",mf:false}},
+  pi2:{color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 2",desc:"Le sport signature 3 c. 2 : traverse le terrain sans être touché et sans échapper le ballon. Les défenseurs touchent le ballon, jamais le joueur.",mf:false},
+       en:{tag:"Signature court",name:"PürInstinct 2",desc:"The signature 3v2 sport: cross the field without being touched or dropping the ball. Defenders touch the ball, never the player.",mf:false}},
+  mf1:{color:"#CCFF00",fr:{tag:"Terrain augmenté",name:"Augmenté 1",desc:"Terrain immersif interactif propulsé par Moment Factory. La lumière, le son et l'interactivité te font bouger — pas regarder.",mf:false},
+       en:{tag:"Augmented court",name:"Augmented 1",desc:"Immersive interactive court powered by Moment Factory. Light, sound and interactivity make you move — not watch.",mf:false}},
+  mf2:{color:"#CCFF00",fr:{tag:"Terrain augmenté",name:"Augmenté 2",desc:"Terrain immersif interactif propulsé par Moment Factory. La lumière, le son et l'interactivité te font bouger — pas regarder.",mf:false},
+       en:{tag:"Augmented court",name:"Augmented 2",desc:"Immersive interactive court powered by Moment Factory. Light, sound and interactivity make you move — not watch.",mf:false}}
+};
+
+let lang = "fr";
+const RICH = new Set(["h1_sub","mf_title_a","p_note"]); // keys containing safe inline HTML
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    const v = I18N[lang][k];
+    if(v==null) return;
+    if(RICH.has(k)) el.innerHTML = v; else el.textContent = v;
+  });
+  document.getElementById("langBtn").textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
+  renderZoneCard(currentZone);
+}
+document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";applyLang();});
+document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";applyLang();});
+
+/* Burger */
+const burger = document.getElementById("burger"), navLinks = document.getElementById("navLinks");
+burger.addEventListener("click",()=>navLinks.classList.toggle("open"));
+navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("open")));
+
+/* ====================================================== */
+/* Hero canvas — beams + particles, moving from frame 0 */
+/* ====================================================== */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const canvas = document.getElementById("heroCanvas");
+const ctx = canvas.getContext("2d");
+let W,H,particles=[],beams=[];
+function sizeCanvas(){
+  const dpr = Math.min(window.devicePixelRatio||1,2);
+  W = canvas.clientWidth; H = canvas.clientHeight;
+  canvas.width = W*dpr; canvas.height = H*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+function initField(){
+  const n = W<700 ? 42 : 80;
+  particles = Array.from({length:n},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.3)*.35,vy:(Math.random()-.5)*.18,
+    r:Math.random()*1.8+.4,a:Math.random()*.5+.15
+  }));
+  beams = Array.from({length:4},(_,i)=>({
+    p:Math.random(),speed:.0016+Math.random()*.0014,
+    angle:(-24+i*14)*Math.PI/180,width:80+Math.random()*120,hue:i%2===0
+  }));
+}
+function drawFrame(t){
+  ctx.clearRect(0,0,W,H);
+  // floor grid hint
+  ctx.strokeStyle="rgba(204,255,0,.05)";
+  ctx.lineWidth=1;
+  for(let i=0;i<7;i++){
+    const y = H*0.55 + i*i*7;
+    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+  }
+  // beams (diagonal light sweeps)
+  beams.forEach(b=>{
+    b.p += b.speed; if(b.p>1.25) b.p = -0.25;
+    const cx = b.p*(W+400)-200;
+    ctx.save();
+    ctx.translate(cx,H*.5); ctx.rotate(b.angle);
+    const g = ctx.createLinearGradient(-b.width,0,b.width,0);
+    const c = b.hue ? "204,255,0" : "255,255,255";
+    g.addColorStop(0,`rgba(${c},0)`);
+    g.addColorStop(.5,`rgba(${c},${b.hue?0.10:0.045})`);
+    g.addColorStop(1,`rgba(${c},0)`);
+    ctx.fillStyle=g;
+    ctx.fillRect(-b.width,-H,b.width*2,H*2);
+    ctx.restore();
+  });
+  // particles
+  particles.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x>W+10)p.x=-10; if(p.x<-10)p.x=W+10;
+    if(p.y>H+10)p.y=-10; if(p.y<-10)p.y=H+10;
+    ctx.beginPath();
+    ctx.fillStyle=`rgba(204,255,0,${p.a})`;
+    ctx.arc(p.x,p.y,p.r,0,7);
+    ctx.fill();
+  });
+  if(!reduceMotion) requestAnimationFrame(drawFrame);
+}
+sizeCanvas(); initField(); requestAnimationFrame(drawFrame);
+let rT; window.addEventListener("resize",()=>{clearTimeout(rT);rT=setTimeout(()=>{sizeCanvas();initField();if(reduceMotion)drawFrame();},150)});
+
+/* ====================================================== */
+/* Scroll reveals */
+/* ====================================================== */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+},{threshold:.18,rootMargin:"0px 0px -6% 0px"});
+document.querySelectorAll(".obs").forEach(el=>io.observe(el));
+
+/* ====================================================== */
+/* Arena map interaction */
+/* ====================================================== */
+let currentZone = null;
+const zoneCard = document.getElementById("zoneCard");
+const zoneInner = document.getElementById("zoneCardInner");
+function renderZoneCard(key){
+  const t = I18N[lang];
+  const tagEl = zoneInner.querySelector("[data-role=tag]");
+  const nameEl = zoneInner.querySelector("[data-role=name]");
+  const descEl = zoneInner.querySelector("[data-role=desc]");
+  const mfEl = zoneInner.querySelector("[data-role=mf]");
+  if(!key){
+    zoneCard.style.setProperty("--zc","#CCFF00");
+    tagEl.textContent=t.zc_default_tag; nameEl.textContent=t.zc_default_name; descEl.textContent=t.zc_default_desc;
+    mfEl.style.display="none"; return;
+  }
+  const z = ZONES[key], d = z[lang];
+  zoneCard.style.setProperty("--zc",z.color);
+  tagEl.textContent=d.tag; nameEl.textContent=d.name; descEl.textContent=d.desc;
+  if(d.mf){ mfEl.style.display="flex"; mfEl.textContent=t.zc_mf; } else mfEl.style.display="none";
+  zoneInner.classList.remove("swap"); void zoneInner.offsetWidth; zoneInner.classList.add("swap");
+}
+document.querySelectorAll("#arenaSvg .station").forEach(st=>{
+  const key = st.getAttribute("data-zone");
+  const activate = ()=>{ 
+    document.querySelectorAll("#arenaSvg .station").forEach(s=>s.classList.remove("active"));
+    st.classList.add("active"); currentZone = key; renderZoneCard(key);
+  };
+  st.addEventListener("click",activate);
+  st.addEventListener("mouseenter",activate);
+});
+/* cursor-proximity glow on zone blocks */
+const arenaSvg = document.getElementById("arenaSvg");
+if(!reduceMotion && matchMedia("(pointer:fine)").matches){
+  let raf=null;
+  arenaSvg.addEventListener("mousemove",e=>{
+    if(raf) return;
+    raf=requestAnimationFrame(()=>{
+      raf=null;
+      const r = arenaSvg.getBoundingClientRect();
+      const mx=e.clientX, my=e.clientY;
+      arenaSvg.querySelectorAll(".station rect.body").forEach(rect=>{
+        const b = rect.getBoundingClientRect();
+        const cx=b.left+b.width/2, cy=b.top+b.height/2;
+        const d=Math.hypot(mx-cx,my-cy);
+        const k=Math.max(0,1-d/(r.width*.45));
+        rect.style.filter = k>0.05 ? `brightness(${1+k*.8}) drop-shadow(0 0 ${k*14}px currentColor)` : "";
+      });
+    });
+  });
+  arenaSvg.addEventListener("mouseleave",()=>arenaSvg.querySelectorAll(".station rect.body").forEach(r=>r.style.filter=""));
+}
+
+/* ====================================================== */
+/* Leaderboard — live mock */
+/* ====================================================== */
+const NAMES=["M. Tremblay","A. Bouchard","S. Nguyen","J. Gagnon","L. Côté","K. Diallo","É. Fortin","C. Lavoie","R. Petit","N. Roy"];
+let lb = NAMES.map((n,i)=>({name:n,score:8600 - i*420 - Math.floor(Math.random()*120)}));
+const lbRows = document.getElementById("lbRows");
+const lbDivider = document.getElementById("lbDivider");
+const ROW_H=48, PAD_T=10;
+const rowEls = lb.map((p,i)=>{
+  const el=document.createElement("div");
+  el.className="lb-row";
+  el.innerHTML=`<span class="rk"></span><span class="nm">${p.name}</span><span class="sc">0</span>`;
+  el.style.top=(PAD_T+i*ROW_H)+"px";
+  lbRows.appendChild(el);
+  return el;
+});
+lbRows.style.height=(PAD_T*2+ROW_H*lb.length)+"px";
+function paintLb(animateScores){
+  const sorted=[...lb].sort((a,b)=>b.score-a.score);
+  sorted.forEach((p,rank)=>{
+    const idx=lb.indexOf(p), el=rowEls[idx];
+    el.style.top=(PAD_T+rank*ROW_H)+"px";
+    el.classList.toggle("top",rank<3);
+    el.querySelector(".rk").textContent=(rank+1).toString().padStart(2,"0");
+    const scEl=el.querySelector(".sc");
+    if(animateScores && !reduceMotion){
+      const from=parseInt(scEl.textContent.replace(/\s/g,""))||0, to=p.score, t0=performance.now();
+      const step=now=>{const k=Math.min(1,(now-t0)/700);
+        scEl.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))).toLocaleString("fr-CA");
+        if(k<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+    } else scEl.textContent=p.score.toLocaleString("fr-CA");
+  });
+  lbDivider.style.top=(PAD_T+3*ROW_H-4)+"px";
+}
+const lbSection=document.getElementById("leaderboard");
+let lbStarted=false;
+new IntersectionObserver((es,obs)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting && !lbStarted){
+      lbStarted=true; paintLb(true);
+      if(!reduceMotion){
+        setInterval(()=>{
+          lb.forEach(p=>{ if(Math.random()<.45) p.score+=Math.floor(Math.random()*180); });
+          paintLb(true);
+        },2600);
+      }
+      obs.disconnect();
+    }
+  });
+},{threshold:.3}).observe(lbSection);
+paintLb(false);
+
+/* ====================================================== */
+/* Stat counters */
+/* ====================================================== */
+document.querySelectorAll(".count").forEach(el=>{
+  new IntersectionObserver((es,obs)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      obs.disconnect();
+      const to=+el.dataset.to, t0=performance.now(), dur=1400;
+      if(reduceMotion){el.textContent=to.toLocaleString("fr-CA");return;}
+      const step=now=>{const k=Math.min(1,(now-t0)/dur);
+        el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString("fr-CA");
+        if(k<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+    });
+  },{threshold:.5}).observe(el);
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+applyLang();
+</script>
+</body>
+</html>
