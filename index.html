@@ -263,7 +263,85 @@ h1,h2,h3,.disp{
 .arena-hint{margin-top:14px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px}
 .arena-hint::before{content:"";width:22px;height:2px;background:var(--lime);transform:skewX(-30deg)}
 
-/* ============ INSTINCTS ============ */
+/* ============ ATHLETE JOURNEY ============ */
+.journey{position:relative;padding:clamp(40px,6vw,80px) 0 clamp(60px,8vw,100px)}
+.j-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.j-line{fill:none;stroke:rgba(255,255,255,.10);stroke-width:2.5;stroke-dasharray:7 9}
+.j-line-fill{fill:none;stroke:var(--lime);stroke-width:3;filter:drop-shadow(0 0 8px rgba(204,255,0,.55))}
+.j-player{position:absolute;top:0;left:0;width:40px;height:40px;border-radius:50%;background:var(--lime);
+  display:flex;align-items:center;justify-content:center;z-index:5;pointer-events:none;
+  box-shadow:0 0 0 5px rgba(204,255,0,.18),0 0 26px rgba(204,255,0,.65);
+  transform:translate(-50%,-50%);will-change:transform}
+.j-stop{position:relative;display:grid;grid-template-columns:1fr 110px 1fr;align-items:center;
+  padding:clamp(36px,5vw,70px) 0;z-index:2}
+.j-node{grid-column:2;justify-self:center;width:52px;height:52px;border-radius:50%;
+  background:#0A0A0A;border:2.5px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;
+  transition:border-color .45s,box-shadow .45s,background .45s;z-index:3}
+.j-node span{font-family:var(--display);font-style:italic;font-weight:900;font-size:17px;color:rgba(255,255,255,.45);transition:color .45s}
+.j-stop.lit .j-node{border-color:var(--zc);box-shadow:0 0 18px color-mix(in srgb,var(--zc) 55%,transparent);background:#101010}
+.j-stop.lit .j-node span{color:var(--zc)}
+.j-stop[data-side=left] .j-card{grid-column:1;grid-row:1;justify-self:end}
+.j-stop[data-side=right] .j-card{grid-column:3;grid-row:1;justify-self:start}
+.j-card{max-width:520px;width:100%;display:flex;flex-direction:column;gap:18px;
+  opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.j-stop.in .j-card{opacity:1;transform:none}
+.j-media{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%)}
+.j-media img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.j-media[data-video]{cursor:pointer}
+.j-media[data-video]:hover img{transform:scale(1.045)}
+.j-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,10,10,.55));pointer-events:none}
+.j-play{position:absolute;right:16px;bottom:16px;width:46px;height:46px;border-radius:50%;background:var(--lime);
+  display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .25s;
+  box-shadow:0 0 18px rgba(204,255,0,.5)}
+.j-play::before{content:"";display:block;width:0;height:0;border-style:solid;border-width:8px 0 8px 14px;
+  border-color:transparent transparent transparent #0A0A0A;margin-left:4px}
+.j-media[data-video]:hover .j-play{transform:scale(1.12)}
+.j-step{font-family:var(--display);font-style:italic;font-weight:900;font-size:14px;letter-spacing:.16em;color:var(--zc);text-transform:uppercase}
+.j-copy h3{font-size:clamp(30px,3.6vw,46px);color:var(--white);margin:2px 0 8px}
+.j-copy p{color:var(--muted);max-width:46ch}
+.j-copy .mfnote{margin-top:12px;color:var(--lime);font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px}
+.j-copy .mfnote::before{content:"";width:8px;height:8px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 10px var(--lime)}
+.j-cta{margin-top:18px;align-self:flex-start}
+/* race bib */
+.j-bib{background:#F4F4F2;border-radius:12px;padding:clamp(18px,2.4vw,28px);display:flex;flex-direction:column;
+  align-items:center;gap:4px;max-width:330px;transform:rotate(-2deg);
+  box-shadow:0 18px 50px rgba(0,0,0,.5);position:relative}
+.j-bib::before,.j-bib::after{content:"";position:absolute;top:12px;width:9px;height:9px;border-radius:50%;background:#0A0A0A}
+.j-bib::before{left:18px}.j-bib::after{right:18px}
+.j-bib-brand{font-family:var(--display);font-style:italic;font-weight:900;font-size:15px;color:#0A0A0A;letter-spacing:.06em}
+.j-bib-brand i{color:#9bc400;font-style:italic}
+.j-bib-num{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(64px,7vw,92px);line-height:.95;color:#0A0A0A}
+.j-bib-name{font-family:var(--display);font-style:italic;font-weight:900;font-size:16px;letter-spacing:.2em;color:#0A0A0A;
+  background:var(--lime);padding:3px 16px}
+/* podium */
+.j-podium{display:flex;align-items:flex-end;gap:8px;height:150px;max-width:330px}
+.j-pod{flex:1;background:#161616;border:1px solid rgba(255,255,255,.1);border-bottom:none;border-radius:8px 8px 0 0;
+  display:flex;align-items:flex-start;justify-content:center;padding-top:10px;position:relative}
+.j-pod i{font-family:var(--display);font-style:italic;font-weight:900;font-size:22px;color:rgba(255,255,255,.5)}
+.j-pod.p1{height:100%;background:linear-gradient(180deg,rgba(204,255,0,.22),rgba(204,255,0,.05));border-color:rgba(204,255,0,.5)}
+.j-pod.p1 i{color:var(--lime)}
+.j-pod.p1::before{content:"";position:absolute;top:-26px;width:20px;height:20px;background:var(--lime);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  filter:drop-shadow(0 0 10px rgba(204,255,0,.8))}
+.j-pod.p2{height:72%}.j-pod.p3{height:52%}
+@media(max-width:860px){
+  .j-stop{grid-template-columns:64px 1fr;padding:clamp(30px,7vw,48px) 0}
+  .j-node{grid-column:1;width:44px;height:44px}
+  .j-node span{font-size:15px}
+  .j-stop[data-side=left] .j-card,.j-stop[data-side=right] .j-card{grid-column:2;grid-row:1;justify-self:start;max-width:none}
+  .j-player{width:34px;height:34px}
+  .j-player svg{width:18px;height:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .j-card{opacity:1;transform:none;transition:none}
+  .j-player{display:none}
+  .j-line-fill{display:none}
+  .j-stop .j-node{border-color:var(--zc)}
+  .j-stop .j-node span{color:var(--zc)}
+}
+
+/* ============ INSTINCTS (legacy) ============ */
 .zone-panel{
   position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);
   padding:clamp(48px,7vw,86px) 0;
@@ -732,89 +810,149 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
 </section>
 
-<!-- ============ INSTINCTS ============ -->
+<!-- ============ INSTINCTS : ATHLETE JOURNEY ============ -->
 <section id="instincts">
-  <div class="instincts-layout">
-    <div class="instincts-sticky-img">
-      <img src="arena-vertical.png" alt="Arène PürInstinct Games — toutes les zones">
+  <div class="wrap" style="padding-top:clamp(60px,8vw,110px)">
+    <span class="eyebrow" data-i18n="i_eyebrow">Le parcours athlète</span>
+    <h2 class="disp obs reveal in-place" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="i_title">De l'inscription au podium.</h2>
+    <p class="lead obs reveal" style="margin:14px 0 0;max-width:62ch" data-i18n="i_sub2">Suis le parcours d'un athlète : une session de 75 minutes, un dossard, neuf stations — et un seul score.</p>
+  </div>
+  <div class="journey wrap" id="journey">
+    <svg class="j-svg" aria-hidden="true">
+      <path class="j-line" d=""/>
+      <path class="j-line-fill" d=""/>
+    </svg>
+    <div class="j-player" id="jPlayer" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="#0A0A0A"><path d="M13.5 5.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM9.8 8.9 7.2 22h2.1l1.6-7 2.1 2v5h2v-6.5l-2.1-2 .6-3A7.3 7.3 0 0 0 19 12.5v-2c-1.8 0-3.4-.9-4.2-2.3l-1-1.6a2 2 0 0 0-1.7-1c-.3 0-.5 0-.8.1L6 7.8v4.7h2V9.6l1.8-.7z"/></svg>
     </div>
-    <div class="instincts-content">
-      <div class="wrap" style="padding-top:clamp(60px,8vw,110px)">
-        <span class="eyebrow" data-i18n="i_eyebrow">Les 5 instincts</span>
-        <h2 class="disp obs reveal in-place" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="i_title">Cinq zones. Cinq réflexes.</h2>
-      </div>
 
-  <article class="zone-panel obs" style="--zc:var(--red)">
-    <span class="zone-num">01</span>
-    <div class="wrap">
-      <div class="reveal">
-        <h3><small data-i18n="z1_en">SPEED</small><span data-i18n="z1_t">Vitesse</span></h3>
-        <p data-i18n="z1_b">Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.</p>
-        <span class="mfnote" data-i18n="mf_note">+ Station augmentée Moment Factory</span>
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
+      <div class="j-node"><span>01</span></div>
+      <div class="j-card">
+        <div class="j-bib">
+          <span class="j-bib-brand">PÜRINSTINCT<i>/</i>GAMES</span>
+          <span class="j-bib-num">047</span>
+          <span class="j-bib-name" data-i18n="j_bib">TON NOM</span>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_reg_s">DÉPART</span>
+          <h3 data-i18n="j_reg_t">Inscription</h3>
+          <p data-i18n="j_reg_b">Reçois ton dossard et ton profil. Ton score individuel te suit partout dans l'arène, en temps réel.</p>
+        </div>
       </div>
-      <div class="zone-logo-wrap reveal d2">
-        <img class="zone-logo" data-logo-fr="assets/logo-speed-fr.png" data-logo-en="assets/logo-speed.png" src="assets/logo-speed-fr.png" alt="Zone Vitesse">
-      </div>
-    </div>
-  </article>
+    </article>
 
-  <article class="zone-panel obs" style="--zc:var(--blue)">
-    <span class="zone-num">02</span>
-    <div class="wrap">
-      <div class="reveal">
-        <h3><small data-i18n="z2_en">HAND SKILLS</small><span data-i18n="z2_t">Agilité des mains</span></h3>
-        <p data-i18n="z2_b">Arène de lancers, équipes de 3. Précision, réaction au ballon.</p>
-        <span class="mfnote" data-i18n="mf_note2">+ Station augmentée Moment Factory</span>
+    <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
+      <div class="j-node"><span>02</span></div>
+      <div class="j-card">
+        <div class="j-media">
+          <img src="assets/render-field.jpg" alt="Terrain PürInstinct" loading="lazy">
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_pi_s">LE SPORT</span>
+          <h3 data-i18n="j_pi_t">Comprendre PürInstinct</h3>
+          <p data-i18n="j_pi_b">D'abord, le terrain signature : traverser en 3 contre 2, sans contact, sans échapper le ballon. Tu comprends le sport en le jouant.</p>
+        </div>
       </div>
-      <div class="zone-logo-wrap reveal d2">
-        <img class="zone-logo" data-logo-fr="assets/logo-hand-fr.png" data-logo-en="assets/logo-hand.png" src="assets/logo-hand-fr.png" alt="Zone Agilité des mains">
-      </div>
-    </div>
-  </article>
+    </article>
 
-  <article class="zone-panel obs" style="--zc:var(--green)">
-    <span class="zone-num">03</span>
-    <div class="wrap">
-      <div class="reveal">
-        <h3><small data-i18n="z3_en">FOOT SKILLS</small><span data-i18n="z3_t">Agilité des pieds</span></h3>
-        <p data-i18n="z3_b">Plaques lumineuses réactives, duels 1 contre 1.</p>
-        <span class="mfnote" data-i18n="mf_note3">+ Station augmentée Moment Factory</span>
+    <article class="j-stop obs" data-side="left" style="--zc:var(--red)">
+      <div class="j-node"><span>03</span></div>
+      <div class="j-card">
+        <div class="j-media" data-video="zone-speed.mp4">
+          <img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="z1_en">SPEED</span>
+          <h3 data-i18n="z1_t">Vitesse</h3>
+          <p data-i18n="z1_b">Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.</p>
+          <span class="mfnote" data-i18n="mf_note">+ Station augmentée Moment Factory</span>
+        </div>
       </div>
-      <div class="zone-logo-wrap reveal d2">
-        <img class="zone-logo" data-logo-fr="assets/logo-foot-fr.png" data-logo-en="assets/logo-foot.png" src="assets/logo-foot-fr.png" alt="Zone Agilité des pieds">
-      </div>
-    </div>
-  </article>
+    </article>
 
-  <article class="zone-panel obs" style="--zc:var(--yellow)">
-    <span class="zone-num">04</span>
-    <div class="wrap">
-      <div class="reveal">
-        <h3><small data-i18n="z4_en">AGILITY</small><span data-i18n="z4_t">Agilité générale</span></h3>
-        <p data-i18n="z4_b">Arène de tag avec obstacles, équipes de 3.</p>
-        <span class="mfnote" data-i18n="mf_note4">+ Station augmentée Moment Factory</span>
+    <article class="j-stop obs" data-side="right" style="--zc:var(--blue)">
+      <div class="j-node"><span>04</span></div>
+      <div class="j-card">
+        <div class="j-media" data-video="zone-hand.mp4">
+          <img src="assets/render-hand.jpg" alt="Zone Agilité des mains" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="z2_en">HAND SKILLS</span>
+          <h3 data-i18n="z2_t">Agilité des mains</h3>
+          <p data-i18n="z2_b">Arène de lancers, équipes de 3. Précision, réaction au ballon.</p>
+          <span class="mfnote" data-i18n="mf_note2">+ Station augmentée Moment Factory</span>
+        </div>
       </div>
-      <div class="zone-logo-wrap reveal d2">
-        <img class="zone-logo" data-logo-fr="assets/logo-agility-fr.png" data-logo-en="assets/logo-agility.png" src="assets/logo-agility-fr.png" alt="Zone Agilité générale">
-      </div>
-    </div>
-  </article>
+    </article>
 
-  <article class="zone-panel obs" style="--zc:var(--purple)">
-    <span class="zone-num">05</span>
-    <div class="wrap">
-      <div class="reveal">
-        <h3><small data-i18n="z5_en">GAME IQ</small><span data-i18n="z5_t">IQ de jeu</span></h3>
-        <p data-i18n="z5_b">Stratégie rapide 3 contre 3 avec ballon.</p>
-        <span class="mfnote" data-i18n="mf_note5">+ Station augmentée Moment Factory</span>
+    <article class="j-stop obs" data-side="left" style="--zc:var(--green)">
+      <div class="j-node"><span>05</span></div>
+      <div class="j-card">
+        <div class="j-media" data-video="zone-foot.mp4">
+          <img src="assets/render-foot.jpg" alt="Zone Agilité des pieds" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="z3_en">FOOT SKILLS</span>
+          <h3 data-i18n="z3_t">Agilité des pieds</h3>
+          <p data-i18n="z3_b">Plaques lumineuses réactives, duels 1 contre 1.</p>
+          <span class="mfnote" data-i18n="mf_note3">+ Station augmentée Moment Factory</span>
+        </div>
       </div>
-      <div class="zone-logo-wrap reveal d2">
-        <img class="zone-logo" data-logo-fr="assets/logo-iq-fr.png" data-logo-en="assets/logo-iq.png" src="assets/logo-iq-fr.png" alt="Zone IQ de jeu">
+    </article>
+
+    <article class="j-stop obs" data-side="right" style="--zc:var(--yellow)">
+      <div class="j-node"><span>06</span></div>
+      <div class="j-card">
+        <div class="j-media" data-video="zone-agility.mp4">
+          <img src="assets/render-agility.jpg" alt="Zone Agilité générale" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="z4_en">AGILITY</span>
+          <h3 data-i18n="z4_t">Agilité générale</h3>
+          <p data-i18n="z4_b">Arène de tag avec obstacles, équipes de 3.</p>
+          <span class="mfnote" data-i18n="mf_note4">+ Station augmentée Moment Factory</span>
+        </div>
       </div>
-    </div>
-  </article>
-    </div><!-- end instincts-content -->
-  </div><!-- end instincts-layout -->
+    </article>
+
+    <article class="j-stop obs" data-side="left" style="--zc:var(--purple)">
+      <div class="j-node"><span>07</span></div>
+      <div class="j-card">
+        <div class="j-media" data-video="zone-iq.mp4">
+          <img src="assets/render-iq.jpg" alt="Zone IQ de jeu" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="z5_en">GAME IQ</span>
+          <h3 data-i18n="z5_t">IQ de jeu</h3>
+          <p data-i18n="z5_b">Stratégie rapide 3 contre 3 avec ballon.</p>
+          <span class="mfnote" data-i18n="mf_note5">+ Station augmentée Moment Factory</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
+      <div class="j-node j-node-finish"><span>08</span></div>
+      <div class="j-card">
+        <div class="j-podium" aria-hidden="true">
+          <div class="j-pod p2"><i>2</i></div>
+          <div class="j-pod p1"><i>1</i></div>
+          <div class="j-pod p3"><i>3</i></div>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_fin_s">ARRIVÉE</span>
+          <h3 data-i18n="j_fin_t">Le podium</h3>
+          <p data-i18n="j_fin_b">Chaque zone a nourri ton score. Le leaderboard décide : les trois premiers s'illuminent en lime.</p>
+          <a class="cta j-cta" href="#leaderboard" data-i18n="j_fin_cta">Voir le leaderboard</a>
+        </div>
+      </div>
+    </article>
+  </div>
 </section>
 
 <!-- ============ LEADERBOARD ============ -->
@@ -982,7 +1120,7 @@ fr:{
   a_eyebrow:"L'arène",a_title:"9 stations. Une arène.",
   a_sub:"Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 terrains augmentés Moment Factory.",
   a_hint:"Glisse pour tourner à 360° · Touche une station pour explorer sa zone",
-  i_eyebrow:"Les 5 instincts",i_title:"Cinq zones. Cinq réflexes.",
+  i_eyebrow:"Le parcours athlète",i_title:"De l'inscription au podium.",i_sub2:"Suis le parcours d'un athlète : une session de 75 minutes, un dossard, neuf stations — et un seul score.",j_bib:"TON NOM",j_reg_s:"DÉPART",j_reg_t:"Inscription",j_reg_b:"Reçois ton dossard et ton profil. Ton score individuel te suit partout dans l'arène, en temps réel.",j_pi_s:"LE SPORT",j_pi_t:"Comprendre PürInstinct",j_pi_b:"D'abord, le terrain signature : traverser en 3 contre 2, sans contact, sans échapper le ballon. Tu comprends le sport en le jouant.",j_fin_s:"ARRIVÉE",j_fin_t:"Le podium",j_fin_b:"Chaque zone a nourri ton score. Le leaderboard décide : les trois premiers s'illuminent en lime.",j_fin_cta:"Voir le leaderboard",
   z1_en:"SPEED",z1_t:"Vitesse",z1_b:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",
   z2_en:"HAND SKILLS",z2_t:"Agilité des mains",z2_b:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",
   z3_en:"FOOT SKILLS",z3_t:"Agilité des pieds",z3_b:"Plaques lumineuses réactives, duels 1 contre 1.",
@@ -1022,7 +1160,7 @@ en:{
   a_eyebrow:"The arena",a_title:"9 stations. One arena.",
   a_sub:"Fly over the complex: 5 skill zones, 2 PürInstinct courts at center, 2 Moment Factory augmented courts.",
   a_hint:"Drag to spin 360° · Tap a station to explore its zone",
-  i_eyebrow:"The 5 instincts",i_title:"Five zones. Five reflexes.",
+  i_eyebrow:"The athlete journey",i_title:"From sign-up to the podium.",i_sub2:"Follow one athlete's journey: a 75-minute session, one bib, nine stations — and a single score.",j_bib:"YOUR NAME",j_reg_s:"START",j_reg_t:"Registration",j_reg_b:"Get your bib and your profile. Your individual score follows you across the arena, in real time.",j_pi_s:"THE SPORT",j_pi_t:"Understand PürInstinct",j_pi_b:"First, the signature field: cross 3 v 2, no contact, never drop the ball. You learn the sport by playing it.",j_fin_s:"FINISH",j_fin_t:"The podium",j_fin_b:"Every zone fed your score. The leaderboard decides: the top three ignite in lime.",j_fin_cta:"See the leaderboard",
   z1_en:"VITESSE",z1_t:"Speed",z1_b:"40m sprint, 5 handicap levels: everyone starts on equal footing.",
   z2_en:"AGILITÉ DES MAINS",z2_t:"Hand skills",z2_b:"Ball-throwing arena, teams of 3. Precision, ball reaction.",
   z3_en:"AGILITÉ DES PIEDS",z3_t:"Foot skills",z3_b:"Reactive light-pad system, 1v1 duels.",
@@ -1529,12 +1667,70 @@ zvVideo.addEventListener("ended", closeZoneVideo);
 zvPlayer.addEventListener("click", e=>{ if(e.target===zvPlayer) closeZoneVideo(); });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeZoneVideo(); });
 
-document.querySelectorAll(".zone-panel").forEach((panel, idx)=>{
-  const wrap = panel.querySelector(".zone-logo-wrap");
-  if(!wrap) return;
-  wrap.style.cursor = "pointer";
-  wrap.addEventListener("click", ()=> openZoneVideo(ZONE_VIDEOS[idx]));
+document.querySelectorAll(".j-media[data-video]").forEach(media=>{
+  media.addEventListener("click", ()=> openZoneVideo(media.dataset.video));
 });
+
+/* ====================================================== */
+/* Athlete journey — path + scroll-driven player */
+/* ====================================================== */
+(function(){
+  const journey = document.getElementById("journey");
+  const player = document.getElementById("jPlayer");
+  if(!journey || !player) return;
+  const line = journey.querySelector(".j-line");
+  const fill = journey.querySelector(".j-line-fill");
+  const stops = [...journey.querySelectorAll(".j-stop")];
+  const nodes = stops.map(st=>st.querySelector(".j-node"));
+  let pts = [], totalLen = 0;
+
+  function build(){
+    const jr = journey.getBoundingClientRect();
+    pts = nodes.map(n=>{
+      const r = n.getBoundingClientRect();
+      return {x:r.left - jr.left + r.width/2, y:r.top - jr.top + r.height/2};
+    });
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for(let i=1;i<pts.length;i++){
+      const a = pts[i-1], b = pts[i], dy = (b.y-a.y)*0.55;
+      d += ` C ${a.x} ${a.y+dy}, ${b.x} ${b.y-dy}, ${b.x} ${b.y}`;
+    }
+    line.setAttribute("d", d);
+    fill.setAttribute("d", d);
+    totalLen = fill.getTotalLength();
+    fill.style.strokeDasharray = totalLen;
+    update();
+  }
+
+  let raf = null;
+  function update(){
+    raf = null;
+    if(!totalLen) return;
+    const jr = journey.getBoundingClientRect();
+    const focusY = window.innerHeight*0.42;
+    const firstY = pts[0].y, lastY = pts[pts.length-1].y;
+    const cur = Math.min(Math.max(focusY - jr.top, firstY), lastY);
+    /* find length along path whose point.y ≈ cur (path is monotonic in y) */
+    let lo = 0, hi = totalLen;
+    for(let i=0;i<22;i++){
+      const mid = (lo+hi)/2;
+      if(fill.getPointAtLength(mid).y < cur) lo = mid; else hi = mid;
+    }
+    const len = (lo+hi)/2;
+    const p = fill.getPointAtLength(len);
+    if(!reduceMotion){
+      player.style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%,-50%)`;
+      fill.style.strokeDashoffset = totalLen - len;
+    }
+    stops.forEach((st,i)=>{ st.classList.toggle("lit", pts[i].y <= cur + 6); });
+  }
+  function onScroll(){ if(!raf) raf = requestAnimationFrame(update); }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  let jrT; window.addEventListener("resize", ()=>{ clearTimeout(jrT); jrT = setTimeout(build, 150); });
+  /* rebuild once fonts/images settle */
+  window.addEventListener("load", build);
+  build();
+})();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js" defer></script>
