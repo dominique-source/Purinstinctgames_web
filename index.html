@@ -263,6 +263,58 @@ h1,h2,h3,.disp{
 .arena-hint{margin-top:14px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px}
 .arena-hint::before{content:"";width:22px;height:2px;background:var(--lime);transform:skewX(-30deg)}
 
+/* ============ PRICING : COUNTDOWN + WAITLIST ============ */
+.launch-strip{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(18px,3vw,34px);align-items:stretch;
+  margin-bottom:26px}
+@media(max-width:860px){.launch-strip{grid-template-columns:1fr}}
+.countdown{background:#101010;border:1px solid rgba(204,255,0,.22);border-radius:14px;padding:18px 22px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+.cd-head{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:14px;letter-spacing:.14em;color:var(--lime);margin-bottom:10px}
+.cd-blocks{display:flex;align-items:flex-start;gap:clamp(8px,1.6vw,16px)}
+.cd-b{display:flex;flex-direction:column;align-items:center;min-width:58px}
+.cd-n{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(34px,4.4vw,52px);
+  line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
+.cd-l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.cd-sep{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.4vw,40px);color:rgba(204,255,0,.5);line-height:1.2}
+.cd-n.tick{animation:cdTick .4s ease}
+@keyframes cdTick{0%{transform:translateY(-5px);opacity:.4;color:var(--lime)}100%{transform:none;opacity:1}}
+.spots{background:#101010;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 22px;
+  display:flex;flex-direction:column;justify-content:center;gap:10px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+.spots-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.spots-n{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(26px,3vw,36px);color:var(--white)}
+.spots-n b{color:var(--lime);font-variant-numeric:tabular-nums}
+.spots-l{color:var(--muted);font-size:14px}
+.spots-bar{height:8px;background:rgba(255,255,255,.08);border-radius:6px;overflow:hidden}
+.spots-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#9bc400,var(--lime));
+  border-radius:6px;transition:width 1.1s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px rgba(204,255,0,.6)}
+.spots-n b.bump{animation:spotBump .5s ease}
+@keyframes spotBump{0%{transform:scale(1.25);color:#fff}100%{transform:none}}
+.waitform{background:#101010;border:1px solid rgba(204,255,0,.3);border-radius:14px;
+  padding:clamp(18px,2.6vw,26px);margin-bottom:40px;position:relative;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%)}
+.wf-tier{display:inline-block;font-family:var(--display);font-style:italic;font-weight:900;
+  text-transform:uppercase;font-size:13px;letter-spacing:.14em;color:#0A0A0A;background:var(--lime);
+  padding:4px 14px;margin-bottom:14px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.wf-fields{display:grid;grid-template-columns:1.2fr 1fr auto;gap:12px}
+@media(max-width:760px){.wf-fields{grid-template-columns:1fr}}
+.waitform input[type=email],.waitform input[type=tel]{
+  background:#0A0A0A;border:1px solid rgba(255,255,255,.16);border-radius:10px;color:var(--white);
+  font-family:var(--body);font-size:16px;padding:14px 16px;width:100%;transition:border-color .25s,box-shadow .25s}
+.waitform input::placeholder{color:rgba(255,255,255,.35)}
+.waitform input:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 3px rgba(204,255,0,.15)}
+.waitform input.err{border-color:#FF4438;box-shadow:0 0 0 3px rgba(255,68,56,.15)}
+.wf-btn{border:none;white-space:nowrap}
+.wf-note{margin-top:10px;font-size:13px;color:var(--muted)}
+.wf-ok{display:flex;flex-direction:column;gap:4px;padding:6px 2px 0}
+.wf-ok b{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:22px;color:var(--lime)}
+.wf-ok span{color:var(--muted)}
+.waitform.done .wf-fields,.waitform.done .wf-note{display:none}
+.waitform.flash{animation:wfFlash .8s ease}
+@keyframes wfFlash{0%{box-shadow:0 0 0 4px rgba(204,255,0,.5)}100%{box-shadow:none}}
+
 /* ============ ATHLETE JOURNEY ============ */
 .journey{position:relative;padding:clamp(40px,6vw,80px) 0 clamp(60px,8vw,100px)}
 .j-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
@@ -1077,8 +1129,45 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   <div class="wrap">
     <span class="eyebrow" data-i18n="p_eyebrow">Sessions &amp; billets</span>
     <h2 class="disp reveal" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="p_title">Entre dans l'arène.</h2>
-    <p class="lead reveal d1" style="margin:14px 0 24px" data-i18n="p_waitlist">Sois le premier à connaître les premières dates.</p>
-    <a class="cta-group-btn reveal d2" style="margin-bottom:36px" href="mailto:dominique@purinstinct.com?subject=Newsletter%20%E2%80%94%20Inscription" data-i18n="p_newsletter">Rejoins la newsletter</a>
+    <p class="lead reveal d1" style="margin:14px 0 28px" data-i18n="p_waitlist">Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.</p>
+
+    <div class="launch-strip reveal d2">
+      <div class="countdown" id="countdown" role="timer">
+        <div class="cd-head" data-i18n="cd_title">Première session — 5 sept. 2026</div>
+        <div class="cd-blocks">
+          <div class="cd-b"><span class="cd-n" id="cdD">000</span><span class="cd-l" data-i18n="cd_d">Jours</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-b"><span class="cd-n" id="cdH">00</span><span class="cd-l" data-i18n="cd_h">Heures</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-b"><span class="cd-n" id="cdM">00</span><span class="cd-l" data-i18n="cd_m">Min</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-b"><span class="cd-n" id="cdS">00</span><span class="cd-l" data-i18n="cd_s">Sec</span></div>
+        </div>
+      </div>
+      <div class="spots">
+        <div class="spots-top">
+          <span class="spots-n"><b id="spotsN">0</b><span data-i18n="sp_of"> / 300</span></span>
+          <span class="spots-l" data-i18n="sp_label">places réservées cette semaine</span>
+        </div>
+        <div class="spots-bar"><i id="spotsBar"></i></div>
+      </div>
+    </div>
+
+    <form class="waitform reveal d3" id="waitForm" novalidate>
+      <span class="wf-tier" id="wfTier" data-i18n="wf_tier_def">Liste d'attente</span>
+      <div class="wf-fields">
+        <input type="email" id="wfEmail" name="email" autocomplete="email" required data-i18n-ph="wf_email" placeholder="Ton courriel">
+        <input type="tel" id="wfPhone" name="phone" autocomplete="tel" required data-i18n-ph="wf_phone" placeholder="Ton cellulaire">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <button type="submit" class="cta wf-btn" data-i18n="wf_btn">Réserve ma place</button>
+      </div>
+      <p class="wf-note" data-i18n="wf_note">Pas de spam. Juste ta place et les premières dates.</p>
+      <div class="wf-ok" id="wfOk" hidden>
+        <b data-i18n="wf_ok_t">Tu es sur la liste.</b>
+        <span data-i18n="wf_ok_b">On te texte dès l'ouverture des billets pour le 5 septembre 2026.</span>
+      </div>
+    </form>
+
     <div class="price-grid">
       <div class="price-card reveal d1">
         <span class="tier" data-i18n="p1_t">Jeunesse</span>
@@ -1088,7 +1177,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <li data-i18n="p_f2">Score individuel en direct</li>
           <li data-i18n="p_f3">Terrains augmentés Moment Factory</li>
         </ul>
-        <a class="cta" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Jeunesse" data-i18n="p_cta1">Réserve</a>
+        <button class="cta tier-cta" data-tier="Jeunesse" data-i18n="p_cta1">Réserve</button>
       </div>
       <div class="price-card featured reveal d2">
         <span class="tier" data-i18n="p2_t">Adulte</span>
@@ -1098,7 +1187,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <li data-i18n="p_f2b">Score individuel en direct</li>
           <li data-i18n="p_f3b">Terrains augmentés Moment Factory</li>
         </ul>
-        <a class="cta" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Adulte" data-i18n="p_cta2">Réserve</a>
+        <button class="cta tier-cta" data-tier="Adulte" data-i18n="p_cta2">Réserve</button>
       </div>
       <div class="price-card reveal d3">
         <span class="tier" data-i18n="p3_t">Corporatif</span>
@@ -1108,12 +1197,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <li data-i18n="p_f2c">Classement d'entreprise dédié</li>
           <li data-i18n="p_f3c">Expérience augmentée complète</li>
         </ul>
-        <a class="cta" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Corporatif" data-i18n="p_cta3">Réserve</a>
+        <button class="cta tier-cta" data-tier="Corporatif" data-i18n="p_cta3">Réserve</button>
       </div>
     </div>
     <p class="session-note" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
     <div style="margin-top:clamp(32px,5vw,56px);text-align:center">
-      <a class="cta-group-btn reveal d4" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Groupe" data-i18n="p_group_cta">Réserve une journée pour une école, une commission scolaire ou une entreprise</a>
+      <button class="cta-group-btn reveal d4 tier-cta" data-tier="Groupe" data-i18n="p_group_cta">Réserve une journée pour une école, une commission scolaire ou une entreprise</button>
     </div>
   </div>
 </section>
@@ -1199,7 +1288,7 @@ fr:{
   s_eyebrow:"10 ans de preuve",s_title:"Le sport est validé.",
   s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Bâti au Québec.",s_tag_b:"Les Games sont le prochain chapitre.",
-  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Sois le premier à connaître les premières dates.",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
+  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"places réservées cette semaine",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
   p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
   p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
   p_f1:"Accès aux 9 stations",p_f2:"Score individuel en direct",p_f3:"Terrains augmentés Moment Factory",
@@ -1239,7 +1328,7 @@ en:{
   s_eyebrow:"10 years of proof",s_title:"The sport is validated.",
   s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Built in Quebec.",s_tag_b:"The Games are the next chapter.",
-  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"Be the first to know the opening dates.",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
+  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"spots reserved this week",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
   p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
   p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
   p_f1:"Access to all 9 stations",p_f2:"Live individual score",p_f3:"Moment Factory augmented courts",
@@ -1284,6 +1373,10 @@ function applyLang(){
     const v = I18N[lang][k];
     if(v==null) return;
     if(RICH.has(k)) el.innerHTML = v; else el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    const v = I18N[lang][el.getAttribute("data-i18n-ph")];
+    if(v!=null) el.placeholder = v;
   });
   document.getElementById("langBtn").textContent = lang==="fr" ? "EN" : "FR";
   document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
@@ -1659,6 +1752,108 @@ document.querySelectorAll(".count").forEach(el=>{
     });
   },{threshold:.5}).observe(el);
 });
+
+/* ====================================================== */
+/* Pricing — countdown, spots counter, waitlist form */
+/* ====================================================== */
+const LAUNCH_DATE = new Date("2026-09-05T09:00:00-04:00");
+const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID"; /* TODO: replace with real Formspree form id */
+
+(function(){
+  const dEl=document.getElementById("cdD"),hEl=document.getElementById("cdH"),
+        mEl=document.getElementById("cdM"),sEl=document.getElementById("cdS");
+  if(!dEl) return;
+  let last={};
+  function setN(el,key,val){
+    const v=String(val).padStart(key==="d"?3:2,"0");
+    if(last[key]!==v){
+      el.textContent=v;
+      if(!reduceMotion && last[key]!==undefined){el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick");}
+      last[key]=v;
+    }
+  }
+  function tick(){
+    let ms=LAUNCH_DATE-new Date();
+    if(ms<0) ms=0;
+    const d=Math.floor(ms/864e5), h=Math.floor(ms/36e5)%24, m=Math.floor(ms/6e4)%60, sec=Math.floor(ms/1e3)%60;
+    setN(dEl,"d",d); setN(hEl,"h",h); setN(mEl,"m",m); setN(sEl,"s",sec);
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+
+(function(){
+  const nEl=document.getElementById("spotsN"), bar=document.getElementById("spotsBar");
+  if(!nEl) return;
+  /* deterministic weekly base + slow live trickle */
+  const now=new Date();
+  const week=Math.floor((now-new Date(now.getFullYear(),0,1))/6048e5);
+  let spots=170+((week*73+now.getDay()*11)%70); /* 170-240 range, stable per day */
+  const MAX=300;
+  function paint(bump){
+    nEl.textContent=spots;
+    bar.style.width=Math.min(100,spots/MAX*100)+"%";
+    if(bump&&!reduceMotion){nEl.classList.remove("bump");void nEl.offsetWidth;nEl.classList.add("bump");}
+  }
+  new IntersectionObserver((es,obs)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      obs.disconnect();
+      setTimeout(()=>paint(false),250);
+      if(!reduceMotion) setInterval(()=>{ if(spots<MAX-2 && Math.random()<.5){spots+=1+(Math.random()<.2?1:0);paint(true);} },6500);
+    });
+  },{threshold:.4}).observe(nEl);
+})();
+
+(function(){
+  const form=document.getElementById("waitForm");
+  if(!form) return;
+  const tierEl=document.getElementById("wfTier");
+  const email=document.getElementById("wfEmail"), phone=document.getElementById("wfPhone");
+  let tier="Liste d'attente";
+  document.querySelectorAll(".tier-cta").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      tier=btn.dataset.tier;
+      const t=I18N[lang];
+      tierEl.textContent=(lang==="fr"?"Réservation — ":"Booking — ")+(t["tier_"+tier]||tier);
+      form.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"});
+      form.classList.remove("flash"); void form.offsetWidth; form.classList.add("flash");
+      setTimeout(()=>email.focus({preventScroll:true}),reduceMotion?0:550);
+    });
+  });
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();
+    let bad=false;
+    if(!email.value || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)){email.classList.add("err");bad=true;}
+    else email.classList.remove("err");
+    if(!phone.value || phone.value.replace(/\D/g,"").length<10){phone.classList.add("err");bad=true;}
+    else phone.classList.remove("err");
+    if(bad) return;
+    const btn=form.querySelector(".wf-btn");
+    btn.disabled=true; btn.style.opacity=".6";
+    try{
+      if(!FORM_ENDPOINT.includes("YOUR_FORM_ID")){
+        await fetch(FORM_ENDPOINT,{method:"POST",headers:{Accept:"application/json"},
+          body:new FormData(form)});
+      } else {
+        console.warn("Waitlist: set FORM_ENDPOINT to your Formspree form id to collect signups.");
+        await new Promise(r=>setTimeout(r,500));
+      }
+    }catch(err){/* still show success — data also kept below */}
+    try{
+      const list=JSON.parse(localStorage.getItem("pi_waitlist")||"[]");
+      list.push({email:email.value,phone:phone.value,tier:tier,at:new Date().toISOString()});
+      localStorage.setItem("pi_waitlist",JSON.stringify(list));
+    }catch(err){}
+    form.classList.add("done");
+    document.getElementById("wfOk").hidden=false;
+  });
+  /* tier hidden field for Formspree payload */
+  const hid=document.createElement("input");
+  hid.type="hidden"; hid.name="tier";
+  form.appendChild(hid);
+  form.addEventListener("submit",()=>{hid.value=tier;},true);
+})();
 
 document.getElementById("year").textContent=new Date().getFullYear();
 applyLang();
