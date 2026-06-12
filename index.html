@@ -108,18 +108,22 @@ h1,h2,h3,.disp{
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
 
-/* Ken Burns — photo terrain */
+/* Hero video background */
 .hero-bg{
   position:absolute;inset:0;z-index:0;
-  background:url("assets/arena-hero.png") center 40% / cover no-repeat;
-  animation:kenBurns 22s ease-in-out infinite alternate;
+  overflow:hidden;
+}
+.hero-bg video{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 40%;
+  transform:scale(1.04);
+  animation:heroZoom 24s ease-in-out infinite alternate;
   will-change:transform;
 }
-@keyframes kenBurns{
-  0%  {transform:scale(1.08) translate(0%,0%)}
-  33% {transform:scale(1.14) translate(-1.5%,0.8%)}
-  66% {transform:scale(1.10) translate(1.2%,-0.5%)}
-  100%{transform:scale(1.06) translate(-0.8%,1%)}
+@keyframes heroZoom{
+  0%  {transform:scale(1.04) translate(0%,0%)}
+  50% {transform:scale(1.08) translate(-0.8%,0.4%)}
+  100%{transform:scale(1.05) translate(0.5%,-0.3%)}
 }
 
 /* dark cinematic vignette over photo */
@@ -470,7 +474,11 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/arena-hero.png">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="hero-vignette"></div>
   <canvas id="heroCanvas"></canvas>
   <div class="wrap" style="z-index:2">
