@@ -346,6 +346,31 @@ h1,h2,h3,.disp{
 .m-grid i{aspect-ratio:1;background:color-mix(in srgb,var(--zc) 10%,#0e0e0e);border:1px solid color-mix(in srgb,var(--zc) 25%,transparent);animation:flick 2.4s steps(2) infinite}
 @keyframes flick{0%,60%,100%{background:color-mix(in srgb,var(--zc) 10%,#0e0e0e)}65%,80%{background:var(--zc);box-shadow:0 0 16px var(--zc)}}
 
+/* ============ ZONE VIDEO PLAYER ============ */
+#zoneVideoPlayer{
+  position:fixed;inset:0;z-index:300;
+  background:#000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+#zoneVideoPlayer.active{opacity:1;pointer-events:all;}
+#zoneVideo{
+  width:100%;height:100%;
+  object-fit:contain;
+}
+#zoneVideoClose{
+  position:absolute;top:20px;right:24px;z-index:10;
+  font-size:28px;color:#fff;background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.3);
+  width:44px;height:44px;border-radius:50%;
+  cursor:pointer;transition:.2s;
+  display:flex;align-items:center;justify-content:center;
+}
+#zoneVideoClose:hover{background:rgba(255,255,255,.2);}
+/* play hint cursor on zone logos */
+.zone-logo-wrap{cursor:pointer;}
+
 /* ============ ZONE ENTRY TRANSITION ============ */
 #zoneEntry{
   position:fixed;inset:0;z-index:200;
@@ -865,6 +890,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
   </div>
 </section>
+
+<!-- ============ ZONE VIDEO PLAYER ============ -->
+<div id="zoneVideoPlayer">
+  <button id="zoneVideoClose" aria-label="Fermer">✕</button>
+  <video id="zoneVideo" playsinline></video>
+</div>
 
 <!-- ============ ZONE ENTRY OVERLAY ============ -->
 <div id="zoneEntry" aria-hidden="true">
@@ -1449,12 +1480,32 @@ function triggerZoneEntry(idx, targetPanel) {
   });
 }
 
-// attach click to each zone-logo-wrap
+// attach click to each zone-logo-wrap — play zone video
+const ZONE_VIDEOS = ["zone-speed.mp4","zone-hand.mp4","zone-foot.mp4","zone-agility.mp4","zone-iq.mp4"];
+const zvPlayer = document.getElementById("zoneVideoPlayer");
+const zvVideo  = document.getElementById("zoneVideo");
+const zvClose  = document.getElementById("zoneVideoClose");
+
+function openZoneVideo(src){
+  zvVideo.src = src;
+  zvPlayer.classList.add("active");
+  zvVideo.play();
+}
+function closeZoneVideo(){
+  zvPlayer.classList.remove("active");
+  zvVideo.pause();
+  zvVideo.src = "";
+}
+zvClose.addEventListener("click", closeZoneVideo);
+zvVideo.addEventListener("ended", closeZoneVideo);
+zvPlayer.addEventListener("click", e=>{ if(e.target===zvPlayer) closeZoneVideo(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeZoneVideo(); });
+
 document.querySelectorAll(".zone-panel").forEach((panel, idx)=>{
   const wrap = panel.querySelector(".zone-logo-wrap");
   if(!wrap) return;
   wrap.style.cursor = "pointer";
-  wrap.addEventListener("click", ()=> triggerZoneEntry(idx, panel));
+  wrap.addEventListener("click", ()=> openZoneVideo(ZONE_VIDEOS[idx]));
 });
 </script>
 </body>
