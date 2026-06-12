@@ -227,6 +227,17 @@ h1,h2,h3,.disp{
 @media(max-width:920px){.arena-grid{grid-template-columns:1fr}}
 .arena-svg-wrap{position:relative}
 .arena-svg-wrap svg{width:100%;height:auto;filter:drop-shadow(0 20px 60px rgba(0,0,0,.6))}
+#arena3d{display:none;position:relative;width:100%;aspect-ratio:900/620;border-radius:16px;overflow:hidden;cursor:grab;
+  background:radial-gradient(ellipse 80% 60% at 50% 30%,#121408 0%,#0A0A0A 70%);
+  border:1px solid rgba(204,255,0,.14);touch-action:pan-y}
+#arena3d.on{display:block}
+#arena3d.on ~ #arenaSvg{display:none}
+#arena3d:active{cursor:grabbing}
+#arena3d canvas{display:block;width:100%;height:100%}
+.a3d-badge{position:absolute;top:14px;right:14px;z-index:3;font-family:var(--display);font-style:italic;font-weight:900;
+  font-size:13px;letter-spacing:.12em;color:var(--lime);border:1px solid rgba(204,255,0,.4);padding:4px 12px;
+  border-radius:30px;background:rgba(10,10,10,.55);backdrop-filter:blur(4px);pointer-events:none}
+.zc-img{width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);margin-top:6px;aspect-ratio:5/4;object-fit:cover}
 .station{cursor:pointer;transition:filter .25s}
 .station rect.body{transition:all .25s}
 .station:hover rect.body,.station.active rect.body{filter:brightness(1.5)}
@@ -636,6 +647,9 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <p class="lead reveal d1" style="margin:14px 0 36px" data-i18n="a_sub">Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 terrains augmentés Moment Factory.</p>
     <div class="arena-grid">
       <div class="arena-svg-wrap reveal d2">
+        <div id="arena3d" aria-label="Arène 3D PürInstinct Games — glisse pour tourner à 360°">
+          <span class="a3d-badge">360°</span>
+        </div>
         <svg id="arenaSvg" viewBox="0 0 900 560" role="img" aria-label="Plan de l'arène PürInstinct Games">
           <defs>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -703,7 +717,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
             <text class="st-tag" x="470" y="402">MOMENT FACTORY</text>
           </g>
         </svg>
-        <p class="arena-hint" data-i18n="a_hint">Touche une station pour explorer sa zone</p>
+        <p class="arena-hint" data-i18n="a_hint">Glisse pour tourner à 360° · Touche une station pour explorer sa zone</p>
       </div>
       <aside class="zone-card reveal d3" id="zoneCard" style="--zc:#CCFF00">
         <div id="zoneCardInner" class="swap">
@@ -711,6 +725,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <h3 data-role="name">L'Arène</h3>
           <p data-role="desc">Sélectionne une des 9 stations sur le plan pour découvrir son gameplay.</p>
           <span class="zc-mf" data-role="mf" style="display:none"></span>
+          <img class="zc-img" data-role="img" src="" alt="" style="display:none" loading="lazy">
         </div>
       </aside>
     </div>
@@ -966,7 +981,7 @@ fr:{
   c_p3t:"Un classement vivant",c_p3b:"Chaque station alimente ton score individuel, en temps réel.",
   a_eyebrow:"L'arène",a_title:"9 stations. Une arène.",
   a_sub:"Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 terrains augmentés Moment Factory.",
-  a_hint:"Touche une station pour explorer sa zone",
+  a_hint:"Glisse pour tourner à 360° · Touche une station pour explorer sa zone",
   i_eyebrow:"Les 5 instincts",i_title:"Cinq zones. Cinq réflexes.",
   z1_en:"SPEED",z1_t:"Vitesse",z1_b:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",
   z2_en:"HAND SKILLS",z2_t:"Agilité des mains",z2_b:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",
@@ -1006,7 +1021,7 @@ en:{
   c_p3t:"One living leaderboard",c_p3b:"Every station feeds your individual score, in real time.",
   a_eyebrow:"The arena",a_title:"9 stations. One arena.",
   a_sub:"Fly over the complex: 5 skill zones, 2 PürInstinct courts at center, 2 Moment Factory augmented courts.",
-  a_hint:"Tap a station to explore its zone",
+  a_hint:"Drag to spin 360° · Tap a station to explore its zone",
   i_eyebrow:"The 5 instincts",i_title:"Five zones. Five reflexes.",
   z1_en:"VITESSE",z1_t:"Speed",z1_b:"40m sprint, 5 handicap levels: everyone starts on equal footing.",
   z2_en:"AGILITÉ DES MAINS",z2_t:"Hand skills",z2_b:"Ball-throwing arena, teams of 3. Precision, ball reaction.",
@@ -1038,19 +1053,19 @@ en:{
 
 /* Zone data for the interactive map card */
 const ZONES = {
-  vitesse:{color:"#FF4438",fr:{tag:"Zone 01 — Vitesse",name:"Vitesse",desc:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",mf:true},
+  vitesse:{img:"assets/render-speed.jpg",color:"#FF4438",fr:{tag:"Zone 01 — Vitesse",name:"Vitesse",desc:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",mf:true},
            en:{tag:"Zone 01 — Speed",name:"Speed",desc:"40m sprint, 5 handicap levels: everyone starts on equal footing.",mf:true}},
-  mains:{color:"#2D7DFF",fr:{tag:"Zone 02 — Agilité des mains",name:"Mains",desc:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",mf:true},
+  mains:{img:"assets/render-hand.jpg",color:"#2D7DFF",fr:{tag:"Zone 02 — Agilité des mains",name:"Mains",desc:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",mf:true},
          en:{tag:"Zone 02 — Hand skills",name:"Hands",desc:"Ball-throwing arena, teams of 3. Precision, ball reaction.",mf:true}},
-  pieds:{color:"#2EE06A",fr:{tag:"Zone 03 — Agilité des pieds",name:"Pieds",desc:"Plaques lumineuses réactives, duels 1 contre 1.",mf:true},
+  pieds:{img:"assets/render-foot.jpg",color:"#2EE06A",fr:{tag:"Zone 03 — Agilité des pieds",name:"Pieds",desc:"Plaques lumineuses réactives, duels 1 contre 1.",mf:true},
          en:{tag:"Zone 03 — Foot skills",name:"Feet",desc:"Reactive light-pad system, 1v1 duels.",mf:true}},
-  agilite:{color:"#FFC400",fr:{tag:"Zone 04 — Agilité générale",name:"Agilité",desc:"Arène de tag avec obstacles, équipes de 3.",mf:true},
+  agilite:{img:"assets/render-agility.jpg",color:"#FFC400",fr:{tag:"Zone 04 — Agilité générale",name:"Agilité",desc:"Arène de tag avec obstacles, équipes de 3.",mf:true},
            en:{tag:"Zone 04 — Agility",name:"Agility",desc:"Tag arena with obstacles, teams of 3.",mf:true}},
-  iq:{color:"#A45CFF",fr:{tag:"Zone 05 — IQ de jeu",name:"IQ de jeu",desc:"Stratégie rapide 3 contre 3 avec ballon.",mf:true},
+  iq:{img:"assets/render-iq.jpg",color:"#A45CFF",fr:{tag:"Zone 05 — IQ de jeu",name:"IQ de jeu",desc:"Stratégie rapide 3 contre 3 avec ballon.",mf:true},
       en:{tag:"Zone 05 — Game IQ",name:"Game IQ",desc:"Fast 3v3 strategy with a ball.",mf:true}},
-  pi1:{color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 1",desc:"Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2.",mf:false},
+  pi1:{img:"assets/render-field.jpg",color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 1",desc:"Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2.",mf:false},
        en:{tag:"Signature court",name:"PürInstinct 1",desc:"The signature sport: a no-contact sport built on 5 natural instincts. Objective: cross the field without being touched while carrying the ball and without dropping it, always 3 against 2.",mf:false}},
-  pi2:{color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 2",desc:"Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2.",mf:false},
+  pi2:{img:"assets/render-field.jpg",color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 2",desc:"Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2.",mf:false},
        en:{tag:"Signature court",name:"PürInstinct 2",desc:"The signature sport: a no-contact sport built on 5 natural instincts. Objective: cross the field without being touched while carrying the ball and without dropping it, always 3 against 2.",mf:false}},
   mf1:{color:"#CCFF00",fr:{tag:"Terrain augmenté",name:"Augmenté 1",desc:"Terrain immersif interactif propulsé par Moment Factory. La lumière, le son et l'interactivité te font bouger — pas regarder.",mf:false},
        en:{tag:"Augmented court",name:"Augmented 1",desc:"Immersive interactive court powered by Moment Factory. Light, sound and interactivity make you move — not watch.",mf:false}},
@@ -1075,6 +1090,7 @@ function applyLang(){
     img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
   });
   renderZoneCard(currentZone);
+  if(window.__arena3dSetLang) window.__arena3dSetLang(lang);
 }
 document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";applyLang();});
 document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";applyLang();});
@@ -1283,15 +1299,17 @@ function renderZoneCard(key){
   const nameEl = zoneInner.querySelector("[data-role=name]");
   const descEl = zoneInner.querySelector("[data-role=desc]");
   const mfEl = zoneInner.querySelector("[data-role=mf]");
+  const imgEl = zoneInner.querySelector("[data-role=img]");
   if(!key){
     zoneCard.style.setProperty("--zc","#CCFF00");
     tagEl.textContent=t.zc_default_tag; nameEl.textContent=t.zc_default_name; descEl.textContent=t.zc_default_desc;
-    mfEl.style.display="none"; return;
+    mfEl.style.display="none"; imgEl.style.display="none"; return;
   }
   const z = ZONES[key], d = z[lang];
   zoneCard.style.setProperty("--zc",z.color);
   tagEl.textContent=d.tag; nameEl.textContent=d.name; descEl.textContent=d.desc;
   if(d.mf){ mfEl.style.display="flex"; mfEl.textContent=t.zc_mf; } else mfEl.style.display="none";
+  if(z.img){ imgEl.src=z.img; imgEl.alt=d.name; imgEl.style.display="block"; } else imgEl.style.display="none";
   zoneInner.classList.remove("swap"); void zoneInner.offsetWidth; zoneInner.classList.add("swap");
 }
 document.querySelectorAll("#arenaSvg .station").forEach(st=>{
@@ -1518,5 +1536,8 @@ document.querySelectorAll(".zone-panel").forEach((panel, idx)=>{
   wrap.addEventListener("click", ()=> openZoneVideo(ZONE_VIDEOS[idx]));
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js" defer></script>
+<script src="arena3d.js" defer></script>
 </body>
 </html>
