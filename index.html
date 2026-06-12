@@ -425,7 +425,27 @@ h1,h2,h3,.disp{
 }
 .lb-row .rk{width:30px;color:var(--muted);font-size:17px}
 .lb-row .nm{flex:1;letter-spacing:.02em}
+.lb-row .up-arrow{font-size:13px;color:var(--lime);opacity:0;transform:translateY(6px);margin-right:-6px}
+.lb-row.rank-up .up-arrow{animation:arrowPop 1.4s ease forwards}
+@keyframes arrowPop{0%{opacity:1;transform:none}70%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-4px)}}
+.lb-row.rank-up{animation:rowFlash 1.1s ease}
+@keyframes rowFlash{0%{background:rgba(204,255,0,.16)}100%{background:transparent}}
 .lb-row .sc{color:var(--white);font-variant-numeric:tabular-nums}
+.lb-row .gain{
+  position:absolute;right:26px;top:-2px;
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:13px;color:#0A0A0A;background:var(--lime);padding:1px 7px 2px;
+  clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%);
+  animation:gainFloat .9s cubic-bezier(.2,.8,.2,1) forwards;pointer-events:none;
+}
+@keyframes gainFloat{0%{opacity:0;transform:translateY(4px)}20%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
+.lb-card::after{
+  content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;
+  background:linear-gradient(105deg,transparent,rgba(204,255,0,.07),rgba(255,255,255,.05),transparent);
+  transform:skewX(-18deg);pointer-events:none;opacity:0;
+}
+.lb-card.sheen::after{animation:lbSheen 1.2s cubic-bezier(.5,0,.3,1) 1}
+@keyframes lbSheen{0%{left:-40%;opacity:1}100%{left:140%;opacity:1}}
 .lb-row.top .rk,.lb-row.top .sc{color:var(--lime)}
 .lb-row.top .nm{color:var(--white)}
 .lb-row.top{text-shadow:0 0 22px rgba(204,255,0,.25)}
@@ -1260,28 +1280,46 @@ const ROW_H=48, PAD_T=10;
 const rowEls = lb.map((p,i)=>{
   const el=document.createElement("div");
   el.className="lb-row";
-  el.innerHTML=`<span class="rk"></span><span class="nm">${p.name}</span><span class="sc">0</span>`;
+  el.innerHTML=`<span class="rk"></span><span class="nm">${p.name}</span><span class="up-arrow">\u25B2</span><span class="sc">0</span>`;
   el.style.top=(PAD_T+i*ROW_H)+"px";
   lbRows.appendChild(el);
   return el;
 });
 lbRows.style.height=(PAD_T*2+ROW_H*lb.length)+"px";
+let prevRanks=null;
 function paintLb(animateScores){
   const sorted=[...lb].sort((a,b)=>b.score-a.score);
+  const card=document.querySelector(".lb-card");
+  let anyMove=false;
   sorted.forEach((p,rank)=>{
     const idx=lb.indexOf(p), el=rowEls[idx];
     el.style.top=(PAD_T+rank*ROW_H)+"px";
     el.classList.toggle("top",rank<3);
+    if(prevRanks && prevRanks[idx]>rank && !reduceMotion){
+      anyMove=true;
+      el.classList.remove("rank-up"); void el.offsetWidth; el.classList.add("rank-up");
+    }
     el.querySelector(".rk").textContent=(rank+1).toString().padStart(2,"0");
     const scEl=el.querySelector(".sc");
     if(animateScores && !reduceMotion){
-      const from=parseInt(scEl.textContent.replace(/\s/g,""))||0, to=p.score, t0=performance.now();
+      const from=parseInt(scEl.dataset.val||"0",10), to=p.score, t0=performance.now();
+      if(prevRanks && to>from){
+        const g=document.createElement("span");
+        g.className="gain"; g.textContent="+"+(to-from);
+        el.appendChild(g);
+        setTimeout(()=>g.remove(),950);
+      }
       const step=now=>{const k=Math.min(1,(now-t0)/700);
         scEl.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))).toLocaleString("fr-CA");
         if(k<1)requestAnimationFrame(step);};
       requestAnimationFrame(step);
-    } else scEl.textContent=p.score.toLocaleString("fr-CA");
+      scEl.dataset.val=to;
+    } else { scEl.textContent=p.score.toLocaleString("fr-CA"); scEl.dataset.val=p.score; }
   });
+  if(anyMove && card){ card.classList.remove("sheen"); void card.offsetWidth; card.classList.add("sheen"); }
+  const pr=new Array(lb.length);
+  sorted.forEach((p,rank)=>{ pr[lb.indexOf(p)]=rank; });
+  prevRanks=pr;
   lbDivider.style.top=(PAD_T+3*ROW_H-4)+"px";
 }
 const lbSection=document.getElementById("leaderboard");
