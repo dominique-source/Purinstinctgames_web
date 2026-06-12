@@ -107,8 +107,31 @@ h1,h2,h3,.disp{
 
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,transparent 30%,rgba(10,10,10,.78) 90%);z-index:1}
+
+/* Ken Burns — photo terrain */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url("assets/arena-hero.png") center 40% / cover no-repeat;
+  animation:kenBurns 22s ease-in-out infinite alternate;
+  will-change:transform;
+}
+@keyframes kenBurns{
+  0%  {transform:scale(1.08) translate(0%,0%)}
+  33% {transform:scale(1.14) translate(-1.5%,0.8%)}
+  66% {transform:scale(1.10) translate(1.2%,-0.5%)}
+  100%{transform:scale(1.06) translate(-0.8%,1%)}
+}
+
+/* dark cinematic vignette over photo */
+.hero-vignette{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg, rgba(6,7,15,.55) 0%, rgba(6,7,15,.15) 40%, rgba(6,7,15,.72) 100%),
+    radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(6,7,15,.65) 100%);
+}
+
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,transparent 30%,rgba(10,10,10,.55) 90%);z-index:3}
 .hero .wrap{padding-top:90px}
 .hero h1{font-size:clamp(58px,11vw,164px)}
 .hero h1 .word{display:inline-block;opacity:0;transform:translateX(-60px) skewX(-12deg);animation:slam .55s cubic-bezier(.16,1,.3,1) forwards}
@@ -218,6 +241,40 @@ h1,h2,h3,.disp{
 .zone-panel .mfnote::before{content:"";width:9px;height:9px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 10px var(--lime)}
 .zone-panel::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 78% 50%,color-mix(in srgb,var(--zc) 13%,transparent),transparent 70%);pointer-events:none}
 .zone-num{position:absolute;right:-1.5%;top:50%;transform:translateY(-50%) skewX(-10deg);font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(160px,26vw,340px);color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--zc) 35%,transparent);line-height:1;pointer-events:none;user-select:none}
+/* ============ ZONE LOGO SLAM ============ */
+.zone-logo-wrap{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,3vw,40px) 0;
+}
+.zone-logo{
+  width:min(300px,80%);
+  height:auto;
+  mix-blend-mode:screen;
+  opacity:0;
+  transform:scale(1.35) translateY(30px) skewY(-4deg);
+  filter:blur(14px);
+  transition:none;
+}
+.in .zone-logo{
+  animation:zoneSlam .65s cubic-bezier(.16,1,.3,1) .1s forwards;
+}
+@keyframes zoneSlam{
+  0%  {opacity:0;transform:scale(1.35) translateY(30px) skewY(-4deg);filter:blur(14px)}
+  60% {opacity:1;transform:scale(.97) translateY(-4px) skewY(0deg);filter:blur(0)}
+  80% {transform:scale(1.03) translateY(2px)}
+  100%{opacity:1;transform:scale(1) translateY(0) skewY(0deg);filter:blur(0)}
+}
+/* glow pulse after slam */
+.in .zone-logo{
+  animation:zoneSlam .65s cubic-bezier(.16,1,.3,1) .1s forwards,
+            zoneGlow 2.4s ease-in-out .8s infinite;
+}
+@keyframes zoneGlow{
+  0%,100%{filter:drop-shadow(0 0 8px color-mix(in srgb,var(--zc) 55%,transparent))}
+  50%    {filter:drop-shadow(0 0 28px color-mix(in srgb,var(--zc) 90%,transparent)) drop-shadow(0 0 60px color-mix(in srgb,var(--zc) 40%,transparent))}
+}
+
 .motif{position:relative;height:clamp(180px,24vw,280px)}
 /* speed lines */
 .m-speed i{position:absolute;height:3px;background:linear-gradient(90deg,transparent,var(--zc));transform:skewX(-30deg);animation:dash 1.4s linear infinite;opacity:.85}
@@ -238,6 +295,63 @@ h1,h2,h3,.disp{
 .m-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-content:center;height:100%}
 .m-grid i{aspect-ratio:1;background:color-mix(in srgb,var(--zc) 10%,#0e0e0e);border:1px solid color-mix(in srgb,var(--zc) 25%,transparent);animation:flick 2.4s steps(2) infinite}
 @keyframes flick{0%,60%,100%{background:color-mix(in srgb,var(--zc) 10%,#0e0e0e)}65%,80%{background:var(--zc);box-shadow:0 0 16px var(--zc)}}
+
+/* ============ ZONE ENTRY TRANSITION ============ */
+#zoneEntry{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  pointer-events:none;opacity:0;
+  overflow:hidden;
+}
+#zoneEntry.active{pointer-events:all;}
+
+/* scanline texture overlay */
+#zoneEntry::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0px,rgba(0,0,0,.18) 1px,transparent 1px,transparent 3px);
+  z-index:1;pointer-events:none;
+}
+
+.ze-bg{
+  position:absolute;inset:0;
+  background:var(--ze-color,#FF4438);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:none;
+}
+.ze-flash{
+  position:absolute;inset:0;
+  background:#fff;
+  opacity:0;
+}
+.ze-num{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(120px,28vw,320px);color:transparent;
+  -webkit-text-stroke:2px rgba(255,255,255,.18);
+  line-height:1;position:absolute;
+  bottom:-10%;right:-2%;
+  z-index:2;
+}
+.ze-content{
+  position:relative;z-index:3;text-align:center;
+  transform:translateY(40px);opacity:0;
+}
+.ze-tag{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(13px,1.4vw,16px);letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);margin-bottom:8px;display:block;
+}
+.ze-name{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(52px,10vw,130px);text-transform:uppercase;
+  color:#fff;line-height:.9;
+  text-shadow:0 0 60px rgba(255,255,255,.4);
+}
+.ze-img{
+  width:min(220px,55vw);height:auto;
+  mix-blend-mode:screen;
+  margin-top:24px;
+  opacity:0;
+}
 
 /* ============ LEADERBOARD ============ */
 #leaderboard{background:var(--bg-2)}
@@ -356,6 +470,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
   <canvas id="heroCanvas"></canvas>
   <div class="wrap" style="z-index:2">
     <h1>
@@ -499,11 +615,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p data-i18n="z1_b">Sprint de 40 m, 5 niveaux de handicap — tout le monde part à chances égales. Stations : blocs de départ, course labyrinthe, course aux lumières.</p>
         <span class="mfnote" data-i18n="mf_note">+ Station augmentée Moment Factory</span>
       </div>
-      <div class="motif m-speed reveal d2" aria-hidden="true">
-        <i style="top:18%;width:62%;animation-delay:0s"></i>
-        <i style="top:38%;width:80%;animation-delay:.25s"></i>
-        <i style="top:58%;width:50%;animation-delay:.5s"></i>
-        <i style="top:78%;width:70%;animation-delay:.75s"></i>
+      <div class="zone-logo-wrap reveal d2">
+        <img class="zone-logo" data-logo-fr="assets/logo-speed-fr.png" data-logo-en="assets/logo-speed.png" src="assets/logo-speed-fr.png" alt="Zone Vitesse">
       </div>
     </div>
   </article>
@@ -516,13 +629,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p data-i18n="z2_b">Arène de lancers, équipes de 3. Précision, réaction au ballon, Ultimatum Ball.</p>
         <span class="mfnote" data-i18n="mf_note2">+ Station augmentée Moment Factory</span>
       </div>
-      <div class="motif m-arcs reveal d2" aria-hidden="true">
-        <svg viewBox="0 0 400 240" style="width:100%;height:100%">
-          <path d="M20,210 Q120,20 230,150"/>
-          <path d="M90,220 Q220,-10 380,170" style="animation-delay:.6s"/>
-          <circle cx="230" cy="150" r="8"/>
-          <circle cx="380" cy="170" r="8"/>
-        </svg>
+      <div class="zone-logo-wrap reveal d2">
+        <img class="zone-logo" data-logo-fr="assets/logo-hand-fr.png" data-logo-en="assets/logo-hand.png" src="assets/logo-hand-fr.png" alt="Zone Agilité des mains">
       </div>
     </div>
   </article>
@@ -535,11 +643,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p data-i18n="z3_b">Plaques lumineuses réactives, duels 1 c. 1. Soccer 1 c. 1, puck shuffle, habiletés de balle. Aucun ballon dans les stations de réaction lumineuse — tes pieds répondent à la lumière.</p>
         <span class="mfnote" data-i18n="mf_note3">+ Station augmentée Moment Factory</span>
       </div>
-      <div class="motif reveal d2" aria-hidden="true">
-        <div class="m-pads">
-          <i></i><i style="animation-delay:.3s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.5s"></i>
-          <i style="animation-delay:1.2s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.7s"></i><i style="animation-delay:1.5s"></i>
-        </div>
+      <div class="zone-logo-wrap reveal d2">
+        <img class="zone-logo" data-logo-fr="assets/logo-foot-fr.png" data-logo-en="assets/logo-foot.png" src="assets/logo-foot-fr.png" alt="Zone Agilité des pieds">
       </div>
     </div>
   </article>
@@ -552,10 +657,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p data-i18n="z4_b">Arène de tag avec obstacles cubiques, équipes de 3. Ultimatum tag, cage d'agilité, react attack.</p>
         <span class="mfnote" data-i18n="mf_note4">+ Station augmentée Moment Factory</span>
       </div>
-      <div class="motif reveal d2" aria-hidden="true">
-        <div class="m-cubes">
-          <i></i><i style="animation-delay:.4s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:1.2s"></i>
-        </div>
+      <div class="zone-logo-wrap reveal d2">
+        <img class="zone-logo" data-logo-fr="assets/logo-agility-fr.png" data-logo-en="assets/logo-agility.png" src="assets/logo-agility-fr.png" alt="Zone Agilité générale">
       </div>
     </div>
   </article>
@@ -568,12 +671,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p data-i18n="z5_b">Stratégie rapide 3 c. 3, tag sécuritaire sans contact avec ballon. Mémoire de cartes, mur lumineux rapide, reconnaissance de motifs.</p>
         <span class="mfnote" data-i18n="mf_note5">+ Station augmentée Moment Factory</span>
       </div>
-      <div class="motif reveal d2" aria-hidden="true">
-        <div class="m-grid">
-          <i></i><i style="animation-delay:.2s"></i><i style="animation-delay:.5s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:1.1s"></i>
-          <i style="animation-delay:.7s"></i><i style="animation-delay:1.4s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.6s"></i><i style="animation-delay:1s"></i><i style="animation-delay:.4s"></i>
-          <i style="animation-delay:1.3s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:1.6s"></i><i style="animation-delay:.55s"></i><i style="animation-delay:1.2s"></i>
-        </div>
+      <div class="zone-logo-wrap reveal d2">
+        <img class="zone-logo" data-logo-fr="assets/logo-iq-fr.png" data-logo-en="assets/logo-iq.png" src="assets/logo-iq-fr.png" alt="Zone IQ de jeu">
       </div>
     </div>
   </article>
@@ -672,6 +771,18 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <p class="session-note" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
   </div>
 </section>
+
+<!-- ============ ZONE ENTRY OVERLAY ============ -->
+<div id="zoneEntry" aria-hidden="true">
+  <div class="ze-bg"></div>
+  <div class="ze-flash"></div>
+  <span class="ze-num">01</span>
+  <div class="ze-content">
+    <span class="ze-tag">Zone</span>
+    <div class="ze-name">Vitesse</div>
+    <img class="ze-img" src="" alt="">
+  </div>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer>
@@ -824,6 +935,10 @@ function applyLang(){
   });
   document.getElementById("langBtn").textContent = lang==="fr" ? "EN" : "FR";
   document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
+  // swap zone logos FR/EN
+  document.querySelectorAll(".zone-logo").forEach(img=>{
+    img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
+  });
   renderZoneCard(currentZone);
 }
 document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";applyLang();});
@@ -1033,6 +1148,87 @@ document.querySelectorAll(".count").forEach(el=>{
 
 document.getElementById("year").textContent=new Date().getFullYear();
 applyLang();
+
+/* ====================================================== */
+/* Zone Entry Transition                                   */
+/* ====================================================== */
+const ZONE_ENTRY_DATA = [
+  {num:"01", color:"var(--red)",   nameFr:"Vitesse",          nameEn:"Speed",      logoFr:"assets/logo-speed-fr.png",   logoEn:"assets/logo-speed.png"},
+  {num:"02", color:"var(--blue)",  nameFr:"Agilité des mains",nameEn:"Hand Skills",logoFr:"assets/logo-hand-fr.png",    logoEn:"assets/logo-hand.png"},
+  {num:"03", color:"var(--green)", nameFr:"Agilité des pieds",nameEn:"Foot Skills",logoFr:"assets/logo-foot-fr.png",    logoEn:"assets/logo-foot.png"},
+  {num:"04", color:"var(--yellow)",nameFr:"Agilité générale", nameEn:"Agility",    logoFr:"assets/logo-agility-fr.png", logoEn:"assets/logo-agility.png"},
+  {num:"05", color:"var(--purple)",nameFr:"IQ de jeu",        nameEn:"Game IQ",    logoFr:"assets/logo-iq-fr.png",      logoEn:"assets/logo-iq.png"},
+];
+
+const ze = document.getElementById("zoneEntry");
+const zeBg = ze.querySelector(".ze-bg");
+const zeFlash = ze.querySelector(".ze-flash");
+const zeNum = ze.querySelector(".ze-num");
+const zeName = ze.querySelector(".ze-name");
+const zeTag = ze.querySelector(".ze-tag");
+const zeImg = ze.querySelector(".ze-img");
+
+function triggerZoneEntry(idx, targetPanel) {
+  const d = ZONE_ENTRY_DATA[idx];
+  const name = lang === "fr" ? d.nameFr : d.nameEn;
+  const logo = lang === "fr" ? d.logoFr : d.logoEn;
+
+  // set content
+  zeNum.textContent = d.num;
+  zeName.textContent = name;
+  zeTag.textContent = lang === "fr" ? "Zone" : "Zone";
+  zeImg.src = logo;
+  ze.style.setProperty("--ze-color", d.color);
+
+  // reset states
+  zeBg.style.cssText = "transform:scaleY(0);transform-origin:bottom;transition:none";
+  zeFlash.style.cssText = "opacity:0;transition:none";
+  ze.querySelector(".ze-content").style.cssText = "transform:translateY(40px);opacity:0;transition:none";
+  zeImg.style.cssText = "opacity:0;transition:none;mix-blend-mode:screen;width:min(220px,55vw)";
+  ze.style.cssText = "opacity:1;pointer-events:all";
+  ze.classList.add("active");
+
+  // force reflow
+  ze.offsetHeight;
+
+  // animate bg slide up
+  requestAnimationFrame(()=>{
+    zeBg.style.cssText = "transform:scaleY(1);transform-origin:bottom;transition:transform .38s cubic-bezier(.16,1,.3,1)";
+
+    setTimeout(()=>{
+      // flash
+      zeFlash.style.cssText = "opacity:.55;transition:opacity .06s";
+      setTimeout(()=>{ zeFlash.style.cssText = "opacity:0;transition:opacity .18s"; }, 60);
+
+      // content slam in
+      ze.querySelector(".ze-content").style.cssText =
+        "transform:translateY(0);opacity:1;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .35s ease";
+
+      // logo fade in
+      setTimeout(()=>{
+        zeImg.style.cssText = "opacity:1;transition:opacity .4s ease .1s;mix-blend-mode:screen;width:min(220px,55vw)";
+      }, 120);
+
+      // hold then exit
+      setTimeout(()=>{
+        ze.style.cssText = "opacity:0;transition:opacity .4s ease;pointer-events:none";
+        setTimeout(()=>{
+          ze.classList.remove("active");
+          if(targetPanel) targetPanel.scrollIntoView({behavior:"smooth", block:"start"});
+        }, 420);
+      }, 900);
+
+    }, 380);
+  });
+}
+
+// attach click to each zone-logo-wrap
+document.querySelectorAll(".zone-panel").forEach((panel, idx)=>{
+  const wrap = panel.querySelector(".zone-logo-wrap");
+  if(!wrap) return;
+  wrap.style.cursor = "pointer";
+  wrap.addEventListener("click", ()=> triggerZoneEntry(idx, panel));
+});
 </script>
 </body>
 </html>
