@@ -496,6 +496,16 @@ h1,h2,h3,.disp{
 .price-card li{display:flex;gap:10px;align-items:baseline}
 .price-card li::before{content:"";width:10px;height:2.5px;background:var(--lime);transform:skewX(-30deg);flex:none;position:relative;top:-3px}
 .price-card .cta{font-size:19px;text-align:center;margin-top:auto}
+.cta-group-btn{
+  display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(16px,2vw,22px);
+  border:2px solid var(--lime);color:var(--lime);
+  padding:16px 40px 18px;letter-spacing:.02em;
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
+  transition:background .2s,color .2s,transform .15s;
+  text-align:center;
+}
+.cta-group-btn:hover{background:var(--lime);color:#0A0A0A;transform:translateY(-2px);box-shadow:0 0 28px rgba(204,255,0,.45)}
 .session-note{margin-top:26px;color:var(--muted);font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(16px,2vw,21px);letter-spacing:.04em}
 .session-note b{color:var(--lime)}
 
@@ -849,6 +859,9 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </div>
     <p class="session-note" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
+    <div style="margin-top:clamp(32px,5vw,56px);text-align:center">
+      <a class="cta-group-btn reveal d4" href="mailto:dominique@purinstinct.com?subject=R%C3%A9servation%20%E2%80%94%20Groupe" data-i18n="p_group_cta">Réserve une journée pour une école, une commission scolaire ou une entreprise</a>
+    </div>
   </div>
 </section>
 
@@ -927,7 +940,7 @@ fr:{
   s_eyebrow:"10 ans de preuve",s_title:"Le sport est validé.",
   s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Bâti au Québec.",s_tag_b:"Les Games sont le prochain chapitre.",
-  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Sois le premier à connaître les premières dates.",
+  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Sois le premier à connaître les premières dates.",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
   p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
   p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
   p_f1:"Accès aux 9 stations",p_f2:"Score individuel en direct",p_f3:"Terrains augmentés Moment Factory",
@@ -967,7 +980,7 @@ en:{
   s_eyebrow:"10 years of proof",s_title:"The sport is validated.",
   s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Built in Quebec.",s_tag_b:"The Games are the next chapter.",
-  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"Be the first to know the opening dates.",
+  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"Be the first to know the opening dates.",p_group_cta:"Book a day for a school, school board or a company",
   p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
   p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
   p_f1:"Access to all 9 stations",p_f2:"Live individual score",p_f3:"Moment Factory augmented courts",
