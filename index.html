@@ -257,12 +257,12 @@ h1,h2,h3,.disp{
   position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);
   padding:clamp(48px,7vw,86px) 0;
 }
-/* parallax photo layer */
+/* parallax photo layer — transform-based (works on iOS, unlike background-attachment:fixed) */
 .zone-panel .zp-photo{
-  position:absolute;inset:-30% 0;
-  background-size:cover;background-position:center;background-attachment:fixed;
+  position:absolute;inset:-16% 0;
+  background-size:cover;background-position:center;
   opacity:0;transition:opacity 1.2s ease;
-  z-index:0;
+  z-index:0;will-change:transform;
 }
 /* dark overlay so text stays readable */
 .zone-panel .zp-photo::after{
@@ -281,13 +281,22 @@ h1,h2,h3,.disp{
 .zone-panel .mfnote{margin-top:14px;color:var(--lime);font-weight:600;font-size:14.5px;display:flex;align-items:center;gap:9px}
 .zone-panel .mfnote::before{content:"";width:9px;height:9px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 10px var(--lime)}
 .zone-panel::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 78% 50%,color-mix(in srgb,var(--zc) 13%,transparent),transparent 70%);pointer-events:none}
-.zone-num{position:absolute;right:-1.5%;top:50%;transform:translateY(-50%) skewX(-10deg);font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(160px,26vw,340px);color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--zc) 35%,transparent);line-height:1;pointer-events:none;user-select:none}
+.zone-num{position:absolute;right:-1.5%;top:50%;transform:translateY(-50%) skewX(-10deg);font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(160px,26vw,340px);color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--zc) 35%,transparent);line-height:1;pointer-events:none;user-select:none;will-change:transform}
 /* ============ ZONE LOGO SLAM ============ */
 .zone-logo-wrap{
   position:relative;
   display:flex;align-items:center;justify-content:center;
   padding:clamp(16px,3vw,40px) 0;
+  perspective:700px;
 }
+/* shockwave ring fired right after the slam lands */
+.zone-logo-wrap::after{
+  content:"";position:absolute;left:50%;top:50%;width:120px;height:120px;
+  margin:-60px 0 0 -60px;border:2px solid var(--zc);border-radius:50%;
+  opacity:0;transform:scale(.4);pointer-events:none;
+}
+.in .zone-logo-wrap::after{animation:shockwave .8s cubic-bezier(.2,.8,.2,1) .62s 1 both}
+@keyframes shockwave{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(2.6)}}
 .zone-logo{
   width:min(300px,80%);
   height:auto;
@@ -1131,6 +1140,52 @@ if(heroWrap && !reduceMotion){
   },{passive:true});
 }
 let rT; window.addEventListener("resize",()=>{clearTimeout(rT);rT=setTimeout(()=>{sizeCanvas();initField();if(reduceMotion)drawFrame();},150)});
+
+/* ====================================================== */
+/* Zone panels: transform parallax (iOS-safe) + logo tilt  */
+/* ====================================================== */
+(function(){
+  if(reduceMotion) return;
+  const panels = [...document.querySelectorAll(".zone-panel")].map(p=>({
+    el:p, photo:p.querySelector(".zp-photo"), num:p.querySelector(".zone-num")
+  })).filter(x=>x.photo||x.num);
+  if(panels.length){
+    let ticking=false;
+    function parallax(){
+      ticking=false;
+      const vh = window.innerHeight;
+      panels.forEach(x=>{
+        const r = x.el.getBoundingClientRect();
+        if(r.bottom<0||r.top>vh) return;
+        const prog = (r.top + r.height/2 - vh/2)/vh;
+        if(x.photo) x.photo.style.transform = `translate3d(0,${(prog*14).toFixed(2)}%,0)`;
+        if(x.num) x.num.style.transform = `translateY(calc(-50% + ${(prog*-60).toFixed(1)}px)) skewX(-10deg)`;
+      });
+    }
+    window.addEventListener("scroll",()=>{ if(!ticking){ticking=true;requestAnimationFrame(parallax);} },{passive:true});
+    parallax();
+  }
+  /* logo hover tilt (desktop) */
+  if(matchMedia("(pointer:fine)").matches){
+    document.querySelectorAll(".zone-logo-wrap").forEach(wrap=>{
+      const img = wrap.querySelector(".zone-logo"); if(!img) return;
+      wrap.addEventListener("mouseenter",()=>{
+        /* slam animation fills forwards and locks transform — release it once landed */
+        img.style.animation="none"; img.style.opacity="1"; img.style.filter="none";
+      });
+      wrap.addEventListener("mousemove",e=>{
+        const r=wrap.getBoundingClientRect();
+        const rx=((e.clientY-r.top)/r.height-.5)*-10;
+        const ry=((e.clientX-r.left)/r.width-.5)*12;
+        img.style.transform=`rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg) scale(1.04)`;
+        img.style.transition="transform .12s ease-out";
+      });
+      wrap.addEventListener("mouseleave",()=>{
+        img.style.transform=""; img.style.transition="transform .4s ease";
+      });
+    });
+  }
+})();
 
 /* ====================================================== */
 /* Scroll reveals */
