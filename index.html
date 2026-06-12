@@ -1757,7 +1757,9 @@ document.querySelectorAll(".count").forEach(el=>{
 /* Pricing — countdown, spots counter, waitlist form */
 /* ====================================================== */
 const LAUNCH_DATE = new Date("2026-09-05T09:00:00-04:00");
-const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID"; /* TODO: replace with real Formspree form id */
+/* Google Sheets backend — see waitlist-apps-script.gs for setup.
+   Paste your Apps Script web-app URL below (ends in /exec). */
+const SHEET_ENDPOINT = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
 
 (function(){
   const dEl=document.getElementById("cdD"),hEl=document.getElementById("cdH"),
@@ -1832,11 +1834,15 @@ const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID"; /* TODO: replace wi
     const btn=form.querySelector(".wf-btn");
     btn.disabled=true; btn.style.opacity=".6";
     try{
-      if(!FORM_ENDPOINT.includes("YOUR_FORM_ID")){
-        await fetch(FORM_ENDPOINT,{method:"POST",headers:{Accept:"application/json"},
-          body:new FormData(form)});
+      if(SHEET_ENDPOINT.startsWith("https://")){
+        const data=new URLSearchParams({
+          email:email.value, phone:phone.value, tier:tier, lang:lang,
+          page:location.href, ts:new Date().toISOString()
+        });
+        await fetch(SHEET_ENDPOINT,{method:"POST",mode:"no-cors",
+          headers:{"Content-Type":"application/x-www-form-urlencoded"},body:data});
       } else {
-        console.warn("Waitlist: set FORM_ENDPOINT to your Formspree form id to collect signups.");
+        console.warn("Waitlist: paste your Google Apps Script URL into SHEET_ENDPOINT to collect signups.");
         await new Promise(r=>setTimeout(r,500));
       }
     }catch(err){/* still show success — data also kept below */}
