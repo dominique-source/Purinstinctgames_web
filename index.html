@@ -1517,7 +1517,9 @@ const canvas = document.getElementById("heroCanvas");
 const ctx = canvas.getContext("2d");
 let W,H,particles=[],beams=[],streaks=[];
 function sizeCanvas(){
-  const dpr = Math.min(window.devicePixelRatio||1,2);
+  // Cap DPR: a full-screen canvas at DPR 2 on a large desktop display is a
+  // huge backing store to clear/fill every frame — main cause of hero jank.
+  const dpr = Math.min(window.devicePixelRatio||1,1.5);
   W = canvas.clientWidth; H = canvas.clientHeight;
   canvas.width = W*dpr; canvas.height = H*dpr;
   ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -1529,10 +1531,16 @@ function initField(){
     vx:(Math.random()-.3)*.35,vy:(Math.random()-.5)*.18,
     r:Math.random()*1.8+.4,a:Math.random()*.5+.15
   }));
-  beams = Array.from({length:4},(_,i)=>({
-    p:Math.random(),speed:.0016+Math.random()*.0014,
-    angle:(-24+i*14)*Math.PI/180,width:80+Math.random()*120,hue:i%2===0
-  }));
+  // Beam gradients live in each beam's local (rotated) space and never change,
+  // so build them once here instead of re-creating 4 gradients every frame.
+  beams = Array.from({length:4},(_,i)=>{
+    const hue=i%2===0, width=80+Math.random()*120, c=hue?"204,255,0":"255,255,255";
+    const grad=ctx.createLinearGradient(-width,0,width,0);
+    grad.addColorStop(0,`rgba(${c},0)`);
+    grad.addColorStop(.5,`rgba(${c},${hue?0.10:0.045})`);
+    grad.addColorStop(1,`rgba(${c},0)`);
+    return {p:Math.random(),speed:.0016+Math.random()*.0014,angle:(-24+i*14)*Math.PI/180,width,hue,grad};
+  });
 }
 function drawFrame(t){
   ctx.clearRect(0,0,W,H);
@@ -1549,12 +1557,7 @@ function drawFrame(t){
     const cx = b.p*(W+400)-200;
     ctx.save();
     ctx.translate(cx,H*.5); ctx.rotate(b.angle);
-    const g = ctx.createLinearGradient(-b.width,0,b.width,0);
-    const c = b.hue ? "204,255,0" : "255,255,255";
-    g.addColorStop(0,`rgba(${c},0)`);
-    g.addColorStop(.5,`rgba(${c},${b.hue?0.10:0.045})`);
-    g.addColorStop(1,`rgba(${c},0)`);
-    ctx.fillStyle=g;
+    ctx.fillStyle=b.grad;
     ctx.fillRect(-b.width,-H,b.width*2,H*2);
     ctx.restore();
   });
@@ -1592,9 +1595,20 @@ function drawFrame(t){
     ctx.fillStyle=`rgba(234,255,140,${.9*s.life})`;
     ctx.beginPath();ctx.arc(s.x,s.y,2.4,0,7);ctx.fill();
   });
-  if(!reduceMotion) requestAnimationFrame(drawFrame);
+  if(!reduceMotion && heroVisible) rafId = requestAnimationFrame(drawFrame);
+  else rafId = null;
 }
-sizeCanvas(); initField(); requestAnimationFrame(drawFrame);
+let rafId=null, heroVisible=true;
+function startHero(){ if(rafId==null && !reduceMotion && heroVisible) rafId=requestAnimationFrame(drawFrame); }
+sizeCanvas(); initField(); rafId = requestAnimationFrame(drawFrame);
+// Stop the canvas animation while the hero is scrolled out of view (saves the
+// main thread for the rest of the page; resumes when the hero returns).
+const heroForCanvas = document.querySelector(".hero");
+if(heroForCanvas && "IntersectionObserver" in window && !reduceMotion){
+  new IntersectionObserver(es=>{
+    es.forEach(e=>{ heroVisible = e.isIntersecting; if(heroVisible) startHero(); });
+  },{threshold:0}).observe(heroForCanvas);
+}
 
 /* Hero video: graceful fallback + battery-friendly playback */
 const heroBg = document.querySelector(".hero-bg");
