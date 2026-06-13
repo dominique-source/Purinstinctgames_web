@@ -139,14 +139,10 @@ h1,h2,h3,.disp{
 .hero-bg video{
   width:100%;height:100%;
   object-fit:cover;object-position:center 40%;
-  transform:scale(1.04);
-  animation:heroZoom 24s ease-in-out infinite alternate;
-  will-change:transform;
-}
-@keyframes heroZoom{
-  0%  {transform:scale(1.04) translate(0%,0%)}
-  50% {transform:scale(1.08) translate(-0.8%,0.4%)}
-  100%{transform:scale(1.05) translate(0.5%,-0.3%)}
+  /* Static cover scale on its own GPU layer. A continuously animated
+     transform on a decoding full-screen video causes judder on desktop. */
+  transform:scale(1.04) translateZ(0);
+  backface-visibility:hidden;
 }
 
 /* dark cinematic vignette over photo */
@@ -839,7 +835,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero-bg">
-    <video autoplay muted loop playsinline preload="auto" poster="assets/arena-hero.png">
+    <video autoplay muted loop playsinline preload="metadata" poster="assets/arena-hero.jpg">
       <source src="hero.mp4" type="video/mp4">
     </video>
   </div>
@@ -1543,6 +1539,9 @@ function initField(){
   });
 }
 function drawFrame(t){
+  rafId = (!reduceMotion && heroVisible) ? requestAnimationFrame(drawFrame) : null;
+  if(t && t-lastDraw < 30) return;   // ~33fps cap eases compositing over the hero video
+  lastDraw = t||0;
   ctx.clearRect(0,0,W,H);
   // floor grid hint
   ctx.strokeStyle="rgba(204,255,0,.05)";
@@ -1595,10 +1594,8 @@ function drawFrame(t){
     ctx.fillStyle=`rgba(234,255,140,${.9*s.life})`;
     ctx.beginPath();ctx.arc(s.x,s.y,2.4,0,7);ctx.fill();
   });
-  if(!reduceMotion && heroVisible) rafId = requestAnimationFrame(drawFrame);
-  else rafId = null;
 }
-let rafId=null, heroVisible=true;
+let rafId=null, heroVisible=true, lastDraw=0;
 function startHero(){ if(rafId==null && !reduceMotion && heroVisible) rafId=requestAnimationFrame(drawFrame); }
 sizeCanvas(); initField(); rafId = requestAnimationFrame(drawFrame);
 // Stop the canvas animation while the hero is scrolled out of view (saves the
