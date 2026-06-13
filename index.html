@@ -2483,6 +2483,21 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
   bars.forEach(b=>b.addEventListener("click",()=>{ +b.dataset.lvl===cur ? close() : open(+b.dataset.lvl); }));
   document.getElementById("lvlClose").addEventListener("click",close);
   window.__lvlRefresh=render;
+
+  // Default to level 1 (with its diagram) the first time the "Apprendre PürInstinct"
+  // step scrolls into view, so the graphic is shown by default.
+  const ladder=document.querySelector(".j-levels");
+  if(ladder && "IntersectionObserver" in window){
+    let done=false;
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !done && cur===null){ done=true; open(1); io.disconnect(); }
+      });
+    },{threshold:.5});
+    io.observe(ladder);
+  } else {
+    open(1);
+  }
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" defer></script>
