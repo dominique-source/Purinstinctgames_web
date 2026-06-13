@@ -37,11 +37,12 @@ body{
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
-@media(max-width:860px){
-  html,body{overflow-x:auto}
-}
 ::selection{background:var(--lime);color:#0A0A0A}
 img,svg{display:block;max-width:100%}
+@media(max-width:860px){
+  *{max-width:100%;box-sizing:border-box}
+  img,video,canvas,svg,iframe{width:100% !important;height:auto}
+}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
