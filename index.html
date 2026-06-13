@@ -1019,7 +1019,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <button class="j-lvl" type="button" data-lvl="3" style="--h:50%"><i>N3</i></button>
           <button class="j-lvl" type="button" data-lvl="4" style="--h:64%"><i>N4</i></button>
           <button class="j-lvl" type="button" data-lvl="5" style="--h:80%"><i>N5</i></button>
-          <button class="j-lvl on" type="button" data-lvl="6" style="--h:100%"><i>N6</i></button>
+          <button class="j-lvl" type="button" data-lvl="6" style="--h:100%"><i>N6</i></button>
         </div>
         <div class="j-lvl-detail" id="lvlDetail" hidden>
           <div class="lvl-head">
@@ -2362,21 +2362,21 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
 
   const RULES={
     fr:["Toutes les passes sont permises.",
-        "Les passes vers l'avant sont interdites pour marquer (dernière passe).",
+        "Les passes vers l'avant sont interdites pour marquer (dernière passe). On peut marquer avec la course, les pokes (coup de poing), les bottés et les redirections.",
         "Les passes avant sont interdites passé le centre de l'aire de jeu.",
         "Aucune passe avant dans l'aire de jeu — seulement des coups de poing, des bottés et des redirections pour avancer le ballon.",
         "Aucun poke dans la zone des buts.",
         "Sur les bottés dans la zone des buts, le receveur doit être à l'extérieur de la zone au moment du coup de pied."],
     en:["All passes are allowed.",
-        "Forward passes are forbidden on the scoring play (the final pass).",
+        "Forward passes are forbidden to score (the final pass). You can score by running, pokes (punches), kicks and redirections.",
         "Forward passes are forbidden past the centre of the playing area.",
         "No forward passes anywhere — only punches, kicks and redirections to advance the ball.",
         "No pokes in the goal zone.",
         "On kicks into the goal zone, the receiver must be outside the zone at the moment of the kick."]
   };
   const LBL={
-    fr:{gz:"ZONE DES BUTS",ok:"PERMIS",no:"INTERDIT",punch:"POING",kick:"BOTTÉ",redir:"REDIRECTION",poke:"POKE",recv:"RECEVEUR",lvl:"Niveau",centre:"CENTRE"},
-    en:{gz:"GOAL ZONE",ok:"ALLOWED",no:"FORBIDDEN",punch:"PUNCH",kick:"KICK",redir:"REDIRECT",poke:"POKE",recv:"RECEIVER",lvl:"Level",centre:"CENTRE"}
+    fr:{gz:"ZONE DES BUTS",ok:"PERMIS",no:"INTERDIT",punch:"POING",kick:"BOTTÉ",redir:"REDIRECTION",poke:"POKE",recv:"RECEVEUR",lvl:"Niveau",centre:"CENTRE",run:"COURSE",last:"DERNIÈRE PASSE"},
+    en:{gz:"GOAL ZONE",ok:"ALLOWED",no:"FORBIDDEN",punch:"PUNCH",kick:"KICK",redir:"REDIRECT",poke:"POKE",recv:"RECEIVER",lvl:"Level",centre:"CENTRE",run:"RUN",last:"FINAL PASS"}
   };
 
   const LIME="#CCFF00", RED="#FF4438", MUT="rgba(255,255,255,.55)";
@@ -2422,13 +2422,21 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
       txt(120,135,L.ok,LIME,14)
     ].join(""), {centre:true}),
     (L)=> field(L, [
-      player(195,80), ball(206,73),
-      arrow(209,72,288,52,RED), cross(250,60),
-      txt(214,38,L.no,RED,13),
-      arrow(193,92,150,150,LIME), player(143,158,"#fff"), check(122,148),
-      curve(152,150,295,150,LIME),
-      txt(150,182,L.ok,LIME,13)
-    ].join(""), {centre:true}),
+      /* forbidden: forward pass to score (the final pass) */
+      player(118,42), ball(129,35),
+      arrow(132,34,300,42,RED), cross(252,38),
+      txt(176,66,L.last,RED,11),
+      /* allowed: carry / run the ball into the goal zone */
+      player(38,100), ball(49,93),
+      arrow(52,92,236,98,LIME), check(238,98),
+      txt(96,120,L.run,LIME,11),
+      /* allowed: punch */
+      player(150,150), arrow(162,146,196,135,LIME), txt(164,176,L.punch,LIME,11),
+      /* allowed: kick */
+      player(214,150), curve(223,144,296,124,LIME), txt(228,176,L.kick,LIME,11),
+      /* allowed: redirection */
+      player(286,150), arrow(295,143,314,124,LIME), arrow(293,153,316,160,LIME), txt(300,176,L.redir,LIME,10)
+    ].join(""), {centre:false}),
     (L)=> field(L, [
       player(52,110), ball(63,103),
       arrow(66,102,130,75,LIME), check(146,68),
