@@ -723,6 +723,72 @@ h1,h2,h3,.disp{
 .session-note{margin-top:26px;color:var(--muted);font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(16px,2vw,21px);letter-spacing:.04em}
 .session-note b{color:var(--lime)}
 
+/* ============ CALENDRIER ============ */
+.cal-section-head{margin:clamp(36px,5vw,60px) 0 24px}
+.cal-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.cal-tab{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:15px;letter-spacing:.08em;padding:8px 22px;border-radius:40px;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.15);background:transparent;color:var(--muted);
+  transition:all .2s}
+.cal-tab.active,.cal-tab:hover{border-color:var(--lime);color:var(--lime);background:rgba(204,255,0,.07)}
+.cal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:28px}
+@media(max-width:860px){.cal-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cal-grid{grid-template-columns:1fr}}
+.cal-card{
+  background:#101010;border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:20px 22px;cursor:pointer;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
+  position:relative;overflow:hidden
+}
+.cal-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lime);opacity:.45;transition:opacity .2s}
+.cal-card:hover,.cal-card.active{border-color:rgba(204,255,0,.55);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 24px rgba(204,255,0,.1)}
+.cal-card:hover::before,.cal-card.active::before{opacity:1}
+.cal-city-lbl{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:var(--lime);margin-bottom:5px}
+.cal-date-big{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(24px,3vw,36px);line-height:1.05;margin-bottom:3px}
+.cal-venue-lbl{color:var(--muted);font-size:13px;margin-bottom:14px}
+.cal-pills{display:flex;gap:6px;flex-wrap:wrap}
+.cal-pill{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid rgba(255,255,255,.12);color:var(--muted)}
+.cal-pill.avail{border-color:rgba(204,255,0,.4);color:rgba(204,255,0,.85)}
+.cal-pill.low{border-color:rgba(255,68,56,.5);color:var(--red)}
+.cal-launch{position:absolute;top:12px;right:12px;font-family:var(--display);font-style:italic;font-weight:900;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--lime);color:#0A0A0A;padding:2px 9px;border-radius:3px}
+/* detail panel */
+.cal-detail{background:#0f0f0f;border:1px solid rgba(204,255,0,.22);border-radius:16px;padding:clamp(22px,3.5vw,38px);margin-bottom:28px}
+.cal-det-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
+.cal-det-city{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.14em;color:var(--lime);display:block;margin-bottom:4px}
+.cal-det-date{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(24px,3vw,38px);margin:0;line-height:1.1}
+.cal-det-venue{color:var(--muted);font-size:13px;margin-top:3px}
+.cal-cls{background:none;border:1px solid rgba(255,255,255,.15);color:var(--white);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;flex:none;transition:border-color .2s}
+.cal-cls:hover{border-color:var(--lime);color:var(--lime)}
+.cal-sess-grid{display:grid;gap:10px;margin-bottom:24px}
+.cal-sess-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;
+  background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:10px;
+  padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s}
+.cal-sess-row:hover,.cal-sess-row.sel{border-color:rgba(204,255,0,.5);background:rgba(204,255,0,.04)}
+.cal-sess-row.full{opacity:.45;cursor:default;pointer-events:none}
+.cs-type{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:19px;transition:color .2s}
+.cal-sess-row.sel .cs-type{color:var(--lime)}
+.cs-time{font-size:13px;color:var(--muted);margin-top:2px}
+.cs-bar-wrap{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-top:7px}
+.cs-bar{height:100%;background:var(--lime);border-radius:3px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.cs-bar.low{background:var(--red)}
+.cs-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.cs-spots{font-family:var(--display);font-style:italic;font-weight:900;font-size:13px;white-space:nowrap;color:var(--muted)}
+.cs-spots b{color:var(--lime);font-size:21px;line-height:1}
+.cs-spots.low b{color:var(--red)}
+.cs-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all .2s}
+.cal-sess-row.sel .cs-check{background:var(--lime);border-color:var(--lime);color:#0A0A0A}
+/* cal form */
+.cal-form{border-top:1px solid rgba(255,255,255,.07);padding-top:20px}
+.cal-sel-lbl{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:15px;color:var(--lime);margin-bottom:12px}
+.cal-no-sel{color:var(--muted);font-size:14px;font-style:italic;margin-bottom:12px}
+.cal-reg-fields{display:grid;grid-template-columns:1fr 1fr auto;gap:10px}
+@media(max-width:680px){.cal-reg-fields{grid-template-columns:1fr}}
+.cal-ok{background:rgba(204,255,0,.07);border:1px solid rgba(204,255,0,.28);border-radius:10px;padding:16px 20px;display:none}
+.cal-ok.show{display:block}
+.cal-ok b{color:var(--lime);display:block;margin-bottom:4px}
+
 /* ============ FOOTER ============ */
 footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
 footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
@@ -1199,42 +1265,41 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </form>
 
-    <div class="price-grid">
-      <div class="price-card reveal d1">
-        <span class="tier" data-i18n="p1_t">Jeunesse</span>
-        <div><span class="amount">20&nbsp;$</span><div class="per" data-i18n="p_per1">par athlète / session</div></div>
-        <ul>
-          <li data-i18n="p_f1">Accès aux 9 stations</li>
-          <li data-i18n="p_f2">Score individuel en direct</li>
-          <li data-i18n="p_f3">Terrains augmentés Moment Factory</li>
-        </ul>
-        <button class="cta tier-cta" data-tier="Jeunesse" data-i18n="p_cta1">Réserve</button>
-      </div>
-      <div class="price-card featured reveal d2">
-        <span class="tier" data-i18n="p2_t">Adulte</span>
-        <div><span class="amount">30&nbsp;$</span><div class="per" data-i18n="p_per2">par athlète / session</div></div>
-        <ul>
-          <li data-i18n="p_f1b">Accès aux 9 stations</li>
-          <li data-i18n="p_f2b">Score individuel en direct</li>
-          <li data-i18n="p_f3b">Terrains augmentés Moment Factory</li>
-        </ul>
-        <button class="cta tier-cta" data-tier="Adulte" data-i18n="p_cta2">Réserve</button>
-      </div>
-      <div class="price-card reveal d3">
-        <span class="tier" data-i18n="p3_t">Corporatif</span>
-        <div><span class="amount">75&nbsp;$</span><div class="per" data-i18n="p_per3">par athlète / session</div></div>
-        <ul>
-          <li data-i18n="p_f1c">Sessions privées d'équipe</li>
-          <li data-i18n="p_f2c">Classement d'entreprise dédié</li>
-          <li data-i18n="p_f3c">Expérience augmentée complète</li>
-        </ul>
-        <button class="cta tier-cta" data-tier="Corporatif" data-i18n="p_cta3">Réserve</button>
-      </div>
+    <!-- ── CALENDRIER ── -->
+    <div class="cal-section-head reveal d2">
+      <h3 class="disp" style="font-size:clamp(26px,3.5vw,42px)" data-i18n="cal_title">Prochains événements</h3>
+      <p style="color:var(--muted);margin-top:8px;font-size:15px" data-i18n="cal_sub">Choisis ta ville, sélectionne une session, réserve ta place.</p>
     </div>
-    <p class="session-note" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
-    <div style="margin-top:clamp(32px,5vw,56px);text-align:center">
-      <button class="cta-group-btn reveal d4 tier-cta" data-tier="Groupe" data-i18n="p_group_cta">Réserve une journée pour une école, une commission scolaire ou une entreprise</button>
+    <div class="cal-tabs reveal d3" id="calTabs">
+      <button class="cal-tab active" data-city="all" data-i18n="cal_all">Toutes les villes</button>
+      <button class="cal-tab" data-city="montreal">Montréal</button>
+      <button class="cal-tab" data-city="quebec">Québec</button>
+      <button class="cal-tab" data-city="laval">Laval</button>
+      <button class="cal-tab" data-city="ottawa">Ottawa</button>
     </div>
+    <div class="cal-grid" id="calGrid"></div>
+
+    <div class="cal-detail" id="calDetail" hidden>
+      <div class="cal-det-head">
+        <div>
+          <span class="cal-det-city" id="calDetCity"></span>
+          <h3 class="cal-det-date" id="calDetDate"></h3>
+          <p class="cal-det-venue" id="calDetVenue"></p>
+        </div>
+        <button class="cal-cls" id="calClose" aria-label="Fermer">✕</button>
+      </div>
+      <div class="cal-sess-grid" id="calSessions"></div>
+      <form class="cal-form" id="calRegForm" novalidate>
+        <p class="cal-no-sel" id="calSelLbl" data-i18n="cal_pick">Sélectionne une session ci-dessus</p>
+        <div class="cal-reg-fields" id="calRegFields" style="display:none">
+          <input type="email" id="calEmail" autocomplete="email" required data-i18n-ph="wf_email" placeholder="Ton courriel">
+          <input type="tel" id="calPhone" autocomplete="tel" data-i18n-ph="wf_phone" placeholder="Ton cellulaire">
+          <button type="submit" class="cta" data-i18n="wf_btn">Réserve ma place</button>
+        </div>
+        <div class="cal-ok" id="calOk"><b data-i18n="wf_ok_t">Tu es sur la liste.</b><span id="calOkMsg"></span></div>
+      </form>
+    </div>
+    <p class="session-note" style="margin-top:32px" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
   </div>
 </section>
 
@@ -1319,6 +1384,7 @@ fr:{
   s_eyebrow:"10 ans de preuve",s_title:"Le sport est validé.",
   s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Bâti au Québec.",s_tag_b:"Les Games sont le prochain chapitre.",
+  cal_title:"Prochains événements",cal_sub:"Choisis ta ville, sélectionne une session, réserve ta place.",cal_all:"Toutes les villes",cal_pick:"Sélectionne une session ci-dessus",cal_launch:"Lancement",cal_full:"Complet",cal_left:"restantes",
   p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"places réservées cette semaine",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
   p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
   p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
@@ -1359,6 +1425,7 @@ en:{
   s_eyebrow:"10 years of proof",s_title:"The sport is validated.",
   s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Built in Quebec.",s_tag_b:"The Games are the next chapter.",
+  cal_title:"Upcoming events",cal_sub:"Choose your city, pick a session, book your spot.",cal_all:"All cities",cal_pick:"Select a session above",cal_launch:"Launch",cal_full:"Full",cal_left:"spots left",
   p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"spots reserved this week",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
   p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
   p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
@@ -1418,6 +1485,7 @@ function applyLang(){
   renderZoneCard(currentZone);
   if(window.__arena3dSetLang) window.__arena3dSetLang(lang);
   if(window.__lvlRefresh) window.__lvlRefresh();
+  if(window.__calRender) window.__calRender();
 }
 document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";applyLang();});
 document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";applyLang();});
@@ -1891,6 +1959,219 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwGSTjB2Me0LayAm
   hid.type="hidden"; hid.name="tier";
   form.appendChild(hid);
   form.addEventListener("submit",()=>{hid.value=tier;},true);
+})();
+
+/* ====================================================== */
+/* CALENDRIER ÉVÉNEMENTS                                   */
+/* ====================================================== */
+(function(){
+  const EVENTS=[
+    {id:"mtl-0905",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",isLaunch:true,
+     date:new Date("2026-09-05T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:38},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:72},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:14},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:9}]},
+    {id:"mtl-0919",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
+     date:new Date("2026-09-19T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:52},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:88},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:22},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:15}]},
+    {id:"qc-0926",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
+     date:new Date("2026-09-26T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:55},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:95},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:24},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:18}]},
+    {id:"mtl-1003",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
+     date:new Date("2026-10-03T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:44},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:82},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:18},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:12}]},
+    {id:"lav-1010",city:"Laval",cityKey:"laval",venue:"À confirmer, Laval",
+     date:new Date("2026-10-10T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:58},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:101},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:26},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:16}]},
+    {id:"ott-1017",city:"Ottawa",cityKey:"ottawa",venue:"À confirmer, Ottawa",
+     date:new Date("2026-10-17T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:56},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:110},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:27},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:17}]},
+    {id:"mtl-1024",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
+     date:new Date("2026-10-24T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:118},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:29},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20}]},
+    {id:"qc-1107",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
+     date:new Date("2026-11-07T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"nov.",mEn:"Nov.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:120},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:30},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20}]}
+  ];
+
+  const grid=document.getElementById("calGrid");
+  const detail=document.getElementById("calDetail");
+  if(!grid||!detail) return;
+
+  const calDetCity=document.getElementById("calDetCity");
+  const calDetDate=document.getElementById("calDetDate");
+  const calDetVenue=document.getElementById("calDetVenue");
+  const calSessions=document.getElementById("calSessions");
+  const calClose=document.getElementById("calClose");
+  const calSelLbl=document.getElementById("calSelLbl");
+  const calRegFields=document.getElementById("calRegFields");
+  const calOk=document.getElementById("calOk");
+  const calOkMsg=document.getElementById("calOkMsg");
+  const calEmail=document.getElementById("calEmail");
+  const calPhone=document.getElementById("calPhone");
+  const calRegForm=document.getElementById("calRegForm");
+
+  let activeCity="all", activeEvent=null, selIdx=null;
+
+  function sClass(s){ const p=s.spots/s.max; return s.spots===0?"full":p<.18||s.spots<=5?"low":"avail"; }
+
+  function renderGrid(){
+    const isFr=lang==="fr";
+    const list=activeCity==="all"?EVENTS:EVENTS.filter(e=>e.cityKey===activeCity);
+    grid.innerHTML=list.map(ev=>{
+      const d=ev.date.getDate(), m=isFr?ev.mFr:ev.mEn, day=isFr?ev.dayFr:ev.dayEn;
+      const pills=ev.sessions.map(s=>{
+        const sc=sClass(s); const lbl=isFr?s.fr:s.en;
+        if(sc==="full") return `<span class="cal-pill">${lbl}</span>`;
+        if(sc==="low")  return `<span class="cal-pill low">${lbl} — ${s.spots}</span>`;
+        return `<span class="cal-pill avail">${lbl}</span>`;
+      }).join("");
+      return `<button class="cal-card" data-id="${ev.id}" aria-label="${ev.city} ${day} ${d} ${m}">
+        ${ev.isLaunch?`<span class="cal-launch">${isFr?"Lancement":"Launch"}</span>`:""}
+        <div class="cal-city-lbl">${ev.city}</div>
+        <div class="cal-date-big">${day} ${d} ${m}</div>
+        <div class="cal-venue-lbl">${ev.venue}</div>
+        <div class="cal-pills">${pills}</div>
+      </button>`;
+    }).join("") || `<p style="color:var(--muted);font-style:italic">${isFr?"Aucun événement prévu pour cette ville.":"No events scheduled for this city."}</p>`;
+    grid.querySelectorAll(".cal-card").forEach(c=>{
+      c.addEventListener("click",()=>openEvent(c.dataset.id));
+    });
+  }
+
+  function openEvent(id){
+    const ev=EVENTS.find(e=>e.id===id); if(!ev) return;
+    activeEvent=ev; selIdx=null;
+    calOk.classList.remove("show");
+    calRegFields.style.display="none";
+    calSelLbl.className="cal-no-sel";
+    calSelLbl.textContent=I18N[lang].cal_pick||"Sélectionne une session ci-dessus";
+    const isFr=lang==="fr";
+    const d=ev.date.getDate(), m=isFr?ev.mFr:ev.mEn, day=isFr?ev.dayFr:ev.dayEn, y=ev.date.getFullYear();
+    calDetCity.textContent=ev.city;
+    calDetDate.textContent=`${day} ${d} ${m} ${y}`;
+    calDetVenue.textContent=ev.venue;
+    calSessions.innerHTML=ev.sessions.map((s,i)=>{
+      const sc=sClass(s); const lbl=isFr?s.fr:s.en;
+      const pct=Math.round((1-s.spots/s.max)*100);
+      const spotsHtml=s.spots===0
+        ?`<span class="cs-spots">${isFr?"Complet":"Full"}</span>`
+        :`<span class="cs-spots${sc==="low"?" low":""}"><b>${s.spots}</b> ${isFr?"restantes":"left"}</span>`;
+      return `<div class="cal-sess-row${sc==="full"?" full":""}" data-i="${i}" role="button" tabindex="${sc==="full"?-1:0}">
+        <div>
+          <div class="cs-type">${lbl}</div>
+          <div class="cs-time">${s.time}</div>
+          <div class="cs-bar-wrap"><div class="cs-bar${sc==="low"?" low":""}" style="width:${pct}%"></div></div>
+        </div>
+        <div class="cs-right">${spotsHtml}<div class="cs-check">✓</div></div>
+      </div>`;
+    }).join("");
+    calSessions.querySelectorAll(".cal-sess-row:not(.full)").forEach(r=>{
+      r.addEventListener("click",()=>selectSess(+r.dataset.i));
+      r.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" ") selectSess(+r.dataset.i); });
+    });
+    detail.hidden=false;
+    if(!reduceMotion) requestAnimationFrame(()=>detail.scrollIntoView({behavior:"smooth",block:"nearest"}));
+    grid.querySelectorAll(".cal-card").forEach(c=>c.classList.toggle("active",c.dataset.id===id));
+  }
+
+  function selectSess(i){
+    selIdx=i;
+    calSessions.querySelectorAll(".cal-sess-row").forEach((r,j)=>r.classList.toggle("sel",j===i));
+    const s=activeEvent.sessions[i]; const isFr=lang==="fr";
+    const lbl=isFr?s.fr:s.en;
+    calSelLbl.className="cal-sel-lbl";
+    calSelLbl.textContent=isFr
+      ?`Session : ${lbl} — ${activeEvent.city}, ${activeEvent.date.getDate()} ${activeEvent.mFr}`
+      :`Session: ${lbl} — ${activeEvent.city}, ${activeEvent.mEn} ${activeEvent.date.getDate()}`;
+    calRegFields.style.display="";
+    if(calEmail) setTimeout(()=>calEmail.focus({preventScroll:true}),100);
+    calOk.classList.remove("show");
+  }
+
+  function closeDetail(){
+    detail.hidden=true; activeEvent=null; selIdx=null;
+    grid.querySelectorAll(".cal-card").forEach(c=>c.classList.remove("active"));
+  }
+
+  calClose.addEventListener("click",closeDetail);
+
+  calRegForm && calRegForm.addEventListener("submit",async e=>{
+    e.preventDefault();
+    if(selIdx===null||!activeEvent) return;
+    const emailVal=calEmail.value.trim(), phoneVal=calPhone.value.trim();
+    if(!emailVal||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailVal)){calEmail.classList.add("err");return;}
+    calEmail.classList.remove("err");
+    const s=activeEvent.sessions[selIdx]; const isFr=lang==="fr";
+    const sessionType=isFr?s.fr:s.en;
+    const eventDate=activeEvent.date.toISOString().split("T")[0];
+    const btn=calRegForm.querySelector("button[type=submit]");
+    btn.disabled=true; btn.style.opacity=".6";
+    try{
+      if(SHEET_ENDPOINT.startsWith("https://")){
+        await fetch(SHEET_ENDPOINT,{method:"POST",mode:"no-cors",
+          headers:{"Content-Type":"application/x-www-form-urlencoded"},
+          body:new URLSearchParams({
+            email:emailVal,phone:phoneVal,
+            tier:sessionType,ville:activeEvent.city,
+            event_date:eventDate,session:sessionType,
+            lang,page:location.href
+          })});
+      } else { await new Promise(r=>setTimeout(r,400)); }
+    }catch(_){}
+    try{
+      const lst=JSON.parse(localStorage.getItem("pi_cal")||"[]");
+      lst.push({email:emailVal,phone:phoneVal,city:activeEvent.city,date:eventDate,session:sessionType,at:new Date().toISOString()});
+      localStorage.setItem("pi_cal",JSON.stringify(lst));
+    }catch(_){}
+    calOk.classList.add("show");
+    calRegFields.style.display="none";
+    calSelLbl.style.display="none";
+    calOkMsg.textContent=isFr
+      ?` On te contacte pour ta session ${sessionType} le ${activeEvent.date.getDate()} ${activeEvent.mFr} à ${activeEvent.city}.`
+      :` We'll reach out for your ${sessionType} session on ${activeEvent.mEn} ${activeEvent.date.getDate()} in ${activeEvent.city}.`;
+  });
+
+  document.querySelectorAll(".cal-tab").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      activeCity=btn.dataset.city;
+      document.querySelectorAll(".cal-tab").forEach(b=>b.classList.toggle("active",b===btn));
+      closeDetail(); renderGrid();
+    });
+  });
+
+  window.__calRender=function(){ renderGrid(); if(activeEvent) openEvent(activeEvent.id); };
+  renderGrid();
 })();
 
 document.getElementById("year").textContent=new Date().getFullYear();
