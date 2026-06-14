@@ -373,17 +373,19 @@ h1,h2,h3,.disp{
 .w360-face{
   position:absolute;inset:0;
   backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  border-radius:14px;overflow:hidden}
+  display:flex;flex-direction:column;align-items:center;justify-content:center}
 .w360-face:nth-child(1){transform:rotateY(0deg)   translateZ(var(--tz,200px))}
 .w360-face:nth-child(2){transform:rotateY(90deg)  translateZ(var(--tz,200px))}
 .w360-face:nth-child(3){transform:rotateY(180deg) translateZ(var(--tz,200px))}
 .w360-face:nth-child(4){transform:rotateY(270deg) translateZ(var(--tz,200px))}
-.w360-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.w360-img{
+  width:100%;height:auto;max-height:80%;
+  object-fit:contain;display:block;
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.75)) drop-shadow(0 0 28px rgba(204,255,0,.22))}
 .w360-chip{
   position:absolute;bottom:0;left:0;right:0;
-  display:flex;align-items:center;gap:10px;
-  padding:14px 16px 16px;
-  background:linear-gradient(0deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.55) 60%,transparent)}
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:10px 16px 12px}
 .w360-chip svg{width:22px;height:22px;color:var(--lime);flex:none;
   filter:drop-shadow(0 0 7px rgba(204,255,0,.65))}
 .w360-chip span{font-family:var(--display);font-style:italic;font-weight:900;
@@ -1022,28 +1024,28 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <div class="w360-track" id="w360Track">
             <div class="w360-stage" id="w360Stage">
               <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-final.jpg" alt="Bracelet PürInstinct" loading="lazy">
+                <img class="w360-img" src="assets/bracelet-nobg.png" alt="Bracelet PürInstinct" loading="lazy">
                 <div class="w360-chip">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
                   <span data-i18n="j_feat_reg">S'inscrire à un jeu</span>
                 </div>
               </div>
               <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-final.jpg" alt="" loading="lazy">
+                <img class="w360-img" src="assets/bracelet-nobg.png" alt="" loading="lazy">
                 <div class="w360-chip">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>
                   <span data-i18n="j_feat_score">Voir ton score</span>
                 </div>
               </div>
               <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-final.jpg" alt="" loading="lazy">
+                <img class="w360-img" src="assets/bracelet-nobg.png" alt="" loading="lazy">
                 <div class="w360-chip">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 13.5h6L9 22l9-11.5h-6L13 2z"/></svg>
                   <span data-i18n="j_feat_chal">Lancer un défi</span>
                 </div>
               </div>
               <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-final.jpg" alt="" loading="lazy">
+                <img class="w360-img" src="assets/bracelet-nobg.png" alt="" loading="lazy">
                 <div class="w360-chip">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11.5" rx="1.2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C12 6.5 10 4.8 8.6 5.6 7.2 6.4 8.4 9 12 9z"/><path d="M12 9c0-2.5 2-4.2 3.4-3.4 1.4.8.2 3.4-3.4 3.4z"/></svg>
                   <span data-i18n="j_feat_prize">Récupérer tes prix</span>
