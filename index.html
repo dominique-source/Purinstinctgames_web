@@ -1644,6 +1644,17 @@ if(heroVid){
   }
 }
 
+/* Bracelet 360 video: force play on mobile when scrolled into view */
+const braceVid = document.querySelector(".w360-video");
+if(braceVid && !reduceMotion){
+  const tryPlay = ()=>{ braceVid.play().catch(()=>{}); };
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting) tryPlay(); else braceVid.pause(); });
+    },{threshold:.1}).observe(braceVid);
+  } else { tryPlay(); }
+}
+
 /* Hero mouse parallax (desktop) + scroll fade-out */
 const heroWrap = document.getElementById("heroWrap");
 const heroEl = document.querySelector(".hero");
