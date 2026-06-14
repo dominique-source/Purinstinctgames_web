@@ -401,6 +401,29 @@ h1,h2,h3,.disp{
   color:rgba(255,255,255,.32);transition:opacity .5s;pointer-events:none}
 .w360-hint.gone{opacity:0}
 @media(max-width:860px){.w360-hub{max-width:340px;margin:0 auto}}
+/* ── bracelet halo next to each journey stop (desktop) ── */
+@media(min-width:861px){
+  .j-node{position:relative;overflow:visible}
+  .j-brace{
+    position:absolute;top:50%;width:72px;height:48px;
+    object-fit:contain;
+    transform:translateY(-50%);
+    opacity:0;pointer-events:none;
+    transition:opacity .5s,filter .5s;
+    filter:drop-shadow(0 0 0 transparent);
+  }
+  .j-stop[data-side=left] .j-brace{left:calc(100% + 12px)}
+  .j-stop[data-side=right] .j-brace{right:calc(100% + 12px)}
+  .j-stop.lit .j-brace{
+    opacity:.82;
+    filter:drop-shadow(0 0 8px rgba(204,255,0,.65)) drop-shadow(0 0 22px rgba(204,255,0,.28))
+  }
+  @keyframes braceArrival{
+    0%,100%{opacity:.82;filter:drop-shadow(0 0 8px rgba(204,255,0,.65))}
+    50%{opacity:1;filter:drop-shadow(0 0 22px rgba(204,255,0,1)) drop-shadow(0 0 44px rgba(204,255,0,.55))}
+  }
+  .j-stop.blink .j-brace{animation:braceArrival .48s ease-in-out 3}
+}
 /* podium */
 .j-podium{display:flex;align-items:flex-end;gap:8px;height:150px;max-width:330px}
 .j-pod{flex:1;background:#161616;border:1px solid rgba(255,255,255,.1);border-bottom:none;border-radius:8px 8px 0 0;
@@ -1018,7 +1041,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node"><span>01</span></div>
+      <div class="j-node"><span>01</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="w360-hub" id="w360Hub">
           <div class="w360-track" id="w360Track">
@@ -1070,7 +1093,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
-      <div class="j-node"><span>02</span></div>
+      <div class="j-node"><span>02</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-levels" role="tablist" aria-label="6 niveaux de difficulté">
           <button class="j-lvl" type="button" data-lvl="1" style="--h:22%"><i>N1</i></button>
@@ -1097,7 +1120,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node"><span>03</span></div>
+      <div class="j-node"><span>03</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media">
           <img src="assets/render-field.jpg" alt="Terrain PürInstinct" loading="lazy">
@@ -1111,7 +1134,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--red)">
-      <div class="j-node"><span>04</span></div>
+      <div class="j-node"><span>04</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-speed.mp4">
           <img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy">
@@ -1127,7 +1150,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--blue)">
-      <div class="j-node"><span>05</span></div>
+      <div class="j-node"><span>05</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-hand.mp4">
           <img src="assets/render-hand.jpg" alt="Zone Agilité des mains" loading="lazy">
@@ -1143,7 +1166,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--green)">
-      <div class="j-node"><span>06</span></div>
+      <div class="j-node"><span>06</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-foot.mp4">
           <img src="assets/render-foot.jpg" alt="Zone Agilité des pieds" loading="lazy">
@@ -1159,7 +1182,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--yellow)">
-      <div class="j-node"><span>07</span></div>
+      <div class="j-node"><span>07</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-agility.mp4">
           <img src="assets/render-agility.jpg" alt="Zone Agilité générale" loading="lazy">
@@ -1175,7 +1198,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--purple)">
-      <div class="j-node"><span>08</span></div>
+      <div class="j-node"><span>08</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media" data-video="zone-iq.mp4">
           <img src="assets/render-iq.jpg" alt="Zone IQ de jeu" loading="lazy">
@@ -1191,7 +1214,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node"><span>09</span></div>
+      <div class="j-node"><span>09</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media">
           <img src="assets/render-mf1.jpg" alt="Reaction Wall — Moment Factory" loading="lazy">
@@ -1205,7 +1228,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
-      <div class="j-node"><span>10</span></div>
+      <div class="j-node"><span>10</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-media">
           <img src="assets/render-mf2.jpg" alt="Zone immersive — Moment Factory" loading="lazy">
@@ -1219,7 +1242,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node j-node-finish"><span>11</span></div>
+      <div class="j-node j-node-finish"><span>11</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
       <div class="j-card">
         <div class="j-podium" aria-hidden="true">
           <div class="j-pod p2"><i>2</i></div>
@@ -2395,6 +2418,7 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
   }
 
   let raf = null;
+  let didLoad = false;   // suppress blink on initial paint
   function update(){
     raf = null;
     if(!totalLen) return;
@@ -2414,7 +2438,15 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
       player.style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%,-50%)`;
       fill.style.strokeDashoffset = totalLen - len;
     }
-    stops.forEach((st,i)=>{ st.classList.toggle("lit", pts[i].y <= cur + 6); });
+    stops.forEach((st,i)=>{
+      const wasLit = st.classList.contains("lit");
+      const lit = pts[i].y <= cur + 6;
+      if(lit && !wasLit && didLoad && !reduceMotion){
+        st.classList.add("blink");
+        setTimeout(()=>st.classList.remove("blink"), 1500);
+      }
+      st.classList.toggle("lit", lit);
+    });
   }
   function onScroll(){ if(!raf) raf = requestAnimationFrame(update); }
   window.addEventListener("scroll", onScroll, {passive:true});
@@ -2423,6 +2455,7 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
   window.addEventListener("load", build);
   window.__journeyRebuild = build;
   build();
+  setTimeout(()=>{ didLoad = true; }, 200);
 })();
 
 /* ====================================================== */
