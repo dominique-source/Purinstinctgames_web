@@ -363,46 +363,42 @@ h1,h2,h3,.disp{
 .j-copy .mfnote{margin-top:12px;color:var(--lime);font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px}
 .j-copy .mfnote::before{content:"";width:8px;height:8px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 10px var(--lime)}
 .j-cta{margin-top:18px;align-self:flex-start}
-/* connected silicone wristband + 3D capability hub */
-@keyframes pulseLive{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.62)}}
-.j-band-hub{max-width:470px;width:100%;margin-top:6px;perspective:1000px}
-.j-band-stage{position:relative;height:clamp(300px,70vw,350px);transform-style:preserve-3d;
-  transform:rotateX(9deg) rotateY(-7deg);will-change:transform;animation:hubFloat 9s ease-in-out infinite}
-@keyframes hubFloat{0%,100%{transform:rotateX(9deg) rotateY(-7deg)}50%{transform:rotateX(12deg) rotateY(7deg)}}
-.j-band-stage.tilting{animation:none}
-/* tilted orbit ring around the bracelet */
-.bh-orbit{position:absolute;left:50%;top:50%;width:430px;height:250px;margin:-125px 0 0 -215px;
-  border:1.5px dashed rgba(204,255,0,.26);border-radius:50%;transform:rotateX(64deg) translateZ(-30px);
-  box-shadow:inset 0 0 50px rgba(204,255,0,.08)}
-/* the silicone bracelet, popped toward the viewer */
-.j-wrist{position:absolute;left:50%;top:50%;width:300px;transform:translate(-50%,-50%) translateZ(62px)}
-.wrist-img{width:100%;height:auto;display:block;border-radius:16px;
-  filter:drop-shadow(0 16px 26px rgba(0,0,0,.65)) drop-shadow(0 0 32px rgba(204,255,0,.28))}
-/* capability chips */
-.j-feat{position:absolute;display:flex;align-items:center;gap:9px;max-width:166px;
-  background:linear-gradient(160deg,#161616,#0a0a0a);border:1px solid rgba(204,255,0,.42);border-radius:12px;
-  padding:9px 13px;box-shadow:0 12px 28px rgba(0,0,0,.55),0 0 18px rgba(204,255,0,.12)}
-.j-feat svg{width:22px;height:22px;color:var(--lime);flex:none}
-.j-feat span{font-family:var(--display);font-style:italic;font-weight:900;font-size:12.5px;letter-spacing:.01em;
-  line-height:1.05;color:var(--white);text-transform:uppercase}
-.bh-tl{top:1%;left:0;transform:translateZ(40px)}
-.bh-tr{top:1%;right:0;transform:translateZ(20px)}
-.bh-bl{bottom:2%;left:1%;transform:translateZ(46px)}
-.bh-br{bottom:2%;right:1%;transform:translateZ(26px)}
-/* little lime node pointing toward the bracelet */
-.j-feat::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 9px var(--lime)}
-.bh-tl::after{right:-3px;bottom:-3px}.bh-tr::after{left:-3px;bottom:-3px}
-.bh-bl::after{right:-3px;top:-3px}.bh-br::after{left:-3px;top:-3px}
-@media(max-width:860px){
-  .j-band-hub{perspective:none;max-width:360px;margin:2px auto 0}
-  .j-band-stage{height:auto;transform:none;transform-style:flat;animation:none;
-    display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-  .bh-orbit{display:none}
-  .j-band-hub .j-wrist{position:static;transform:none;flex:0 0 100%;width:auto;max-width:280px;margin:0 auto 6px}
-  .j-feat{position:static;transform:none!important;flex:1 1 calc(50% - 6px);max-width:none;min-width:0}
-  .j-feat svg{width:22px!important;height:22px!important}
-  .j-feat::after{display:none}
-}
+/* ── 360° bracelet viewer ── */
+.w360-hub{width:100%;max-width:460px}
+.w360-track{perspective:900px;width:100%;cursor:grab;touch-action:pan-y}
+.w360-track.dragging{cursor:grabbing}
+.w360-stage{
+  position:relative;width:100%;height:clamp(180px,44vw,270px);
+  transform-style:preserve-3d;will-change:transform}
+.w360-face{
+  position:absolute;inset:0;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:14px;overflow:hidden}
+.w360-face:nth-child(1){transform:rotateY(0deg)   translateZ(var(--tz,200px))}
+.w360-face:nth-child(2){transform:rotateY(90deg)  translateZ(var(--tz,200px))}
+.w360-face:nth-child(3){transform:rotateY(180deg) translateZ(var(--tz,200px))}
+.w360-face:nth-child(4){transform:rotateY(270deg) translateZ(var(--tz,200px))}
+.w360-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.w360-chip{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px 16px;
+  background:linear-gradient(0deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.55) 60%,transparent)}
+.w360-chip svg{width:22px;height:22px;color:var(--lime);flex:none;
+  filter:drop-shadow(0 0 7px rgba(204,255,0,.65))}
+.w360-chip span{font-family:var(--display);font-style:italic;font-weight:900;
+  font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.w360-nav{display:flex;justify-content:center;gap:9px;margin-top:14px}
+.w360-dot{width:8px;height:8px;border-radius:50%;border:none;padding:0;
+  background:rgba(204,255,0,.22);cursor:pointer;
+  transition:background .2s,transform .2s,box-shadow .2s}
+.w360-dot.active{background:var(--lime);transform:scale(1.35);box-shadow:0 0 10px rgba(204,255,0,.7)}
+.w360-hint{text-align:center;margin-top:10px;
+  font-family:var(--display);font-style:italic;font-weight:700;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.32);transition:opacity .5s;pointer-events:none}
+.w360-hint.gone{opacity:0}
+@media(max-width:860px){.w360-hub{max-width:340px;margin:0 auto}}
 /* podium */
 .j-podium{display:flex;align-items:flex-end;gap:8px;height:150px;max-width:330px}
 .j-pod{flex:1;background:#161616;border:1px solid rgba(255,255,255,.1);border-bottom:none;border-radius:8px 8px 0 0;
@@ -1022,29 +1018,46 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
       <div class="j-node"><span>01</span></div>
       <div class="j-card">
-        <div class="j-band-hub">
-          <div class="j-band-stage" id="bandStage">
-            <div class="bh-orbit" aria-hidden="true"></div>
-            <div class="j-wrist">
-              <img class="wrist-img" src="assets/bracelet-lime.jpg" alt="Bracelet connecté PürInstinct" loading="lazy">
-            </div>
-            <div class="j-feat bh-tl">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
-              <span data-i18n="j_feat_reg">S'inscrire à un jeu</span>
-            </div>
-            <div class="j-feat bh-tr">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>
-              <span data-i18n="j_feat_score">Voir ton score</span>
-            </div>
-            <div class="j-feat bh-bl">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 13.5h6L9 22l9-11.5h-6L13 2z"/></svg>
-              <span data-i18n="j_feat_chal">Lancer un défi</span>
-            </div>
-            <div class="j-feat bh-br">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11.5" rx="1.2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C12 6.5 10 4.8 8.6 5.6 7.2 6.4 8.4 9 12 9z"/><path d="M12 9c0-2.5 2-4.2 3.4-3.4 1.4.8.2 3.4-3.4 3.4z"/></svg>
-              <span data-i18n="j_feat_prize">Récupérer tes prix</span>
+        <div class="w360-hub" id="w360Hub">
+          <div class="w360-track" id="w360Track">
+            <div class="w360-stage" id="w360Stage">
+              <div class="w360-face">
+                <img class="w360-img" src="assets/bracelet-final.jpg" alt="Bracelet PürInstinct" loading="lazy">
+                <div class="w360-chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+                  <span data-i18n="j_feat_reg">S'inscrire à un jeu</span>
+                </div>
+              </div>
+              <div class="w360-face">
+                <img class="w360-img" src="assets/bracelet-final.jpg" alt="" loading="lazy">
+                <div class="w360-chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>
+                  <span data-i18n="j_feat_score">Voir ton score</span>
+                </div>
+              </div>
+              <div class="w360-face">
+                <img class="w360-img" src="assets/bracelet-final.jpg" alt="" loading="lazy">
+                <div class="w360-chip">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 13.5h6L9 22l9-11.5h-6L13 2z"/></svg>
+                  <span data-i18n="j_feat_chal">Lancer un défi</span>
+                </div>
+              </div>
+              <div class="w360-face">
+                <img class="w360-img" src="assets/bracelet-final.jpg" alt="" loading="lazy">
+                <div class="w360-chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11.5" rx="1.2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C12 6.5 10 4.8 8.6 5.6 7.2 6.4 8.4 9 12 9z"/><path d="M12 9c0-2.5 2-4.2 3.4-3.4 1.4.8.2 3.4-3.4 3.4z"/></svg>
+                  <span data-i18n="j_feat_prize">Récupérer tes prix</span>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="w360-nav" aria-hidden="true">
+            <button class="w360-dot active" data-fi="0"></button>
+            <button class="w360-dot" data-fi="1"></button>
+            <button class="w360-dot" data-fi="2"></button>
+            <button class="w360-dot" data-fi="3"></button>
+          </div>
+          <p class="w360-hint" id="w360Hint" aria-hidden="true" data-i18n="w360_hint">⟲ Fais tourner</p>
         </div>
         <div class="j-copy">
           <span class="j-step" data-i18n="j_reg_s">DÉPART</span>
@@ -1427,7 +1440,7 @@ fr:{
   a_eyebrow:"L'arène",a_title:"9 stations. Une arène.",
   a_sub:"Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 terrains augmentés Moment Factory.",
   a_hint:"Glisse pour tourner à 360° · Touche une station pour explorer sa zone",
-  i_eyebrow:"Le parcours athlète",i_title:"De l'inscription au podium.",i_sub2:"Suis le parcours d'un athlète : une session de 120 minutes, un dossard, neuf stations — et un seul score.",j_bib:"TON NOM",j_bib_kind:"Pass athlète",j_band_live:"En direct",j_band_tag:"Ton score · 9 stations",j_feat_reg:"S'inscrire à un jeu",j_feat_score:"Voir ton score",j_feat_chal:"Lancer un défi",j_feat_prize:"Récupérer tes prix",j_reg_s:"DÉPART",j_reg_t:"Inscription",j_reg_b:"Reçois ton bracelet connecté PürInstinct : t'inscrire à un jeu, suivre ton score, lancer un défi, récupérer tes prix — il te suit partout dans l'arène, en temps réel.",j_learn_s:"LE SPORT",j_learn_t:"Apprendre PürInstinct",j_learn_b:"6 niveaux de difficulté pour maîtriser le sport signature : tu progresses à ton rythme, du premier essai jusqu'au niveau élite.",j_play_s:"LE MATCH",j_play_t:"Joue à PürInstinct",j_play_b:"Équipe aléatoire : tu es jumelé à de nouveaux coéquipiers. Traverse le terrain en 3 contre 2, sans contact, sans échapper le ballon.",j_mf_s:"AUGMENTÉ — MOMENT FACTORY",j_mf_s2:"AUGMENTÉ — MOMENT FACTORY",j_mf1_t:"Reaction Wall",j_mf1_b:"Mur de cibles lumineuses : touche les tiennes plus vite que ton adversaire. Réflexes purs, propulsé par Moment Factory.",j_mf2_t:"Zone immersive",j_mf2_b:"Projections 360°, environnements dynamiques au sol et aux murs. Habileté, agilité et décisions rapides.",j_fin_s:"ARRIVÉE",j_fin_t:"Le podium",j_fin_b:"Chaque zone a nourri ton score. Le leaderboard décide.",j_fin_cta:"Voir le leaderboard",
+  i_eyebrow:"Le parcours athlète",i_title:"De l'inscription au podium.",i_sub2:"Suis le parcours d'un athlète : une session de 120 minutes, un dossard, neuf stations — et un seul score.",j_bib:"TON NOM",j_bib_kind:"Pass athlète",j_band_live:"En direct",j_band_tag:"Ton score · 9 stations",j_feat_reg:"S'inscrire à un jeu",j_feat_score:"Voir ton score",j_feat_chal:"Lancer un défi",j_feat_prize:"Récupérer tes prix",w360_hint:"⟲ Fais tourner",j_reg_s:"DÉPART",j_reg_t:"Inscription",j_reg_b:"Reçois ton bracelet connecté PürInstinct : t'inscrire à un jeu, suivre ton score, lancer un défi, récupérer tes prix — il te suit partout dans l'arène, en temps réel.",j_learn_s:"LE SPORT",j_learn_t:"Apprendre PürInstinct",j_learn_b:"6 niveaux de difficulté pour maîtriser le sport signature : tu progresses à ton rythme, du premier essai jusqu'au niveau élite.",j_play_s:"LE MATCH",j_play_t:"Joue à PürInstinct",j_play_b:"Équipe aléatoire : tu es jumelé à de nouveaux coéquipiers. Traverse le terrain en 3 contre 2, sans contact, sans échapper le ballon.",j_mf_s:"AUGMENTÉ — MOMENT FACTORY",j_mf_s2:"AUGMENTÉ — MOMENT FACTORY",j_mf1_t:"Reaction Wall",j_mf1_b:"Mur de cibles lumineuses : touche les tiennes plus vite que ton adversaire. Réflexes purs, propulsé par Moment Factory.",j_mf2_t:"Zone immersive",j_mf2_b:"Projections 360°, environnements dynamiques au sol et aux murs. Habileté, agilité et décisions rapides.",j_fin_s:"ARRIVÉE",j_fin_t:"Le podium",j_fin_b:"Chaque zone a nourri ton score. Le leaderboard décide.",j_fin_cta:"Voir le leaderboard",
   z1_en:"SPEED",z1_t:"Vitesse",z1_b:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",
   z2_en:"HAND SKILLS",z2_t:"Agilité des mains",z2_b:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",
   z3_en:"FOOT SKILLS",z3_t:"Agilité des pieds",z3_b:"Plaques lumineuses réactives, duels 1 contre 1.",
@@ -1468,7 +1481,7 @@ en:{
   a_eyebrow:"The arena",a_title:"9 stations. One arena.",
   a_sub:"Fly over the complex: 5 skill zones, 2 PürInstinct courts at center, 2 Moment Factory augmented courts.",
   a_hint:"Drag to spin 360° · Tap a station to explore its zone",
-  i_eyebrow:"The athlete journey",i_title:"From sign-up to the podium.",i_sub2:"Follow one athlete's journey: a 75-minute session, one bib, nine stations — and a single score.",j_bib:"YOUR NAME",j_bib_kind:"Athlete pass",j_band_live:"Live",j_band_tag:"Your score · 9 stations",j_feat_reg:"Join a game",j_feat_score:"Track your score",j_feat_chal:"Send a challenge",j_feat_prize:"Claim your prizes",j_reg_s:"START",j_reg_t:"Registration",j_reg_b:"Get your connected PürInstinct wristband: join a game, track your score, send a challenge, claim your prizes — it follows you everywhere in the arena, in real time.",j_learn_s:"THE SPORT",j_learn_t:"Learn PürInstinct",j_learn_b:"6 difficulty levels to master the signature sport — progress at your own pace, from first try to elite.",j_play_s:"THE MATCH",j_play_t:"Play PürInstinct",j_play_b:"Random team: you're matched with new teammates. Cross the field 3 v 2, no contact, never drop the ball.",j_mf_s:"AUGMENTED — MOMENT FACTORY",j_mf_s2:"AUGMENTED — MOMENT FACTORY",j_mf1_t:"Reaction Wall",j_mf1_b:"A wall of light targets: hit yours faster than your opponent. Pure reflexes, powered by Moment Factory.",j_mf2_t:"Immersive Zone",j_mf2_b:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",j_fin_s:"FINISH",j_fin_t:"The podium",j_fin_b:"Every zone fed your score. The leaderboard decides: the top three ignite in lime.",j_fin_cta:"See the leaderboard",
+  i_eyebrow:"The athlete journey",i_title:"From sign-up to the podium.",i_sub2:"Follow one athlete's journey: a 75-minute session, one bib, nine stations — and a single score.",j_bib:"YOUR NAME",j_bib_kind:"Athlete pass",j_band_live:"Live",j_band_tag:"Your score · 9 stations",j_feat_reg:"Join a game",j_feat_score:"Track your score",j_feat_chal:"Send a challenge",j_feat_prize:"Claim your prizes",w360_hint:"⟲ Drag to rotate",j_reg_s:"START",j_reg_t:"Registration",j_reg_b:"Get your connected PürInstinct wristband: join a game, track your score, send a challenge, claim your prizes — it follows you everywhere in the arena, in real time.",j_learn_s:"THE SPORT",j_learn_t:"Learn PürInstinct",j_learn_b:"6 difficulty levels to master the signature sport — progress at your own pace, from first try to elite.",j_play_s:"THE MATCH",j_play_t:"Play PürInstinct",j_play_b:"Random team: you're matched with new teammates. Cross the field 3 v 2, no contact, never drop the ball.",j_mf_s:"AUGMENTED — MOMENT FACTORY",j_mf_s2:"AUGMENTED — MOMENT FACTORY",j_mf1_t:"Reaction Wall",j_mf1_b:"A wall of light targets: hit yours faster than your opponent. Pure reflexes, powered by Moment Factory.",j_mf2_t:"Immersive Zone",j_mf2_b:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",j_fin_s:"FINISH",j_fin_t:"The podium",j_fin_b:"Every zone fed your score. The leaderboard decides: the top three ignite in lime.",j_fin_cta:"See the leaderboard",
   z1_en:"VITESSE",z1_t:"Speed",z1_b:"40m sprint, 5 handicap levels: everyone starts on equal footing.",
   z2_en:"AGILITÉ DES MAINS",z2_t:"Hand skills",z2_b:"Ball-throwing arena, teams of 3. Precision, ball reaction.",
   z3_en:"AGILITÉ DES PIEDS",z3_t:"Foot skills",z3_b:"Reactive light-pad system, 1v1 duels.",
@@ -2593,22 +2606,123 @@ document.querySelectorAll(".j-media[data-video]").forEach(media=>{
 })();
 
 /* ====================================================== */
-/* Bracelet hub — 3D tilt toward the pointer (desktop)     */
+/* Bracelet 360° viewer — drag / touch / auto-rotate       */
 /* ====================================================== */
 (function(){
-  const stage=document.getElementById("bandStage");
-  if(!stage || reduceMotion || !matchMedia("(pointer:fine)").matches) return;
-  const hub=stage.parentElement;
-  let rx=9, ry=-7, raf=null;
-  function apply(){ raf=null; stage.style.transform=`rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`; }
-  hub.addEventListener("mousemove",e=>{
-    const r=hub.getBoundingClientRect();
-    ry=((e.clientX-r.left)/r.width-.5)*24;
-    rx=9-((e.clientY-r.top)/r.height-.5)*24;
-    stage.classList.add("tilting");
-    if(!raf) raf=requestAnimationFrame(apply);
-  });
-  hub.addEventListener("mouseleave",()=>{ stage.classList.remove("tilting"); stage.style.transform=""; });
+  const hub=document.getElementById("w360Hub");
+  if(!hub) return;
+  const track=document.getElementById("w360Track");
+  const stage=document.getElementById("w360Stage");
+  const dots=hub.querySelectorAll(".w360-dot");
+  const hint=document.getElementById("w360Hint");
+
+  /* cylinder geometry: translateZ ≈ 55% of face width */
+  function setTZ(){ stage.style.setProperty("--tz",(stage.offsetWidth*.55)+"px"); }
+  setTZ();
+  window.addEventListener("resize",setTZ);
+
+  let rot=0, vel=0, isDrag=false, x0=0, rot0=0, prevX=0;
+  let rafId=null, autoRaf=null, autoTid=null, touched=false;
+
+  /* active face index from current rotation */
+  function faceIdx(){ return (((Math.round(-rot/90))%4)+4)%4; }
+
+  function paint(){
+    stage.style.transform="rotateY("+rot.toFixed(2)+"deg)";
+    const f=faceIdx();
+    dots.forEach((d,i)=>d.classList.toggle("active",i===f));
+  }
+
+  function stopRaf(){ if(rafId){cancelAnimationFrame(rafId);rafId=null;} }
+  function stopAuto(){ if(autoRaf){cancelAnimationFrame(autoRaf);autoRaf=null;} }
+  function clearAuto(){ clearTimeout(autoTid);autoTid=null; }
+
+  /* momentum → snap after release */
+  function runMomentum(){
+    vel*=0.86;
+    rot+=vel;
+    const snap=Math.round(rot/90)*90;
+    if(Math.abs(vel)<0.25){
+      vel=0;
+      (function snapLerp(){
+        const d=snap-rot;
+        if(Math.abs(d)<0.04){rot=snap;paint();rafId=null;schedAuto();return;}
+        rot+=d*.15;paint();
+        rafId=requestAnimationFrame(snapLerp);
+      })();
+      return;
+    }
+    paint();
+    rafId=requestAnimationFrame(runMomentum);
+  }
+
+  /* auto-rotate: slow continuous drift */
+  function startAuto(){
+    if(reduceMotion) return;
+    stopAuto();
+    (function tick(){
+      if(isDrag){stopAuto();return;}
+      rot-=.22;paint();
+      autoRaf=requestAnimationFrame(tick);
+    })();
+  }
+
+  function schedAuto(){
+    clearAuto();
+    if(!reduceMotion) autoTid=setTimeout(startAuto,4500);
+  }
+
+  function onStart(x){
+    isDrag=true; x0=x; rot0=rot; prevX=x; vel=0;
+    stopRaf(); stopAuto(); clearAuto();
+    track.classList.add("dragging");
+    if(!touched){ touched=true; if(hint) hint.classList.add("gone"); }
+  }
+  function onMove(x){
+    if(!isDrag) return;
+    vel=(x-prevX)*.45; prevX=x;
+    rot=rot0+(x-x0)*.45; paint();
+  }
+  function onEnd(){
+    if(!isDrag) return;
+    isDrag=false;
+    track.classList.remove("dragging");
+    rafId=requestAnimationFrame(runMomentum);
+  }
+
+  track.addEventListener("mousedown",e=>onStart(e.clientX));
+  window.addEventListener("mousemove",e=>{if(isDrag)onMove(e.clientX);});
+  window.addEventListener("mouseup",onEnd);
+
+  track.addEventListener("touchstart",e=>onStart(e.touches[0].clientX),{passive:true});
+  window.addEventListener("touchmove",e=>{if(isDrag)onMove(e.touches[0].clientX);},{passive:true});
+  window.addEventListener("touchend",onEnd);
+
+  /* dot clicks — shortest-path snap */
+  dots.forEach((d,i)=>d.addEventListener("click",()=>{
+    stopRaf(); stopAuto(); clearAuto();
+    if(!touched){touched=true;if(hint)hint.classList.add("gone");}
+    const base=Math.round(rot/90)*90;
+    let target=-i*90;
+    while(target-base>180) target-=360;
+    while(target-base<-180) target+=360;
+    rot=base;
+    (function go(){
+      const d=target-rot;
+      if(Math.abs(d)<0.05){rot=target;paint();schedAuto();return;}
+      rot+=d*.15;paint();
+      rafId=requestAnimationFrame(go);
+    })();
+  }));
+
+  /* start auto-rotate when section enters viewport */
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting&&!isDrag) schedAuto(); });
+    },{threshold:.4}).observe(hub);
+  }
+
+  paint();
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" defer></script>
