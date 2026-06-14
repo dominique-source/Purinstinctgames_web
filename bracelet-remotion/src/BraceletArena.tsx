@@ -229,7 +229,7 @@ export const BraceletArena: React.FC = () => {
           transform: `translate(-50%, -50%) scale(${scaleIn})`,
           width: "100%",
           height: "100%",
-          filter: `drop-shadow(0 0 28px rgba(204,255,0,0.35)) drop-shadow(0 0 60px rgba(204,255,0,0.15))`,
+          filter: `drop-shadow(0 0 18px rgba(204,255,0,0.16)) drop-shadow(0 0 44px rgba(204,255,0,0.07))`,
         }}
       >
         <ThreeCanvas width={width} height={height}>
