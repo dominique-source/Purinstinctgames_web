@@ -401,10 +401,11 @@ h1,h2,h3,.disp{
   color:rgba(255,255,255,.32);transition:opacity .5s;pointer-events:none}
 .w360-hint.gone{opacity:0}
 @media(max-width:860px){.w360-hub{max-width:340px;margin:0 auto}}
-/* ── bracelet halo next to each journey stop (desktop) ── */
+/* ── bracelet halo next to each journey stop (desktop only) ── */
+.j-brace{display:none}
 @media(min-width:861px){
-  .j-node{position:relative;overflow:visible}
   .j-brace{
+    display:block;
     position:absolute;top:50%;width:clamp(260px,34vw,500px);height:auto;
     object-fit:contain;
     transform:translateY(-50%);
@@ -412,8 +413,10 @@ h1,h2,h3,.disp{
     transition:opacity .6s,filter .6s;
     filter:drop-shadow(0 0 0 transparent);
   }
-  .j-stop[data-side=left] .j-brace{left:calc(100% + 24px)}
-  .j-stop[data-side=right] .j-brace{right:calc(100% + 24px)}
+  /* j-brace is a direct child of j-stop (position:relative, grid 1fr 110px 1fr)
+     50% + 55px puts us at the right/left edge of the 110px center column */
+  .j-stop[data-side=left] .j-brace{left:calc(50% + 79px)}
+  .j-stop[data-side=right] .j-brace{right:calc(50% + 79px)}
   .j-stop.lit .j-brace{
     opacity:.82;
     filter:drop-shadow(0 0 8px rgba(204,255,0,.65)) drop-shadow(0 0 22px rgba(204,255,0,.28))
@@ -1093,7 +1096,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
-      <div class="j-node"><span>02</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>02</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-levels" role="tablist" aria-label="6 niveaux de difficulté">
           <button class="j-lvl" type="button" data-lvl="1" style="--h:22%"><i>N1</i></button>
@@ -1120,7 +1123,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node"><span>03</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>03</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media">
           <img src="assets/render-field.jpg" alt="Terrain PürInstinct" loading="lazy">
@@ -1134,7 +1137,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--red)">
-      <div class="j-node"><span>04</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>04</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-speed.mp4">
           <img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy">
@@ -1150,7 +1153,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--blue)">
-      <div class="j-node"><span>05</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>05</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-hand.mp4">
           <img src="assets/render-hand.jpg" alt="Zone Agilité des mains" loading="lazy">
@@ -1166,7 +1169,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--green)">
-      <div class="j-node"><span>06</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>06</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-foot.mp4">
           <img src="assets/render-foot.jpg" alt="Zone Agilité des pieds" loading="lazy">
@@ -1182,7 +1185,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--yellow)">
-      <div class="j-node"><span>07</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>07</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-agility.mp4">
           <img src="assets/render-agility.jpg" alt="Zone Agilité générale" loading="lazy">
@@ -1198,7 +1201,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--purple)">
-      <div class="j-node"><span>08</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>08</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-iq.mp4">
           <img src="assets/render-iq.jpg" alt="Zone IQ de jeu" loading="lazy">
@@ -1214,7 +1217,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node"><span>09</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>09</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media">
           <img src="assets/render-mf1.jpg" alt="Reaction Wall — Moment Factory" loading="lazy">
@@ -1228,7 +1231,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
-      <div class="j-node"><span>10</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>10</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media">
           <img src="assets/render-mf2.jpg" alt="Zone immersive — Moment Factory" loading="lazy">
@@ -1242,7 +1245,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </article>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node j-node-finish"><span>11</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node j-node-finish"><span>11</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-podium" aria-hidden="true">
           <div class="j-pod p2"><i>2</i></div>
