@@ -365,6 +365,7 @@ h1,h2,h3,.disp{
 .j-cta{margin-top:18px;align-self:flex-start}
 /* ── 360° bracelet viewer ── */
 .w360-hub{width:100%;max-width:460px}
+.w360-video{width:100%;height:auto;display:block;border-radius:12px}
 .w360-track{perspective:900px;width:100%;cursor:grab;touch-action:pan-y}
 .w360-track.dragging{cursor:grabbing}
 .w360-stage{
@@ -1046,46 +1047,10 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
       <div class="j-node"><span>01</span></div>
       <div class="j-card">
-        <div class="w360-hub" id="w360Hub">
-          <div class="w360-track" id="w360Track">
-            <div class="w360-stage" id="w360Stage">
-              <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-nobg.png" alt="Bracelet PürInstinct" loading="lazy">
-                <div class="w360-chip">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>
-                  <span data-i18n="j_feat_reg">S'inscrire à un jeu</span>
-                </div>
-              </div>
-              <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-nobg.png" alt="" loading="lazy">
-                <div class="w360-chip">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>
-                  <span data-i18n="j_feat_score">Voir ton score</span>
-                </div>
-              </div>
-              <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-nobg.png" alt="" loading="lazy">
-                <div class="w360-chip">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 13.5h6L9 22l9-11.5h-6L13 2z"/></svg>
-                  <span data-i18n="j_feat_chal">Lancer un défi</span>
-                </div>
-              </div>
-              <div class="w360-face">
-                <img class="w360-img" src="assets/bracelet-nobg.png" alt="" loading="lazy">
-                <div class="w360-chip">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11.5" rx="1.2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C12 6.5 10 4.8 8.6 5.6 7.2 6.4 8.4 9 12 9z"/><path d="M12 9c0-2.5 2-4.2 3.4-3.4 1.4.8.2 3.4-3.4 3.4z"/></svg>
-                  <span data-i18n="j_feat_prize">Récupérer tes prix</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="w360-nav" aria-hidden="true">
-            <button class="w360-dot active" data-fi="0"></button>
-            <button class="w360-dot" data-fi="1"></button>
-            <button class="w360-dot" data-fi="2"></button>
-            <button class="w360-dot" data-fi="3"></button>
-          </div>
-          <p class="w360-hint" id="w360Hint" aria-hidden="true" data-i18n="w360_hint">⟲ Fais tourner</p>
+        <div class="w360-hub">
+          <video class="w360-video" src="assets/bracelet-360.webm"
+            autoplay loop muted playsinline preload="auto"
+            aria-label="Bracelet PürInstinct — rotation 360°"></video>
         </div>
         <div class="j-copy">
           <span class="j-step" data-i18n="j_reg_s">DÉPART</span>
