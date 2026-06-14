@@ -405,15 +405,15 @@ h1,h2,h3,.disp{
 @media(min-width:861px){
   .j-node{position:relative;overflow:visible}
   .j-brace{
-    position:absolute;top:50%;width:72px;height:48px;
+    position:absolute;top:50%;width:clamp(110px,14vw,180px);height:auto;
     object-fit:contain;
     transform:translateY(-50%);
     opacity:0;pointer-events:none;
-    transition:opacity .5s,filter .5s;
+    transition:opacity .6s,filter .6s;
     filter:drop-shadow(0 0 0 transparent);
   }
-  .j-stop[data-side=left] .j-brace{left:calc(100% + 12px)}
-  .j-stop[data-side=right] .j-brace{right:calc(100% + 12px)}
+  .j-stop[data-side=left] .j-brace{left:calc(100% + 18px)}
+  .j-stop[data-side=right] .j-brace{right:calc(100% + 18px)}
   .j-stop.lit .j-brace{
     opacity:.82;
     filter:drop-shadow(0 0 8px rgba(204,255,0,.65)) drop-shadow(0 0 22px rgba(204,255,0,.28))
@@ -1041,7 +1041,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
 
     <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
-      <div class="j-node"><span>01</span><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager"></div>
+      <div class="j-node"><span>01</span></div>
       <div class="j-card">
         <div class="w360-hub" id="w360Hub">
           <div class="w360-track" id="w360Track">
