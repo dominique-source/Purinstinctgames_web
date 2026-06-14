@@ -405,15 +405,15 @@ h1,h2,h3,.disp{
 @media(min-width:861px){
   .j-node{position:relative;overflow:visible}
   .j-brace{
-    position:absolute;top:50%;width:clamp(110px,14vw,180px);height:auto;
+    position:absolute;top:50%;width:clamp(260px,34vw,500px);height:auto;
     object-fit:contain;
     transform:translateY(-50%);
     opacity:0;pointer-events:none;
     transition:opacity .6s,filter .6s;
     filter:drop-shadow(0 0 0 transparent);
   }
-  .j-stop[data-side=left] .j-brace{left:calc(100% + 18px)}
-  .j-stop[data-side=right] .j-brace{right:calc(100% + 18px)}
+  .j-stop[data-side=left] .j-brace{left:calc(100% + 24px)}
+  .j-stop[data-side=right] .j-brace{right:calc(100% + 24px)}
   .j-stop.lit .j-brace{
     opacity:.82;
     filter:drop-shadow(0 0 8px rgba(204,255,0,.65)) drop-shadow(0 0 22px rgba(204,255,0,.28))
