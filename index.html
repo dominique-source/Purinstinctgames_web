@@ -302,9 +302,9 @@ h1,h2,h3,.disp{
 .waitform{background:#101010;border:1px solid rgba(204,255,0,.3);border-radius:14px;
   padding:clamp(18px,2.6vw,26px);margin-bottom:40px;position:relative;
   clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%)}
-.wf-tier{display:inline-block;font-family:var(--display);font-style:italic;font-weight:900;
-  text-transform:uppercase;font-size:13px;letter-spacing:.14em;color:#0A0A0A;background:var(--lime);
-  padding:4px 14px;margin-bottom:14px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.wf-headline{font-family:var(--display);font-style:italic;font-weight:900;
+  font-size:clamp(18px,2.2vw,26px);letter-spacing:.04em;text-transform:uppercase;
+  color:var(--white);margin-bottom:16px}
 .wf-fields{display:grid;grid-template-columns:1.2fr 1fr auto;gap:12px}
 @media(max-width:760px){.wf-fields{grid-template-columns:1fr}}
 .waitform input[type=email],.waitform input[type=tel]{
@@ -1314,8 +1314,9 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </div>
 
+    <p class="wf-headline reveal d3" data-i18n="wf_headline">Reçois les nouvelles avant tout le monde</p>
     <form class="waitform reveal d3" id="waitForm" novalidate>
-      <span class="wf-tier" id="wfTier" data-i18n="wf_tier_def">Liste d'attente</span>
+      <span id="wfTier" style="display:none" data-i18n="wf_tier_def">Liste d'attente</span>
       <div class="wf-fields">
         <input type="email" id="wfEmail" name="email" autocomplete="email" required data-i18n-ph="wf_email" placeholder="Ton courriel">
         <input type="tel" id="wfPhone" name="phone" autocomplete="tel" required data-i18n-ph="wf_phone" placeholder="Ton cellulaire">
@@ -1449,7 +1450,7 @@ fr:{
   s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Bâti au Québec.",s_tag_b:"Les Games sont le prochain chapitre.",
   cal_title:"Prochains événements",cal_sub:"Choisis ta ville, sélectionne une session, réserve ta place.",cal_all:"Toutes les villes",cal_pick:"Sélectionne une session ci-dessus",cal_launch:"Lancement",cal_full:"Complet",cal_left:"restantes",
-  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"places réservées cette semaine",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
+  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"places réservées cette semaine",wf_headline:"Reçois les nouvelles avant tout le monde",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
   p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
   p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
   p_f1:"Accès aux 9 stations",p_f2:"Score individuel en direct",p_f3:"Terrains augmentés Moment Factory",
@@ -1490,7 +1491,7 @@ en:{
   s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Built in Quebec.",s_tag_b:"The Games are the next chapter.",
   cal_title:"Upcoming events",cal_sub:"Choose your city, pick a session, book your spot.",cal_all:"All cities",cal_pick:"Select a session above",cal_launch:"Launch",cal_full:"Full",cal_left:"spots left",
-  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"spots reserved this week",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
+  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_of:" / 300",sp_label:"spots reserved this week",wf_headline:"Be the first to know",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
   p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
   p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
   p_f1:"Access to all 9 stations",p_f2:"Live individual score",p_f3:"Moment Factory augmented courts",
