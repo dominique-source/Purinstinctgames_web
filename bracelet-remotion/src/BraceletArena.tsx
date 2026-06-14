@@ -1,6 +1,5 @@
 import {
   AbsoluteFill,
-  Img,
   interpolate,
   spring,
   useCurrentFrame,
@@ -13,53 +12,6 @@ import * as THREE from "three";
 import { useLoader } from "@react-three/fiber";
 
 const LIME = "#ccff00";
-
-/* ─── Arena glow background ─── */
-const ArenaBackground: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const fadeIn = interpolate(frame, [0, fps * 0.8], [0, 1], {
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.16, 1, 0.3, 1),
-  });
-
-  // Subtle pulse breathe
-  const pulse = interpolate(
-    Math.sin((frame / fps) * Math.PI * 0.5),
-    [-1, 1],
-    [0.88, 1.0]
-  );
-
-  return (
-    <AbsoluteFill style={{ background: "#080808" }}>
-      {/* Arena photo — darkened, blurred, positioned bottom-right */}
-      <Img
-        src={staticFile("arena.jpg")}
-        style={{
-          position: "absolute",
-          right: -40,
-          bottom: -60,
-          width: "72%",
-          opacity: fadeIn * 0.28 * pulse,
-          filter: "blur(3px) saturate(0.6)",
-          objectFit: "cover",
-          borderRadius: 12,
-        }}
-      />
-      {/* Radial lime glow from center */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: `radial-gradient(ellipse 55% 45% at 42% 52%,
-            rgba(204,255,0,${0.07 * fadeIn * pulse}) 0%,
-            transparent 70%)`,
-        }}
-      />
-    </AbsoluteFill>
-  );
-};
 
 /* ─── Energy connection lines (SVG, JS-driven) ─── */
 const ConnectionLines: React.FC<{ progress: number }> = ({ progress }) => {
@@ -265,10 +217,7 @@ export const BraceletArena: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ opacity: masterOpacity }}>
-      {/* 1. Arena background */}
-      <ArenaBackground />
-
-      {/* 2. Energy connection lines */}
+      {/* 1. Energy connection lines */}
       <ConnectionLines progress={linesProgress} />
 
       {/* 3. Three.js bracelet */}
