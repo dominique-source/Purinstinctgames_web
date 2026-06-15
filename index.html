@@ -1335,6 +1335,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
     <div class="cal-acc reveal d3" id="calAcc"></div>
     <p class="session-note" style="margin-top:32px" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
+    <p class="session-note" style="margin-top:14px;font-size:clamp(13px,1.6vw,17px);opacity:.7" data-i18n="p_bracelet_tip">Économise <b>5$</b> pour le prochain événement en gardant ton bracelet</p>
   </div>
 </section>
 
@@ -1428,6 +1429,7 @@ fr:{
   p_f1c:"Sessions privées d'équipe",p_f2c:"Classement d'entreprise dédié",p_f3c:"Expérience augmentée complète",
   p_cta1:"Réserve",p_cta2:"Réserve",p_cta3:"Réserve",
   p_note:"<b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard",
+  p_bracelet_tip:"Économise <b>5$</b> pour le prochain événement en gardant ton bracelet",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur.",
   zc_default_tag:"Zone signature",zc_default_name:"L'Arène",zc_default_desc:"Sélectionne une des 9 stations sur le plan pour découvrir son gameplay.",
@@ -1469,6 +1471,7 @@ en:{
   p_f1c:"Private team sessions",p_f2c:"Dedicated company leaderboard",p_f3c:"Full augmented experience",
   p_cta1:"Book",p_cta2:"Book",p_cta3:"Book",
   p_note:"<b>7 sessions per day</b> · 300 participants per session · One leaderboard",
+  p_bracelet_tip:"Save <b>$5</b> on your next event by keeping your bracelet",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player.",
   zc_default_tag:"Signature zone",zc_default_name:"The Arena",zc_default_desc:"Select one of the 9 stations on the map to discover its gameplay.",
@@ -1498,7 +1501,7 @@ const ZONES = {
 };
 
 let lang = "fr";
-const RICH = new Set(["h1_sub","mf_title_a","p_note"]); // keys containing safe inline HTML
+const RICH = new Set(["h1_sub","mf_title_a","p_note","p_bracelet_tip"]); // keys containing safe inline HTML
 function applyLang(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el=>{
