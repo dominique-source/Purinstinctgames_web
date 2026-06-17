@@ -562,8 +562,8 @@ fr:{
   sg_cta:"Réserve ta place",sg_cta2:"Je veux ma place",sg_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE",
   prog_eyebrow:"Au programme",prog_title:"3 DISCIPLINES.<br>UN SEUL ÉVÉNEMENT.",
   prog_1_num:"Activité 01",prog_1_t:"PürInstinct Games",prog_1_b:"Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2.",prog_1_t1:"9 stations",prog_1_t2:"Score en direct",prog_1_t3:"Sans contact",
-  prog_2_num:"Activité 02",prog_2_t:"Tournoi Panna 1v1",prog_2_b:"Le duel de rue le plus électrique du soccer : passe le ballon entre les jambes de ton adversaire pour marquer le panna et remporter le point. Format élimination directe, Séan Garnier comme juge suprême.",prog_2_t1:"1 contre 1",prog_2_t2:"Élimination directe",prog_2_t3:"Jugé par Séan",
-  prog_3_num:"Activité 03",prog_3_t:"Tournoi Freestyle Soccer",prog_3_b:"Jongle, invente, impressionne. Chaque participant présente une routine libre devant les autres athlètes et Séan Garnier. Les juges notent la créativité, la maîtrise technique et le style. Le meilleur freestyler repart avec un prix.",prog_3_t1:"Routine libre",prog_3_t2:"Noté par Séan",prog_3_t3:"Prix à gagner",
+  prog_2_num:"Activité 02",prog_2_t:"Séan Garnier Challenge",prog_2_b:"Le tournoi officiel de Panna 1 contre 1. Affronte les autres participants dans une cage Panna et démontre ta créativité, ton contrôle et ta capacité à éliminer ton adversaire.",prog_2_t1:"Panna 1v1",prog_2_t2:"Élimination directe",prog_2_t3:"Animé par Séan",
+  prog_3_num:"Activité 03",prog_3_t:"Freestyle Showcase",prog_3_b:"Un spectacle de freestyle football présenté par des athlètes de haut niveau. Des routines impressionnantes alliant technique, créativité et maîtrise du ballon.",prog_3_t1:"Athlètes élites",prog_3_t2:"Routines exclusives",prog_3_t3:"Inspirant",
   prog_cta:"Réserve ta place",prog_hint:"Voir l'activité",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
@@ -584,8 +584,8 @@ en:{
   sg_cta:"Save your spot",sg_cta2:"I want my spot",sg_card_tag:"EXCLUSIVE SESSION · ONE DATE ONLY",
   prog_eyebrow:"On the program",prog_title:"3 DISCIPLINES.<br>ONE EVENT.",
   prog_1_num:"Activity 01",prog_1_t:"PürInstinct Games",prog_1_b:"The arena's signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball — always 3 against 2.",prog_1_t1:"9 stations",prog_1_t2:"Live score",prog_1_t3:"No contact",
-  prog_2_num:"Activity 02",prog_2_t:"Panna 1v1 Tournament",prog_2_b:"The most electric street soccer duel: roll the ball through your opponent's legs to score the panna and take the point. Single-elimination bracket, Séan Garnier as the supreme judge.",prog_2_t1:"1 vs 1",prog_2_t2:"Single elimination",prog_2_t3:"Judged by Séan",
-  prog_3_num:"Activity 03",prog_3_t:"Freestyle Soccer Tournament",prog_3_b:"Juggle, invent, impress. Each participant performs a free-form routine in front of the other athletes and Séan Garnier. Judges score creativity, technical mastery and style. The best freestyler wins a prize.",prog_3_t1:"Free routine",prog_3_t2:"Scored by Séan",prog_3_t3:"Prize to win",
+  prog_2_num:"Activity 02",prog_2_t:"Séan Garnier Challenge",prog_2_b:"The official Panna 1v1 tournament. Face other participants in a Panna cage and show your creativity, control and ability to eliminate your opponent.",prog_2_t1:"Panna 1v1",prog_2_t2:"Single elimination",prog_2_t3:"Hosted by Séan",
+  prog_3_num:"Activity 03",prog_3_t:"Freestyle Showcase",prog_3_b:"A freestyle football showcase performed by elite athletes. Breathtaking routines combining technique, creativity and ball mastery.",prog_3_t1:"Elite athletes",prog_3_t2:"Exclusive routines",prog_3_t3:"Inspiring",
   prog_cta:"Save your spot",prog_hint:"See the activity",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
@@ -627,31 +627,31 @@ applyLang();
 /* ====================================================== */
 const DISCIPLINES = {
   '1': {
-    img: 'freestyle.png', imgPos: 'center 30%',
+    img: 'img-purinstinct-games.png', imgPos: 'center 40%',
     fr: { num:'Activité 01', title:'PürInstinct Games',
       desc:'Le sport signature de l\'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2. Séan Garnier observe, commente et défie les meilleurs en direct.',
-      tags:['9 stations','Score en direct','Sans contact','Avec Séan'], cta:'Réserve ta place' },
+      tags:['9 stations','Leaderboard live','Sans contact','Avec Séan'], cta:'Réserve ta place' },
     en: { num:'Activity 01', title:'PürInstinct Games',
       desc:'The arena\'s signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball — always 3 against 2. Séan Garnier watches, comments and challenges the top performers live.',
-      tags:['9 stations','Live score','No contact','With Séan'], cta:'Save your spot' }
+      tags:['9 stations','Live leaderboard','No contact','With Séan'], cta:'Save your spot' }
   },
   '2': {
-    img: 'assets/render-field.jpg', imgPos: 'center center',
-    fr: { num:'Activité 02', title:'Tournoi Panna 1v1',
-      desc:'Le duel de rue le plus électrique du soccer : passe le ballon entre les jambes de ton adversaire pour marquer le panna et remporter le point. Format élimination directe, bracket officiel, Séan Garnier comme juge suprême et arbitre de chaque duel.',
-      tags:['1 contre 1','Élimination directe','Jugé par Séan','Street soccer'], cta:'Réserve ta place' },
-    en: { num:'Activity 02', title:'Panna 1v1 Tournament',
-      desc:'The most electric street soccer duel: roll the ball through your opponent\'s legs to score the panna and take the point. Official single-elimination bracket, Séan Garnier as the supreme judge and referee of every duel.',
-      tags:['1 vs 1','Single elimination','Judged by Séan','Street soccer'], cta:'Save your spot' }
+    img: 'img-panna-challenge.png', imgPos: 'center 35%',
+    fr: { num:'Activité 02', title:'Séan Garnier Challenge',
+      desc:'Le tournoi officiel de Panna 1 contre 1. Affronte les autres participants dans une cage Panna et démontre ta créativité, ton contrôle et ta capacité à éliminer ton adversaire. Le but : faire passer le ballon entre les jambes de l\'adversaire pour remporter le duel. Séan Garnier anime la compétition et couronne le meilleur joueur.',
+      tags:['Panna 1v1','Animé par Séan','Élimination directe'], cta:'Réserve ta place' },
+    en: { num:'Activity 02', title:'Séan Garnier Challenge',
+      desc:'The official Panna 1v1 tournament. Face other participants in a Panna cage and show off your creativity, control and ability to eliminate your opponent. The goal: roll the ball through your opponent\'s legs to win the duel. Séan Garnier hosts the competition and crowns the best player.',
+      tags:['Panna 1v1','Hosted by Séan','Single elimination'], cta:'Save your spot' }
   },
   '3': {
-    img: 'sean.png', imgPos: 'center 15%',
-    fr: { num:'Activité 03', title:'Tournoi Freestyle Soccer',
-      desc:'Jongle, invente, impressionne. Chaque participant présente une routine libre devant les autres athlètes et Séan Garnier. Les juges notent la créativité, la maîtrise technique et le style. Le meilleur freestyler repart avec un prix signé Séan.',
-      tags:['Routine libre','Noté par Séan','Prix à gagner','Performance live'], cta:'Réserve ta place' },
-    en: { num:'Activity 03', title:'Freestyle Soccer Tournament',
-      desc:'Juggle, invent, impress. Each participant performs a free-form routine in front of the other athletes and Séan Garnier. Judges score creativity, technical mastery and style. The best freestyler wins a prize signed by Séan.',
-      tags:['Free routine','Scored by Séan','Prize to win','Live performance'], cta:'Save your spot' }
+    img: 'img-freestyle-showcase.png', imgPos: 'center 25%',
+    fr: { num:'Activité 03', title:'Freestyle Showcase',
+      desc:'Un spectacle de freestyle football présenté par des athlètes de haut niveau. Des routines impressionnantes alliant technique, créativité et maîtrise du ballon. Une expérience inspirante qui repousse les limites du possible.',
+      tags:['Athlètes élites','Routines exclusives','Inspirant'], cta:'Réserve ta place' },
+    en: { num:'Activity 03', title:'Freestyle Showcase',
+      desc:'A freestyle football showcase performed by elite athletes. Breathtaking routines combining technique, creativity and ball mastery. An inspiring experience that pushes the limits of what\'s possible.',
+      tags:['Elite athletes','Exclusive routines','Inspiring'], cta:'Save your spot' }
   }
 };
 
