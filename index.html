@@ -134,6 +134,52 @@ h1,h2,h3,.disp{
   .burger{display:flex}
   .nav-cta{display:none}
   .nav-badge{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:120px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+
+/* ============ NAV DROPDOWN ============ */
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-btn.active{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:220px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:not(.soon):hover{color:var(--lime);background:rgba(204,255,0,.04)}
+.nav-drop-item.active{color:var(--lime)}
+.nav-drop-item.soon{color:var(--muted);cursor:default;pointer-events:none}
+.nav-drop-soon-tag{
+  font-size:9px;letter-spacing:.1em;padding:2px 7px;
+  border:1px solid rgba(255,255,255,.18);color:var(--muted);
+  font-style:normal;font-weight:700;white-space:nowrap;border-radius:2px;
 }
 
 /* ============ PROJET SPÉCIAL ============ */
@@ -927,7 +973,15 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <a href="#arena" data-i18n="nav_arena">L'arène</a>
     <a href="#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
     <a href="#leaderboard" data-i18n="nav_lb">Leaderboard</a>
-    <a href="projet-special.html"><span data-i18n="nav_special">Projet spécial</span><span class="nav-badge">SÉAN GARNIER</span></a>
+    <div class="nav-drop" id="navDrop">
+      <button class="nav-drop-btn" aria-haspopup="true" aria-expanded="false">
+        <span data-i18n="nav_special">Projet spécial</span><span class="nav-badge">SÉAN GARNIER</span><span class="nav-drop-arrow">▾</span>
+      </button>
+      <div class="nav-drop-menu" role="menu">
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <span class="nav-drop-item soon"><span data-i18n="nav_next">Prochain créateur</span><span class="nav-drop-soon-tag" data-i18n="nav_soon">Bientôt</span></span>
+      </div>
+    </div>
     <a href="#billets" data-i18n="nav_tickets">Billets</a>
   </div>
   <div class="nav-right">
@@ -1484,7 +1538,7 @@ fr:{
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur.",
   zc_default_tag:"Zone signature",zc_default_name:"L'Arène",zc_default_desc:"Sélectionne une des 9 stations sur le plan pour découvrir son gameplay.",
   zc_mf:"Zone augmentée par la technologie incluse",
-  nav_special:"Projet spécial",
+  nav_special:"Projet spécial",nav_sg:"Séan Garnier",nav_next:"Prochain créateur",nav_soon:"Bientôt",
   sg_eyebrow:"Projet spécial",sg_title:"SÉAN GARNIER<br>DANS L'ARÈNE.",
   sg_quote:"&ldquo;Le freestyle, c'est libérer l'instinct. PürInstinct Games, c'est exactement ça — mais à 300 athlètes en même temps.&rdquo;",
   sg_body:"Le joueur le plus visionné de l'histoire du football freestyle — 1 milliard de vues — prend la direction de l'arène pour une session exclusive. Il anime, il défie, il joue. Une seule date, un nombre limité de places.",
@@ -1532,7 +1586,7 @@ en:{
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player.",
   zc_default_tag:"Signature zone",zc_default_name:"The Arena",zc_default_desc:"Select one of the 9 stations on the map to discover its gameplay.",
   zc_mf:"Augmented tech zone included",
-  nav_special:"Special project",
+  nav_special:"Special project",nav_sg:"Séan Garnier",nav_next:"Next creator",nav_soon:"Coming soon",
   sg_eyebrow:"Special project",sg_title:"SÉAN GARNIER<br>IN THE ARENA.",
   sg_quote:"&ldquo;Freestyle is about releasing pure instinct. PürInstinct Games is exactly that — but with 300 athletes at once.&rdquo;",
   sg_body:"The most-watched player in freestyle football history — 1 billion views — takes over the arena for one exclusive session. He hosts, he challenges, he plays. One date only, limited spots.",
@@ -1594,6 +1648,17 @@ document.getElementById("footLang").addEventListener("click",e=>{e.preventDefaul
 const burger = document.getElementById("burger"), navLinks = document.getElementById("navLinks");
 burger.addEventListener("click",()=>navLinks.classList.toggle("open"));
 navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("open")));
+
+/* nav dropdown */
+const navDrop = document.getElementById("navDrop");
+if(navDrop){
+  navDrop.querySelector(".nav-drop-btn").addEventListener("click",e=>{
+    e.stopPropagation();
+    navDrop.classList.toggle("open");
+    navDrop.querySelector(".nav-drop-btn").setAttribute("aria-expanded", navDrop.classList.contains("open"));
+  });
+  document.addEventListener("click",e=>{if(!navDrop.contains(e.target))navDrop.classList.remove("open");});
+}
 
 /* ====================================================== */
 /* Hero canvas — beams + particles, moving from frame 0 */
