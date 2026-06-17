@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1617,7 +1617,7 @@ const ZONES = {
        en:{tag:"Augmented tech zone",name:"Sports tech zone 2",desc:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",mf:false}}
 };
 
-let lang = "fr";
+let lang = localStorage.getItem("pi_lang") || "en";
 const RICH = new Set(["h1_sub","mf_title_a","p_note","p_bracelet_tip","sg_title","sg_quote"]); // keys containing safe inline HTML
 function applyLang(){
   document.documentElement.lang = lang;
@@ -1642,8 +1642,8 @@ function applyLang(){
   if(window.__lvlRefresh) window.__lvlRefresh();
   if(window.__calRender) window.__calRender();
 }
-document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";applyLang();});
-document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";applyLang();});
+document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
+document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
 
 /* Burger */
 const burger = document.getElementById("burger"), navLinks = document.getElementById("navLinks");
