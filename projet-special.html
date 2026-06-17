@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projet spécial — Séan Garnier × PürInstinct Games</title>
+<meta name="description" content="Séan Garnier, le freestyler le plus visionné de l'histoire, entre dans l'arène PürInstinct Games pour une session exclusive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --white:#F4F4F2;
+  --muted:#9C9C96;
+  --line:rgba(204,255,0,.18);
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,.disp{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lead{color:var(--muted);max-width:62ch}
+.lime{color:var(--lime)}
+.cta{
+  display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;background:var(--lime);color:#0A0A0A;
+  padding:14px 28px 15px;font-size:19px;letter-spacing:.02em;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+  transition:.2s;
+}
+.cta:hover{box-shadow:0 0 28px rgba(204,255,0,.55);transform:translateY(-2px)}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-links a.active{color:var(--lime);opacity:1}
+.nav-badge{
+  display:inline-block;background:var(--lime);color:#0A0A0A;
+  font-size:8px;font-weight:900;font-style:normal;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 6px;border-radius:3px;
+  vertical-align:middle;margin-left:5px;line-height:1.5;white-space:nowrap;
+}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-badge{display:none}
+}
+
+/* ============ PAGE HERO ============ */
+.sg-hero{
+  position:relative;min-height:55vh;display:flex;align-items:flex-end;
+  padding-top:80px;overflow:hidden;
+  background:radial-gradient(ellipse 80% 60% at 60% 0%,rgba(204,255,0,.08) 0%,transparent 65%),
+             radial-gradient(ellipse 50% 40% at 10% 100%,rgba(204,255,0,.05) 0%,transparent 70%),
+             var(--bg);
+}
+.sg-hero::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:repeating-linear-gradient(
+    -8deg,
+    rgba(204,255,0,.04) 0,rgba(204,255,0,.04) 2px,
+    transparent 2px,transparent 48px
+  );
+}
+.sg-hero-inner{
+  position:relative;z-index:1;
+  padding:clamp(48px,8vw,100px) 0 clamp(56px,7vw,80px);
+}
+.sg-hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:var(--lime);margin-bottom:20px;
+}
+.sg-hero-tag::before{content:"";width:28px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.sg-hero h1{
+  font-size:clamp(52px,9vw,120px);line-height:.88;
+  letter-spacing:-.02em;margin-bottom:28px;
+}
+.sg-hero h1 .dim{opacity:.5}
+.sg-hero h1 .lime{color:var(--lime)}
+.sg-hero-sub{
+  font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:52ch;line-height:1.5;
+}
+.sg-hero-deco{
+  position:absolute;right:0;top:0;bottom:0;width:42%;z-index:0;
+  background:linear-gradient(135deg,rgba(204,255,0,.06) 0%,transparent 55%);
+  clip-path:polygon(18% 0,100% 0,100% 100%,0 100%);
+}
+.sg-hero-deco::after{
+  content:"";position:absolute;left:10%;top:10%;right:0;bottom:0;
+  background:repeating-linear-gradient(
+    -8deg,rgba(204,255,0,.1) 0,rgba(204,255,0,.1) 3px,
+    transparent 3px,transparent 28px
+  );
+}
+@media(max-width:860px){.sg-hero-deco{display:none}}
+
+/* ============ MAIN CONTENT ============ */
+.sg-main{padding:clamp(48px,7vw,90px) 0}
+.sg-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+@media(max-width:860px){.sg-layout{grid-template-columns:1fr}}
+
+.sg-quote{
+  border-left:3px solid var(--lime);padding:16px 0 16px 22px;
+  margin:28px 0 24px;font-size:clamp(16px,2vw,20px);font-style:italic;
+  color:var(--white);line-height:1.45;opacity:.9;
+}
+
+.sg-facts{display:flex;gap:clamp(20px,4vw,40px);margin:28px 0 36px;flex-wrap:wrap}
+.sg-fact{display:flex;flex-direction:column;gap:4px}
+.sg-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,44px);color:var(--lime);line-height:1}
+.sg-l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* ============ CARD ============ */
+.sg-card{
+  position:sticky;top:84px;
+  background:#111111;border:1.5px solid rgba(204,255,0,.25);border-radius:4px;
+  padding:40px 36px 36px;overflow:hidden;
+}
+.sg-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--lime)}
+.sg-card-tag{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:11px;letter-spacing:.14em;color:var(--lime);text-transform:uppercase;margin-bottom:22px;
+}
+.sg-name-block{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;line-height:.88;letter-spacing:-.02em;margin-bottom:28px}
+.sg-firstname{font-size:clamp(44px,7vw,80px);color:rgba(244,244,242,.45)}
+.sg-lastname{font-size:clamp(44px,7vw,80px);color:var(--lime)}
+.sg-card-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.sg-pill{
+  font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:5px 12px;border-radius:99px;border:1px solid rgba(204,255,0,.3);color:var(--muted);
+}
+.sg-card-cta{
+  display:inline-block;width:100%;text-align:center;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:18px;letter-spacing:.03em;
+  background:var(--lime);color:#0A0A0A;padding:14px 22px 15px;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+  transition:.2s;
+}
+.sg-card-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.sg-slash-deco{
+  position:absolute;bottom:-24px;right:-24px;
+  width:140px;height:140px;
+  background:repeating-linear-gradient(-60deg,rgba(204,255,0,.12) 0,rgba(204,255,0,.12) 3px,transparent 3px,transparent 16px);
+  transform:skewX(-8deg);pointer-events:none;
+}
+@media(max-width:860px){.sg-card{position:static}}
+
+/* ============ INFO STRIP ============ */
+.sg-strip{
+  background:#111;border-top:1px solid rgba(204,255,0,.12);
+  border-bottom:1px solid rgba(204,255,0,.12);
+  padding:clamp(28px,4vw,48px) 0;margin-bottom:clamp(32px,5vw,60px);
+}
+.sg-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(204,255,0,.12)}
+@media(max-width:640px){.sg-strip-grid{grid-template-columns:1fr}}
+.sg-strip-item{
+  background:#111;padding:28px 32px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.sg-strip-icon{font-size:22px;margin-bottom:4px}
+.sg-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,2vw,20px);color:var(--white)}
+.sg-strip-sub{font-size:14px;color:var(--muted);line-height:1.45}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#concept" data-i18n="nav_concept">Le concept</a>
+    <a href="index.html#arena" data-i18n="nav_arena">L'arène</a>
+    <a href="index.html#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <a href="projet-special.html" class="active"><span data-i18n="nav_special">Projet spécial</span><span class="nav-badge">SÉAN GARNIER</span></a>
+    <a href="index.html#billets" data-i18n="nav_tickets">Billets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <a class="nav-cta" href="index.html#billets" data-i18n="nav_cta">Réserve</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="sg-hero">
+  <div class="sg-hero-deco"></div>
+  <div class="wrap sg-hero-inner">
+    <div class="sg-hero-tag" data-i18n="sg_eyebrow">Projet spécial</div>
+    <h1>
+      <span class="dim" data-i18n="sg_h1a">SÉAN</span><br>
+      <span class="lime" data-i18n="sg_h1b">GARNIER</span><br>
+      <span data-i18n="sg_h1c">DANS L'ARÈNE.</span>
+    </h1>
+    <p class="sg-hero-sub" data-i18n="sg_herosub">Le freestyler le plus visionné de l'histoire entre dans l'arène PürInstinct Games pour une session exclusive.</p>
+  </div>
+</header>
+
+<!-- ============ INFO STRIP ============ -->
+<div class="sg-strip">
+  <div class="wrap">
+    <div class="sg-strip-grid">
+      <div class="sg-strip-item">
+        <div class="sg-strip-icon">📅</div>
+        <div class="sg-strip-label" data-i18n="sg_s1l">Date à confirmer</div>
+        <div class="sg-strip-sub" data-i18n="sg_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
+      </div>
+      <div class="sg-strip-item">
+        <div class="sg-strip-icon">🏟️</div>
+        <div class="sg-strip-label" data-i18n="sg_s2l">Session exclusive</div>
+        <div class="sg-strip-sub" data-i18n="sg_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
+      </div>
+      <div class="sg-strip-item">
+        <div class="sg-strip-icon">⚡</div>
+        <div class="sg-strip-label" data-i18n="sg_s3l">Il joue avec toi</div>
+        <div class="sg-strip-sub" data-i18n="sg_s3b">Séan Garnier anime, défie et joue dans l'arène aux côtés des participants.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN CONTENT ============ -->
+<main class="sg-main">
+  <div class="wrap">
+    <div class="sg-layout">
+
+      <!-- LEFT: copy -->
+      <div>
+        <span class="eyebrow" data-i18n="sg_who_ey">Qui est Séan Garnier ?</span>
+        <h2 style="font-size:clamp(34px,5vw,60px);margin-bottom:20px" data-i18n="sg_who_t">Le freestyler le plus visionné de la planète.</h2>
+        <div class="sg-quote" data-i18n="sg_quote">« Le freestyle, c'est libérer l'instinct. PürInstinct Games, c'est exactement ça — mais à 300 athlètes en même temps. »</div>
+        <p class="lead" style="margin-bottom:18px" data-i18n="sg_body">Le joueur le plus visionné de l'histoire du football freestyle — 1 milliard de vues — prend la direction de l'arène pour une session exclusive. Il anime, il défie, il joue. Une seule date, un nombre limité de places.</p>
+        <p class="lead" style="margin-bottom:32px" data-i18n="sg_body2">Champion du monde de freestyle, ambassadeur Nike, collaborateur Red Bull : Séan Garnier a transformé le football de rue en art mondial. Maintenant il entre dans l'arène et défie chaque athlète présent.</p>
+
+        <div class="sg-facts">
+          <div class="sg-fact"><span class="sg-n">1B+</span><span class="sg-l" data-i18n="sg_f1">vues cumulées</span></div>
+          <div class="sg-fact"><span class="sg-n">#1</span><span class="sg-l" data-i18n="sg_f2">freestyler mondial</span></div>
+          <div class="sg-fact"><span class="sg-n">10+</span><span class="sg-l" data-i18n="sg_f3">ans de carrière</span></div>
+          <div class="sg-fact"><span class="sg-n">🌍</span><span class="sg-l" data-i18n="sg_f4">présence mondiale</span></div>
+        </div>
+
+        <a class="cta" href="index.html#billets" data-i18n="sg_cta">Réserve ta place</a>
+      </div>
+
+      <!-- RIGHT: card -->
+      <div>
+        <div class="sg-card">
+          <div class="sg-card-tag" data-i18n="sg_card_tag">SESSION EXCLUSIVE · DATE UNIQUE</div>
+          <div class="sg-name-block">
+            <div class="sg-firstname">SÉAN</div>
+            <div class="sg-lastname">GARNIER</div>
+          </div>
+          <div class="sg-card-pills">
+            <span class="sg-pill">🏆 Freestyle World Champion</span>
+            <span class="sg-pill">⚽ 1B+ views</span>
+            <span class="sg-pill">👟 Nike Ambassador</span>
+            <span class="sg-pill">🎯 PürInstinct Games</span>
+          </div>
+          <a class="sg-card-cta" href="index.html#billets" data-i18n="sg_cta2">Je veux ma place</a>
+          <div class="sg-slash-deco"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="index.html#billets" data-i18n="f_book">Réserver une session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ====================================================== */
+/* i18n */
+/* ====================================================== */
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projet spécial",
+  sg_eyebrow:"Projet spécial",
+  sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"DANS L'ARÈNE.",
+  sg_herosub:"Le freestyler le plus visionné de l'histoire entre dans l'arène PürInstinct Games pour une session exclusive.",
+  sg_s1l:"Date à confirmer",sg_s1b:"Réserve ta place maintenant pour être notifié en premier.",
+  sg_s2l:"Session exclusive",sg_s2b:"Nombre de places limité. Une seule date, une seule chance.",
+  sg_s3l:"Il joue avec toi",sg_s3b:"Séan Garnier anime, défie et joue dans l'arène aux côtés des participants.",
+  sg_who_ey:"Qui est Séan Garnier ?",sg_who_t:"Le freestyler le plus visionné de la planète.",
+  sg_quote:"« Le freestyle, c'est libérer l'instinct. PürInstinct Games, c'est exactement ça — mais à 300 athlètes en même temps. »",
+  sg_body:"Le joueur le plus visionné de l'histoire du football freestyle — 1 milliard de vues — prend la direction de l'arène pour une session exclusive. Il anime, il défie, il joue. Une seule date, un nombre limité de places.",
+  sg_body2:"Champion du monde de freestyle, ambassadeur Nike, collaborateur Red Bull : Séan Garnier a transformé le football de rue en art mondial. Maintenant il entre dans l'arène et défie chaque athlète présent.",
+  sg_f1:"vues cumulées",sg_f2:"freestyler mondial",sg_f3:"ans de carrière",sg_f4:"présence mondiale",
+  sg_cta:"Réserve ta place",sg_cta2:"Je veux ma place",sg_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE",
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special project",
+  sg_eyebrow:"Special project",
+  sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"IN THE ARENA.",
+  sg_herosub:"The most-watched freestyler in history steps into the PürInstinct Games arena for one exclusive session.",
+  sg_s1l:"Date to be confirmed",sg_s1b:"Save your spot now to be the first notified.",
+  sg_s2l:"Exclusive session",sg_s2b:"Limited spots. One date, one chance.",
+  sg_s3l:"He plays with you",sg_s3b:"Séan Garnier hosts, challenges and plays alongside every participant in the arena.",
+  sg_who_ey:"Who is Séan Garnier?",sg_who_t:"The most-watched freestyler on the planet.",
+  sg_quote:"« Freestyle is about releasing pure instinct. PürInstinct Games is exactly that — but with 300 athletes at once. »",
+  sg_body:"The most-watched player in freestyle football history — 1 billion views — takes over the arena for one exclusive session. He hosts, he challenges, he plays. One date only, limited spots.",
+  sg_body2:"Freestyle World Champion, Nike ambassador, Red Bull collaborator: Séan Garnier transformed street football into a global art form. Now he enters the arena and challenges every athlete there.",
+  sg_f1:"combined views",sg_f2:"world freestyler",sg_f3:"years of career",sg_f4:"worldwide presence",
+  sg_cta:"Save your spot",sg_cta2:"I want my spot",sg_card_tag:"EXCLUSIVE SESSION · ONE DATE ONLY",
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
+}};
+
+let lang = "fr";
+function applyLang(){
+  const t = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if(t[k] !== undefined) el.textContent = t[k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const k = el.dataset.i18nPh;
+    if(t[k]) el.placeholder = t[k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
+}
+
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; applyLang(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; applyLang(); });
+
+/* burger */
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+document.addEventListener('click', e => { if(!burger.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove('open'); });
+
+/* year */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+applyLang();
+</script>
+</body>
+</html>
