@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -646,7 +646,7 @@ en:{
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
 }};
 
-let lang = "fr";
+let lang = localStorage.getItem("pi_lang") || "en";
 function applyLang(){
   const t = I18N[lang];
   const RICH = new Set(["sg_title","sg_quote","prog_title"]);
@@ -663,8 +663,8 @@ function applyLang(){
   document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
 }
 
-document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; applyLang(); });
-document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; applyLang(); });
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
 
 /* burger */
 const burger = document.getElementById('burger');
