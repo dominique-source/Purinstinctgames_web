@@ -156,6 +156,7 @@ h1,h2,h3,.disp{
 .nav-drop-btn.active{color:var(--lime);opacity:1}
 .nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
 .nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
 .nav-drop-menu{
   position:absolute;top:calc(100% + 14px);left:0;min-width:220px;
   background:#111;border:1.5px solid rgba(204,255,0,.22);
