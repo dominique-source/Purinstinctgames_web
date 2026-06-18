@@ -907,9 +907,12 @@ if (film) {
     trk.classList.toggle('on', visible);
     if(!visible) return;
 
-    const ch2R = chs[1].getBoundingClientRect();
+    // Start: center of the lime seam dot at the bottom of chapter 1
+    const seam1 = chs[0].querySelector('.narr-seam');
+    const seam1R = (seam1 || chs[1]).getBoundingClientRect();
+    const seam1CenterY = seam1R.top + window.scrollY + seam1R.height / 2;
     const ch7R = chs[chs.length - 1].getBoundingClientRect();
-    const startScroll = (ch2R.top + window.scrollY) - V_TOP * vh;
+    const startScroll = seam1CenterY - V_TOP * vh;
     const endScroll   = (ch7R.top + window.scrollY + ch7R.height * 0.42) - V_BOT * vh;
     const prog = Math.max(0, Math.min(1, (window.scrollY - startScroll) / (endScroll - startScroll)));
 
