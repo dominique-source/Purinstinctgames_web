@@ -870,6 +870,34 @@ h1,h2,h3,.disp{
 .price-card li{display:flex;gap:10px;align-items:baseline}
 .price-card li::before{content:"";width:10px;height:2.5px;background:var(--lime);transform:skewX(-30deg);flex:none;position:relative;top:-3px}
 .price-card .cta{font-size:19px;text-align:center;margin-top:auto}
+
+/* ── Session type tiles ── */
+.sess-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,18px);margin:36px 0 0}
+@media(max-width:860px){.sess-tiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sess-tiles{grid-template-columns:1fr}}
+.sess-tile{
+  position:relative;background:#0e0e0e;border:1px solid rgba(255,255,255,.08);
+  border-radius:4px;padding:clamp(18px,2.4vw,28px);
+  display:flex;flex-direction:column;gap:8px;
+  cursor:pointer;transition:border-color .22s,transform .22s,box-shadow .22s;
+  text-align:left;
+}
+.sess-tile:hover,.sess-tile:focus-visible{
+  border-color:rgba(204,255,0,.45);transform:translateY(-4px);
+  box-shadow:0 18px 48px rgba(0,0,0,.55),0 0 24px rgba(204,255,0,.09);
+  outline:none;
+}
+.sess-tile.special{border-color:rgba(204,255,0,.22);background:linear-gradient(160deg,#111502,#0e0e0e 60%)}
+.sess-tile.special:hover,.sess-tile.special:focus-visible{border-color:rgba(204,255,0,.6);box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 32px rgba(204,255,0,.14)}
+.st-tag{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:9px;letter-spacing:.22em;color:var(--lime);opacity:.65;margin-bottom:2px}
+.st-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(20px,2.4vw,30px);line-height:1;color:var(--white)}
+.st-sub{font-size:clamp(12px,1.3vw,14px);color:rgba(255,255,255,.5);line-height:1.45;margin-top:4px}
+.st-tagline{font-size:clamp(12px,1.3vw,14px);color:rgba(204,255,0,.75);line-height:1.45;margin-top:6px;font-style:italic}
+.st-cta{margin-top:auto;padding-top:14px;font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;font-size:11px;letter-spacing:.18em;color:var(--lime);opacity:.8}
+.sess-tiles-head{margin-top:52px;margin-bottom:0}
 .cta-group-btn{
   display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:clamp(16px,2vw,22px);
@@ -881,6 +909,76 @@ h1,h2,h3,.disp{
 }
 .cta-group-btn:hover{background:var(--lime);color:#0A0A0A;transform:translateY(-2px);box-shadow:0 0 28px rgba(204,255,0,.45)}
 .session-note{margin-top:26px;color:var(--muted);font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(16px,2vw,21px);letter-spacing:.04em}
+
+/* ════════════════════════════════
+   CTA BANDS — mid-page conviction
+   ════════════════════════════════ */
+.cta-band{
+  width:100%;background:#0F0F0F;
+  padding:clamp(64px,9vw,100px) 0;
+  text-align:center;
+  position:relative;
+}
+/* Placement 4 variant — lime rule above */
+.cta-band--lime-rule::before{
+  content:"";display:block;
+  position:absolute;top:0;left:0;right:0;
+  height:1px;background:#ccff00;opacity:.1;
+}
+/* Placement 5 variant — signals page wrap-up */
+.cta-band--close{background:#141414}
+.cta-band .inner{max-width:640px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+.cta-band-hl{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(28px,4vw,56px);line-height:.95;
+  color:var(--white);margin:0 0 clamp(28px,3.5vw,44px);
+  letter-spacing:-.01em;
+}
+.cta-band-micro{
+  margin-top:clamp(16px,2vw,24px);
+  font-size:clamp(13px,1.4vw,15px);color:rgba(255,255,255,.45);
+  letter-spacing:.04em;
+}
+.cta-band-micro a{color:rgba(204,255,0,.6);text-decoration:none}
+.cta-band-micro a:hover{color:var(--lime)}
+
+/* ════════════════════════════════
+   #billets — ACTION ZONE treatment
+   ════════════════════════════════ */
+#billets{background:#111;position:relative}
+#billets::before{
+  content:"";display:block;
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(to right,transparent 0%,#ccff00 20%,#ccff00 80%,transparent 100%);
+  opacity:.55;
+}
+#billets .eyebrow{
+  background:rgba(204,255,0,.08);
+  border:1px solid rgba(204,255,0,.25);
+  border-radius:2px;
+  padding:5px 14px;
+  letter-spacing:.22em;
+  color:var(--lime) !important;
+  opacity:1 !important;
+}
+
+/* ════════════════════════════════
+   MOBILE STICKY BAR
+   ════════════════════════════════ */
+.sticky-play{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  height:64px;background:#ccff00;z-index:9999;
+  align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;font-size:18px;letter-spacing:.04em;
+  color:#0A0A0A;text-decoration:none;
+  transform:translateY(100%);
+  transition:transform .3s ease;
+  border:none;cursor:pointer;
+}
+.sticky-play.visible{transform:translateY(0)}
+@media(max-width:768px){.sticky-play{display:flex}}
 .session-note b{color:var(--lime)}
 
 /* ============ CALENDRIER ============ */
@@ -1007,7 +1105,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <span class="word arene" data-i18n="h1_b">TON ARÈNE.</span>
     </h1>
     <p class="sub" data-i18n="h1_sub">Le sport à l'état <b>Pur.</b> Instinctif</p>
-    <a class="cta" href="#billets" data-i18n="h1_cta">Réserve ta session</a>
+    <a class="cta" href="#billets" data-i18n="h1_cta">Rejoins l'arène →</a>
     <div class="counter-strip">
       <div class="chip"><span class="num">9</span><span class="lbl" data-i18n="strip_st">Stations</span></div>
       <div class="chip"><span class="num">300</span><span class="lbl" data-i18n="strip_ath">Athlètes / session</span></div>
@@ -1038,6 +1136,15 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
   <div class="link-down" aria-hidden="true"><i></i></div>
 </section>
+
+<!-- ── CTA BAND 2: POST-EXPLANATION ── -->
+<div class="cta-band" id="ctaBand2">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta2_hl">Tu comprends le concept.<br>Maintenant vis-le.</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta2_btn">Je veux jouer</a>
+    <p class="cta-band-micro reveal d2" data-i18n="cta2_micro">Gratuit pour commencer &nbsp;·&nbsp; Aucune inscription complexe</p>
+  </div>
+</div>
 
 <!-- ============ ARENA MAP ============ -->
 <section class="section obs" id="arena">
@@ -1373,6 +1480,14 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   <div class="link-down" aria-hidden="true"><i></i></div>
 </section>
 
+<!-- ── CTA BAND 4: POST-VISUAL (Moment Factory) ── -->
+<div class="cta-band cta-band--lime-rule" id="ctaBand4">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta4_hl">L'arène t'attend.</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta4_btn">Je veux être là</a>
+  </div>
+</div>
+
 <!-- ============ STATS ============ -->
 <section class="section obs" id="preuve">
   <span class="divider-streak"></span>
@@ -1389,6 +1504,15 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
   <div class="link-down" aria-hidden="true"><i></i></div>
 </section>
+
+<!-- ── CTA BAND 3: POST-SOCIAL PROOF (Stats) ── -->
+<div class="cta-band" id="ctaBand3">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta3_hl">10 000 participants<br>ne peuvent pas avoir tort.</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta3_btn">Rejoins le mouvement</a>
+    <p class="cta-band-micro reveal d2" data-i18n="cta3_micro">Rejoins le mouvement.</p>
+  </div>
+</div>
 
 <!-- ============ PRICING ============ -->
 <section class="section slash-top obs" id="billets">
@@ -1435,6 +1559,55 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </form>
 
+    <!-- ── SESSION TYPES ── -->
+    <h3 class="sess-tiles-head disp reveal d2" style="font-size:clamp(22px,2.8vw,36px);margin-top:52px" data-i18n="st_head">Choisis ta session</h3>
+    <div class="sess-tiles reveal d3">
+      <!-- Youth -->
+      <div class="sess-tile tier-cta" data-tier="Jeunesse" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_youth_tag">10–17 ans</span>
+        <div class="st-name" data-i18n="st_youth_name">Jeunesse</div>
+        <p class="st-sub" data-i18n="st_youth_sub">Pour les 10 à 17 ans. 9 stations. Un seul score.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Adult -->
+      <div class="sess-tile tier-cta" data-tier="Adulte" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_adult_tag">18 ans et +</span>
+        <div class="st-name" data-i18n="st_adult_name">Adulte</div>
+        <p class="st-sub" data-i18n="st_adult_sub">Compétition individuelle. Leaderboard en direct. Instinct à l'état pur.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Corporate -->
+      <div class="sess-tile tier-cta" data-tier="Corporatif" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_corp_tag">Équipes & entreprises</span>
+        <div class="st-name" data-i18n="st_corp_name">Corporatif</div>
+        <p class="st-sub" data-i18n="st_corp_sub">Session privée, classement d'entreprise dédié, expérience complète.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Elite -->
+      <div class="sess-tile tier-cta" data-tier="Elite" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_elite_tag">Niveau élite</span>
+        <div class="st-name" data-i18n="st_elite_name">Élite</div>
+        <p class="st-sub" data-i18n="st_elite_sub">Les meilleurs athlètes. Les vrais scores. La vraie compétition.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Family -->
+      <div class="sess-tile special tier-cta" data-tier="Famille" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_fam_tag">Tous âges · En famille</span>
+        <div class="st-name" data-i18n="st_fam_name">Famille</div>
+        <p class="st-sub" data-i18n="st_fam_sub">Parents et enfants ensemble dans l'arène.</p>
+        <p class="st-tagline" data-i18n="st_fam_tagline">Ce n'est pas ton sport traditionnel — ici, personne ne regarde. Tout le monde joue. Rentre dans l'arène.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- All Sessions -->
+      <div class="sess-tile special tier-cta" data-tier="ToutesSessions" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_all_tag">Accès illimité · Toute la journée</span>
+        <div class="st-name" data-i18n="st_all_name">Toutes sessions</div>
+        <p class="st-sub" data-i18n="st_all_sub">Tous les âges, toute la journée, un seul leaderboard.</p>
+        <p class="st-tagline" data-i18n="st_all_tagline">Ce n'est pas un spectacle — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+    </div>
+
     <!-- ── CALENDRIER ── -->
     <div class="cal-section-head reveal d2">
       <h3 class="disp" style="font-size:clamp(26px,3.5vw,42px)" data-i18n="cal_title">Prochains événements</h3>
@@ -1445,6 +1618,11 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <p class="session-note" style="margin-top:14px;font-size:clamp(13px,1.6vw,17px);opacity:.7" data-i18n="p_bracelet_tip">Économise <b>5$</b> pour le prochain événement en gardant ton bracelet</p>
   </div>
 </section>
+
+<!-- Mobile sticky play bar — must be before <script> so applyLang() processes it -->
+<a href="#billets" class="sticky-play" id="stickyPlay" aria-label="Play Now">
+  <span data-i18n="sticky_play">JOUE MAINTENANT →</span>
+</a>
 
 <!-- ============ ZONE VIDEO PLAYER ============ -->
 <div id="zoneVideoPlayer">
@@ -1461,6 +1639,15 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <span class="ze-tag">Zone</span>
     <div class="ze-name">Vitesse</div>
     <img class="ze-img" src="" alt="">
+  </div>
+</div>
+
+<!-- ── CTA BAND 5: PRE-FOOTER ── -->
+<div class="cta-band cta-band--close" id="ctaBand5">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta5_hl">Prêt à jouer ?</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta5_btn">Commencer maintenant</a>
+    <p class="cta-band-micro reveal d2"><span data-i18n="cta5_micro">Des questions ?</span> <a href="mailto:dominique@purinstinct.com" data-i18n="cta5_micro_link">Écris-nous.</a></p>
   </div>
 </div>
 
@@ -1502,7 +1689,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 const I18N = {
 fr:{
   nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",
-  h1_a:"TON INSTINCT.",h1_b:"TON ARÈNE.",h1_sub:"Le sport à l'état <b>Pur.</b> Instinctif",h1_cta:"Réserve ta session",
+  h1_a:"TON INSTINCT.",h1_b:"TON ARÈNE.",h1_sub:"Le sport à l'état <b>Pur.</b> Instinctif",h1_cta:"Rejoins l'arène →",
+  cta2_hl:"Tu comprends le concept.<br>Maintenant vis-le.",cta2_btn:"Je veux jouer",cta2_micro:"Gratuit pour commencer &nbsp;·&nbsp; Aucune inscription complexe",
+  cta3_hl:"10 000 participants<br>ne peuvent pas avoir tort.",cta3_btn:"Rejoins le mouvement",cta3_micro:"Rejoins le mouvement.",
+  cta4_hl:"L'arène t'attend.",cta4_btn:"Je veux être là",
+  cta5_hl:"Prêt à jouer ?",cta5_btn:"Commencer maintenant",cta5_micro:"Des questions ?",cta5_micro_link:"Écris-nous.",
+  sticky_play:"JOUE MAINTENANT →",
   strip_st:"Stations",strip_ath:"Athlètes / session",strip_lb:"Leaderboard",scroll_hint:"Descends dans l'arène",
   c_eyebrow:"Le concept",c_l1:"Ici, on ne regarde pas.",c_l2:"On compétitionne.",c_l3:"On bouge. Ensemble.",
   c_body:"PürInstinct Games n'est pas un spectacle. C'est une arène portable de 9 stations qui tourne de ville en ville — et tout le monde y est athlète. Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2. Autour : une technologie immersive qui fait bouger les gens dans le vrai monde — au lieu de les laisser fixer chacun leur écran. Même le championnat est un lieu de participation.",
@@ -1528,7 +1720,17 @@ fr:{
   s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Bâti au Québec.",s_tag_b:"Les Games sont le prochain chapitre.",
   cal_title:"Prochains événements",cal_sub:"Choisis ta ville, sélectionne une session, réserve ta place.",cal_all:"Toutes les villes",cal_pick:"Sélectionne une session ci-dessus",cal_launch:"Lancement",cal_full:"Complet",cal_left:"restantes",
-  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_label:"places réservées cette semaine",wf_headline:"Reçois les nouvelles avant tout le monde",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
+  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_label:"places réservées cette semaine",wf_headline:"Reçois les nouvelles avant tout le monde",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",tier_Famille:"Famille",tier_ToutesSessions:"Toutes sessions",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
+  st_head:"Choisis ta session",
+  st_youth_tag:"10–17 ans",st_youth_name:"Jeunesse",st_youth_sub:"Pour les 10 à 17 ans. 9 stations. Un seul score.",
+  st_adult_tag:"18 ans et +",st_adult_name:"Adulte",st_adult_sub:"Compétition individuelle. Leaderboard en direct. Instinct à l'état pur.",
+  st_corp_tag:"Équipes & entreprises",st_corp_name:"Corporatif",st_corp_sub:"Session privée, classement d'entreprise dédié, expérience complète.",
+  st_elite_tag:"Niveau élite",st_elite_name:"Élite",st_elite_sub:"Les meilleurs athlètes. Les vrais scores. La vraie compétition.",
+  st_fam_tag:"Tous âges · En famille",st_fam_name:"Famille",st_fam_sub:"Parents et enfants ensemble dans l'arène.",
+  st_fam_tagline:"Ce n'est pas ton sport traditionnel — ici, personne ne regarde. Tout le monde joue. Rentre dans l'arène.",
+  st_all_tag:"Accès illimité · Toute la journée",st_all_name:"Toutes sessions",st_all_sub:"Tous les âges, toute la journée, un seul leaderboard.",
+  st_all_tagline:"Ce n'est pas un spectacle — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game.",
+  st_book:"Réserve ta place →",
   p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
   p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
   p_f1:"Accès aux 9 stations",p_f2:"Score individuel en direct",p_f3:"Sports tech zone 1 & 2",
@@ -1550,7 +1752,12 @@ fr:{
 },
 en:{
   nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",
-  h1_a:"YOUR INSTINCT.",h1_b:"YOUR ARENA.",h1_sub:"Sport at its purest. Instinct at its highest.",h1_cta:"Book your session",
+  h1_a:"YOUR INSTINCT.",h1_b:"YOUR ARENA.",h1_sub:"Sport at its purest. Instinct at its highest.",h1_cta:"Enter the Arena →",
+  cta2_hl:"You get it.<br>Now come play it.",cta2_btn:"I Want to Play",cta2_micro:"Free to start &nbsp;·&nbsp; No complicated registration",
+  cta3_hl:"10,000 participants<br>can't be wrong.",cta3_btn:"Join the Movement",cta3_micro:"Join the movement.",
+  cta4_hl:"The arena is waiting.",cta4_btn:"I Want In",
+  cta5_hl:"Ready to play?",cta5_btn:"Start Now",cta5_micro:"Questions?",cta5_micro_link:"Reach out.",
+  sticky_play:"PLAY NOW →",
   strip_st:"Stations",strip_ath:"Athletes / session",strip_lb:"Leaderboard",scroll_hint:"Descend into the arena",
   c_eyebrow:"The concept",c_l1:"Nobody here watches.",c_l2:"Everybody competes.",c_l3:"We move. Together.",
   c_body:"PürInstinct Games is not a show. It's a portable 9-station arena touring city to city — and everyone in it is an athlete. The signature sport: a no-contact sport built on 5 natural instincts. Objective: cross the field without being touched while carrying the ball and without dropping it, always 3 against 2. Around it: immersive technology that makes people move in the real world — instead of staring at individual screens. Even the championship is a place of participation.",
@@ -1576,7 +1783,17 @@ en:{
   s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Built in Quebec.",s_tag_b:"The Games are the next chapter.",
   cal_title:"Upcoming events",cal_sub:"Choose your city, pick a session, book your spot.",cal_all:"All cities",cal_pick:"Select a session above",cal_launch:"Launch",cal_full:"Full",cal_left:"spots left",
-  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_label:"spots reserved this week",wf_headline:"Be the first to know",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
+  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_label:"spots reserved this week",wf_headline:"Be the first to know",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",tier_Famille:"Family",tier_ToutesSessions:"All Sessions",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
+  st_head:"Choose your session",
+  st_youth_tag:"Ages 10–17",st_youth_name:"Youth",st_youth_sub:"For ages 10 to 17. 9 stations. One score.",
+  st_adult_tag:"18 and up",st_adult_name:"Adult",st_adult_sub:"Individual competition. Live leaderboard. Pure instinct.",
+  st_corp_tag:"Teams & companies",st_corp_name:"Corporate",st_corp_sub:"Private session, dedicated company leaderboard, full augmented experience.",
+  st_elite_tag:"Elite level",st_elite_name:"Elite",st_elite_sub:"The best athletes. Real scores. Real competition.",
+  st_fam_tag:"All ages · Together",st_fam_name:"Family",st_fam_sub:"Parents and kids in the arena together.",
+  st_fam_tagline:"This is not your traditional sport — here, nobody watches. Everybody plays. Get in the game.",
+  st_all_tag:"Unlimited access · All day",st_all_name:"All Sessions",st_all_sub:"All ages, all day, one leaderboard.",
+  st_all_tagline:"This is not a spectacle — here, nobody sits in the stands. Everybody plays. Get in the game.",
+  st_book:"Save your spot →",
   p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
   p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
   p_f1:"Access to all 9 stations",p_f2:"Live individual score",p_f3:"Sports tech zone 1 & 2",
@@ -1620,7 +1837,7 @@ const ZONES = {
 };
 
 let lang = localStorage.getItem("pi_lang") || "en";
-const RICH = new Set(["h1_sub","mf_title_a","p_note","p_bracelet_tip","sg_title","sg_quote"]); // keys containing safe inline HTML
+const RICH = new Set(["h1_sub","mf_title_a","p_note","p_bracelet_tip","sg_title","sg_quote","cta2_hl","cta3_hl","cta2_micro"]); // keys containing safe inline HTML
 function applyLang(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el=>{
@@ -2161,58 +2378,74 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyUEaOiLGiV8PIC7
      date:new Date("2026-09-05T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:38},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:52},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:72},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:14},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:9}]},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:9},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:24}]},
     {id:"mtl-0919",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
      date:new Date("2026-09-19T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:52},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:65},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:88},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:22},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:15}]},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:15},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:31}]},
     {id:"qc-0926",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
      date:new Date("2026-09-26T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:55},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:68},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:95},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:24},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:18}]},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:18},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:34}]},
     {id:"mtl-1003",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
      date:new Date("2026-10-03T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:44},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:58},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:82},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:18},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:12}]},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:12},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:27}]},
     {id:"lav-1010",city:"Laval",cityKey:"laval",venue:"À confirmer, Laval",
      date:new Date("2026-10-10T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:58},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:72},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:101},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:26},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:16}]},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:16},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:38}]},
     {id:"ott-1017",city:"Ottawa",cityKey:"ottawa",venue:"À confirmer, Ottawa",
      date:new Date("2026-10-17T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:56},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:70},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:110},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:27},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:17}]},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:17},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:36}]},
     {id:"mtl-1024",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
      date:new Date("2026-10-24T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:76},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:118},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:29},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20}]},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:40}]},
     {id:"qc-1107",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
      date:new Date("2026-11-07T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"nov.",mEn:"Nov.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
+       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:80},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:120},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:30},
-       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20}]}
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20},
+       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:40}]}
   ];
 
   const acc=document.getElementById("calAcc");
@@ -2388,6 +2621,37 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyUEaOiLGiV8PIC7
 
 document.getElementById("year").textContent=new Date().getFullYear();
 applyLang();
+
+/* ── Mobile sticky play bar ── */
+(function(){
+  const bar = document.getElementById("stickyPlay");
+  if(!bar) return;
+  const heroCta = document.querySelector(".hero .cta");
+  const footer = document.querySelector("footer");
+  let shown = false;
+
+  function update(){
+    const scrollY = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? scrollY / total : 0;
+
+    // Hide if hero CTA is visible
+    const heroRect = heroCta ? heroCta.getBoundingClientRect() : null;
+    const heroVisible = heroRect && heroRect.bottom > 0 && heroRect.top < window.innerHeight;
+
+    // Hide near footer (200px)
+    const footRect = footer ? footer.getBoundingClientRect() : null;
+    const nearFooter = footRect && footRect.top < window.innerHeight + 200;
+
+    const shouldShow = pct >= 0.30 && !heroVisible && !nearFooter;
+    if(shouldShow === shown) return;
+    shown = shouldShow;
+    bar.classList.toggle("visible", shouldShow);
+  }
+
+  window.addEventListener("scroll", update, {passive:true});
+  update();
+})()
 
 /* ====================================================== */
 /* Zone Entry Transition                                   */
