@@ -922,10 +922,15 @@ if (film) {
 
     const lineTopPx = V_TOP * vh;
     const lineEndPx = V_BOT * vh;
-    const trophyPx  = lineTopPx + prog * (lineEndPx - lineTopPx);
+
+    // When prog reaches 1, lock trophy to the actual image position so it scrolls with the photo
+    const ch7LockY = ch7R.top + ch7R.height * 0.65;
+    const trophyPx = prog < 1
+      ? lineTopPx + prog * (lineEndPx - lineTopPx)
+      : ch7LockY;
 
     trkBg.style.top    = lineTopPx + 'px';
-    trkBg.style.height = (lineEndPx - lineTopPx) + 'px';
+    trkBg.style.height = (Math.max(lineEndPx, trophyPx) - lineTopPx) + 'px';
     trkFill.style.top    = lineTopPx + 'px';
     trkFill.style.height = (trophyPx - lineTopPx) + 'px';
     trkImg.style.top = trophyPx + 'px';
