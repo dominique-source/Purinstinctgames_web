@@ -212,35 +212,48 @@ h1,h2,h3,.disp{
 .yt-announce-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3vw,34px);line-height:1;color:var(--white);margin-bottom:10px}
 .yt-announce-sub{font-size:15px;color:var(--muted);line-height:1.5}
 
-/* ============ NARRATION — MERGED FILM STRIP ============ */
-.yt-narration{background:var(--bg-2);border-top:1px solid rgba(204,255,0,.08);overflow:hidden}
+/* ============ NARRATION — SHADOW SCROLL STACK ============ */
+.yt-narration{background:var(--bg-2);border-top:1px solid rgba(204,255,0,.08)}
 .yt-narr-intro{padding:clamp(60px,8vw,100px) 0 clamp(40px,5vw,60px)}
 .yt-narr-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(36px,5.5vw,72px);line-height:.92;margin:6px 0 0;color:var(--white)}
 .yt-narr-h .lime{color:var(--lime)}
 
-/* Full-bleed film container */
+/* Film container */
 .narr-film{width:100%;position:relative}
 
-/* Each chapter: full-width merged block */
-.yt-chapter{
-  position:relative;margin:0;
-  opacity:0;transform:translateY(14px);
-  transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);
+/* Trophy parallax — sticky behind all chapters, glimpsed in gaps */
+.narr-trophy{
+  position:sticky;top:58px;height:0;overflow:visible;z-index:1;pointer-events:none;
 }
+.narr-trophy img{
+  position:absolute;top:0;left:0;width:100%;
+  aspect-ratio:16/9;object-fit:cover;object-position:center 30%;
+  opacity:.07;filter:blur(1.5px) grayscale(30%);
+  transform:scale(1.04);transition:transform 14s linear;
+}
+.narr-trophy.drift img{transform:scale(1)}
+
+/* Chapter cards — spaced, with deep shadow */
+.yt-chapter{
+  position:relative;z-index:2;
+  margin-bottom:clamp(28px,5vw,64px);
+  opacity:0;transform:translateY(18px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),box-shadow .4s ease;
+  /* Shadow that casts onto the trophy layer and gap below */
+  box-shadow:0 40px 90px rgba(0,0,0,.92),0 10px 24px rgba(0,0,0,.7);
+}
+.yt-chapter:last-child{margin-bottom:0}
 .yt-chapter.visible{opacity:1;transform:translateY(0)}
-/* Each chapter slightly overlaps the previous at the diagonal seam */
-.yt-chapter:not(:first-child){margin-top:-4.8%}
-/* Ascending z-index so later chapters sit on top at seams */
-.yt-chapter:nth-child(1){z-index:1}.yt-chapter:nth-child(2){z-index:2}
-.yt-chapter:nth-child(3){z-index:3}.yt-chapter:nth-child(4){z-index:4}
-.yt-chapter:nth-child(5){z-index:5}.yt-chapter:nth-child(6){z-index:6}
-.yt-chapter:nth-child(7){z-index:7}
 
-/* Alternating diagonal bottom cuts create the merge illusion */
-.yt-chapter:nth-child(odd)  .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 93%,0 100%)}
-.yt-chapter:nth-child(even) .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 100%,0 93%)}
+/* Top-edge shadow overhang — "lifted card" depth */
+.yt-chapter::before{
+  content:"";position:absolute;top:-28px;left:0;right:0;height:28px;
+  background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 100%);
+  pointer-events:none;z-index:3;
+}
+.yt-chapter:first-child::before{display:none}
 
-/* Image container */
+/* Image container — no clip-path, full rect */
 .yt-chap-img-wrap{
   width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:#0a0a0a;
 }
@@ -253,21 +266,20 @@ h1,h2,h3,.disp{
 }
 .yt-chapter.visible .yt-chap-img-wrap img{transform:scale(1)}
 
-/* Cinematic gradient — dark bottom-left, clear top-right */
+/* Cinematic gradient overlay */
 .yt-chap-img-wrap::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
   background:
-    linear-gradient(to top,  rgba(0,0,0,.88) 0%, rgba(0,0,0,.45) 35%, transparent 62%),
-    linear-gradient(to right, rgba(0,0,0,.45) 0%, transparent 55%);
+    linear-gradient(to top,  rgba(0,0,0,.88) 0%,rgba(0,0,0,.45) 35%,transparent 62%),
+    linear-gradient(to right, rgba(0,0,0,.45) 0%,transparent 55%);
 }
 
-/* Text overlay — sits above gradient */
+/* Text overlay */
 .yt-chap-over{
   position:absolute;inset:0;z-index:2;
-  display:flex;align-items:flex-end;justify-content:space-between;
+  display:flex;align-items:flex-end;
   padding:clamp(16px,3.5vw,44px);
 }
-/* Ghost chapter number — top-right watermark */
 .yt-chap-num-big{
   font-family:var(--display);font-weight:900;font-style:italic;
   font-size:clamp(80px,13vw,170px);line-height:1;letter-spacing:-.02em;
@@ -293,10 +305,10 @@ h1,h2,h3,.disp{
 .yt-chapter.visible .yt-chap-desc{opacity:1;transform:translateY(0)}
 @media(max-width:560px){.yt-chap-desc{display:none}}
 
-/* Seam energy node between chapters */
+/* Seam energy node — now centered below each image in the gap */
 .narr-seam{
-  position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);
-  z-index:20;width:26px;height:26px;pointer-events:none;
+  position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);
+  z-index:10;width:26px;height:26px;pointer-events:none;
 }
 .narr-seam svg{width:100%;height:100%;overflow:visible}
 .ns-node{
@@ -309,18 +321,38 @@ h1,h2,h3,.disp{
 .yt-chapter.visible .ns-ray{stroke-dashoffset:0;opacity:.45}
 .yt-chapter:last-child .narr-seam{display:none}
 
-/* Film strip bottom spacer */
+/* Right-side progress track — trophy scrolls to the end */
+.narr-progress{
+  position:fixed;right:clamp(12px,2.5vw,28px);top:50%;transform:translateY(-50%);
+  z-index:100;display:flex;flex-direction:column;align-items:center;gap:0;
+  opacity:0;transition:opacity .4s ease;pointer-events:none;
+}
+.narr-progress.show{opacity:1}
+.narr-prog-line{width:1.5px;flex:1;background:rgba(204,255,0,.12);min-height:8px}
+.narr-prog-dot{
+  width:7px;height:7px;border-radius:50%;border:1.5px solid rgba(204,255,0,.3);
+  background:transparent;transition:border-color .3s,background .3s,transform .3s,box-shadow .3s;
+  flex-shrink:0;margin:4px 0;
+}
+.narr-prog-dot.active{
+  background:var(--lime);border-color:var(--lime);transform:scale(1.4);
+  box-shadow:0 0 8px rgba(204,255,0,.7),0 0 18px rgba(204,255,0,.35);
+}
+.narr-prog-trophy{
+  font-size:14px;margin-top:6px;opacity:.25;transition:opacity .4s ease,transform .4s ease,filter .4s ease;
+  line-height:1;
+}
+.narr-prog-trophy.lit{opacity:1;transform:scale(1.2);filter:drop-shadow(0 0 6px rgba(204,255,0,.8))}
+@media(max-width:700px){.narr-progress{display:none}}
+
+/* Bottom spacer */
 .narr-film-end{padding-bottom:clamp(60px,8vw,100px)}
 
-@media(max-width:600px){
-  .yt-chapter:nth-child(odd)  .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 96%,0 100%)}
-  .yt-chapter:nth-child(even) .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 100%,0 96%)}
-  .yt-chapter:not(:first-child){margin-top:-3.2%}
-}
 @media(prefers-reduced-motion:reduce){
   .yt-chapter,.yt-chap-desc{transition:none !important;opacity:1 !important;transform:none !important}
   .yt-chap-img-wrap img{transition:none !important;transform:none !important}
   .ns-node,.ns-ray{transition:none !important}
+  .narr-trophy img{transition:none !important}
 }
 
 /* ============ FOOTER ============ */
@@ -413,6 +445,31 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
 
   <div class="narr-film">
+
+    <!-- Trophy: sticky parallax background glimpsed between cards -->
+    <div class="narr-trophy" id="narrTrophy" aria-hidden="true">
+      <img src="vignette-pro.png" alt="">
+    </div>
+
+    <!-- Right-side chapter progress track -->
+    <nav class="narr-progress" id="narrProgress" aria-label="Chapter progress">
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-dot" data-ch="0"></div>
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-dot" data-ch="1"></div>
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-dot" data-ch="2"></div>
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-dot" data-ch="3"></div>
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-dot" data-ch="4"></div>
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-dot" data-ch="5"></div>
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-dot" data-ch="6"></div>
+      <div class="narr-prog-line"></div>
+      <div class="narr-prog-trophy" id="narrTrophyIcon">🏆</div>
+    </nav>
 
     <!-- 01 — The Invitation -->
     <div class="yt-chapter">
@@ -766,12 +823,37 @@ if(navDrop){
 document.getElementById('year').textContent = new Date().getFullYear();
 applyLang();
 
-// Merged film strip: reveal each chapter + fire seam node on scroll
-document.querySelectorAll('.yt-chapter').forEach(el => {
+// Chapter reveal + progress track
+const chapters = document.querySelectorAll('.yt-chapter');
+const dots = document.querySelectorAll('.narr-prog-dot');
+const progress = document.getElementById('narrProgress');
+const trophyIcon = document.getElementById('narrTrophyIcon');
+const narrTrophy = document.getElementById('narrTrophy');
+
+// Start slow Ken Burns drift on the sticky trophy image
+setTimeout(() => narrTrophy && narrTrophy.classList.add('drift'), 100);
+
+// Reveal chapters + sync active progress dot
+chapters.forEach((el, i) => {
   new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) el.classList.add('visible');
-  }, {threshold: 0.18}).observe(el);
+    if (e.isIntersecting) {
+      el.classList.add('visible');
+      // Update active dot
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[i]) dots[i].classList.add('active');
+      // Light up trophy on last chapter
+      trophyIcon && trophyIcon.classList.toggle('lit', i === chapters.length - 1);
+    }
+  }, {threshold: 0.35}).observe(el);
 });
+
+// Show/hide progress track when narr-film is in view
+const film = document.querySelector('.narr-film');
+if (film) {
+  new IntersectionObserver(([e]) => {
+    progress && progress.classList.toggle('show', e.isIntersecting);
+  }, {threshold: 0.05}).observe(film);
+}
 </script>
 </body>
 </html>
