@@ -915,19 +915,14 @@ if (film) {
     const rawProg = (window.scrollY - startScroll) / (endScroll - startScroll);
     const prog = Math.max(0, Math.min(1, rawProg));
 
-    // Show from seam dot until ch7 completely exits viewport
-    const visible = rawProg >= 0 && ch7R.bottom > vh * 0.05;
+    // Show while traveling; disappear the moment trophy reaches the photo trophy position
+    const visible = rawProg >= 0 && rawProg < 1;
     trk.classList.toggle('on', visible);
     if(!visible) return;
 
     const lineTopPx = V_TOP * vh;
     const lineEndPx = V_BOT * vh;
-
-    // When prog reaches 1, lock trophy to the actual image position so it scrolls with the photo
-    const ch7LockY = ch7R.top + ch7R.height * 0.46;
-    const trophyPx = prog < 1
-      ? lineTopPx + prog * (lineEndPx - lineTopPx)
-      : ch7LockY;
+    const trophyPx  = lineTopPx + prog * (lineEndPx - lineTopPx);
 
     trkBg.style.top    = lineTopPx + 'px';
     trkBg.style.height = (Math.max(lineEndPx, trophyPx) - lineTopPx) + 'px';
