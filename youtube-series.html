@@ -365,6 +365,15 @@ h1,h2,h3,.disp{
 /* Bottom spacer */
 .narr-film-end{padding-bottom:clamp(60px,8vw,100px)}
 
+/* ── Scroll trophy track ── */
+.yt-trk{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:0;transition:opacity .5s ease}
+.yt-trk.on{opacity:1}
+.yt-trk-bg,.yt-trk-fill{position:absolute;left:50%;transform:translateX(-1px);width:2px;top:0;height:0}
+.yt-trk-bg{background:rgba(204,255,0,.13)}
+.yt-trk-fill{background:#ccff00;box-shadow:0 0 8px rgba(204,255,0,.55),0 0 22px rgba(204,255,0,.18)}
+.yt-trk-trophy{position:absolute;left:50%;transform:translateX(-50%) translateY(-50%);width:clamp(72px,8vw,108px);filter:drop-shadow(0 0 18px rgba(204,255,0,.55)) drop-shadow(0 0 6px rgba(204,255,0,.3));will-change:top}
+@media(max-width:600px){.yt-trk{display:none}}
+
 @media(prefers-reduced-motion:reduce){
   .yt-chapter,.yt-chap-desc{transition:none !important;opacity:1 !important;transform:none !important}
   .yt-chap-img-wrap img{transition:none !important;transform:none !important}
@@ -866,6 +875,61 @@ if (film) {
     progress && progress.classList.toggle('show', e.isIntersecting);
   }, {threshold: 0.05}).observe(film);
 }
+
+</script>
+
+<!-- Scroll trophy track overlay -->
+<div class="yt-trk" id="ytTrk" aria-hidden="true">
+  <div class="yt-trk-bg"   id="ytTrkBg"></div>
+  <div class="yt-trk-fill" id="ytTrkFill"></div>
+  <img class="yt-trk-trophy" id="ytTrkImg" src="trophy.png" alt="">
+</div>
+
+<script>
+(function(){
+  const trk     = document.getElementById('ytTrk');
+  const trkBg   = document.getElementById('ytTrkBg');
+  const trkFill = document.getElementById('ytTrkFill');
+  const trkImg  = document.getElementById('ytTrkImg');
+  const filmEl  = document.querySelector('.narr-film');
+  const chs     = [...document.querySelectorAll('.yt-chapter')];
+  if(!trk || !filmEl || chs.length < 2) return;
+
+  const V_TOP = 0.14;
+  const V_BOT = 0.82;
+  let raf = null;
+
+  function update(){
+    raf = null;
+    const vh = window.innerHeight;
+    const filmR = filmEl.getBoundingClientRect();
+    const visible = filmR.top < vh * 0.9 && filmR.bottom > vh * 0.1;
+    trk.classList.toggle('on', visible);
+    if(!visible) return;
+
+    const ch2R = chs[1].getBoundingClientRect();
+    const ch7R = chs[chs.length - 1].getBoundingClientRect();
+    const startScroll = (ch2R.top + window.scrollY) - V_TOP * vh;
+    const endScroll   = (ch7R.top + window.scrollY + ch7R.height * 0.42) - V_BOT * vh;
+    const prog = Math.max(0, Math.min(1, (window.scrollY - startScroll) / (endScroll - startScroll)));
+
+    const lineTopPx = V_TOP * vh;
+    const lineEndPx = V_BOT * vh;
+    const trophyPx  = lineTopPx + prog * (lineEndPx - lineTopPx);
+
+    trkBg.style.top    = lineTopPx + 'px';
+    trkBg.style.height = (lineEndPx - lineTopPx) + 'px';
+    trkFill.style.top    = lineTopPx + 'px';
+    trkFill.style.height = (trophyPx - lineTopPx) + 'px';
+    trkImg.style.top = trophyPx + 'px';
+  }
+
+  function onScroll(){ if(!raf) raf = requestAnimationFrame(update); }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', ()=>{ clearTimeout(window._trkRsz); window._trkRsz = setTimeout(update,120); });
+  window.addEventListener('load', update);
+  update();
+})();
 </script>
 </body>
 </html>
