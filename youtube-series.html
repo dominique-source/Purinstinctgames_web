@@ -929,7 +929,9 @@ if (film) {
     const trophyAlpha = prog <= fadeStartProg
       ? 1
       : Math.max(0, 1 - (prog - fadeStartProg) / (1 - fadeStartProg));
-    trkImg.style.opacity = trophyAlpha;
+    trkImg.style.opacity  = trophyAlpha;
+    trkFill.style.opacity = trophyAlpha;
+    trkBg.style.opacity   = trophyAlpha;
 
     trkBg.style.top    = lineTopPx + 'px';
     trkBg.style.height = (Math.max(lineEndPx, trophyPx) - lineTopPx) + 'px';
