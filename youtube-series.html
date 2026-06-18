@@ -206,37 +206,116 @@ h1,h2,h3,.disp{
 .yt-announce-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3vw,34px);line-height:1;color:var(--white);margin-bottom:10px}
 .yt-announce-sub{font-size:15px;color:var(--muted);line-height:1.5}
 
-/* ============ NARRATION ============ */
-.yt-narration{background:var(--bg-2);padding:clamp(60px,8vw,100px) 0;border-top:1px solid rgba(204,255,0,.08)}
-.yt-narr-intro{margin-bottom:clamp(48px,6vw,72px)}
+/* ============ NARRATION — MERGED FILM STRIP ============ */
+.yt-narration{background:var(--bg-2);border-top:1px solid rgba(204,255,0,.08);overflow:hidden}
+.yt-narr-intro{padding:clamp(60px,8vw,100px) 0 clamp(40px,5vw,60px)}
 .yt-narr-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(36px,5.5vw,72px);line-height:.92;margin:6px 0 0;color:var(--white)}
 .yt-narr-h .lime{color:var(--lime)}
-.yt-chapter{margin-bottom:clamp(20px,2.5vw,32px)}
-.yt-chapter:last-child{margin-bottom:0}
-.yt-chap-top{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
-.yt-chap-num{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(60px,9vw,110px);line-height:.85;color:rgba(204,255,0,.07);flex-shrink:0;letter-spacing:-.02em;pointer-events:none;user-select:none}
-.yt-chap-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3.2vw,42px);line-height:.92;color:var(--white)}
-.yt-chap-img-wrap{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:#0f0f0f}
-.yt-chap-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.5) 0%,transparent 40%);pointer-events:none}
-.yt-chap-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
-.yt-chapter:hover .yt-chap-img-wrap img{transform:scale(1.025)}
-.yt-chap-bottom{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding-top:16px}
-.yt-chap-desc{font-size:clamp(14px,1.6vw,17px);color:var(--muted);max-width:58ch;line-height:1.6}
-.yt-chap-tag{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(204,255,0,.35);white-space:nowrap;padding-top:3px;flex-shrink:0}
-@media(max-width:640px){.yt-chap-bottom{flex-direction:column;gap:8px}.yt-chap-tag{order:-1}}
 
-/* ============ CHAPTER CONNECTORS ============ */
-.narr-connector{display:flex;flex-direction:column;align-items:center;margin:0 0 clamp(20px,2.5vw,32px);overflow:visible}
-.narr-conn-svg{width:clamp(56px,7vw,76px);overflow:visible}
-.nc-draw{opacity:.6;transition:stroke-dashoffset 1.1s cubic-bezier(.16,1,.3,1)}
-.nc-node{opacity:0;transform:scale(0);transform-origin:center;filter:drop-shadow(0 0 5px rgba(204,255,0,.9)) drop-shadow(0 0 14px rgba(204,255,0,.5));transition:opacity .25s ease .85s,transform .55s cubic-bezier(.34,1.56,.64,1) .85s}
-.nc-ray{opacity:0;transition:stroke-dashoffset .55s ease .95s,opacity .25s ease .9s}
-.narr-conn-label{font-family:var(--display);font-weight:900;font-style:italic;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(204,255,0,0);margin-top:4px;transition:color .4s ease 1.15s}
-.narr-connector.drawn .nc-draw{stroke-dashoffset:0}
-.narr-connector.drawn .nc-node{opacity:1;transform:scale(1)}
-.narr-connector.drawn .nc-ray{stroke-dashoffset:0;opacity:.5}
-.narr-connector.drawn .narr-conn-label{color:rgba(204,255,0,.22)}
-@media(prefers-reduced-motion:reduce){.nc-draw,.nc-node,.nc-ray,.narr-conn-label{transition:none !important}}
+/* Full-bleed film container */
+.narr-film{width:100%;position:relative}
+
+/* Each chapter: full-width merged block */
+.yt-chapter{
+  position:relative;margin:0;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);
+}
+.yt-chapter.visible{opacity:1;transform:translateY(0)}
+/* Each chapter slightly overlaps the previous at the diagonal seam */
+.yt-chapter:not(:first-child){margin-top:-4.8%}
+/* Ascending z-index so later chapters sit on top at seams */
+.yt-chapter:nth-child(1){z-index:1}.yt-chapter:nth-child(2){z-index:2}
+.yt-chapter:nth-child(3){z-index:3}.yt-chapter:nth-child(4){z-index:4}
+.yt-chapter:nth-child(5){z-index:5}.yt-chapter:nth-child(6){z-index:6}
+.yt-chapter:nth-child(7){z-index:7}
+
+/* Alternating diagonal bottom cuts create the merge illusion */
+.yt-chapter:nth-child(odd)  .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 93%,0 100%)}
+.yt-chapter:nth-child(even) .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 100%,0 93%)}
+
+/* Image container */
+.yt-chap-img-wrap{
+  width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:#0a0a0a;
+}
+@media(min-width:800px){.yt-chap-img-wrap{aspect-ratio:21/9}}
+
+/* Ken Burns zoom-out on scroll-in */
+.yt-chap-img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transform:scale(1.05);transition:transform 9s ease-out;will-change:transform;
+}
+.yt-chapter.visible .yt-chap-img-wrap img{transform:scale(1)}
+
+/* Cinematic gradient — dark bottom-left, clear top-right */
+.yt-chap-img-wrap::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    linear-gradient(to top,  rgba(0,0,0,.88) 0%, rgba(0,0,0,.45) 35%, transparent 62%),
+    linear-gradient(to right, rgba(0,0,0,.45) 0%, transparent 55%);
+}
+
+/* Text overlay — sits above gradient */
+.yt-chap-over{
+  position:absolute;inset:0;z-index:2;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:clamp(16px,3.5vw,44px);
+}
+/* Ghost chapter number — top-right watermark */
+.yt-chap-num-big{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(80px,13vw,170px);line-height:1;letter-spacing:-.02em;
+  color:rgba(204,255,0,.055);
+  position:absolute;top:clamp(8px,2vw,18px);right:clamp(14px,3vw,36px);
+  pointer-events:none;user-select:none;
+}
+.yt-chap-text{flex:1;min-width:0;max-width:56ch}
+.yt-chap-tag{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--lime);opacity:.7;display:block;margin-bottom:6px;
+}
+.yt-chap-title{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(22px,3.2vw,48px);line-height:.92;color:var(--white);margin:0 0 10px;
+}
+.yt-chap-desc{
+  font-size:clamp(13px,1.4vw,15px);color:rgba(255,255,255,.62);line-height:1.5;margin:0;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .6s ease .4s,transform .6s ease .4s;
+}
+.yt-chapter.visible .yt-chap-desc{opacity:1;transform:translateY(0)}
+@media(max-width:560px){.yt-chap-desc{display:none}}
+
+/* Seam energy node between chapters */
+.narr-seam{
+  position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);
+  z-index:20;width:26px;height:26px;pointer-events:none;
+}
+.narr-seam svg{width:100%;height:100%;overflow:visible}
+.ns-node{
+  filter:drop-shadow(0 0 4px rgba(204,255,0,.9)) drop-shadow(0 0 10px rgba(204,255,0,.55));
+  opacity:0;transform:scale(0);transform-origin:center;
+  transition:opacity .3s ease .65s,transform .45s cubic-bezier(.34,1.56,.64,1) .65s;
+}
+.ns-ray{opacity:0;transition:stroke-dashoffset .4s ease .8s,opacity .25s ease .75s}
+.yt-chapter.visible .ns-node{opacity:1;transform:scale(1)}
+.yt-chapter.visible .ns-ray{stroke-dashoffset:0;opacity:.45}
+.yt-chapter:last-child .narr-seam{display:none}
+
+/* Film strip bottom spacer */
+.narr-film-end{padding-bottom:clamp(60px,8vw,100px)}
+
+@media(max-width:600px){
+  .yt-chapter:nth-child(odd)  .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 96%,0 100%)}
+  .yt-chapter:nth-child(even) .yt-chap-img-wrap{clip-path:polygon(0 0,100% 0,100% 100%,0 96%)}
+  .yt-chapter:not(:first-child){margin-top:-3.2%}
+}
+@media(prefers-reduced-motion:reduce){
+  .yt-chapter,.yt-chap-desc{transition:none !important;opacity:1 !important;transform:none !important}
+  .yt-chap-img-wrap img{transition:none !important;transform:none !important}
+  .ns-node,.ns-ray{transition:none !important}
+}
 
 /* ============ FOOTER ============ */
 footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
@@ -319,196 +398,176 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <!-- ============ NARRATION ============ -->
 <section class="yt-narration">
   <div class="wrap">
-
     <div class="yt-narr-intro">
       <span class="eyebrow" data-i18n="narr_ey">The Episode</span>
       <h2 class="yt-narr-h" data-i18n="narr_h">7 CHAPTERS. <span class="lime">ONE STORY.</span></h2>
     </div>
+  </div>
+
+  <div class="narr-film">
 
     <!-- 01 — The Invitation -->
     <div class="yt-chapter">
-      <div class="yt-chap-top">
-        <span class="yt-chap-num">01</span>
-        <span class="yt-chap-title" data-i18n="narr_01_t">THE INVITATION</span>
-      </div>
       <div class="yt-chap-img-wrap">
         <img src="narr-01-invitation.png" alt="The Invitation" loading="lazy">
+        <div class="yt-chap-over">
+          <span class="yt-chap-num-big" aria-hidden="true">01</span>
+          <div class="yt-chap-text">
+            <span class="yt-chap-tag">CHAPTER 01 / 07</span>
+            <h3 class="yt-chap-title" data-i18n="narr_01_t">THE INVITATION</h3>
+            <p class="yt-chap-desc" data-i18n="narr_01_d">Dominique hits the streets. He scouts. He recruits. 25 athletes — no casting, no auditions. Pure instinct.</p>
+          </div>
+        </div>
       </div>
-      <div class="yt-chap-bottom">
-        <p class="yt-chap-desc" data-i18n="narr_01_d">Dominique hits the streets. He scouts. He recruits. 25 athletes — no casting, no auditions. Pure instinct.</p>
-        <span class="yt-chap-tag">CHAPTER 01 / 07</span>
+      <div class="narr-seam" aria-hidden="true">
+        <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ns-node" cx="13" cy="13" r="4" fill="#ccff00"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="narr-connector" aria-hidden="true">
-      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
-        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
-        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-      </svg>
-      <span class="narr-conn-label">01 → 02</span>
     </div>
 
     <!-- 02 — Arrival Day -->
     <div class="yt-chapter">
-      <div class="yt-chap-top">
-        <span class="yt-chap-num">02</span>
-        <span class="yt-chap-title" data-i18n="narr_02_t">ARRIVAL DAY</span>
-      </div>
       <div class="yt-chap-img-wrap">
         <img src="narr-02-arrival.png" alt="Arrival Day" loading="lazy">
+        <div class="yt-chap-over">
+          <span class="yt-chap-num-big" aria-hidden="true">02</span>
+          <div class="yt-chap-text">
+            <span class="yt-chap-tag">CHAPTER 02 / 07</span>
+            <h3 class="yt-chap-title" data-i18n="narr_02_t">ARRIVAL DAY</h3>
+            <p class="yt-chap-desc" data-i18n="narr_02_d">The arena opens. Athletes walk in and see the field for the first time. Nobody knows what's about to happen.</p>
+          </div>
+        </div>
       </div>
-      <div class="yt-chap-bottom">
-        <p class="yt-chap-desc" data-i18n="narr_02_d">The arena opens. Athletes walk in and see the field for the first time. Nobody knows what's about to happen.</p>
-        <span class="yt-chap-tag">CHAPTER 02 / 07</span>
+      <div class="narr-seam" aria-hidden="true">
+        <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ns-node" cx="13" cy="13" r="4" fill="#ccff00"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="narr-connector" aria-hidden="true">
-      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
-        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
-        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-      </svg>
-      <span class="narr-conn-label">02 → 03</span>
     </div>
 
     <!-- 03 — Random Draw -->
     <div class="yt-chapter">
-      <div class="yt-chap-top">
-        <span class="yt-chap-num">03</span>
-        <span class="yt-chap-title" data-i18n="narr_03_t">RANDOM DRAW</span>
-      </div>
       <div class="yt-chap-img-wrap">
         <img src="narr-03-draw.png" alt="Random Draw" loading="lazy">
+        <div class="yt-chap-over">
+          <span class="yt-chap-num-big" aria-hidden="true">03</span>
+          <div class="yt-chap-text">
+            <span class="yt-chap-tag">CHAPTER 03 / 07</span>
+            <h3 class="yt-chap-title" data-i18n="narr_03_t">RANDOM DRAW</h3>
+            <p class="yt-chap-desc" data-i18n="narr_03_d">Teams form by chance. Nobody picks their squad. Nobody controls the outcome. The draw is live, in front of everyone.</p>
+          </div>
+        </div>
       </div>
-      <div class="yt-chap-bottom">
-        <p class="yt-chap-desc" data-i18n="narr_03_d">Teams form by chance. Nobody picks their squad. Nobody controls the outcome. The draw is live, in front of everyone.</p>
-        <span class="yt-chap-tag">CHAPTER 03 / 07</span>
+      <div class="narr-seam" aria-hidden="true">
+        <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ns-node" cx="13" cy="13" r="4" fill="#ccff00"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="narr-connector" aria-hidden="true">
-      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
-        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
-        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-      </svg>
-      <span class="narr-conn-label">03 → 04</span>
     </div>
 
     <!-- 04 — Skills Gauntlet -->
     <div class="yt-chapter">
-      <div class="yt-chap-top">
-        <span class="yt-chap-num">04</span>
-        <span class="yt-chap-title" data-i18n="narr_04_t">SKILLS GAUNTLET</span>
-      </div>
       <div class="yt-chap-img-wrap">
         <img src="narr-04-skills.png" alt="Skills Gauntlet" loading="lazy">
+        <div class="yt-chap-over">
+          <span class="yt-chap-num-big" aria-hidden="true">04</span>
+          <div class="yt-chap-text">
+            <span class="yt-chap-tag">CHAPTER 04 / 07</span>
+            <h3 class="yt-chap-title" data-i18n="narr_04_t">SKILLS GAUNTLET</h3>
+            <p class="yt-chap-desc" data-i18n="narr_04_d">5 zones. Speed, Agility, Hands, Feet, Game IQ. Points stack. The live board comes alive. Every second counts.</p>
+          </div>
+        </div>
       </div>
-      <div class="yt-chap-bottom">
-        <p class="yt-chap-desc" data-i18n="narr_04_d">5 zones. Speed, Agility, Hands, Feet, Game IQ. Points stack. The live board comes alive. Every second counts.</p>
-        <span class="yt-chap-tag">CHAPTER 04 / 07</span>
+      <div class="narr-seam" aria-hidden="true">
+        <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ns-node" cx="13" cy="13" r="4" fill="#ccff00"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="narr-connector" aria-hidden="true">
-      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
-        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
-        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-      </svg>
-      <span class="narr-conn-label">04 → 05</span>
     </div>
 
     <!-- 05 — PurInstinct Main Event -->
     <div class="yt-chapter">
-      <div class="yt-chap-top">
-        <span class="yt-chap-num">05</span>
-        <span class="yt-chap-title" data-i18n="narr_05_t">PURINSTINCT MAIN EVENT</span>
-      </div>
       <div class="yt-chap-img-wrap">
         <img src="narr-05-mainevent.png" alt="PurInstinct Main Event" loading="lazy">
+        <div class="yt-chap-over">
+          <span class="yt-chap-num-big" aria-hidden="true">05</span>
+          <div class="yt-chap-text">
+            <span class="yt-chap-tag">CHAPTER 05 / 07</span>
+            <h3 class="yt-chap-title" data-i18n="narr_05_t">PURINSTINCT MAIN EVENT</h3>
+            <p class="yt-chap-desc" data-i18n="narr_05_d">The signature match. 3 against 2. No contact. No compromise. Cross the field, keep the ball, score your name on the board.</p>
+          </div>
+        </div>
       </div>
-      <div class="yt-chap-bottom">
-        <p class="yt-chap-desc" data-i18n="narr_05_d">The signature match. 3 against 2. No contact. No compromise. Cross the field, keep the ball, score your name on the board.</p>
-        <span class="yt-chap-tag">CHAPTER 05 / 07</span>
+      <div class="narr-seam" aria-hidden="true">
+        <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ns-node" cx="13" cy="13" r="4" fill="#ccff00"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="narr-connector" aria-hidden="true">
-      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
-        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
-        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-      </svg>
-      <span class="narr-conn-label">05 → 06</span>
     </div>
 
     <!-- 06 — Leaderboard Drama -->
     <div class="yt-chapter">
-      <div class="yt-chap-top">
-        <span class="yt-chap-num">06</span>
-        <span class="yt-chap-title" data-i18n="narr_06_t">LEADERBOARD DRAMA</span>
-      </div>
       <div class="yt-chap-img-wrap">
         <img src="narr-06-leaderboard.png" alt="Leaderboard Drama" loading="lazy">
+        <div class="yt-chap-over">
+          <span class="yt-chap-num-big" aria-hidden="true">06</span>
+          <div class="yt-chap-text">
+            <span class="yt-chap-tag">CHAPTER 06 / 07</span>
+            <h3 class="yt-chap-title" data-i18n="narr_06_t">LEADERBOARD DRAMA</h3>
+            <p class="yt-chap-desc" data-i18n="narr_06_d">The numbers don't lie. The board shifts in real time. Anyone can see where they stand — and who they need to beat.</p>
+          </div>
+        </div>
       </div>
-      <div class="yt-chap-bottom">
-        <p class="yt-chap-desc" data-i18n="narr_06_d">The numbers don't lie. The board shifts in real time. Anyone can see where they stand — and who they need to beat.</p>
-        <span class="yt-chap-tag">CHAPTER 06 / 07</span>
+      <div class="narr-seam" aria-hidden="true">
+        <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ns-node" cx="13" cy="13" r="4" fill="#ccff00"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="1"  stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="1" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+          <line class="ns-ray" x1="13" y1="13" x2="25" y2="25" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="17" stroke-dashoffset="17"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="narr-connector" aria-hidden="true">
-      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
-        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
-        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
-      </svg>
-      <span class="narr-conn-label">06 → 07</span>
     </div>
 
     <!-- 07 — Champion Crowned -->
     <div class="yt-chapter">
-      <div class="yt-chap-top">
-        <span class="yt-chap-num">07</span>
-        <span class="yt-chap-title" data-i18n="narr_08_t">CHAMPION CROWNED</span>
-      </div>
       <div class="yt-chap-img-wrap">
         <img src="narr-08-champion.png" alt="Champion Crowned" loading="lazy">
+        <div class="yt-chap-over">
+          <span class="yt-chap-num-big" aria-hidden="true">07</span>
+          <div class="yt-chap-text">
+            <span class="yt-chap-tag">CHAPTER 07 / 07</span>
+            <h3 class="yt-chap-title" data-i18n="narr_08_t">CHAMPION CROWNED</h3>
+            <p class="yt-chap-desc" data-i18n="narr_08_d">One winner. One spotlight. Confetti, cheers, and a name that will be remembered. The episode ends. The story stays.</p>
+          </div>
+        </div>
       </div>
-      <div class="yt-chap-bottom">
-        <p class="yt-chap-desc" data-i18n="narr_08_d">One winner. One spotlight. Confetti, cheers, and a name that will be remembered. The episode ends. The story stays.</p>
-        <span class="yt-chap-tag">CHAPTER 07 / 07</span>
-      </div>
+      <div class="narr-seam" aria-hidden="true"></div>
     </div>
 
   </div>
+  <div class="narr-film-end"></div>
 </section>
 
 <!-- ============ MAIN ============ -->
@@ -699,11 +758,11 @@ if(navDrop){
 document.getElementById('year').textContent = new Date().getFullYear();
 applyLang();
 
-// Animate chapter connectors when scrolled into view
-document.querySelectorAll('.narr-connector').forEach(el => {
+// Merged film strip: reveal each chapter + fire seam node on scroll
+document.querySelectorAll('.yt-chapter').forEach(el => {
   new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) el.classList.add('drawn');
-  }, {threshold: 0.5}).observe(el);
+    if (e.isIntersecting) el.classList.add('visible');
+  }, {threshold: 0.18}).observe(el);
 });
 </script>
 </body>
