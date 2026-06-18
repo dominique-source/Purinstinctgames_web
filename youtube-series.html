@@ -267,6 +267,10 @@ h1,h2,h3,.disp{
 .yt-chapter.visible .yt-chap-img-wrap img{transform:scale(1)}
 
 /* Cinematic gradient overlay */
+.yt-chap-img-wrap::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(to bottom, rgba(0,0,0,.72) 0%,rgba(0,0,0,.18) 28%,transparent 52%);
+}
 .yt-chap-img-wrap::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
   background:
