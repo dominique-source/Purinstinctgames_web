@@ -211,7 +211,7 @@ h1,h2,h3,.disp{
 .yt-narr-intro{margin-bottom:clamp(48px,6vw,72px)}
 .yt-narr-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(36px,5.5vw,72px);line-height:.92;margin:6px 0 0;color:var(--white)}
 .yt-narr-h .lime{color:var(--lime)}
-.yt-chapter{margin-bottom:clamp(64px,9vw,110px)}
+.yt-chapter{margin-bottom:clamp(20px,2.5vw,32px)}
 .yt-chapter:last-child{margin-bottom:0}
 .yt-chap-top{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
 .yt-chap-num{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(60px,9vw,110px);line-height:.85;color:rgba(204,255,0,.07);flex-shrink:0;letter-spacing:-.02em;pointer-events:none;user-select:none}
@@ -224,6 +224,19 @@ h1,h2,h3,.disp{
 .yt-chap-desc{font-size:clamp(14px,1.6vw,17px);color:var(--muted);max-width:58ch;line-height:1.6}
 .yt-chap-tag{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(204,255,0,.35);white-space:nowrap;padding-top:3px;flex-shrink:0}
 @media(max-width:640px){.yt-chap-bottom{flex-direction:column;gap:8px}.yt-chap-tag{order:-1}}
+
+/* ============ CHAPTER CONNECTORS ============ */
+.narr-connector{display:flex;flex-direction:column;align-items:center;margin:0 0 clamp(20px,2.5vw,32px);overflow:visible}
+.narr-conn-svg{width:clamp(56px,7vw,76px);overflow:visible}
+.nc-draw{opacity:.6;transition:stroke-dashoffset 1.1s cubic-bezier(.16,1,.3,1)}
+.nc-node{opacity:0;transform:scale(0);transform-origin:center;filter:drop-shadow(0 0 5px rgba(204,255,0,.9)) drop-shadow(0 0 14px rgba(204,255,0,.5));transition:opacity .25s ease .85s,transform .55s cubic-bezier(.34,1.56,.64,1) .85s}
+.nc-ray{opacity:0;transition:stroke-dashoffset .55s ease .95s,opacity .25s ease .9s}
+.narr-conn-label{font-family:var(--display);font-weight:900;font-style:italic;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(204,255,0,0);margin-top:4px;transition:color .4s ease 1.15s}
+.narr-connector.drawn .nc-draw{stroke-dashoffset:0}
+.narr-connector.drawn .nc-node{opacity:1;transform:scale(1)}
+.narr-connector.drawn .nc-ray{stroke-dashoffset:0;opacity:.5}
+.narr-connector.drawn .narr-conn-label{color:rgba(204,255,0,.22)}
+@media(prefers-reduced-motion:reduce){.nc-draw,.nc-node,.nc-ray,.narr-conn-label{transition:none !important}}
 
 /* ============ FOOTER ============ */
 footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
@@ -327,6 +340,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </div>
 
+    <div class="narr-connector" aria-hidden="true">
+      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
+        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
+        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+      </svg>
+      <span class="narr-conn-label">01 → 02</span>
+    </div>
+
     <!-- 02 — Arrival Day -->
     <div class="yt-chapter">
       <div class="yt-chap-top">
@@ -340,6 +366,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p class="yt-chap-desc" data-i18n="narr_02_d">The arena opens. Athletes walk in and see the field for the first time. Nobody knows what's about to happen.</p>
         <span class="yt-chap-tag">CHAPTER 02 / 08</span>
       </div>
+    </div>
+
+    <div class="narr-connector" aria-hidden="true">
+      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
+        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
+        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+      </svg>
+      <span class="narr-conn-label">02 → 03</span>
     </div>
 
     <!-- 03 — Random Draw -->
@@ -357,6 +396,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </div>
 
+    <div class="narr-connector" aria-hidden="true">
+      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
+        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
+        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+      </svg>
+      <span class="narr-conn-label">03 → 04</span>
+    </div>
+
     <!-- 04 — Skills Gauntlet -->
     <div class="yt-chapter">
       <div class="yt-chap-top">
@@ -370,6 +422,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p class="yt-chap-desc" data-i18n="narr_04_d">5 zones. Speed, Agility, Hands, Feet, Game IQ. Points stack. The live board comes alive. Every second counts.</p>
         <span class="yt-chap-tag">CHAPTER 04 / 08</span>
       </div>
+    </div>
+
+    <div class="narr-connector" aria-hidden="true">
+      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
+        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
+        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+      </svg>
+      <span class="narr-conn-label">04 → 05</span>
     </div>
 
     <!-- 05 — PurInstinct Main Event -->
@@ -387,6 +452,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </div>
 
+    <div class="narr-connector" aria-hidden="true">
+      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
+        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
+        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+      </svg>
+      <span class="narr-conn-label">05 → 06</span>
+    </div>
+
     <!-- 06 — Leaderboard Drama -->
     <div class="yt-chapter">
       <div class="yt-chap-top">
@@ -402,6 +480,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </div>
 
+    <div class="narr-connector" aria-hidden="true">
+      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
+        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
+        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+      </svg>
+      <span class="narr-conn-label">06 → 07</span>
+    </div>
+
     <!-- 07 — Creator Challenge -->
     <div class="yt-chapter">
       <div class="yt-chap-top">
@@ -415,6 +506,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p class="yt-chap-desc" data-i18n="narr_07_d">Dominique steps onto the floor. He faces the top athletes head-on. No special treatment. No easy path. He earns his place.</p>
         <span class="yt-chap-tag">CHAPTER 07 / 08</span>
       </div>
+    </div>
+
+    <div class="narr-connector" aria-hidden="true">
+      <svg class="narr-conn-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1" stroke-dasharray="7 16" opacity=".09"/>
+        <line class="nc-draw" x1="50" y1="8" x2="50" y2="152" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="144" stroke-dashoffset="144"/>
+        <circle class="nc-node" cx="50" cy="80" r="5" fill="#ccff00"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="55" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="14" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+        <line class="nc-ray" x1="50" y1="80" x2="86" y2="105" stroke="#ccff00" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="44"/>
+      </svg>
+      <span class="narr-conn-label">07 → 08</span>
     </div>
 
     <!-- 08 — Champion Crowned -->
@@ -624,6 +728,13 @@ if(navDrop){
 
 document.getElementById('year').textContent = new Date().getFullYear();
 applyLang();
+
+// Animate chapter connectors when scrolled into view
+document.querySelectorAll('.narr-connector').forEach(el => {
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) el.classList.add('drawn');
+  }, {threshold: 0.5}).observe(el);
+});
 </script>
 </body>
 </html>
