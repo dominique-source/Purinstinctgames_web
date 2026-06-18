@@ -915,7 +915,7 @@ if (film) {
     const rawProg = (window.scrollY - startScroll) / (endScroll - startScroll);
     const prog = Math.max(0, Math.min(1, rawProg));
 
-    // Show while traveling; disappear the moment trophy reaches the photo trophy position
+    // Show while traveling; hide after trophy fully fades into ch7
     const visible = rawProg >= 0 && rawProg < 1;
     trk.classList.toggle('on', visible);
     if(!visible) return;
@@ -923,6 +923,13 @@ if (film) {
     const lineTopPx = V_TOP * vh;
     const lineEndPx = V_BOT * vh;
     const trophyPx  = lineTopPx + prog * (lineEndPx - lineTopPx);
+
+    // Fade trophy out quickly once it crosses the top of ch7 image
+    const fadeStartProg = Math.max(0, (ch7R.top - lineTopPx) / (lineEndPx - lineTopPx));
+    const trophyAlpha = prog <= fadeStartProg
+      ? 1
+      : Math.max(0, 1 - (prog - fadeStartProg) / (1 - fadeStartProg));
+    trkImg.style.opacity = trophyAlpha;
 
     trkBg.style.top    = lineTopPx + 'px';
     trkBg.style.height = (Math.max(lineEndPx, trophyPx) - lineTopPx) + 'px';
