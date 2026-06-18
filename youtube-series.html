@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Series — PürInstinct Creator Invitational</title>
+<meta name="description" content="Creator 01 confirmed. Montréal. The PürInstinct Creator Invitational Series — one creator, 25 athletes, six disciplines, two hours. More creators and cities coming soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --white:#F4F4F2;
+  --muted:#9C9C96;
+  --line:rgba(204,255,0,.18);
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,.disp{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lime{color:var(--lime)}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-links a.active{color:var(--lime);opacity:1}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:120px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-btn.active{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:220px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:hover{color:var(--lime);background:rgba(204,255,0,.04)}
+.nav-drop-item.active{color:var(--lime)}
+
+/* ============ HERO ============ */
+.yt-hero{
+  position:relative;min-height:65vh;display:flex;align-items:flex-end;
+  padding-top:80px;overflow:hidden;background:#0A0A0A;
+}
+.yt-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,#0A0A0A 0%,#0d1a00 50%,#0A0A0A 100%);
+}
+.yt-hero-bg::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(-55deg,rgba(204,255,0,.025) 0,rgba(204,255,0,.025) 1px,transparent 1px,transparent 32px);
+}
+.yt-hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 60% 50%,rgba(204,255,0,.07) 0%,transparent 70%);
+}
+.yt-hero-inner{
+  position:relative;z-index:1;
+  padding:clamp(60px,10vw,120px) 0 clamp(56px,7vw,80px);
+}
+.yt-hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:var(--lime);margin-bottom:20px;
+}
+.yt-hero-tag::before{content:"";width:28px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.yt-hero h1{
+  font-size:clamp(56px,10vw,130px);line-height:.88;
+  letter-spacing:-.02em;margin-bottom:28px;color:var(--white);
+}
+.yt-hero h1 .lime{color:var(--lime)}
+.yt-hero-sub{
+  font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:54ch;line-height:1.5;
+}
+
+/* ============ FORMAT STRIP ============ */
+.yt-strip{
+  background:#111;border-top:1px solid rgba(204,255,0,.12);
+  border-bottom:1px solid rgba(204,255,0,.12);
+  padding:clamp(24px,3.5vw,40px) 0;
+}
+.yt-strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(204,255,0,.1)}
+@media(max-width:640px){.yt-strip-grid{grid-template-columns:repeat(2,1fr)}}
+.yt-strip-item{
+  background:#111;padding:22px 28px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.yt-strip-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,40px);color:var(--lime);line-height:1}
+.yt-strip-l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* ============ MAIN CONTENT ============ */
+.yt-main{padding:clamp(60px,8vw,110px) 0;position:relative;overflow:hidden}
+.yt-main::before{content:"";position:absolute;right:-80px;top:-40px;width:380px;height:380px;background:radial-gradient(ellipse at 60% 40%,rgba(204,255,0,.05) 0%,transparent 65%);pointer-events:none}
+.yt-intro{max-width:700px;margin-bottom:clamp(48px,6vw,80px)}
+.yt-headline{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(44px,7vw,88px);line-height:.92;margin:0 0 24px;color:var(--white)}
+.yt-headline .lime{color:var(--lime)}
+.yt-intro-body{font-size:clamp(15px,1.8vw,18px);color:var(--muted);max-width:58ch;line-height:1.6}
+
+/* ============ CREATOR CARDS ============ */
+.yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px)}
+@media(max-width:860px){.yt-grid{grid-template-columns:1fr;max-width:480px}}
+.yt-card{position:relative;border:1.5px solid rgba(255,255,255,.07);background:#0f0f0f;overflow:hidden;display:flex;flex-direction:column;min-height:320px}
+.yt-card.confirmed{border-color:rgba(204,255,0,.35);background:#0d1400}
+.yt-card.confirmed::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--lime)}
+.yt-card-slash{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.yt-slash-inner{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(100px,18vw,180px);color:rgba(204,255,0,.05);line-height:1;user-select:none}
+.yt-card.confirmed .yt-slash-inner{color:rgba(204,255,0,.09)}
+.yt-card-body{position:relative;z-index:2;padding:28px 26px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.yt-num{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.yt-card.confirmed .yt-num{color:var(--lime)}
+.yt-badge{display:inline-flex;align-items:center;font-family:var(--display);font-weight:900;font-style:italic;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#0A0A0A;background:var(--lime);padding:4px 12px;align-self:flex-start}
+.yt-badge.soon{background:none;color:var(--muted);border:1px solid rgba(255,255,255,.12);padding:3px 11px}
+.yt-creator-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(20px,2.8vw,30px);line-height:.95;color:var(--white);margin-top:6px}
+.yt-creator-name.locked{color:rgba(255,255,255,.2);letter-spacing:.05em}
+.yt-city{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:15px;letter-spacing:.08em;color:var(--lime)}
+.yt-city.locked{color:rgba(255,255,255,.15)}
+.yt-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:16px}
+.yt-tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 11px;border-radius:99px;border:1px solid rgba(255,255,255,.1);color:var(--muted)}
+.yt-card.confirmed .yt-tag{border-color:rgba(204,255,0,.3);color:var(--lime)}
+
+/* ============ ANNOUNCE BANNER ============ */
+.yt-announce{margin-top:clamp(40px,5vw,64px);border:1.5px solid rgba(204,255,0,.2);background:rgba(204,255,0,.03);padding:clamp(22px,4vw,40px) clamp(24px,4vw,48px)}
+.yt-announce-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3vw,34px);line-height:1;color:var(--white);margin-bottom:10px}
+.yt-announce-sub{font-size:15px;color:var(--muted);line-height:1.5}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#concept" data-i18n="nav_concept">The concept</a>
+    <a href="index.html#arena" data-i18n="nav_arena">The arena</a>
+    <a href="index.html#instincts" data-i18n="nav_instincts">The 5 instincts</a>
+    <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <div class="nav-drop" id="navDrop">
+      <button class="nav-drop-btn active" aria-haspopup="true" aria-expanded="false">
+        <span data-i18n="nav_special">Special projects</span><span class="nav-drop-arrow">▾</span>
+      </button>
+      <div class="nav-drop-menu" role="menu">
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="youtube-series.html" class="nav-drop-item active" data-i18n="nav_yt">YouTube Series</a>
+      </div>
+    </div>
+    <a href="index.html#billets" data-i18n="nav_tickets">Tickets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">FR</button>
+    <a class="nav-cta" href="index.html#billets" data-i18n="nav_cta">Book now</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="yt-hero">
+  <div class="yt-hero-bg"></div>
+  <div class="wrap yt-hero-inner">
+    <div class="yt-hero-tag" data-i18n="yt_eyebrow">YouTube Series</div>
+    <h1>
+      <span data-i18n="yt_h1a">YOUR GAMES.</span><br>
+      <span data-i18n="yt_h1b">YOUR CREW.</span><br>
+      <span class="lime" data-i18n="yt_h1c">YOUR LEGACY.</span>
+    </h1>
+    <p class="yt-hero-sub" data-i18n="yt_herosub">One creator. One co-host. 25 athletes. Six disciplines. Two hours. Cameras everywhere.</p>
+  </div>
+</header>
+
+<!-- ============ FORMAT STRIP ============ -->
+<div class="yt-strip">
+  <div class="wrap">
+    <div class="yt-strip-grid">
+      <div class="yt-strip-item">
+        <span class="yt-strip-n">25</span>
+        <span class="yt-strip-l" data-i18n="yt_s1">Athletes / episode</span>
+      </div>
+      <div class="yt-strip-item">
+        <span class="yt-strip-n">6</span>
+        <span class="yt-strip-l" data-i18n="yt_s2">Disciplines</span>
+      </div>
+      <div class="yt-strip-item">
+        <span class="yt-strip-n">2H</span>
+        <span class="yt-strip-l" data-i18n="yt_s3">Block per episode</span>
+      </div>
+      <div class="yt-strip-item">
+        <span class="yt-strip-n" style="font-size:clamp(22px,3vw,32px)">📹</span>
+        <span class="yt-strip-l" data-i18n="yt_s4">Cameras everywhere</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN ============ -->
+<main class="yt-main">
+  <div class="wrap">
+
+    <div class="yt-intro">
+      <span class="eyebrow" data-i18n="yt_section_ey">Creator Invitational Series</span>
+      <h2 class="yt-headline" data-i18n="yt_section_t">ONE CREATOR.<br>25 ATHLETES.<br><span class="lime">ONE EPISODE.</span></h2>
+      <p class="yt-intro-body" data-i18n="yt_body">One creator. One co-host. 25 athletes — locals, friends, unknowns. Six disciplines. Two hours. Random teams. One game at a time. Cameras everywhere. This is the PürInstinct Creator Invitational Series.</p>
+    </div>
+
+    <div class="yt-grid">
+
+      <!-- Creator 01 — confirmed -->
+      <div class="yt-card confirmed">
+        <div class="yt-card-slash"><div class="yt-slash-inner">/</div></div>
+        <div class="yt-card-body">
+          <div class="yt-num" data-i18n="yt_c1_num">CREATOR 01 · EPISODE 01</div>
+          <span class="yt-badge" data-i18n="yt_confirmed">CONFIRMED</span>
+          <div class="yt-creator-name" data-i18n="yt_c1_name">IDENTITY<br>REVEAL SOON</div>
+          <div class="yt-city" data-i18n="yt_c1_city">MONTRÉAL</div>
+          <div class="yt-card-tags">
+            <span class="yt-tag" data-i18n="yt_c1_t1">25 Athletes</span>
+            <span class="yt-tag" data-i18n="yt_c1_t2">6 Disciplines</span>
+            <span class="yt-tag" data-i18n="yt_c1_t3">2H Block</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 02 — coming -->
+      <div class="yt-card">
+        <div class="yt-card-slash"><div class="yt-slash-inner">/</div></div>
+        <div class="yt-card-body">
+          <div class="yt-num" data-i18n="yt_c2_num">CREATOR 02 · EPISODE 02</div>
+          <span class="yt-badge soon" data-i18n="yt_coming">COMING SOON</span>
+          <div class="yt-creator-name locked" data-i18n="yt_locked">???</div>
+          <div class="yt-city locked" data-i18n="yt_c2_city">CITY TBD</div>
+          <div class="yt-card-tags">
+            <span class="yt-tag" data-i18n="yt_tba">To be announced</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator 03 — coming -->
+      <div class="yt-card">
+        <div class="yt-card-slash"><div class="yt-slash-inner">/</div></div>
+        <div class="yt-card-body">
+          <div class="yt-num" data-i18n="yt_c3_num">CREATOR 03 · EPISODE 03</div>
+          <span class="yt-badge soon" data-i18n="yt_coming">COMING SOON</span>
+          <div class="yt-creator-name locked" data-i18n="yt_locked">???</div>
+          <div class="yt-city locked" data-i18n="yt_c3_city">CITY TBD</div>
+          <div class="yt-card-tags">
+            <span class="yt-tag" data-i18n="yt_tba">To be announced</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Announcement banner -->
+    <div class="yt-announce">
+      <div class="yt-announce-title" data-i18n="yt_ann_t">MORE CREATORS. <span class="lime">MORE CITIES.</span></div>
+      <p class="yt-announce-sub" data-i18n="yt_ann_sub">Announcements dropping soon — follow us to be the first to know who's next.</p>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Your instinct. Your arena.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="index.html#billets" data-i18n="f_book">Book a session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Follow the arena</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Language</h4>
+        <a href="#" id="footLang">Français</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">All rights reserved.</span></span>
+      <span data-i18n="f_nc">No-contact sport — touch the ball, never the player.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  yt_eyebrow:"Série YouTube",
+  yt_h1a:"TES GAMES.",yt_h1b:"TON ÉQUIPE.",yt_h1c:"TON HÉRITAGE.",
+  yt_herosub:"Un créateur. Un co-animateur. 25 athlètes. Six disciplines. Deux heures. Des caméras partout.",
+  yt_s1:"Athlètes / épisode",yt_s2:"Disciplines",yt_s3:"Bloc par épisode",yt_s4:"Caméras partout",
+  yt_section_ey:"Creator Invitational Series",
+  yt_section_t:"UN CRÉATEUR.<br>25 ATHLÈTES.<br><span class=\"lime\">UN ÉPISODE.</span>",
+  yt_body:"Un créateur. Un co-animateur. 25 athlètes — des locaux, des amis, des inconnus. Six disciplines. Deux heures. Équipes aléatoires. Un jeu à la fois. Des caméras partout. C'est la PürInstinct Creator Invitational Series.",
+  yt_c1_num:"CRÉATEUR 01 · ÉPISODE 01",yt_confirmed:"CONFIRMÉ",yt_c1_name:"RÉVÉLATION D'IDENTITÉ À VENIR",yt_c1_city:"MONTRÉAL",
+  yt_c1_t1:"25 Athlètes",yt_c1_t2:"6 Disciplines",yt_c1_t3:"Bloc 2H",
+  yt_c2_num:"CRÉATEUR 02 · ÉPISODE 02",yt_c3_num:"CRÉATEUR 03 · ÉPISODE 03",
+  yt_coming:"À VENIR",yt_locked:"???",yt_c2_city:"VILLE À ANNONCER",yt_c3_city:"VILLE À ANNONCER",yt_tba:"À annoncer",
+  yt_ann_t:"PLUS DE CRÉATEURS. <span class=\"lime\">PLUS DE VILLES.</span>",
+  yt_ann_sub:"Des annonces arrivent bientôt — suis-nous pour être le premier à savoir qui est le prochain.",
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  yt_eyebrow:"YouTube Series",
+  yt_h1a:"YOUR GAMES.",yt_h1b:"YOUR CREW.",yt_h1c:"YOUR LEGACY.",
+  yt_herosub:"One creator. One co-host. 25 athletes. Six disciplines. Two hours. Cameras everywhere.",
+  yt_s1:"Athletes / episode",yt_s2:"Disciplines",yt_s3:"Block per episode",yt_s4:"Cameras everywhere",
+  yt_section_ey:"Creator Invitational Series",
+  yt_section_t:"ONE CREATOR.<br>25 ATHLETES.<br><span class=\"lime\">ONE EPISODE.</span>",
+  yt_body:"One creator. One co-host. 25 athletes — locals, friends, unknowns. Six disciplines. Two hours. Random teams. One game at a time. Cameras everywhere. This is the PürInstinct Creator Invitational Series.",
+  yt_c1_num:"CREATOR 01 · EPISODE 01",yt_confirmed:"CONFIRMED",yt_c1_name:"IDENTITY REVEAL SOON",yt_c1_city:"MONTRÉAL",
+  yt_c1_t1:"25 Athletes",yt_c1_t2:"6 Disciplines",yt_c1_t3:"2H Block",
+  yt_c2_num:"CREATOR 02 · EPISODE 02",yt_c3_num:"CREATOR 03 · EPISODE 03",
+  yt_coming:"COMING SOON",yt_locked:"???",yt_c2_city:"CITY TBD",yt_c3_city:"CITY TBD",yt_tba:"To be announced",
+  yt_ann_t:"MORE CREATORS. <span class=\"lime\">MORE CITIES.</span>",
+  yt_ann_sub:"Announcements dropping soon — follow us to be the first to know who's next.",
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
+}};
+
+let lang = localStorage.getItem("pi_lang") || "en";
+const RICH = new Set(["yt_section_t","yt_ann_t"]);
+
+function applyLang(){
+  const t = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if(t[k] !== undefined) RICH.has(k) ? el.innerHTML = t[k] : el.textContent = t[k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
+}
+
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+document.addEventListener('click', e => { if(!burger.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove('open'); });
+
+const navDrop = document.getElementById('navDrop');
+if(navDrop){
+  navDrop.querySelector('.nav-drop-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    navDrop.classList.toggle('open');
+    navDrop.querySelector('.nav-drop-btn').setAttribute('aria-expanded', navDrop.classList.contains('open'));
+  });
+  document.addEventListener('click', e => { if(!navDrop.contains(e.target)) navDrop.classList.remove('open'); });
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang();
+</script>
+</body>
+</html>
