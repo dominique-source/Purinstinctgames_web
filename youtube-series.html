@@ -371,7 +371,7 @@ h1,h2,h3,.disp{
 .yt-trk-bg,.yt-trk-fill{position:absolute;left:50%;transform:translateX(-1px);width:2px;top:0;height:0}
 .yt-trk-bg{background:rgba(204,255,0,.13)}
 .yt-trk-fill{background:#ccff00;box-shadow:0 0 8px rgba(204,255,0,.55),0 0 22px rgba(204,255,0,.18)}
-.yt-trk-trophy{position:absolute;left:50%;transform:translateX(-50%) translateY(-50%);width:clamp(160px,22vw,220px);filter:drop-shadow(0 0 18px rgba(204,255,0,.55)) drop-shadow(0 0 6px rgba(204,255,0,.3));will-change:top}
+.yt-trk-trophy{position:absolute;left:50%;transform:translateX(-50%) translateY(-50%);width:clamp(115px,16vw,170px);filter:drop-shadow(0 0 18px rgba(204,255,0,.55)) drop-shadow(0 0 6px rgba(204,255,0,.3));will-change:top}
 @media(max-width:600px){.yt-trk{display:none}}
 
 @media(prefers-reduced-motion:reduce){
@@ -911,7 +911,7 @@ if (film) {
     const seam1CenterY = seam1R.top + window.scrollY + seam1R.height / 2;
     const ch7R = chs[chs.length - 1].getBoundingClientRect();
     const startScroll = seam1CenterY - V_TOP * vh;
-    const endScroll   = (ch7R.top + window.scrollY + ch7R.height * 0.50) - V_BOT * vh;
+    const endScroll   = (ch7R.top + window.scrollY + ch7R.height * 0.46) - V_BOT * vh;
     const rawProg = (window.scrollY - startScroll) / (endScroll - startScroll);
     const prog = Math.max(0, Math.min(1, rawProg));
 
@@ -924,7 +924,7 @@ if (film) {
     const lineEndPx = V_BOT * vh;
 
     // When prog reaches 1, lock trophy to the actual image position so it scrolls with the photo
-    const ch7LockY = ch7R.top + ch7R.height * 0.50;
+    const ch7LockY = ch7R.top + ch7R.height * 0.46;
     const trophyPx = prog < 1
       ? lineTopPx + prog * (lineEndPx - lineTopPx)
       : ch7LockY;
