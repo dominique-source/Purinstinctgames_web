@@ -895,7 +895,7 @@ if (film) {
   const chs     = [...document.querySelectorAll('.yt-chapter')];
   if(!trk || !filmEl || chs.length < 2) return;
 
-  const V_TOP = 0.14;
+  const V_TOP = 0.50;  // trophy starts at 50% of viewport (center)
   const V_BOT = 0.82;
   let raf = null;
 
@@ -903,9 +903,7 @@ if (film) {
     raf = null;
     const vh = window.innerHeight;
     const filmR = filmEl.getBoundingClientRect();
-    const visible = filmR.top < vh * 0.9 && filmR.bottom > vh * 0.1;
-    trk.classList.toggle('on', visible);
-    if(!visible) return;
+    if(filmR.bottom < vh * 0.1) { trk.classList.remove('on'); return; }
 
     // Start: center of the lime seam dot at the bottom of chapter 1
     const seam1 = chs[0].querySelector('.narr-seam');
@@ -914,7 +912,13 @@ if (film) {
     const ch7R = chs[chs.length - 1].getBoundingClientRect();
     const startScroll = seam1CenterY - V_TOP * vh;
     const endScroll   = (ch7R.top + window.scrollY + ch7R.height * 0.42) - V_BOT * vh;
-    const prog = Math.max(0, Math.min(1, (window.scrollY - startScroll) / (endScroll - startScroll)));
+    const rawProg = (window.scrollY - startScroll) / (endScroll - startScroll);
+    const prog = Math.max(0, Math.min(1, rawProg));
+
+    // Only show once we've reached the seam dot
+    const visible = rawProg >= 0 && filmR.bottom > vh * 0.1;
+    trk.classList.toggle('on', visible);
+    if(!visible) return;
 
     const lineTopPx = V_TOP * vh;
     const lineEndPx = V_BOT * vh;
