@@ -873,6 +873,8 @@ h1,h2,h3,.disp{
 
 /* ── Session type tiles ── */
 .sess-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,18px);margin:36px 0 0}
+/* Last two tiles (Family & For All is 5th) center gracefully */
+.sess-tile:nth-child(4),.sess-tile:nth-child(5){}
 @media(max-width:860px){.sess-tiles{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.sess-tiles{grid-template-columns:1fr}}
 .sess-tile{
@@ -1590,20 +1592,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <p class="st-sub" data-i18n="st_elite_sub">Les meilleurs athlètes. Les vrais scores. La vraie compétition.</p>
         <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
       </div>
-      <!-- Family -->
+      <!-- Family and for All -->
       <div class="sess-tile special tier-cta" data-tier="Famille" role="button" tabindex="0">
-        <span class="st-tag" data-i18n="st_fam_tag">Tous âges · En famille</span>
-        <div class="st-name" data-i18n="st_fam_name">Famille</div>
-        <p class="st-sub" data-i18n="st_fam_sub">Parents et enfants ensemble dans l'arène.</p>
-        <p class="st-tagline" data-i18n="st_fam_tagline">Ce n'est pas ton sport traditionnel — ici, personne ne regarde. Tout le monde joue. Rentre dans l'arène.</p>
-        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
-      </div>
-      <!-- All Sessions -->
-      <div class="sess-tile special tier-cta" data-tier="ToutesSessions" role="button" tabindex="0">
-        <span class="st-tag" data-i18n="st_all_tag">Accès illimité · Toute la journée</span>
-        <div class="st-name" data-i18n="st_all_name">Toutes sessions</div>
-        <p class="st-sub" data-i18n="st_all_sub">Tous les âges, toute la journée, un seul leaderboard.</p>
-        <p class="st-tagline" data-i18n="st_all_tagline">Ce n'est pas un spectacle — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game.</p>
+        <span class="st-tag" data-i18n="st_fam_tag">Tous âges · En famille · Pour tous</span>
+        <div class="st-name" data-i18n="st_fam_name">Famille &amp; Pour tous</div>
+        <p class="st-sub" data-i18n="st_fam_sub">Parents, enfants, amis — tout le monde joue. Personne ne regarde.</p>
+        <p class="st-tagline" data-i18n="st_fam_tagline">Ce n'est pas ton sport traditionnel — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game!</p>
         <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
       </div>
     </div>
@@ -1720,16 +1714,14 @@ fr:{
   s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Bâti au Québec.",s_tag_b:"Les Games sont le prochain chapitre.",
   cal_title:"Prochains événements",cal_sub:"Choisis ta ville, sélectionne une session, réserve ta place.",cal_all:"Toutes les villes",cal_pick:"Sélectionne une session ci-dessus",cal_launch:"Lancement",cal_full:"Complet",cal_left:"restantes",
-  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_label:"places réservées cette semaine",wf_headline:"Reçois les nouvelles avant tout le monde",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",tier_Famille:"Famille",tier_ToutesSessions:"Toutes sessions",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
+  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_label:"places réservées cette semaine",wf_headline:"Reçois les nouvelles avant tout le monde",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",tier_Famille:"Famille & Pour tous",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
   st_head:"Choisis ta session",
   st_youth_tag:"10–17 ans",st_youth_name:"Jeunesse",st_youth_sub:"Pour les 10 à 17 ans. 9 stations. Un seul score.",
   st_adult_tag:"18 ans et +",st_adult_name:"Adulte",st_adult_sub:"Compétition individuelle. Leaderboard en direct. Instinct à l'état pur.",
   st_corp_tag:"Équipes & entreprises",st_corp_name:"Corporatif",st_corp_sub:"Session privée, classement d'entreprise dédié, expérience complète.",
   st_elite_tag:"Niveau élite",st_elite_name:"Élite",st_elite_sub:"Les meilleurs athlètes. Les vrais scores. La vraie compétition.",
-  st_fam_tag:"Tous âges · En famille",st_fam_name:"Famille",st_fam_sub:"Parents et enfants ensemble dans l'arène.",
-  st_fam_tagline:"Ce n'est pas ton sport traditionnel — ici, personne ne regarde. Tout le monde joue. Rentre dans l'arène.",
-  st_all_tag:"Accès illimité · Toute la journée",st_all_name:"Toutes sessions",st_all_sub:"Tous les âges, toute la journée, un seul leaderboard.",
-  st_all_tagline:"Ce n'est pas un spectacle — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game.",
+  st_fam_tag:"Tous âges · En famille · Pour tous",st_fam_name:"Famille & Pour tous",st_fam_sub:"Parents, enfants, amis — tout le monde joue. Personne ne regarde.",
+  st_fam_tagline:"Ce n'est pas ton sport traditionnel — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game!",
   st_book:"Réserve ta place →",
   p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
   p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
@@ -1783,16 +1775,14 @@ en:{
   s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
   s_tag_a:"Built in Quebec.",s_tag_b:"The Games are the next chapter.",
   cal_title:"Upcoming events",cal_sub:"Choose your city, pick a session, book your spot.",cal_all:"All cities",cal_pick:"Select a session above",cal_launch:"Launch",cal_full:"Full",cal_left:"spots left",
-  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_label:"spots reserved this week",wf_headline:"Be the first to know",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",tier_Famille:"Family",tier_ToutesSessions:"All Sessions",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
+  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_label:"spots reserved this week",wf_headline:"Be the first to know",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",tier_Famille:"Family & For All",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
   st_head:"Choose your session",
   st_youth_tag:"Ages 10–17",st_youth_name:"Youth",st_youth_sub:"For ages 10 to 17. 9 stations. One score.",
   st_adult_tag:"18 and up",st_adult_name:"Adult",st_adult_sub:"Individual competition. Live leaderboard. Pure instinct.",
   st_corp_tag:"Teams & companies",st_corp_name:"Corporate",st_corp_sub:"Private session, dedicated company leaderboard, full augmented experience.",
   st_elite_tag:"Elite level",st_elite_name:"Elite",st_elite_sub:"The best athletes. Real scores. Real competition.",
-  st_fam_tag:"All ages · Together",st_fam_name:"Family",st_fam_sub:"Parents and kids in the arena together.",
-  st_fam_tagline:"This is not your traditional sport — here, nobody watches. Everybody plays. Get in the game.",
-  st_all_tag:"Unlimited access · All day",st_all_name:"All Sessions",st_all_sub:"All ages, all day, one leaderboard.",
-  st_all_tagline:"This is not a spectacle — here, nobody sits in the stands. Everybody plays. Get in the game.",
+  st_fam_tag:"All ages · Family · For All",st_fam_name:"Family &amp; For All",st_fam_sub:"Parents, kids, friends — everybody plays. Nobody watches.",
+  st_fam_tagline:"This is not your traditional sport — here, nobody sits in the stands. Everybody plays. Get in the game!",
   st_book:"Save your spot →",
   p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
   p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
@@ -2378,74 +2368,74 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyUEaOiLGiV8PIC7
      date:new Date("2026-09-05T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:38},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:52},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:52},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:72},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:14},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:9},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:24}]},
+]},
     {id:"mtl-0919",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
      date:new Date("2026-09-19T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:52},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:65},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:65},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:88},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:22},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:15},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:31}]},
+]},
     {id:"qc-0926",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
      date:new Date("2026-09-26T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:55},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:68},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:68},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:95},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:24},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:18},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:34}]},
+]},
     {id:"mtl-1003",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
      date:new Date("2026-10-03T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:44},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:58},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:58},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:82},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:18},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:12},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:27}]},
+]},
     {id:"lav-1010",city:"Laval",cityKey:"laval",venue:"À confirmer, Laval",
      date:new Date("2026-10-10T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:58},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:72},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:72},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:101},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:26},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:16},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:38}]},
+]},
     {id:"ott-1017",city:"Ottawa",cityKey:"ottawa",venue:"À confirmer, Ottawa",
      date:new Date("2026-10-17T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:56},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:70},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:70},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:110},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:27},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:17},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:36}]},
+]},
     {id:"mtl-1024",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
      date:new Date("2026-10-24T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:76},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:76},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:118},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:29},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:40}]},
+]},
     {id:"qc-1107",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
      date:new Date("2026-11-07T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"nov.",mEn:"Nov.",
      sessions:[
        {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
-       {fr:"Famille",en:"Family",time:"11h30",max:80,spots:80},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:80},
        {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:120},
        {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:30},
        {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20},
-       {fr:"Toutes sessions",en:"All Sessions",time:"10h00–21h00",max:40,spots:40}]}
+]}
   ];
 
   const acc=document.getElementById("calAcc");
