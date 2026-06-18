@@ -225,6 +225,10 @@ h1,h2,h3,.disp{
 .yt-narr-intro{padding:clamp(60px,8vw,100px) 0 clamp(40px,5vw,60px)}
 .yt-narr-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(36px,5.5vw,72px);line-height:.92;margin:6px 0 0;color:var(--white)}
 .yt-narr-h .lime{color:var(--lime)}
+.yt-narr-sub{margin-top:clamp(32px,4vw,52px);display:flex;gap:clamp(24px,4vw,60px);align-items:flex-start;flex-wrap:wrap}
+.yt-narr-sub-hl{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(26px,3.5vw,44px);line-height:.92;color:var(--white);margin:0;flex-shrink:0}
+.yt-narr-sub-hl .lime{color:var(--lime)}
+.yt-narr-sub-body{font-size:clamp(14px,1.6vw,17px);color:var(--muted);line-height:1.65;margin:0;max-width:52ch;padding-top:4px}
 
 /* Film container */
 .narr-film{width:100%;position:relative}
@@ -487,6 +491,10 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <div class="yt-narr-intro">
       <span class="eyebrow" data-i18n="narr_ey">The Episode</span>
       <h2 class="yt-narr-h" data-i18n="narr_h">7 CHAPTERS. <span class="lime">ONE STORY.</span></h2>
+      <div class="yt-narr-sub">
+        <h3 class="yt-narr-sub-hl" data-i18n="yt_section_t">ONE CREATOR.<br>25 ATHLETES.<br><span class="lime">ONE EPISODE.</span></h3>
+        <p class="yt-narr-sub-body" data-i18n="yt_body">One creator hosting. 25 athletes — locals, friends, unknowns. Six disciplines. Two hours. Random teams. One winner. This is the PürInstinct Invitational Games Series.</p>
+      </div>
     </div>
   </div>
 
@@ -689,11 +697,6 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <!-- ============ MAIN ============ -->
 <main class="yt-main">
   <div class="wrap">
-
-    <div class="yt-intro">
-      <h2 class="yt-headline" data-i18n="yt_section_t">ONE CREATOR.<br>25 ATHLETES.<br><span class="lime">ONE EPISODE.</span></h2>
-      <p class="yt-intro-body" data-i18n="yt_body">One creator hosting. 25 athletes — locals, friends, unknowns. Six disciplines. Two hours. Random teams. One winner. This is the PürInstinct Invitational Games Series.</p>
-    </div>
 
     <div class="yt-grid">
 
