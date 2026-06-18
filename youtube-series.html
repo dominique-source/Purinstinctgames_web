@@ -206,6 +206,25 @@ h1,h2,h3,.disp{
 .yt-announce-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3vw,34px);line-height:1;color:var(--white);margin-bottom:10px}
 .yt-announce-sub{font-size:15px;color:var(--muted);line-height:1.5}
 
+/* ============ NARRATION ============ */
+.yt-narration{background:var(--bg-2);padding:clamp(60px,8vw,100px) 0;border-top:1px solid rgba(204,255,0,.08)}
+.yt-narr-intro{margin-bottom:clamp(48px,6vw,72px)}
+.yt-narr-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(36px,5.5vw,72px);line-height:.92;margin:6px 0 0;color:var(--white)}
+.yt-narr-h .lime{color:var(--lime)}
+.yt-chapter{margin-bottom:clamp(64px,9vw,110px)}
+.yt-chapter:last-child{margin-bottom:0}
+.yt-chap-top{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+.yt-chap-num{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(60px,9vw,110px);line-height:.85;color:rgba(204,255,0,.07);flex-shrink:0;letter-spacing:-.02em;pointer-events:none;user-select:none}
+.yt-chap-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3.2vw,42px);line-height:.92;color:var(--white)}
+.yt-chap-img-wrap{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:#0f0f0f}
+.yt-chap-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.5) 0%,transparent 40%);pointer-events:none}
+.yt-chap-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+.yt-chapter:hover .yt-chap-img-wrap img{transform:scale(1.025)}
+.yt-chap-bottom{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding-top:16px}
+.yt-chap-desc{font-size:clamp(14px,1.6vw,17px);color:var(--muted);max-width:58ch;line-height:1.6}
+.yt-chap-tag{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(204,255,0,.35);white-space:nowrap;padding-top:3px;flex-shrink:0}
+@media(max-width:640px){.yt-chap-bottom{flex-direction:column;gap:8px}.yt-chap-tag{order:-1}}
+
 /* ============ FOOTER ============ */
 footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
 footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
@@ -283,6 +302,138 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
   </div>
 </div>
+
+<!-- ============ NARRATION ============ -->
+<section class="yt-narration">
+  <div class="wrap">
+
+    <div class="yt-narr-intro">
+      <span class="eyebrow" data-i18n="narr_ey">The Episode</span>
+      <h2 class="yt-narr-h" data-i18n="narr_h">8 CHAPTERS. <span class="lime">ONE STORY.</span></h2>
+    </div>
+
+    <!-- 01 — The Invitation -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">01</span>
+        <span class="yt-chap-title" data-i18n="narr_01_t">THE INVITATION</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-01-invitation.png" alt="The Invitation" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_01_d">Dominique hits the streets. He scouts. He recruits. 25 athletes — no casting, no auditions. Pure instinct.</p>
+        <span class="yt-chap-tag">CHAPTER 01 / 08</span>
+      </div>
+    </div>
+
+    <!-- 02 — Arrival Day -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">02</span>
+        <span class="yt-chap-title" data-i18n="narr_02_t">ARRIVAL DAY</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-02-arrival.png" alt="Arrival Day" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_02_d">The arena opens. Athletes walk in and see the field for the first time. Nobody knows what's about to happen.</p>
+        <span class="yt-chap-tag">CHAPTER 02 / 08</span>
+      </div>
+    </div>
+
+    <!-- 03 — Random Draw -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">03</span>
+        <span class="yt-chap-title" data-i18n="narr_03_t">RANDOM DRAW</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-03-draw.png" alt="Random Draw" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_03_d">Teams form by chance. Nobody picks their squad. Nobody controls the outcome. The draw is live, in front of everyone.</p>
+        <span class="yt-chap-tag">CHAPTER 03 / 08</span>
+      </div>
+    </div>
+
+    <!-- 04 — Skills Gauntlet -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">04</span>
+        <span class="yt-chap-title" data-i18n="narr_04_t">SKILLS GAUNTLET</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-04-skills.png" alt="Skills Gauntlet" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_04_d">5 zones. Speed, Agility, Hands, Feet, Game IQ. Points stack. The live board comes alive. Every second counts.</p>
+        <span class="yt-chap-tag">CHAPTER 04 / 08</span>
+      </div>
+    </div>
+
+    <!-- 05 — PurInstinct Main Event -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">05</span>
+        <span class="yt-chap-title" data-i18n="narr_05_t">PURINSTINCT MAIN EVENT</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-05-mainevent.png" alt="PurInstinct Main Event" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_05_d">The signature match. 3 against 2. No contact. No compromise. Cross the field, keep the ball, score your name on the board.</p>
+        <span class="yt-chap-tag">CHAPTER 05 / 08</span>
+      </div>
+    </div>
+
+    <!-- 06 — Leaderboard Drama -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">06</span>
+        <span class="yt-chap-title" data-i18n="narr_06_t">LEADERBOARD DRAMA</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-06-leaderboard.png" alt="Leaderboard Drama" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_06_d">The numbers don't lie. The board shifts in real time. Anyone can see where they stand — and who they need to beat.</p>
+        <span class="yt-chap-tag">CHAPTER 06 / 08</span>
+      </div>
+    </div>
+
+    <!-- 07 — Creator Challenge -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">07</span>
+        <span class="yt-chap-title" data-i18n="narr_07_t">CREATOR CHALLENGE</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-07-creator.png" alt="Creator Challenge" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_07_d">Dominique steps onto the floor. He faces the top athletes head-on. No special treatment. No easy path. He earns his place.</p>
+        <span class="yt-chap-tag">CHAPTER 07 / 08</span>
+      </div>
+    </div>
+
+    <!-- 08 — Champion Crowned -->
+    <div class="yt-chapter">
+      <div class="yt-chap-top">
+        <span class="yt-chap-num">08</span>
+        <span class="yt-chap-title" data-i18n="narr_08_t">CHAMPION CROWNED</span>
+      </div>
+      <div class="yt-chap-img-wrap">
+        <img src="narr-08-champion.png" alt="Champion Crowned" loading="lazy">
+      </div>
+      <div class="yt-chap-bottom">
+        <p class="yt-chap-desc" data-i18n="narr_08_d">One winner. One spotlight. Confetti, cheers, and a name that will be remembered. The episode ends. The story stays.</p>
+        <span class="yt-chap-tag">CHAPTER 08 / 08</span>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ============ MAIN ============ -->
 <main class="yt-main">
@@ -399,6 +550,15 @@ fr:{
   yt_coming:"À VENIR",yt_locked:"???",yt_c2_city:"VILLE À ANNONCER",yt_c3_city:"VILLE À ANNONCER",yt_tba:"À annoncer",
   yt_ann_t:"PLUS DE CRÉATEURS. <span class=\"lime\">PLUS DE VILLES.</span>",
   yt_ann_sub:"Des annonces arrivent bientôt — suis-nous pour être le premier à savoir qui est le prochain.",
+  narr_ey:"L'Épisode",narr_h:"8 CHAPITRES. <span class=\"lime\">UNE HISTOIRE.</span>",
+  narr_01_t:"L'INVITATION",narr_01_d:"Dominique sort dans la ville. Il repère. Il recrute. 25 athlètes — pas de casting, pas d'auditions. De l'instinct pur.",
+  narr_02_t:"JOUR J",narr_02_d:"L'arène s'ouvre. Les athlètes découvrent le terrain pour la première fois. Personne ne sait ce qui va se passer.",
+  narr_03_t:"TIRAGE AU SORT",narr_03_d:"Les équipes se forment au hasard. Personne ne choisit son équipe. Personne ne contrôle. Le tirage se fait en direct, devant tout le monde.",
+  narr_04_t:"LE GAUNTLET",narr_04_d:"5 zones. Vitesse, Agilité, Mains, Pieds, IQ de jeu. Les points s'accumulent. Le classement s'anime. Chaque seconde compte.",
+  narr_05_t:"L'ÉVÉNEMENT PRINCIPAL",narr_05_d:"Le match signature. 3 contre 2. Sans contact. Sans compromis. Traverse le terrain, garde le ballon, inscris ton nom au tableau.",
+  narr_06_t:"LE CLASSEMENT",narr_06_d:"Les chiffres ne mentent pas. Le tableau bouge en temps réel. Tout le monde peut voir où il se situe — et qui il doit battre.",
+  narr_07_t:"LE DÉFI DU CRÉATEUR",narr_07_d:"Dominique entre sur le terrain. Il affronte les meilleurs de face. Pas de traitement spécial. Pas de chemin facile. Il mérite sa place.",
+  narr_08_t:"CHAMPION COURONNÉ",narr_08_d:"Un vainqueur. Un spotlight. Des confettis, des cris, et un nom dont on se souviendra. L'épisode se termine. L'histoire reste.",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
 },
@@ -417,12 +577,21 @@ en:{
   yt_coming:"COMING SOON",yt_locked:"???",yt_c2_city:"CITY TBD",yt_c3_city:"CITY TBD",yt_tba:"To be announced",
   yt_ann_t:"MORE CREATORS. <span class=\"lime\">MORE CITIES.</span>",
   yt_ann_sub:"Announcements dropping soon — follow us to be the first to know who's next.",
+  narr_ey:"The Episode",narr_h:"8 CHAPTERS. <span class=\"lime\">ONE STORY.</span>",
+  narr_01_t:"THE INVITATION",narr_01_d:"Dominique hits the streets. He scouts. He recruits. 25 athletes — no casting, no auditions. Pure instinct.",
+  narr_02_t:"ARRIVAL DAY",narr_02_d:"The arena opens. Athletes walk in and see the field for the first time. Nobody knows what's about to happen.",
+  narr_03_t:"RANDOM DRAW",narr_03_d:"Teams form by chance. Nobody picks their squad. Nobody controls the outcome. The draw is live, in front of everyone.",
+  narr_04_t:"SKILLS GAUNTLET",narr_04_d:"5 zones. Speed, Agility, Hands, Feet, Game IQ. Points stack. The live board comes alive. Every second counts.",
+  narr_05_t:"PURINSTINCT MAIN EVENT",narr_05_d:"The signature match. 3 against 2. No contact. No compromise. Cross the field, keep the ball, score your name on the board.",
+  narr_06_t:"LEADERBOARD DRAMA",narr_06_d:"The numbers don't lie. The board shifts in real time. Anyone can see where they stand — and who they need to beat.",
+  narr_07_t:"CREATOR CHALLENGE",narr_07_d:"Dominique steps onto the floor. He faces the top athletes head-on. No special treatment. No easy path. He earns his place.",
+  narr_08_t:"CHAMPION CROWNED",narr_08_d:"One winner. One spotlight. Confetti, cheers, and a name that will be remembered. The episode ends. The story stays.",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
 }};
 
 let lang = localStorage.getItem("pi_lang") || "en";
-const RICH = new Set(["yt_section_t","yt_ann_t"]);
+const RICH = new Set(["yt_section_t","yt_ann_t","narr_h"]);
 
 function applyLang(){
   const t = I18N[lang];
