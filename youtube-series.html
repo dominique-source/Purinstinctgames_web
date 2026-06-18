@@ -361,42 +361,6 @@ h1,h2,h3,.disp{
 .narr-prog-trophy.lit{opacity:1;transform:scale(1.2);filter:drop-shadow(0 0 6px rgba(204,255,0,.8))}
 @media(max-width:700px){.narr-progress{display:none}}
 
-/* ── Progressive trophy element ── */
-.narr-trophy-fixed{
-  position:fixed;
-  right:clamp(14px,3vw,44px);
-  bottom:clamp(14px,4vh,44px);
-  width:clamp(64px,7.5vw,110px);
-  z-index:101;
-  pointer-events:none;
-  opacity:0;
-  transform:translateY(14px) scale(.78);
-  filter:grayscale(1) brightness(.22);
-  transition:opacity .65s ease, transform .65s cubic-bezier(.16,1,.3,1), filter .65s ease;
-}
-.narr-trophy-fixed img{width:100%;height:auto;display:block}
-/* Show when narr-film is active */
-.narr-trophy-fixed.show{
-  opacity:var(--tr-op,.22);
-  transform:translateY(0) scale(var(--tr-sc,.82));
-  filter:grayscale(var(--tr-grey,1)) brightness(var(--tr-br,.28));
-}
-/* Chapter 7 champion reveal */
-.narr-trophy-fixed.champion{
-  filter:grayscale(0) brightness(1.18)
-         drop-shadow(0 0 14px rgba(204,255,0,.75))
-         drop-shadow(0 0 36px rgba(204,255,0,.4)) !important;
-  transform:scale(1.12) !important;
-  opacity:1 !important;
-  animation:trophy-reveal 1.1s cubic-bezier(.16,1,.3,1) forwards;
-}
-@keyframes trophy-reveal{
-  0%  {transform:scale(.9);filter:grayscale(0) brightness(1) drop-shadow(0 0 4px rgba(204,255,0,.2))}
-  45% {transform:scale(1.22);filter:grayscale(0) brightness(1.35) drop-shadow(0 0 30px rgba(204,255,0,.9)) drop-shadow(0 0 60px rgba(204,255,0,.5))}
-  75% {transform:scale(1.09)}
-  100%{transform:scale(1.12);filter:grayscale(0) brightness(1.18) drop-shadow(0 0 14px rgba(204,255,0,.75)) drop-shadow(0 0 36px rgba(204,255,0,.4))}
-}
-@media(max-width:600px){.narr-trophy-fixed{display:none}}
 
 /* Bottom spacer */
 .narr-film-end{padding-bottom:clamp(60px,8vw,100px)}
@@ -499,11 +463,6 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
 
   <div class="narr-film">
-
-    <!-- Progressive fixed trophy (bottom-right, desktop only) -->
-    <div class="narr-trophy-fixed" id="narrTrophyFixed" aria-hidden="true">
-      <img src="trophy.png" alt="">
-    </div>
 
     <!-- Trophy: sticky parallax background glimpsed between cards -->
     <div class="narr-trophy" id="narrTrophy" aria-hidden="true">
@@ -882,29 +841,6 @@ const dots = document.querySelectorAll('.narr-prog-dot');
 const progress = document.getElementById('narrProgress');
 const trophyIcon = document.getElementById('narrTrophyIcon');
 const narrTrophy = document.getElementById('narrTrophy');
-const trophyFixed = document.getElementById('narrTrophyFixed');
-
-// Progressive trophy states: [opacity, scale, grayscale, brightness]
-// Ch 0→6 = chapters 1→7; index 6 is the champion chapter
-const TROPHY_STATES = [
-  [.22, .80, 1,   .28],  // ch 1 — ghost
-  [.35, .84, .82, .40],  // ch 2
-  [.50, .88, .65, .55],  // ch 3
-  [.62, .91, .48, .68],  // ch 4
-  [.75, .95, .28, .82],  // ch 5
-  [.88, .99, .10, .96],  // ch 6 — almost there
-  [1,   1,   0,   1.15], // ch 7 — champion (also gets .champion class)
-];
-
-function setTrophyState(i) {
-  if (!trophyFixed) return;
-  const [op, sc, grey, br] = TROPHY_STATES[Math.min(i, TROPHY_STATES.length - 1)];
-  trophyFixed.style.setProperty('--tr-op',   op);
-  trophyFixed.style.setProperty('--tr-sc',   sc);
-  trophyFixed.style.setProperty('--tr-grey', grey);
-  trophyFixed.style.setProperty('--tr-br',   br);
-  trophyFixed.classList.toggle('champion', i === chapters.length - 1);
-}
 
 // Start slow Ken Burns drift on the sticky trophy image
 setTimeout(() => narrTrophy && narrTrophy.classList.add('drift'), 100);
@@ -919,24 +855,15 @@ chapters.forEach((el, i) => {
       if (dots[i]) dots[i].classList.add('active');
       // Light up right-side trophy icon on last chapter
       trophyIcon && trophyIcon.classList.toggle('lit', i === chapters.length - 1);
-      // Drive progressive fixed trophy
-      setTrophyState(i);
     }
   }, {threshold: 0.35}).observe(el);
 });
 
-// Show/hide progress track + fixed trophy when narr-film is in view
+// Show/hide progress track when narr-film is in view
 const film = document.querySelector('.narr-film');
 if (film) {
   new IntersectionObserver(([e]) => {
     progress && progress.classList.toggle('show', e.isIntersecting);
-    if (trophyFixed) {
-      if (e.isIntersecting) {
-        trophyFixed.classList.add('show');
-      } else {
-        trophyFixed.classList.remove('show', 'champion');
-      }
-    }
   }, {threshold: 0.05}).observe(film);
 }
 </script>
