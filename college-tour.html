@@ -492,6 +492,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <div class="ct-timer">
         <div class="ct-timer-label" data-i18n="ct_timer_lbl">PROCHAINE ÉTAPE</div>
         <div class="ct-timer-school" id="timerSchool">—</div>
+        <div class="ct-timer-time" id="timerTime" style="font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(13px,1.5vw,16px);color:var(--muted);letter-spacing:.15em;margin-bottom:14px"></div>
         <div class="ct-timer-digits">
           <div class="ct-timer-unit"><span id="timerD">00</span><em data-i18n="ct_td">JOURS</em></div>
           <div class="ct-timer-sep">:</div>
@@ -654,16 +655,16 @@ startTimer();
 
 /* ── Tour dates ── */
 const TOUR_DATES = [
-  {date:"2026-09-05",city:"Québec",school:"Université Laval",link:"#"},
-  {date:"2026-09-12",city:"Trois-Rivières",school:"Université du Québec à Trois-Rivières",link:"#"},
-  {date:"2026-09-19",city:"Sherbrooke",school:"Université de Sherbrooke",link:"#"},
-  {date:"2026-09-26",city:"Montréal",school:"Université de Montréal",link:"#"},
-  {date:"2026-10-03",city:"Montréal",school:"HEC Montréal",link:"#"},
-  {date:"2026-10-10",city:"Montréal",school:"Concordia University",link:"#"},
-  {date:"2026-10-17",city:"Montréal",school:"McGill University",link:"#"},
-  {date:"2026-10-24",city:"Montréal",school:"École de technologie supérieure",link:"#"},
-  {date:"2026-11-07",city:"Ottawa",school:"University of Ottawa",link:"#"},
-  {date:"2026-11-14",city:"Ottawa",school:"Carleton University",link:"#"},
+  {date:"2026-09-05",time:"12:00",city:"Québec",school:"Université Laval",link:"#"},
+  {date:"2026-09-12",time:"12:00",city:"Trois-Rivières",school:"Université du Québec à Trois-Rivières",link:"#"},
+  {date:"2026-09-19",time:"12:00",city:"Sherbrooke",school:"Université de Sherbrooke",link:"#"},
+  {date:"2026-09-26",time:"12:00",city:"Montréal",school:"Université de Montréal",link:"#"},
+  {date:"2026-10-03",time:"12:00",city:"Montréal",school:"HEC Montréal",link:"#"},
+  {date:"2026-10-10",time:"12:00",city:"Montréal",school:"Concordia University",link:"#"},
+  {date:"2026-10-17",time:"12:00",city:"Montréal",school:"McGill University",link:"#"},
+  {date:"2026-10-24",time:"12:00",city:"Montréal",school:"École de technologie supérieure",link:"#"},
+  {date:"2026-11-07",time:"12:00",city:"Ottawa",school:"University of Ottawa",link:"#"},
+  {date:"2026-11-14",time:"12:00",city:"Ottawa",school:"Carleton University",link:"#"},
 ];
 
 function renderDates(){
@@ -671,9 +672,9 @@ function renderDates(){
   const list = document.getElementById('datelist');
   if(!list) return;
   const now = new Date();
-  let nextIdx = TOUR_DATES.findIndex(d => new Date(d.date) > now);
+  let nextIdx = TOUR_DATES.findIndex(d => new Date(`${d.date}T${d.time||'12:00'}:00`) > now);
   list.innerHTML = TOUR_DATES.map((d,i)=>{
-    const dt = new Date(d.date);
+    const dt = new Date(`${d.date}T${d.time||'12:00'}:00`);
     const past = dt < now;
     const next = i === nextIdx;
     const dayNum = dt.getDate();
@@ -686,7 +687,7 @@ function renderDates(){
     return `<div class="ct-date-card${past?' ct-date-past':''}${next?' ct-date-next':''}">
       <div class="ct-date-num">${String(dayNum).padStart(2,'0')}<br><small style="font-size:.45em;letter-spacing:.06em">${mon}</small></div>
       <div class="ct-date-info">
-        <div class="ct-date-city">${d.city}</div>
+        <div class="ct-date-city">${d.city} · ${d.time||'12:00'}</div>
         <div class="ct-date-school">${d.school}</div>
         ${tag}
       </div>
@@ -704,8 +705,11 @@ function startTimer(){
     return;
   }
   document.getElementById('timerSchool').textContent = next.school;
+  const el = document.getElementById('timerTime');
+  if(el) el.textContent = next.date.split('-').reverse().join(' / ').replace(/(\d+) \/ (\d+) \/ (\d+)/,'$1.$2.$3') + ' · ' + (next.time||'12:00');
+  const targetDate = new Date(`${next.date}T${next.time||'12:00'}:00`);
   function tick(){
-    const diff = new Date(next.date) - new Date();
+    const diff = targetDate - new Date();
     if(diff<=0){startTimer();return;}
     const d=Math.floor(diff/864e5),
           h=Math.floor((diff%864e5)/36e5),
