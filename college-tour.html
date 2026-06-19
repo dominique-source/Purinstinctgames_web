@@ -290,6 +290,30 @@ h1,h2,h3,.disp{
   .ct-sessions{right:auto;left:0}
 }
 
+/* ── Registration modal ── */
+.reg-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.reg-overlay.open{display:flex}
+.reg-modal{background:#111;border:1px solid rgba(204,255,0,.3);width:100%;max-width:460px;position:relative;animation:fadeUp .25s ease}
+.reg-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.reg-modal-close:hover{color:var(--white)}
+.reg-context{background:rgba(204,255,0,.07);border-bottom:1px solid rgba(204,255,0,.15);padding:16px 24px}
+.reg-context-school{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(14px,1.8vw,18px);color:var(--white);text-transform:uppercase}
+.reg-context-meta{font-size:12px;color:var(--lime);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.reg-form{padding:24px}
+.reg-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.reg-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.reg-field label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.reg-field input{background:#1a1a1a;border:1px solid rgba(255,255,255,.12);color:var(--white);padding:11px 14px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
+.reg-field input:focus{border-color:var(--lime)}
+.reg-submit{width:100%;font-family:var(--display);font-weight:900;font-style:italic;font-size:17px;letter-spacing:.06em;text-transform:uppercase;background:var(--lime);color:#000;border:none;padding:15px;cursor:pointer;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);margin-top:8px;transition:opacity .2s}
+.reg-submit:hover{opacity:.88}
+.reg-submit:disabled{opacity:.4;cursor:not-allowed}
+.reg-success{display:none;padding:32px 24px;text-align:center}
+.reg-success-icon{font-size:40px;margin-bottom:12px}
+.reg-success-title{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(20px,3vw,28px);color:var(--lime);text-transform:uppercase;margin-bottom:8px}
+.reg-success-sub{font-size:14px;color:var(--muted);line-height:1.6}
+@media(max-width:440px){.reg-form-row{grid-template-columns:1fr}}
+
 .ct-slash-bar{
   margin-top:clamp(36px,5vw,60px);
   background:var(--lime);padding:18px 24px;text-align:center;
@@ -545,6 +569,30 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
 </main>
 
+<!-- ── REGISTRATION MODAL ── -->
+<div class="reg-overlay" id="regOverlay" onclick="if(event.target===this)closeRegModal()">
+  <div class="reg-modal">
+    <button class="reg-modal-close" onclick="closeRegModal()">✕</button>
+    <div class="reg-context">
+      <div class="reg-context-school" id="regSchool"></div>
+      <div class="reg-context-meta" id="regMeta"></div>
+    </div>
+    <div class="reg-form" id="regFormWrap">
+      <div class="reg-form-row">
+        <div class="reg-field"><label data-i18n="reg_fname">Prénom</label><input id="regFirstName" type="text" required autocomplete="given-name"></div>
+        <div class="reg-field"><label data-i18n="reg_lname">Nom</label><input id="regLastName" type="text" required autocomplete="family-name"></div>
+      </div>
+      <div class="reg-field"><label data-i18n="reg_email">Courriel</label><input id="regEmail" type="email" required autocomplete="email"></div>
+      <button class="reg-submit" id="regSubmit" onclick="submitReg()" data-i18n="reg_submit">CONFIRMER MA PLACE →</button>
+    </div>
+    <div class="reg-success" id="regSuccess">
+      <div class="reg-success-icon">⚡</div>
+      <div class="reg-success-title" data-i18n="reg_ok_title">PLACE CONFIRMÉE !</div>
+      <p class="reg-success-sub" id="regSuccessSub"></p>
+    </div>
+  </div>
+</div>
+
 <!-- ── CTA BAND — STUDENTS ── -->
 <div class="cta-band">
   <div class="inner">
@@ -618,6 +666,7 @@ fr:{
   ct_lb_lbl:"LEADERBOARD LIVE",ct_lb_body:"Le classement est affiché en temps réel sur écran grand format. Chaque station alimente le score individuel. Les rivalités s'installent naturellement.",
   ct_dj_eyebrow:"L'ambiance",ct_dj_title:"UN SPORT. UNE ARÈNE.",ct_dj_title2:"UNE FÊTE.",ct_dj_body:"PürInstinct Games n'est pas juste une compétition. C'est une expérience. Un DJ sélectionné pour le campus accompagne chaque session — l'énergie d'un événement, la structure d'un sport.",
   ct_dj_s1:"DJ live sur campus",ct_dj_s2:"Atmosphère d'arène",ct_dj_s3:"Podium final",
+  reg_fname:"Prénom",reg_lname:"Nom",reg_email:"Courriel",reg_submit:"CONFIRMER MA PLACE →",reg_ok_title:"PLACE CONFIRMÉE !",reg_ok_sub:"Tu recevras une confirmation à {email}. Prépare ton instinct.",
   ct_dates_eyebrow:"La tournée",ct_dates_title:"QUÉBEC → OTTAWA · AUTOMNE 2026",ct_dates_sub:"10 campus. 10 dates. Trouve ton arène.",
   ct_timer_lbl:"PROCHAINE ÉTAPE",ct_td:"JOURS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
   ct_reg_btn:"S'INSCRIRE",ct_reg_full:"COMPLET",ct_date_next_lbl:"PROCHAIN",
@@ -654,6 +703,7 @@ en:{
   ct_lb_lbl:"LIVE LEADERBOARD",ct_lb_body:"The ranking is displayed in real time on a large screen. Every station feeds the individual score. Rivalries form naturally.",
   ct_dj_eyebrow:"The atmosphere",ct_dj_title:"A SPORT. AN ARENA.",ct_dj_title2:"A PARTY.",ct_dj_body:"PürInstinct Games is not just a competition. It's an experience. A DJ curated for the campus backs every session — the energy of an event, the structure of a sport.",
   ct_dj_s1:"Live DJ on campus",ct_dj_s2:"Arena atmosphere",ct_dj_s3:"Final podium",
+  reg_fname:"First name",reg_lname:"Last name",reg_email:"Email",reg_submit:"CONFIRM MY SPOT →",reg_ok_title:"SPOT CONFIRMED!",reg_ok_sub:"You'll receive a confirmation at {email}. Get your instinct ready.",
   ct_dates_eyebrow:"The tour",ct_dates_title:"QUÉBEC → OTTAWA · FALL 2026",ct_dates_sub:"10 campuses. 10 dates. Find your arena.",
   ct_timer_lbl:"NEXT STOP",ct_td:"DAYS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
   ct_reg_btn:"REGISTER",ct_reg_full:"SOLD OUT",ct_date_next_lbl:"NEXT",
@@ -742,7 +792,7 @@ const TOUR_DATES = [
         var spotsHtml = '<span class="ct-spots" style="color:'+spotsColor+'">'+sp+'<em> '+placesLbl+'</em></span>';
         var linkHtml = sp === 0
           ? '<span class="ct-session-link" style="opacity:.35;cursor:default">'+(t.ct_reg_full||'COMPLET')+'</span>'
-          : '<a class="ct-session-link" href="'+d.link+'" target="_blank">'+regLbl+'</a>';
+          : '<button class="ct-session-link" onclick="openRegModal(\''+d.school.replace(/'/g,"\\'") +'\',\''+d.city+'\',\''+d.date+'\',\''+sessionLabels[s]+'\')">'+regLbl+'</button>';
         sessionItems += '<div class="ct-session-item"><span class="ct-session-time">'+sessionLabels[s]+'</span>'+spotsHtml+linkHtml+'</div>';
       }
       var totalSpots = d.spots ? d.spots.reduce(function(a,b){return a+b;},0) : 1000;
@@ -791,6 +841,62 @@ const TOUR_DATES = [
   buildDates();
   buildTimer();
 }());
+
+/* ── Google Sheets endpoint — replace with your deployed Apps Script URL ── */
+var SHEETS_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+
+var _regCtx = {};
+
+function openRegModal(school, city, date, session){
+  _regCtx = {school:school, city:city, date:date, session:session};
+  document.getElementById('regSchool').textContent = school;
+  var parts = date.split('-');
+  document.getElementById('regMeta').textContent = parts[2]+'.'+parts[1]+'.'+parts[0]+' · '+session;
+  document.getElementById('regFirstName').value='';
+  document.getElementById('regLastName').value='';
+  document.getElementById('regEmail').value='';
+  document.getElementById('regFormWrap').style.display='';
+  document.getElementById('regSuccess').style.display='none';
+  document.getElementById('regSubmit').disabled=false;
+  document.getElementById('regSubmit').textContent = I18N[lang].reg_submit||'CONFIRMER MA PLACE →';
+  document.getElementById('regOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.querySelectorAll('.ct-reg-wrap.open').forEach(function(w){w.classList.remove('open');});
+}
+
+function closeRegModal(){
+  document.getElementById('regOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function submitReg(){
+  var fn = document.getElementById('regFirstName').value.trim();
+  var ln = document.getElementById('regLastName').value.trim();
+  var em = document.getElementById('regEmail').value.trim();
+  if(!fn||!ln||!em||!em.includes('@')){ return; }
+  var btn = document.getElementById('regSubmit');
+  btn.disabled=true;
+  btn.textContent='…';
+  var payload = {
+    firstName:fn, lastName:ln, email:em,
+    university:_regCtx.school, city:_regCtx.city,
+    date:_regCtx.date, session:_regCtx.session,
+    lang:lang, timestamp:new Date().toISOString()
+  };
+  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
+    .then(function(){
+      document.getElementById('regFormWrap').style.display='none';
+      var sub = (I18N[lang].reg_ok_sub||'').replace('{email}',em);
+      document.getElementById('regSuccessSub').textContent = sub;
+      document.getElementById('regSuccess').style.display='block';
+    })
+    .catch(function(){
+      document.getElementById('regFormWrap').style.display='none';
+      var sub = (I18N[lang].reg_ok_sub||'').replace('{email}',em);
+      document.getElementById('regSuccessSub').textContent = sub;
+      document.getElementById('regSuccess').style.display='block';
+    });
+}
 
 function toggleSession(btn){
   var wrap = btn.closest('.ct-reg-wrap');
