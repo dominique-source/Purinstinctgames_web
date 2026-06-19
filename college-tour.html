@@ -250,13 +250,24 @@ h1,h2,h3,.disp{
 .ct-date-tag{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px}
 .ct-date-status{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-align:right;white-space:nowrap}
 .ct-date-card.ct-date-past .ct-date-status{color:rgba(255,255,255,.2)}
-.ct-reg-btn{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:#000;padding:8px 18px;text-decoration:none;white-space:nowrap;transition:opacity .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.ct-reg-wrap{position:relative}
+.ct-reg-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:#000;padding:8px 18px;border:none;cursor:pointer;white-space:nowrap;transition:opacity .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
 .ct-reg-btn:hover{opacity:.85}
+.ct-reg-btn .ct-arr{font-style:normal;font-size:10px;transition:transform .2s}
+.ct-reg-wrap.open .ct-arr{transform:rotate(180deg)}
 .ct-date-card.ct-date-past .ct-reg-btn{background:#333;color:var(--muted);cursor:default;pointer-events:none}
+.ct-sessions{display:none;position:absolute;right:0;top:calc(100% + 6px);background:#1a1a1a;border:1px solid rgba(204,255,0,.3);min-width:220px;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.ct-reg-wrap.open .ct-sessions{display:block}
+.ct-session-item{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06);gap:12px}
+.ct-session-item:last-child{border-bottom:none}
+.ct-session-time{font-family:var(--display);font-weight:900;font-style:italic;font-size:15px;color:var(--white);letter-spacing:.04em}
+.ct-session-link{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);text-decoration:none;border:1px solid var(--lime);padding:4px 10px;white-space:nowrap;transition:background .15s,color .15s}
+.ct-session-link:hover{background:var(--lime);color:#000}
 @media(max-width:640px){
   .ct-date-card{grid-template-columns:60px 1fr;grid-template-rows:auto auto}
   .ct-date-status{display:none}
   .ct-reg-btn{padding:7px 14px;font-size:12px}
+  .ct-sessions{right:auto;left:0}
 }
 
 .ct-slash-bar{
@@ -687,9 +698,16 @@ const TOUR_DATES = [
       var day = dt.getDate();
       var mon = (lang==='fr' ? MONTHS_FR : MONTHS_EN)[dt.getMonth()];
       var nextTag = isNext ? '<span style="font-size:10px;letter-spacing:.1em;color:var(--lime);text-transform:uppercase;display:block;margin-top:2px">'+(t.ct_date_next_lbl||'NEXT')+'</span>' : '';
+      var sessions = ['12:00','14:00','16:00','18:00','20:00'];
+      var sessionLabels = lang==='fr' ? ['12H00 — Midi','14H00','16H00','18H00','20H00'] : ['12:00 — Noon','2:00 PM','4:00 PM','6:00 PM','8:00 PM'];
+      var regLbl = t.ct_reg_btn||'REGISTER';
+      var sessionItems = '';
+      for(var s=0;s<sessions.length;s++){
+        sessionItems += '<div class="ct-session-item"><span class="ct-session-time">'+sessionLabels[s]+'</span><a class="ct-session-link" href="'+d.link+'" target="_blank">'+regLbl+'</a></div>';
+      }
       var btn = past
         ? '<span class="ct-reg-btn" style="background:#222;color:#555;cursor:default">'+(t.ct_reg_full||'SOLD OUT')+'</span>'
-        : '<a class="ct-reg-btn" href="'+d.link+'" target="_blank">'+(t.ct_reg_btn||'REGISTER')+'</a>';
+        : '<div class="ct-reg-wrap"><button class="ct-reg-btn" onclick="toggleSession(this)">'+(t.ct_reg_btn||'REGISTER')+' <span class="ct-arr">▾</span></button><div class="ct-sessions">'+sessionItems+'</div></div>';
       html += '<div class="ct-date-card'+(past?' ct-date-past':'')+(isNext?' ct-date-next':'')+'"><div class="ct-date-num">'+String(day).padStart(2,'0')+'<br><small style="font-size:.45em;letter-spacing:.06em">'+mon+'</small></div><div class="ct-date-info"><div class="ct-date-city">'+d.city+' · '+d.time+'</div><div class="ct-date-school">'+d.school+'</div>'+nextTag+'</div><div class="ct-date-status">2026</div>'+btn+'</div>';
     }
     list.innerHTML = html;
@@ -729,6 +747,16 @@ const TOUR_DATES = [
   buildDates();
   buildTimer();
 }());
+
+function toggleSession(btn){
+  var wrap = btn.closest('.ct-reg-wrap');
+  var isOpen = wrap.classList.contains('open');
+  document.querySelectorAll('.ct-reg-wrap.open').forEach(function(w){ w.classList.remove('open'); });
+  if(!isOpen) wrap.classList.add('open');
+}
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.ct-reg-wrap')) document.querySelectorAll('.ct-reg-wrap.open').forEach(function(w){ w.classList.remove('open'); });
+});
 
 function toggleKit(btn){
   const row = btn.closest('.ct-kit-row');
