@@ -265,6 +265,9 @@ h1,h2,h3,.disp{
 .ct-date-tag{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px}
 .ct-date-status{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-align:right;white-space:nowrap}
 .ct-date-card.ct-date-past .ct-date-status{color:rgba(255,255,255,.2)}
+.ct-spots-total{text-align:right;white-space:nowrap}
+.ct-spots-total strong{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(20px,2.5vw,28px);line-height:1;display:block}
+.ct-spots-total span{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block;margin-top:2px}
 .ct-reg-wrap{position:relative}
 .ct-reg-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:#000;padding:8px 18px;border:none;cursor:pointer;white-space:nowrap;transition:opacity .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
 .ct-reg-btn:hover{opacity:.85}
@@ -742,10 +745,14 @@ const TOUR_DATES = [
           : '<a class="ct-session-link" href="'+d.link+'" target="_blank">'+regLbl+'</a>';
         sessionItems += '<div class="ct-session-item"><span class="ct-session-time">'+sessionLabels[s]+'</span>'+spotsHtml+linkHtml+'</div>';
       }
+      var totalSpots = d.spots ? d.spots.reduce(function(a,b){return a+b;},0) : 1000;
+      var totalColor = totalSpots === 0 ? '#ff4444' : totalSpots <= 100 ? '#ff8c00' : totalSpots <= 250 ? '#ffcc00' : 'var(--lime)';
+      var totalLbl = lang==='fr' ? 'places dispo' : 'spots available';
+      var spotsTotal = past ? '' : '<div class="ct-spots-total" style="color:'+totalColor+'"><strong>'+totalSpots+'</strong><span> '+totalLbl+'</span></div>';
       var btn = past
         ? '<span class="ct-reg-btn" style="background:#222;color:#555;cursor:default">'+(t.ct_reg_full||'SOLD OUT')+'</span>'
         : '<div class="ct-reg-wrap"><button class="ct-reg-btn" onclick="toggleSession(this)">'+(t.ct_reg_btn||'REGISTER')+' <span class="ct-arr">▾</span></button><div class="ct-sessions">'+sessionItems+'</div></div>';
-      html += '<div class="ct-date-card'+(past?' ct-date-past':'')+(isNext?' ct-date-next':'')+'"><div class="ct-date-num">'+String(day).padStart(2,'0')+'<br><small style="font-size:.45em;letter-spacing:.06em">'+mon+'</small></div><div class="ct-date-info"><div class="ct-date-city">'+d.city+' · '+d.time+'</div><div class="ct-date-school">'+d.school+'</div>'+nextTag+'</div><div class="ct-date-status">2026</div>'+btn+'</div>';
+      html += '<div class="ct-date-card'+(past?' ct-date-past':'')+(isNext?' ct-date-next':'')+'"><div class="ct-date-num">'+String(day).padStart(2,'0')+'<br><small style="font-size:.45em;letter-spacing:.06em">'+mon+'</small></div><div class="ct-date-info"><div class="ct-date-city">'+d.city+' · '+d.time+'</div><div class="ct-date-school">'+d.school+'</div>'+nextTag+'</div>'+spotsTotal+btn+'</div>';
     }
     list.innerHTML = html;
   }
