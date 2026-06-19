@@ -122,9 +122,18 @@ h1,h2,h3,.disp{
 
 /* ============ HERO ============ */
 .ct-hero{
-  position:relative;min-height:60vh;display:flex;align-items:flex-end;
-  padding-top:80px;overflow:hidden;background:var(--bg);
+  position:relative;min-height:70vh;display:flex;align-items:flex-end;
+  padding-top:80px;overflow:hidden;background:#0A0A0A;
   border-bottom:1px solid rgba(204,255,0,.10);
+}
+.ct-hero-img{
+  position:absolute;inset:0;z-index:0;
+  background:url('College tour image.png') center center / cover no-repeat;
+}
+.ct-hero-img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to right, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%),
+             linear-gradient(to top, rgba(10,10,10,.95) 0%, rgba(10,10,10,.4) 40%, transparent 70%);
 }
 .ct-hero-inner{
   position:relative;z-index:1;
@@ -140,12 +149,6 @@ h1,h2,h3,.disp{
 .ct-hero h1{font-size:clamp(52px,9vw,118px);line-height:.88;letter-spacing:-.02em;margin-bottom:24px}
 .ct-hero h1 .dim{opacity:.45}
 .ct-hero-sub{font-size:clamp(16px,2vw,21px);color:var(--lime);font-family:var(--body);font-weight:600;font-style:italic;max-width:46ch;line-height:1.4}
-/* Decorative slash accent top-right */
-.ct-hero-deco{
-  position:absolute;top:80px;right:0;width:clamp(160px,22vw,320px);height:100%;
-  background:repeating-linear-gradient(-60deg,rgba(204,255,0,.04) 0,rgba(204,255,0,.04) 2px,transparent 2px,transparent 18px);
-  transform:skewX(-8deg);pointer-events:none;
-}
 
 /* ============ MAIN CONTENT ============ */
 .ct-main{padding:clamp(56px,8vw,100px) 0}
@@ -233,7 +236,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 
 <!-- ============ HERO ============ -->
 <header class="ct-hero">
-  <div class="ct-hero-deco" aria-hidden="true"></div>
+  <div class="ct-hero-img" aria-hidden="true"></div>
   <div class="wrap ct-hero-inner">
     <div class="ct-hero-tag" data-i18n="ct_eyebrow">PROJET SPÉCIAL — COLLEGE TOUR</div>
     <h1>
