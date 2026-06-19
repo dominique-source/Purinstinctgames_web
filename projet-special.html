@@ -384,6 +384,33 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 }
 .modal-close:hover{background:var(--lime);color:#0A0A0A;border-color:var(--lime)}
 @media(max-width:640px){.modal-body{padding:22px 20px 28px}}
+
+/* ============ COLLEGE TOUR ============ */
+.ct-section{padding:clamp(100px,11vw,140px) 0 clamp(60px,7vw,90px);border-bottom:1px solid rgba(204,255,0,.12)}
+.ct-headline{font-size:clamp(36px,6vw,80px);line-height:.9;margin:0 0 14px}
+.ct-sub{font-family:var(--body);font-weight:600;font-style:italic;font-size:clamp(16px,2vw,22px);color:var(--lime);margin-bottom:clamp(32px,4vw,52px)}
+.ct-grid{display:grid;grid-template-columns:1.22fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+@media(max-width:860px){.ct-grid{grid-template-columns:1fr}}
+.ct-body{font-size:clamp(14px,1.5vw,16px);color:var(--white);max-width:62ch;line-height:1.65;margin-bottom:28px}
+.ct-kit-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:11px;letter-spacing:.2em;color:var(--lime);margin-bottom:16px}
+.ct-kit{display:flex;flex-direction:column;gap:14px;margin-bottom:22px}
+.ct-kit-row{border-left:3px solid var(--lime);padding:10px 0 10px 18px}
+.ct-kit-row strong{display:block;font-size:clamp(13px,1.4vw,15px);font-weight:700;color:var(--white);letter-spacing:.02em;margin-bottom:3px}
+.ct-kit-row span{display:block;font-size:13px;color:var(--muted);line-height:1.5}
+.ct-deploy{font-size:12.5px;color:var(--muted);font-style:italic;letter-spacing:.02em;margin-top:8px}
+.ct-day-card{background:#111;border:1px solid rgba(204,255,0,.15);border-top:3px solid var(--lime);padding:24px 26px 22px;margin-bottom:24px}
+.ct-day-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:11px;letter-spacing:.2em;color:var(--lime);margin-bottom:16px}
+.ct-timeline{display:flex;flex-direction:column;gap:12px}
+.ct-step{display:grid;grid-template-columns:80px 1fr;gap:12px;font-size:14px;color:var(--muted);line-height:1.45}
+.ct-step-time{font-family:var(--display);font-weight:900;font-style:italic;color:var(--lime);font-size:15px;white-space:nowrap}
+.ct-stats{flex-wrap:wrap;margin-bottom:24px}
+.ct-cta-strip{background:var(--lime);padding:20px 24px;position:relative;overflow:hidden}
+.ct-cta-strip::after{content:"";position:absolute;top:0;bottom:0;right:-16px;width:36px;background:#0A0A0A;transform:skewX(-8deg)}
+.ct-cta-hl{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(18px,2.5vw,26px);color:#0A0A0A;line-height:.95;margin-bottom:8px}
+.ct-cta-sub{font-size:13px;color:rgba(0,0,0,.72)}
+.ct-cta-sub a{color:#0A0A0A;font-weight:700;text-decoration:underline}
+.ct-slash-bar{margin-top:clamp(36px,5vw,60px);background:var(--lime);padding:18px 24px;text-align:center;transform:skewX(-8deg)}
+.ct-slash-bar span{display:inline-block;transform:skewX(8deg);font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,2.5vw,26px);color:#0A0A0A;letter-spacing:.02em}
 </style>
 </head>
 <body>
@@ -401,6 +428,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <span data-i18n="nav_special">Projets spéciaux</span><span class="nav-drop-arrow">▾</span>
       </button>
       <div class="nav-drop-menu" role="menu">
+        <a href="#college-tour" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
         <a href="projet-special.html" class="nav-drop-item active" data-i18n="nav_sg">Séan Garnier</a>
         <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
       </div>
@@ -413,6 +441,77 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<!-- ============ COLLEGE TOUR ============ -->
+<section class="ct-section" id="college-tour">
+  <div class="wrap">
+
+    <span class="eyebrow" data-i18n="ct_eyebrow">PROJET SPÉCIAL — COLLEGE TOUR</span>
+    <h2 class="ct-headline" data-i18n="ct_headline">LE SPORT QUI S'INSTALLE SUR VOTRE CAMPUS.</h2>
+    <p class="ct-sub" data-i18n="ct_sub">2 heures. Un terrain. Une expérience complète.</p>
+
+    <div class="ct-grid">
+
+      <!-- LEFT: Concept + Kit -->
+      <div>
+        <p class="ct-body" data-i18n="ct_body">PürInstinct Games déploie son Campus Kit sur les terrains de gazon synthétique des universités et collèges. Pas de salle, pas de logistique complexe : on arrive avec un sprinter van, on installe en 2 heures, et le sport prend vie.</p>
+
+        <div class="ct-kit-label" data-i18n="ct_kit_lbl">CE QUI ARRIVE SUR VOTRE TERRAIN</div>
+
+        <div class="ct-kit">
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k1t">2 TERRAINS PÜRINSTINCT</strong>
+            <span data-i18n="ct_k1b">Installés directement sur le gazon existant — aucun plancher requis</span>
+          </div>
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k2t">5 ZONES D'ACTIVATION</strong>
+            <span data-i18n="ct_k2b">Speed · Agilité · Foot Skills · Réaction · IQ — autour des terrains</span>
+          </div>
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k3t">BRACELETS + LEADERBOARD</strong>
+            <span data-i18n="ct_k3b">Chaque athlète scoré en temps réel, classement affiché en direct</span>
+          </div>
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k4t">SON + AMBIANCE</strong>
+            <span data-i18n="ct_k4b">Système audio portable — l'atmosphère d'une arène, en plein air</span>
+          </div>
+        </div>
+
+        <p class="ct-deploy" data-i18n="ct_deploy">Déploiement : 1 sprinter van · 2 heures d'installation · équipe locale</p>
+      </div>
+
+      <!-- RIGHT: Day timeline + Stats + CTA -->
+      <div>
+        <div class="ct-day-card">
+          <div class="ct-day-label" data-i18n="ct_day_lbl">UNE JOURNÉE TYPE</div>
+          <div class="ct-timeline">
+            <div class="ct-step"><span class="ct-step-time">14h00</span><span data-i18n="ct_t1">Arrivée sur le campus · installation complète</span></div>
+            <div class="ct-step"><span class="ct-step-time">16h00</span><span data-i18n="ct_t2">Session 1 : compétition ouverte · bracelets activés</span></div>
+            <div class="ct-step"><span class="ct-step-time">18h00</span><span data-i18n="ct_t3">Session 2 : soirée · leaderboard live · ambiance maximale</span></div>
+            <div class="ct-step"><span class="ct-step-time">20h00</span><span data-i18n="ct_t4">Démontage · van reparti · zéro trace</span></div>
+          </div>
+        </div>
+
+        <div class="sg-facts ct-stats">
+          <div class="sg-fact"><span class="sg-n">60–75</span><span class="sg-l" data-i18n="ct_s1">MIN / Parcours athlète complet</span></div>
+          <div class="sg-fact"><span class="sg-n">240+</span><span class="sg-l" data-i18n="ct_s2">Participants par journée</span></div>
+          <div class="sg-fact"><span class="sg-n">2H</span><span class="sg-l" data-i18n="ct_s3">Déploiement complet</span></div>
+        </div>
+
+        <div class="ct-cta-strip">
+          <div class="ct-cta-hl" data-i18n="ct_cta_hl">VOTRE CAMPUS. VOTRE SAISON.</div>
+          <p class="ct-cta-sub"><span data-i18n="ct_cta_sub">Contactez-nous pour réserver une date →</span> <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ct-slash-bar">
+      <span data-i18n="ct_slash">BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.</span>
+    </div>
+
+  </div>
+</section>
 
 <!-- ============ HERO ============ -->
 <header class="sg-hero">
@@ -603,7 +702,26 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 /* ====================================================== */
 const I18N = {
 fr:{
-  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  ct_eyebrow:"PROJET SPÉCIAL — COLLEGE TOUR",
+  ct_headline:"LE SPORT QUI S'INSTALLE SUR VOTRE CAMPUS.",
+  ct_sub:"2 heures. Un terrain. Une expérience complète.",
+  ct_body:"PürInstinct Games déploie son Campus Kit sur les terrains de gazon synthétique des universités et collèges. Pas de salle, pas de logistique complexe : on arrive avec un sprinter van, on installe en 2 heures, et le sport prend vie.",
+  ct_kit_lbl:"CE QUI ARRIVE SUR VOTRE TERRAIN",
+  ct_k1t:"2 TERRAINS PÜRINSTINCT",ct_k1b:"Installés directement sur le gazon existant — aucun plancher requis",
+  ct_k2t:"5 ZONES D'ACTIVATION",ct_k2b:"Speed · Agilité · Foot Skills · Réaction · IQ — autour des terrains",
+  ct_k3t:"BRACELETS + LEADERBOARD",ct_k3b:"Chaque athlète scoré en temps réel, classement affiché en direct",
+  ct_k4t:"SON + AMBIANCE",ct_k4b:"Système audio portable — l'atmosphère d'une arène, en plein air",
+  ct_deploy:"Déploiement : 1 sprinter van · 2 heures d'installation · équipe locale",
+  ct_day_lbl:"UNE JOURNÉE TYPE",
+  ct_t1:"Arrivée sur le campus · installation complète",
+  ct_t2:"Session 1 : compétition ouverte · bracelets activés",
+  ct_t3:"Session 2 : soirée · leaderboard live · ambiance maximale",
+  ct_t4:"Démontage · van reparti · zéro trace",
+  ct_s1:"MIN / Parcours athlète complet",ct_s2:"Participants par journée",ct_s3:"Déploiement complet",
+  ct_cta_hl:"VOTRE CAMPUS. VOTRE SAISON.",
+  ct_cta_sub:"Contactez-nous pour réserver une date →",
+  ct_slash:"BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.",
   sg_eyebrow:"Projet spécial",
   sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"DANS L'ARÈNE.",
   sg_herosub:"Le freestyler le plus visionné de l'histoire entre dans l'arène PürInstinct Games pour une session exclusive.",
@@ -625,7 +743,26 @@ fr:{
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
 },
 en:{
-  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  ct_eyebrow:"SPECIAL PROJECT — COLLEGE TOUR",
+  ct_headline:"THE SPORT THAT COMES TO YOUR CAMPUS.",
+  ct_sub:"2 hours. A field. A full experience.",
+  ct_body:"PürInstinct Games deploys its Campus Kit on university and college synthetic turf fields. No gym, no complex logistics: we arrive with a sprinter van, set up in 2 hours, and the sport comes alive.",
+  ct_kit_lbl:"WHAT ARRIVES ON YOUR FIELD",
+  ct_k1t:"2 PÜRINSTINCT COURTS",ct_k1b:"Set up directly on existing turf — no flooring required",
+  ct_k2t:"5 ACTIVATION ZONES",ct_k2b:"Speed · Agility · Foot Skills · Reaction · IQ — around the courts",
+  ct_k3t:"WRISTBANDS + LEADERBOARD",ct_k3b:"Every athlete scored in real time, ranking displayed live",
+  ct_k4t:"SOUND + ATMOSPHERE",ct_k4b:"Portable audio system — arena atmosphere, outdoors",
+  ct_deploy:"Deployment: 1 sprinter van · 2-hour setup · local crew",
+  ct_day_lbl:"A TYPICAL DAY",
+  ct_t1:"2:00 PM — Campus arrival · full setup",
+  ct_t2:"4:00 PM — Session 1: open competition · wristbands activated",
+  ct_t3:"6:00 PM — Session 2: evening · live leaderboard · peak atmosphere",
+  ct_t4:"8:00 PM — Teardown · van gone · zero trace",
+  ct_s1:"MIN / Full athlete journey",ct_s2:"Participants per day",ct_s3:"Full deployment",
+  ct_cta_hl:"YOUR CAMPUS. YOUR SEASON.",
+  ct_cta_sub:"Contact us to book a date →",
+  ct_slash:"BUILT FOR INSTINCT. DEPLOYED IN 2 HOURS.",
   sg_eyebrow:"Special project",
   sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"IN THE ARENA.",
   sg_herosub:"The most-watched freestyler in history steps into the PürInstinct Games arena for one exclusive session.",
