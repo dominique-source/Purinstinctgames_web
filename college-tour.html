@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Tour — Campus Kit · PürInstinct Games</title>
+<meta name="description" content="PürInstinct Games déploie son Campus Kit sur les terrains de gazon synthétique des universités et collèges. 2 heures, un terrain, une expérience complète.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --white:#F4F4F2;
+  --muted:#888888;
+  --line:rgba(204,255,0,.18);
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,.disp{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lime{color:var(--lime)}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-links a.active{color:var(--lime);opacity:1}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:160px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-btn.active{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:220px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:hover{color:var(--lime);background:rgba(204,255,0,.04)}
+.nav-drop-item.active{color:var(--lime)}
+
+/* ============ HERO ============ */
+.ct-hero{
+  position:relative;min-height:60vh;display:flex;align-items:flex-end;
+  padding-top:80px;overflow:hidden;background:var(--bg);
+  border-bottom:1px solid rgba(204,255,0,.10);
+}
+.ct-hero-inner{
+  position:relative;z-index:1;
+  padding:clamp(60px,9vw,110px) 0 clamp(52px,6vw,72px);
+  max-width:760px;
+}
+.ct-hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:var(--lime);margin-bottom:20px;
+}
+.ct-hero-tag::before{content:"";width:28px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.ct-hero h1{font-size:clamp(52px,9vw,118px);line-height:.88;letter-spacing:-.02em;margin-bottom:24px}
+.ct-hero h1 .dim{opacity:.45}
+.ct-hero-sub{font-size:clamp(16px,2vw,21px);color:var(--lime);font-family:var(--body);font-weight:600;font-style:italic;max-width:46ch;line-height:1.4}
+/* Decorative slash accent top-right */
+.ct-hero-deco{
+  position:absolute;top:80px;right:0;width:clamp(160px,22vw,320px);height:100%;
+  background:repeating-linear-gradient(-60deg,rgba(204,255,0,.04) 0,rgba(204,255,0,.04) 2px,transparent 2px,transparent 18px);
+  transform:skewX(-8deg);pointer-events:none;
+}
+
+/* ============ MAIN CONTENT ============ */
+.ct-main{padding:clamp(56px,8vw,100px) 0}
+.ct-grid{display:grid;grid-template-columns:1.22fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+@media(max-width:860px){.ct-grid{grid-template-columns:1fr}}
+
+.ct-body{font-size:clamp(14px,1.5vw,16px);color:var(--white);max-width:62ch;line-height:1.65;margin-bottom:28px}
+.ct-kit-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:11px;letter-spacing:.2em;color:var(--lime);margin-bottom:16px}
+.ct-kit{display:flex;flex-direction:column;gap:14px;margin-bottom:22px}
+.ct-kit-row{border-left:3px solid var(--lime);padding:10px 0 10px 18px}
+.ct-kit-row strong{display:block;font-size:clamp(13px,1.4vw,15px);font-weight:700;color:var(--white);letter-spacing:.02em;margin-bottom:3px}
+.ct-kit-row span{display:block;font-size:13px;color:var(--muted);line-height:1.5}
+.ct-deploy{font-size:12.5px;color:var(--muted);font-style:italic;letter-spacing:.02em;margin-top:8px}
+
+.ct-day-card{background:#111;border:1px solid rgba(204,255,0,.15);border-top:3px solid var(--lime);padding:24px 26px 22px;margin-bottom:24px}
+.ct-day-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:11px;letter-spacing:.2em;color:var(--lime);margin-bottom:16px}
+.ct-timeline{display:flex;flex-direction:column;gap:12px}
+.ct-step{display:grid;grid-template-columns:80px 1fr;gap:12px;font-size:14px;color:var(--muted);line-height:1.45}
+.ct-step-time{font-family:var(--display);font-weight:900;font-style:italic;color:var(--lime);font-size:15px;white-space:nowrap}
+
+.ct-stats{display:flex;gap:clamp(20px,4vw,40px);flex-wrap:wrap;margin-bottom:24px}
+.ct-stat{display:flex;flex-direction:column;gap:4px}
+.ct-stat-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,44px);color:var(--lime);line-height:1}
+.ct-stat-l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+.ct-cta-strip{background:var(--lime);padding:20px 24px;position:relative;overflow:hidden}
+.ct-cta-strip::after{content:"";position:absolute;top:0;bottom:0;right:-16px;width:36px;background:var(--bg);transform:skewX(-8deg)}
+.ct-cta-hl{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(18px,2.5vw,26px);color:#0A0A0A;line-height:.95;margin-bottom:8px}
+.ct-cta-sub{font-size:13px;color:rgba(0,0,0,.72)}
+.ct-cta-sub a{color:#0A0A0A;font-weight:700;text-decoration:underline}
+
+/* ============ SLASH BAR ============ */
+.ct-slash-bar{
+  margin-top:clamp(36px,5vw,60px);
+  background:var(--lime);padding:18px 24px;text-align:center;
+  transform:skewX(-8deg);
+}
+.ct-slash-bar span{
+  display:inline-block;transform:skewX(8deg);
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;font-size:clamp(15px,2.5vw,26px);
+  color:#0A0A0A;letter-spacing:.02em;
+}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#concept" data-i18n="nav_concept">Le concept</a>
+    <a href="index.html#arena" data-i18n="nav_arena">L'arène</a>
+    <a href="index.html#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <div class="nav-drop" id="navDrop">
+      <button class="nav-drop-btn active" aria-haspopup="true" aria-expanded="false">
+        <span data-i18n="nav_special">Projets spéciaux</span><span class="nav-drop-arrow">▾</span>
+      </button>
+      <div class="nav-drop-menu" role="menu">
+        <a href="college-tour.html" class="nav-drop-item active" data-i18n="nav_ct">College Tour</a>
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
+      </div>
+    </div>
+    <a href="index.html#billets" data-i18n="nav_tickets">Billets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <a class="nav-cta" href="index.html#billets" data-i18n="nav_cta">Réserve</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="ct-hero">
+  <div class="ct-hero-deco" aria-hidden="true"></div>
+  <div class="wrap ct-hero-inner">
+    <div class="ct-hero-tag" data-i18n="ct_eyebrow">PROJET SPÉCIAL — COLLEGE TOUR</div>
+    <h1>
+      <span class="dim" data-i18n="ct_h1a">LE SPORT QUI</span><br>
+      <span class="lime" data-i18n="ct_h1b">S'INSTALLE</span><br>
+      <span data-i18n="ct_h1c">SUR VOTRE CAMPUS.</span>
+    </h1>
+    <p class="ct-hero-sub" data-i18n="ct_sub">2 heures. Un terrain. Une expérience complète.</p>
+  </div>
+</header>
+
+<!-- ============ MAIN CONTENT ============ -->
+<main class="ct-main">
+  <div class="wrap">
+
+    <div class="ct-grid">
+
+      <!-- LEFT: Concept + Kit -->
+      <div>
+        <span class="eyebrow" data-i18n="ct_kit_eyebrow">Campus Kit</span>
+        <p class="ct-body" data-i18n="ct_body">PürInstinct Games déploie son Campus Kit sur les terrains de gazon synthétique des universités et collèges. Pas de salle, pas de logistique complexe : on arrive avec un sprinter van, on installe en 2 heures, et le sport prend vie.</p>
+
+        <div class="ct-kit-label" data-i18n="ct_kit_lbl">CE QUI ARRIVE SUR VOTRE TERRAIN</div>
+
+        <div class="ct-kit">
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k1t">2 TERRAINS PÜRINSTINCT</strong>
+            <span data-i18n="ct_k1b">Installés directement sur le gazon existant — aucun plancher requis</span>
+          </div>
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k2t">5 ZONES D'ACTIVATION</strong>
+            <span data-i18n="ct_k2b">Speed · Agilité · Foot Skills · Réaction · IQ — autour des terrains</span>
+          </div>
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k3t">BRACELETS + LEADERBOARD</strong>
+            <span data-i18n="ct_k3b">Chaque athlète scoré en temps réel, classement affiché en direct</span>
+          </div>
+          <div class="ct-kit-row">
+            <strong data-i18n="ct_k4t">SON + AMBIANCE</strong>
+            <span data-i18n="ct_k4b">Système audio portable — l'atmosphère d'une arène, en plein air</span>
+          </div>
+        </div>
+
+        <p class="ct-deploy" data-i18n="ct_deploy">Déploiement : 1 sprinter van · 2 heures d'installation · équipe locale</p>
+      </div>
+
+      <!-- RIGHT: Timeline + Stats + CTA -->
+      <div>
+        <div class="ct-day-card">
+          <div class="ct-day-label" data-i18n="ct_day_lbl">UNE JOURNÉE TYPE</div>
+          <div class="ct-timeline">
+            <div class="ct-step"><span class="ct-step-time">14h00</span><span data-i18n="ct_t1">Arrivée sur le campus · installation complète</span></div>
+            <div class="ct-step"><span class="ct-step-time">16h00</span><span data-i18n="ct_t2">Session 1 : compétition ouverte · bracelets activés</span></div>
+            <div class="ct-step"><span class="ct-step-time">18h00</span><span data-i18n="ct_t3">Session 2 : soirée · leaderboard live · ambiance maximale</span></div>
+            <div class="ct-step"><span class="ct-step-time">20h00</span><span data-i18n="ct_t4">Démontage · van reparti · zéro trace</span></div>
+          </div>
+        </div>
+
+        <div class="ct-stats">
+          <div class="ct-stat"><span class="ct-stat-n">60–75</span><span class="ct-stat-l" data-i18n="ct_s1">MIN / Parcours athlète complet</span></div>
+          <div class="ct-stat"><span class="ct-stat-n">240+</span><span class="ct-stat-l" data-i18n="ct_s2">Participants par journée</span></div>
+          <div class="ct-stat"><span class="ct-stat-n">2H</span><span class="ct-stat-l" data-i18n="ct_s3">Déploiement complet</span></div>
+        </div>
+
+        <div class="ct-cta-strip">
+          <div class="ct-cta-hl" data-i18n="ct_cta_hl">VOTRE CAMPUS. VOTRE SAISON.</div>
+          <p class="ct-cta-sub"><span data-i18n="ct_cta_sub">Contactez-nous pour réserver une date →</span> <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ct-slash-bar">
+      <span data-i18n="ct_slash">BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.</span>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="index.html#billets" data-i18n="f_book">Réserver une session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  ct_eyebrow:"PROJET SPÉCIAL — COLLEGE TOUR",
+  ct_h1a:"LE SPORT QUI",ct_h1b:"S'INSTALLE",ct_h1c:"SUR VOTRE CAMPUS.",
+  ct_sub:"2 heures. Un terrain. Une expérience complète.",
+  ct_kit_eyebrow:"Campus Kit",
+  ct_body:"PürInstinct Games déploie son Campus Kit sur les terrains de gazon synthétique des universités et collèges. Pas de salle, pas de logistique complexe : on arrive avec un sprinter van, on installe en 2 heures, et le sport prend vie.",
+  ct_kit_lbl:"CE QUI ARRIVE SUR VOTRE TERRAIN",
+  ct_k1t:"2 TERRAINS PÜRINSTINCT",ct_k1b:"Installés directement sur le gazon existant — aucun plancher requis",
+  ct_k2t:"5 ZONES D'ACTIVATION",ct_k2b:"Speed · Agilité · Foot Skills · Réaction · IQ — autour des terrains",
+  ct_k3t:"BRACELETS + LEADERBOARD",ct_k3b:"Chaque athlète scoré en temps réel, classement affiché en direct",
+  ct_k4t:"SON + AMBIANCE",ct_k4b:"Système audio portable — l'atmosphère d'une arène, en plein air",
+  ct_deploy:"Déploiement : 1 sprinter van · 2 heures d'installation · équipe locale",
+  ct_day_lbl:"UNE JOURNÉE TYPE",
+  ct_t1:"Arrivée sur le campus · installation complète",
+  ct_t2:"Session 1 : compétition ouverte · bracelets activés",
+  ct_t3:"Session 2 : soirée · leaderboard live · ambiance maximale",
+  ct_t4:"Démontage · van reparti · zéro trace",
+  ct_s1:"MIN / Parcours athlète complet",ct_s2:"Participants par journée",ct_s3:"Déploiement complet",
+  ct_cta_hl:"VOTRE CAMPUS. VOTRE SAISON.",
+  ct_cta_sub:"Contactez-nous pour réserver une date →",
+  ct_slash:"BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.",
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+  ct_eyebrow:"SPECIAL PROJECT — COLLEGE TOUR",
+  ct_h1a:"THE SPORT THAT",ct_h1b:"COMES",ct_h1c:"TO YOUR CAMPUS.",
+  ct_sub:"2 hours. A field. A full experience.",
+  ct_kit_eyebrow:"Campus Kit",
+  ct_body:"PürInstinct Games deploys its Campus Kit on university and college synthetic turf fields. No gym, no complex logistics: we arrive with a sprinter van, set up in 2 hours, and the sport comes alive.",
+  ct_kit_lbl:"WHAT ARRIVES ON YOUR FIELD",
+  ct_k1t:"2 PÜRINSTINCT COURTS",ct_k1b:"Set up directly on existing turf — no flooring required",
+  ct_k2t:"5 ACTIVATION ZONES",ct_k2b:"Speed · Agility · Foot Skills · Reaction · IQ — around the courts",
+  ct_k3t:"WRISTBANDS + LEADERBOARD",ct_k3b:"Every athlete scored in real time, ranking displayed live",
+  ct_k4t:"SOUND + ATMOSPHERE",ct_k4b:"Portable audio system — arena atmosphere, outdoors",
+  ct_deploy:"Deployment: 1 sprinter van · 2-hour setup · local crew",
+  ct_day_lbl:"A TYPICAL DAY",
+  ct_t1:"2:00 PM — Campus arrival · full setup",
+  ct_t2:"4:00 PM — Session 1: open competition · wristbands activated",
+  ct_t3:"6:00 PM — Session 2: evening · live leaderboard · peak atmosphere",
+  ct_t4:"8:00 PM — Teardown · van gone · zero trace",
+  ct_s1:"MIN / Full athlete journey",ct_s2:"Participants per day",ct_s3:"Full deployment",
+  ct_cta_hl:"YOUR CAMPUS. YOUR SEASON.",
+  ct_cta_sub:"Contact us to book a date →",
+  ct_slash:"BUILT FOR INSTINCT. DEPLOYED IN 2 HOURS.",
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
+}};
+
+let lang = localStorage.getItem("pi_lang") || "fr";
+function applyLang(){
+  const t = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if(t[k] !== undefined) el.textContent = t[k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
+}
+
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+document.addEventListener('click', e => { if(!burger.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove('open'); });
+
+const navDrop = document.getElementById('navDrop');
+if(navDrop){
+  navDrop.querySelector('.nav-drop-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    navDrop.classList.toggle('open');
+    navDrop.querySelector('.nav-drop-btn').setAttribute('aria-expanded', navDrop.classList.contains('open'));
+  });
+  document.addEventListener('click', e => { if(!navDrop.contains(e.target)) navDrop.classList.remove('open'); });
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang();
+</script>
+</body>
+</html>
