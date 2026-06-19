@@ -648,6 +648,9 @@ if(navDrop){
   document.addEventListener('click', e => { if(!navDrop.contains(e.target)) navDrop.classList.remove('open'); });
 }
 
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang();
+
 /* ── Tour dates ── */
 const TOUR_DATES = [
   {date:"2026-09-05",time:"12:00",city:"Québec",school:"Université Laval",link:"#"},
@@ -662,68 +665,70 @@ const TOUR_DATES = [
   {date:"2026-11-14",time:"12:00",city:"Ottawa",school:"Carleton University",link:"#"},
 ];
 
-document.getElementById('year').textContent = new Date().getFullYear();
-applyLang();
-renderDates();
-startTimer();
+(function(){
+  var MONTHS_FR = ["JANV","FÉVR","MARS","AVR","MAI","JUIN","JUIL","AOÛT","SEPT","OCT","NOV","DÉC"];
+  var MONTHS_EN = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
-function renderDates(){
-  const t = I18N[lang];
-  const list = document.getElementById('datelist');
-  if(!list) return;
-  const now = new Date();
-  let nextIdx = TOUR_DATES.findIndex(d => new Date(`${d.date}T${d.time||'12:00'}:00`) > now);
-  list.innerHTML = TOUR_DATES.map((d,i)=>{
-    const dt = new Date(`${d.date}T${d.time||'12:00'}:00`);
-    const past = dt < now;
-    const next = i === nextIdx;
-    const dayNum = dt.getDate();
-    const mon = dt.toLocaleString(lang==='fr'?'fr-CA':'en-CA',{month:'short'}).toUpperCase();
-    const yr = dt.getFullYear();
-    const tag = next ? `<span class="ct-date-tag" style="color:var(--lime)">${t.ct_date_next_lbl||'NEXT'}</span>` : '';
-    const btn = past
-      ? `<span class="ct-reg-btn" style="background:#222;color:#555;pointer-events:none">${t.ct_reg_full||'SOLD OUT'}</span>`
-      : `<a class="ct-reg-btn" href="${d.link}" target="_blank">${t.ct_reg_btn||'REGISTER'}</a>`;
-    return `<div class="ct-date-card${past?' ct-date-past':''}${next?' ct-date-next':''}">
-      <div class="ct-date-num">${String(dayNum).padStart(2,'0')}<br><small style="font-size:.45em;letter-spacing:.06em">${mon}</small></div>
-      <div class="ct-date-info">
-        <div class="ct-date-city">${d.city} · ${d.time||'12:00'}</div>
-        <div class="ct-date-school">${d.school}</div>
-        ${tag}
-      </div>
-      <div class="ct-date-status">${yr}</div>
-      ${btn}
-    </div>`;
-  }).join('');
-}
+  function buildDates(){
+    var t = I18N[lang];
+    var list = document.getElementById('datelist');
+    if(!list) return;
+    var now = new Date();
+    var nextIdx = -1;
+    for(var i=0;i<TOUR_DATES.length;i++){
+      if(new Date(TOUR_DATES[i].date+'T'+TOUR_DATES[i].time+':00') > now){ nextIdx=i; break; }
+    }
+    var html = '';
+    for(var j=0;j<TOUR_DATES.length;j++){
+      var d = TOUR_DATES[j];
+      var dt = new Date(d.date+'T'+d.time+':00');
+      var past = dt < now;
+      var isNext = j === nextIdx;
+      var day = dt.getDate();
+      var mon = (lang==='fr' ? MONTHS_FR : MONTHS_EN)[dt.getMonth()];
+      var nextTag = isNext ? '<span style="font-size:10px;letter-spacing:.1em;color:var(--lime);text-transform:uppercase;display:block;margin-top:2px">'+(t.ct_date_next_lbl||'NEXT')+'</span>' : '';
+      var btn = past
+        ? '<span class="ct-reg-btn" style="background:#222;color:#555;cursor:default">'+(t.ct_reg_full||'SOLD OUT')+'</span>'
+        : '<a class="ct-reg-btn" href="'+d.link+'" target="_blank">'+(t.ct_reg_btn||'REGISTER')+'</a>';
+      html += '<div class="ct-date-card'+(past?' ct-date-past':'')+(isNext?' ct-date-next':'')+'"><div class="ct-date-num">'+String(day).padStart(2,'0')+'<br><small style="font-size:.45em;letter-spacing:.06em">'+mon+'</small></div><div class="ct-date-info"><div class="ct-date-city">'+d.city+' · '+d.time+'</div><div class="ct-date-school">'+d.school+'</div>'+nextTag+'</div><div class="ct-date-status">2026</div>'+btn+'</div>';
+    }
+    list.innerHTML = html;
+  }
 
-function startTimer(){
-  const now = new Date();
-  const next = TOUR_DATES.find(d => new Date(d.date) > now);
-  if(!next){
-    document.querySelector('.ct-timer').style.display='none';
-    return;
+  function buildTimer(){
+    var now = new Date();
+    var next = null;
+    for(var i=0;i<TOUR_DATES.length;i++){
+      if(new Date(TOUR_DATES[i].date+'T'+TOUR_DATES[i].time+':00') > now){ next=TOUR_DATES[i]; break; }
+    }
+    if(!next){ var tb=document.querySelector('.ct-timer'); if(tb) tb.style.display='none'; return; }
+    var school = document.getElementById('timerSchool');
+    if(school) school.textContent = next.school;
+    var ttime = document.getElementById('timerTime');
+    var parts = next.date.split('-');
+    if(ttime) ttime.textContent = parts[2]+'.'+parts[1]+'.'+parts[0]+' · '+next.time;
+    var target = new Date(next.date+'T'+next.time+':00').getTime();
+    function tick(){
+      var diff = target - Date.now();
+      if(diff<=0){ buildTimer(); return; }
+      var days=Math.floor(diff/864e5), hrs=Math.floor((diff%864e5)/36e5), mins=Math.floor((diff%36e5)/6e4), secs=Math.floor((diff%6e4)/1e3);
+      var dEl=document.getElementById('timerD'), hEl=document.getElementById('timerH'), mEl=document.getElementById('timerM'), sEl=document.getElementById('timerS');
+      if(dEl) dEl.textContent=String(days).padStart(2,'0');
+      if(hEl) hEl.textContent=String(hrs).padStart(2,'0');
+      if(mEl) mEl.textContent=String(mins).padStart(2,'0');
+      if(sEl) sEl.textContent=String(secs).padStart(2,'0');
+    }
+    tick();
+    clearInterval(window._timerInt);
+    window._timerInt = setInterval(tick,1000);
   }
-  document.getElementById('timerSchool').textContent = next.school;
-  const el = document.getElementById('timerTime');
-  if(el) el.textContent = next.date.split('-').reverse().join(' / ').replace(/(\d+) \/ (\d+) \/ (\d+)/,'$1.$2.$3') + ' · ' + (next.time||'12:00');
-  const targetDate = new Date(`${next.date}T${next.time||'12:00'}:00`);
-  function tick(){
-    const diff = targetDate - new Date();
-    if(diff<=0){startTimer();return;}
-    const d=Math.floor(diff/864e5),
-          h=Math.floor((diff%864e5)/36e5),
-          m=Math.floor((diff%36e5)/6e4),
-          s=Math.floor((diff%6e4)/1e3);
-    document.getElementById('timerD').textContent=String(d).padStart(2,'0');
-    document.getElementById('timerH').textContent=String(h).padStart(2,'0');
-    document.getElementById('timerM').textContent=String(m).padStart(2,'0');
-    document.getElementById('timerS').textContent=String(s).padStart(2,'0');
-  }
-  tick();
-  clearInterval(window._timerInt);
-  window._timerInt = setInterval(tick,1000);
-}
+
+  window.renderDates = buildDates;
+  window.startTimer = buildTimer;
+
+  buildDates();
+  buildTimer();
+}());
 
 function toggleKit(btn){
   const row = btn.closest('.ct-kit-row');
