@@ -258,9 +258,11 @@ h1,h2,h3,.disp{
 .ct-date-card.ct-date-past .ct-reg-btn{background:#333;color:var(--muted);cursor:default;pointer-events:none}
 .ct-sessions{display:none;position:absolute;right:0;top:calc(100% + 6px);background:#1a1a1a;border:1px solid rgba(204,255,0,.3);min-width:220px;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,.6)}
 .ct-reg-wrap.open .ct-sessions{display:block}
-.ct-session-item{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06);gap:12px}
+.ct-session-item{display:grid;grid-template-columns:1fr auto auto;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06);gap:12px}
 .ct-session-item:last-child{border-bottom:none}
 .ct-session-time{font-family:var(--display);font-weight:900;font-style:italic;font-size:15px;color:var(--white);letter-spacing:.04em}
+.ct-spots{font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;white-space:nowrap}
+.ct-spots em{font-style:normal;font-weight:400;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
 .ct-session-link{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);text-decoration:none;border:1px solid var(--lime);padding:4px 10px;white-space:nowrap;transition:background .15s,color .15s}
 .ct-session-link:hover{background:var(--lime);color:#000}
 @media(max-width:640px){
@@ -664,16 +666,16 @@ applyLang();
 
 /* ── Tour dates ── */
 const TOUR_DATES = [
-  {date:"2026-09-05",time:"12:00",city:"Québec",school:"Université Laval",link:"#"},
-  {date:"2026-09-12",time:"12:00",city:"Trois-Rivières",school:"Université du Québec à Trois-Rivières",link:"#"},
-  {date:"2026-09-19",time:"12:00",city:"Sherbrooke",school:"Université de Sherbrooke",link:"#"},
-  {date:"2026-09-26",time:"12:00",city:"Montréal",school:"Université de Montréal",link:"#"},
-  {date:"2026-10-03",time:"12:00",city:"Montréal",school:"HEC Montréal",link:"#"},
-  {date:"2026-10-10",time:"12:00",city:"Montréal",school:"Concordia University",link:"#"},
-  {date:"2026-10-17",time:"12:00",city:"Montréal",school:"McGill University",link:"#"},
-  {date:"2026-10-24",time:"12:00",city:"Montréal",school:"École de technologie supérieure",link:"#"},
-  {date:"2026-11-07",time:"12:00",city:"Ottawa",school:"University of Ottawa",link:"#"},
-  {date:"2026-11-14",time:"12:00",city:"Ottawa",school:"Carleton University",link:"#"},
+  {date:"2026-09-05",time:"12:00",city:"Québec",school:"Université Laval",link:"#",spots:[42,67,120,38,155]},
+  {date:"2026-09-12",time:"12:00",city:"Trois-Rivières",school:"Université du Québec à Trois-Rivières",link:"#",spots:[178,145,198,167,189]},
+  {date:"2026-09-19",time:"12:00",city:"Sherbrooke",school:"Université de Sherbrooke",link:"#",spots:[95,112,180,88,140]},
+  {date:"2026-09-26",time:"12:00",city:"Montréal",school:"Université de Montréal",link:"#",spots:[23,45,88,31,76]},
+  {date:"2026-10-03",time:"12:00",city:"Montréal",school:"HEC Montréal",link:"#",spots:[156,134,190,148,177]},
+  {date:"2026-10-10",time:"12:00",city:"Montréal",school:"Concordia University",link:"#",spots:[67,89,145,72,123]},
+  {date:"2026-10-17",time:"12:00",city:"Montréal",school:"McGill University",link:"#",spots:[12,34,78,19,56]},
+  {date:"2026-10-24",time:"12:00",city:"Montréal",school:"École de technologie supérieure",link:"#",spots:[134,156,188,143,169]},
+  {date:"2026-11-07",time:"12:00",city:"Ottawa",school:"University of Ottawa",link:"#",spots:[189,167,195,178,192]},
+  {date:"2026-11-14",time:"12:00",city:"Ottawa",school:"Carleton University",link:"#",spots:[196,188,199,193,197]},
 ];
 
 (function(){
@@ -698,12 +700,18 @@ const TOUR_DATES = [
       var day = dt.getDate();
       var mon = (lang==='fr' ? MONTHS_FR : MONTHS_EN)[dt.getMonth()];
       var nextTag = isNext ? '<span style="font-size:10px;letter-spacing:.1em;color:var(--lime);text-transform:uppercase;display:block;margin-top:2px">'+(t.ct_date_next_lbl||'NEXT')+'</span>' : '';
-      var sessions = ['12:00','14:00','16:00','18:00','20:00'];
       var sessionLabels = lang==='fr' ? ['12H00 — Midi','14H00','16H00','18H00','20H00'] : ['12:00 — Noon','2:00 PM','4:00 PM','6:00 PM','8:00 PM'];
+      var placesLbl = lang==='fr' ? 'places restantes' : 'spots left';
       var regLbl = t.ct_reg_btn||'REGISTER';
       var sessionItems = '';
-      for(var s=0;s<sessions.length;s++){
-        sessionItems += '<div class="ct-session-item"><span class="ct-session-time">'+sessionLabels[s]+'</span><a class="ct-session-link" href="'+d.link+'" target="_blank">'+regLbl+'</a></div>';
+      for(var s=0;s<5;s++){
+        var sp = d.spots ? d.spots[s] : 200;
+        var spotsColor = sp === 0 ? '#ff4444' : sp <= 20 ? '#ff8c00' : sp <= 50 ? '#ffcc00' : 'var(--lime)';
+        var spotsHtml = '<span class="ct-spots" style="color:'+spotsColor+'">'+sp+'<em> '+placesLbl+'</em></span>';
+        var linkHtml = sp === 0
+          ? '<span class="ct-session-link" style="opacity:.35;cursor:default">'+(t.ct_reg_full||'COMPLET')+'</span>'
+          : '<a class="ct-session-link" href="'+d.link+'" target="_blank">'+regLbl+'</a>';
+        sessionItems += '<div class="ct-session-item"><span class="ct-session-time">'+sessionLabels[s]+'</span>'+spotsHtml+linkHtml+'</div>';
       }
       var btn = past
         ? '<span class="ct-reg-btn" style="background:#222;color:#555;cursor:default">'+(t.ct_reg_full||'SOLD OUT')+'</span>'
