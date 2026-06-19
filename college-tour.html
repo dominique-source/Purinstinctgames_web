@@ -186,7 +186,7 @@ h1,h2,h3,.disp{
 .ct-block-sub{font-size:clamp(14px,1.5vw,16px);color:var(--muted);max-width:60ch;line-height:1.6;margin-bottom:clamp(28px,4vw,44px)}
 
 /* Zone cards */
-.ct-zones{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ct-zones{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media(max-width:900px){.ct-zones{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.ct-zones{grid-template-columns:repeat(2,1fr)}}
 .ct-zone{background:#111;border:1px solid rgba(255,255,255,.07);overflow:hidden;position:relative;transition:border-color .2s,transform .2s}
@@ -197,6 +197,9 @@ h1,h2,h3,.disp{
 .ct-zone-logo{position:absolute;top:10px;left:10px;width:36px;height:36px}
 .ct-zone-logo img{width:100%;height:100%;object-fit:contain}
 .ct-zone-name{padding:10px 12px;font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(13px,1.4vw,17px);text-transform:uppercase;letter-spacing:.04em;color:var(--white);border-top:2px solid var(--lime)}
+.ct-zone--sig{border-color:rgba(204,255,0,.35)}
+.ct-zone--sig .ct-zone-name{border-top-color:var(--lime);background:rgba(204,255,0,.08)}
+.ct-zone-badge{position:absolute;top:10px;right:10px;background:var(--lime);color:#000;font-family:var(--display);font-weight:900;font-style:italic;font-size:10px;letter-spacing:.06em;padding:3px 7px;text-transform:uppercase}
 
 /* Tech (bracelet + leaderboard) */
 .ct-tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start}
@@ -346,8 +349,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <!-- ── STATIONS ── -->
     <div class="ct-block">
       <span class="eyebrow" data-i18n="ct_st_eyebrow">Les stations</span>
-      <h2 class="ct-block-title" data-i18n="ct_st_title">5 INSTINCTS. 9 STATIONS.</h2>
-      <p class="ct-block-sub" data-i18n="ct_st_sub">Chaque athlète passe par les 5 zones. Chaque zone mesure un instinct différent. Un seul score individuel en temps réel.</p>
+      <h2 class="ct-block-title" data-i18n="ct_st_title">5 INSTINCTS · 7 STATIONS</h2>
+      <p class="ct-block-sub" data-i18n="ct_st_sub">Chaque athlète passe par les 7 stations — 5 zones d'instinct mesurées en temps réel, et 2 sports signature PurInstinct. Un seul score individuel.</p>
       <div class="ct-zones">
         <div class="ct-zone">
           <div class="ct-zone-img"><img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy"></div>
@@ -373,6 +376,16 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <div class="ct-zone-img"><img src="assets/render-iq.jpg" alt="Zone IQ" loading="lazy"></div>
           <div class="ct-zone-logo"><img src="assets/logo-iq.png" alt="" loading="lazy"></div>
           <div class="ct-zone-name" data-i18n="ct_z5">IQ DE JEU</div>
+        </div>
+        <div class="ct-zone ct-zone--sig">
+          <div class="ct-zone-img"><img src="assets/render-mf1.jpg" alt="Sport Signature 1" loading="lazy"></div>
+          <div class="ct-zone-badge">PurInstinct</div>
+          <div class="ct-zone-name" data-i18n="ct_z6">SPORT SIGNATURE</div>
+        </div>
+        <div class="ct-zone ct-zone--sig">
+          <div class="ct-zone-img"><img src="assets/render-mf2.jpg" alt="Sport Signature 2" loading="lazy"></div>
+          <div class="ct-zone-badge">PurInstinct</div>
+          <div class="ct-zone-name" data-i18n="ct_z7">SPORT SIGNATURE</div>
         </div>
       </div>
     </div>
@@ -479,8 +492,8 @@ fr:{
   ct_s1:"MIN / Parcours athlète complet",ct_s2:"Participants par journée",ct_s3:"Sessions dans la journée",
   ct_cta_hl:"VOTRE CAMPUS. VOTRE SAISON.",
   ct_cta_sub:"Contactez-nous pour réserver une date →",
-  ct_st_eyebrow:"Les stations",ct_st_title:"5 INSTINCTS. 9 STATIONS.",ct_st_sub:"Chaque athlète passe par les 5 zones. Chaque zone mesure un instinct différent. Un seul score individuel en temps réel.",
-  ct_z1:"VITESSE",ct_z2:"MAINS",ct_z3:"PIEDS",ct_z4:"AGILITÉ",ct_z5:"IQ DE JEU",
+  ct_st_eyebrow:"Les stations",ct_st_title:"5 INSTINCTS · 7 STATIONS",ct_st_sub:"Chaque athlète passe par les 7 stations — 5 zones d'instinct mesurées en temps réel, et 2 sports signature PurInstinct. Un seul score individuel.",
+  ct_z1:"VITESSE",ct_z2:"MAINS",ct_z3:"PIEDS",ct_z4:"AGILITÉ",ct_z5:"IQ DE JEU",ct_z6:"SPORT SIGNATURE",ct_z7:"SPORT SIGNATURE",
   ct_tech_eyebrow:"Technologie",ct_tech_title:"CHAQUE ATHLÈTE SCORÉ EN TEMPS RÉEL.",
   ct_brac_lbl:"BRACELET CONNECTÉ",ct_brac_body:"Chaque participant reçoit un bracelet à l'entrée. Il identifie l'athlète, enregistre chaque score à chaque station, et alimente le leaderboard en direct.",
   ct_lb_lbl:"LEADERBOARD LIVE",ct_lb_body:"Le classement est affiché en temps réel sur écran grand format. Chaque station alimente le score individuel. Les rivalités s'installent naturellement.",
@@ -511,8 +524,8 @@ en:{
   ct_s1:"MIN / Full athlete journey",ct_s2:"Participants per day",ct_s3:"Sessions per day",
   ct_cta_hl:"YOUR CAMPUS. YOUR SEASON.",
   ct_cta_sub:"Contact us to book a date →",
-  ct_st_eyebrow:"The stations",ct_st_title:"5 INSTINCTS. 9 STATIONS.",ct_st_sub:"Every athlete goes through all 5 zones. Each zone measures a different instinct. One individual live score.",
-  ct_z1:"SPEED",ct_z2:"HAND SKILLS",ct_z3:"FOOT SKILLS",ct_z4:"AGILITY",ct_z5:"GAME IQ",
+  ct_st_eyebrow:"The stations",ct_st_title:"5 INSTINCTS · 7 STATIONS",ct_st_sub:"Every athlete goes through all 7 stations — 5 instinct zones scored in real time, and 2 PurInstinct signature sports. One individual score.",
+  ct_z1:"SPEED",ct_z2:"HAND SKILLS",ct_z3:"FOOT SKILLS",ct_z4:"AGILITY",ct_z5:"GAME IQ",ct_z6:"SIGNATURE SPORT",ct_z7:"SIGNATURE SPORT",
   ct_tech_eyebrow:"Technology",ct_tech_title:"EVERY ATHLETE SCORED IN REAL TIME.",
   ct_brac_lbl:"CONNECTED WRISTBAND",ct_brac_body:"Every participant gets a wristband at check-in. It identifies the athlete, records their score at each station, and feeds the live leaderboard.",
   ct_lb_lbl:"LIVE LEADERBOARD",ct_lb_body:"The ranking is displayed in real time on a large screen. Every station feeds the individual score. Rivalries form naturally.",
