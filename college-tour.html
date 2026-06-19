@@ -180,6 +180,41 @@ h1,h2,h3,.disp{
 .ct-cta-sub{font-size:13px;color:rgba(0,0,0,.72)}
 .ct-cta-sub a{color:#0A0A0A;font-weight:700;text-decoration:underline}
 
+/* ============ STATIONS + TECH + DJ ============ */
+.ct-block{margin-top:clamp(60px,8vw,100px)}
+.ct-block-title{font-size:clamp(30px,5vw,62px);margin:0 0 14px}
+.ct-block-sub{font-size:clamp(14px,1.5vw,16px);color:var(--muted);max-width:60ch;line-height:1.6;margin-bottom:clamp(28px,4vw,44px)}
+
+/* Zone cards */
+.ct-zones{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:900px){.ct-zones{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.ct-zones{grid-template-columns:repeat(2,1fr)}}
+.ct-zone{background:#111;border:1px solid rgba(255,255,255,.07);overflow:hidden;position:relative;transition:border-color .2s,transform .2s}
+.ct-zone:hover{border-color:rgba(204,255,0,.4);transform:translateY(-4px)}
+.ct-zone-img{width:100%;aspect-ratio:3/4;overflow:hidden}
+.ct-zone-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.ct-zone:hover .ct-zone-img img{transform:scale(1.05)}
+.ct-zone-logo{position:absolute;top:10px;left:10px;width:36px;height:36px}
+.ct-zone-logo img{width:100%;height:100%;object-fit:contain}
+.ct-zone-name{padding:10px 12px;font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(13px,1.4vw,17px);text-transform:uppercase;letter-spacing:.04em;color:var(--white);border-top:2px solid var(--lime)}
+
+/* Tech (bracelet + leaderboard) */
+.ct-tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start}
+@media(max-width:700px){.ct-tech-grid{grid-template-columns:1fr}}
+.ct-tech-card{background:#111;border:1px solid rgba(204,255,0,.12);overflow:hidden}
+.ct-tech-img{width:100%;display:block;object-fit:cover;aspect-ratio:16/9}
+.ct-tech-img--lb{aspect-ratio:4/3}
+.ct-tech-copy{padding:20px 22px 24px}
+.ct-tech-copy p{font-size:14px;color:var(--muted);line-height:1.6;margin-top:8px}
+
+/* DJ block */
+.ct-dj-block{border-top:1px solid rgba(204,255,0,.10);padding-top:clamp(48px,6vw,80px)}
+.ct-dj-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+@media(max-width:760px){.ct-dj-grid{grid-template-columns:1fr}}
+.ct-dj-img-wrap{position:relative;overflow:hidden;aspect-ratio:4/5}
+.ct-dj-img{width:100%;height:100%;object-fit:cover;display:block}
+.ct-dj-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.6) 0%,transparent 50%)}
+
 /* ============ SLASH BAR ============ */
 .ct-slash-bar{
   margin-top:clamp(36px,5vw,60px);
@@ -308,6 +343,81 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 
     </div>
 
+    <!-- ── STATIONS ── -->
+    <div class="ct-block">
+      <span class="eyebrow" data-i18n="ct_st_eyebrow">Les stations</span>
+      <h2 class="ct-block-title" data-i18n="ct_st_title">5 INSTINCTS. 9 STATIONS.</h2>
+      <p class="ct-block-sub" data-i18n="ct_st_sub">Chaque athlète passe par les 5 zones. Chaque zone mesure un instinct différent. Un seul score individuel en temps réel.</p>
+      <div class="ct-zones">
+        <div class="ct-zone">
+          <div class="ct-zone-img"><img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy"></div>
+          <div class="ct-zone-logo"><img src="assets/logo-speed.png" alt="" loading="lazy"></div>
+          <div class="ct-zone-name" data-i18n="ct_z1">VITESSE</div>
+        </div>
+        <div class="ct-zone">
+          <div class="ct-zone-img"><img src="assets/render-hand.jpg" alt="Zone Mains" loading="lazy"></div>
+          <div class="ct-zone-logo"><img src="assets/logo-hand.png" alt="" loading="lazy"></div>
+          <div class="ct-zone-name" data-i18n="ct_z2">MAINS</div>
+        </div>
+        <div class="ct-zone">
+          <div class="ct-zone-img"><img src="assets/render-foot.jpg" alt="Zone Pieds" loading="lazy"></div>
+          <div class="ct-zone-logo"><img src="assets/logo-foot.png" alt="" loading="lazy"></div>
+          <div class="ct-zone-name" data-i18n="ct_z3">PIEDS</div>
+        </div>
+        <div class="ct-zone">
+          <div class="ct-zone-img"><img src="assets/render-agility.jpg" alt="Zone Agilité" loading="lazy"></div>
+          <div class="ct-zone-logo"><img src="assets/logo-agility.png" alt="" loading="lazy"></div>
+          <div class="ct-zone-name" data-i18n="ct_z4">AGILITÉ</div>
+        </div>
+        <div class="ct-zone">
+          <div class="ct-zone-img"><img src="assets/render-iq.jpg" alt="Zone IQ" loading="lazy"></div>
+          <div class="ct-zone-logo"><img src="assets/logo-iq.png" alt="" loading="lazy"></div>
+          <div class="ct-zone-name" data-i18n="ct_z5">IQ DE JEU</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BRACELETS + LEADERBOARD ── -->
+    <div class="ct-block">
+      <span class="eyebrow" data-i18n="ct_tech_eyebrow">Technologie</span>
+      <h2 class="ct-block-title" data-i18n="ct_tech_title">CHAQUE ATHLÈTE SCORÉ EN TEMPS RÉEL.</h2>
+      <div class="ct-tech-grid">
+        <div class="ct-tech-card">
+          <img src="bracelet PurInstinct Games final.png" alt="Bracelet PürInstinct" loading="lazy" class="ct-tech-img">
+          <div class="ct-tech-copy">
+            <div class="ct-kit-label" data-i18n="ct_brac_lbl">BRACELET CONNECTÉ</div>
+            <p data-i18n="ct_brac_body">Chaque participant reçoit un bracelet à l'entrée. Il identifie l'athlète, enregistre chaque score à chaque station, et alimente le leaderboard en direct.</p>
+          </div>
+        </div>
+        <div class="ct-tech-card">
+          <img src="narr-06-leaderboard.png" alt="Leaderboard PürInstinct" loading="lazy" class="ct-tech-img ct-tech-img--lb">
+          <div class="ct-tech-copy">
+            <div class="ct-kit-label" data-i18n="ct_lb_lbl">LEADERBOARD LIVE</div>
+            <p data-i18n="ct_lb_body">Le classement est affiché en temps réel sur écran grand format. Chaque station alimente le score individuel. Les rivalités s'installent naturellement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DJ / AMBIANCE ── -->
+    <div class="ct-block ct-dj-block">
+      <div class="ct-dj-grid">
+        <div class="ct-dj-img-wrap">
+          <img src="dj-campus.png" alt="DJ PürInstinct Games" loading="lazy" class="ct-dj-img" onerror="this.closest('.ct-dj-img-wrap').style.display='none'">
+        </div>
+        <div class="ct-dj-copy">
+          <span class="eyebrow" data-i18n="ct_dj_eyebrow">L'ambiance</span>
+          <h2 class="ct-block-title" data-i18n="ct_dj_title">UN SPORT. UNE ARÈNE.<br><span class="lime" data-i18n="ct_dj_title2">UNE FÊTE.</span></h2>
+          <p class="ct-body" data-i18n="ct_dj_body">PürInstinct Games n'est pas juste une compétition. C'est une expérience. Un DJ sélectionné pour le campus accompagne chaque session — l'énergie d'un événement, la structure d'un sport.</p>
+          <div class="ct-stats" style="margin-top:24px">
+            <div class="ct-stat"><span class="ct-stat-n">🎵</span><span class="ct-stat-l" data-i18n="ct_dj_s1">DJ live sur campus</span></div>
+            <div class="ct-stat"><span class="ct-stat-n">🏟️</span><span class="ct-stat-l" data-i18n="ct_dj_s2">Atmosphère d'arène</span></div>
+            <div class="ct-stat"><span class="ct-stat-n">🏆</span><span class="ct-stat-l" data-i18n="ct_dj_s3">Podium final</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="ct-slash-bar">
       <span data-i18n="ct_slash">BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.</span>
     </div>
@@ -369,6 +479,13 @@ fr:{
   ct_s1:"MIN / Parcours athlète complet",ct_s2:"Participants par journée",ct_s3:"Sessions dans la journée",
   ct_cta_hl:"VOTRE CAMPUS. VOTRE SAISON.",
   ct_cta_sub:"Contactez-nous pour réserver une date →",
+  ct_st_eyebrow:"Les stations",ct_st_title:"5 INSTINCTS. 9 STATIONS.",ct_st_sub:"Chaque athlète passe par les 5 zones. Chaque zone mesure un instinct différent. Un seul score individuel en temps réel.",
+  ct_z1:"VITESSE",ct_z2:"MAINS",ct_z3:"PIEDS",ct_z4:"AGILITÉ",ct_z5:"IQ DE JEU",
+  ct_tech_eyebrow:"Technologie",ct_tech_title:"CHAQUE ATHLÈTE SCORÉ EN TEMPS RÉEL.",
+  ct_brac_lbl:"BRACELET CONNECTÉ",ct_brac_body:"Chaque participant reçoit un bracelet à l'entrée. Il identifie l'athlète, enregistre chaque score à chaque station, et alimente le leaderboard en direct.",
+  ct_lb_lbl:"LEADERBOARD LIVE",ct_lb_body:"Le classement est affiché en temps réel sur écran grand format. Chaque station alimente le score individuel. Les rivalités s'installent naturellement.",
+  ct_dj_eyebrow:"L'ambiance",ct_dj_title:"UN SPORT. UNE ARÈNE.",ct_dj_title2:"UNE FÊTE.",ct_dj_body:"PürInstinct Games n'est pas juste une compétition. C'est une expérience. Un DJ sélectionné pour le campus accompagne chaque session — l'énergie d'un événement, la structure d'un sport.",
+  ct_dj_s1:"DJ live sur campus",ct_dj_s2:"Atmosphère d'arène",ct_dj_s3:"Podium final",
   ct_slash:"BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
@@ -394,6 +511,13 @@ en:{
   ct_s1:"MIN / Full athlete journey",ct_s2:"Participants per day",ct_s3:"Sessions per day",
   ct_cta_hl:"YOUR CAMPUS. YOUR SEASON.",
   ct_cta_sub:"Contact us to book a date →",
+  ct_st_eyebrow:"The stations",ct_st_title:"5 INSTINCTS. 9 STATIONS.",ct_st_sub:"Every athlete goes through all 5 zones. Each zone measures a different instinct. One individual live score.",
+  ct_z1:"SPEED",ct_z2:"HAND SKILLS",ct_z3:"FOOT SKILLS",ct_z4:"AGILITY",ct_z5:"GAME IQ",
+  ct_tech_eyebrow:"Technology",ct_tech_title:"EVERY ATHLETE SCORED IN REAL TIME.",
+  ct_brac_lbl:"CONNECTED WRISTBAND",ct_brac_body:"Every participant gets a wristband at check-in. It identifies the athlete, records their score at each station, and feeds the live leaderboard.",
+  ct_lb_lbl:"LIVE LEADERBOARD",ct_lb_body:"The ranking is displayed in real time on a large screen. Every station feeds the individual score. Rivalries form naturally.",
+  ct_dj_eyebrow:"The atmosphere",ct_dj_title:"A SPORT. AN ARENA.",ct_dj_title2:"A PARTY.",ct_dj_body:"PürInstinct Games is not just a competition. It's an experience. A DJ curated for the campus backs every session — the energy of an event, the structure of a sport.",
+  ct_dj_s1:"Live DJ on campus",ct_dj_s2:"Arena atmosphere",ct_dj_s3:"Final podium",
   ct_slash:"BUILT FOR INSTINCT. DEPLOYED IN 2 HOURS.",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
