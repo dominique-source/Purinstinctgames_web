@@ -648,11 +648,6 @@ if(navDrop){
   document.addEventListener('click', e => { if(!navDrop.contains(e.target)) navDrop.classList.remove('open'); });
 }
 
-document.getElementById('year').textContent = new Date().getFullYear();
-applyLang();
-renderDates();
-startTimer();
-
 /* ── Tour dates ── */
 const TOUR_DATES = [
   {date:"2026-09-05",time:"12:00",city:"Québec",school:"Université Laval",link:"#"},
@@ -666,6 +661,11 @@ const TOUR_DATES = [
   {date:"2026-11-07",time:"12:00",city:"Ottawa",school:"University of Ottawa",link:"#"},
   {date:"2026-11-14",time:"12:00",city:"Ottawa",school:"Carleton University",link:"#"},
 ];
+
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang();
+renderDates();
+startTimer();
 
 function renderDates(){
   const t = I18N[lang];
