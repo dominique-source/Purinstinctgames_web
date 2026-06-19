@@ -228,6 +228,37 @@ h1,h2,h3,.disp{
 .ct-dj-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.6) 0%,transparent 50%)}
 
 /* ============ SLASH BAR ============ */
+/* ── Tour dates & timer ── */
+.ct-timer{background:#111;border:1px solid rgba(204,255,0,.3);padding:clamp(20px,3vw,32px) clamp(20px,4vw,40px);margin-bottom:clamp(28px,4vw,44px);position:relative;overflow:hidden}
+.ct-timer::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(204,255,0,.06) 0%,transparent 60%);pointer-events:none}
+.ct-timer-label{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.2em;color:var(--lime);text-transform:uppercase;margin-bottom:6px}
+.ct-timer-school{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(18px,2.5vw,28px);color:var(--white);text-transform:uppercase;margin-bottom:16px}
+.ct-timer-digits{display:flex;align-items:flex-end;gap:4px;flex-wrap:wrap}
+.ct-timer-unit{display:flex;flex-direction:column;align-items:center;min-width:52px}
+.ct-timer-unit span{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(32px,5vw,56px);color:var(--lime);line-height:1;tabular-nums:true;letter-spacing:-.01em}
+.ct-timer-unit em{font-style:normal;font-size:10px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.ct-timer-sep{font-family:var(--display);font-weight:900;font-size:clamp(24px,4vw,40px);color:rgba(204,255,0,.4);padding-bottom:18px;margin:0 2px}
+.ct-datelist{display:flex;flex-direction:column;gap:0}
+.ct-date-card{display:grid;grid-template-columns:80px 1fr auto auto;align-items:center;gap:12px 20px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s}
+.ct-date-card:hover{background:rgba(255,255,255,.02)}
+.ct-date-card.ct-date-next{background:rgba(204,255,0,.05);border-left:3px solid var(--lime);padding-left:16px;margin-left:-19px}
+.ct-date-card.ct-date-past{opacity:.45}
+.ct-date-num{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,40px);color:var(--lime);line-height:1;white-space:nowrap}
+.ct-date-info{min-width:0}
+.ct-date-city{font-size:10px;letter-spacing:.18em;color:var(--lime);text-transform:uppercase;margin-bottom:2px}
+.ct-date-school{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(15px,1.8vw,20px);color:var(--white);text-transform:uppercase;line-height:1.1}
+.ct-date-tag{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.ct-date-status{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-align:right;white-space:nowrap}
+.ct-date-card.ct-date-past .ct-date-status{color:rgba(255,255,255,.2)}
+.ct-reg-btn{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:#000;padding:8px 18px;text-decoration:none;white-space:nowrap;transition:opacity .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.ct-reg-btn:hover{opacity:.85}
+.ct-date-card.ct-date-past .ct-reg-btn{background:#333;color:var(--muted);cursor:default;pointer-events:none}
+@media(max-width:640px){
+  .ct-date-card{grid-template-columns:60px 1fr;grid-template-rows:auto auto}
+  .ct-date-status{display:none}
+  .ct-reg-btn{padding:7px 14px;font-size:12px}
+}
+
 .ct-slash-bar{
   margin-top:clamp(36px,5vw,60px);
   background:var(--lime);padding:18px 24px;text-align:center;
@@ -452,6 +483,29 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </div>
 
+    <!-- ── TOUR DATES ── -->
+    <div class="ct-block">
+      <span class="eyebrow" data-i18n="ct_dates_eyebrow">La tournée</span>
+      <h2 class="ct-block-title" data-i18n="ct_dates_title">QUÉBEC → OTTAWA · AUTOMNE 2026</h2>
+      <p class="ct-block-sub" data-i18n="ct_dates_sub">10 campus. 10 dates. Trouve ton arène.</p>
+
+      <div class="ct-timer">
+        <div class="ct-timer-label" data-i18n="ct_timer_lbl">PROCHAINE ÉTAPE</div>
+        <div class="ct-timer-school" id="timerSchool">—</div>
+        <div class="ct-timer-digits">
+          <div class="ct-timer-unit"><span id="timerD">00</span><em data-i18n="ct_td">JOURS</em></div>
+          <div class="ct-timer-sep">:</div>
+          <div class="ct-timer-unit"><span id="timerH">00</span><em data-i18n="ct_th">H</em></div>
+          <div class="ct-timer-sep">:</div>
+          <div class="ct-timer-unit"><span id="timerM">00</span><em data-i18n="ct_tm">MIN</em></div>
+          <div class="ct-timer-sep">:</div>
+          <div class="ct-timer-unit"><span id="timerS">00</span><em data-i18n="ct_ts">SEC</em></div>
+        </div>
+      </div>
+
+      <div class="ct-datelist" id="datelist"></div>
+    </div>
+
     <div class="ct-slash-bar">
       <span data-i18n="ct_slash">BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.</span>
     </div>
@@ -520,6 +574,9 @@ fr:{
   ct_lb_lbl:"LEADERBOARD LIVE",ct_lb_body:"Le classement est affiché en temps réel sur écran grand format. Chaque station alimente le score individuel. Les rivalités s'installent naturellement.",
   ct_dj_eyebrow:"L'ambiance",ct_dj_title:"UN SPORT. UNE ARÈNE.",ct_dj_title2:"UNE FÊTE.",ct_dj_body:"PürInstinct Games n'est pas juste une compétition. C'est une expérience. Un DJ sélectionné pour le campus accompagne chaque session — l'énergie d'un événement, la structure d'un sport.",
   ct_dj_s1:"DJ live sur campus",ct_dj_s2:"Atmosphère d'arène",ct_dj_s3:"Podium final",
+  ct_dates_eyebrow:"La tournée",ct_dates_title:"QUÉBEC → OTTAWA · AUTOMNE 2026",ct_dates_sub:"10 campus. 10 dates. Trouve ton arène.",
+  ct_timer_lbl:"PROCHAINE ÉTAPE",ct_td:"JOURS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
+  ct_reg_btn:"S'INSCRIRE",ct_reg_full:"COMPLET",ct_date_next_lbl:"PROCHAIN",
   ct_slash:"BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
@@ -552,6 +609,9 @@ en:{
   ct_lb_lbl:"LIVE LEADERBOARD",ct_lb_body:"The ranking is displayed in real time on a large screen. Every station feeds the individual score. Rivalries form naturally.",
   ct_dj_eyebrow:"The atmosphere",ct_dj_title:"A SPORT. AN ARENA.",ct_dj_title2:"A PARTY.",ct_dj_body:"PürInstinct Games is not just a competition. It's an experience. A DJ curated for the campus backs every session — the energy of an event, the structure of a sport.",
   ct_dj_s1:"Live DJ on campus",ct_dj_s2:"Arena atmosphere",ct_dj_s3:"Final podium",
+  ct_dates_eyebrow:"The tour",ct_dates_title:"QUÉBEC → OTTAWA · FALL 2026",ct_dates_sub:"10 campuses. 10 dates. Find your arena.",
+  ct_timer_lbl:"NEXT STOP",ct_td:"DAYS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
+  ct_reg_btn:"REGISTER",ct_reg_full:"SOLD OUT",ct_date_next_lbl:"NEXT",
   ct_slash:"BUILT FOR INSTINCT. DEPLOYED IN 2 HOURS.",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
@@ -569,8 +629,8 @@ function applyLang(){
   document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
 }
 
-document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
-document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); renderDates(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); renderDates(); });
 
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
@@ -589,6 +649,77 @@ if(navDrop){
 
 document.getElementById('year').textContent = new Date().getFullYear();
 applyLang();
+renderDates();
+startTimer();
+
+/* ── Tour dates ── */
+const TOUR_DATES = [
+  {date:"2026-09-05",city:"Québec",school:"Université Laval",link:"#"},
+  {date:"2026-09-12",city:"Québec",school:"CÉGEP de Sainte-Foy",link:"#"},
+  {date:"2026-09-19",city:"Trois-Rivières",school:"Université du Québec à Trois-Rivières",link:"#"},
+  {date:"2026-09-26",city:"Trois-Rivières",school:"CÉGEP de Trois-Rivières",link:"#"},
+  {date:"2026-10-03",city:"Montréal",school:"Université de Montréal",link:"#"},
+  {date:"2026-10-10",city:"Montréal",school:"Concordia University",link:"#"},
+  {date:"2026-10-17",city:"Montréal",school:"McGill University",link:"#"},
+  {date:"2026-10-24",city:"Montréal",school:"UQAM",link:"#"},
+  {date:"2026-11-07",city:"Gatineau",school:"Université du Québec en Outaouais",link:"#"},
+  {date:"2026-11-14",city:"Ottawa",school:"Collège La Cité",link:"#"},
+];
+
+function renderDates(){
+  const t = I18N[lang];
+  const list = document.getElementById('datelist');
+  if(!list) return;
+  const now = new Date();
+  let nextIdx = TOUR_DATES.findIndex(d => new Date(d.date) > now);
+  list.innerHTML = TOUR_DATES.map((d,i)=>{
+    const dt = new Date(d.date);
+    const past = dt < now;
+    const next = i === nextIdx;
+    const dayNum = dt.getDate();
+    const mon = dt.toLocaleString(lang==='fr'?'fr-CA':'en-CA',{month:'short'}).toUpperCase();
+    const yr = dt.getFullYear();
+    const tag = next ? `<span class="ct-date-tag" style="color:var(--lime)">${t.ct_date_next_lbl||'NEXT'}</span>` : '';
+    const btn = past
+      ? `<span class="ct-reg-btn" style="background:#222;color:#555;pointer-events:none">${t.ct_reg_full||'SOLD OUT'}</span>`
+      : `<a class="ct-reg-btn" href="${d.link}" target="_blank">${t.ct_reg_btn||'REGISTER'}</a>`;
+    return `<div class="ct-date-card${past?' ct-date-past':''}${next?' ct-date-next':''}">
+      <div class="ct-date-num">${String(dayNum).padStart(2,'0')}<br><small style="font-size:.45em;letter-spacing:.06em">${mon}</small></div>
+      <div class="ct-date-info">
+        <div class="ct-date-city">${d.city}</div>
+        <div class="ct-date-school">${d.school}</div>
+        ${tag}
+      </div>
+      <div class="ct-date-status">${yr}</div>
+      ${btn}
+    </div>`;
+  }).join('');
+}
+
+function startTimer(){
+  const now = new Date();
+  const next = TOUR_DATES.find(d => new Date(d.date) > now);
+  if(!next){
+    document.querySelector('.ct-timer').style.display='none';
+    return;
+  }
+  document.getElementById('timerSchool').textContent = next.school;
+  function tick(){
+    const diff = new Date(next.date) - new Date();
+    if(diff<=0){startTimer();return;}
+    const d=Math.floor(diff/864e5),
+          h=Math.floor((diff%864e5)/36e5),
+          m=Math.floor((diff%36e5)/6e4),
+          s=Math.floor((diff%6e4)/1e3);
+    document.getElementById('timerD').textContent=String(d).padStart(2,'0');
+    document.getElementById('timerH').textContent=String(h).padStart(2,'0');
+    document.getElementById('timerM').textContent=String(m).padStart(2,'0');
+    document.getElementById('timerS').textContent=String(s).padStart(2,'0');
+  }
+  tick();
+  clearInterval(window._timerInt);
+  window._timerInt = setInterval(tick,1000);
+}
 
 function toggleKit(btn){
   const row = btn.closest('.ct-kit-row');
