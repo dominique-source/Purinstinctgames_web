@@ -377,6 +377,10 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <span class="lime" data-i18n="ct_h1b">S'INSTALLE</span><br>
       <span data-i18n="ct_h1c">SUR VOTRE CAMPUS.</span>
     </h1>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:32px">
+      <a class="cta" href="#datelist" data-i18n="hero_reg">S'INSCRIRE →</a>
+      <a class="cta-outline" href="#datelist" data-i18n="hero_dates">VOIR LES PROCHAINES DATES</a>
+    </div>
   </div>
 </header>
 
@@ -666,6 +670,7 @@ fr:{
   ct_lb_lbl:"LEADERBOARD LIVE",ct_lb_body:"Le classement est affiché en temps réel sur écran grand format. Chaque station alimente le score individuel. Les rivalités s'installent naturellement.",
   ct_dj_eyebrow:"L'ambiance",ct_dj_title:"UN SPORT. UNE ARÈNE.",ct_dj_title2:"UNE FÊTE.",ct_dj_body:"PürInstinct Games n'est pas juste une compétition. C'est une expérience. Un DJ sélectionné pour le campus accompagne chaque session — l'énergie d'un événement, la structure d'un sport.",
   ct_dj_s1:"DJ live sur campus",ct_dj_s2:"Atmosphère d'arène",ct_dj_s3:"Podium final",
+  hero_reg:"S'INSCRIRE →",hero_dates:"VOIR LES PROCHAINES DATES",
   reg_fname:"Prénom",reg_lname:"Nom",reg_email:"Courriel",reg_submit:"CONFIRMER MA PLACE →",reg_ok_title:"PLACE CONFIRMÉE !",reg_ok_sub:"Tu recevras une confirmation à {email}. Prépare ton instinct.",
   ct_dates_eyebrow:"La tournée",ct_dates_title:"QUÉBEC → OTTAWA · AUTOMNE 2026",ct_dates_sub:"10 campus. 10 dates. Trouve ton arène.",
   ct_timer_lbl:"PROCHAINE ÉTAPE",ct_td:"JOURS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
@@ -703,6 +708,7 @@ en:{
   ct_lb_lbl:"LIVE LEADERBOARD",ct_lb_body:"The ranking is displayed in real time on a large screen. Every station feeds the individual score. Rivalries form naturally.",
   ct_dj_eyebrow:"The atmosphere",ct_dj_title:"A SPORT. AN ARENA.",ct_dj_title2:"A PARTY.",ct_dj_body:"PürInstinct Games is not just a competition. It's an experience. A DJ curated for the campus backs every session — the energy of an event, the structure of a sport.",
   ct_dj_s1:"Live DJ on campus",ct_dj_s2:"Arena atmosphere",ct_dj_s3:"Final podium",
+  hero_reg:"REGISTER →",hero_dates:"SEE NEXT DATES",
   reg_fname:"First name",reg_lname:"Last name",reg_email:"Email",reg_submit:"CONFIRM MY SPOT →",reg_ok_title:"SPOT CONFIRMED!",reg_ok_sub:"You'll receive a confirmation at {email}. Get your instinct ready.",
   ct_dates_eyebrow:"The tour",ct_dates_title:"QUÉBEC → OTTAWA · FALL 2026",ct_dates_sub:"10 campuses. 10 dates. Find your arena.",
   ct_timer_lbl:"NEXT STOP",ct_td:"DAYS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
@@ -843,7 +849,7 @@ const TOUR_DATES = [
 }());
 
 /* ── Google Sheets endpoint — replace with your deployed Apps Script URL ── */
-var SHEETS_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyUEaOiLGiV8PIC7_DGi3ZuYt2PPOqJJjj-Mlnchtt811p4ncuBGcqIV0U7Mcw3Hh37lg/exec';
 
 var _regCtx = {};
 
