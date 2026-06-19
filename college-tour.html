@@ -189,6 +189,21 @@ h1,h2,h3,.disp{
 .ct-cta-sub{font-size:13px;color:rgba(0,0,0,.72)}
 .ct-cta-sub a{color:#0A0A0A;font-weight:700;text-decoration:underline}
 
+/* CTA band */
+.cta-band{width:100%;background:#0F0F0F;padding:clamp(64px,9vw,100px) 0;text-align:center;position:relative}
+.cta-band::before{content:"";display:block;position:absolute;top:0;left:0;right:0;height:1px;background:var(--lime);opacity:.12}
+.cta-band .inner{max-width:640px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+.cta-band-hl{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(28px,4vw,56px);line-height:.95;color:var(--white);margin:0 0 clamp(28px,3.5vw,44px);letter-spacing:-.01em}
+.cta-band-hl .lime{color:var(--lime)}
+.cta-band-btns{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center}
+.cta{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(17px,2.2vw,23px);background:var(--lime);color:#0A0A0A;padding:15px 38px 17px;letter-spacing:.02em;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:transform .15s;text-decoration:none}
+.cta:hover{transform:translateY(-2px);filter:drop-shadow(0 0 14px rgba(204,255,0,.7))}
+.cta-outline{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.9vw,20px);border:2px solid var(--lime);color:var(--lime);padding:13px 36px 15px;letter-spacing:.02em;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:background .2s,color .2s,transform .15s;text-decoration:none}
+.cta-outline:hover{background:var(--lime);color:#0A0A0A;transform:translateY(-2px);box-shadow:0 0 28px rgba(204,255,0,.45)}
+.cta-band-micro{margin-top:clamp(16px,2vw,24px);font-size:clamp(12px,1.3vw,14px);color:rgba(255,255,255,.4);letter-spacing:.04em}
+.cta-band-micro a{color:rgba(204,255,0,.6);text-decoration:none}
+.cta-band-micro a:hover{color:var(--lime)}
+
 /* ============ STATIONS + TECH + DJ ============ */
 .ct-block{margin-top:clamp(60px,8vw,100px)}
 .ct-block-title{font-size:clamp(30px,5vw,62px);margin:0 0 14px}
@@ -521,11 +536,23 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
 
     <div class="ct-slash-bar">
-      <span data-i18n="ct_slash">BÂTI POUR L'INSTINCT. DÉPLOYÉ EN 2 HEURES.</span>
+      <span data-i18n="ct_slash">BÂTI POUR L'INSTINCT. DIRECT AU COLLÈGE.</span>
     </div>
 
   </div>
 </main>
+
+<!-- ── CTA BAND — STUDENTS ── -->
+<div class="cta-band">
+  <div class="inner">
+    <p class="cta-band-hl" data-i18n="ctb_hl">TROUVE TON CAMPUS.<br><span class="lime" data-i18n="ctb_hl2">RÉSERVE TA SESSION.</span></p>
+    <div class="cta-band-btns">
+      <a class="cta" href="#datelist" data-i18n="ctb_primary">S'INSCRIRE →</a>
+      <a class="cta-outline" href="mailto:dominique@purinstinct.com" data-i18n="ctb_secondary">RÉSERVER MON CAMPUS</a>
+    </div>
+    <p class="cta-band-micro" data-i18n="ctb_micro">200 étudiants par session &nbsp;·&nbsp; 5 sessions par jour &nbsp;·&nbsp; Installation en 2 heures</p>
+  </div>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer>
@@ -592,6 +619,7 @@ fr:{
   ct_timer_lbl:"PROCHAINE ÉTAPE",ct_td:"JOURS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
   ct_reg_btn:"S'INSCRIRE",ct_reg_full:"COMPLET",ct_date_next_lbl:"PROCHAIN",
   ct_slash:"BÂTI POUR L'INSTINCT. DIRECT AU COLLÈGE.",
+  ctb_hl:"TROUVE TON CAMPUS.",ctb_hl2:"RÉSERVE TA SESSION.",ctb_primary:"S'INSCRIRE →",ctb_secondary:"RÉSERVER MON CAMPUS",ctb_micro:"200 étudiants par session · 5 sessions par jour · Installation en 2 heures",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
 },
@@ -627,6 +655,7 @@ en:{
   ct_timer_lbl:"NEXT STOP",ct_td:"DAYS",ct_th:"H",ct_tm:"MIN",ct_ts:"SEC",
   ct_reg_btn:"REGISTER",ct_reg_full:"SOLD OUT",ct_date_next_lbl:"NEXT",
   ct_slash:"BUILT FOR INSTINCT. DIRECT TO COLLEGE.",
+  ctb_hl:"FIND YOUR CAMPUS.",ctb_hl2:"BOOK YOUR SESSION.",ctb_primary:"REGISTER →",ctb_secondary:"BOOK MY CAMPUS",ctb_micro:"200 students per session · 5 sessions per day · Set up in 2 hours",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
   f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
 }};
