@@ -317,83 +317,50 @@ h1,h2,h3,.disp{
 .ch-format-header{margin-bottom:clamp(48px,7vw,72px);text-align:center}
 .ch-format-header h2{font-size:clamp(36px,6vw,82px)}
 .ch-format-header p{font-size:clamp(14px,1.5vw,16px);color:var(--muted);max-width:55ch;margin:14px auto 0;line-height:1.6}
-.ch-steps{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  position:relative;
-}
-@media(max-width:760px){.ch-steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.ch-steps{grid-template-columns:1fr}}
-/* connector line — draws itself L→R when section enters view */
-.ch-steps::before{
-  content:"";position:absolute;top:44px;left:12.5%;right:12.5%;height:2px;
-  background:linear-gradient(90deg,var(--lime),var(--gold));
-  z-index:0;transform:scaleX(0);transform-origin:left center;
-  transition:transform 1s cubic-bezier(.65,0,.35,1);
-}
-.ch-steps.is-on::before{transform:scaleX(1)}
-/* glowing spark that races along the line */
-.ch-steps::after{
-  content:"";position:absolute;top:44px;left:12.5%;width:11px;height:11px;margin-top:-4px;
-  border-radius:50%;background:var(--lime);box-shadow:0 0 14px 4px rgba(204,255,0,.85);
-  opacity:0;z-index:2;pointer-events:none;
-}
-.ch-steps.is-on::after{animation:chSpark 1.05s cubic-bezier(.65,0,.35,1) .05s 1 forwards}
-@keyframes chSpark{
-  0%{opacity:0;left:12.5%}
-  12%{opacity:1}
-  88%{opacity:1;background:var(--gold);box-shadow:0 0 16px 5px rgba(240,180,41,.85)}
-  100%{opacity:0;left:87.5%;background:var(--gold);box-shadow:0 0 16px 5px rgba(240,180,41,.85)}
-}
-@media(max-width:760px){.ch-steps::before,.ch-steps::after{display:none}}
-.ch-step{
-  display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:0 clamp(12px,2vw,24px) 40px;position:relative;z-index:1;
-}
-.ch-step-num{
-  width:clamp(44px,5.5vw,56px);height:clamp(44px,5.5vw,56px);
-  display:flex;align-items:center;justify-content:center;
-  background:var(--bg);border:2px solid var(--lime);
-  font-family:var(--display);font-weight:900;font-style:italic;
-  font-size:clamp(18px,2.5vw,24px);color:var(--lime);
-  margin-bottom:20px;position:relative;cursor:default;
-  transform:scale(.35);opacity:0;
-  transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .4s ease,box-shadow .3s ease,border-color .3s ease;
-}
-.ch-steps.is-on .ch-step-num{transform:scale(1);opacity:1}
-/* staggered entrance — delay only the transform/opacity, keep hover instant */
-.ch-steps.is-on .ch-step:nth-child(1) .ch-step-num{transition-delay:.12s,.12s,0s,0s}
-.ch-steps.is-on .ch-step:nth-child(2) .ch-step-num{transition-delay:.30s,.30s,0s,0s}
-.ch-steps.is-on .ch-step:nth-child(3) .ch-step-num{transition-delay:.48s,.48s,0s,0s}
-.ch-steps.is-on .ch-step:nth-child(4) .ch-step-num{transition-delay:.66s,.66s,0s,0s}
-.ch-step:hover .ch-step-num{transform:scale(1.12) translateY(-3px);box-shadow:0 0 22px rgba(204,255,0,.45)}
-.ch-step:last-child .ch-step-num{
-  border-color:var(--gold);color:var(--gold);
-  background:linear-gradient(rgba(240,180,41,.08),rgba(240,180,41,.08)),var(--bg);
-  box-shadow:0 0 24px rgba(240,180,41,.3);
-}
-/* champion node keeps breathing after it lands (box-shadow only, hover-safe) */
-.ch-steps.is-on .ch-step:last-child .ch-step-num{animation:chStarGlow 2.4s ease-in-out 1.1s infinite}
-.ch-step:last-child:hover .ch-step-num{transform:scale(1.12) translateY(-3px);box-shadow:0 0 36px rgba(240,180,41,.6)}
-@keyframes chStarGlow{0%,100%{box-shadow:0 0 22px rgba(240,180,41,.3)}50%{box-shadow:0 0 42px rgba(240,180,41,.7)}}
-.ch-step-label{
+/* ===== ROAD TO THE CHAMPIONSHIP — scroll-scrubbed interactive map ===== */
+#roadDriver{position:relative}
+.road-sticky{position:absolute;left:0;right:0;top:0;overflow:hidden}
+.road-wrap{width:min(1180px,92%);margin:0 auto;position:relative;padding:clamp(30px,5vw,52px) 0 clamp(20px,3vw,34px)}
+.road-map{width:100%;height:auto;display:block;overflow:visible}
+.road-hint{
+  position:absolute;left:50%;top:2px;transform:translateX(-50%);
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
-  font-size:clamp(14px,1.8vw,20px);color:var(--white);margin-bottom:8px;line-height:1;
-  opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;
+  font-size:clamp(11px,1.3vw,13px);letter-spacing:.16em;color:var(--lime);
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+  transition:opacity .4s ease;pointer-events:none;z-index:3;
 }
-.ch-step:last-child .ch-step-label{color:var(--gold)}
-.ch-step-sub{
-  font-size:clamp(12px,1.2vw,13px);color:var(--muted);line-height:1.5;max-width:18ch;margin:0 auto;
-  opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;
+.road-hint::after{content:"↓";font-style:normal;animation:scrollBounce 2s ease-in-out infinite}
+.road-prog{position:relative;height:3px;background:rgba(255,255,255,.08);margin-top:16px;border-radius:3px;overflow:hidden}
+.road-prog-fill{position:absolute;inset:0 auto 0 0;width:0%;background:linear-gradient(90deg,var(--lime),var(--gold))}
+.road-prog-pct{position:absolute;right:0;top:-21px;font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;color:var(--gold);font-variant-numeric:tabular-nums}
+.road-stops{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}
+@media(max-width:560px){.road-stops{grid-template-columns:repeat(2,1fr);gap:22px 10px}}
+.road-stop{text-align:center;will-change:opacity,transform}
+.road-stop-scope{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:10px;letter-spacing:.2em;color:var(--lime);margin-bottom:5px}
+.road-stop:last-child .road-stop-scope{color:var(--gold)}
+.road-stop-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.9vw,22px);color:var(--white);line-height:1;margin-bottom:6px}
+.road-stop:last-child .road-stop-name{color:var(--gold)}
+.road-stop-sub{font-size:clamp(11px,1.2vw,13px);color:var(--muted);line-height:1.45;max-width:20ch;margin:0 auto}
+.road-track{fill:none;stroke:rgba(255,255,255,.10);stroke-width:2}
+.road-line{fill:none;stroke:url(#roadGrad);stroke-width:3.5;stroke-linecap:round}
+.road-node{transform-box:fill-box;transform-origin:center;will-change:transform,opacity}
+.road-node-box{fill:#0c0c0c;stroke:var(--lime);stroke-width:2}
+.road-node--champ .road-node-box{stroke:var(--gold)}
+.road-node-glyph{fill:var(--lime);font-family:var(--display);font-weight:900;font-style:italic}
+.road-node--champ .road-node-glyph{fill:var(--gold)}
+.road-ring{fill:none;transform-box:fill-box;transform-origin:center}
+.road-node .road-ring{stroke:var(--lime)}
+.road-node--champ .road-ring{stroke:var(--gold)}
+.road-node--champ.is-live .road-ring{animation:roadPulse 2.3s ease-in-out infinite}
+@keyframes roadPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+.road-traveler{fill:var(--lime);filter:drop-shadow(0 0 7px rgba(204,255,0,.9))}
+.road-traveler-ring{fill:none;stroke:var(--lime);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:roadPing 1.9s ease-out infinite}
+@keyframes roadPing{0%{transform:scale(.5);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+@media(max-width:760px),(prefers-reduced-motion:reduce){
+  #roadDriver{height:auto!important}
+  .road-sticky{position:relative!important;top:auto!important;bottom:auto!important;height:auto!important}
+  .road-hint{display:none}
 }
-.ch-steps.is-on .ch-step-label,.ch-steps.is-on .ch-step-sub{opacity:1;transform:none}
-.ch-steps.is-on .ch-step:nth-child(1) .ch-step-label{transition-delay:.30s}
-.ch-steps.is-on .ch-step:nth-child(2) .ch-step-label{transition-delay:.48s}
-.ch-steps.is-on .ch-step:nth-child(3) .ch-step-label{transition-delay:.66s}
-.ch-steps.is-on .ch-step:nth-child(4) .ch-step-label{transition-delay:.84s}
-.ch-steps.is-on .ch-step:nth-child(1) .ch-step-sub{transition-delay:.38s}
-.ch-steps.is-on .ch-step:nth-child(2) .ch-step-sub{transition-delay:.56s}
-.ch-steps.is-on .ch-step:nth-child(3) .ch-step-sub{transition-delay:.74s}
-.ch-steps.is-on .ch-step:nth-child(4) .ch-step-sub{transition-delay:.92s}
 
 /* ============ PRIZE MONEY ============ */
 .ch-prize{padding:clamp(72px,10vw,120px) 0;position:relative;overflow:hidden}
@@ -555,9 +522,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   *{scroll-behavior:auto!important}
   .ch-hero-scroll{animation:none}
   .reveal,.reveal-left,.reveal-right{opacity:1;transform:none;transition:none}
-  .ch-steps::before{transform:scaleX(1);transition:none}
-  .ch-steps::after{display:none}
-  .ch-step-num,.ch-step-label,.ch-step-sub{opacity:1;transform:none;transition:none;animation:none}
+  .road-node--champ.is-live .road-ring,.road-traveler-ring,.road-hint::after{animation:none}
 }
 </style>
 </head>
@@ -728,26 +693,69 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <h2 data-i18n="ch_fmt_h2">COMMENT ON ARRIVE AU SOMMET.</h2>
       <p data-i18n="ch_fmt_sub">Quatre étapes. Un seul champion. Le format conçu pour que chaque match compte et que l'instinct soit récompensé jusqu'au bout.</p>
     </div>
-    <div class="ch-steps" id="chSteps">
-      <div class="ch-step">
-        <div class="ch-step-num">1</div>
-        <div class="ch-step-label" data-i18n="fmt_s1">Qualifications</div>
-        <div class="ch-step-sub" data-i18n="fmt_s1_sub">Championnats locaux dans chaque ville participante</div>
-      </div>
-      <div class="ch-step">
-        <div class="ch-step-num">2</div>
-        <div class="ch-step-label" data-i18n="fmt_s2">Phase de groupes</div>
-        <div class="ch-step-sub" data-i18n="fmt_s2_sub">Round-robin entre équipes qualifiées de toutes les villes</div>
-      </div>
-      <div class="ch-step">
-        <div class="ch-step-num">3</div>
-        <div class="ch-step-label" data-i18n="fmt_s3">Demi-finales</div>
-        <div class="ch-step-sub" data-i18n="fmt_s3_sub">Les 4 meilleures équipes s'affrontent en élimination directe</div>
-      </div>
-      <div class="ch-step">
-        <div class="ch-step-num">★</div>
-        <div class="ch-step-label" data-i18n="fmt_s4">LA GRANDE FINALE</div>
-        <div class="ch-step-sub" data-i18n="fmt_s4_sub">Devant la foule. Pour le trophée. Pour l'argent. Pour la légende.</div>
+  </div>
+
+  <div id="roadDriver">
+    <div class="road-sticky">
+      <div class="road-wrap">
+        <div class="road-hint" id="roadHint" data-i18n="road_hint">Fais défiler pour voyager</div>
+        <svg class="road-map" viewBox="0 0 1160 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs><linearGradient id="roadGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#CCFF00"/><stop offset="1" stop-color="#F0B429"/>
+          </linearGradient></defs>
+          <path class="road-track" d="M145 310 C 250 300, 330 252, 435 250 C 560 248, 610 176, 725 178 C 845 180, 905 112, 1015 76"/>
+          <path class="road-line" id="roadLine" d="M145 310 C 250 300, 330 252, 435 250 C 560 248, 610 176, 725 178 C 845 180, 905 112, 1015 76"/>
+          <g class="road-node">
+            <circle class="road-ring" cx="145" cy="310" r="22" opacity=".4"/>
+            <rect class="road-node-box" x="124" y="289" width="42" height="42"/>
+            <text class="road-node-glyph" x="145" y="310" text-anchor="middle" dominant-baseline="central" font-size="22">1</text>
+          </g>
+          <g class="road-node">
+            <circle class="road-ring" cx="435" cy="250" r="38" opacity=".26"/>
+            <circle class="road-ring" cx="435" cy="250" r="22" opacity=".4"/>
+            <rect class="road-node-box" x="414" y="229" width="42" height="42"/>
+            <text class="road-node-glyph" x="435" y="250" text-anchor="middle" dominant-baseline="central" font-size="22">2</text>
+          </g>
+          <g class="road-node">
+            <circle class="road-ring" cx="725" cy="178" r="54" opacity=".16"/>
+            <circle class="road-ring" cx="725" cy="178" r="38" opacity=".26"/>
+            <circle class="road-ring" cx="725" cy="178" r="22" opacity=".4"/>
+            <rect class="road-node-box" x="704" y="157" width="42" height="42"/>
+            <text class="road-node-glyph" x="725" y="178" text-anchor="middle" dominant-baseline="central" font-size="22">3</text>
+          </g>
+          <g class="road-node road-node--champ">
+            <circle class="road-ring" cx="1015" cy="76" r="66" opacity=".16"/>
+            <circle class="road-ring" cx="1015" cy="76" r="46" opacity=".3"/>
+            <circle class="road-ring" cx="1015" cy="76" r="24" opacity=".45"/>
+            <rect class="road-node-box" x="992" y="53" width="46" height="46"/>
+            <path class="road-node-glyph" transform="translate(1015,76)" d="M0,-12 L3.5,-4.9 L11.4,-3.7 L5.7,1.9 L7,9.7 L0,6 L-7,9.7 L-5.7,1.9 L-11.4,-3.7 L-3.5,-4.9 Z"/>
+          </g>
+          <circle class="road-traveler-ring" id="roadTravelerRing" cx="145" cy="310" r="9" style="opacity:0"/>
+          <circle class="road-traveler" id="roadTraveler" cx="145" cy="310" r="6" style="opacity:0"/>
+        </svg>
+        <div class="road-prog"><div class="road-prog-fill" id="roadFill"></div><span class="road-prog-pct" id="roadPct">0%</span></div>
+        <div class="road-stops">
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc1">Ta ville</div>
+            <div class="road-stop-name" data-i18n="fmt_s1">Local</div>
+            <div class="road-stop-sub" data-i18n="fmt_s1_sub">Qualifie ton équipe dans ta ville.</div>
+          </div>
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc2">Ton pays</div>
+            <div class="road-stop-name" data-i18n="fmt_s2">National</div>
+            <div class="road-stop-sub" data-i18n="fmt_s2_sub">Les meilleures équipes du pays se rejoignent.</div>
+          </div>
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc3">Le monde</div>
+            <div class="road-stop-name" data-i18n="fmt_s3">International</div>
+            <div class="road-stop-sub" data-i18n="fmt_s3_sub">Des équipes de plusieurs pays s'affrontent.</div>
+          </div>
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc4">Le sommet</div>
+            <div class="road-stop-name" data-i18n="fmt_s4">Championship</div>
+            <div class="road-stop-sub" data-i18n="fmt_s4_sub">La grande finale. Le titre. La légende.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -957,13 +965,15 @@ fr:{
   fest_zones:"Zones Élargies",fest_zones_sub:"Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.",
   fest_ent:"Live Entertainment",fest_ent_sub:"Shows freestyle, battles surprises et animations entre chaque match.",
 
-  ch_fmt_eyebrow:"Format du tournoi",
+  ch_fmt_eyebrow:"La route vers le championnat",
   ch_fmt_h2:"COMMENT ON ARRIVE AU SOMMET.",
-  ch_fmt_sub:"Quatre étapes. Un seul champion. Le format conçu pour que chaque match compte et que l'instinct soit récompensé jusqu'au bout.",
-  fmt_s1:"Qualifications",fmt_s1_sub:"Championnats locaux dans chaque ville participante",
-  fmt_s2:"Phase de groupes",fmt_s2_sub:"Round-robin entre équipes qualifiées de toutes les villes",
-  fmt_s3:"Demi-finales",fmt_s3_sub:"Les 4 meilleures équipes s'affrontent en élimination directe",
-  fmt_s4:"LA GRANDE FINALE",fmt_s4_sub:"Devant la foule. Pour le trophée. Pour l'argent. Pour la légende.",
+  ch_fmt_sub:"Du local au mondial. Fais défiler pour parcourir la route — chaque étape se dévoile en chemin.",
+  road_hint:"Fais défiler pour voyager",
+  road_sc1:"Ta ville",road_sc2:"Ton pays",road_sc3:"Le monde",road_sc4:"Le sommet",
+  fmt_s1:"Local",fmt_s1_sub:"Qualifie ton équipe dans ta ville.",
+  fmt_s2:"National",fmt_s2_sub:"Les meilleures équipes du pays se rejoignent.",
+  fmt_s3:"International",fmt_s3_sub:"Des équipes de plusieurs pays s'affrontent.",
+  fmt_s4:"Championship",fmt_s4_sub:"La grande finale. Le titre. La légende.",
 
   ch_prize_eyebrow:"Prix en jeu",
   ch_prize_h2:"DE VRAIS PRIX. DE VRAIES RÉCOMPENSES.",
@@ -1031,13 +1041,15 @@ en:{
   fest_zones:"Expanded Zones",fest_zones_sub:"All zones available — bigger and more intense than the regular season.",
   fest_ent:"Live Entertainment",fest_ent_sub:"Freestyle shows, surprise battles and entertainment between every match.",
 
-  ch_fmt_eyebrow:"Tournament format",
+  ch_fmt_eyebrow:"The road to the championship",
   ch_fmt_h2:"HOW YOU REACH THE TOP.",
-  ch_fmt_sub:"Four stages. One champion. A format designed so every match matters and instinct is rewarded all the way to the end.",
-  fmt_s1:"Qualifiers",fmt_s1_sub:"Local championships in each participating city",
-  fmt_s2:"Group Stage",fmt_s2_sub:"Round-robin between qualified teams from all cities",
-  fmt_s3:"Semi-finals",fmt_s3_sub:"Top 4 teams face off in single elimination",
-  fmt_s4:"THE GRAND FINAL",fmt_s4_sub:"In front of the crowd. For the trophy. For the prize. For the legend.",
+  ch_fmt_sub:"From local to global. Scroll to travel the road — each stage reveals as you go.",
+  road_hint:"Scroll to travel",
+  road_sc1:"Your city",road_sc2:"Your country",road_sc3:"The world",road_sc4:"The summit",
+  fmt_s1:"Local",fmt_s1_sub:"Qualify your team in your city.",
+  fmt_s2:"National",fmt_s2_sub:"The best teams in the country converge.",
+  fmt_s3:"International",fmt_s3_sub:"Teams from multiple countries face off.",
+  fmt_s4:"Championship",fmt_s4_sub:"The grand final. The title. The legend.",
 
   ch_prize_eyebrow:"Prize money",
   ch_prize_h2:"REAL PRIZES. REAL REWARDS.",
@@ -1270,15 +1282,78 @@ function submitChReg(){
   update();
 }());
 
-/* ── Tournament format: play staggered entrance when section enters view ── */
+/* ── The Road to the Championship: scroll-scrubbed map (reversible) ── */
 (function(){
-  var steps = document.getElementById('chSteps');
-  if(!steps) return;
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){ steps.classList.add('is-on'); return; }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ steps.classList.add('is-on'); io.disconnect(); } });
-  }, {threshold:0.35});
-  io.observe(steps);
+  var driver = document.getElementById('roadDriver');
+  if(!driver) return;
+  var sticky = driver.querySelector('.road-sticky');
+  var nav    = document.querySelector('nav');
+  var line   = document.getElementById('roadLine');
+  var travel = document.getElementById('roadTraveler');
+  var travelRing = document.getElementById('roadTravelerRing');
+  var nodes  = [].slice.call(driver.querySelectorAll('.road-node'));
+  var stops  = [].slice.call(driver.querySelectorAll('.road-stop'));
+  var champ  = driver.querySelector('.road-node--champ');
+  var fill   = document.getElementById('roadFill');
+  var pct    = document.getElementById('roadPct');
+  var hint   = document.getElementById('roadHint');
+  if(!line || !sticky) return;
+  var starts = [-0.06, 0.30, 0.56, 0.82];
+  function ss(x){ x = x<0?0:x>1?1:x; return x*x*(3-2*x); }
+  var len = line.getTotalLength();
+  line.style.strokeDasharray = len;
+
+  function render(p){
+    line.style.strokeDashoffset = len * (1 - p);
+    if(travel){
+      var pt = line.getPointAtLength(len * (p<=0 ? 0.0001 : p));
+      travel.setAttribute('cx', pt.x); travel.setAttribute('cy', pt.y);
+      travelRing.setAttribute('cx', pt.x); travelRing.setAttribute('cy', pt.y);
+      var v = p>0.012 ? 1 : 0;
+      travel.style.opacity = v; travelRing.style.opacity = v ? 0.6 : 0;
+    }
+    for(var i=0;i<nodes.length;i++){
+      var a = ss((p - starts[i]) / 0.22);
+      nodes[i].style.opacity = (0.16 + 0.84*a).toFixed(3);
+      nodes[i].style.transform = 'scale(' + (0.72 + 0.28*a).toFixed(3) + ')';
+      if(stops[i]){
+        stops[i].style.opacity = (0.10 + 0.90*a).toFixed(3);
+        stops[i].style.transform = 'translateY(' + ((1-a)*16).toFixed(1) + 'px)';
+      }
+    }
+    if(champ) champ.classList.toggle('is-live', ss((p - starts[3]) / 0.22) > 0.72);
+    if(fill) fill.style.width = (p*100).toFixed(1) + '%';
+    if(pct)  pct.textContent = Math.round(p*100) + '%';
+    if(hint) hint.style.opacity = p<0.04 ? '1' : '0';
+  }
+
+  if(window.matchMedia('(max-width:760px),(prefers-reduced-motion:reduce)').matches){
+    render(1); return;
+  }
+
+  function setH(){ var sH = sticky.offsetHeight || 500; driver.style.height = (sH + Math.round(window.innerHeight * 1.7)) + 'px'; }
+  setH();
+  var raf = false;
+  function update(){
+    raf = false;
+    var navH = nav ? nav.offsetHeight : 0;
+    var sH = sticky.offsetHeight;
+    var rect = driver.getBoundingClientRect();
+    var driverH = driver.offsetHeight;
+    var scrollable = driverH - sH;
+    var p = Math.max(0, Math.min(1, -(rect.top - navH) / scrollable));
+    if(rect.top <= navH && rect.bottom >= navH + sH){
+      sticky.style.cssText = 'position:fixed;top:'+navH+'px;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else if(rect.bottom < navH + sH){
+      sticky.style.cssText = 'position:absolute;bottom:0;top:auto;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else {
+      sticky.style.cssText = 'position:absolute;top:0;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    }
+    render(p);
+  }
+  window.addEventListener('scroll', function(){ if(!raf){ raf=true; requestAnimationFrame(update); } }, {passive:true});
+  window.addEventListener('resize', function(){ setH(); update(); });
+  update();
 }());
 
 /* ── Reveal on scroll ── */
