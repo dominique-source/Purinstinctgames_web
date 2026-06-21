@@ -1298,7 +1298,7 @@ function submitChReg(){
   var pct    = document.getElementById('roadPct');
   var hint   = document.getElementById('roadHint');
   if(!line || !sticky) return;
-  var starts = [-0.06, 0.30, 0.56, 0.82];
+  var starts = [-0.25, 0.08, 0.38, 0.65];
   function ss(x){ x = x<0?0:x>1?1:x; return x*x*(3-2*x); }
   var len = line.getTotalLength();
   line.style.strokeDasharray = len;
