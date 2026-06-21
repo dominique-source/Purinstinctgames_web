@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projet spécial — Séan Garnier × PürInstinct Games</title>
+<title>King Dac × PürInstinct Games — Darius Clark</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="manifest" href="site.webmanifest">
-<meta name="description" content="Séan Garnier, le freestyler le plus visionné de l'histoire, entre dans l'arène PürInstinct Games pour une session exclusive.">
+<meta name="description" content="King Dac (Darius Clark), spécialiste du saut en hauteur, entre dans l'arène PürInstinct Games pour une session explosive et exclusive.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,6 +18,7 @@
   --bg:#0A0A0A;
   --bg-2:#101010;
   --lime:#CCFF00;
+  --gold:#F0B429;
   --white:#F4F4F2;
   --muted:#9C9C96;
   --line:rgba(204,255,0,.18);
@@ -48,6 +49,7 @@ h1,h2,h3,.disp{
 .wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
 .lead{color:var(--muted);max-width:62ch}
 .lime{color:var(--lime)}
+.gold{color:var(--gold)}
 .cta{
   display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;
   text-transform:uppercase;background:var(--lime);color:#0A0A0A;
@@ -149,114 +151,113 @@ h1,h2,h3,.disp{
 }
 
 /* ============ PAGE HERO ============ */
-.sg-hero{
+.kd-hero{
   position:relative;min-height:70vh;display:flex;align-items:flex-end;
   padding-top:80px;overflow:hidden;background:#0A0A0A;
 }
-.sg-hero-img{
+.kd-hero-img{
   position:absolute;inset:0;z-index:0;
-  background:url('freestyle.png') center 30% / cover no-repeat;
+  background:url('darius.png') center 15% / cover no-repeat;
 }
-.sg-hero-img::after{
+.kd-hero-img::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(to right, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%),
-             linear-gradient(to top, rgba(10,10,10,.95) 0%, rgba(10,10,10,.4) 40%, transparent 70%);
+  background:linear-gradient(to right, rgba(0,0,0,.88) 0%, rgba(0,0,0,.60) 50%, rgba(0,0,0,.25) 100%),
+             linear-gradient(to top, rgba(10,10,10,.97) 0%, rgba(10,10,10,.4) 40%, transparent 70%);
 }
-.sg-hero-inner{
+.kd-hero-inner{
   position:relative;z-index:1;
   padding:clamp(60px,10vw,120px) 0 clamp(56px,7vw,80px);
   max-width:700px;
 }
-.sg-hero-tag{
+.kd-hero-tag{
   display:inline-flex;align-items:center;gap:10px;
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:13px;letter-spacing:.14em;color:var(--lime);margin-bottom:20px;
 }
-.sg-hero-tag::before{content:"";width:28px;height:3px;background:var(--lime);transform:skewX(-30deg)}
-.sg-hero h1{
+.kd-hero-tag::before{content:"";width:28px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.kd-hero h1{
   font-size:clamp(52px,9vw,120px);line-height:.88;
   letter-spacing:-.02em;margin-bottom:28px;
 }
-.sg-hero h1 .dim{opacity:.5}
-.sg-hero h1 .lime{color:var(--lime)}
-.sg-hero-sub{
+.kd-hero h1 .dim{opacity:.5}
+.kd-hero h1 .lime{color:var(--lime)}
+.kd-hero-sub{
   font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:52ch;line-height:1.5;
-}
-/* prog section: freestyle photo tinted bg strip */
-.prog-section{position:relative}
-.prog-photo-bg{
-  position:absolute;inset:0;z-index:0;
-  background:url('freestyle.png') center 40% / cover no-repeat;
-  opacity:.07;
 }
 
 /* ============ MAIN CONTENT ============ */
-.sg-main{padding:clamp(48px,7vw,90px) 0}
-.sg-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
-@media(max-width:860px){.sg-layout{grid-template-columns:1fr}}
+.kd-main{padding:clamp(48px,7vw,90px) 0}
+.kd-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+@media(max-width:860px){.kd-layout{grid-template-columns:1fr}}
 
-.sg-quote{
+.kd-quote{
   border-left:3px solid var(--lime);padding:16px 0 16px 22px;
   margin:28px 0 24px;font-size:clamp(16px,2vw,20px);font-style:italic;
   color:var(--white);line-height:1.45;opacity:.9;
 }
 
-.sg-facts{display:flex;gap:clamp(20px,4vw,40px);margin:28px 0 36px;flex-wrap:wrap}
-.sg-fact{display:flex;flex-direction:column;gap:4px}
-.sg-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,44px);color:var(--lime);line-height:1}
-.sg-l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.kd-facts{display:flex;gap:clamp(20px,4vw,40px);margin:28px 0 36px;flex-wrap:wrap}
+.kd-fact{display:flex;flex-direction:column;gap:4px}
+.kd-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,44px);color:var(--lime);line-height:1}
+.kd-l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 
 /* ============ PORTRAIT PHOTO ============ */
-.sg-photo-wrap{
+.kd-photo-wrap{
   position:sticky;top:84px;
   display:flex;flex-direction:column;gap:0;
 }
-.sg-photo{
+.kd-photo{
   position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;
   border:2px solid rgba(204,255,0,.22);
 }
-.sg-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.sg-photo::after{
+.kd-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.kd-photo::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(to top, rgba(10,10,10,.7) 0%, transparent 45%);
 }
-.sg-photo-caption{
+.kd-photo-caption{
   background:#111;border:2px solid rgba(204,255,0,.22);border-top:none;
   padding:18px 22px;display:flex;align-items:center;justify-content:space-between;
 }
-.sg-photo-name{
+.kd-photo-name{
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:clamp(18px,2.5vw,26px);letter-spacing:-.01em;
 }
-.sg-photo-name span{color:var(--lime)}
-.sg-photo-badge{
+.kd-photo-name span{color:var(--lime)}
+.kd-photo-badge{
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:10px;letter-spacing:.12em;color:#0A0A0A;
   background:var(--lime);padding:4px 10px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
   white-space:nowrap;
 }
-@media(max-width:860px){.sg-photo-wrap{position:static}}
+@media(max-width:860px){.kd-photo-wrap{position:static}}
 
 /* ============ INFO STRIP ============ */
-.sg-strip{
+.kd-strip{
   background:#111;border-top:1px solid rgba(204,255,0,.12);
   border-bottom:1px solid rgba(204,255,0,.12);
   padding:clamp(28px,4vw,48px) 0;margin-bottom:clamp(32px,5vw,60px);
 }
-.sg-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(204,255,0,.12)}
-@media(max-width:640px){.sg-strip-grid{grid-template-columns:1fr}}
-.sg-strip-item{
+.kd-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(204,255,0,.12)}
+@media(max-width:640px){.kd-strip-grid{grid-template-columns:1fr}}
+.kd-strip-item{
   background:#111;padding:28px 32px;
   display:flex;flex-direction:column;gap:8px;
 }
-.sg-strip-icon{font-size:22px;margin-bottom:4px}
-.sg-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,2vw,20px);color:var(--white)}
-.sg-strip-sub{font-size:14px;color:var(--muted);line-height:1.45}
+.kd-strip-icon{font-size:22px;margin-bottom:4px}
+.kd-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,2vw,20px);color:var(--white)}
+.kd-strip-sub{font-size:14px;color:var(--muted);line-height:1.45}
 
 /* ============ PROGRAMME ============ */
 .prog-section{
   background:var(--bg-2);padding:clamp(56px,7vw,100px) 0;
   border-top:1px solid rgba(204,255,0,.10);
+  position:relative;
+}
+.prog-photo-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('darius.png') center 40% / cover no-repeat;
+  opacity:.05;
 }
 .prog-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
@@ -267,7 +268,7 @@ h1,h2,h3,.disp{
   position:relative;background:#0f0f0f;
   border:1.5px solid rgba(255,255,255,.07);border-radius:4px;
   padding:36px 28px 32px;overflow:hidden;display:flex;flex-direction:column;gap:14px;
-  transition:border-color .25s,box-shadow .25s;
+  transition:border-color .25s,box-shadow .25s;cursor:pointer;
 }
 .prog-card:hover{border-color:rgba(204,255,0,.35);box-shadow:0 4px 32px rgba(204,255,0,.08)}
 .prog-card.featured{border-color:rgba(204,255,0,.3);background:#101a00}
@@ -292,25 +293,21 @@ h1,h2,h3,.disp{
   padding:4px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.12);color:var(--muted);
 }
 .prog-card.featured .prog-tag{border-color:rgba(204,255,0,.3);color:var(--lime)}
-.prog-card-cta{
-  display:inline-block;align-self:flex-start;margin-top:8px;
+.prog-card-hint{
+  display:flex;align-items:center;gap:6px;margin-top:12px;
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
-  font-size:15px;letter-spacing:.03em;
-  background:var(--lime);color:#0A0A0A;padding:10px 22px 11px;
-  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+  font-size:12px;letter-spacing:.08em;color:var(--muted);transition:.2s;
 }
-.prog-card-cta:hover{box-shadow:0 0 20px rgba(204,255,0,.5);transform:translateY(-1px)}
-.prog-card-cta.ghost{
-  background:none;color:var(--white);border:1.5px solid rgba(255,255,255,.2);
-  clip-path:none;padding:9px 22px 10px;border-radius:2px;
-}
-.prog-card-cta.ghost:hover{border-color:var(--lime);color:var(--lime);box-shadow:none}
+.prog-card:hover .prog-card-hint{color:var(--lime)}
+.prog-card-hint::after{content:"→";transition:transform .2s}
+.prog-card:hover .prog-card-hint::after{transform:translateX(4px)}
+.prog-card.featured .prog-card-hint{color:rgba(204,255,0,.6)}
+.prog-card.featured:hover .prog-card-hint{color:var(--lime)}
 .prog-slash{
   position:absolute;bottom:-16px;right:-16px;width:100px;height:100px;
   background:repeating-linear-gradient(-60deg,rgba(204,255,0,.08) 0,rgba(204,255,0,.08) 2px,transparent 2px,transparent 14px);
   transform:skewX(-8deg);pointer-events:none;
 }
-
 
 /* ============ FOOTER ============ */
 footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
@@ -324,18 +321,6 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
 
 /* ============ MODAL ============ */
-.prog-card{cursor:pointer}
-.prog-card-hint{
-  display:flex;align-items:center;gap:6px;margin-top:12px;
-  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
-  font-size:12px;letter-spacing:.08em;color:var(--muted);transition:.2s;
-}
-.prog-card:hover .prog-card-hint{color:var(--lime)}
-.prog-card-hint::after{content:"→";transition:transform .2s}
-.prog-card:hover .prog-card-hint::after{transform:translateX(4px)}
-.prog-card.featured .prog-card-hint{color:rgba(204,255,0,.6)}
-.prog-card.featured:hover .prog-card-hint{color:var(--lime)}
-
 .modal-overlay{
   position:fixed;inset:0;z-index:200;
   background:rgba(0,0,0,.88);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -389,6 +374,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .modal-close:hover{background:var(--lime);color:#0A0A0A;border-color:var(--lime)}
 @media(max-width:640px){.modal-body{padding:22px 20px 28px}}
 
+/* ============ FOCUS / A11Y ============ */
+a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:1px}
 </style>
 </head>
 <body>
@@ -407,8 +394,8 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </button>
       <div class="nav-drop-menu" role="menu">
         <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
-        <a href="projet-special.html" class="nav-drop-item active" data-i18n="nav_sg">Séan Garnier</a>
-        <a href="king-dac.html" class="nav-drop-item" data-i18n="nav_kd">King Dac</a>
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="king-dac.html" class="nav-drop-item active" data-i18n="nav_kd">King Dac</a>
         <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
       </div>
     </div>
@@ -422,74 +409,73 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 </nav>
 
 <!-- ============ HERO ============ -->
-<header class="sg-hero">
-  <div class="sg-hero-img"></div>
-  <div class="wrap sg-hero-inner">
-    <div class="sg-hero-tag" data-i18n="sg_eyebrow">Projet spécial</div>
+<header class="kd-hero">
+  <div class="kd-hero-img"></div>
+  <div class="wrap kd-hero-inner">
+    <div class="kd-hero-tag" data-i18n="kd_eyebrow">Projet spécial · Athlète signature</div>
     <h1>
-      <span class="dim" data-i18n="sg_h1a">SÉAN</span><br>
-      <span class="lime" data-i18n="sg_h1b">GARNIER</span><br>
-      <span data-i18n="sg_h1c">DANS L'ARÈNE.</span>
+      <span class="dim" data-i18n="kd_h1a">KING</span><br>
+      <span class="lime" data-i18n="kd_h1b">DAC</span><br>
+      <span data-i18n="kd_h1c">DANS L'ARÈNE.</span>
     </h1>
-    <p class="sg-hero-sub" data-i18n="sg_herosub">Le freestyler le plus visionné de l'histoire entre dans l'arène PürInstinct Games pour une session exclusive.</p>
+    <p class="kd-hero-sub" data-i18n="kd_herosub">Le spécialiste du saut en hauteur le plus explosif entre dans l'arène PürInstinct Games pour une session exclusive.</p>
   </div>
 </header>
 
 <!-- ============ INFO STRIP ============ -->
-<div class="sg-strip">
+<div class="kd-strip">
   <div class="wrap">
-    <div class="sg-strip-grid">
-      <div class="sg-strip-item">
-        <div class="sg-strip-icon">📅</div>
-        <div class="sg-strip-label" data-i18n="sg_s1l">Date à confirmer</div>
-        <div class="sg-strip-sub" data-i18n="sg_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
+    <div class="kd-strip-grid">
+      <div class="kd-strip-item">
+        <div class="kd-strip-icon">📅</div>
+        <div class="kd-strip-label" data-i18n="kd_s1l">Date à confirmer</div>
+        <div class="kd-strip-sub" data-i18n="kd_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
       </div>
-      <div class="sg-strip-item">
-        <div class="sg-strip-icon">🏟️</div>
-        <div class="sg-strip-label" data-i18n="sg_s2l">Session exclusive</div>
-        <div class="sg-strip-sub" data-i18n="sg_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
+      <div class="kd-strip-item">
+        <div class="kd-strip-icon">🏟️</div>
+        <div class="kd-strip-label" data-i18n="kd_s2l">Session exclusive</div>
+        <div class="kd-strip-sub" data-i18n="kd_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
       </div>
-      <div class="sg-strip-item">
-        <div class="sg-strip-icon">⚡</div>
-        <div class="sg-strip-label" data-i18n="sg_s3l">Il joue avec toi</div>
-        <div class="sg-strip-sub" data-i18n="sg_s3b">Séan Garnier anime, défie et joue dans l'arène aux côtés des participants.</div>
+      <div class="kd-strip-item">
+        <div class="kd-strip-icon">⬆️</div>
+        <div class="kd-strip-label" data-i18n="kd_s3l">Il concourt avec toi</div>
+        <div class="kd-strip-sub" data-i18n="kd_s3b">King Dac participe aux concours et défie chaque participant sur le terrain.</div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ============ MAIN CONTENT ============ -->
-<main class="sg-main">
+<main class="kd-main">
   <div class="wrap">
-    <div class="sg-layout">
+    <div class="kd-layout">
 
       <!-- LEFT: copy -->
       <div>
-        <span class="eyebrow" data-i18n="sg_who_ey">Qui est Séan Garnier ?</span>
-        <h2 style="font-size:clamp(34px,5vw,60px);margin-bottom:20px" data-i18n="sg_who_t">Le freestyler le plus visionné de la planète.</h2>
-        <div class="sg-quote" data-i18n="sg_quote">« Le freestyle, c'est libérer l'instinct. PürInstinct Games, c'est exactement ça — mais à 300 athlètes en même temps. »</div>
-        <p class="lead" style="margin-bottom:18px" data-i18n="sg_body">Le joueur le plus visionné de l'histoire du football freestyle — 1 milliard de vues — prend la direction de l'arène pour une session exclusive. Il anime, il défie, il joue. Une seule date, un nombre limité de places.</p>
-        <p class="lead" style="margin-bottom:32px" data-i18n="sg_body2">Champion du monde de freestyle, ambassadeur Nike, collaborateur Red Bull : Séan Garnier a transformé le football de rue en art mondial. Maintenant il entre dans l'arène et défie chaque athlète présent.</p>
+        <span class="eyebrow" data-i18n="kd_who_ey">Qui est King Dac ?</span>
+        <h2 style="font-size:clamp(34px,5vw,60px);margin-bottom:20px" data-i18n="kd_who_t">Le spécialiste du saut en hauteur le plus explosif.</h2>
+        <div class="kd-quote" data-i18n="kd_quote">« Le saut, c'est l'instinct à l'état pur. Le corps réagit avant que le cerveau comprenne — c'est ça, PürInstinct. »</div>
+        <p class="lead" style="margin-bottom:18px" data-i18n="kd_body">Darius Clark, alias King Dac, est un spécialiste du saut en hauteur et du saut vertical qui repousse les limites du corps humain. Sa capacité à exploser vers le haut, à décoller comme personne, lui a valu une réputation internationale dans le monde du sport athlétique et du basketball.</p>
+        <p class="lead" style="margin-bottom:32px" data-i18n="kd_body2">Pour cette session exclusive, King Dac débarque dans l'arène PürInstinct Games avec ses deux concours signature — saut en hauteur et triple saut horizontal — et une démo de dunk explosive aux côtés d'invités surprises.</p>
 
-        <div class="sg-facts">
-          <div class="sg-fact"><span class="sg-n">1B+</span><span class="sg-l" data-i18n="sg_f1">vues cumulées</span></div>
-          <div class="sg-fact"><span class="sg-n">#1</span><span class="sg-l" data-i18n="sg_f2">freestyler mondial</span></div>
-          <div class="sg-fact"><span class="sg-n">10+</span><span class="sg-l" data-i18n="sg_f3">ans de carrière</span></div>
-          <div class="sg-fact"><span class="sg-n">🌍</span><span class="sg-l" data-i18n="sg_f4">présence mondiale</span></div>
+        <div class="kd-facts">
+          <div class="kd-fact"><span class="kd-n">+2 m</span><span class="kd-l" data-i18n="kd_f1">record personnel</span></div>
+          <div class="kd-fact"><span class="kd-n">Elite</span><span class="kd-l" data-i18n="kd_f2">sauteur vertical</span></div>
+          <div class="kd-fact"><span class="kd-l" style="font-size:11px;max-width:12ch;text-align:left" data-i18n="kd_f3">Darius Clark<br>Montréal, QC</span></div>
         </div>
 
-        <a class="cta" href="index.html#billets" data-i18n="sg_cta">Réserve ta place</a>
+        <a class="cta" href="index.html#billets" data-i18n="kd_cta">Réserve ta place</a>
       </div>
 
       <!-- RIGHT: portrait photo -->
       <div>
-        <div class="sg-photo-wrap">
-          <div class="sg-photo">
-            <img src="sean.png" alt="Séan Garnier × PürInstinct Games">
+        <div class="kd-photo-wrap">
+          <div class="kd-photo">
+            <img src="darius.png" alt="King Dac (Darius Clark) × PürInstinct Games">
           </div>
-          <div class="sg-photo-caption">
-            <div class="sg-photo-name">SÉAN <span>GARNIER</span></div>
-            <div class="sg-photo-badge" data-i18n="sg_card_tag">SESSION EXCLUSIVE</div>
+          <div class="kd-photo-caption">
+            <div class="kd-photo-name">KING <span>DAC</span></div>
+            <div class="kd-photo-badge" data-i18n="kd_card_tag">SESSION EXCLUSIVE</div>
           </div>
         </div>
       </div>
@@ -503,52 +489,52 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   <div class="prog-photo-bg"></div>
   <div class="wrap" style="position:relative;z-index:1">
     <span class="eyebrow" data-i18n="prog_eyebrow">Au programme</span>
-    <h2 style="font-size:clamp(36px,5.5vw,68px)" data-i18n="prog_title">3 DISCIPLINES.<br>UN SEUL ÉVÉNEMENT.</h2>
+    <h2 style="font-size:clamp(36px,5.5vw,68px)" data-i18n="prog_title">3 DÉFIS SIGNATURE.<br>UN SEUL ÉVÉNEMENT.</h2>
 
     <div class="prog-grid">
 
-      <!-- PürInstinct Games -->
+      <!-- Saut en hauteur -->
       <div class="prog-card featured" data-discipline="1">
-        <div class="prog-card-num" data-i18n="prog_1_num">Activité 01</div>
-        <div class="prog-card-icon">🏟️</div>
-        <div class="prog-card-title" data-i18n="prog_1_t">PürInstinct Games</div>
-        <p class="prog-card-desc" data-i18n="prog_1_b">Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2.</p>
+        <div class="prog-card-num" data-i18n="prog_1_num">Concours 01</div>
+        <div class="prog-card-icon">⬆️</div>
+        <div class="prog-card-title" data-i18n="prog_1_t">Concours de saut en hauteur</div>
+        <p class="prog-card-desc" data-i18n="prog_1_b">Le concours signature de King Dac. Chaque participant tente de franchir la barre à la plus grande hauteur possible. Format élimination progressive — la barre monte à chaque tour. Qui saute le plus haut ?</p>
         <div class="prog-card-tags">
-          <span class="prog-tag" data-i18n="prog_1_t1">9 stations</span>
-          <span class="prog-tag" data-i18n="prog_1_t2">Score en direct</span>
-          <span class="prog-tag" data-i18n="prog_1_t3">Sans contact</span>
+          <span class="prog-tag" data-i18n="prog_1_t1">Barre progressive</span>
+          <span class="prog-tag" data-i18n="prog_1_t2">Élimination directe</span>
+          <span class="prog-tag" data-i18n="prog_1_t3">Jugé par King Dac</span>
         </div>
-        <span class="prog-card-hint" data-i18n="prog_hint">Voir l'activité</span>
+        <span class="prog-card-hint" data-i18n="prog_hint">Voir le concours</span>
         <div class="prog-slash"></div>
       </div>
 
-      <!-- Panna 1v1 -->
+      <!-- Triple saut horizontal -->
       <div class="prog-card" data-discipline="2">
-        <div class="prog-card-num" data-i18n="prog_2_num">Activité 02</div>
-        <div class="prog-card-icon">⚽</div>
-        <div class="prog-card-title" data-i18n="prog_2_t">Tournoi Panna 1v1</div>
-        <p class="prog-card-desc" data-i18n="prog_2_b">Le duel de rue le plus électrique du soccer : passe le ballon entre les jambes de ton adversaire pour marquer le panna et remporter le point. Format élimination directe, Séan Garnier comme juge suprême.</p>
+        <div class="prog-card-num" data-i18n="prog_2_num">Concours 02</div>
+        <div class="prog-card-icon">↔️</div>
+        <div class="prog-card-title" data-i18n="prog_2_t">Triple saut horizontal<br>à deux pieds</div>
+        <p class="prog-card-desc" data-i18n="prog_2_b">Trois bonds consécutifs à deux pieds, vers l'avant, sans élan. Tout repose sur la puissance de tes jambes et ton explosivité brute. La distance totale est mesurée. Le plus loin gagne.</p>
         <div class="prog-card-tags">
-          <span class="prog-tag" data-i18n="prog_2_t1">1 contre 1</span>
-          <span class="prog-tag" data-i18n="prog_2_t2">Élimination directe</span>
-          <span class="prog-tag" data-i18n="prog_2_t3">Jugé par Séan</span>
+          <span class="prog-tag" data-i18n="prog_2_t1">Puissance pure</span>
+          <span class="prog-tag" data-i18n="prog_2_t2">Trois bonds</span>
+          <span class="prog-tag" data-i18n="prog_2_t3">Distance mesurée</span>
         </div>
-        <span class="prog-card-hint" data-i18n="prog_hint">Voir l'activité</span>
+        <span class="prog-card-hint" data-i18n="prog_hint">Voir le concours</span>
         <div class="prog-slash"></div>
       </div>
 
-      <!-- Freestyle -->
+      <!-- Démo dunk -->
       <div class="prog-card" data-discipline="3">
-        <div class="prog-card-num" data-i18n="prog_3_num">Activité 03</div>
-        <div class="prog-card-icon">🌀</div>
-        <div class="prog-card-title" data-i18n="prog_3_t">Tournoi Freestyle Soccer</div>
-        <p class="prog-card-desc" data-i18n="prog_3_b">Jongle, invente, impressionne. Chaque participant présente une routine libre devant les autres athlètes et Séan Garnier. Les juges notent la créativité, la maîtrise technique et le style. Le meilleur freestyler repart avec un prix.</p>
+        <div class="prog-card-num" data-i18n="prog_3_num">Démo 03</div>
+        <div class="prog-card-icon">🏀</div>
+        <div class="prog-card-title" data-i18n="prog_3_t">Démo de dunk<br>King Dac & Invités</div>
+        <p class="prog-card-desc" data-i18n="prog_3_b">King Dac prend la barre de basket et invite des guests à se surpasser. Des dunks explosifs, des alley-oops, des moments qui font lever la salle. Une démonstration pure de verticalité et d'instinct athlétique.</p>
         <div class="prog-card-tags">
-          <span class="prog-tag" data-i18n="prog_3_t1">Routine libre</span>
-          <span class="prog-tag" data-i18n="prog_3_t2">Noté par Séan</span>
-          <span class="prog-tag" data-i18n="prog_3_t3">Prix à gagner</span>
+          <span class="prog-tag" data-i18n="prog_3_t1">King Dac live</span>
+          <span class="prog-tag" data-i18n="prog_3_t2">Invités surprise</span>
+          <span class="prog-tag" data-i18n="prog_3_t3">Slam dunk</span>
         </div>
-        <span class="prog-card-hint" data-i18n="prog_hint">Voir l'activité</span>
+        <span class="prog-card-hint" data-i18n="prog_hint">Voir la démo</span>
         <div class="prog-slash"></div>
       </div>
 
@@ -582,13 +568,13 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
-      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+      <span data-i18n="f_nc">Sport at its purest. Instinct at its highest.</span>
     </div>
   </div>
 </footer>
 
 <!-- ============ MODAL ============ -->
-<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Détails du concours">
   <div class="modal-box" id="modalBox">
     <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
     <div class="modal-img">
@@ -599,7 +585,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <h3 class="modal-title" id="modalTitle"></h3>
       <p class="modal-desc" id="modalDesc"></p>
       <div class="modal-tags" id="modalTags"></div>
-      <a class="modal-cta" href="index.html#billets" id="modalCta">Réserve ta place</a>
+      <a class="modal-cta" href="index.html#billets" id="modalCta" data-i18n="kd_cta">Réserve ta place</a>
     </div>
   </div>
 </div>
@@ -611,60 +597,56 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 const I18N = {
 fr:{
   nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
-  sg_eyebrow:"Projet spécial",
-  sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"DANS L'ARÈNE.",
-  sg_herosub:"Le freestyler le plus visionné de l'histoire entre dans l'arène PürInstinct Games pour une session exclusive.",
-  sg_s1l:"Date à confirmer",sg_s1b:"Réserve ta place maintenant pour être notifié en premier.",
-  sg_s2l:"Session exclusive",sg_s2b:"Nombre de places limité. Une seule date, une seule chance.",
-  sg_s3l:"Il joue avec toi",sg_s3b:"Séan Garnier anime, défie et joue dans l'arène aux côtés des participants.",
-  sg_who_ey:"Qui est Séan Garnier ?",sg_who_t:"Le freestyler le plus visionné de la planète.",
-  sg_quote:"« Le freestyle, c'est libérer l'instinct. PürInstinct Games, c'est exactement ça — mais à 300 athlètes en même temps. »",
-  sg_body:"Le joueur le plus visionné de l'histoire du football freestyle — 1 milliard de vues — prend la direction de l'arène pour une session exclusive. Il anime, il défie, il joue. Une seule date, un nombre limité de places.",
-  sg_body2:"Champion du monde de freestyle, ambassadeur Nike, collaborateur Red Bull : Séan Garnier a transformé le football de rue en art mondial. Maintenant il entre dans l'arène et défie chaque athlète présent.",
-  sg_f1:"vues cumulées",sg_f2:"freestyler mondial",sg_f3:"ans de carrière",sg_f4:"présence mondiale",
-  sg_cta:"Réserve ta place",sg_cta2:"Je veux ma place",sg_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE",
-  prog_eyebrow:"Au programme",prog_title:"3 DISCIPLINES.<br>UN SEUL ÉVÉNEMENT.",
-  prog_1_num:"Activité 01",prog_1_t:"PürInstinct Games",prog_1_b:"Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2.",prog_1_t1:"9 stations",prog_1_t2:"Score en direct",prog_1_t3:"Sans contact",
-  prog_2_num:"Activité 02",prog_2_t:"Séan Garnier Challenge",prog_2_b:"Le tournoi officiel de Panna 1 contre 1. Affronte les autres participants dans une cage Panna et démontre ta créativité, ton contrôle et ta capacité à éliminer ton adversaire.",prog_2_t1:"Panna 1v1",prog_2_t2:"Élimination directe",prog_2_t3:"Animé par Séan",
-  prog_3_num:"Activité 03",prog_3_t:"Freestyle Showcase",prog_3_b:"Un spectacle de freestyle football présenté par des athlètes de haut niveau. Des routines impressionnantes alliant technique, créativité et maîtrise du ballon.",prog_3_t1:"Athlètes élites",prog_3_t2:"Routines exclusives",prog_3_t3:"Inspirant",
-  prog_cta:"Réserve ta place",prog_hint:"Voir l'activité",
+  kd_eyebrow:"Projet spécial · Athlète signature",
+  kd_h1a:"KING",kd_h1b:"DAC",kd_h1c:"DANS L'ARÈNE.",
+  kd_herosub:"Le spécialiste du saut en hauteur le plus explosif entre dans l'arène PürInstinct Games pour une session exclusive.",
+  kd_s1l:"Date à confirmer",kd_s1b:"Réserve ta place maintenant pour être notifié en premier.",
+  kd_s2l:"Session exclusive",kd_s2b:"Nombre de places limité. Une seule date, une seule chance.",
+  kd_s3l:"Il concourt avec toi",kd_s3b:"King Dac participe aux concours et défie chaque participant sur le terrain.",
+  kd_who_ey:"Qui est King Dac ?",kd_who_t:"Le spécialiste du saut en hauteur le plus explosif.",
+  kd_quote:"« Le saut, c'est l'instinct à l'état pur. Le corps réagit avant que le cerveau comprenne — c'est ça, PürInstinct. »",
+  kd_body:"Darius Clark, alias King Dac, est un spécialiste du saut en hauteur et du saut vertical qui repousse les limites du corps humain. Sa capacité à exploser vers le haut, à décoller comme personne, lui a valu une réputation internationale dans le monde du sport athlétique et du basketball.",
+  kd_body2:"Pour cette session exclusive, King Dac débarque dans l'arène PürInstinct Games avec ses deux concours signature — saut en hauteur et triple saut horizontal — et une démo de dunk explosive aux côtés d'invités surprises.",
+  kd_f1:"record personnel",kd_f2:"sauteur vertical",kd_f3:"Darius Clark\nMontréal, QC",
+  kd_cta:"Réserve ta place",kd_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE",
+  prog_eyebrow:"Au programme",prog_title:"3 DÉFIS SIGNATURE.<br>UN SEUL ÉVÉNEMENT.",
+  prog_1_num:"Concours 01",prog_1_t:"Concours de saut en hauteur",prog_1_b:"Le concours signature de King Dac. Chaque participant tente de franchir la barre à la plus grande hauteur possible. Format élimination progressive — la barre monte à chaque tour. Qui saute le plus haut ?",prog_1_t1:"Barre progressive",prog_1_t2:"Élimination directe",prog_1_t3:"Jugé par King Dac",
+  prog_2_num:"Concours 02",prog_2_t:"Triple saut horizontal à deux pieds",prog_2_b:"Trois bonds consécutifs à deux pieds, vers l'avant, sans élan. Tout repose sur la puissance de tes jambes et ton explosivité brute. La distance totale est mesurée. Le plus loin gagne.",prog_2_t1:"Puissance pure",prog_2_t2:"Trois bonds",prog_2_t3:"Distance mesurée",
+  prog_3_num:"Démo 03",prog_3_t:"Démo de dunk — King Dac & Invités",prog_3_b:"King Dac prend la barre de basket et invite des guests à se surpasser. Des dunks explosifs, des alley-oops, des moments qui font lever la salle. Une démonstration pure de verticalité et d'instinct athlétique.",prog_3_t1:"King Dac live",prog_3_t2:"Invités surprise",prog_3_t3:"Slam dunk",
+  prog_hint:"Voir le concours",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
-  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
+  f_rights:"Tous droits réservés.",f_nc:"Le sport à son état pur. L'instinct à son sommet."
 },
 en:{
   nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
-  sg_eyebrow:"Special project",
-  sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"IN THE ARENA.",
-  sg_herosub:"The most-watched freestyler in history steps into the PürInstinct Games arena for one exclusive session.",
-  sg_s1l:"Date to be confirmed",sg_s1b:"Save your spot now to be the first notified.",
-  sg_s2l:"Exclusive session",sg_s2b:"Limited spots. One date, one chance.",
-  sg_s3l:"He plays with you",sg_s3b:"Séan Garnier hosts, challenges and plays alongside every participant in the arena.",
-  sg_who_ey:"Who is Séan Garnier?",sg_who_t:"The most-watched freestyler on the planet.",
-  sg_quote:"« Freestyle is about releasing pure instinct. PürInstinct Games is exactly that — but with 300 athletes at once. »",
-  sg_body:"The most-watched player in freestyle football history — 1 billion views — takes over the arena for one exclusive session. He hosts, he challenges, he plays. One date only, limited spots.",
-  sg_body2:"Freestyle World Champion, Nike ambassador, Red Bull collaborator: Séan Garnier transformed street football into a global art form. Now he enters the arena and challenges every athlete there.",
-  sg_f1:"combined views",sg_f2:"world freestyler",sg_f3:"years of career",sg_f4:"worldwide presence",
-  sg_cta:"Save your spot",sg_cta2:"I want my spot",sg_card_tag:"EXCLUSIVE SESSION · ONE DATE ONLY",
-  prog_eyebrow:"On the program",prog_title:"3 DISCIPLINES.<br>ONE EVENT.",
-  prog_1_num:"Activity 01",prog_1_t:"PürInstinct Games",prog_1_b:"The arena's signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball — always 3 against 2.",prog_1_t1:"9 stations",prog_1_t2:"Live score",prog_1_t3:"No contact",
-  prog_2_num:"Activity 02",prog_2_t:"Séan Garnier Challenge",prog_2_b:"The official Panna 1v1 tournament. Face other participants in a Panna cage and show your creativity, control and ability to eliminate your opponent.",prog_2_t1:"Panna 1v1",prog_2_t2:"Single elimination",prog_2_t3:"Hosted by Séan",
-  prog_3_num:"Activity 03",prog_3_t:"Freestyle Showcase",prog_3_b:"A freestyle football showcase performed by elite athletes. Breathtaking routines combining technique, creativity and ball mastery.",prog_3_t1:"Elite athletes",prog_3_t2:"Exclusive routines",prog_3_t3:"Inspiring",
-  prog_cta:"Save your spot",prog_hint:"See the activity",
+  kd_eyebrow:"Special project · Signature athlete",
+  kd_h1a:"KING",kd_h1b:"DAC",kd_h1c:"IN THE ARENA.",
+  kd_herosub:"The most explosive high jump specialist steps into the PürInstinct Games arena for one exclusive session.",
+  kd_s1l:"Date to be confirmed",kd_s1b:"Save your spot now to be the first notified.",
+  kd_s2l:"Exclusive session",kd_s2b:"Limited spots. One date, one chance.",
+  kd_s3l:"He competes with you",kd_s3b:"King Dac takes part in every contest and challenges each participant on the floor.",
+  kd_who_ey:"Who is King Dac?",kd_who_t:"The most explosive high jump specialist on the planet.",
+  kd_quote:"« Jumping is pure instinct. The body reacts before the brain understands — that's PürInstinct. »",
+  kd_body:"Darius Clark, known as King Dac, is a high jump and vertical leap specialist who pushes the boundaries of the human body. His ability to explode upward like no one else has earned him an international reputation in athletics and basketball.",
+  kd_body2:"For this exclusive session, King Dac brings his two signature contests to the PürInstinct Games arena — high jump and horizontal triple jump — plus an explosive dunk demo alongside surprise guests.",
+  kd_f1:"personal record",kd_f2:"vertical specialist",kd_f3:"Darius Clark\nMontreal, QC",
+  kd_cta:"Save your spot",kd_card_tag:"EXCLUSIVE SESSION · ONE DATE ONLY",
+  prog_eyebrow:"On the program",prog_title:"3 SIGNATURE EVENTS.<br>ONE SESSION.",
+  prog_1_num:"Contest 01",prog_1_t:"High Jump Contest",prog_1_b:"King Dac's signature event. Each participant tries to clear the bar at the highest height possible. Progressive elimination format — the bar rises each round. Who jumps the highest?",prog_1_t1:"Rising bar",prog_1_t2:"Single elimination",prog_1_t3:"Judged by King Dac",
+  prog_2_num:"Contest 02",prog_2_t:"Two-Foot Horizontal Triple Jump",prog_2_b:"Three consecutive two-footed jumps forward from a standing start. Pure leg power and raw explosiveness. Total distance is measured. The furthest wins.",prog_2_t1:"Raw power",prog_2_t2:"Three jumps",prog_2_t3:"Distance measured",
+  prog_3_num:"Demo 03",prog_3_t:"Dunk Demo — King Dac & Guests",prog_3_b:"King Dac takes the basketball hoop and invites guests to push their limits. Explosive dunks, alley-oops, moments that bring the house down. A pure display of verticality and athletic instinct.",prog_3_t1:"King Dac live",prog_3_t2:"Surprise guests",prog_3_t3:"Slam dunk",
+  prog_hint:"See the event",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
-  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
+  f_rights:"All rights reserved.",f_nc:"Sport at its purest. Instinct at its highest."
 }};
 
-let lang = localStorage.getItem("pi_lang") || "en";
+let lang = localStorage.getItem("pi_lang") || "fr";
+const RICH = new Set(["prog_title","prog_2_t","prog_3_t"]);
 function applyLang(){
   const t = I18N[lang];
-  const RICH = new Set(["sg_title","sg_quote","prog_title"]);
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.dataset.i18n;
     if(t[k] !== undefined) RICH.has(k) ? el.innerHTML = t[k] : el.textContent = t[k];
-  });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-    const k = el.dataset.i18nPh;
-    if(t[k]) el.placeholder = t[k];
   });
   document.documentElement.lang = lang;
   document.getElementById('langBtn').textContent = lang==="fr" ? "EN" : "FR";
@@ -701,42 +683,42 @@ applyLang();
 /* ====================================================== */
 const DISCIPLINES = {
   '1': {
-    img: 'img-purinstinct-games.png', imgPos: 'center 40%',
-    fr: { num:'Activité 01', title:'PürInstinct Games',
-      desc:'Le sport signature de l\'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2. Séan Garnier observe, commente et défie les meilleurs en direct.',
-      tags:['9 stations','Leaderboard live','Sans contact','Avec Séan'], cta:'Réserve ta place' },
-    en: { num:'Activity 01', title:'PürInstinct Games',
-      desc:'The arena\'s signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball — always 3 against 2. Séan Garnier watches, comments and challenges the top performers live.',
-      tags:['9 stations','Live leaderboard','No contact','With Séan'], cta:'Save your spot' }
+    img: 'darius.png', imgPos: 'center 20%',
+    fr: { num:'Concours 01', title:'Concours de saut en hauteur',
+      desc:'Le concours signature de King Dac. Chaque participant tente de franchir la barre à la plus grande hauteur possible. La barre commence à une hauteur accessible à tous et monte progressivement. Les participants sont éliminés dès qu\'ils ratent trois tentatives. King Dac établit la barre finale — et tente de la franchir lui-même.',
+      tags:['Barre progressive','Élimination directe','Jugé par King Dac','Record à battre'], cta:'Réserve ta place' },
+    en: { num:'Contest 01', title:'High Jump Contest',
+      desc:'King Dac\'s signature event. Each participant tries to clear the bar at the highest height possible. The bar starts at an accessible height and rises progressively. Participants are eliminated after three misses. King Dac sets the final bar — and attempts to clear it himself.',
+      tags:['Rising bar','Single elimination','Judged by King Dac','Record to beat'], cta:'Save your spot' }
   },
   '2': {
-    img: 'img-panna-challenge.png', imgPos: 'center 35%',
-    fr: { num:'Activité 02', title:'Séan Garnier Challenge',
-      desc:'Le tournoi officiel de Panna 1 contre 1. Affronte les autres participants dans une cage Panna et démontre ta créativité, ton contrôle et ta capacité à éliminer ton adversaire. Le but : faire passer le ballon entre les jambes de l\'adversaire pour remporter le duel. Séan Garnier anime la compétition et couronne le meilleur joueur.',
-      tags:['Panna 1v1','Animé par Séan','Élimination directe'], cta:'Réserve ta place' },
-    en: { num:'Activity 02', title:'Séan Garnier Challenge',
-      desc:'The official Panna 1v1 tournament. Face other participants in a Panna cage and show off your creativity, control and ability to eliminate your opponent. The goal: roll the ball through your opponent\'s legs to win the duel. Séan Garnier hosts the competition and crowns the best player.',
-      tags:['Panna 1v1','Hosted by Séan','Single elimination'], cta:'Save your spot' }
+    img: 'darius.png', imgPos: 'center 30%',
+    fr: { num:'Concours 02', title:'Triple saut horizontal à deux pieds',
+      desc:'Trois bonds consécutifs à deux pieds, vers l\'avant, depuis une position statique. Pas d\'élan, pas de triche — que la puissance brute de tes jambes. La distance totale des trois bonds est mesurée à la centimètre. King Dac montre d\'abord comment ça se fait, puis c\'est à toi.',
+      tags:['Puissance brute','Trois bonds','Distance mesurée','Debout, sans élan'], cta:'Réserve ta place' },
+    en: { num:'Contest 02', title:'Two-Foot Horizontal Triple Jump',
+      desc:'Three consecutive two-footed jumps forward from a standing position. No run-up, no tricks — pure raw leg power. Total distance across all three jumps is measured to the centimetre. King Dac demos first, then it\'s your turn.',
+      tags:['Raw power','Three jumps','Distance measured','Standing start'], cta:'Save your spot' }
   },
   '3': {
-    img: 'img-freestyle-showcase.png', imgPos: 'center 25%',
-    fr: { num:'Activité 03', title:'Freestyle Showcase',
-      desc:'Un spectacle de freestyle football présenté par des athlètes de haut niveau. Des routines impressionnantes alliant technique, créativité et maîtrise du ballon. Une expérience inspirante qui repousse les limites du possible.',
-      tags:['Athlètes élites','Routines exclusives','Inspirant'], cta:'Réserve ta place' },
-    en: { num:'Activity 03', title:'Freestyle Showcase',
-      desc:'A freestyle football showcase performed by elite athletes. Breathtaking routines combining technique, creativity and ball mastery. An inspiring experience that pushes the limits of what\'s possible.',
-      tags:['Elite athletes','Exclusive routines','Inspiring'], cta:'Save your spot' }
+    img: 'darius.png', imgPos: 'center 25%',
+    fr: { num:'Démo 03', title:'Démo de dunk — King Dac & Invités',
+      desc:'King Dac prend possession du terrain de basket et invite des guests à se surpasser. Des dunks à une main, des alley-oops, des approches créatives — une démonstration qui met en valeur la verticalité et l\'explosivité à leur niveau le plus pur. Les invités peuvent inclure d\'autres athlètes, des participants choisis sur place ou des surprises.',
+      tags:['King Dac live','Invités surprise','Slam dunk','Alley-oop'], cta:'Réserve ta place' },
+    en: { num:'Demo 03', title:'Dunk Demo — King Dac & Guests',
+      desc:'King Dac takes the basketball court and invites guests to push their limits. One-handed dunks, alley-oops, creative approaches — a showcase that puts verticality and explosiveness on full display. Guests may include other athletes, participants selected on the spot, or surprise appearances.',
+      tags:['King Dac live','Surprise guests','Slam dunk','Alley-oop'], cta:'Save your spot' }
   }
 };
 
-const overlay  = document.getElementById('modalOverlay');
-const mImg     = document.getElementById('modalImg');
-const mNum     = document.getElementById('modalNum');
-const mTitle   = document.getElementById('modalTitle');
-const mDesc    = document.getElementById('modalDesc');
-const mTags    = document.getElementById('modalTags');
-const mCta     = document.getElementById('modalCta');
-const mClose   = document.getElementById('modalClose');
+const overlay = document.getElementById('modalOverlay');
+const mImg    = document.getElementById('modalImg');
+const mNum    = document.getElementById('modalNum');
+const mTitle  = document.getElementById('modalTitle');
+const mDesc   = document.getElementById('modalDesc');
+const mTags   = document.getElementById('modalTags');
+const mCta    = document.getElementById('modalCta');
+const mClose  = document.getElementById('modalClose');
 
 function openModal(id) {
   const d = DISCIPLINES[id]; if(!d) return;
@@ -751,7 +733,6 @@ function openModal(id) {
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeModal() {
   overlay.classList.remove('open');
   document.body.style.overflow = '';
@@ -760,7 +741,6 @@ function closeModal() {
 document.querySelectorAll('.prog-card[data-discipline]').forEach(card => {
   card.addEventListener('click', () => openModal(card.dataset.discipline));
 });
-
 mClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
