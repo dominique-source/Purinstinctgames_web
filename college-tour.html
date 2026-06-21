@@ -214,12 +214,8 @@ h1,h2,h3,.disp{
 .ct-block-sub{font-size:clamp(14px,1.5vw,16px);color:var(--muted);max-width:60ch;line-height:1.6;margin-bottom:clamp(28px,4vw,44px)}
 
 /* Zone cards */
-.ct-zones{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:rgba(204,255,0,.35) rgba(255,255,255,.06)}
-.ct-zones::-webkit-scrollbar{height:4px}
-.ct-zones::-webkit-scrollbar-track{background:rgba(255,255,255,.06)}
-.ct-zones::-webkit-scrollbar-thumb{background:rgba(204,255,0,.35);border-radius:2px}
-.ct-zone{flex:0 0 clamp(160px,22vw,260px);scroll-snap-align:start;background:#111;border:1px solid rgba(255,255,255,.07);overflow:hidden;position:relative;transition:border-color .2s,transform .2s}
-.ct-zone:hover{border-color:rgba(204,255,0,.4);transform:translateY(-4px)}
+.ct-zone{flex:0 0 clamp(160px,22vw,260px);background:#111;border:1px solid rgba(255,255,255,.07);overflow:hidden;position:relative;transition:border-color .2s}
+.ct-zone:hover{border-color:rgba(204,255,0,.4)}
 .ct-zone-img{width:100%;aspect-ratio:3/4;overflow:hidden}
 .ct-zone-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .ct-zone:hover .ct-zone-img img{transform:scale(1.05)}
@@ -229,6 +225,26 @@ h1,h2,h3,.disp{
 .ct-zone--sig{border:2px solid var(--lime);box-shadow:0 0 20px rgba(204,255,0,.25),inset 0 0 40px rgba(204,255,0,.04)}
 .ct-zone--sig .ct-zone-name{border-top:2px solid var(--lime);background:rgba(204,255,0,.1);color:var(--lime)}
 .ct-zone-badge{position:absolute;top:0;left:0;right:0;background:var(--lime);color:#000;font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.08em;padding:5px 10px;text-transform:uppercase;text-align:center}
+
+/* ── Stations scroll-driven horizontal pan ── */
+#ctStations{margin-top:clamp(60px,8vw,100px);position:relative}
+#ctsDriver{position:relative}
+.cts-sticky{position:absolute;left:0;right:0;top:0;overflow:hidden}
+.cts-track{display:flex;gap:12px;will-change:transform;
+  padding-left:max(4vw,calc((100vw - 1180px) / 2));
+  padding-right:max(4vw,calc((100vw - 1180px) / 2))}
+/* progress bar */
+.cts-bar{position:absolute;bottom:0;left:max(4vw,calc((100vw - 1180px)/2));right:max(4vw,calc((100vw - 1180px)/2));height:2px;background:rgba(255,255,255,.08)}
+.cts-bar-fill{height:100%;width:0%;background:var(--lime);transition:width .1s linear}
+/* mobile / reduced-motion: native horizontal scroll */
+@media(max-width:700px),(prefers-reduced-motion:reduce){
+  #ctsDriver{height:auto!important}
+  .cts-sticky{position:relative!important;top:auto!important;bottom:auto!important;
+    overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .cts-track{transform:none!important}
+  .ct-zone{scroll-snap-align:start;opacity:1!important;transform:none!important}
+  .cts-bar{display:none}
+}
 
 /* Tech (bracelet + leaderboard) */
 .ct-tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start}
@@ -462,49 +478,60 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 
     </div>
 
-    <!-- ── STATIONS ── -->
-    <div class="ct-block">
+  </div><!-- /wrap -->
+
+  <!-- ── STATIONS ── -->
+  <section id="ctStations">
+    <div class="wrap">
       <span class="eyebrow" data-i18n="ct_st_eyebrow">Les stations</span>
       <h2 class="ct-block-title" data-i18n="ct_st_title">5 INSTINCTS · 7 STATIONS</h2>
       <p class="ct-block-sub" data-i18n="ct_st_sub">Chaque athlète passe par les 7 stations — 5 zones d'instinct mesurées en temps réel, et 2 sports signature PurInstinct. Un seul score individuel.</p>
-      <div class="ct-zones">
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-speed.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z1">VITESSE</div>
+    </div>
+    <div id="ctsDriver">
+      <div class="cts-sticky">
+        <div class="cts-track">
+          <div class="ct-zone">
+            <div class="ct-zone-img"><img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy"></div>
+            <div class="ct-zone-logo"><img src="assets/logo-speed.png" alt="" loading="lazy"></div>
+            <div class="ct-zone-name" data-i18n="ct_z1">VITESSE</div>
+          </div>
+          <div class="ct-zone">
+            <div class="ct-zone-img"><img src="assets/render-hand.jpg" alt="Zone Mains" loading="lazy"></div>
+            <div class="ct-zone-logo"><img src="assets/logo-hand.png" alt="" loading="lazy"></div>
+            <div class="ct-zone-name" data-i18n="ct_z2">MAINS</div>
+          </div>
+          <div class="ct-zone">
+            <div class="ct-zone-img"><img src="assets/render-foot.jpg" alt="Zone Pieds" loading="lazy"></div>
+            <div class="ct-zone-logo"><img src="assets/logo-foot.png" alt="" loading="lazy"></div>
+            <div class="ct-zone-name" data-i18n="ct_z3">PIEDS</div>
+          </div>
+          <div class="ct-zone">
+            <div class="ct-zone-img"><img src="assets/render-agility.jpg" alt="Zone Agilité" loading="lazy"></div>
+            <div class="ct-zone-logo"><img src="assets/logo-agility.png" alt="" loading="lazy"></div>
+            <div class="ct-zone-name" data-i18n="ct_z4">AGILITÉ</div>
+          </div>
+          <div class="ct-zone">
+            <div class="ct-zone-img"><img src="assets/render-iq.jpg" alt="Zone IQ" loading="lazy"></div>
+            <div class="ct-zone-logo"><img src="assets/logo-iq.png" alt="" loading="lazy"></div>
+            <div class="ct-zone-name" data-i18n="ct_z5">IQ DE JEU</div>
+          </div>
+          <div class="ct-zone ct-zone--sig">
+            <div class="ct-zone-img"><img src="assets/render-field.jpg" alt="Sport Signature PurInstinct" loading="lazy"></div>
+            <div class="ct-zone-badge">★ SPORT SIGNATURE</div>
+            <div class="ct-zone-name" data-i18n="ct_z6">PURINSTINCT</div>
+          </div>
+          <div class="ct-zone ct-zone--sig">
+            <div class="ct-zone-img"><img src="assets/render-field.jpg" alt="Sport Signature PurInstinct" loading="lazy"></div>
+            <div class="ct-zone-badge">★ SPORT SIGNATURE</div>
+            <div class="ct-zone-name" data-i18n="ct_z7">PURINSTINCT</div>
+          </div>
         </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-hand.jpg" alt="Zone Mains" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-hand.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z2">MAINS</div>
-        </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-foot.jpg" alt="Zone Pieds" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-foot.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z3">PIEDS</div>
-        </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-agility.jpg" alt="Zone Agilité" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-agility.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z4">AGILITÉ</div>
-        </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-iq.jpg" alt="Zone IQ" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-iq.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z5">IQ DE JEU</div>
-        </div>
-        <div class="ct-zone ct-zone--sig">
-          <div class="ct-zone-img"><img src="assets/render-field.jpg" alt="Sport Signature PurInstinct" loading="lazy"></div>
-          <div class="ct-zone-badge">★ SPORT SIGNATURE</div>
-          <div class="ct-zone-name" data-i18n="ct_z6">PURINSTINCT</div>
-        </div>
-        <div class="ct-zone ct-zone--sig">
-          <div class="ct-zone-img"><img src="assets/render-field.jpg" alt="Sport Signature PurInstinct" loading="lazy"></div>
-          <div class="ct-zone-badge">★ SPORT SIGNATURE</div>
-          <div class="ct-zone-name" data-i18n="ct_z7">PURINSTINCT</div>
-        </div>
+        <div class="cts-bar"><div class="cts-bar-fill" id="ctsBarFill"></div></div>
       </div>
     </div>
+  </section>
+
+  <div class="wrap">
 
     <!-- ── BRACELETS + LEADERBOARD ── -->
     <div class="ct-block">
@@ -926,6 +953,75 @@ function toggleKit(btn){
   if(!isOpen) row.classList.add('open');
 }
 
+/* ── Stations: vertical scroll → horizontal pan ── */
+(function(){
+  if(window.matchMedia('(max-width:700px),(prefers-reduced-motion:reduce)').matches) return;
+
+  var driver  = document.getElementById('ctsDriver');
+  var sticky  = driver && driver.querySelector('.cts-sticky');
+  var track   = driver && driver.querySelector('.cts-track');
+  var barFill = document.getElementById('ctsBarFill');
+  if(!driver || !sticky || !track) return;
+
+  var nav   = document.querySelector('nav');
+  var cards = track.querySelectorAll('.ct-zone');
+  var N     = cards.length;
+
+  /* Set driver height: sticky height + scroll range for N cards at 38vh each */
+  function setDriverHeight(){
+    var sH = sticky.offsetHeight || 400;
+    driver.style.height = sH + N * Math.round(window.innerHeight * 0.38) + 'px';
+  }
+  setDriverHeight();
+
+  var rafPending = false;
+
+  function update(){
+    rafPending = false;
+    var navH    = nav ? nav.offsetHeight : 0;
+    var sH      = sticky.offsetHeight;
+    var rect    = driver.getBoundingClientRect();
+    var driverH = driver.offsetHeight;
+
+    /* progress 0→1 over the extra scroll range beyond sticky height */
+    var scrollable  = driverH - sH;
+    var rawProgress = -(rect.top - navH) / scrollable;
+    var progress    = Math.max(0, Math.min(1, rawProgress));
+
+    /* JS fixed-polyfill (position:sticky broken by overflow-x:hidden on body) */
+    if(rect.top <= navH && rect.bottom >= navH + sH){
+      sticky.style.cssText = 'position:fixed;top:'+navH+'px;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else if(rect.bottom < navH + sH){
+      sticky.style.cssText = 'position:absolute;bottom:0;top:auto;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else {
+      sticky.style.cssText = 'position:absolute;top:0;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    }
+
+    /* Translate track: pan by (N-1) card widths */
+    var cardW     = cards[0].offsetWidth;
+    var totalMove = (N - 1) * (cardW + 12);
+    track.style.transform = 'translate3d('+(-progress * totalMove)+'px,0,0)';
+
+    /* Depth effect: active card full opacity/scale, neighbours recede */
+    var pos = progress * (N - 1);
+    for(var i = 0; i < N; i++){
+      var d = Math.min(1, Math.abs(i - pos));
+      cards[i].style.opacity   = 0.40 + 0.60 * (1 - d);
+      cards[i].style.transform = 'scale('+(0.93 + 0.07 * (1 - d))+')';
+    }
+
+    /* Lime progress bar */
+    if(barFill) barFill.style.width = (progress * 100)+'%';
+  }
+
+  window.addEventListener('scroll', function(){
+    if(!rafPending){ rafPending = true; requestAnimationFrame(update); }
+  }, {passive:true});
+
+  window.addEventListener('resize', function(){ setDriverHeight(); update(); });
+
+  update();
+}());
 </script>
 </body>
 </html>
