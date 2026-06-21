@@ -252,22 +252,29 @@ h1,h2,h3,.disp{
 }
 
 /* ============ FESTIVAL ============ */
-.ch-festival{padding:clamp(72px,10vw,120px) 0}
+.ch-festival{padding:clamp(72px,10vw,120px) 0 0;position:relative}
 .ch-festival-header{margin-bottom:clamp(40px,6vw,64px)}
 .ch-festival-header h2{font-size:clamp(38px,6.5vw,88px);margin-bottom:14px}
 .ch-festival-header p{font-size:clamp(15px,1.6vw,17px);color:var(--muted);max-width:60ch;line-height:1.6}
-.ch-fest-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2px;
+
+/* scroll-driven pan */
+#chfDriver{position:relative}
+.chf-sticky{position:absolute;left:0;right:0;top:0;overflow:hidden}
+.chf-track{
+  display:flex;gap:12px;will-change:transform;
+  padding-left:max(4vw,calc((100vw - 1180px) / 2));
+  padding-right:max(4vw,calc((100vw - 1180px) / 2));
+  padding-bottom:clamp(72px,10vw,120px);
 }
-@media(max-width:760px){.ch-fest-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.ch-fest-grid{grid-template-columns:1fr}}
+.chf-bar{position:absolute;bottom:clamp(36px,5vw,60px);left:max(4vw,calc((100vw - 1180px)/2));right:max(4vw,calc((100vw - 1180px)/2));height:2px;background:rgba(255,255,255,.08)}
+.chf-bar-fill{height:100%;width:0%;background:var(--lime);transition:width .1s linear}
+
 .ch-fest-card{
+  flex:0 0 clamp(260px,30vw,380px);
   background:#111;border:1px solid rgba(255,255,255,.06);
   padding:clamp(26px,3.5vw,36px) clamp(22px,3vw,32px);
   position:relative;overflow:hidden;
-  transition:border-color .25s,background .25s;
+  transition:border-color .25s,background .25s,opacity .25s,transform .25s;
 }
 .ch-fest-card:hover{border-color:rgba(204,255,0,.25);background:#131313}
 .ch-fest-card::before{
@@ -278,13 +285,22 @@ h1,h2,h3,.disp{
 .ch-fest-card:hover::before{transform:scaleX(1)}
 .ch-fest-icon{
   font-size:clamp(28px,4vw,38px);margin-bottom:18px;display:block;
-  filter:grayscale(30%);
 }
 .ch-fest-title{
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:clamp(18px,2.2vw,24px);color:var(--white);margin-bottom:8px;line-height:1;
 }
 .ch-fest-body{font-size:clamp(13px,1.3vw,14px);color:var(--muted);line-height:1.6}
+
+/* mobile: native scroll-snap */
+@media(max-width:700px),(prefers-reduced-motion:reduce){
+  #chfDriver{height:auto!important}
+  .chf-sticky{position:relative!important;top:auto!important;bottom:auto!important;
+    overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .chf-track{transform:none!important;padding-bottom:clamp(48px,7vw,80px)}
+  .ch-fest-card{scroll-snap-align:start;opacity:1!important;transform:none!important}
+  .chf-bar{display:none}
+}
 
 /* ============ TOURNAMENT FORMAT ============ */
 .ch-format{
@@ -601,37 +617,42 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </h2>
       <p data-i18n="ch_fest_sub">Le Championship, c'est une journée entière. Un terrain transformé en expérience totale : musique, nourriture, créateurs de contenu, et la compétition la plus intense de l'année.</p>
     </div>
-    <div class="ch-fest-grid">
-      <div class="ch-fest-card reveal delay-1">
-        <span class="ch-fest-icon">🎵</span>
-        <div class="ch-fest-title" data-i18n="fest_dj">Live DJ</div>
-        <p class="ch-fest-body" data-i18n="fest_dj_sub">Un set continu du matin jusqu'à la finale. L'énergie ne tombe jamais.</p>
+  </div>
+  <div id="chfDriver">
+    <div class="chf-sticky">
+      <div class="chf-track">
+        <div class="ch-fest-card">
+          <span class="ch-fest-icon">🎵</span>
+          <div class="ch-fest-title" data-i18n="fest_dj">Live DJ</div>
+          <p class="ch-fest-body" data-i18n="fest_dj_sub">Un set continu du matin jusqu'à la finale. L'énergie ne tombe jamais.</p>
+        </div>
+        <div class="ch-fest-card">
+          <span class="ch-fest-icon">🎸</span>
+          <div class="ch-fest-title" data-i18n="fest_band">Live Band</div>
+          <p class="ch-fest-body" data-i18n="fest_band_sub">Showcase live pour la cérémonie d'ouverture et la remise des trophées.</p>
+        </div>
+        <div class="ch-fest-card">
+          <span class="ch-fest-icon">🍔</span>
+          <div class="ch-fest-title" data-i18n="fest_food">Food Trucks</div>
+          <p class="ch-fest-body" data-i18n="fest_food_sub">Une sélection culinaire sur site. On mange bien avant de jouer mieux.</p>
+        </div>
+        <div class="ch-fest-card">
+          <span class="ch-fest-icon">📱</span>
+          <div class="ch-fest-title" data-i18n="fest_creators">Créateurs &amp; Contenu</div>
+          <p class="ch-fest-body" data-i18n="fest_creators_sub">Des créateurs sur place pour capturer chaque moment fort de la journée.</p>
+        </div>
+        <div class="ch-fest-card">
+          <span class="ch-fest-icon">⚡</span>
+          <div class="ch-fest-title" data-i18n="fest_zones">Zones Élargies</div>
+          <p class="ch-fest-body" data-i18n="fest_zones_sub">Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.</p>
+        </div>
+        <div class="ch-fest-card">
+          <span class="ch-fest-icon">🎪</span>
+          <div class="ch-fest-title" data-i18n="fest_ent">Live Entertainment</div>
+          <p class="ch-fest-body" data-i18n="fest_ent_sub">Shows freestyle, battles surprises et animations entre chaque match.</p>
+        </div>
       </div>
-      <div class="ch-fest-card reveal delay-2">
-        <span class="ch-fest-icon">🎸</span>
-        <div class="ch-fest-title" data-i18n="fest_band">Live Band</div>
-        <p class="ch-fest-body" data-i18n="fest_band_sub">Showcase live pour la cérémonie d'ouverture et la remise des trophées.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-3">
-        <span class="ch-fest-icon">🍔</span>
-        <div class="ch-fest-title" data-i18n="fest_food">Food Trucks</div>
-        <p class="ch-fest-body" data-i18n="fest_food_sub">Une sélection culinaire sur site. On mange bien avant de jouer mieux.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-4">
-        <span class="ch-fest-icon">📱</span>
-        <div class="ch-fest-title" data-i18n="fest_creators">Créateurs &amp; Contenu</div>
-        <p class="ch-fest-body" data-i18n="fest_creators_sub">Des créateurs sur place pour capturer chaque moment fort de la journée.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-5">
-        <span class="ch-fest-icon">⚡</span>
-        <div class="ch-fest-title" data-i18n="fest_zones">Zones Élargies</div>
-        <p class="ch-fest-body" data-i18n="fest_zones_sub">Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-5">
-        <span class="ch-fest-icon">🎪</span>
-        <div class="ch-fest-title" data-i18n="fest_ent">Live Entertainment</div>
-        <p class="ch-fest-body" data-i18n="fest_ent_sub">Shows freestyle, battles surprises et animations entre chaque match.</p>
-      </div>
+      <div class="chf-bar"><div class="chf-bar-fill" id="chfBarFill"></div></div>
     </div>
   </div>
 </section>
@@ -1124,6 +1145,61 @@ function submitChReg(){
     document.getElementById('chSuccess').style.display='block';
   }
 }
+
+/* ── Festival: vertical scroll → horizontal pan ── */
+(function(){
+  if(window.matchMedia('(max-width:700px),(prefers-reduced-motion:reduce)').matches) return;
+  var driver  = document.getElementById('chfDriver');
+  var sticky  = driver && driver.querySelector('.chf-sticky');
+  var track   = driver && driver.querySelector('.chf-track');
+  var barFill = document.getElementById('chfBarFill');
+  if(!driver || !sticky || !track) return;
+  var nav   = document.querySelector('nav');
+  var cards = track.querySelectorAll('.ch-fest-card');
+  var N     = cards.length;
+
+  function setDriverHeight(){
+    var sH = sticky.offsetHeight || 500;
+    driver.style.height = sH + N * Math.round(window.innerHeight * 0.38) + 'px';
+  }
+  setDriverHeight();
+
+  var rafPending = false;
+  function update(){
+    rafPending = false;
+    var navH    = nav ? nav.offsetHeight : 0;
+    var sH      = sticky.offsetHeight;
+    var rect    = driver.getBoundingClientRect();
+    var driverH = driver.offsetHeight;
+    var scrollable  = driverH - sH;
+    var rawProgress = -(rect.top - navH) / scrollable;
+    var progress    = Math.max(0, Math.min(1, rawProgress));
+
+    if(rect.top <= navH && rect.bottom >= navH + sH){
+      sticky.style.cssText = 'position:fixed;top:'+navH+'px;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else if(rect.bottom < navH + sH){
+      sticky.style.cssText = 'position:absolute;bottom:0;top:auto;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else {
+      sticky.style.cssText = 'position:absolute;top:0;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    }
+
+    var cardW     = cards[0].offsetWidth;
+    var totalMove = (N - 1) * (cardW + 12);
+    track.style.transform = 'translate3d('+(-progress * totalMove)+'px,0,0)';
+
+    var panelPos = progress * (N - 1);
+    for(var i = 0; i < N; i++){
+      var d = Math.min(1, Math.abs(i - panelPos));
+      cards[i].style.opacity   = 0.40 + 0.60 * (1 - d);
+      cards[i].style.transform = 'scale('+(0.93 + 0.07 * (1 - d))+')';
+    }
+    if(barFill) barFill.style.width = (progress * 100)+'%';
+  }
+
+  window.addEventListener('scroll', function(){ if(!rafPending){ rafPending=true; requestAnimationFrame(update); } }, {passive:true});
+  window.addEventListener('resize', function(){ setDriverHeight(); update(); });
+  update();
+}());
 
 /* ── Reveal on scroll ── */
 (function(){
