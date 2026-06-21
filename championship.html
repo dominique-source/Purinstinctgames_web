@@ -283,6 +283,9 @@ h1,h2,h3,.disp{
   transition:transform .3s ease;
 }
 .ch-fest-card:hover::before{transform:scaleX(1)}
+.ch-fest-img{width:100%;aspect-ratio:16/9;overflow:hidden;margin:-clamp(26px,3.5vw,36px) -clamp(22px,3vw,32px) 20px;width:calc(100% + clamp(44px,6vw,64px))}
+.ch-fest-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.ch-fest-card:hover .ch-fest-img img{transform:scale(1.05)}
 .ch-fest-icon{
   font-size:clamp(28px,4vw,38px);margin-bottom:18px;display:block;
 }
@@ -627,12 +630,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <p class="ch-fest-body" data-i18n="fest_dj_sub">Un set continu du matin jusqu'à la finale. L'énergie ne tombe jamais.</p>
         </div>
         <div class="ch-fest-card">
-          <span class="ch-fest-icon">🎸</span>
+          <div class="ch-fest-img"><img src="live band.png" alt="Live Band"></div>
           <div class="ch-fest-title" data-i18n="fest_band">Live Band</div>
           <p class="ch-fest-body" data-i18n="fest_band_sub">Showcase live pour la cérémonie d'ouverture et la remise des trophées.</p>
         </div>
         <div class="ch-fest-card">
-          <span class="ch-fest-icon">🍔</span>
+          <div class="ch-fest-img"><img src="food truck.png" alt="Food Trucks"></div>
           <div class="ch-fest-title" data-i18n="fest_food">Food Trucks</div>
           <p class="ch-fest-body" data-i18n="fest_food_sub">Une sélection culinaire sur site. On mange bien avant de jouer mieux.</p>
         </div>
@@ -642,12 +645,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <p class="ch-fest-body" data-i18n="fest_creators_sub">Des créateurs sur place pour capturer chaque moment fort de la journée.</p>
         </div>
         <div class="ch-fest-card">
-          <span class="ch-fest-icon">⚡</span>
+          <div class="ch-fest-img"><img src="expanded zones.png" alt="Expanded Zones"></div>
           <div class="ch-fest-title" data-i18n="fest_zones">Zones Élargies</div>
           <p class="ch-fest-body" data-i18n="fest_zones_sub">Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.</p>
         </div>
         <div class="ch-fest-card">
-          <span class="ch-fest-icon">🎪</span>
+          <div class="ch-fest-img"><img src="entertainment.png" alt="Live Entertainment"></div>
           <div class="ch-fest-title" data-i18n="fest_ent">Live Entertainment</div>
           <p class="ch-fest-body" data-i18n="fest_ent_sub">Shows freestyle, battles surprises et animations entre chaque match.</p>
         </div>
