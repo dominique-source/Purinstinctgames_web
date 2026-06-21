@@ -229,6 +229,31 @@ h1,h2,h3,.disp{
 .ct-zone--sig .ct-zone-name{border-top:2px solid var(--lime);background:rgba(204,255,0,.1);color:var(--lime)}
 .ct-zone-badge{position:absolute;top:0;left:0;right:0;background:var(--lime);color:#000;font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.08em;padding:5px 10px;text-transform:uppercase;text-align:center}
 
+/* ── Station Horizontal Scroll ── */
+#ctStations{margin-top:clamp(60px,8vw,100px);position:relative}
+#ctsDriver{position:relative}
+.cts-sticky{position:absolute;top:0;left:0;right:0;overflow:hidden}
+.cts-track{display:flex;height:100%;will-change:transform}
+.cts-panel{flex:0 0 100%;height:100%;position:relative;overflow:hidden;transform-origin:center center}
+.cts-panel img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.cts-meta{position:absolute;bottom:0;left:0;right:0;padding:clamp(24px,4vw,52px);background:linear-gradient(to top,rgba(10,10,10,.93) 0%,rgba(10,10,10,.3) 50%,transparent 80%)}
+.cts-num{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.22em;color:var(--lime);margin-bottom:8px;text-transform:uppercase}
+.cts-name{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(40px,7vw,90px);text-transform:uppercase;line-height:.9;color:var(--white)}
+.cts-name.sig{color:var(--lime)}
+.cts-logo{position:absolute;top:clamp(16px,3vw,32px);left:clamp(16px,3vw,32px);width:clamp(44px,5.5vw,72px);height:clamp(44px,5.5vw,72px)}
+.cts-logo img{width:100%;height:100%;object-fit:contain}
+.cts-badge{position:absolute;top:0;left:0;right:0;background:var(--lime);color:#000;font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;letter-spacing:.1em;padding:8px 16px;text-transform:uppercase;text-align:center}
+.cts-dots{position:absolute;right:clamp(16px,3vw,36px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:2;pointer-events:none}
+.cts-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);transition:background .3s,transform .3s}
+.cts-dot.active{background:var(--lime);transform:scale(1.6)}
+@media(max-width:700px),(prefers-reduced-motion:reduce){
+  #ctsDriver{height:auto!important}
+  .cts-sticky{position:relative!important;top:auto!important;bottom:auto!important;overflow-x:scroll;scroll-snap-type:x mandatory;display:flex;height:72vw;min-height:360px}
+  .cts-track{transform:none!important;width:max-content;height:100%;flex-shrink:0}
+  .cts-panel{scroll-snap-align:start;flex:0 0 80vw;height:100%;opacity:1!important;transform:none!important}
+  .cts-dots{display:none}
+}
+
 /* Tech (bracelet + leaderboard) */
 .ct-tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start}
 @media(max-width:700px){.ct-tech-grid{grid-template-columns:1fr}}
@@ -461,49 +486,19 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 
     </div>
 
-    <!-- ── STATIONS ── -->
-    <div class="ct-block">
+  </div><!-- /wrap -->
+
+  <!-- ── STATIONS ── -->
+  <section id="ctStations">
+    <div class="wrap">
       <span class="eyebrow" data-i18n="ct_st_eyebrow">Les stations</span>
       <h2 class="ct-block-title" data-i18n="ct_st_title">5 INSTINCTS · 7 STATIONS</h2>
       <p class="ct-block-sub" data-i18n="ct_st_sub">Chaque athlète passe par les 7 stations — 5 zones d'instinct mesurées en temps réel, et 2 sports signature PurInstinct. Un seul score individuel.</p>
-      <div class="ct-zones">
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-speed.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z1">VITESSE</div>
-        </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-hand.jpg" alt="Zone Mains" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-hand.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z2">MAINS</div>
-        </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-foot.jpg" alt="Zone Pieds" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-foot.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z3">PIEDS</div>
-        </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-agility.jpg" alt="Zone Agilité" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-agility.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z4">AGILITÉ</div>
-        </div>
-        <div class="ct-zone">
-          <div class="ct-zone-img"><img src="assets/render-iq.jpg" alt="Zone IQ" loading="lazy"></div>
-          <div class="ct-zone-logo"><img src="assets/logo-iq.png" alt="" loading="lazy"></div>
-          <div class="ct-zone-name" data-i18n="ct_z5">IQ DE JEU</div>
-        </div>
-        <div class="ct-zone ct-zone--sig">
-          <div class="ct-zone-img"><img src="assets/render-field.jpg" alt="Sport Signature PurInstinct" loading="lazy"></div>
-          <div class="ct-zone-badge">★ SPORT SIGNATURE</div>
-          <div class="ct-zone-name" data-i18n="ct_z6">PURINSTINCT</div>
-        </div>
-        <div class="ct-zone ct-zone--sig">
-          <div class="ct-zone-img"><img src="assets/render-field.jpg" alt="Sport Signature PurInstinct" loading="lazy"></div>
-          <div class="ct-zone-badge">★ SPORT SIGNATURE</div>
-          <div class="ct-zone-name" data-i18n="ct_z7">PURINSTINCT</div>
-        </div>
-      </div>
     </div>
+    <div id="ctsDriver"></div>
+  </section>
+
+  <div class="wrap">
 
     <!-- ── BRACELETS + LEADERBOARD ── -->
     <div class="ct-block">
@@ -924,6 +919,153 @@ function toggleKit(btn){
   document.querySelectorAll('.ct-kit-row.open').forEach(r=>r.classList.remove('open'));
   if(!isOpen) row.classList.add('open');
 }
+
+/* ── Station Horizontal Scroll ── */
+(function(){
+  var N = 7;
+  var STATIONS = [
+    {img:'assets/render-speed.jpg',   logo:'assets/logo-speed.png',   nameKey:'ct_z1', num:'01', sig:false},
+    {img:'assets/render-hand.jpg',    logo:'assets/logo-hand.png',    nameKey:'ct_z2', num:'02', sig:false},
+    {img:'assets/render-foot.jpg',    logo:'assets/logo-foot.png',    nameKey:'ct_z3', num:'03', sig:false},
+    {img:'assets/render-agility.jpg', logo:'assets/logo-agility.png', nameKey:'ct_z4', num:'04', sig:false},
+    {img:'assets/render-iq.jpg',      logo:'assets/logo-iq.png',      nameKey:'ct_z5', num:'05', sig:false},
+    {img:'assets/render-field.jpg',   logo:null,                      nameKey:'ct_z6', num:'06', sig:true},
+    {img:'assets/render-field.jpg',   logo:null,                      nameKey:'ct_z7', num:'07', sig:true}
+  ];
+
+  var isLite = window.matchMedia('(max-width:700px),(prefers-reduced-motion:reduce)').matches;
+
+  var driver = document.getElementById('ctsDriver');
+  if(!driver) return;
+
+  var sticky = document.createElement('div');
+  sticky.className = 'cts-sticky';
+
+  var track = document.createElement('div');
+  track.className = 'cts-track';
+
+  var dotsEl = document.createElement('div');
+  dotsEl.className = 'cts-dots';
+
+  STATIONS.forEach(function(s, i){
+    var panel = document.createElement('div');
+    panel.className = 'cts-panel';
+
+    var img = document.createElement('img');
+    img.src = s.img; img.alt = ''; img.loading = 'lazy';
+    panel.appendChild(img);
+
+    if(s.sig){
+      var badge = document.createElement('div');
+      badge.className = 'cts-badge';
+      badge.textContent = '★ SPORT SIGNATURE';
+      panel.appendChild(badge);
+    }
+
+    if(s.logo){
+      var logoWrap = document.createElement('div');
+      logoWrap.className = 'cts-logo';
+      var li = document.createElement('img');
+      li.src = s.logo; li.alt = ''; li.loading = 'lazy';
+      logoWrap.appendChild(li);
+      panel.appendChild(logoWrap);
+    }
+
+    var meta = document.createElement('div');
+    meta.className = 'cts-meta';
+
+    var numEl = document.createElement('div');
+    numEl.className = 'cts-num';
+    numEl.textContent = 'STATION ' + s.num;
+    meta.appendChild(numEl);
+
+    var nameEl = document.createElement('div');
+    nameEl.className = s.sig ? 'cts-name sig' : 'cts-name';
+    nameEl.dataset.i18n = s.nameKey;
+    nameEl.textContent = I18N[lang][s.nameKey] || s.nameKey;
+    meta.appendChild(nameEl);
+
+    panel.appendChild(meta);
+    track.appendChild(panel);
+
+    var dot = document.createElement('div');
+    dot.className = 'cts-dot' + (i === 0 ? ' active' : '');
+    dotsEl.appendChild(dot);
+  });
+
+  sticky.appendChild(track);
+  sticky.appendChild(dotsEl);
+  driver.appendChild(sticky);
+
+  if(isLite){
+    driver.style.height = 'auto';
+    return;
+  }
+
+  var VH_PER_PANEL = 80;
+  driver.style.height = (N * VH_PER_PANEL) + 'vh';
+
+  var nav = document.querySelector('nav');
+  var navH = 0, vpH = 0, panelH = 0;
+
+  function measure(){
+    vpH = window.innerHeight;
+    navH = nav ? nav.offsetHeight : 0;
+    panelH = vpH - navH;
+  }
+  measure();
+
+  sticky.style.height = panelH + 'px';
+
+  var rafPending = false;
+  var dots = dotsEl.querySelectorAll('.cts-dot');
+  var panels = track.children;
+
+  function update(){
+    rafPending = false;
+    var rect = driver.getBoundingClientRect();
+    var driverH = driver.offsetHeight;
+
+    var scrollable = driverH - panelH;
+    var rawProgress = -(rect.top - navH) / scrollable;
+    var progress = Math.max(0, Math.min(1, rawProgress));
+
+    if(rect.top <= navH && rect.bottom >= vpH){
+      /* pinned */
+      sticky.style.cssText = 'position:fixed;top:'+navH+'px;left:0;right:0;bottom:0;height:auto;overflow:hidden';
+    } else if(rect.bottom < vpH){
+      /* at end */
+      sticky.style.cssText = 'position:absolute;top:auto;bottom:0;left:0;right:0;height:'+panelH+'px;overflow:hidden';
+    } else {
+      /* before */
+      sticky.style.cssText = 'position:absolute;top:'+navH+'px;bottom:auto;left:0;right:0;height:'+panelH+'px;overflow:hidden';
+    }
+
+    var panelProgress = progress * (N - 1);
+    track.style.transform = 'translate3d(' + (-progress * (N - 1) * 100) + 'vw,0,0)';
+
+    for(var j = 0; j < panels.length; j++){
+      var d = Math.min(1, Math.abs(j - panelProgress));
+      panels[j].style.opacity = 0.32 + 0.68 * (1 - d);
+      panels[j].style.transform = 'scale(' + (0.93 + 0.07 * (1 - d)) + ')';
+    }
+
+    var active = Math.round(panelProgress);
+    for(var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === active);
+  }
+
+  window.addEventListener('scroll', function(){
+    if(!rafPending){ rafPending = true; requestAnimationFrame(update); }
+  }, {passive:true});
+
+  window.addEventListener('resize', function(){
+    measure();
+    driver.style.height = (N * VH_PER_PANEL) + 'vh';
+    update();
+  });
+
+  update();
+}());
 </script>
 </body>
 </html>
