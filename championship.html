@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Championship — PürInstinct Games</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="description" content="Le PürInstinct Championship : l'événement principal. Des équipes de toutes les villes. Des prix réels. Deux fois par an. Un festival d'instinct.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --gold:#D4AF37;
+  --gold-glow:rgba(212,175,55,.22);
+  --white:#F4F4F2;
+  --muted:#888888;
+  --line:rgba(204,255,0,.18);
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,.disp{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.eyebrow--gold{color:var(--gold)}
+.eyebrow--gold::before{background:var(--gold)}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lime{color:var(--lime)}
+.gold{color:var(--gold)}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-links a.active{color:var(--lime);opacity:1}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:200px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-btn.active{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:220px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:hover{color:var(--lime);background:rgba(204,255,0,.04)}
+.nav-drop-item.active{color:var(--lime)}
+
+/* ============ HERO ============ */
+.ch-hero{
+  position:relative;min-height:100vh;display:flex;align-items:flex-end;
+  padding-top:80px;overflow:hidden;background:#0A0A0A;
+}
+.ch-hero-img{
+  position:absolute;inset:0;z-index:0;
+  background:url('narr-08-champion.png') center 30% / cover no-repeat;
+}
+.ch-hero-img::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.15) 100%),
+    linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,.6) 25%, transparent 55%);
+}
+.ch-hero-inner{
+  position:relative;z-index:1;
+  padding:clamp(80px,12vw,140px) 0 clamp(60px,7vw,90px);
+  max-width:820px;
+}
+.ch-hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:var(--gold);margin-bottom:22px;
+}
+.ch-hero-tag::before{content:"";width:28px;height:3px;background:var(--gold);transform:skewX(-30deg)}
+.ch-hero h1{font-size:clamp(58px,10vw,132px);line-height:.88;letter-spacing:-.025em;margin-bottom:28px}
+.ch-hero h1 .dim{opacity:.38}
+.ch-hero h1 .accent-gold{color:var(--gold)}
+.ch-hero h1 .accent-lime{color:var(--lime)}
+.ch-hero-sub{
+  font-size:clamp(16px,2vw,21px);color:rgba(244,244,242,.72);
+  font-family:var(--body);font-weight:600;max-width:50ch;line-height:1.5;margin-bottom:36px;
+}
+.ch-hero-btns{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.cta{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(17px,2.2vw,23px);background:var(--lime);color:#0A0A0A;padding:15px 38px 17px;letter-spacing:.02em;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:transform .15s;text-decoration:none}
+.cta:hover{transform:translateY(-2px);filter:drop-shadow(0 0 14px rgba(204,255,0,.7))}
+.cta--gold{background:var(--gold);color:#0A0A0A}
+.cta--gold:hover{filter:drop-shadow(0 0 14px rgba(212,175,55,.7))}
+.cta-outline{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.9vw,20px);border:2px solid var(--lime);color:var(--lime);padding:13px 36px 15px;letter-spacing:.02em;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:background .2s,color .2s,transform .15s;text-decoration:none}
+.cta-outline:hover{background:var(--lime);color:#0A0A0A;transform:translateY(-2px)}
+.ch-hero-scroll{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:var(--display);font-style:italic;font-weight:900;font-size:11px;
+  letter-spacing:.15em;color:rgba(255,255,255,.35);text-transform:uppercase;z-index:2;
+  animation:scrollBounce 2s ease-in-out infinite;
+}
+.ch-hero-scroll::after{content:"↓";font-size:18px;color:var(--gold);opacity:.6}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ============ STAT STRIP ============ */
+.ch-stats{
+  background:linear-gradient(90deg,#0d0d0d 0%,#111 50%,#0d0d0d 100%);
+  border-top:2px solid var(--gold);border-bottom:1px solid rgba(212,175,55,.15);
+  padding:clamp(28px,4vw,44px) 0;
+  position:relative;overflow:hidden;
+}
+.ch-stats::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.04) 50%,transparent);
+  pointer-events:none;
+}
+.ch-stats-grid{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:clamp(28px,6vw,72px);
+}
+.ch-stat{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.ch-stat-n{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(36px,5.5vw,72px);line-height:1;letter-spacing:-.02em;
+  color:var(--gold);
+}
+.ch-stat-n sup{font-size:.45em;vertical-align:super;letter-spacing:0}
+.ch-stat-l{
+  font-size:clamp(11px,1.2vw,13px);color:rgba(255,255,255,.5);
+  text-transform:uppercase;letter-spacing:.12em;
+}
+
+/* ============ MAIN EVENT ============ */
+.ch-event{padding:clamp(72px,10vw,120px) 0;position:relative}
+.ch-event-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(48px,8vw,100px);align-items:center}
+@media(max-width:860px){.ch-event-grid{grid-template-columns:1fr}}
+.ch-event-img-wrap{position:relative;overflow:hidden}
+.ch-event-img{width:100%;height:100%;min-height:460px;object-fit:cover;display:block}
+.ch-event-img-wrap::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,10,10,.4) 0%,transparent 50%),
+             linear-gradient(to right,rgba(10,10,10,.1) 0%,transparent 30%);
+}
+.ch-event-gutter{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 22px;
+  background:linear-gradient(to top,rgba(10,10,10,.9),transparent);
+  z-index:1;
+}
+.ch-event-gutter-tag{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:11px;letter-spacing:.2em;color:var(--gold);margin-bottom:4px}
+.ch-event-gutter-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(18px,2.5vw,26px);color:var(--white);line-height:1}
+.ch-event-copy{}
+.ch-event-body{font-size:clamp(15px,1.6vw,17px);color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:26px;max-width:54ch}
+.ch-event-pull{
+  border-left:3px solid var(--gold);padding:18px 22px;
+  background:rgba(212,175,55,.05);margin-bottom:28px;
+}
+.ch-event-pull p{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(18px,2.5vw,26px);text-transform:uppercase;color:var(--white);line-height:1.1;
+}
+.ch-event-pull p em{color:var(--gold);font-style:inherit}
+
+/* ============ SLASH BAR ============ */
+.ch-slash-bar{
+  background:var(--gold);padding:18px 24px;text-align:center;
+  transform:skewX(-8deg);margin:0;
+}
+.ch-slash-bar span{
+  display:inline-block;transform:skewX(8deg);
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;font-size:clamp(15px,2.5vw,26px);
+  color:#0A0A0A;letter-spacing:.02em;
+}
+
+/* ============ FESTIVAL ============ */
+.ch-festival{padding:clamp(72px,10vw,120px) 0}
+.ch-festival-header{margin-bottom:clamp(40px,6vw,64px)}
+.ch-festival-header h2{font-size:clamp(38px,6.5vw,88px);margin-bottom:14px}
+.ch-festival-header p{font-size:clamp(15px,1.6vw,17px);color:var(--muted);max-width:60ch;line-height:1.6}
+.ch-fest-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+@media(max-width:760px){.ch-fest-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.ch-fest-grid{grid-template-columns:1fr}}
+.ch-fest-card{
+  background:#111;border:1px solid rgba(255,255,255,.06);
+  padding:clamp(26px,3.5vw,36px) clamp(22px,3vw,32px);
+  position:relative;overflow:hidden;
+  transition:border-color .25s,background .25s;
+}
+.ch-fest-card:hover{border-color:rgba(204,255,0,.25);background:#131313}
+.ch-fest-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--lime);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.ch-fest-card:hover::before{transform:scaleX(1)}
+.ch-fest-icon{
+  font-size:clamp(28px,4vw,38px);margin-bottom:18px;display:block;
+  filter:grayscale(30%);
+}
+.ch-fest-title{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(18px,2.2vw,24px);color:var(--white);margin-bottom:8px;line-height:1;
+}
+.ch-fest-body{font-size:clamp(13px,1.3vw,14px);color:var(--muted);line-height:1.6}
+
+/* ============ TOURNAMENT FORMAT ============ */
+.ch-format{
+  padding:clamp(72px,10vw,120px) 0;
+  background:var(--bg-2);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
+}
+.ch-format-header{margin-bottom:clamp(48px,7vw,72px);text-align:center}
+.ch-format-header h2{font-size:clamp(36px,6vw,82px)}
+.ch-format-header p{font-size:clamp(14px,1.5vw,16px);color:var(--muted);max-width:55ch;margin:14px auto 0;line-height:1.6}
+.ch-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  position:relative;
+}
+@media(max-width:760px){.ch-steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.ch-steps{grid-template-columns:1fr}}
+.ch-steps::before{
+  content:"";position:absolute;top:44px;left:12.5%;right:12.5%;height:2px;
+  background:linear-gradient(90deg,var(--lime),var(--gold));
+  z-index:0;
+}
+@media(max-width:760px){.ch-steps::before{display:none}}
+.ch-step{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:0 clamp(12px,2vw,24px) 40px;position:relative;z-index:1;
+}
+.ch-step-num{
+  width:clamp(44px,5.5vw,56px);height:clamp(44px,5.5vw,56px);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg);border:2px solid var(--lime);
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(18px,2.5vw,24px);color:var(--lime);
+  margin-bottom:20px;
+  position:relative;
+}
+.ch-step:last-child .ch-step-num{
+  border-color:var(--gold);color:var(--gold);
+  background:rgba(212,175,55,.08);
+  box-shadow:0 0 24px rgba(212,175,55,.3);
+}
+.ch-step-label{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(14px,1.8vw,20px);color:var(--white);margin-bottom:8px;line-height:1;
+}
+.ch-step:last-child .ch-step-label{color:var(--gold)}
+.ch-step-sub{font-size:clamp(12px,1.2vw,13px);color:var(--muted);line-height:1.5;max-width:18ch;margin:0 auto}
+
+/* ============ PRIZE MONEY ============ */
+.ch-prize{padding:clamp(72px,10vw,120px) 0;position:relative;overflow:hidden}
+.ch-prize::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(212,175,55,.06),transparent);
+  pointer-events:none;
+}
+.ch-prize-header{text-align:center;margin-bottom:clamp(48px,7vw,80px)}
+.ch-prize-header h2{font-size:clamp(36px,6vw,82px)}
+.ch-prize-header p{font-size:clamp(14px,1.5vw,16px);color:var(--muted);max-width:52ch;margin:14px auto 0;line-height:1.6}
+.ch-prize-grid{
+  display:grid;grid-template-columns:1fr 1.3fr 1fr;
+  gap:clamp(12px,2vw,20px);align-items:end;
+  max-width:860px;margin:0 auto;
+}
+@media(max-width:640px){.ch-prize-grid{grid-template-columns:1fr;align-items:stretch}}
+.ch-podium{
+  background:#111;border:1px solid rgba(255,255,255,.08);
+  padding:clamp(20px,3vw,32px) clamp(16px,2.5vw,28px);
+  text-align:center;position:relative;transition:transform .2s;
+}
+.ch-podium:hover{transform:translateY(-4px)}
+.ch-podium--1st{
+  background:linear-gradient(160deg,#161400,#111);
+  border-color:var(--gold);
+  box-shadow:0 0 40px rgba(212,175,55,.2),inset 0 0 60px rgba(212,175,55,.04);
+}
+.ch-podium--2nd,.ch-podium--3rd{margin-bottom:clamp(16px,3vw,32px)}
+@media(max-width:640px){.ch-podium--2nd,.ch-podium--3rd{margin-bottom:0;order:1}}
+@media(max-width:640px){.ch-podium--1st{order:0}}
+.ch-podium-rank{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:14px;
+}
+.ch-podium--1st .ch-podium-rank{color:var(--gold)}
+.ch-podium-trophy{font-size:clamp(28px,4vw,40px);margin-bottom:12px;display:block}
+.ch-podium-amount{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(36px,5.5vw,64px);color:var(--white);line-height:1;
+  margin-bottom:6px;
+}
+.ch-podium--1st .ch-podium-amount{color:var(--gold)}
+.ch-podium-label{font-size:clamp(12px,1.3vw,14px);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.ch-prize-note{text-align:center;margin-top:clamp(24px,3vw,36px);font-size:clamp(12px,1.2vw,14px);color:rgba(255,255,255,.3);font-style:italic;letter-spacing:.04em}
+
+/* ============ NEXT EDITIONS ============ */
+.ch-editions{
+  padding:clamp(72px,10vw,120px) 0;
+  background:var(--bg-2);border-top:1px solid rgba(255,255,255,.06);
+}
+.ch-editions-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
+@media(max-width:860px){.ch-editions-grid{grid-template-columns:1fr}}
+.ch-timer{background:#111;border:1px solid rgba(212,175,55,.3);padding:clamp(24px,3.5vw,36px) clamp(22px,4vw,40px);position:relative;overflow:hidden;margin-bottom:32px}
+.ch-timer::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,175,55,.06) 0%,transparent 60%);pointer-events:none}
+.ch-timer-label{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.ch-timer-event{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(18px,2.8vw,30px);color:var(--white);text-transform:uppercase;margin-bottom:20px}
+.ch-timer-digits{display:flex;align-items:flex-end;gap:6px;flex-wrap:wrap}
+.ch-timer-unit{display:flex;flex-direction:column;align-items:center;min-width:56px}
+.ch-timer-unit span{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(34px,5vw,58px);color:var(--gold);line-height:1;letter-spacing:-.01em}
+.ch-timer-unit em{font-style:normal;font-size:10px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.ch-timer-sep{font-family:var(--display);font-weight:900;font-size:clamp(26px,4.5vw,44px);color:rgba(212,175,55,.4);padding-bottom:18px;margin:0 2px}
+.ch-edlist{display:flex;flex-direction:column;gap:0}
+.ch-ed-row{
+  display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:14px 20px;
+  padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s;
+}
+.ch-ed-row:hover{background:rgba(255,255,255,.02)}
+.ch-ed-row--next{background:rgba(212,175,55,.05);border-left:3px solid var(--gold);padding-left:16px;margin-left:-19px;border-bottom-color:rgba(212,175,55,.15)}
+.ch-ed-row--past{opacity:.4}
+.ch-ed-num{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(26px,3.5vw,38px);color:var(--gold);line-height:1;
+}
+.ch-ed-row--past .ch-ed-num{color:var(--muted)}
+.ch-ed-info{}
+.ch-ed-city{font-size:10px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:2px}
+.ch-ed-row--past .ch-ed-city{color:var(--muted)}
+.ch-ed-name{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(15px,1.8vw,20px);color:var(--white);text-transform:uppercase;line-height:1.1}
+.ch-ed-tag{font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.ch-ed-status{font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-align:right;white-space:nowrap}
+.ch-ed-row--next .ch-ed-status{color:var(--gold)}
+.ch-ed-row--past .ch-ed-status{color:rgba(255,255,255,.2)}
+
+/* ============ REGISTRATION ============ */
+.ch-reg{padding:clamp(72px,10vw,120px) 0;position:relative}
+.ch-reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,7vw,100px);align-items:start}
+@media(max-width:860px){.ch-reg-grid{grid-template-columns:1fr}}
+.ch-reg-copy h2{font-size:clamp(32px,5.5vw,72px);margin-bottom:18px}
+.ch-reg-copy p{font-size:clamp(14px,1.5vw,16px);color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:24px;max-width:52ch}
+.ch-reg-features{display:flex;flex-direction:column;gap:12px}
+.ch-reg-feat{display:flex;align-items:flex-start;gap:12px;font-size:clamp(13px,1.4vw,15px);color:rgba(255,255,255,.7)}
+.ch-reg-feat::before{
+  content:"◆";color:var(--gold);font-size:11px;flex-shrink:0;margin-top:3px;
+}
+.ch-reg-form{background:#111;border:1px solid rgba(204,255,0,.15);border-top:3px solid var(--lime);padding:clamp(24px,3.5vw,36px)}
+.ch-form-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(20px,2.5vw,28px);margin-bottom:22px}
+.ch-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.ch-field label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.ch-field input,.ch-field select{
+  background:#1a1a1a;border:1px solid rgba(255,255,255,.12);
+  color:var(--white);padding:12px 14px;font-size:15px;font-family:inherit;
+  outline:none;transition:border-color .2s;width:100%;
+  appearance:none;-webkit-appearance:none;
+}
+.ch-field input:focus,.ch-field select:focus{border-color:var(--lime)}
+.ch-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:440px){.ch-field-row{grid-template-columns:1fr}}
+.ch-form-submit{
+  width:100%;font-family:var(--display);font-weight:900;font-style:italic;font-size:18px;
+  letter-spacing:.06em;text-transform:uppercase;background:var(--lime);color:#000;
+  border:none;padding:16px;cursor:pointer;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+  margin-top:10px;transition:opacity .2s,filter .2s;
+}
+.ch-form-submit:hover{filter:drop-shadow(0 0 12px rgba(204,255,0,.5));opacity:.92}
+.ch-form-submit:disabled{opacity:.4;cursor:not-allowed}
+.ch-form-success{display:none;text-align:center;padding:32px 20px}
+.ch-form-success-icon{font-size:44px;margin-bottom:14px}
+.ch-form-success-title{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(22px,3vw,30px);color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.ch-form-success-sub{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ============ CTA BAND ============ */
+.cta-band{width:100%;background:#0F0F0F;padding:clamp(64px,9vw,100px) 0;text-align:center;position:relative}
+.cta-band::before{content:"";display:block;position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);opacity:.25}
+.cta-band .inner{max-width:640px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+.cta-band-hl{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(28px,4vw,56px);line-height:.95;color:var(--white);margin:0 0 clamp(28px,3.5vw,44px);letter-spacing:-.01em}
+.cta-band-hl .gold{color:var(--gold)}
+.cta-band-btns{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center}
+.cta-band-micro{margin-top:clamp(16px,2vw,24px);font-size:clamp(12px,1.3vw,14px);color:rgba(255,255,255,.35);letter-spacing:.04em}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(212,175,55,.08),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+
+/* ============ REVEAL ANIMATIONS ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.is-visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .65s ease,transform .65s ease}
+.reveal-left.is-visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .65s ease,transform .65s ease}
+.reveal-right.is-visible{opacity:1;transform:none}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}.delay-5{transition-delay:.5s}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#concept" data-i18n="nav_concept">Le concept</a>
+    <a href="index.html#arena" data-i18n="nav_arena">L'arène</a>
+    <a href="index.html#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <div class="nav-drop" id="navDrop">
+      <button class="nav-drop-btn active" aria-haspopup="true" aria-expanded="false">
+        <span data-i18n="nav_special">Projets spéciaux</span><span class="nav-drop-arrow">▾</span>
+      </button>
+      <div class="nav-drop-menu" role="menu">
+        <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
+        <a href="championship.html" class="nav-drop-item active" data-i18n="nav_champ">Championship</a>
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
+      </div>
+    </div>
+    <a href="index.html#billets" data-i18n="nav_tickets">Billets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <a class="nav-cta" href="#inscription" data-i18n="nav_cta">Réserve</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="ch-hero">
+  <div class="ch-hero-img" aria-hidden="true"></div>
+  <div class="wrap ch-hero-inner">
+    <div class="ch-hero-tag" data-i18n="ch_eyebrow">L'ÉVÉNEMENT PRINCIPAL — CHAMPIONSHIP</div>
+    <h1>
+      <span class="dim" data-i18n="ch_h1a">THE</span><br>
+      <span class="accent-gold" data-i18n="ch_h1b">CHAMPIONSHIP</span><br>
+      <span class="accent-lime" data-i18n="ch_h1c">PürInstinct.</span>
+    </h1>
+    <p class="ch-hero-sub" data-i18n="ch_sub">Des équipes. Des villes. Des pays. Des vrais prix. Deux fois par an, l'instinct devient légende.</p>
+    <div class="ch-hero-btns">
+      <a class="cta cta--gold" href="#inscription" data-i18n="ch_cta_reg">INSCRIRE MON ÉQUIPE →</a>
+      <a class="cta-outline" href="#editions" data-i18n="ch_cta_dates">VOIR LES PROCHAINES ÉDITIONS</a>
+    </div>
+  </div>
+  <div class="ch-hero-scroll" aria-hidden="true" data-i18n="ch_scroll">SCROLL</div>
+</header>
+
+<!-- ============ STAT STRIP ============ -->
+<div class="ch-stats">
+  <div class="wrap">
+    <div class="ch-stats-grid">
+      <div class="ch-stat reveal delay-1">
+        <div class="ch-stat-n"><sup>$</sup>10K</div>
+        <div class="ch-stat-l" data-i18n="stat_prize">Prix total</div>
+      </div>
+      <div class="ch-stat reveal delay-2">
+        <div class="ch-stat-n">2<sup>×</sup></div>
+        <div class="ch-stat-l" data-i18n="stat_freq">Par année</div>
+      </div>
+      <div class="ch-stat reveal delay-3">
+        <div class="ch-stat-n">10<sup>+</sup></div>
+        <div class="ch-stat-l" data-i18n="stat_cities">Villes</div>
+      </div>
+      <div class="ch-stat reveal delay-4">
+        <div class="ch-stat-n">5<sup>+</sup></div>
+        <div class="ch-stat-l" data-i18n="stat_countries">Pays</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN EVENT ============ -->
+<section class="ch-event">
+  <div class="wrap">
+    <div class="ch-event-grid">
+      <div class="reveal-left">
+        <div class="ch-event-img-wrap">
+          <img src="narr-05-mainevent-new.png" alt="Main Event PürInstinct Championship" class="ch-event-img">
+          <div class="ch-event-gutter">
+            <div class="ch-event-gutter-tag" data-i18n="ch_img_tag">THE MAIN EVENT</div>
+            <div class="ch-event-gutter-title" data-i18n="ch_img_title">L'instinct contre l'instinct</div>
+          </div>
+        </div>
+      </div>
+      <div class="ch-event-copy reveal-right">
+        <span class="eyebrow" data-i18n="ch_event_eyebrow">L'événement principal</span>
+        <h2 style="font-size:clamp(34px,5.5vw,72px);margin-bottom:22px">
+          <span data-i18n="ch_event_h2a">UNE FOIS DE PLUS,</span><br>
+          <span class="gold" data-i18n="ch_event_h2b">L'INSTINCT</span><br>
+          <span data-i18n="ch_event_h2c">DÉCIDE TOUT.</span>
+        </h2>
+        <p class="ch-event-body" data-i18n="ch_event_body">Le Championship n'est pas un tournoi ordinaire. Des équipes qui ont qualifié dans leurs villes respectives se retrouvent sur un seul terrain, devant une foule, avec de vrais prix en jeu. Chaque match est une histoire. Chaque but, un moment.</p>
+        <div class="ch-event-pull">
+          <p data-i18n="ch_pull">Ce n'est pas juste <em>du sport</em>. C'est l'arène qui juge.</p>
+        </div>
+        <a class="cta cta--gold" href="#inscription" data-i18n="ch_event_cta">INSCRIRE MON ÉQUIPE</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLASH BAR ============ -->
+<div class="ch-slash-bar">
+  <span data-i18n="ch_slash">INSTINCT CONTRE INSTINCT. VILLE CONTRE VILLE. QUI GAGNE ?</span>
+</div>
+
+<!-- ============ FESTIVAL ============ -->
+<section class="ch-festival">
+  <div class="wrap">
+    <div class="ch-festival-header reveal">
+      <span class="eyebrow" data-i18n="ch_fest_eyebrow">L'atmosphère</span>
+      <h2>
+        <span data-i18n="ch_fest_h2a">PLUS QU'UN MATCH.</span><br>
+        <span class="lime" data-i18n="ch_fest_h2b">UN FESTIVAL.</span>
+      </h2>
+      <p data-i18n="ch_fest_sub">Le Championship, c'est une journée entière. Un terrain transformé en expérience totale : musique, nourriture, créateurs de contenu, et la compétition la plus intense de l'année.</p>
+    </div>
+    <div class="ch-fest-grid">
+      <div class="ch-fest-card reveal delay-1">
+        <span class="ch-fest-icon">🎵</span>
+        <div class="ch-fest-title" data-i18n="fest_dj">Live DJ</div>
+        <p class="ch-fest-body" data-i18n="fest_dj_sub">Un set continu du matin jusqu'à la finale. L'énergie ne tombe jamais.</p>
+      </div>
+      <div class="ch-fest-card reveal delay-2">
+        <span class="ch-fest-icon">🎸</span>
+        <div class="ch-fest-title" data-i18n="fest_band">Live Band</div>
+        <p class="ch-fest-body" data-i18n="fest_band_sub">Showcase live pour la cérémonie d'ouverture et la remise des trophées.</p>
+      </div>
+      <div class="ch-fest-card reveal delay-3">
+        <span class="ch-fest-icon">🍔</span>
+        <div class="ch-fest-title" data-i18n="fest_food">Food Trucks</div>
+        <p class="ch-fest-body" data-i18n="fest_food_sub">Une sélection culinaire sur site. On mange bien avant de jouer mieux.</p>
+      </div>
+      <div class="ch-fest-card reveal delay-4">
+        <span class="ch-fest-icon">📱</span>
+        <div class="ch-fest-title" data-i18n="fest_creators">Créateurs &amp; Contenu</div>
+        <p class="ch-fest-body" data-i18n="fest_creators_sub">Des créateurs sur place pour capturer chaque moment fort de la journée.</p>
+      </div>
+      <div class="ch-fest-card reveal delay-5">
+        <span class="ch-fest-icon">⚡</span>
+        <div class="ch-fest-title" data-i18n="fest_zones">Zones Élargies</div>
+        <p class="ch-fest-body" data-i18n="fest_zones_sub">Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.</p>
+      </div>
+      <div class="ch-fest-card reveal delay-5">
+        <span class="ch-fest-icon">🎪</span>
+        <div class="ch-fest-title" data-i18n="fest_ent">Live Entertainment</div>
+        <p class="ch-fest-body" data-i18n="fest_ent_sub">Shows freestyle, battles surprises et animations entre chaque match.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOURNAMENT FORMAT ============ -->
+<section class="ch-format">
+  <div class="wrap">
+    <div class="ch-format-header reveal">
+      <span class="eyebrow--gold eyebrow" data-i18n="ch_fmt_eyebrow">Format du tournoi</span>
+      <h2 data-i18n="ch_fmt_h2">COMMENT ON ARRIVE AU SOMMET.</h2>
+      <p data-i18n="ch_fmt_sub">Quatre étapes. Un seul champion. Le format conçu pour que chaque match compte et que l'instinct soit récompensé jusqu'au bout.</p>
+    </div>
+    <div class="ch-steps">
+      <div class="ch-step reveal delay-1">
+        <div class="ch-step-num">1</div>
+        <div class="ch-step-label" data-i18n="fmt_s1">Qualifications</div>
+        <div class="ch-step-sub" data-i18n="fmt_s1_sub">Championnats locaux dans chaque ville participante</div>
+      </div>
+      <div class="ch-step reveal delay-2">
+        <div class="ch-step-num">2</div>
+        <div class="ch-step-label" data-i18n="fmt_s2">Phase de groupes</div>
+        <div class="ch-step-sub" data-i18n="fmt_s2_sub">Round-robin entre équipes qualifiées de toutes les villes</div>
+      </div>
+      <div class="ch-step reveal delay-3">
+        <div class="ch-step-num">3</div>
+        <div class="ch-step-label" data-i18n="fmt_s3">Demi-finales</div>
+        <div class="ch-step-sub" data-i18n="fmt_s3_sub">Les 4 meilleures équipes s'affrontent en élimination directe</div>
+      </div>
+      <div class="ch-step reveal delay-4">
+        <div class="ch-step-num">★</div>
+        <div class="ch-step-label" data-i18n="fmt_s4">LA GRANDE FINALE</div>
+        <div class="ch-step-sub" data-i18n="fmt_s4_sub">Devant la foule. Pour le trophée. Pour l'argent. Pour la légende.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIZE MONEY ============ -->
+<section class="ch-prize">
+  <div class="wrap">
+    <div class="ch-prize-header reveal">
+      <span class="eyebrow--gold eyebrow" data-i18n="ch_prize_eyebrow">Prix en jeu</span>
+      <h2 data-i18n="ch_prize_h2">DE VRAIS PRIX. DE VRAIES RÉCOMPENSES.</h2>
+      <p data-i18n="ch_prize_sub">Le talent mérite d'être payé. Le Championship distribue des prix réels à chaque édition — parce que l'instinct a une valeur.</p>
+    </div>
+    <div class="ch-prize-grid">
+      <div class="ch-podium ch-podium--2nd reveal delay-2">
+        <div class="ch-podium-rank" data-i18n="prize_2nd">2e place</div>
+        <span class="ch-podium-trophy">🥈</span>
+        <div class="ch-podium-amount">$2 500</div>
+        <div class="ch-podium-label" data-i18n="prize_cash">en prix</div>
+      </div>
+      <div class="ch-podium ch-podium--1st reveal delay-1">
+        <div class="ch-podium-rank" data-i18n="prize_1st">1re place — Champion</div>
+        <span class="ch-podium-trophy">🏆</span>
+        <div class="ch-podium-amount">$5 000</div>
+        <div class="ch-podium-label" data-i18n="prize_cash">en prix</div>
+      </div>
+      <div class="ch-podium ch-podium--3rd reveal delay-3">
+        <div class="ch-podium-rank" data-i18n="prize_3rd">3e place</div>
+        <span class="ch-podium-trophy">🥉</span>
+        <div class="ch-podium-amount">$1 500</div>
+        <div class="ch-podium-label" data-i18n="prize_cash">en prix</div>
+      </div>
+    </div>
+    <div class="ch-prize-note reveal" data-i18n="prize_note">* Les montants peuvent varier selon l'édition et les commanditaires. D'autres prix spéciaux peuvent s'ajouter.</div>
+  </div>
+</section>
+
+<!-- ============ NEXT EDITIONS ============ -->
+<section class="ch-editions" id="editions">
+  <div class="wrap">
+    <div class="ch-editions-grid">
+      <div>
+        <span class="eyebrow--gold eyebrow reveal" data-i18n="ch_ed_eyebrow">Prochaine édition</span>
+        <h2 class="reveal" style="font-size:clamp(34px,5.5vw,68px);margin-bottom:28px" data-i18n="ch_ed_h2">PRÊT À QUALIFIER TON ÉQUIPE ?</h2>
+        <div class="ch-timer reveal">
+          <div class="ch-timer-label" data-i18n="ch_timer_lbl">COMPTE À REBOURS</div>
+          <div class="ch-timer-event" id="chTimerEvent">Championship Hiver 2027 — Montréal</div>
+          <div class="ch-timer-digits">
+            <div class="ch-timer-unit"><span id="chTD">--</span><em data-i18n="ch_td">JOURS</em></div>
+            <div class="ch-timer-sep">:</div>
+            <div class="ch-timer-unit"><span id="chTH">--</span><em data-i18n="ch_th">H</em></div>
+            <div class="ch-timer-sep">:</div>
+            <div class="ch-timer-unit"><span id="chTM">--</span><em data-i18n="ch_tm">MIN</em></div>
+            <div class="ch-timer-sep">:</div>
+            <div class="ch-timer-unit"><span id="chTS">--</span><em data-i18n="ch_ts">SEC</em></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ch-edlist reveal" id="chEdlist"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGISTRATION ============ -->
+<section class="ch-reg" id="inscription">
+  <div class="wrap">
+    <div class="ch-reg-grid">
+      <div class="ch-reg-copy">
+        <span class="eyebrow reveal" data-i18n="ch_reg_eyebrow">Inscription équipe</span>
+        <h2 class="reveal" data-i18n="ch_reg_h2">VOTRE ÉQUIPE A L'INSTINCT.<br><span class="lime">ON A L'ARÈNE.</span></h2>
+        <p class="reveal" data-i18n="ch_reg_body">Inscrivez votre équipe pour recevoir toutes les informations sur les qualifications locales, le calendrier et les modalités de participation au Championship PürInstinct.</p>
+        <div class="ch-reg-features reveal">
+          <div class="ch-reg-feat" data-i18n="ch_feat1">Qualifications dans votre ville</div>
+          <div class="ch-reg-feat" data-i18n="ch_feat2">Accès prioritaire aux dates de Championship</div>
+          <div class="ch-reg-feat" data-i18n="ch_feat3">Pack équipe complet à l'arrivée</div>
+          <div class="ch-reg-feat" data-i18n="ch_feat4">Couverture créateur pendant la journée</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="ch-reg-form" id="chRegForm">
+          <div class="ch-form-title" data-i18n="ch_form_title">Inscrire mon équipe</div>
+          <div class="ch-field-row">
+            <div class="ch-field">
+              <label data-i18n="ch_f_captain">Capitaine — Prénom</label>
+              <input id="chFirstName" type="text" autocomplete="given-name">
+            </div>
+            <div class="ch-field">
+              <label data-i18n="ch_f_lname">Nom</label>
+              <input id="chLastName" type="text" autocomplete="family-name">
+            </div>
+          </div>
+          <div class="ch-field">
+            <label data-i18n="ch_f_email">Courriel</label>
+            <input id="chEmail" type="email" autocomplete="email">
+          </div>
+          <div class="ch-field">
+            <label data-i18n="ch_f_team">Nom de l'équipe</label>
+            <input id="chTeam" type="text">
+          </div>
+          <div class="ch-field-row">
+            <div class="ch-field">
+              <label data-i18n="ch_f_city">Ville</label>
+              <input id="chCity" type="text">
+            </div>
+            <div class="ch-field">
+              <label data-i18n="ch_f_size">Taille de l'équipe</label>
+              <select id="chSize">
+                <option value="">—</option>
+                <option value="2">2 joueurs</option>
+                <option value="3">3 joueurs</option>
+                <option value="4">4 joueurs</option>
+                <option value="5">5 joueurs</option>
+                <option value="6+">6+ joueurs</option>
+              </select>
+            </div>
+          </div>
+          <button class="ch-form-submit" id="chSubmit" onclick="submitChReg()" data-i18n="ch_f_submit">CONFIRMER L'INSCRIPTION →</button>
+        </div>
+        <div class="ch-form-success" id="chSuccess">
+          <div class="ch-form-success-icon">🏆</div>
+          <div class="ch-form-success-title" data-i18n="ch_ok_title">ÉQUIPE INSCRITE !</div>
+          <p class="ch-form-success-sub" id="chSuccessSub"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<div class="cta-band">
+  <div class="inner">
+    <p class="cta-band-hl" data-i18n="ctb_hl">LE PROCHAIN CHAMPION<br><span class="gold" data-i18n="ctb_hl2">C'EST PEUT-ÊTRE TOI.</span></p>
+    <div class="cta-band-btns">
+      <a class="cta cta--gold" href="#inscription" data-i18n="ctb_primary">INSCRIRE MON ÉQUIPE →</a>
+      <a class="cta-outline" href="mailto:dominique@purinstinct.com" data-i18n="ctb_secondary">PARTENARIAT / COMMANDITE</a>
+    </div>
+    <p class="cta-band-micro" data-i18n="ctb_micro">Deux fois par an &nbsp;·&nbsp; Villes multiples &nbsp;·&nbsp; $10 000 en prix</p>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="#inscription" data-i18n="f_reg">Inscrire mon équipe</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwPLACEHOLDER/exec';
+
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",
+  nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",
+  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+
+  ch_eyebrow:"L'ÉVÉNEMENT PRINCIPAL — CHAMPIONSHIP",
+  ch_h1a:"THE",ch_h1b:"CHAMPIONSHIP",ch_h1c:"PürInstinct.",
+  ch_sub:"Des équipes. Des villes. Des pays. Des vrais prix. Deux fois par an, l'instinct devient légende.",
+  ch_cta_reg:"INSCRIRE MON ÉQUIPE →",ch_cta_dates:"VOIR LES PROCHAINES ÉDITIONS",
+  ch_scroll:"SCROLL",
+
+  stat_prize:"Prix total",stat_freq:"Par année",stat_cities:"Villes",stat_countries:"Pays",
+
+  ch_img_tag:"THE MAIN EVENT",ch_img_title:"L'instinct contre l'instinct",
+  ch_event_eyebrow:"L'événement principal",
+  ch_event_h2a:"UNE FOIS DE PLUS,",ch_event_h2b:"L'INSTINCT",ch_event_h2c:"DÉCIDE TOUT.",
+  ch_event_body:"Le Championship n'est pas un tournoi ordinaire. Des équipes qui ont qualifié dans leurs villes respectives se retrouvent sur un seul terrain, devant une foule, avec de vrais prix en jeu. Chaque match est une histoire. Chaque but, un moment.",
+  ch_pull:"Ce n'est pas juste du sport. C'est l'arène qui juge.",
+  ch_event_cta:"INSCRIRE MON ÉQUIPE",
+
+  ch_slash:"INSTINCT CONTRE INSTINCT. VILLE CONTRE VILLE. QUI GAGNE ?",
+
+  ch_fest_eyebrow:"L'atmosphère",
+  ch_fest_h2a:"PLUS QU'UN MATCH.",ch_fest_h2b:"UN FESTIVAL.",
+  ch_fest_sub:"Le Championship, c'est une journée entière. Un terrain transformé en expérience totale : musique, nourriture, créateurs de contenu, et la compétition la plus intense de l'année.",
+  fest_dj:"Live DJ",fest_dj_sub:"Un set continu du matin jusqu'à la finale. L'énergie ne tombe jamais.",
+  fest_band:"Live Band",fest_band_sub:"Showcase live pour la cérémonie d'ouverture et la remise des trophées.",
+  fest_food:"Food Trucks",fest_food_sub:"Une sélection culinaire sur site. On mange bien avant de jouer mieux.",
+  fest_creators:"Créateurs & Contenu",fest_creators_sub:"Des créateurs sur place pour capturer chaque moment fort de la journée.",
+  fest_zones:"Zones Élargies",fest_zones_sub:"Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.",
+  fest_ent:"Live Entertainment",fest_ent_sub:"Shows freestyle, battles surprises et animations entre chaque match.",
+
+  ch_fmt_eyebrow:"Format du tournoi",
+  ch_fmt_h2:"COMMENT ON ARRIVE AU SOMMET.",
+  ch_fmt_sub:"Quatre étapes. Un seul champion. Le format conçu pour que chaque match compte et que l'instinct soit récompensé jusqu'au bout.",
+  fmt_s1:"Qualifications",fmt_s1_sub:"Championnats locaux dans chaque ville participante",
+  fmt_s2:"Phase de groupes",fmt_s2_sub:"Round-robin entre équipes qualifiées de toutes les villes",
+  fmt_s3:"Demi-finales",fmt_s3_sub:"Les 4 meilleures équipes s'affrontent en élimination directe",
+  fmt_s4:"LA GRANDE FINALE",fmt_s4_sub:"Devant la foule. Pour le trophée. Pour l'argent. Pour la légende.",
+
+  ch_prize_eyebrow:"Prix en jeu",
+  ch_prize_h2:"DE VRAIS PRIX. DE VRAIES RÉCOMPENSES.",
+  ch_prize_sub:"Le talent mérite d'être payé. Le Championship distribue des prix réels à chaque édition — parce que l'instinct a une valeur.",
+  prize_1st:"1re place — Champion",prize_2nd:"2e place",prize_3rd:"3e place",prize_cash:"en prix",
+  prize_note:"* Les montants peuvent varier selon l'édition et les commanditaires. D'autres prix spéciaux peuvent s'ajouter.",
+
+  ch_ed_eyebrow:"Prochaine édition",
+  ch_ed_h2:"PRÊT À QUALIFIER TON ÉQUIPE ?",
+  ch_timer_lbl:"COMPTE À REBOURS",
+  ch_td:"JOURS",ch_th:"H",ch_tm:"MIN",ch_ts:"SEC",
+
+  ch_reg_eyebrow:"Inscription équipe",
+  ch_reg_h2:"VOTRE ÉQUIPE A L'INSTINCT.",
+  ch_reg_body:"Inscrivez votre équipe pour recevoir toutes les informations sur les qualifications locales, le calendrier et les modalités de participation au Championship PürInstinct.",
+  ch_feat1:"Qualifications dans votre ville",
+  ch_feat2:"Accès prioritaire aux dates de Championship",
+  ch_feat3:"Pack équipe complet à l'arrivée",
+  ch_feat4:"Couverture créateur pendant la journée",
+  ch_form_title:"Inscrire mon équipe",
+  ch_f_captain:"Capitaine — Prénom",ch_f_lname:"Nom",ch_f_email:"Courriel",
+  ch_f_team:"Nom de l'équipe",ch_f_city:"Ville",ch_f_size:"Taille de l'équipe",
+  ch_f_submit:"CONFIRMER L'INSCRIPTION →",
+  ch_ok_title:"ÉQUIPE INSCRITE !",ch_ok_sub:"Confirmation envoyée à {email}. On se voit sur l'arène.",
+
+  ctb_hl:"LE PROCHAIN CHAMPION",ctb_hl2:"C'EST PEUT-ÊTRE TOI.",
+  ctb_primary:"INSCRIRE MON ÉQUIPE →",ctb_secondary:"PARTENARIAT / COMMANDITE",
+  ctb_micro:"Deux fois par an · Villes multiples · $10 000 en prix",
+
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_reg:"Inscrire mon équipe",
+  f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur.",
+
+  ed_next:"PROCHAIN",ed_past:"TERMINÉ",ed_reg:"INSCRIPTION →",ed_soon:"BIENTÔT"
+},
+en:{
+  nav_concept:"The Concept",nav_arena:"The Arena",nav_instincts:"The 5 Instincts",nav_lb:"Leaderboard",
+  nav_tickets:"Tickets",nav_cta:"Reserve",nav_special:"Special Projects",
+  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",
+
+  ch_eyebrow:"THE MAIN EVENT — CHAMPIONSHIP",
+  ch_h1a:"THE",ch_h1b:"CHAMPIONSHIP",ch_h1c:"PürInstinct.",
+  ch_sub:"Teams. Cities. Countries. Real prize money. Twice a year, instinct becomes legend.",
+  ch_cta_reg:"REGISTER MY TEAM →",ch_cta_dates:"SEE NEXT EDITIONS",
+  ch_scroll:"SCROLL",
+
+  stat_prize:"Total prize",stat_freq:"Per year",stat_cities:"Cities",stat_countries:"Countries",
+
+  ch_img_tag:"THE MAIN EVENT",ch_img_title:"Instinct vs Instinct",
+  ch_event_eyebrow:"The main event",
+  ch_event_h2a:"ONCE AGAIN,",ch_event_h2b:"INSTINCT",ch_event_h2c:"DECIDES EVERYTHING.",
+  ch_event_body:"The Championship is not an ordinary tournament. Teams that qualified in their home cities converge on one field, in front of a crowd, with real prize money on the line. Every match is a story. Every goal, a moment.",
+  ch_pull:"It's not just sport. The arena is the judge.",
+  ch_event_cta:"REGISTER MY TEAM",
+
+  ch_slash:"INSTINCT VS INSTINCT. CITY VS CITY. WHO WINS?",
+
+  ch_fest_eyebrow:"The atmosphere",
+  ch_fest_h2a:"MORE THAN A MATCH.",ch_fest_h2b:"A FESTIVAL.",
+  ch_fest_sub:"The Championship is a full-day experience. A field transformed into total immersion: music, food, content creators, and the most intense competition of the year.",
+  fest_dj:"Live DJ",fest_dj_sub:"A continuous set from morning to the final. The energy never drops.",
+  fest_band:"Live Band",fest_band_sub:"Live showcase for the opening ceremony and trophy presentation.",
+  fest_food:"Food Trucks",fest_food_sub:"Curated food selection on-site. Eat well, play better.",
+  fest_creators:"Creators & Content",fest_creators_sub:"Creators on the ground to capture every highlight of the day.",
+  fest_zones:"Expanded Zones",fest_zones_sub:"All zones available — bigger and more intense than the regular season.",
+  fest_ent:"Live Entertainment",fest_ent_sub:"Freestyle shows, surprise battles and entertainment between every match.",
+
+  ch_fmt_eyebrow:"Tournament format",
+  ch_fmt_h2:"HOW YOU REACH THE TOP.",
+  ch_fmt_sub:"Four stages. One champion. A format designed so every match matters and instinct is rewarded all the way to the end.",
+  fmt_s1:"Qualifiers",fmt_s1_sub:"Local championships in each participating city",
+  fmt_s2:"Group Stage",fmt_s2_sub:"Round-robin between qualified teams from all cities",
+  fmt_s3:"Semi-finals",fmt_s3_sub:"Top 4 teams face off in single elimination",
+  fmt_s4:"THE GRAND FINAL",fmt_s4_sub:"In front of the crowd. For the trophy. For the prize. For the legend.",
+
+  ch_prize_eyebrow:"Prize money",
+  ch_prize_h2:"REAL PRIZES. REAL REWARDS.",
+  ch_prize_sub:"Talent deserves to be paid. The Championship awards real prize money at every edition — because instinct has value.",
+  prize_1st:"1st place — Champion",prize_2nd:"2nd place",prize_3rd:"3rd place",prize_cash:"in prizes",
+  prize_note:"* Amounts may vary by edition and sponsors. Additional special prizes may be added.",
+
+  ch_ed_eyebrow:"Next edition",
+  ch_ed_h2:"READY TO QUALIFY YOUR TEAM?",
+  ch_timer_lbl:"COUNTDOWN",
+  ch_td:"DAYS",ch_th:"H",ch_tm:"MIN",ch_ts:"SEC",
+
+  ch_reg_eyebrow:"Team registration",
+  ch_reg_h2:"YOUR TEAM HAS THE INSTINCT.",
+  ch_reg_body:"Register your team to receive all information about local qualifiers, the schedule, and how to participate in the PürInstinct Championship.",
+  ch_feat1:"Qualifiers in your city",
+  ch_feat2:"Priority access to Championship dates",
+  ch_feat3:"Full team pack on arrival",
+  ch_feat4:"Creator coverage throughout the day",
+  ch_form_title:"Register my team",
+  ch_f_captain:"Captain — First name",ch_f_lname:"Last name",ch_f_email:"Email",
+  ch_f_team:"Team name",ch_f_city:"City",ch_f_size:"Team size",
+  ch_f_submit:"CONFIRM REGISTRATION →",
+  ch_ok_title:"TEAM REGISTERED!",ch_ok_sub:"Confirmation sent to {email}. See you on the arena.",
+
+  ctb_hl:"THE NEXT CHAMPION",ctb_hl2:"MIGHT BE YOU.",
+  ctb_primary:"REGISTER MY TEAM →",ctb_secondary:"PARTNERSHIP / SPONSORSHIP",
+  ctb_micro:"Twice a year · Multiple cities · $10,000 in prizes",
+
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_reg:"Register my team",
+  f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player.",
+
+  ed_next:"NEXT",ed_past:"DONE",ed_reg:"REGISTER →",ed_soon:"COMING SOON"
+}};
+
+let lang = localStorage.getItem("pi_lang") || "fr";
+
+function applyLang(){
+  const t = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if(t[k] !== undefined) el.textContent = t[k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
+  renderEditions();
+  updateTimerLabel();
+}
+
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+document.addEventListener('click', e => { if(!burger.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove('open'); });
+
+const navDrop = document.getElementById('navDrop');
+if(navDrop){
+  navDrop.querySelector('.nav-drop-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    navDrop.classList.toggle('open');
+    navDrop.querySelector('.nav-drop-btn').setAttribute('aria-expanded', navDrop.classList.contains('open'));
+  });
+  document.addEventListener('click', e => { if(!navDrop.contains(e.target)) navDrop.classList.remove('open'); });
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ── Editions list ── */
+const EDITIONS = [
+  {date:"2027-02-06",city:"Montréal",name:"Championship Hiver 2027",link:"#"},
+  {date:"2027-07-10",city:"Paris",name:"Championship Été 2027",link:"#"},
+  {date:"2027-12-04",city:"Toronto",name:"Championship Hiver 2027 — Est",link:"#"},
+];
+
+const MONTHS_FR = ["JANV","FÉVR","MARS","AVR","MAI","JUIN","JUIL","AOÛT","SEPT","OCT","NOV","DÉC"];
+const MONTHS_EN = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+
+function renderEditions(){
+  const t = I18N[lang];
+  const list = document.getElementById('chEdlist');
+  if(!list) return;
+  const now = new Date();
+  let nextIdx = -1;
+  for(let i=0;i<EDITIONS.length;i++){
+    if(new Date(EDITIONS[i].date+'T10:00:00') > now){ nextIdx=i; break; }
+  }
+  let html = '';
+  EDITIONS.forEach((ed, i) => {
+    const dt = new Date(ed.date+'T10:00:00');
+    const past = dt < now;
+    const isNext = i === nextIdx;
+    const day = dt.getDate();
+    const mon = (lang==='fr' ? MONTHS_FR : MONTHS_EN)[dt.getMonth()];
+    const year = dt.getFullYear();
+    let cls = 'ch-ed-row';
+    if(isNext) cls += ' ch-ed-row--next';
+    if(past) cls += ' ch-ed-row--past';
+    const statusText = past ? (t.ed_past||'DONE') : isNext ? (t.ed_next||'NEXT') : (t.ed_soon||'COMING SOON');
+    const btn = past ? '' : '<a href="'+ed.link+'" class="cta cta--gold" style="font-size:13px;padding:9px 18px 10px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)" data-i18n="ed_reg">'+(t.ed_reg||'REGISTER →')+'</a>';
+    html += '<div class="'+cls+'"><div class="ch-ed-num">'+day+'<br><span style="font-size:.45em;letter-spacing:.1em">'+mon+' '+year+'</span></div><div class="ch-ed-info"><div class="ch-ed-city">'+ed.city+'</div><div class="ch-ed-name">'+ed.name+'</div><div class="ch-ed-tag">'+statusText+'</div></div>'+btn+'</div>';
+  });
+  list.innerHTML = html;
+}
+
+function updateTimerLabel(){
+  const t = I18N[lang];
+  const now = new Date();
+  let next = null;
+  for(let i=0;i<EDITIONS.length;i++){
+    const dt = new Date(EDITIONS[i].date+'T10:00:00');
+    if(dt > now){ next = EDITIONS[i]; break; }
+  }
+  const el = document.getElementById('chTimerEvent');
+  if(el && next) el.textContent = next.name + ' — ' + next.city;
+}
+
+/* ── Countdown ── */
+function runCountdown(){
+  const now = new Date();
+  let target = null;
+  for(let i=0;i<EDITIONS.length;i++){
+    const dt = new Date(EDITIONS[i].date+'T10:00:00');
+    if(dt > now){ target = dt; break; }
+  }
+  const d = document.getElementById('chTD');
+  const h = document.getElementById('chTH');
+  const m = document.getElementById('chTM');
+  const s = document.getElementById('chTS');
+  if(!d||!target) return;
+  const diff = Math.max(0, target - now);
+  const days = Math.floor(diff/86400000);
+  const hrs  = Math.floor((diff%86400000)/3600000);
+  const mins = Math.floor((diff%3600000)/60000);
+  const secs = Math.floor((diff%60000)/1000);
+  d.textContent = String(days).padStart(2,'0');
+  h.textContent = String(hrs).padStart(2,'0');
+  m.textContent = String(mins).padStart(2,'0');
+  s.textContent = String(secs).padStart(2,'0');
+}
+runCountdown();
+setInterval(runCountdown, 1000);
+
+/* ── Team registration ── */
+function submitChReg(){
+  const fn = document.getElementById('chFirstName').value.trim();
+  const ln = document.getElementById('chLastName').value.trim();
+  const em = document.getElementById('chEmail').value.trim();
+  const team = document.getElementById('chTeam').value.trim();
+  if(!fn||!ln||!em||!em.includes('@')||!team) return;
+  const btn = document.getElementById('chSubmit');
+  btn.disabled=true; btn.textContent='…';
+  const payload = {
+    firstName:fn, lastName:ln, email:em, team:team,
+    city: document.getElementById('chCity').value.trim(),
+    size: document.getElementById('chSize').value,
+    type:'championship', lang, timestamp: new Date().toISOString()
+  };
+  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
+    .then(showSuccess).catch(showSuccess);
+  function showSuccess(){
+    document.getElementById('chRegForm').style.display='none';
+    const sub = (I18N[lang].ch_ok_sub||'').replace('{email}',em);
+    document.getElementById('chSuccessSub').textContent = sub;
+    document.getElementById('chSuccess').style.display='block';
+  }
+}
+
+/* ── Reveal on scroll ── */
+(function(){
+  const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+  if(!els.length) return;
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('is-visible'); });
+  }, {threshold:0.12});
+  els.forEach(function(el){ io.observe(el); });
+}());
+
+applyLang();
+</script>
+</body>
+</html>
