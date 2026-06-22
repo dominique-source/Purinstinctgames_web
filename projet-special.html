@@ -275,9 +275,8 @@ h1,h2,h3,.disp{
   position:relative;background:#0f0f0f;
   border:1.5px solid rgba(255,255,255,.07);border-radius:4px;
   padding:36px 28px 32px;overflow:hidden;display:flex;flex-direction:column;gap:14px;
-  transition:border-color .25s,box-shadow .25s;
+  transition:transform .34s cubic-bezier(.34,1.4,.6,1),opacity .28s ease,border-color .25s,box-shadow .25s,background .25s;
 }
-.prog-card:hover{border-color:rgba(204,255,0,.35);box-shadow:0 4px 32px rgba(204,255,0,.08)}
 .prog-card.featured{border-color:rgba(204,255,0,.3);background:#101a00}
 .prog-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.08)}
 .prog-card.featured::before{background:var(--lime)}
@@ -286,7 +285,17 @@ h1,h2,h3,.disp{
   font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
 }
 .prog-card.featured .prog-card-num{color:var(--lime)}
-.prog-card-icon{font-size:30px;line-height:1;margin-bottom:4px}
+.prog-card-icon{
+  width:54px;height:54px;border-radius:13px;margin-bottom:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(255,255,255,.10);background:rgba(255,255,255,.035);
+  color:var(--white);transition:border-color .25s,background .25s,color .25s;
+}
+.prog-card-icon svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none}
+.prog-card.featured .prog-card-icon{
+  border-color:rgba(204,255,0,.38);background:rgba(204,255,0,.07);
+  color:var(--lime);box-shadow:0 0 18px rgba(204,255,0,.12);
+}
 .prog-card-title{
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:clamp(20px,2.5vw,26px);letter-spacing:-.01em;line-height:.95;
@@ -343,6 +352,36 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .prog-card:hover .prog-card-hint::after{transform:translateX(4px)}
 .prog-card.featured .prog-card-hint{color:rgba(204,255,0,.6)}
 .prog-card.featured:hover .prog-card-hint{color:var(--lime)}
+
+/* ===== Interactive spotlight: the lime accent follows the cursor across the 3 events ===== */
+@media(hover:hover){
+  .prog-card:hover{
+    transform:scale(1.15);z-index:5;
+    border-color:rgba(204,255,0,.5);background:#101a00;
+    box-shadow:0 14px 46px rgba(204,255,0,.16);
+  }
+  .prog-card:hover::before{background:var(--lime)}
+  .prog-card:hover .prog-card-num{color:var(--lime)}
+  .prog-card:hover .prog-card-title{color:var(--lime)}
+  .prog-card:hover .prog-card-icon{
+    border-color:rgba(204,255,0,.45);background:rgba(204,255,0,.08);
+    color:var(--lime);box-shadow:0 0 20px rgba(204,255,0,.18);
+  }
+  .prog-card:hover .prog-tag{border-color:rgba(204,255,0,.4);color:var(--lime)}
+  .prog-card:hover .prog-card-hint{color:var(--lime)}
+
+  .prog-grid:hover .prog-card:not(:hover){opacity:.4}
+  .prog-grid:hover .prog-card.featured:not(:hover){border-color:rgba(255,255,255,.07);background:#0f0f0f;box-shadow:none}
+  .prog-grid:hover .prog-card.featured:not(:hover)::before{background:rgba(255,255,255,.08)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-num{color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-title{color:var(--white)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-icon{
+    border-color:rgba(255,255,255,.10);background:rgba(255,255,255,.035);color:var(--white);box-shadow:none;
+  }
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-tag{border-color:rgba(255,255,255,.12);color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-hint{color:rgba(204,255,0,.6)}
+}
+@media(prefers-reduced-motion:reduce){.prog-card:hover{transform:none}}
 
 .modal-overlay{
   position:fixed;inset:0;z-index:200;
@@ -525,7 +564,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <!-- PürInstinct Games -->
       <div class="prog-card featured" data-discipline="1">
         <div class="prog-card-num" data-i18n="prog_1_num">Activité 01</div>
-        <div class="prog-card-icon">🏟️</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_1_t">PürInstinct Games</div>
         <p class="prog-card-desc" data-i18n="prog_1_b">Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2. Séan Garnier observe, commente et défie les meilleurs en direct.</p>
         <div class="prog-card-tags">
@@ -540,7 +579,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <!-- Panna 1v1 -->
       <div class="prog-card" data-discipline="2">
         <div class="prog-card-num" data-i18n="prog_2_num">Activité 02</div>
-        <div class="prog-card-icon">⚽</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.6 14.7 9.5 13.7 12.7 10.3 12.7 9.3 9.5Z"/><path d="M12 7.6V3.2M14.7 9.5 18.6 8.2M13.7 12.7 16.2 16M10.3 12.7 7.8 16M9.3 9.5 5.4 8.2"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_2_t">Tournoi Panna 1v1</div>
         <p class="prog-card-desc" data-i18n="prog_2_b">Le duel de rue le plus électrique du soccer : passe le ballon entre les jambes de ton adversaire pour marquer le panna et remporter le point. Format élimination directe, Séan Garnier comme juge suprême.</p>
         <div class="prog-card-tags">
@@ -555,7 +594,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <!-- Freestyle -->
       <div class="prog-card" data-discipline="3">
         <div class="prog-card-num" data-i18n="prog_3_num">Activité 03</div>
-        <div class="prog-card-icon">🌀</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 3.5 13.3 8.2 18 10 13.3 11.8 11.5 16.5 9.7 11.8 5 10 9.7 8.2Z"/><path d="M18 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_3_t">Tournoi Freestyle Soccer</div>
         <p class="prog-card-desc" data-i18n="prog_3_b">Jongle, invente, impressionne. Chaque participant présente une routine libre devant les autres athlètes et Séan Garnier. Les juges notent la créativité, la maîtrise technique et le style. Le meilleur freestyler repart avec un prix.</p>
         <div class="prog-card-tags">
