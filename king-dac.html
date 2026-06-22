@@ -96,7 +96,7 @@ h1,h2,h3,.disp{
 .burger{display:none;flex-direction:column;gap:5px;padding:6px}
 .burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
 @media(max-width:860px){
-  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw;max-height:calc(100dvh - 70px);overflow-y:auto}
   .nav-links.open{transform:none}
   .burger{display:flex}
   .nav-cta{display:none}
@@ -108,7 +108,7 @@ h1,h2,h3,.disp{
     min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
     padding-left:14px;margin-top:2px;box-shadow:none;
   }
-  .nav-drop.open .nav-drop-menu{max-height:200px}
+  .nav-drop.open .nav-drop-menu{max-height:360px}
   .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
 }
 
@@ -234,19 +234,27 @@ h1,h2,h3,.disp{
 
 /* ============ INFO STRIP ============ */
 .kd-strip{
-  background:#111;border-top:1px solid rgba(204,255,0,.12);
+  background:#0d0d0d;border-top:1px solid rgba(204,255,0,.12);
   border-bottom:1px solid rgba(204,255,0,.12);
-  padding:clamp(28px,4vw,48px) 0;margin-bottom:clamp(32px,5vw,60px);
+  padding:clamp(16px,2.4vw,26px) 0;margin-bottom:clamp(28px,4vw,52px);
 }
-.kd-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(204,255,0,.12)}
-@media(max-width:640px){.kd-strip-grid{grid-template-columns:1fr}}
-.kd-strip-item{
-  background:#111;padding:28px 32px;
-  display:flex;flex-direction:column;gap:8px;
+.kd-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,30px)}
+@media(max-width:640px){.kd-strip-grid{grid-template-columns:1fr;gap:0}}
+.kd-strip-item{display:flex;align-items:flex-start;gap:13px;position:relative}
+@media(min-width:641px){.kd-strip-item:not(:last-child)::after{content:"";position:absolute;right:calc(-1*clamp(8px,1.1vw,15px));top:1px;bottom:1px;width:1px;background:rgba(204,255,0,.12)}}
+@media(max-width:640px){
+  .kd-strip-item{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+  .kd-strip-item:last-child{border-bottom:none}
 }
-.kd-strip-icon{font-size:22px;margin-bottom:4px}
-.kd-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,2vw,20px);color:var(--white)}
-.kd-strip-sub{font-size:14px;color:var(--muted);line-height:1.45}
+.kd-strip-icon{
+  flex:none;width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(204,255,0,.28);background:rgba(204,255,0,.06);color:var(--lime);
+}
+.kd-strip-icon svg{width:19px;height:19px;stroke:currentColor;fill:none}
+.kd-strip-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.kd-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.7vw,18px);color:var(--white);line-height:1.05}
+.kd-strip-sub{font-size:13px;color:var(--muted);line-height:1.4}
 
 /* ============ PROGRAMME ============ */
 .prog-section{
@@ -268,9 +276,8 @@ h1,h2,h3,.disp{
   position:relative;background:#0f0f0f;
   border:1.5px solid rgba(255,255,255,.07);border-radius:4px;
   padding:36px 28px 32px;overflow:hidden;display:flex;flex-direction:column;gap:14px;
-  transition:border-color .25s,box-shadow .25s;cursor:pointer;
+  transition:transform .34s cubic-bezier(.34,1.4,.6,1),opacity .28s ease,border-color .25s,box-shadow .25s,background .25s;cursor:pointer;
 }
-.prog-card:hover{border-color:rgba(204,255,0,.35);box-shadow:0 4px 32px rgba(204,255,0,.08)}
 .prog-card.featured{border-color:rgba(204,255,0,.3);background:#101a00}
 .prog-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.08)}
 .prog-card.featured::before{background:var(--lime)}
@@ -314,6 +321,38 @@ h1,h2,h3,.disp{
 .prog-card:hover .prog-card-hint::after{transform:translateX(4px)}
 .prog-card.featured .prog-card-hint{color:rgba(204,255,0,.6)}
 .prog-card.featured:hover .prog-card-hint{color:var(--lime)}
+
+/* ===== Interactive spotlight: the lime accent follows the cursor across the 3 events ===== */
+@media(hover:hover){
+  /* hovered card = full lime + 15% zoom, lifts above siblings */
+  .prog-card:hover{
+    transform:scale(1.15);z-index:5;
+    border-color:rgba(204,255,0,.5);background:#101a00;
+    box-shadow:0 14px 46px rgba(204,255,0,.16);
+  }
+  .prog-card:hover::before{background:var(--lime)}
+  .prog-card:hover .prog-card-num{color:var(--lime)}
+  .prog-card:hover .prog-card-title{color:var(--lime)}
+  .prog-card:hover .prog-card-icon{
+    border-color:rgba(204,255,0,.45);background:rgba(204,255,0,.08);
+    color:var(--lime);box-shadow:0 0 20px rgba(204,255,0,.18);
+  }
+  .prog-card:hover .prog-tag{border-color:rgba(204,255,0,.4);color:var(--lime)}
+  .prog-card:hover .prog-card-hint{color:var(--lime)}
+
+  /* while hovering the grid, every non-hovered card fades + drops its lime */
+  .prog-grid:hover .prog-card:not(:hover){opacity:.4}
+  .prog-grid:hover .prog-card.featured:not(:hover){border-color:rgba(255,255,255,.07);background:#0f0f0f;box-shadow:none}
+  .prog-grid:hover .prog-card.featured:not(:hover)::before{background:rgba(255,255,255,.08)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-num{color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-title{color:var(--white)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-icon{
+    border-color:rgba(255,255,255,.10);background:rgba(255,255,255,.035);color:var(--white);box-shadow:none;
+  }
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-tag{border-color:rgba(255,255,255,.12);color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-hint{color:rgba(204,255,0,.6)}
+}
+@media(prefers-reduced-motion:reduce){.prog-card:hover{transform:none}}
 .prog-slash{
   position:absolute;bottom:-16px;right:-16px;width:100px;height:100px;
   background:repeating-linear-gradient(-60deg,rgba(204,255,0,.08) 0,rgba(204,255,0,.08) 2px,transparent 2px,transparent 14px);
@@ -443,6 +482,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .jump-flag-lab{fill:var(--gold);font-family:var(--display);font-weight:900;font-style:italic;font-size:15px}
 .dust{fill:rgba(204,255,0,.5)}
 .jump-shadow{fill:#000}
+/* Mobile: keep the replay button clear of King Dac's landing (bottom-right) */
+@media(max-width:640px){
+  .jump-hud{flex-direction:column;align-items:flex-start;gap:10px}
+  .jump-replay{top:12px;bottom:auto;font-size:12px;padding:7px 13px 8px}
+  .jump-tag{display:none}
+}
 @media(prefers-reduced-motion:reduce){.jump-replay{display:none}}
 
 /* ============ FOCUS / A11Y ============ */
@@ -499,19 +544,25 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offse
   <div class="wrap">
     <div class="kd-strip-grid">
       <div class="kd-strip-item">
-        <div class="kd-strip-icon">📅</div>
-        <div class="kd-strip-label" data-i18n="kd_s1l">Date à confirmer</div>
-        <div class="kd-strip-sub" data-i18n="kd_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
+        <div class="kd-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 9.5h18"/></svg></div>
+        <div class="kd-strip-txt">
+          <div class="kd-strip-label" data-i18n="kd_s1l">Date à confirmer</div>
+          <div class="kd-strip-sub" data-i18n="kd_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
+        </div>
       </div>
       <div class="kd-strip-item">
-        <div class="kd-strip-icon">🏟️</div>
-        <div class="kd-strip-label" data-i18n="kd_s2l">Session exclusive</div>
-        <div class="kd-strip-sub" data-i18n="kd_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
+        <div class="kd-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H5a2 2 0 0 1-2-2 2 2 0 0 0 0-4Z"/><path d="M15 7v10"/></svg></div>
+        <div class="kd-strip-txt">
+          <div class="kd-strip-label" data-i18n="kd_s2l">Session exclusive</div>
+          <div class="kd-strip-sub" data-i18n="kd_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
+        </div>
       </div>
       <div class="kd-strip-item">
-        <div class="kd-strip-icon">⬆️</div>
-        <div class="kd-strip-label" data-i18n="kd_s3l">Il concourt avec toi</div>
-        <div class="kd-strip-sub" data-i18n="kd_s3b">King Dac participe aux concours et défie chaque participant sur le terrain.</div>
+        <div class="kd-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <div class="kd-strip-txt">
+          <div class="kd-strip-label" data-i18n="kd_s3l">Il concourt avec toi</div>
+          <div class="kd-strip-sub" data-i18n="kd_s3b">King Dac participe aux concours et défie chaque participant sur le terrain.</div>
+        </div>
       </div>
     </div>
   </div>
