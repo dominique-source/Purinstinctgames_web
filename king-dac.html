@@ -882,12 +882,14 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
 
   // sprite frames cropped to figure: [src, origW, origH]
   var FR={
-    1:{src:'kd-pose1.png',w:121,h:497}, // stand
-    2:{src:'kd-pose2.png',w:258,h:357}, // load / crouch (ground)
-    3:{src:'kd-pose3.png',w:617,h:336}, // superman flight
-    4:{src:'kd-pose4.png',w:279,h:345}, // ascending knees up
-    5:{src:'kd-pose5.png',w:357,h:369}, // descending tuck
-    6:{src:'kd-pose6.png',w:313,h:384}  // landing absorb (ground)
+    1:{src:'kd-pose1.png',w:121,h:497},   // stand
+    2:{src:'kd-pose2.png',w:258,h:357},   // load / crouch (ground)
+    '7a':{src:'kd-pose7a.png',w:568,h:587},// takeoff dive (steep rise)
+    '7':{src:'kd-pose7.png',w:586,h:482},  // dive (flattening out)
+    3:{src:'kd-pose3.png',w:617,h:336},   // full superman flight
+    4:{src:'kd-pose4.png',w:279,h:345},   // tuck knees up
+    5:{src:'kd-pose5.png',w:357,h:369},   // descending reach
+    6:{src:'kd-pose6.png',w:313,h:384}    // landing absorb (ground)
   };
   for(var k in FR){ var pim=new Image(); pim.src=FR[k].src; }
 
@@ -940,11 +942,11 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
       if(u<0.16){            // load (frame 2) on the ground, slight dip
         frame=2; x=b[0];
         var lu=u/0.16; h = -3*Math.sin(Math.PI*lu);
-      } else if(u<0.84){     // airborne: 3 -> 4 -> 5 along the arc
+      } else if(u<0.84){     // airborne: 7a -> 7 -> 3 -> 4 -> 5 along the arc
         var au=(u-0.16)/0.68;
         x=lerp(b[0],b[1], ss(au));
         h=b[2]*Math.sin(Math.PI*au);
-        frame = au<0.34 ? 3 : (au<0.66 ? 4 : 5);
+        frame = au<0.20 ? '7a' : au<0.40 ? '7' : au<0.62 ? 3 : au<0.81 ? 4 : 5;
       } else {               // land (frame 6) — squash & recover
         frame=6; x=b[1];
         var ld=(u-0.84)/0.16;
@@ -1022,8 +1024,8 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
     }
     lastX=s.x;
     if(lastFrame!==s.frame){
-      if(s.frame===3) dust(s.x,GROUND);   // takeoff
-      if(s.frame===6) dust(s.x,GROUND);   // landing
+      if(s.frame==='7a') dust(s.x,GROUND); // takeoff
+      if(s.frame===6) dust(s.x,GROUND);    // landing
       lastFrame=s.frame;
     }
     var done=0; for(var i=0;i<3;i++){ if(p>=INTRO+i*bSpan+0.84*bSpan) done=i+1; }
