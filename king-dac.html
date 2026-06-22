@@ -279,7 +279,18 @@ h1,h2,h3,.disp{
   font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
 }
 .prog-card.featured .prog-card-num{color:var(--lime)}
-.prog-card-icon{font-size:30px;line-height:1;margin-bottom:4px}
+.prog-card-icon{
+  width:54px;height:54px;border-radius:13px;margin-bottom:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(255,255,255,.10);background:rgba(255,255,255,.035);
+  color:var(--white);transition:border-color .25s,background .25s,color .25s;
+}
+.prog-card-icon svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none}
+.prog-card:hover .prog-card-icon{border-color:rgba(204,255,0,.28)}
+.prog-card.featured .prog-card-icon{
+  border-color:rgba(204,255,0,.38);background:rgba(204,255,0,.07);
+  color:var(--lime);box-shadow:0 0 18px rgba(204,255,0,.12);
+}
 .prog-card-title{
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:clamp(20px,2.5vw,26px);letter-spacing:-.01em;line-height:.95;
@@ -557,7 +568,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offse
       <!-- PürInstinct Games -->
       <div class="prog-card featured" data-discipline="1">
         <div class="prog-card-num" data-i18n="prog_1_num">Événement 01</div>
-        <div class="prog-card-icon">🏟️</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_1_t">PürInstinct Games</div>
         <p class="prog-card-desc" data-i18n="prog_1_b">Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon. King Dac entre dans l'arène et défie les meilleurs.</p>
         <div class="prog-card-tags">
@@ -572,7 +583,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offse
       <!-- Vertical & horizontal jump challenge -->
       <div class="prog-card" data-discipline="2">
         <div class="prog-card-num" data-i18n="prog_2_num">Défi 02</div>
-        <div class="prog-card-icon">⬆️</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19 Q 12 2 20.5 19"/><path d="M16.5 17.6 20.5 19 19.2 15"/><path d="M3 20.5 H21"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_2_t">Vertical & Horizontal<br>Jump Challenge</div>
         <p class="prog-card-desc" data-i18n="prog_2_b">Les deux concours signature de King Dac réunis : saut en hauteur (franchis la barre) et triple saut horizontal à deux pieds (la distance la plus longue). Pure puissance, pure explosivité, vers le haut et vers l'avant.</p>
         <div class="prog-card-tags">
@@ -587,7 +598,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offse
       <!-- Dunk showcase -->
       <div class="prog-card" data-discipline="3">
         <div class="prog-card-num" data-i18n="prog_3_num">Showcase 03</div>
-        <div class="prog-card-icon">🏀</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3v18"/><path d="M5.6 5.6c3 2.6 3 10.2 0 12.8"/><path d="M18.4 5.6c-3 2.6-3 10.2 0 12.8"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_3_t">Dunk Showcase</div>
         <p class="prog-card-desc" data-i18n="prog_3_b">King Dac prend la barre de basket et invite des guests à se surpasser. Des dunks explosifs, des alley-oops, des moments qui font lever la salle. Une démonstration pure de verticalité et d'instinct athlétique.</p>
         <div class="prog-card-tags">
