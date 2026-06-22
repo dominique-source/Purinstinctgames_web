@@ -374,6 +374,65 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .modal-close:hover{background:var(--lime);color:#0A0A0A;border-color:var(--lime)}
 @media(max-width:640px){.modal-body{padding:22px 20px 28px}}
 
+/* ============ TRIPLE JUMP SHOWCASE ============ */
+.jump-show{background:var(--bg);padding:clamp(56px,7vw,100px) 0;border-top:1px solid rgba(204,255,0,.10);position:relative;overflow:hidden}
+.jump-head{margin-bottom:clamp(26px,4vw,42px);max-width:760px}
+.jump-head h2{font-size:clamp(34px,5.2vw,64px);margin-bottom:16px}
+.jump-head p{color:var(--muted);font-size:clamp(15px,1.6vw,17px);line-height:1.55;max-width:60ch}
+.jump-stage-wrap{
+  position:relative;width:100%;border:1.5px solid rgba(204,255,0,.18);border-radius:8px;
+  background:radial-gradient(120% 90% at 50% 8%,#141414 0%,#0b0b0b 55%,#060606 100%);
+  overflow:hidden;box-shadow:inset 0 0 80px rgba(0,0,0,.6);
+}
+.jump-stage{display:block;width:100%;height:auto}
+.jump-hud{
+  position:absolute;top:clamp(12px,2.2vw,22px);left:clamp(14px,2.4vw,26px);right:clamp(14px,2.4vw,26px);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:14px;pointer-events:none;
+}
+.jump-dist{font-family:var(--display);font-weight:900;font-style:italic;line-height:.82}
+.jump-dist .num{font-size:clamp(36px,6.4vw,72px);color:var(--lime);font-variant-numeric:tabular-nums;text-shadow:0 0 24px rgba(204,255,0,.35)}
+.jump-dist .num .u{font-size:.42em;color:var(--white);margin-left:4px}
+.jump-dist .lab{display:block;font-size:clamp(9px,1vw,11px);letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+.jump-pips{display:flex;gap:7px;align-items:center}
+.jump-pip{width:clamp(22px,3vw,38px);height:6px;border-radius:3px;background:rgba(255,255,255,.14);transition:background .3s,box-shadow .3s}
+.jump-pip.on{background:var(--lime);box-shadow:0 0 14px rgba(204,255,0,.65)}
+.jump-replay{
+  position:absolute;bottom:clamp(12px,2vw,20px);right:clamp(14px,2.4vw,26px);z-index:4;pointer-events:auto;
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:14px;letter-spacing:.04em;color:#0A0A0A;background:var(--lime);
+  padding:9px 18px 10px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:.2s;
+}
+.jump-replay:hover{box-shadow:0 0 22px rgba(204,255,0,.55);transform:translateY(-1px)}
+.jump-replay svg{width:15px;height:15px}
+.jump-tag{
+  position:absolute;bottom:clamp(12px,2vw,20px);left:clamp(14px,2.4vw,26px);z-index:4;pointer-events:none;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(10px,1.2vw,13px);letter-spacing:.14em;color:var(--muted);
+  display:flex;align-items:center;gap:9px;
+}
+.jump-tag b{color:var(--gold)}
+/* SVG athlete styling */
+.ath-limb{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ath-near{stroke:var(--lime)}
+.ath-far{stroke:#566a17}
+.ath-foot-near{fill:var(--lime)}
+.ath-foot-far{fill:#566a17}
+.ath-torso{fill:var(--lime)}
+.ath-torso-stripe{fill:#0A0A0A;opacity:.55}
+.ath-head{fill:var(--lime)}
+.ath-visor{fill:#0A0A0A;opacity:.5}
+.jump-tick{stroke:rgba(255,255,255,.12);stroke-width:1.5}
+.jump-tick-major{stroke:rgba(204,255,0,.28);stroke-width:2}
+.jump-tick-lab{fill:rgba(255,255,255,.32);font-family:var(--display);font-weight:900;font-style:italic;font-size:13px}
+.jump-ground{stroke:rgba(204,255,0,.35);stroke-width:2.5}
+.jump-flag-pole{stroke:var(--gold);stroke-width:2.5}
+.jump-flag{fill:var(--gold)}
+.jump-flag-lab{fill:var(--gold);font-family:var(--display);font-weight:900;font-style:italic;font-size:15px}
+.dust{fill:rgba(204,255,0,.5)}
+@media(prefers-reduced-motion:reduce){.jump-replay{display:none}}
+
 /* ============ FOCUS / A11Y ============ */
 a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:1px}
 </style>
@@ -543,6 +602,59 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offse
   </div>
 </section>
 
+<!-- ============ TRIPLE JUMP SHOWCASE ============ -->
+<section class="jump-show" id="jumpShow">
+  <div class="wrap">
+    <div class="jump-head">
+      <span class="eyebrow" data-i18n="jump_eyebrow">Concours signature · En action</span>
+      <h2 data-i18n="jump_title">LE TRIPLE SAUT<br>HORIZONTAL.</h2>
+      <p data-i18n="jump_sub">Trois bonds consécutifs à deux pieds, sans élan. Pure puissance, pure explosivité. Regarde la distance grimper à chaque bond.</p>
+    </div>
+
+    <div class="jump-stage-wrap">
+      <svg class="jump-stage" id="jumpStage" viewBox="0 0 1000 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <filter id="speedBlur" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur id="speedBlurNode" in="SourceGraphic" stdDeviation="0 0"/>
+          </filter>
+          <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(204,255,0,.05)"/>
+            <stop offset="1" stop-color="rgba(204,255,0,0)"/>
+          </linearGradient>
+        </defs>
+        <!-- floor glow -->
+        <rect x="0" y="362" width="1000" height="78" fill="url(#floorGrad)"/>
+        <!-- ruler ticks + ground built by JS into #jumpRuler -->
+        <g id="jumpRuler"></g>
+        <line class="jump-ground" x1="40" y1="360" x2="965" y2="360"/>
+        <!-- fx (dust) -->
+        <g id="jumpFx"></g>
+        <!-- athlete -->
+        <g id="jumpAthlete" filter="url(#speedBlur)"></g>
+      </svg>
+
+      <div class="jump-hud">
+        <div class="jump-dist">
+          <span class="num"><span id="jumpNum">0.00</span><span class="u">m</span></span>
+          <span class="lab" data-i18n="jump_dist_label">Distance · 3 bonds</span>
+        </div>
+        <div class="jump-pips" aria-hidden="true">
+          <span class="jump-pip" id="pip1"></span>
+          <span class="jump-pip" id="pip2"></span>
+          <span class="jump-pip" id="pip3"></span>
+        </div>
+      </div>
+
+      <div class="jump-tag"><b data-i18n="jump_tag_b">King Dac</b> <span data-i18n="jump_tag">démontre. À toi de battre la marque.</span></div>
+
+      <button class="jump-replay" id="jumpReplay" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+        <span data-i18n="jump_replay">Rejouer</span>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
@@ -615,6 +727,7 @@ fr:{
   prog_2_num:"Concours 02",prog_2_t:"Triple saut horizontal à deux pieds",prog_2_b:"Trois bonds consécutifs à deux pieds, vers l'avant, sans élan. Tout repose sur la puissance de tes jambes et ton explosivité brute. La distance totale est mesurée. Le plus loin gagne.",prog_2_t1:"Puissance pure",prog_2_t2:"Trois bonds",prog_2_t3:"Distance mesurée",
   prog_3_num:"Démo 03",prog_3_t:"Démo de dunk — King Dac & Invités",prog_3_b:"King Dac prend la barre de basket et invite des guests à se surpasser. Des dunks explosifs, des alley-oops, des moments qui font lever la salle. Une démonstration pure de verticalité et d'instinct athlétique.",prog_3_t1:"King Dac live",prog_3_t2:"Invités surprise",prog_3_t3:"Slam dunk",
   prog_hint:"Voir le concours",
+  jump_eyebrow:"Concours signature · En action",jump_title:"LE TRIPLE SAUT<br>HORIZONTAL.",jump_sub:"Trois bonds consécutifs à deux pieds, sans élan. Pure puissance, pure explosivité. Regarde la distance grimper à chaque bond.",jump_dist_label:"Distance · 3 bonds",jump_tag_b:"King Dac",jump_tag:"démontre. À toi de battre la marque.",jump_replay:"Rejouer",
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
   f_rights:"Tous droits réservés.",f_nc:"Le sport à son état pur. L'instinct à son sommet."
 },
@@ -637,12 +750,13 @@ en:{
   prog_2_num:"Contest 02",prog_2_t:"Two-Foot Horizontal Triple Jump",prog_2_b:"Three consecutive two-footed jumps forward from a standing start. Pure leg power and raw explosiveness. Total distance is measured. The furthest wins.",prog_2_t1:"Raw power",prog_2_t2:"Three jumps",prog_2_t3:"Distance measured",
   prog_3_num:"Demo 03",prog_3_t:"Dunk Demo — King Dac & Guests",prog_3_b:"King Dac takes the basketball hoop and invites guests to push their limits. Explosive dunks, alley-oops, moments that bring the house down. A pure display of verticality and athletic instinct.",prog_3_t1:"King Dac live",prog_3_t2:"Surprise guests",prog_3_t3:"Slam dunk",
   prog_hint:"See the event",
+  jump_eyebrow:"Signature contest · In action",jump_title:"THE HORIZONTAL<br>TRIPLE JUMP.",jump_sub:"Three consecutive two-footed bounds from a standing start. Pure power, pure explosiveness. Watch the distance climb with every jump.",jump_dist_label:"Distance · 3 bounds",jump_tag_b:"King Dac",jump_tag:"demos. Now beat the mark.",jump_replay:"Replay",
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
   f_rights:"All rights reserved.",f_nc:"Sport at its purest. Instinct at its highest."
 }};
 
 let lang = localStorage.getItem("pi_lang") || "fr";
-const RICH = new Set(["prog_title","prog_2_t","prog_3_t"]);
+const RICH = new Set(["prog_title","prog_2_t","prog_3_t","jump_title"]);
 function applyLang(){
   const t = I18N[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -745,6 +859,273 @@ document.querySelectorAll('.prog-card[data-discipline]').forEach(card => {
 mClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+/* ====================================================== */
+/* Triple jump showcase — rigged SVG athlete             */
+/* ====================================================== */
+(function(){
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var stage    = document.getElementById('jumpStage');
+  var gAth     = document.getElementById('jumpAthlete');
+  var gFx      = document.getElementById('jumpFx');
+  var gRuler   = document.getElementById('jumpRuler');
+  var numEl    = document.getElementById('jumpNum');
+  var blurNode = document.getElementById('speedBlurNode');
+  var replay   = document.getElementById('jumpReplay');
+  var pips     = [document.getElementById('pip1'),document.getElementById('pip2'),document.getElementById('pip3')];
+  if(!stage || !gAth) return;
+
+  /* --- geometry --- */
+  var GROUND = 360, STAND_H = 82;
+  var X0 = 150, XF = 858, TOTAL_M = 8.40;          // standing start → final landing
+  var pxPerM = (XF - X0) / TOTAL_M;
+  var HOPS = [ [150,378,92], [378,620,98], [620,858,90] ]; // [fromX,toX,apex]
+
+  /* --- limb lengths --- */
+  var L = {thigh:39, shin:36, foot:18, spine:42, neck:8, head:13, uarm:29, farm:27};
+
+  /* --- poses (angles in degrees; 0 = straight down, + = forward/+x) --- */
+  var STAND   = {lean:6,  hip:5,   knee:0,   sh:10,  el:16,  hd:0,  drop:0};
+  var CROUCH  = {lean:40, hip:64,  knee:-44, sh:-46, el:-18, hd:10, drop:30};
+  var LOAD    = {lean:46, hip:72,  knee:-52, sh:-58, el:-26, hd:12, drop:36};
+  var TAKEOFF = {lean:16, hip:30,  knee:14,  sh:78,  el:64,  hd:-6, drop:-10};
+  var TUCK    = {lean:20, hip:104, knee:150, sh:96,  el:128, hd:0,  drop:4};
+  var REACH   = {lean:48, hip:128, knee:108, sh:54,  el:18,  hd:8,  drop:18};
+  var FINISH  = {lean:-4, hip:4,   knee:0,   sh:172, el:184, hd:-8, drop:-6};
+
+  function ss(x){ x = x<0?0:x>1?1:x; return x*x*(3-2*x); }
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  function poseLerp(A,B,t){ var o={}; for(var k in A) o[k]=lerp(A[k],B[k],t); return o; }
+
+  /* sub-sequence inside a flight: crouch→takeoff→tuck→reach */
+  function airPose(t){
+    if(t < 0.16) return poseLerp(CROUCH,TAKEOFF, ss(t/0.16));
+    if(t < 0.52) return poseLerp(TAKEOFF,TUCK,   ss((t-0.16)/0.36));
+    return poseLerp(TUCK,REACH, ss((t-0.52)/0.48));
+  }
+
+  /* phase timeline → {x, h(height), pose, phase} */
+  var PH = [
+    {a:0.00,b:0.13,k:'load'},
+    {a:0.13,b:0.29,k:'air',hop:0},
+    {a:0.29,b:0.385,k:'land'},
+    {a:0.385,b:0.55,k:'air',hop:1},
+    {a:0.55,b:0.645,k:'land'},
+    {a:0.645,b:0.81,k:'air',hop:2},
+    {a:0.81,b:0.89,k:'land3'},
+    {a:0.89,b:1.00,k:'finish'}
+  ];
+  function getState(p){
+    for(var i=0;i<PH.length;i++){
+      var ph=PH[i]; if(p>ph.b && i<PH.length-1) continue;
+      var t=(p-ph.a)/(ph.b-ph.a); if(t<0)t=0; if(t>1)t=1;
+      if(ph.k==='load')   return {x:X0, h:0, pose:poseLerp(STAND,LOAD,ss(t)), phase:i};
+      if(ph.k==='air'){
+        var H=HOPS[ph.hop];
+        return {x:lerp(H[0],H[1],ss(t)), h:H[2]*Math.sin(Math.PI*t), pose:airPose(t), phase:i};
+      }
+      if(ph.k==='land')   return {x:HOPS[(i===2?0:1)][1], h:0, pose:poseLerp(REACH,LOAD,ss(t)), phase:i};
+      if(ph.k==='land3')  return {x:XF, h:0, pose:poseLerp(REACH,CROUCH,ss(t)), phase:i};
+      if(ph.k==='finish') return {x:XF, h:0, pose:poseLerp(CROUCH,FINISH,ss(t)), phase:i};
+    }
+    return {x:XF,h:0,pose:FINISH,phase:7};
+  }
+
+  /* --- forward kinematics --- */
+  function rad(d){ return d*Math.PI/180; }
+  function fk(px, py, pose){
+    function leg(off){
+      var hipP={x:px+off, y:py};
+      var ha=rad(pose.hip), ka=rad(pose.hip+pose.knee);
+      var knee={x:hipP.x+L.thigh*Math.sin(ha), y:hipP.y+L.thigh*Math.cos(ha)};
+      var ank ={x:knee.x+L.shin*Math.sin(ka),  y:knee.y+L.shin*Math.cos(ka)};
+      var fa=ka+rad(78);
+      var toe={x:ank.x+L.foot*Math.sin(fa), y:ank.y+L.foot*Math.cos(fa)};
+      return {hip:hipP,knee:knee,ank:ank,toe:toe};
+    }
+    var la=rad(pose.lean);
+    var neck={x:px+L.spine*Math.sin(la), y:py-L.spine*Math.cos(la)};
+    var ha=rad(pose.lean+pose.hd);
+    var head={x:neck.x+(L.neck+L.head)*Math.sin(ha), y:neck.y-(L.neck+L.head)*Math.cos(ha)};
+    function arm(off){
+      var sh={x:neck.x+off, y:neck.y+5};
+      var sa=rad(pose.sh), ea=rad(pose.sh+pose.el);
+      var el={x:sh.x+L.uarm*Math.sin(sa), y:sh.y+L.uarm*Math.cos(sa)};
+      var hd={x:el.x+L.farm*Math.sin(ea), y:el.y+L.farm*Math.cos(ea)};
+      return {sh:sh,el:el,hd:hd};
+    }
+    return {
+      legFar:leg(-4), legNear:leg(5), neck:neck, head:head,
+      armFar:arm(-6), armNear:arm(7), pelvis:{x:px,y:py}
+    };
+  }
+
+  /* --- build SVG elements once --- */
+  function mk(tag, cls, attrs){
+    var e=document.createElementNS(SVGNS,tag);
+    if(cls) e.setAttribute('class',cls);
+    for(var k in (attrs||{})) e.setAttribute(k,attrs[k]);
+    gAth.appendChild(e); return e;
+  }
+  // far side (drawn first = behind)
+  var farThigh = mk('path','ath-limb ath-far',{'stroke-width':14});
+  var farShin  = mk('path','ath-limb ath-far',{'stroke-width':10});
+  var farFoot  = mk('path','ath-foot-far');
+  var farUarm  = mk('path','ath-limb ath-far',{'stroke-width':9.5});
+  var farFarm  = mk('path','ath-limb ath-far',{'stroke-width':8});
+  // torso
+  var torso     = mk('polygon','ath-torso');
+  var torsoStr  = mk('rect','ath-torso-stripe',{width:6,height:40,rx:2});
+  // near side (front)
+  var nearThigh = mk('path','ath-limb ath-near',{'stroke-width':16});
+  var nearShin  = mk('path','ath-limb ath-near',{'stroke-width':11.5});
+  var nearFoot  = mk('path','ath-foot-near');
+  var nearUarm  = mk('path','ath-limb ath-near',{'stroke-width':11});
+  var nearFarm  = mk('path','ath-limb ath-near',{'stroke-width':9});
+  // head
+  var neckSeg = mk('path','ath-limb ath-near',{'stroke-width':12});
+  var head    = mk('circle','ath-head',{r:L.head});
+  var visor   = mk('rect','ath-visor',{width:14,height:5,rx:2.5});
+
+  function seg(el,a,b){ el.setAttribute('d','M'+a.x.toFixed(1)+' '+a.y.toFixed(1)+'L'+b.x.toFixed(1)+' '+b.y.toFixed(1)); }
+  function footPath(el,ank,toe){
+    var hx=ank.x-(toe.x-ank.x)*0.25, hy=ank.y; // small heel
+    el.setAttribute('d','M'+hx.toFixed(1)+' '+(hy).toFixed(1)+'L'+toe.x.toFixed(1)+' '+toe.y.toFixed(1)+'L'+toe.x.toFixed(1)+' '+(toe.y+4).toFixed(1)+'L'+hx.toFixed(1)+' '+(hy+4).toFixed(1)+'Z');
+  }
+
+  function draw(s){
+    var py = GROUND - STAND_H + s.pose.drop - s.h;
+    var px = s.x;
+    var r = fk(px, py, s.pose);
+    // torso jersey: pelvis(±width) → shoulders(±width)
+    var pw=11, sw=13;
+    var lean=rad(s.pose.lean);
+    var perp={x:Math.cos(lean), y:Math.sin(lean)};
+    var pL={x:r.pelvis.x-perp.x*pw, y:r.pelvis.y-perp.y*pw};
+    var pR={x:r.pelvis.x+perp.x*pw, y:r.pelvis.y+perp.y*pw};
+    var sL={x:r.neck.x-perp.x*sw, y:r.neck.y-perp.y*sw};
+    var sR={x:r.neck.x+perp.x*sw, y:r.neck.y+perp.y*sw};
+    torso.setAttribute('points', [pL,pR,sR,sL].map(function(q){return q.x.toFixed(1)+','+q.y.toFixed(1)}).join(' '));
+    torsoStr.setAttribute('x',(r.pelvis.x-2.5).toFixed(1));
+    torsoStr.setAttribute('y',(Math.min(r.neck.y,r.pelvis.y)).toFixed(1));
+    torsoStr.setAttribute('height',(Math.abs(r.neck.y-r.pelvis.y)).toFixed(1));
+    // limbs
+    seg(farThigh, r.legFar.hip, r.legFar.knee);   seg(farShin, r.legFar.knee, r.legFar.ank);   footPath(farFoot, r.legFar.ank, r.legFar.toe);
+    seg(farUarm,  r.armFar.sh,  r.armFar.el);      seg(farFarm, r.armFar.el,  r.armFar.hd);
+    seg(nearThigh,r.legNear.hip,r.legNear.knee);  seg(nearShin,r.legNear.knee,r.legNear.ank); footPath(nearFoot, r.legNear.ank, r.legNear.toe);
+    seg(nearUarm, r.armNear.sh, r.armNear.el);     seg(nearFarm,r.armNear.el, r.armNear.hd);
+    seg(neckSeg, r.neck, {x:r.neck.x+(r.head.x-r.neck.x)*0.45, y:r.neck.y+(r.head.y-r.neck.y)*0.45});
+    head.setAttribute('cx',r.head.x.toFixed(1)); head.setAttribute('cy',r.head.y.toFixed(1));
+    visor.setAttribute('x',(r.head.x-5).toFixed(1)); visor.setAttribute('y',(r.head.y-3).toFixed(1));
+    return {px:px, toeY: Math.max(r.legNear.toe.y, r.legFar.toe.y)};
+  }
+
+  /* --- dust burst --- */
+  function dust(x,y){
+    for(var i=0;i<7;i++){
+      var c=document.createElementNS(SVGNS,'circle');
+      c.setAttribute('class','dust');
+      c.setAttribute('cx',x); c.setAttribute('cy',y);
+      var rr=2+Math.random()*3; c.setAttribute('r',rr);
+      gFx.appendChild(c);
+      var ang=-Math.PI*(0.15+Math.random()*0.7), sp=18+Math.random()*34;
+      var dx=Math.cos(ang)*sp*(Math.random()<.5?-1:1), dy=Math.sin(ang)*sp;
+      var t0=performance.now();
+      (function(c,dx,dy,t0){
+        function step(now){
+          var k=(now-t0)/620; if(k>=1){ c.remove(); return; }
+          c.setAttribute('transform','translate('+(dx*k).toFixed(1)+','+(dy*k - 0.5*60*k*k).toFixed(1)+')');
+          c.setAttribute('opacity',(0.55*(1-k)).toFixed(2));
+          requestAnimationFrame(step);
+        } requestAnimationFrame(step);
+      })(c,dx,dy,t0);
+    }
+  }
+
+  /* --- ruler / ticks --- */
+  (function buildRuler(){
+    for(var m=0;m<=8;m++){
+      var x=X0+m*pxPerM;
+      var major=(m%2===0);
+      var ln=document.createElementNS(SVGNS,'line');
+      ln.setAttribute('class', major?'jump-tick-major':'jump-tick');
+      ln.setAttribute('x1',x); ln.setAttribute('x2',x);
+      ln.setAttribute('y1',360); ln.setAttribute('y2', major?342:350);
+      gRuler.appendChild(ln);
+      if(major){
+        var tx=document.createElementNS(SVGNS,'text');
+        tx.setAttribute('class','jump-tick-lab');
+        tx.setAttribute('x',x+4); tx.setAttribute('y',337);
+        tx.textContent=m+'m';
+        gRuler.appendChild(tx);
+      }
+    }
+    // finish flag at final landing
+    var fx=XF;
+    var pole=document.createElementNS(SVGNS,'line');
+    pole.setAttribute('class','jump-flag-pole');
+    pole.setAttribute('x1',fx);pole.setAttribute('x2',fx);pole.setAttribute('y1',360);pole.setAttribute('y2',300);
+    gRuler.appendChild(pole);
+    var fl=document.createElementNS(SVGNS,'polygon');
+    fl.setAttribute('class','jump-flag');
+    fl.setAttribute('points',fx+',300 '+(fx+30)+',308 '+fx+',316');
+    gRuler.appendChild(fl);
+    var lab=document.createElementNS(SVGNS,'text');
+    lab.setAttribute('class','jump-flag-lab');
+    lab.setAttribute('x',fx-4);lab.setAttribute('y',294);lab.setAttribute('text-anchor','end');
+    lab.textContent='8.40 m';
+    gRuler.appendChild(lab);
+  })();
+
+  /* --- runner --- */
+  var DUR = 5200;
+  var start=null, raf=null, lastX=null, dustedPhase={};
+  function frame(now){
+    if(start===null) start=now;
+    var p=(now-start)/DUR;
+    if(p>1) p=1;
+    var s=getState(p);
+    var info=draw(s);
+    // distance readout
+    var dist=Math.max(0, Math.min(TOTAL_M, (s.x - X0)/pxPerM));
+    numEl.textContent=dist.toFixed(2);
+    // pips
+    var done = p>=0.385?1:0; done += p>=0.645?1:0; done += p>=0.83?1:0;
+    for(var i=0;i<3;i++) pips[i].classList.toggle('on', i<done);
+    // speed blur (horizontal)
+    if(lastX!==null){
+      var v=Math.abs(s.x-lastX);
+      blurNode.setAttribute('stdDeviation', Math.min(6, v*0.7).toFixed(2)+' 0');
+    }
+    lastX=s.x;
+    // dust on takeoff (start of each air) + landings
+    var ph=s.phase;
+    if(!dustedPhase[ph]){
+      if(PH[ph].k==='air'){ dustedPhase[ph]=1; dust(s.x, info.toeY); }
+      if((PH[ph].k==='land'||PH[ph].k==='land3') ){ dustedPhase[ph]=1; dust(s.x, GROUND); }
+    }
+    if(p<1) raf=requestAnimationFrame(frame);
+    else blurNode.setAttribute('stdDeviation','0 0');
+  }
+  function play(){
+    if(raf) cancelAnimationFrame(raf);
+    start=null; lastX=null; dustedPhase={};
+    raf=requestAnimationFrame(frame);
+  }
+  function showFinal(){ draw(getState(1)); numEl.textContent=TOTAL_M.toFixed(2); pips.forEach(function(p){p.classList.add('on')}); }
+
+  replay.addEventListener('click', play);
+
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduce){ showFinal(); }
+  else {
+    draw(getState(0));
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } });
+    },{threshold:0.35});
+    io.observe(document.getElementById('jumpShow'));
+  }
+}());
 </script>
 </body>
 </html>
