@@ -431,6 +431,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .jump-flag{fill:var(--gold)}
 .jump-flag-lab{fill:var(--gold);font-family:var(--display);font-weight:900;font-style:italic;font-size:15px}
 .dust{fill:rgba(204,255,0,.5)}
+.jump-shadow{fill:#000}
 @media(prefers-reduced-motion:reduce){.jump-replay{display:none}}
 
 /* ============ FOCUS / A11Y ============ */
@@ -861,181 +862,117 @@ overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); 
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
 /* ====================================================== */
-/* Triple jump showcase — rigged SVG athlete             */
-/* ====================================================== */
+/* Triple jump showcase — real photo sequence of Darius Clark */
+/* Frame order: 1 · (2-3-4-5-6) ×3 bounds · 1                 */
 (function(){
-  var SVGNS = 'http://www.w3.org/2000/svg';
-  var stage    = document.getElementById('jumpStage');
-  var gAth     = document.getElementById('jumpAthlete');
-  var gFx      = document.getElementById('jumpFx');
-  var gRuler   = document.getElementById('jumpRuler');
-  var numEl    = document.getElementById('jumpNum');
-  var blurNode = document.getElementById('speedBlurNode');
-  var replay   = document.getElementById('jumpReplay');
-  var pips     = [document.getElementById('pip1'),document.getElementById('pip2'),document.getElementById('pip3')];
+  var SVGNS='http://www.w3.org/2000/svg', XLINK='http://www.w3.org/1999/xlink';
+  var stage = document.getElementById('jumpStage');
+  var gAth  = document.getElementById('jumpAthlete');
+  var gFx   = document.getElementById('jumpFx');
+  var gRuler= document.getElementById('jumpRuler');
+  var numEl = document.getElementById('jumpNum');
+  var replay= document.getElementById('jumpReplay');
+  var pips  = [document.getElementById('pip1'),document.getElementById('pip2'),document.getElementById('pip3')];
   if(!stage || !gAth) return;
+  gAth.removeAttribute('filter'); // photos shouldn't be hard-smeared
 
-  /* --- geometry --- */
-  var GROUND = 360, STAND_H = 82;
-  var X0 = 150, XF = 858, TOTAL_M = 8.40;          // standing start → final landing
-  var pxPerM = (XF - X0) / TOTAL_M;
-  var HOPS = [ [150,378,92], [378,620,98], [620,858,90] ]; // [fromX,toX,apex]
+  var GROUND=360, X0=150, XF=858, TOTAL_M=8.40;
+  var pxPerM=(XF-X0)/TOTAL_M;
+  var SCALE=0.34;
 
-  /* --- limb lengths --- */
-  var L = {thigh:39, shin:36, foot:18, spine:42, neck:8, head:13, uarm:29, farm:27};
+  // sprite frames cropped to figure: [src, origW, origH]
+  var FR={
+    1:{src:'kd-pose1.png',w:121,h:497}, // stand
+    2:{src:'kd-pose2.png',w:258,h:357}, // load / crouch (ground)
+    3:{src:'kd-pose3.png',w:617,h:336}, // superman flight
+    4:{src:'kd-pose4.png',w:279,h:345}, // ascending knees up
+    5:{src:'kd-pose5.png',w:357,h:369}, // descending tuck
+    6:{src:'kd-pose6.png',w:313,h:384}  // landing absorb (ground)
+  };
+  for(var k in FR){ var pim=new Image(); pim.src=FR[k].src; }
 
-  /* --- poses (angles in degrees; 0 = straight down, + = forward/+x) --- */
-  var STAND   = {lean:6,  hip:5,   knee:0,   sh:10,  el:16,  hd:0,  drop:0};
-  var CROUCH  = {lean:40, hip:64,  knee:-44, sh:-46, el:-18, hd:10, drop:30};
-  var LOAD    = {lean:46, hip:72,  knee:-52, sh:-58, el:-26, hd:12, drop:36};
-  var TAKEOFF = {lean:16, hip:30,  knee:14,  sh:78,  el:64,  hd:-6, drop:-10};
-  var TUCK    = {lean:20, hip:104, knee:150, sh:96,  el:128, hd:0,  drop:4};
-  var REACH   = {lean:48, hip:128, knee:108, sh:54,  el:18,  hd:8,  drop:18};
-  var FINISH  = {lean:-4, hip:4,   knee:0,   sh:172, el:184, hd:-8, drop:-6};
+  // ground shadow + sprite + dust layer
+  var shadow=document.createElementNS(SVGNS,'ellipse');
+  shadow.setAttribute('class','jump-shadow');
+  gFx.appendChild(shadow);
+  var dustG=document.createElementNS(SVGNS,'g');
+  gFx.appendChild(dustG);
+  var sprite=document.createElementNS(SVGNS,'image');
+  sprite.setAttribute('preserveAspectRatio','xMidYMax meet');
+  gAth.appendChild(sprite);
 
-  function ss(x){ x = x<0?0:x>1?1:x; return x*x*(3-2*x); }
-  function lerp(a,b,t){ return a+(b-a)*t; }
-  function poseLerp(A,B,t){ var o={}; for(var k in A) o[k]=lerp(A[k],B[k],t); return o; }
-
-  /* sub-sequence inside a flight: crouch→takeoff→tuck→reach */
-  function airPose(t){
-    if(t < 0.16) return poseLerp(CROUCH,TAKEOFF, ss(t/0.16));
-    if(t < 0.52) return poseLerp(TAKEOFF,TUCK,   ss((t-0.16)/0.36));
-    return poseLerp(TUCK,REACH, ss((t-0.52)/0.48));
+  function setFrame(n){
+    var f=FR[n];
+    sprite.setAttributeNS(XLINK,'href',f.src);
+    sprite.setAttribute('href',f.src);
+    sprite._n=n;
+  }
+  function place(n,x,h,sq){
+    if(sprite._n!==n) setFrame(n);
+    var f=FR[n], w=f.w*SCALE, ht=f.h*SCALE*sq, wq=w/sq;
+    var by=GROUND-h;
+    sprite.setAttribute('width', wq.toFixed(1));
+    sprite.setAttribute('height', ht.toFixed(1));
+    sprite.setAttribute('x',(x-wq/2).toFixed(1));
+    sprite.setAttribute('y',(by-ht).toFixed(1));
+    var lift=h/165; if(lift>1)lift=1;
+    shadow.setAttribute('cx',x.toFixed(1));
+    shadow.setAttribute('cy',(GROUND+4).toFixed(1));
+    shadow.setAttribute('rx',(Math.max(22,w*0.62)*(1-0.42*lift)).toFixed(1));
+    shadow.setAttribute('ry',(6*(1-0.4*lift)).toFixed(1));
+    shadow.setAttribute('opacity',(0.36*(1-0.62*lift)).toFixed(2));
   }
 
-  /* phase timeline → {x, h(height), pose, phase} */
-  var PH = [
-    {a:0.00,b:0.13,k:'load'},
-    {a:0.13,b:0.29,k:'air',hop:0},
-    {a:0.29,b:0.385,k:'land'},
-    {a:0.385,b:0.55,k:'air',hop:1},
-    {a:0.55,b:0.645,k:'land'},
-    {a:0.645,b:0.81,k:'air',hop:2},
-    {a:0.81,b:0.89,k:'land3'},
-    {a:0.89,b:1.00,k:'finish'}
-  ];
-  function getState(p){
-    for(var i=0;i<PH.length;i++){
-      var ph=PH[i]; if(p>ph.b && i<PH.length-1) continue;
-      var t=(p-ph.a)/(ph.b-ph.a); if(t<0)t=0; if(t>1)t=1;
-      if(ph.k==='load')   return {x:X0, h:0, pose:poseLerp(STAND,LOAD,ss(t)), phase:i};
-      if(ph.k==='air'){
-        var H=HOPS[ph.hop];
-        return {x:lerp(H[0],H[1],ss(t)), h:H[2]*Math.sin(Math.PI*t), pose:airPose(t), phase:i};
+  // bounds: [startX, endX, peakHeight]
+  var B=[[150,398,150],[398,632,166],[632,858,150]];
+  function ss(x){x=x<0?0:x>1?1:x;return x*x*(3-2*x);}
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  var INTRO=0.07, OUTRO=0.07, bSpan=(1-INTRO-OUTRO)/3;
+
+  function render(p){
+    var frame,x,h=0,sq=1;
+    if(p<INTRO){ frame=1; x=X0; }
+    else if(p>1-OUTRO){ frame=1; x=XF; }
+    else{
+      var bp=(p-INTRO)/bSpan, bi=Math.floor(bp); if(bi>2)bi=2;
+      var u=bp-bi, b=B[bi];
+      if(u<0.16){            // load (frame 2) on the ground, slight dip
+        frame=2; x=b[0];
+        var lu=u/0.16; h = -3*Math.sin(Math.PI*lu);
+      } else if(u<0.84){     // airborne: 3 -> 4 -> 5 along the arc
+        var au=(u-0.16)/0.68;
+        x=lerp(b[0],b[1], ss(au));
+        h=b[2]*Math.sin(Math.PI*au);
+        frame = au<0.34 ? 3 : (au<0.66 ? 4 : 5);
+      } else {               // land (frame 6) — squash & recover
+        frame=6; x=b[1];
+        var ld=(u-0.84)/0.16;
+        sq = 1 - 0.16*Math.sin(Math.PI*ld);
       }
-      if(ph.k==='land')   return {x:HOPS[(i===2?0:1)][1], h:0, pose:poseLerp(REACH,LOAD,ss(t)), phase:i};
-      if(ph.k==='land3')  return {x:XF, h:0, pose:poseLerp(REACH,CROUCH,ss(t)), phase:i};
-      if(ph.k==='finish') return {x:XF, h:0, pose:poseLerp(CROUCH,FINISH,ss(t)), phase:i};
     }
-    return {x:XF,h:0,pose:FINISH,phase:7};
-  }
-
-  /* --- forward kinematics --- */
-  function rad(d){ return d*Math.PI/180; }
-  function fk(px, py, pose){
-    function leg(off){
-      var hipP={x:px+off, y:py};
-      var ha=rad(pose.hip), ka=rad(pose.hip+pose.knee);
-      var knee={x:hipP.x+L.thigh*Math.sin(ha), y:hipP.y+L.thigh*Math.cos(ha)};
-      var ank ={x:knee.x+L.shin*Math.sin(ka),  y:knee.y+L.shin*Math.cos(ka)};
-      var fa=ka+rad(78);
-      var toe={x:ank.x+L.foot*Math.sin(fa), y:ank.y+L.foot*Math.cos(fa)};
-      return {hip:hipP,knee:knee,ank:ank,toe:toe};
-    }
-    var la=rad(pose.lean);
-    var neck={x:px+L.spine*Math.sin(la), y:py-L.spine*Math.cos(la)};
-    var ha=rad(pose.lean+pose.hd);
-    var head={x:neck.x+(L.neck+L.head)*Math.sin(ha), y:neck.y-(L.neck+L.head)*Math.cos(ha)};
-    function arm(off){
-      var sh={x:neck.x+off, y:neck.y+5};
-      var sa=rad(pose.sh), ea=rad(pose.sh+pose.el);
-      var el={x:sh.x+L.uarm*Math.sin(sa), y:sh.y+L.uarm*Math.cos(sa)};
-      var hd={x:el.x+L.farm*Math.sin(ea), y:el.y+L.farm*Math.cos(ea)};
-      return {sh:sh,el:el,hd:hd};
-    }
-    return {
-      legFar:leg(-4), legNear:leg(5), neck:neck, head:head,
-      armFar:arm(-6), armNear:arm(7), pelvis:{x:px,y:py}
-    };
-  }
-
-  /* --- build SVG elements once --- */
-  function mk(tag, cls, attrs){
-    var e=document.createElementNS(SVGNS,tag);
-    if(cls) e.setAttribute('class',cls);
-    for(var k in (attrs||{})) e.setAttribute(k,attrs[k]);
-    gAth.appendChild(e); return e;
-  }
-  // far side (drawn first = behind)
-  var farThigh = mk('path','ath-limb ath-far',{'stroke-width':14});
-  var farShin  = mk('path','ath-limb ath-far',{'stroke-width':10});
-  var farFoot  = mk('path','ath-foot-far');
-  var farUarm  = mk('path','ath-limb ath-far',{'stroke-width':9.5});
-  var farFarm  = mk('path','ath-limb ath-far',{'stroke-width':8});
-  // torso
-  var torso     = mk('polygon','ath-torso');
-  var torsoStr  = mk('rect','ath-torso-stripe',{width:6,height:40,rx:2});
-  // near side (front)
-  var nearThigh = mk('path','ath-limb ath-near',{'stroke-width':16});
-  var nearShin  = mk('path','ath-limb ath-near',{'stroke-width':11.5});
-  var nearFoot  = mk('path','ath-foot-near');
-  var nearUarm  = mk('path','ath-limb ath-near',{'stroke-width':11});
-  var nearFarm  = mk('path','ath-limb ath-near',{'stroke-width':9});
-  // head
-  var neckSeg = mk('path','ath-limb ath-near',{'stroke-width':12});
-  var head    = mk('circle','ath-head',{r:L.head});
-  var visor   = mk('rect','ath-visor',{width:14,height:5,rx:2.5});
-
-  function seg(el,a,b){ el.setAttribute('d','M'+a.x.toFixed(1)+' '+a.y.toFixed(1)+'L'+b.x.toFixed(1)+' '+b.y.toFixed(1)); }
-  function footPath(el,ank,toe){
-    var hx=ank.x-(toe.x-ank.x)*0.25, hy=ank.y; // small heel
-    el.setAttribute('d','M'+hx.toFixed(1)+' '+(hy).toFixed(1)+'L'+toe.x.toFixed(1)+' '+toe.y.toFixed(1)+'L'+toe.x.toFixed(1)+' '+(toe.y+4).toFixed(1)+'L'+hx.toFixed(1)+' '+(hy+4).toFixed(1)+'Z');
-  }
-
-  function draw(s){
-    var py = GROUND - STAND_H + s.pose.drop - s.h;
-    var px = s.x;
-    var r = fk(px, py, s.pose);
-    // torso jersey: pelvis(±width) → shoulders(±width)
-    var pw=11, sw=13;
-    var lean=rad(s.pose.lean);
-    var perp={x:Math.cos(lean), y:Math.sin(lean)};
-    var pL={x:r.pelvis.x-perp.x*pw, y:r.pelvis.y-perp.y*pw};
-    var pR={x:r.pelvis.x+perp.x*pw, y:r.pelvis.y+perp.y*pw};
-    var sL={x:r.neck.x-perp.x*sw, y:r.neck.y-perp.y*sw};
-    var sR={x:r.neck.x+perp.x*sw, y:r.neck.y+perp.y*sw};
-    torso.setAttribute('points', [pL,pR,sR,sL].map(function(q){return q.x.toFixed(1)+','+q.y.toFixed(1)}).join(' '));
-    torsoStr.setAttribute('x',(r.pelvis.x-2.5).toFixed(1));
-    torsoStr.setAttribute('y',(Math.min(r.neck.y,r.pelvis.y)).toFixed(1));
-    torsoStr.setAttribute('height',(Math.abs(r.neck.y-r.pelvis.y)).toFixed(1));
-    // limbs
-    seg(farThigh, r.legFar.hip, r.legFar.knee);   seg(farShin, r.legFar.knee, r.legFar.ank);   footPath(farFoot, r.legFar.ank, r.legFar.toe);
-    seg(farUarm,  r.armFar.sh,  r.armFar.el);      seg(farFarm, r.armFar.el,  r.armFar.hd);
-    seg(nearThigh,r.legNear.hip,r.legNear.knee);  seg(nearShin,r.legNear.knee,r.legNear.ank); footPath(nearFoot, r.legNear.ank, r.legNear.toe);
-    seg(nearUarm, r.armNear.sh, r.armNear.el);     seg(nearFarm,r.armNear.el, r.armNear.hd);
-    seg(neckSeg, r.neck, {x:r.neck.x+(r.head.x-r.neck.x)*0.45, y:r.neck.y+(r.head.y-r.neck.y)*0.45});
-    head.setAttribute('cx',r.head.x.toFixed(1)); head.setAttribute('cy',r.head.y.toFixed(1));
-    visor.setAttribute('x',(r.head.x-5).toFixed(1)); visor.setAttribute('y',(r.head.y-3).toFixed(1));
-    return {px:px, toeY: Math.max(r.legNear.toe.y, r.legFar.toe.y)};
+    place(frame,x,h,sq);
+    var dist=Math.max(0,Math.min(TOTAL_M,(x-X0)/pxPerM));
+    numEl.textContent=dist.toFixed(2);
+    return {frame:frame,x:x,h:h};
   }
 
   /* --- dust burst --- */
   function dust(x,y){
-    for(var i=0;i<7;i++){
+    for(var i=0;i<9;i++){
       var c=document.createElementNS(SVGNS,'circle');
       c.setAttribute('class','dust');
       c.setAttribute('cx',x); c.setAttribute('cy',y);
-      var rr=2+Math.random()*3; c.setAttribute('r',rr);
-      gFx.appendChild(c);
-      var ang=-Math.PI*(0.15+Math.random()*0.7), sp=18+Math.random()*34;
+      c.setAttribute('r',2+Math.random()*3.5);
+      dustG.appendChild(c);
+      var ang=-Math.PI*(0.12+Math.random()*0.76), sp=22+Math.random()*46;
       var dx=Math.cos(ang)*sp*(Math.random()<.5?-1:1), dy=Math.sin(ang)*sp;
       var t0=performance.now();
       (function(c,dx,dy,t0){
         function step(now){
-          var k=(now-t0)/620; if(k>=1){ c.remove(); return; }
-          c.setAttribute('transform','translate('+(dx*k).toFixed(1)+','+(dy*k - 0.5*60*k*k).toFixed(1)+')');
-          c.setAttribute('opacity',(0.55*(1-k)).toFixed(2));
+          var kk=(now-t0)/640; if(kk>=1){ c.remove(); return; }
+          c.setAttribute('transform','translate('+(dx*kk).toFixed(1)+','+(dy*kk-0.5*70*kk*kk).toFixed(1)+')');
+          c.setAttribute('opacity',(0.6*(1-kk)).toFixed(2));
           requestAnimationFrame(step);
         } requestAnimationFrame(step);
       })(c,dx,dy,t0);
@@ -1045,8 +982,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
   /* --- ruler / ticks --- */
   (function buildRuler(){
     for(var m=0;m<=8;m++){
-      var x=X0+m*pxPerM;
-      var major=(m%2===0);
+      var x=X0+m*pxPerM, major=(m%2===0);
       var ln=document.createElementNS(SVGNS,'line');
       ln.setAttribute('class', major?'jump-tick-major':'jump-tick');
       ln.setAttribute('x1',x); ln.setAttribute('x2',x);
@@ -1056,11 +992,9 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
         var tx=document.createElementNS(SVGNS,'text');
         tx.setAttribute('class','jump-tick-lab');
         tx.setAttribute('x',x+4); tx.setAttribute('y',337);
-        tx.textContent=m+'m';
-        gRuler.appendChild(tx);
+        tx.textContent=m+'m'; gRuler.appendChild(tx);
       }
     }
-    // finish flag at final landing
     var fx=XF;
     var pole=document.createElementNS(SVGNS,'line');
     pole.setAttribute('class','jump-flag-pole');
@@ -1073,53 +1007,44 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
     var lab=document.createElementNS(SVGNS,'text');
     lab.setAttribute('class','jump-flag-lab');
     lab.setAttribute('x',fx-4);lab.setAttribute('y',294);lab.setAttribute('text-anchor','end');
-    lab.textContent='8.40 m';
-    gRuler.appendChild(lab);
+    lab.textContent='8.40 m'; gRuler.appendChild(lab);
   })();
 
   /* --- runner --- */
-  var DUR = 5200;
-  var start=null, raf=null, lastX=null, dustedPhase={};
-  function frame(now){
+  var DUR=6200, start=null, raf=null, lastX=null, lastFrame=null;
+  function tick(now){
     if(start===null) start=now;
-    var p=(now-start)/DUR;
-    if(p>1) p=1;
-    var s=getState(p);
-    var info=draw(s);
-    // distance readout
-    var dist=Math.max(0, Math.min(TOTAL_M, (s.x - X0)/pxPerM));
-    numEl.textContent=dist.toFixed(2);
-    // pips
-    var done = p>=0.385?1:0; done += p>=0.645?1:0; done += p>=0.83?1:0;
-    for(var i=0;i<3;i++) pips[i].classList.toggle('on', i<done);
-    // speed blur (horizontal)
+    var p=(now-start)/DUR; if(p>1)p=1;
+    var s=render(p);
     if(lastX!==null){
       var v=Math.abs(s.x-lastX);
-      blurNode.setAttribute('stdDeviation', Math.min(6, v*0.7).toFixed(2)+' 0');
+      sprite.style.filter = v>2.4 ? 'blur('+Math.min(2.2,(v-2.4)*0.45).toFixed(2)+'px)' : 'none';
     }
     lastX=s.x;
-    // dust on takeoff (start of each air) + landings
-    var ph=s.phase;
-    if(!dustedPhase[ph]){
-      if(PH[ph].k==='air'){ dustedPhase[ph]=1; dust(s.x, info.toeY); }
-      if((PH[ph].k==='land'||PH[ph].k==='land3') ){ dustedPhase[ph]=1; dust(s.x, GROUND); }
+    if(lastFrame!==s.frame){
+      if(s.frame===3) dust(s.x,GROUND);   // takeoff
+      if(s.frame===6) dust(s.x,GROUND);   // landing
+      lastFrame=s.frame;
     }
-    if(p<1) raf=requestAnimationFrame(frame);
-    else blurNode.setAttribute('stdDeviation','0 0');
+    var done=0; for(var i=0;i<3;i++){ if(p>=INTRO+i*bSpan+0.84*bSpan) done=i+1; }
+    for(var j=0;j<3;j++) pips[j].classList.toggle('on', j<done);
+    if(p<1) raf=requestAnimationFrame(tick);
+    else sprite.style.filter='none';
   }
   function play(){
     if(raf) cancelAnimationFrame(raf);
-    start=null; lastX=null; dustedPhase={};
-    raf=requestAnimationFrame(frame);
+    start=null; lastX=null; lastFrame=null;
+    while(dustG.firstChild) dustG.removeChild(dustG.firstChild);
+    raf=requestAnimationFrame(tick);
   }
-  function showFinal(){ draw(getState(1)); numEl.textContent=TOTAL_M.toFixed(2); pips.forEach(function(p){p.classList.add('on')}); }
+  function showFinal(){ render(1); numEl.textContent=TOTAL_M.toFixed(2); pips.forEach(function(p){p.classList.add('on');}); }
 
   replay.addEventListener('click', play);
 
-  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(reduce){ showFinal(); }
-  else {
-    draw(getState(0));
+  else{
+    render(0);
     var io=new IntersectionObserver(function(ents){
       ents.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } });
     },{threshold:0.35});
