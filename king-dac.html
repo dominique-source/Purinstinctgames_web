@@ -881,15 +881,17 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
   var SCALE=0.34;
 
   // sprite frames cropped to figure: [src, origW, origH]
+  // f = horizontal fraction of the image where the feet are (foot anchor),
+  // so the feet ride the distance line and only ever move forward.
   var FR={
-    1:{src:'kd-pose1.png',w:121,h:497},   // stand
-    2:{src:'kd-pose2.png',w:258,h:357},   // load / crouch (ground)
-    '7a':{src:'kd-pose7a.png',w:568,h:587},// takeoff dive (steep rise)
-    '7':{src:'kd-pose7.png',w:586,h:482},  // dive (flattening out)
-    3:{src:'kd-pose3.png',w:617,h:336},   // full superman flight
-    4:{src:'kd-pose4.png',w:279,h:345},   // tuck knees up
-    5:{src:'kd-pose5.png',w:357,h:369},   // descending reach
-    6:{src:'kd-pose6.png',w:313,h:384}    // landing absorb (ground)
+    1:{src:'kd-pose1.png',w:121,h:497,f:0.40},   // stand
+    2:{src:'kd-pose2.png',w:258,h:357,f:0.54},   // load / crouch (ground)
+    '7a':{src:'kd-pose7a.png',w:568,h:587,f:0.08},// takeoff dive (steep rise)
+    '7':{src:'kd-pose7.png',w:586,h:482,f:0.06},  // dive (flattening out)
+    3:{src:'kd-pose3.png',w:617,h:336,f:0.04},   // full superman flight
+    4:{src:'kd-pose4.png',w:279,h:345,f:0.73},   // tuck knees up
+    5:{src:'kd-pose5.png',w:357,h:369,f:0.72},   // descending reach
+    6:{src:'kd-pose6.png',w:313,h:384,f:0.59}    // landing absorb (ground)
   };
   for(var k in FR){ var pim=new Image(); pim.src=FR[k].src; }
 
@@ -911,11 +913,11 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
   }
   function place(n,x,h,sq){
     if(sprite._n!==n) setFrame(n);
-    var f=FR[n], w=f.w*SCALE, ht=f.h*SCALE*sq, wq=w/sq;
+    var fr=FR[n], w=fr.w*SCALE, ht=fr.h*SCALE*sq, wq=w/sq;
     var by=GROUND-h;
     sprite.setAttribute('width', wq.toFixed(1));
     sprite.setAttribute('height', ht.toFixed(1));
-    sprite.setAttribute('x',(x-wq/2).toFixed(1));
+    sprite.setAttribute('x',(x-wq*fr.f).toFixed(1));
     sprite.setAttribute('y',(by-ht).toFixed(1));
     var lift=h/165; if(lift>1)lift=1;
     shadow.setAttribute('cx',x.toFixed(1));
