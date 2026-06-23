@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSTINCT: La Série TV — PürInstinct Games</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="description" content="INSTINCT: Qui est vraiment le plus complet? 64 participants. 5 disciplines. Équipes changeantes. Un seul champion. L'émission de télé-réalité compétitive de PürInstinct Games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --white:#F4F4F2;
+  --muted:#888888;
+  --off-white:#F4F4EF;
+  --line:rgba(204,255,0,.18);
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,.disp{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lime{color:var(--lime)}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-links a.active{color:var(--lime);opacity:1}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:300px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-btn.active{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:240px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:hover{color:var(--lime);background:rgba(204,255,0,.04)}
+.nav-drop-item.active{color:var(--lime)}
+
+/* ============ HERO ============ */
+.itv-hero{
+  position:relative;min-height:72vh;display:flex;align-items:flex-end;
+  padding-top:80px;overflow:hidden;background:#0A0A0A;
+}
+.itv-hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.itv-hero-bg img{
+  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
+  transform:scale(1.04);transition:transform 8s ease-out;will-change:transform;
+}
+.itv-hero-bg.loaded img{transform:scale(1)}
+.itv-hero-bg::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to bottom,rgba(10,10,10,.6) 0%,rgba(10,10,10,.1) 35%,rgba(10,10,10,.78) 100%),
+    linear-gradient(to right,rgba(10,10,10,.84) 0%,rgba(10,10,10,.72) 28%,rgba(10,10,10,.5) 52%,rgba(10,10,10,.18) 72%,rgba(10,10,10,.04) 100%);
+}
+.itv-hero-bg::after{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:repeating-linear-gradient(-55deg,rgba(204,255,0,.018) 0,rgba(204,255,0,.018) 1px,transparent 1px,transparent 32px);
+}
+.itv-hero-inner{
+  position:relative;z-index:3;
+  padding:clamp(64px,10vw,124px) 0 clamp(60px,7.5vw,90px);
+}
+.itv-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:#0A0A0A;background:var(--lime);
+  padding:5px 18px;margin-bottom:22px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
+}
+.itv-hero h1{
+  font-size:clamp(54px,9.5vw,128px);line-height:.88;
+  letter-spacing:-.02em;margin-bottom:26px;color:var(--white);
+}
+.itv-hero h1 .lime{color:var(--lime)}
+.itv-hero-sub{
+  font-size:clamp(15px,1.8vw,20px);color:var(--muted);max-width:50ch;line-height:1.5;
+  margin-bottom:32px;
+}
+.itv-hero-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:13px 30px 14px;font-size:18px;letter-spacing:.02em;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:.2s;
+}
+.itv-hero-cta:hover{box-shadow:0 0 32px rgba(204,255,0,.55);transform:translateY(-1px)}
+
+/* ============ STATS STRIP ============ */
+.itv-strip{
+  background:#111;border-top:1px solid rgba(204,255,0,.12);
+  border-bottom:1px solid rgba(204,255,0,.12);
+  padding:clamp(20px,3vw,36px) 0;
+}
+.itv-strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(204,255,0,.1)}
+@media(max-width:600px){.itv-strip-grid{grid-template-columns:repeat(2,1fr)}}
+.itv-strip-item{background:#111;padding:20px 28px;display:flex;flex-direction:column;gap:4px}
+.itv-strip-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(30px,3.8vw,46px);color:var(--lime);line-height:1}
+.itv-strip-l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+/* ============ SECTIONS ============ */
+.sec-dark{background:var(--bg-2);padding:clamp(70px,9vw,120px) 0;position:relative;overflow:hidden}
+.sec-dark-deeper{background:var(--bg);padding:clamp(70px,9vw,120px) 0;position:relative;overflow:hidden;border-top:1px solid rgba(204,255,0,.08)}
+.sec-dark::before{content:"";position:absolute;right:-80px;top:-40px;width:380px;height:380px;background:radial-gradient(ellipse at 60% 40%,rgba(204,255,0,.04) 0%,transparent 65%);pointer-events:none;z-index:0}
+.sec-light{background:var(--off-white);padding:clamp(70px,9vw,120px) 0;color:#0A0A0A;position:relative;overflow:hidden}
+
+.itv-sec-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(34px,5.5vw,74px);line-height:.92;margin:0 0 18px;color:var(--white)}
+.itv-sec-h .lime{color:var(--lime)}
+.sec-light .itv-sec-h{color:#0A0A0A}
+.itv-sec-sub{font-size:clamp(15px,1.7vw,18px);color:var(--muted);max-width:64ch;line-height:1.65;margin-bottom:clamp(36px,5vw,60px)}
+.sec-light .itv-sec-sub{color:#555}
+
+/* ============ CONCEPT CARDS ============ */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.5vw,18px)}
+@media(max-width:900px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.cat-grid{grid-template-columns:1fr}}
+
+.cat-card{
+  background:#0d0d0d;border:1.5px solid rgba(255,255,255,.07);
+  padding:clamp(18px,2.5vw,28px);display:flex;flex-direction:column;gap:10px;
+  position:relative;overflow:hidden;
+}
+.cat-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.cat-card.c-blue::before{background:#3B82F6}
+.cat-card.c-lime::before{background:var(--lime)}
+.cat-card.c-orange::before{background:#F97316}
+.cat-card.c-gold::before{background:#D4AF37}
+.cat-card.c-blue{border-top-color:rgba(59,130,246,.45)}
+.cat-card.c-lime{border-top-color:rgba(204,255,0,.45)}
+.cat-card.c-orange{border-top-color:rgba(249,115,22,.45)}
+.cat-card.c-gold{border-top-color:rgba(212,175,55,.45)}
+.cat-count{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(42px,5.5vw,68px);line-height:1;color:var(--white);margin-bottom:2px}
+.cat-card.c-lime .cat-count{color:var(--lime)}
+.cat-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(13px,1.5vw,17px);line-height:1.1;color:var(--white)}
+.cat-detail{font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:4px}
+
+/* ============ PHASES ============ */
+.phases-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.3vw,16px)}
+@media(max-width:900px){.phases-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.phases-grid{grid-template-columns:1fr}}
+
+.phase-card{position:relative;overflow:hidden;background:#0a0a0a}
+.phase-img-wrap{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden}
+.phase-img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transform:scale(1.04);transition:transform 8s ease-out;will-change:transform;
+}
+.phase-card:hover .phase-img-wrap img{transform:scale(1.07)}
+.phase-img-wrap::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.96) 0%,rgba(0,0,0,.52) 48%,rgba(0,0,0,.08) 100%);
+}
+.phase-over{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:clamp(14px,2.5vw,24px)}
+.phase-num-tag{font-family:var(--display);font-weight:900;font-style:italic;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);opacity:.75;display:block;margin-bottom:4px}
+.phase-eps{font-size:11px;color:var(--lime);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px}
+.phase-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.8vw,22px);line-height:.95;color:var(--white);margin-bottom:8px}
+.phase-desc{font-size:clamp(11.5px,1.1vw,13px);color:rgba(255,255,255,.6);line-height:1.52}
+
+/* Progress pills */
+.prog-pills{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:clamp(28px,4vw,50px)}
+.prog-pill{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  padding:7px 16px;border:1.5px solid rgba(204,255,0,.22);color:var(--muted);
+}
+.prog-pill.champ{background:var(--lime);color:#0A0A0A;border-color:var(--lime)}
+.prog-arrow{color:rgba(204,255,0,.4);font-size:14px;font-family:sans-serif;line-height:1}
+
+/* ============ DISCIPLINES ============ */
+.disc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(8px,1.2vw,14px);margin-top:clamp(32px,5vw,52px)}
+@media(max-width:860px){.disc-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){.disc-grid{grid-template-columns:1fr 1fr}}
+
+.disc-card{
+  background:#0A0A0A;border:1.5px solid rgba(10,10,10,.1);
+  padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:7px;
+}
+.disc-icon{font-size:clamp(22px,2.8vw,30px);line-height:1;margin-bottom:2px}
+.disc-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,1.9vw,22px);line-height:1;color:#0A0A0A}
+.disc-detail{font-size:12.5px;color:#555;line-height:1.4}
+.disc-adv{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;display:inline-block;margin-top:3px}
+.disc-adv.ath{background:rgba(59,130,246,.12);color:#2563EB}
+.disc-adv.cre{background:rgba(90,117,0,.12);color:#5a7500}
+.disc-adv.mix{background:rgba(249,115,22,.1);color:#C2610A}
+
+.disc-quote{
+  margin-top:clamp(32px,5vw,56px);
+  border-left:3px solid #5a7500;
+  padding:clamp(16px,2.5vw,26px) clamp(20px,3vw,38px);
+  background:rgba(90,117,0,.06);
+}
+.disc-quote p{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(20px,2.8vw,36px);line-height:1.08;color:#0A0A0A;
+}
+
+/* ============ TENSION — VS ============ */
+.tens-h{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(26px,4.2vw,58px);line-height:.92;margin:0 0 clamp(36px,5vw,60px);
+  color:var(--white);max-width:22ch;
+}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,20px)}
+@media(max-width:640px){.vs-grid{grid-template-columns:1fr}}
+
+.vs-pair{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid rgba(255,255,255,.06)}
+.vs-side{padding:clamp(14px,2vw,22px);display:flex;flex-direction:column;gap:7px}
+.vs-side-ath{background:#0d0d0d;border-right:1px solid rgba(255,255,255,.06)}
+.vs-side-cre{background:#0a1000}
+.vs-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:10px;letter-spacing:.14em;margin-bottom:3px}
+.vs-label-ath{color:rgba(255,255,255,.35)}
+.vs-label-cre{color:var(--lime)}
+.vs-text{font-size:clamp(12px,1.2vw,14px);color:rgba(255,255,255,.65);line-height:1.5;font-style:italic}
+.vs-text-cre{color:rgba(204,255,0,.82)}
+
+.tens-img{margin-top:clamp(32px,5vw,56px);position:relative;overflow:hidden}
+.tens-img img{width:100%;max-height:320px;object-fit:cover;object-position:center}
+.tens-img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(10,10,10,.92) 0%,rgba(10,10,10,.38) 50%,rgba(10,10,10,0) 100%);
+}
+
+/* ============ QC → EXPORT ============ */
+.qcex-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:start}
+@media(max-width:760px){.qcex-grid{grid-template-columns:1fr}}
+
+.qcex-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(28px,4vw,56px);line-height:.9;margin:0 0 clamp(28px,4vw,48px);color:#0A0A0A}
+.qcex-col-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,1.8vw,22px);color:#0A0A0A;margin-bottom:18px}
+.qcex-list{display:flex;flex-direction:column;gap:12px}
+.qcex-item{display:flex;align-items:flex-start;gap:10px;font-size:clamp(13.5px,1.4vw,15.5px);color:#333;line-height:1.5}
+.qcex-item::before{content:"→";font-family:var(--display);font-weight:900;font-style:italic;color:#5a7500;font-size:17px;flex-shrink:0;margin-top:-1px}
+.qcex-item strong{color:#0A0A0A;font-weight:700}
+
+.city-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(7px,1vw,11px)}
+.city-card{
+  background:#fff;border:1px solid rgba(0,0,0,.07);
+  padding:clamp(11px,1.4vw,16px);display:flex;flex-direction:column;gap:3px;
+}
+.city-card.current{border-color:rgba(90,117,0,.45);background:#f1f8e0}
+.city-flag{font-size:18px;line-height:1;margin-bottom:4px}
+.city-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(13px,1.4vw,16px);color:#0A0A0A;line-height:1}
+.city-season{font-size:10.5px;color:#888;text-transform:uppercase;letter-spacing:.06em}
+.city-broadcaster{font-size:11.5px;color:#444;margin-top:1px}
+
+/* ============ MOMENT FACTORY — SPLIT ============ */
+.mf-wrap{border-top:1px solid rgba(204,255,0,.08)}
+.mf-split{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:720px){.mf-split{grid-template-columns:1fr}}
+
+.mf-left{background:#0d0d0d;padding:clamp(40px,6vw,72px) clamp(28px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:22px}
+.mf-right{background:var(--lime);padding:clamp(40px,6vw,72px) clamp(28px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:22px;color:#0A0A0A}
+.mf-eyebrow{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:12px;letter-spacing:.14em;margin-bottom:4px}
+.mf-left .mf-eyebrow{color:var(--muted)}
+.mf-right .mf-eyebrow{color:rgba(0,0,0,.5)}
+.mf-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(32px,4.8vw,62px);line-height:.88;margin:0}
+.mf-left .mf-h{color:var(--white)}
+.mf-right .mf-h{color:#0A0A0A}
+.mf-body{font-size:clamp(13.5px,1.4vw,16px);line-height:1.6}
+.mf-left .mf-body{color:var(--muted)}
+.mf-right .mf-body{color:rgba(0,0,0,.68)}
+.mf-list{display:flex;flex-direction:column;gap:10px;list-style:none}
+.mf-list li{font-size:clamp(12.5px,1.3vw,15px);display:flex;align-items:flex-start;gap:10px;line-height:1.4}
+.mf-left .mf-list li{color:var(--white)}
+.mf-right .mf-list li{color:#0A0A0A;font-weight:600}
+.mf-check{font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;flex-shrink:0;margin-top:-1px}
+.mf-left .mf-check{color:var(--lime)}
+.mf-right .mf-check{color:#0A0A0A}
+
+/* ============ CTA FINAL ============ */
+.itv-cta{
+  background:#0A0A0A;padding:clamp(80px,11vw,140px) 0;
+  position:relative;overflow:hidden;text-align:center;
+}
+.itv-cta::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(-55deg,rgba(204,255,0,.014) 0,rgba(204,255,0,.014) 1px,transparent 1px,transparent 32px);
+}
+.itv-cta::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;
+  background:radial-gradient(ellipse at center,rgba(204,255,0,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.itv-cta-trophy{width:clamp(90px,14vw,170px);margin:0 auto clamp(20px,3vw,34px);filter:drop-shadow(0 0 24px rgba(204,255,0,.48));position:relative;z-index:2}
+.itv-cta-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(44px,7.5vw,100px);line-height:.88;color:var(--white);margin-bottom:16px;position:relative;z-index:2}
+.itv-cta-sub{font-size:clamp(14px,1.6vw,18px);color:var(--muted);max-width:48ch;margin:0 auto clamp(28px,4vw,50px);position:relative;z-index:2}
+.itv-cta-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;position:relative;z-index:2}
+.btn-lime{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:14px 32px 15px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:.2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-lime:hover{box-shadow:0 0 32px rgba(204,255,0,.55);transform:translateY(-1px)}
+.btn-outline{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:none;color:var(--white);padding:14px 32px 15px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:.2s;
+  border:1.5px solid rgba(255,255,255,.3);display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{border-color:var(--lime);color:var(--lime)}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+
+/* ============ REDUCE MOTION ============ */
+@media(prefers-reduced-motion:reduce){
+  .itv-hero-bg img,.phase-img-wrap img{transition:none!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#concept" data-i18n="nav_concept">Le concept</a>
+    <a href="index.html#arena" data-i18n="nav_arena">L'arène</a>
+    <a href="index.html#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <div class="nav-drop" id="navDrop">
+      <button class="nav-drop-btn active" aria-haspopup="true" aria-expanded="false">
+        <span data-i18n="nav_special">Projets spéciaux</span><span class="nav-drop-arrow">▾</span>
+      </button>
+      <div class="nav-drop-menu" role="menu">
+        <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
+        <a href="championship.html" class="nav-drop-item" data-i18n="nav_champ">Championship</a>
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
+        <a href="instinct-tv.html" class="nav-drop-item active" data-i18n="nav_tv">INSTINCT: La Série TV</a>
+      </div>
+    </div>
+    <a href="index.html#billets" data-i18n="nav_tickets">Billets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <a class="nav-cta" href="index.html#billets" data-i18n="nav_cta">Réserve</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="itv-hero">
+  <div class="itv-hero-bg" id="heroBg">
+    <img src="vignette-pro-new.png" alt="" aria-hidden="true" onload="this.closest('.itv-hero-bg').classList.add('loaded')">
+  </div>
+  <div class="wrap itv-hero-inner">
+    <div class="itv-badge" data-i18n="itv_badge">ÉMISSION TV · SAISON 1 · 2027</div>
+    <h1>
+      <span>INSTINCT:</span><br>
+      <span class="lime" data-i18n="itv_h1">QUI EST VRAIMENT LE PLUS COMPLET?</span>
+    </h1>
+    <p class="itv-hero-sub" data-i18n="itv_sub">64 participants. 5 disciplines. Équipes changeantes. Un seul champion.</p>
+    <a href="#concept" class="itv-hero-cta" data-i18n="itv_cta_hero">VOIR LE FORMAT →</a>
+  </div>
+</header>
+
+<!-- ============ STATS STRIP ============ -->
+<div class="itv-strip">
+  <div class="wrap">
+    <div class="itv-strip-grid">
+      <div class="itv-strip-item">
+        <span class="itv-strip-n">64</span>
+        <span class="itv-strip-l" data-i18n="itv_s1">PARTICIPANTS</span>
+      </div>
+      <div class="itv-strip-item">
+        <span class="itv-strip-n">16</span>
+        <span class="itv-strip-l" data-i18n="itv_s2">CRÉATEURS</span>
+      </div>
+      <div class="itv-strip-item">
+        <span class="itv-strip-n">12</span>
+        <span class="itv-strip-l" data-i18n="itv_s3">ÉPISODES</span>
+      </div>
+      <div class="itv-strip-item">
+        <span class="itv-strip-n">1</span>
+        <span class="itv-strip-l" data-i18n="itv_s4">CHAMPION</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SECTION: LE CONCEPT ============ -->
+<section class="sec-dark" id="concept">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="itv_con_ey">Le Concept</span>
+    <h2 class="itv-sec-h" data-i18n="itv_con_h">64 PARTICIPANTS. 4 CATÉGORIES. <span class="lime">ZÉRO ALLIANCE.</span></h2>
+    <p class="itv-sec-sub" data-i18n="itv_con_body">Chaque épisode, les équipes sont redistribuées au hasard. Aucune alliance ne tient. Seul le leaderboard individuel compte. Athlètes professionnels, créateurs à parcours athlétique, wildcards et légendes québécoises — tous sur le même terrain, soumis aux mêmes disciplines.</p>
+    <div class="cat-grid">
+      <div class="cat-card c-blue">
+        <div class="cat-count">32</div>
+        <div class="cat-name" data-i18n="cat1_name">ATHLÈTES PRO / SEMI-PRO QC</div>
+        <div class="cat-detail" data-i18n="cat1_detail">Basketball · Football · Soccer · Hockey · All-Canadians U Sport</div>
+      </div>
+      <div class="cat-card c-lime">
+        <div class="cat-count">16</div>
+        <div class="cat-name" data-i18n="cat2_name">CRÉATEURS ATHLÉTIQUES</div>
+        <div class="cat-detail" data-i18n="cat2_detail">Séan Garnier · Deestroying · Touzani + créateurs CA/QC</div>
+      </div>
+      <div class="cat-card c-orange">
+        <div class="cat-count">8</div>
+        <div class="cat-name" data-i18n="cat3_name">WILDCARDS</div>
+        <div class="cat-detail" data-i18n="cat3_detail">Parkour · Breakdance olympique · Arts martiaux · Gymnaste</div>
+      </div>
+      <div class="cat-card c-gold">
+        <div class="cat-count">8</div>
+        <div class="cat-name" data-i18n="cat4_name">LÉGENDES QC</div>
+        <div class="cat-detail" data-i18n="cat4_detail">GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: LA MÉCANIQUE — 4 PHASES ============ -->
+<section class="sec-dark-deeper" id="mecanique">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="itv_ph_ey">La Mécanique</span>
+    <h2 class="itv-sec-h" style="margin-bottom:clamp(32px,5vw,52px)" data-i18n="itv_ph_h">L'ARC NARRATIF. <span class="lime">4 PHASES.</span></h2>
+    <div class="phases-grid">
+
+      <!-- Phase 01 -->
+      <div class="phase-card">
+        <div class="phase-img-wrap">
+          <img src="narr-01-invitation.png" alt="Phase 01" loading="lazy">
+          <div class="phase-over">
+            <span class="phase-num-tag">PHASE 01</span>
+            <span class="phase-eps" data-i18n="ph1_eps">ÉP. 1–3</span>
+            <div class="phase-title" data-i18n="ph1_t">L'ANNONCE</div>
+            <p class="phase-desc" data-i18n="ph1_d">Les 64 participants découvrent le format. Les équipes sont tirées au sort. Les athlètes pros minimisent les créateurs. Les premières surprises arrivent dès la station 1.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 02 -->
+      <div class="phase-card">
+        <div class="phase-img-wrap">
+          <img src="narr-04-skills.png" alt="Phase 02" loading="lazy">
+          <div class="phase-over">
+            <span class="phase-num-tag">PHASE 02</span>
+            <span class="phase-eps" data-i18n="ph2_eps">ÉP. 4–7</span>
+            <div class="phase-title" data-i18n="ph2_t">LA FRACTURE</div>
+            <p class="phase-desc" data-i18n="ph2_d">Un athlète star est éliminé. Un créateur domine le leaderboard. La question devient réelle : qui est vraiment le plus complet? Internet s'enflamme.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 03 -->
+      <div class="phase-card">
+        <div class="phase-img-wrap">
+          <img src="narr-05-mainevent-new.png" alt="Phase 03" loading="lazy">
+          <div class="phase-over">
+            <span class="phase-num-tag">PHASE 03</span>
+            <span class="phase-eps" data-i18n="ph3_eps">ÉP. 8–11</span>
+            <div class="phase-title" data-i18n="ph3_t">LA PREUVE</div>
+            <p class="phase-desc" data-i18n="ph3_d">Top 16. Tout le monde est légitime. Les équipes changent encore. Chaque discipline décide. Le leaderboard individuel devient impitoyable.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 04 -->
+      <div class="phase-card">
+        <div class="phase-img-wrap">
+          <img src="narr-08-champion.png" alt="Phase 04" loading="lazy">
+          <div class="phase-over">
+            <span class="phase-num-tag">PHASE 04</span>
+            <span class="phase-eps" data-i18n="ph4_eps">ÉP. 12 — FINALE</span>
+            <div class="phase-title" data-i18n="ph4_t">LA FINALE</div>
+            <p class="phase-desc" data-i18n="ph4_d">Live TV. Arène pleine. 4 finalistes. Les 5 disciplines complètes. Le gagnant peut être n'importe qui — c'est ça le show.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Progression pills -->
+    <div class="prog-pills">
+      <div class="prog-pill"><span data-i18n="pp1">64 PARTICIPANTS</span></div>
+      <span class="prog-arrow">→</span>
+      <div class="prog-pill"><span>32</span></div>
+      <span class="prog-arrow">→</span>
+      <div class="prog-pill"><span>16</span></div>
+      <span class="prog-arrow">→</span>
+      <div class="prog-pill"><span>4</span></div>
+      <span class="prog-arrow">→</span>
+      <div class="prog-pill champ"><span data-i18n="pp5">1 CHAMPION</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: LES 5 DISCIPLINES ============ -->
+<section class="sec-light" id="disciplines">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#5a7500" data-i18n="itv_disc_ey">Les Disciplines</span>
+    <h2 class="itv-sec-h" data-i18n="itv_disc_h">5 DISCIPLINES. <span style="color:#5a7500">UNE VÉRITÉ.</span></h2>
+    <p class="itv-sec-sub" data-i18n="itv_disc_sub">Chaque discipline avantage différemment les athlètes et les créateurs. C'est pour ça que personne ne sait qui va gagner.</p>
+    <div class="disc-grid">
+      <div class="disc-card">
+        <div class="disc-icon">⚡</div>
+        <div class="disc-name">SPEED</div>
+        <div class="disc-detail" data-i18n="disc1_d">Sprint, réactivité</div>
+        <span class="disc-adv ath" data-i18n="disc1_adv">Avantage : Athlète traditionnel</span>
+      </div>
+      <div class="disc-card">
+        <div class="disc-icon">✋</div>
+        <div class="disc-name">HAND SKILLS</div>
+        <div class="disc-detail" data-i18n="disc2_d">Balle, précision, contrôle</div>
+        <span class="disc-adv cre" data-i18n="disc2_adv">Avantage : Créateur</span>
+      </div>
+      <div class="disc-card">
+        <div class="disc-icon">⚽</div>
+        <div class="disc-name">FOOT SKILLS</div>
+        <div class="disc-detail" data-i18n="disc3_d">Dribble, frappe, geste</div>
+        <span class="disc-adv cre" data-i18n="disc3_adv">Avantage : Créateur</span>
+      </div>
+      <div class="disc-card">
+        <div class="disc-icon">🔀</div>
+        <div class="disc-name">AGILITY</div>
+        <div class="disc-detail" data-i18n="disc4_d">Changements de direction</div>
+        <span class="disc-adv mix" data-i18n="disc4_adv">Avantage : 50/50</span>
+      </div>
+      <div class="disc-card">
+        <div class="disc-icon">🧠</div>
+        <div class="disc-name">GAME IQ</div>
+        <div class="disc-detail" data-i18n="disc5_d">Lecture du jeu, décision</div>
+        <span class="disc-adv cre" data-i18n="disc5_adv">Avantage : Créateur</span>
+      </div>
+    </div>
+    <div class="disc-quote">
+      <p data-i18n="disc_quote">"3 disciplines sur 5 avantagent les créateurs. Mais le speed les tue. C'est ça l'instinct."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: LA TENSION ============ -->
+<section class="sec-dark" id="tension">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="itv_tens_ey">Le Débat</span>
+    <h2 class="tens-h" data-i18n="itv_tens_h">LE DÉBAT QUE TOUT LE MONDE A EU DANS UNE COUR D'ÉCOLE — EN PRIME TIME.</h2>
+    <div class="vs-grid">
+      <div class="vs-pair">
+        <div class="vs-side vs-side-ath">
+          <div class="vs-label vs-label-ath" data-i18n="vs_ath">ATHLÈTE PRO DIT :</div>
+          <p class="vs-text" data-i18n="vs1_ath">"10 ans de sport structuré"</p>
+        </div>
+        <div class="vs-side vs-side-cre">
+          <div class="vs-label vs-label-cre" data-i18n="vs_cre">CRÉATEUR RÉPOND :</div>
+          <p class="vs-text vs-text-cre" data-i18n="vs1_cre">"10 ans de jeu libre — mes skills sont plus larges"</p>
+        </div>
+      </div>
+      <div class="vs-pair">
+        <div class="vs-side vs-side-ath">
+          <div class="vs-label vs-label-ath" data-i18n="vs_ath">ATHLÈTE PRO DIT :</div>
+          <p class="vs-text" data-i18n="vs2_ath">"Tu es bon dans une seule chose"</p>
+        </div>
+        <div class="vs-side vs-side-cre">
+          <div class="vs-label vs-label-cre" data-i18n="vs_cre">CRÉATEUR RÉPOND :</div>
+          <p class="vs-text vs-text-cre" data-i18n="vs2_cre">"Mes 20M d'abonnés me voient maîtriser 5 sports"</p>
+        </div>
+      </div>
+      <div class="vs-pair">
+        <div class="vs-side vs-side-ath">
+          <div class="vs-label vs-label-ath" data-i18n="vs_ath">ATHLÈTE PRO DIT :</div>
+          <p class="vs-text" data-i18n="vs3_ath">"Le sport réel a des standards"</p>
+        </div>
+        <div class="vs-side vs-side-cre">
+          <div class="vs-label vs-label-cre" data-i18n="vs_cre">CRÉATEUR RÉPOND :</div>
+          <p class="vs-text vs-text-cre" data-i18n="vs3_cre">"Le freestyle crée ses propres standards"</p>
+        </div>
+      </div>
+      <div class="vs-pair">
+        <div class="vs-side vs-side-ath">
+          <div class="vs-label vs-label-ath" data-i18n="vs_ath">ATHLÈTE PRO DIT :</div>
+          <p class="vs-text" data-i18n="vs4_ath">"Tu es juste populaire"</p>
+        </div>
+        <div class="vs-side vs-side-cre">
+          <div class="vs-label vs-label-cre" data-i18n="vs_cre">CRÉATEUR RÉPOND :</div>
+          <p class="vs-text vs-text-cre" data-i18n="vs4_cre">"La popularité vient du skill réel"</p>
+        </div>
+      </div>
+    </div>
+    <div class="tens-img">
+      <img src="narr-06-leaderboard.png" alt="Leaderboard" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: MODÈLE QC → EXPORT ============ -->
+<section class="sec-light" id="export">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#5a7500" data-i18n="itv_qc_ey">Modèle de croissance</span>
+    <h2 class="qcex-h" data-i18n="itv_qc_h">MONTRÉAL EN PREMIER. <span style="color:#5a7500">LE MONDE ENSUITE.</span></h2>
+    <div class="qcex-grid">
+      <div>
+        <div class="qcex-col-title" data-i18n="itv_qc1_t">MODÈLE QUÉBEC — SAISON 1</div>
+        <div class="qcex-list">
+          <div class="qcex-item"><span><strong data-i18n="qc_b1_l">Diffuseur cible :</strong>&nbsp;<span data-i18n="qc_b1_v">TVA Sports / RDS / DAZN Canada</span></span></div>
+          <div class="qcex-item"><span><strong data-i18n="qc_b2_l">Commanditaire titre :</strong>&nbsp;<span data-i18n="qc_b2_v">Desjardins / Intact / Bell / New Balance</span></span></div>
+          <div class="qcex-item"><span><strong data-i18n="qc_b3_l">Finale live :</strong>&nbsp;<span data-i18n="qc_b3_v">Montréal, 3 000 places</span></span></div>
+          <div class="qcex-item"><span><strong data-i18n="qc_b4_l">Participants :</strong>&nbsp;<span data-i18n="qc_b4_v">Bassin 10 000+ athlètes QC partenaires PürInstinct</span></span></div>
+          <div class="qcex-item"><span><strong data-i18n="qc_b5_l">Légendes invités :</strong>&nbsp;<span data-i18n="qc_b5_v">GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser</span></span></div>
+        </div>
+      </div>
+      <div>
+        <div class="qcex-col-title" data-i18n="itv_qc2_t">EXPANSION INTERNATIONALE</div>
+        <div class="city-grid">
+          <div class="city-card current">
+            <div class="city-flag">🍁</div>
+            <div class="city-name">MONTRÉAL</div>
+            <div class="city-season" data-i18n="city_s1">SAISON 1</div>
+            <div class="city-broadcaster">TVA Sports / DAZN CA</div>
+          </div>
+          <div class="city-card">
+            <div class="city-flag">🍁</div>
+            <div class="city-name">TORONTO</div>
+            <div class="city-season" data-i18n="city_s2">SAISON 2</div>
+            <div class="city-broadcaster">TSN / Sportsnet</div>
+          </div>
+          <div class="city-card">
+            <div class="city-flag">🇺🇸</div>
+            <div class="city-name">NEW YORK</div>
+            <div class="city-season" data-i18n="city_s2">SAISON 2</div>
+            <div class="city-broadcaster">ESPN+ / Prime Video</div>
+          </div>
+          <div class="city-card">
+            <div class="city-flag">🇺🇸</div>
+            <div class="city-name">LOS ANGELES</div>
+            <div class="city-season" data-i18n="city_s2">SAISON 2</div>
+            <div class="city-broadcaster">Fox Sports / YouTube</div>
+          </div>
+          <div class="city-card">
+            <div class="city-flag">🇫🇷</div>
+            <div class="city-name">PARIS</div>
+            <div class="city-season" data-i18n="city_s3">SAISON 3</div>
+            <div class="city-broadcaster">Canal+ / beIN Sports</div>
+          </div>
+          <div class="city-card">
+            <div class="city-flag">🇦🇪</div>
+            <div class="city-name">DUBAI</div>
+            <div class="city-season" data-i18n="city_s3">SAISON 3</div>
+            <div class="city-broadcaster" data-i18n="city_dubai">MENA rights deal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: MOMENT FACTORY UPGRADE ============ -->
+<div class="mf-wrap">
+  <div class="mf-split">
+    <div class="mf-left">
+      <div>
+        <div class="mf-eyebrow" data-i18n="mf_ey1">Version de base</div>
+        <h2 class="mf-h" data-i18n="mf_h1">MÊME ARÈNE.</h2>
+      </div>
+      <p class="mf-body" data-i18n="mf_body1">Structure physique identique. Éclairage standard, chronos, filets. 100% du show est déjà là.</p>
+      <ul class="mf-list">
+        <li><span class="mf-check">✓</span><span data-i18n="mf1_i1">9 stations complètes</span></li>
+        <li><span class="mf-check">✓</span><span data-i18n="mf1_i2">Scoring en temps réel</span></li>
+        <li><span class="mf-check">✓</span><span data-i18n="mf1_i3">Multi-caméras</span></li>
+        <li><span class="mf-check">✓</span><span data-i18n="mf1_i4">Animations participants</span></li>
+      </ul>
+    </div>
+    <div class="mf-right">
+      <div>
+        <div class="mf-eyebrow" data-i18n="mf_ey2">+ Moment Factory</div>
+        <h2 class="mf-h" data-i18n="mf_h2">AUTRE PLANÈTE.</h2>
+      </div>
+      <p class="mf-body" data-i18n="mf_body2">La même arène. Zéro modification de structure. Le spectacle devient le sport.</p>
+      <ul class="mf-list">
+        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i1">Projection mapping sur chaque station</span></li>
+        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i2">Floor LED interactif &amp; réactif</span></li>
+        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i3">Audio spatial immersif</span></li>
+        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i4">Leaderboard vivant — XR diffusion</span></li>
+        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i5">Highlight cam IA — clip automatique</span></li>
+        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i6">Intro VJ-style pour chaque participant</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="itv-cta" id="contact">
+  <div class="wrap">
+    <img src="trophy-transparent.png" alt="" aria-hidden="true" class="itv-cta-trophy">
+    <h2 class="itv-cta-h" data-i18n="itv_cta_h">ON LANCE INSTINCT.</h2>
+    <p class="itv-cta-sub" data-i18n="itv_cta_sub">Partenariats diffuseurs, commandites et opportunités de production — contactez-nous.</p>
+    <div class="itv-cta-btns">
+      <a href="mailto:dominique@purinstinct.com" class="btn-lime" data-i18n="itv_cta_b1">PARTENARIAT DIFFUSEUR →</a>
+      <a href="index.html" class="btn-outline" data-i18n="itv_cta_b2">VOIR LES AUTRES PROJETS →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="index.html#billets" data-i18n="f_book">Réserver une session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",
+  nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",
+  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
+  itv_badge:"ÉMISSION TV · SAISON 1 · 2027",
+  itv_h1:"QUI EST VRAIMENT LE PLUS COMPLET?",
+  itv_sub:"64 participants. 5 disciplines. Équipes changeantes. Un seul champion.",
+  itv_cta_hero:"VOIR LE FORMAT →",
+  itv_s1:"PARTICIPANTS",itv_s2:"CRÉATEURS",itv_s3:"ÉPISODES",itv_s4:"CHAMPION",
+  itv_con_ey:"Le Concept",
+  itv_con_h:"64 PARTICIPANTS. 4 CATÉGORIES. ZÉRO ALLIANCE.",
+  itv_con_body:"Chaque épisode, les équipes sont redistribuées au hasard. Aucune alliance ne tient. Seul le leaderboard individuel compte. Athlètes professionnels, créateurs à parcours athlétique, wildcards et légendes québécoises — tous sur le même terrain, soumis aux mêmes disciplines.",
+  cat1_name:"ATHLÈTES PRO / SEMI-PRO QC",cat1_detail:"Basketball · Football · Soccer · Hockey · All-Canadians U Sport",
+  cat2_name:"CRÉATEURS ATHLÉTIQUES",cat2_detail:"Séan Garnier · Deestroying · Touzani + créateurs CA/QC",
+  cat3_name:"WILDCARDS",cat3_detail:"Parkour · Breakdance olympique · Arts martiaux · Gymnaste",
+  cat4_name:"LÉGENDES QC",cat4_detail:"GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser",
+  itv_ph_ey:"La Mécanique",itv_ph_h:"L'ARC NARRATIF. 4 PHASES.",
+  ph1_eps:"ÉP. 1–3",ph1_t:"L'ANNONCE",ph1_d:"Les 64 participants découvrent le format. Les équipes sont tirées au sort. Les athlètes pros minimisent les créateurs. Les premières surprises arrivent dès la station 1.",
+  ph2_eps:"ÉP. 4–7",ph2_t:"LA FRACTURE",ph2_d:"Un athlète star est éliminé. Un créateur domine le leaderboard. La question devient réelle : qui est vraiment le plus complet? Internet s'enflamme.",
+  ph3_eps:"ÉP. 8–11",ph3_t:"LA PREUVE",ph3_d:"Top 16. Tout le monde est légitime. Les équipes changent encore. Chaque discipline décide. Le leaderboard individuel devient impitoyable.",
+  ph4_eps:"ÉP. 12 — FINALE",ph4_t:"LA FINALE",ph4_d:"Live TV. Arène pleine. 4 finalistes. Les 5 disciplines complètes. Le gagnant peut être n'importe qui — c'est ça le show.",
+  pp1:"64 PARTICIPANTS",pp5:"1 CHAMPION",
+  itv_disc_ey:"Les Disciplines",itv_disc_h:"5 DISCIPLINES. UNE VÉRITÉ.",
+  itv_disc_sub:"Chaque discipline avantage différemment les athlètes et les créateurs. C'est pour ça que personne ne sait qui va gagner.",
+  disc1_d:"Sprint, réactivité",disc1_adv:"Avantage : Athlète traditionnel",
+  disc2_d:"Balle, précision, contrôle",disc2_adv:"Avantage : Créateur",
+  disc3_d:"Dribble, frappe, geste",disc3_adv:"Avantage : Créateur",
+  disc4_d:"Changements de direction",disc4_adv:"Avantage : 50/50",
+  disc5_d:"Lecture du jeu, décision",disc5_adv:"Avantage : Créateur",
+  disc_quote:'"3 disciplines sur 5 avantagent les créateurs. Mais le speed les tue. C\'est ça l\'instinct."',
+  itv_tens_ey:"Le Débat",
+  itv_tens_h:"LE DÉBAT QUE TOUT LE MONDE A EU DANS UNE COUR D'ÉCOLE — EN PRIME TIME.",
+  vs_ath:"ATHLÈTE PRO DIT :",vs_cre:"CRÉATEUR RÉPOND :",
+  vs1_ath:'"10 ans de sport structuré"',vs1_cre:'"10 ans de jeu libre — mes skills sont plus larges"',
+  vs2_ath:'"Tu es bon dans une seule chose"',vs2_cre:'"Mes 20M d\'abonnés me voient maîtriser 5 sports"',
+  vs3_ath:'"Le sport réel a des standards"',vs3_cre:'"Le freestyle crée ses propres standards"',
+  vs4_ath:'"Tu es juste populaire"',vs4_cre:'"La popularité vient du skill réel"',
+  itv_qc_ey:"Modèle de croissance",itv_qc_h:"MONTRÉAL EN PREMIER. LE MONDE ENSUITE.",
+  itv_qc1_t:"MODÈLE QUÉBEC — SAISON 1",itv_qc2_t:"EXPANSION INTERNATIONALE",
+  qc_b1_l:"Diffuseur cible :",qc_b1_v:"TVA Sports / RDS / DAZN Canada",
+  qc_b2_l:"Commanditaire titre :",qc_b2_v:"Desjardins / Intact / Bell / New Balance",
+  qc_b3_l:"Finale live :",qc_b3_v:"Montréal, 3 000 places",
+  qc_b4_l:"Participants :",qc_b4_v:"Bassin 10 000+ athlètes QC partenaires PürInstinct",
+  qc_b5_l:"Légendes invités :",qc_b5_v:"GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser",
+  city_s1:"SAISON 1",city_s2:"SAISON 2",city_s3:"SAISON 3",city_dubai:"MENA rights deal",
+  mf_ey1:"Version de base",mf_h1:"MÊME ARÈNE.",
+  mf_body1:"Structure physique identique. Éclairage standard, chronos, filets. 100% du show est déjà là.",
+  mf1_i1:"9 stations complètes",mf1_i2:"Scoring en temps réel",mf1_i3:"Multi-caméras",mf1_i4:"Animations participants",
+  mf_ey2:"+ Moment Factory",mf_h2:"AUTRE PLANÈTE.",
+  mf_body2:"La même arène. Zéro modification de structure. Le spectacle devient le sport.",
+  mf2_i1:"Projection mapping sur chaque station",mf2_i2:"Floor LED interactif & réactif",
+  mf2_i3:"Audio spatial immersif",mf2_i4:"Leaderboard vivant — XR diffusion",
+  mf2_i5:"Highlight cam IA — clip automatique",mf2_i6:"Intro VJ-style pour chaque participant",
+  itv_cta_h:"ON LANCE INSTINCT.",
+  itv_cta_sub:"Partenariats diffuseurs, commandites et opportunités de production — contactez-nous.",
+  itv_cta_b1:"PARTENARIAT DIFFUSEUR →",itv_cta_b2:"VOIR LES AUTRES PROJETS →",
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",
+  f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",
+  nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",
+  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
+  itv_badge:"TV SHOW · SEASON 1 · 2027",
+  itv_h1:"WHO IS TRULY THE MOST COMPLETE?",
+  itv_sub:"64 participants. 5 disciplines. Shifting teams. One champion.",
+  itv_cta_hero:"SEE THE FORMAT →",
+  itv_s1:"PARTICIPANTS",itv_s2:"CREATORS",itv_s3:"EPISODES",itv_s4:"CHAMPION",
+  itv_con_ey:"The Concept",
+  itv_con_h:"64 PARTICIPANTS. 4 CATEGORIES. ZERO ALLIANCES.",
+  itv_con_body:"Every episode, teams are reshuffled at random. No alliance survives. Only the individual leaderboard matters. Pro athletes, athletic content creators, wildcards and Quebec legends — all on the same field, tested by the same disciplines.",
+  cat1_name:"PRO / SEMI-PRO ATHLETES QC",cat1_detail:"Basketball · Football · Soccer · Hockey · All-Canadians U Sport",
+  cat2_name:"ATHLETIC CREATORS",cat2_detail:"Séan Garnier · Deestroying · Touzani + CA/QC creators",
+  cat3_name:"WILDCARDS",cat3_detail:"Parkour · Olympic Breakdance · Martial Arts · Gymnastics",
+  cat4_name:"QC LEGENDS",cat4_detail:"GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser",
+  itv_ph_ey:"The Mechanics",itv_ph_h:"THE NARRATIVE ARC. 4 PHASES.",
+  ph1_eps:"EP. 1–3",ph1_t:"THE REVEAL",ph1_d:"64 participants discover the format. Teams are drawn at random. Pro athletes underestimate the creators. The first upsets arrive at station 1.",
+  ph2_eps:"EP. 4–7",ph2_t:"THE FRACTURE",ph2_d:"A star athlete is eliminated. A creator dominates the leaderboard. The question becomes real: who is truly the most complete? The internet ignites.",
+  ph3_eps:"EP. 8–11",ph3_t:"THE PROOF",ph3_d:"Top 16. Everyone has earned their spot. Teams shuffle again. Every discipline decides. The individual leaderboard becomes ruthless.",
+  ph4_eps:"EP. 12 — FINALE",ph4_t:"THE FINALE",ph4_d:"Live TV. Full arena. 4 finalists. All 5 disciplines. The winner could be anyone — that's the show.",
+  pp1:"64 PARTICIPANTS",pp5:"1 CHAMPION",
+  itv_disc_ey:"The Disciplines",itv_disc_h:"5 DISCIPLINES. ONE TRUTH.",
+  itv_disc_sub:"Each discipline gives a different edge to athletes or creators. That's why nobody knows who's going to win.",
+  disc1_d:"Sprint, reaction time",disc1_adv:"Edge: Traditional Athlete",
+  disc2_d:"Ball, precision, control",disc2_adv:"Edge: Creator",
+  disc3_d:"Dribble, shot, technique",disc3_adv:"Edge: Creator",
+  disc4_d:"Changes of direction",disc4_adv:"Edge: 50/50",
+  disc5_d:"Reading the game, decision-making",disc5_adv:"Edge: Creator",
+  disc_quote:'"3 out of 5 disciplines favor creators. But speed kills them. That\'s instinct."',
+  itv_tens_ey:"The Debate",
+  itv_tens_h:"THE DEBATE EVERYONE HAD IN A SCHOOLYARD — IN PRIME TIME.",
+  vs_ath:"PRO ATHLETE SAYS:",vs_cre:"CREATOR REPLIES:",
+  vs1_ath:'"10 years of structured sport"',vs1_cre:'"10 years of free play — my skills are broader"',
+  vs2_ath:'"You\'re good at one thing"',vs2_cre:'"20M subscribers watch me master 5 sports"',
+  vs3_ath:'"Real sport has standards"',vs3_cre:'"Freestyle creates its own standards"',
+  vs4_ath:'"You\'re just popular"',vs4_cre:'"Popularity comes from real skill"',
+  itv_qc_ey:"Growth model",itv_qc_h:"MONTRÉAL FIRST. THE WORLD NEXT.",
+  itv_qc1_t:"QUÉBEC MODEL — SEASON 1",itv_qc2_t:"INTERNATIONAL EXPANSION",
+  qc_b1_l:"Target broadcaster:",qc_b1_v:"TVA Sports / RDS / DAZN Canada",
+  qc_b2_l:"Title sponsor:",qc_b2_v:"Desjardins / Intact / Bell / New Balance",
+  qc_b3_l:"Live finale:",qc_b3_v:"Montréal, 3,000 seats",
+  qc_b4_l:"Participants:",qc_b4_v:"Pool of 10,000+ QC athletes via PürInstinct partners",
+  qc_b5_l:"Guest legends:",qc_b5_v:"GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser",
+  city_s1:"SEASON 1",city_s2:"SEASON 2",city_s3:"SEASON 3",city_dubai:"MENA rights deal",
+  mf_ey1:"Base version",mf_h1:"SAME ARENA.",
+  mf_body1:"Identical physical structure. Standard lighting, timers, nets. 100% of the show is already there.",
+  mf1_i1:"9 complete stations",mf1_i2:"Real-time scoring",mf1_i3:"Multi-camera setup",mf1_i4:"Participant animations",
+  mf_ey2:"+ Moment Factory",mf_h2:"ANOTHER PLANET.",
+  mf_body2:"Same arena. Zero structural changes. The spectacle becomes the sport.",
+  mf2_i1:"Projection mapping on every station",mf2_i2:"Interactive & reactive LED floor",
+  mf2_i3:"Immersive spatial audio",mf2_i4:"Live leaderboard — XR broadcast",
+  mf2_i5:"AI highlight cam — auto-clip",mf2_i6:"VJ-style intro for each participant",
+  itv_cta_h:"LET'S LAUNCH INSTINCT.",
+  itv_cta_sub:"Broadcaster partnerships, sponsorships and production opportunities — reach out.",
+  itv_cta_b1:"BROADCASTER PARTNERSHIP →",itv_cta_b2:"SEE OTHER PROJECTS →",
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",
+  f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player."
+}};
+
+let lang = localStorage.getItem("pi_lang") || "fr";
+
+function applyLang(){
+  const t = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if(t[k] !== undefined) el.textContent = t[k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
+}
+
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+document.addEventListener('click', e => { if(!burger.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove('open'); });
+
+const navDrop = document.getElementById('navDrop');
+if(navDrop){
+  navDrop.querySelector('.nav-drop-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    navDrop.classList.toggle('open');
+    navDrop.querySelector('.nav-drop-btn').setAttribute('aria-expanded', navDrop.classList.contains('open'));
+  });
+  document.addEventListener('click', e => { if(!navDrop.contains(e.target)) navDrop.classList.remove('open'); });
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang();
+</script>
+
+</body>
+</html>
