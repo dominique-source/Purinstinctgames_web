@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="description" content="INSTINCT: Qui est vraiment le plus complet? 64 participants. 5 disciplines. Équipes changeantes. Un seul champion. L'émission de télé-réalité compétitive de PürInstinct Games.">
+<meta name="description" content="INSTINCT: Qui est vraiment le plus complet? 32 participants. 6 disciplines. Équipes changeantes. Un seul champion. L'émission de télé-réalité compétitive de PürInstinct Games.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
@@ -223,11 +223,44 @@ h1,h2,h3,.disp{
 .cat-detail{font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:4px}
 
 /* ============ PHASES ============ */
-.phases-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.3vw,16px)}
+.phases-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(10px,1.3vw,16px);
+  overflow:visible;
+}
 @media(max-width:900px){.phases-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.phases-grid{grid-template-columns:1fr}}
 
-.phase-card{position:relative;overflow:hidden;background:#0a0a0a}
+.phase-card{
+  position:relative;overflow:hidden;
+  background:#0f0f0f;
+  border:1.5px solid rgba(255,255,255,.07);
+  transition:transform .34s cubic-bezier(.34,1.4,.6,1),opacity .28s ease,border-color .25s,box-shadow .25s;
+}
+.phase-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:rgba(255,255,255,.08);z-index:3;
+  transition:background .25s;
+}
+@media(hover:hover){
+  .phase-card:hover{
+    transform:scale(1.15);z-index:5;
+    border-color:rgba(204,255,0,.5);
+    box-shadow:0 14px 46px rgba(204,255,0,.16);
+  }
+  .phase-card:hover::before{background:var(--lime)}
+  .phase-card:hover .phase-num-tag{color:var(--lime);opacity:1}
+  .phase-card:hover .phase-title{color:var(--lime)}
+  .phases-grid:hover .phase-card:not(:hover){opacity:.4}
+}
+@media(prefers-reduced-motion:reduce){.phase-card:hover{transform:none}}
+
+.phase-slash{
+  position:absolute;bottom:-16px;right:-16px;width:100px;height:100px;
+  background:repeating-linear-gradient(-60deg,rgba(204,255,0,.08) 0,rgba(204,255,0,.08) 2px,transparent 2px,transparent 14px);
+  transform:skewX(-8deg);pointer-events:none;z-index:1;
+}
+
 .phase-img-wrap{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden}
 .phase-img-wrap img{
   width:100%;height:100%;object-fit:cover;display:block;
@@ -239,9 +272,9 @@ h1,h2,h3,.disp{
   background:linear-gradient(to top,rgba(0,0,0,.96) 0%,rgba(0,0,0,.52) 48%,rgba(0,0,0,.08) 100%);
 }
 .phase-over{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:clamp(14px,2.5vw,24px)}
-.phase-num-tag{font-family:var(--display);font-weight:900;font-style:italic;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);opacity:.75;display:block;margin-bottom:4px}
+.phase-num-tag{font-family:var(--display);font-weight:900;font-style:italic;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(204,255,0,.75);display:block;margin-bottom:4px;transition:color .25s,opacity .25s}
 .phase-eps{font-size:11px;color:var(--lime);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px}
-.phase-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.8vw,22px);line-height:.95;color:var(--white);margin-bottom:8px}
+.phase-title{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.8vw,22px);line-height:.95;color:var(--white);margin-bottom:8px;transition:color .25s}
 .phase-desc{font-size:clamp(11.5px,1.1vw,13px);color:rgba(255,255,255,.6);line-height:1.52}
 
 /* Progress pills */
@@ -255,9 +288,9 @@ h1,h2,h3,.disp{
 .prog-arrow{color:rgba(204,255,0,.4);font-size:14px;font-family:sans-serif;line-height:1}
 
 /* ============ DISCIPLINES ============ */
-.disc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(8px,1.2vw,14px);margin-top:clamp(32px,5vw,52px)}
-@media(max-width:860px){.disc-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:500px){.disc-grid{grid-template-columns:1fr 1fr}}
+.disc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.2vw,14px);margin-top:clamp(32px,5vw,52px)}
+@media(max-width:860px){.disc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.disc-grid{grid-template-columns:1fr}}
 
 .disc-card{
   background:#0A0A0A;border:1.5px solid rgba(10,10,10,.1);
@@ -447,7 +480,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <span>INSTINCT:</span><br>
       <span class="lime" data-i18n="itv_h1">QUI EST VRAIMENT LE PLUS COMPLET?</span>
     </h1>
-    <p class="itv-hero-sub" data-i18n="itv_sub">64 participants. 5 disciplines. Équipes changeantes. Un seul champion.</p>
+    <p class="itv-hero-sub" data-i18n="itv_sub">32 participants. 6 disciplines. Équipes changeantes. Un seul champion.</p>
     <a href="#concept" class="itv-hero-cta" data-i18n="itv_cta_hero">VOIR LE FORMAT →</a>
   </div>
 </header>
@@ -457,12 +490,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   <div class="wrap">
     <div class="itv-strip-grid">
       <div class="itv-strip-item">
-        <span class="itv-strip-n">64</span>
+        <span class="itv-strip-n">32</span>
         <span class="itv-strip-l" data-i18n="itv_s1">PARTICIPANTS</span>
       </div>
       <div class="itv-strip-item">
-        <span class="itv-strip-n">16</span>
-        <span class="itv-strip-l" data-i18n="itv_s2">CRÉATEURS</span>
+        <span class="itv-strip-n">6</span>
+        <span class="itv-strip-l" data-i18n="itv_s2">DISCIPLINES</span>
       </div>
       <div class="itv-strip-item">
         <span class="itv-strip-n">12</span>
@@ -480,28 +513,28 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <section class="sec-dark" id="concept">
   <div class="wrap">
     <span class="eyebrow" data-i18n="itv_con_ey">Le Concept</span>
-    <h2 class="itv-sec-h" data-i18n="itv_con_h">64 PARTICIPANTS. 4 CATÉGORIES. <span class="lime">ZÉRO ALLIANCE.</span></h2>
-    <p class="itv-sec-sub" data-i18n="itv_con_body">Chaque épisode, les équipes sont redistribuées au hasard. Aucune alliance ne tient. Seul le leaderboard individuel compte. Athlètes professionnels, créateurs à parcours athlétique, wildcards et légendes québécoises — tous sur le même terrain, soumis aux mêmes disciplines.</p>
+    <h2 class="itv-sec-h" data-i18n="itv_con_h">32 PARTICIPANTS. 4 CATÉGORIES. <span class="lime">ZÉRO ALLIANCE.</span></h2>
+    <p class="itv-sec-sub" data-i18n="itv_con_body">Chaque épisode, les équipes sont redistribuées au hasard. Aucune alliance ne tient. Seul le leaderboard individuel compte. Anciens universitaires, anciens pros, sportifs multi-sports et créateurs athlétiques — tous sur le même terrain, soumis aux 6 mêmes disciplines.</p>
     <div class="cat-grid">
       <div class="cat-card c-blue">
-        <div class="cat-count">32</div>
-        <div class="cat-name" data-i18n="cat1_name">ATHLÈTES PRO / SEMI-PRO QC</div>
+        <div class="cat-count">14</div>
+        <div class="cat-name" data-i18n="cat1_name">ANCIENS UNIVERSITAIRES</div>
         <div class="cat-detail" data-i18n="cat1_detail">Basketball · Football · Soccer · Hockey · All-Canadians U Sport</div>
       </div>
-      <div class="cat-card c-lime">
-        <div class="cat-count">16</div>
-        <div class="cat-name" data-i18n="cat2_name">CRÉATEURS ATHLÉTIQUES</div>
-        <div class="cat-detail" data-i18n="cat2_detail">Séan Garnier · Deestroying · Touzani + créateurs CA/QC</div>
-      </div>
       <div class="cat-card c-orange">
-        <div class="cat-count">8</div>
-        <div class="cat-name" data-i18n="cat3_name">WILDCARDS</div>
-        <div class="cat-detail" data-i18n="cat3_detail">Parkour · Breakdance olympique · Arts martiaux · Gymnaste</div>
+        <div class="cat-count">6</div>
+        <div class="cat-name" data-i18n="cat2_name">ANCIENS PRO</div>
+        <div class="cat-detail" data-i18n="cat2_detail">Anciens joueurs professionnels reconvertis</div>
       </div>
       <div class="cat-card c-gold">
-        <div class="cat-count">8</div>
-        <div class="cat-name" data-i18n="cat4_name">LÉGENDES QC</div>
-        <div class="cat-detail" data-i18n="cat4_detail">GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser</div>
+        <div class="cat-count">10</div>
+        <div class="cat-name" data-i18n="cat3_name">SPORTIFS</div>
+        <div class="cat-detail" data-i18n="cat3_detail">Athlètes multi-sports · Compétiteurs amateurs · Wildcards</div>
+      </div>
+      <div class="cat-card c-lime">
+        <div class="cat-count">2</div>
+        <div class="cat-name" data-i18n="cat4_name">CRÉATEURS SPORTIFS</div>
+        <div class="cat-detail" data-i18n="cat4_detail">Créateurs à parcours athlétique confirmé</div>
       </div>
     </div>
   </div>
@@ -522,9 +555,10 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
             <span class="phase-num-tag">PHASE 01</span>
             <span class="phase-eps" data-i18n="ph1_eps">ÉP. 1–3</span>
             <div class="phase-title" data-i18n="ph1_t">L'ANNONCE</div>
-            <p class="phase-desc" data-i18n="ph1_d">Les 64 participants découvrent le format. Les équipes sont tirées au sort. Les athlètes pros minimisent les créateurs. Les premières surprises arrivent dès la station 1.</p>
+            <p class="phase-desc" data-i18n="ph1_d">Les 32 participants découvrent le format. Les équipes sont tirées au sort. Les anciens pros minimisent les sportifs. Les premières surprises arrivent dès la discipline 1.</p>
           </div>
         </div>
+        <div class="phase-slash"></div>
       </div>
 
       <!-- Phase 02 -->
@@ -535,9 +569,10 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
             <span class="phase-num-tag">PHASE 02</span>
             <span class="phase-eps" data-i18n="ph2_eps">ÉP. 4–7</span>
             <div class="phase-title" data-i18n="ph2_t">LA FRACTURE</div>
-            <p class="phase-desc" data-i18n="ph2_d">Un athlète star est éliminé. Un créateur domine le leaderboard. La question devient réelle : qui est vraiment le plus complet? Internet s'enflamme.</p>
+            <p class="phase-desc" data-i18n="ph2_d">Un ancien pro est éliminé. Un sportif domine le leaderboard. La question devient réelle : qui est vraiment le plus complet? Internet s'enflamme.</p>
           </div>
         </div>
+        <div class="phase-slash"></div>
       </div>
 
       <!-- Phase 03 -->
@@ -548,9 +583,10 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
             <span class="phase-num-tag">PHASE 03</span>
             <span class="phase-eps" data-i18n="ph3_eps">ÉP. 8–11</span>
             <div class="phase-title" data-i18n="ph3_t">LA PREUVE</div>
-            <p class="phase-desc" data-i18n="ph3_d">Top 16. Tout le monde est légitime. Les équipes changent encore. Chaque discipline décide. Le leaderboard individuel devient impitoyable.</p>
+            <p class="phase-desc" data-i18n="ph3_d">Top 8. Tout le monde est légitime. Les équipes changent encore. Chaque discipline décide. Le leaderboard individuel devient impitoyable.</p>
           </div>
         </div>
+        <div class="phase-slash"></div>
       </div>
 
       <!-- Phase 04 -->
@@ -561,20 +597,21 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
             <span class="phase-num-tag">PHASE 04</span>
             <span class="phase-eps" data-i18n="ph4_eps">ÉP. 12 — FINALE</span>
             <div class="phase-title" data-i18n="ph4_t">LA FINALE</div>
-            <p class="phase-desc" data-i18n="ph4_d">Live TV. Arène pleine. 4 finalistes. Les 5 disciplines complètes. Le gagnant peut être n'importe qui — c'est ça le show.</p>
+            <p class="phase-desc" data-i18n="ph4_d">Live TV. Arène pleine. 4 finalistes. Les 6 disciplines complètes. Le gagnant peut être n'importe qui — c'est ça le show.</p>
           </div>
         </div>
+        <div class="phase-slash"></div>
       </div>
 
     </div>
 
     <!-- Progression pills -->
     <div class="prog-pills">
-      <div class="prog-pill"><span data-i18n="pp1">64 PARTICIPANTS</span></div>
-      <span class="prog-arrow">→</span>
-      <div class="prog-pill"><span>32</span></div>
+      <div class="prog-pill"><span data-i18n="pp1">32 PARTICIPANTS</span></div>
       <span class="prog-arrow">→</span>
       <div class="prog-pill"><span>16</span></div>
+      <span class="prog-arrow">→</span>
+      <div class="prog-pill"><span>8</span></div>
       <span class="prog-arrow">→</span>
       <div class="prog-pill"><span>4</span></div>
       <span class="prog-arrow">→</span>
@@ -583,11 +620,11 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   </div>
 </section>
 
-<!-- ============ SECTION: LES 5 DISCIPLINES ============ -->
+<!-- ============ SECTION: LES 6 DISCIPLINES ============ -->
 <section class="sec-light" id="disciplines">
   <div class="wrap">
     <span class="eyebrow" style="color:#5a7500" data-i18n="itv_disc_ey">Les Disciplines</span>
-    <h2 class="itv-sec-h" data-i18n="itv_disc_h">5 DISCIPLINES. <span style="color:#5a7500">UNE VÉRITÉ.</span></h2>
+    <h2 class="itv-sec-h" data-i18n="itv_disc_h">6 DISCIPLINES. <span style="color:#5a7500">UNE VÉRITÉ.</span></h2>
     <p class="itv-sec-sub" data-i18n="itv_disc_sub">Chaque discipline avantage différemment les athlètes et les créateurs. C'est pour ça que personne ne sait qui va gagner.</p>
     <div class="disc-grid">
       <div class="disc-card">
@@ -620,9 +657,15 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <div class="disc-detail" data-i18n="disc5_d">Lecture du jeu, décision</div>
         <span class="disc-adv cre" data-i18n="disc5_adv">Avantage : Créateur</span>
       </div>
+      <div class="disc-card">
+        <div class="disc-icon">💪</div>
+        <div class="disc-name">ENDURANCE</div>
+        <div class="disc-detail" data-i18n="disc6_d">Cardio, résistance mentale</div>
+        <span class="disc-adv ath" data-i18n="disc6_adv">Avantage : Athlète traditionnel</span>
+      </div>
     </div>
     <div class="disc-quote">
-      <p data-i18n="disc_quote">"3 disciplines sur 5 avantagent les créateurs. Mais le speed les tue. C'est ça l'instinct."</p>
+      <p data-i18n="disc_quote">"3 disciplines sur 6 avantagent les créateurs. Mais le speed et l'endurance les rattrapent. C'est ça l'instinct."</p>
     </div>
   </div>
 </section>
@@ -827,30 +870,31 @@ fr:{
   nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
   itv_badge:"ÉMISSION TV · SAISON 1 · 2027",
   itv_h1:"QUI EST VRAIMENT LE PLUS COMPLET?",
-  itv_sub:"64 participants. 5 disciplines. Équipes changeantes. Un seul champion.",
+  itv_sub:"32 participants. 6 disciplines. Équipes changeantes. Un seul champion.",
   itv_cta_hero:"VOIR LE FORMAT →",
-  itv_s1:"PARTICIPANTS",itv_s2:"CRÉATEURS",itv_s3:"ÉPISODES",itv_s4:"CHAMPION",
+  itv_s1:"PARTICIPANTS",itv_s2:"DISCIPLINES",itv_s3:"ÉPISODES",itv_s4:"CHAMPION",
   itv_con_ey:"Le Concept",
-  itv_con_h:"64 PARTICIPANTS. 4 CATÉGORIES. ZÉRO ALLIANCE.",
-  itv_con_body:"Chaque épisode, les équipes sont redistribuées au hasard. Aucune alliance ne tient. Seul le leaderboard individuel compte. Athlètes professionnels, créateurs à parcours athlétique, wildcards et légendes québécoises — tous sur le même terrain, soumis aux mêmes disciplines.",
-  cat1_name:"ATHLÈTES PRO / SEMI-PRO QC",cat1_detail:"Basketball · Football · Soccer · Hockey · All-Canadians U Sport",
-  cat2_name:"CRÉATEURS ATHLÉTIQUES",cat2_detail:"Séan Garnier · Deestroying · Touzani + créateurs CA/QC",
-  cat3_name:"WILDCARDS",cat3_detail:"Parkour · Breakdance olympique · Arts martiaux · Gymnaste",
-  cat4_name:"LÉGENDES QC",cat4_detail:"GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser",
+  itv_con_h:"32 PARTICIPANTS. 4 CATÉGORIES. ZÉRO ALLIANCE.",
+  itv_con_body:"Chaque épisode, les équipes sont redistribuées au hasard. Aucune alliance ne tient. Seul le leaderboard individuel compte. Anciens universitaires, anciens pros, sportifs multi-sports et créateurs athlétiques — tous sur le même terrain, soumis aux 6 mêmes disciplines.",
+  cat1_name:"ANCIENS UNIVERSITAIRES",cat1_detail:"Basketball · Football · Soccer · Hockey · All-Canadians U Sport",
+  cat2_name:"ANCIENS PRO",cat2_detail:"Anciens joueurs professionnels reconvertis",
+  cat3_name:"SPORTIFS",cat3_detail:"Athlètes multi-sports · Compétiteurs amateurs · Wildcards",
+  cat4_name:"CRÉATEURS SPORTIFS",cat4_detail:"Créateurs à parcours athlétique confirmé",
   itv_ph_ey:"La Mécanique",itv_ph_h:"L'ARC NARRATIF. 4 PHASES.",
-  ph1_eps:"ÉP. 1–3",ph1_t:"L'ANNONCE",ph1_d:"Les 64 participants découvrent le format. Les équipes sont tirées au sort. Les athlètes pros minimisent les créateurs. Les premières surprises arrivent dès la station 1.",
-  ph2_eps:"ÉP. 4–7",ph2_t:"LA FRACTURE",ph2_d:"Un athlète star est éliminé. Un créateur domine le leaderboard. La question devient réelle : qui est vraiment le plus complet? Internet s'enflamme.",
-  ph3_eps:"ÉP. 8–11",ph3_t:"LA PREUVE",ph3_d:"Top 16. Tout le monde est légitime. Les équipes changent encore. Chaque discipline décide. Le leaderboard individuel devient impitoyable.",
-  ph4_eps:"ÉP. 12 — FINALE",ph4_t:"LA FINALE",ph4_d:"Live TV. Arène pleine. 4 finalistes. Les 5 disciplines complètes. Le gagnant peut être n'importe qui — c'est ça le show.",
-  pp1:"64 PARTICIPANTS",pp5:"1 CHAMPION",
-  itv_disc_ey:"Les Disciplines",itv_disc_h:"5 DISCIPLINES. UNE VÉRITÉ.",
+  ph1_eps:"ÉP. 1–3",ph1_t:"L'ANNONCE",ph1_d:"Les 32 participants découvrent le format. Les équipes sont tirées au sort. Les anciens pros minimisent les sportifs. Les premières surprises arrivent dès la discipline 1.",
+  ph2_eps:"ÉP. 4–7",ph2_t:"LA FRACTURE",ph2_d:"Un ancien pro est éliminé. Un sportif domine le leaderboard. La question devient réelle : qui est vraiment le plus complet? Internet s'enflamme.",
+  ph3_eps:"ÉP. 8–11",ph3_t:"LA PREUVE",ph3_d:"Top 8. Tout le monde est légitime. Les équipes changent encore. Chaque discipline décide. Le leaderboard individuel devient impitoyable.",
+  ph4_eps:"ÉP. 12 — FINALE",ph4_t:"LA FINALE",ph4_d:"Live TV. Arène pleine. 4 finalistes. Les 6 disciplines complètes. Le gagnant peut être n'importe qui — c'est ça le show.",
+  pp1:"32 PARTICIPANTS",pp5:"1 CHAMPION",
+  itv_disc_ey:"Les Disciplines",itv_disc_h:"6 DISCIPLINES. UNE VÉRITÉ.",
   itv_disc_sub:"Chaque discipline avantage différemment les athlètes et les créateurs. C'est pour ça que personne ne sait qui va gagner.",
   disc1_d:"Sprint, réactivité",disc1_adv:"Avantage : Athlète traditionnel",
   disc2_d:"Balle, précision, contrôle",disc2_adv:"Avantage : Créateur",
   disc3_d:"Dribble, frappe, geste",disc3_adv:"Avantage : Créateur",
   disc4_d:"Changements de direction",disc4_adv:"Avantage : 50/50",
   disc5_d:"Lecture du jeu, décision",disc5_adv:"Avantage : Créateur",
-  disc_quote:'"3 disciplines sur 5 avantagent les créateurs. Mais le speed les tue. C\'est ça l\'instinct."',
+  disc6_d:"Cardio, résistance mentale",disc6_adv:"Avantage : Athlète traditionnel",
+  disc_quote:'"3 disciplines sur 6 avantagent les créateurs. Mais le speed et l\'endurance les rattrapent. C\'est ça l\'instinct."',
   itv_tens_ey:"Le Débat",
   itv_tens_h:"LE DÉBAT QUE TOUT LE MONDE A EU DANS UNE COUR D'ÉCOLE — EN PRIME TIME.",
   vs_ath:"ATHLÈTE PRO DIT :",vs_cre:"CRÉATEUR RÉPOND :",
@@ -887,30 +931,31 @@ en:{
   nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
   itv_badge:"TV SHOW · SEASON 1 · 2027",
   itv_h1:"WHO IS TRULY THE MOST COMPLETE?",
-  itv_sub:"64 participants. 5 disciplines. Shifting teams. One champion.",
+  itv_sub:"32 participants. 6 disciplines. Shifting teams. One champion.",
   itv_cta_hero:"SEE THE FORMAT →",
-  itv_s1:"PARTICIPANTS",itv_s2:"CREATORS",itv_s3:"EPISODES",itv_s4:"CHAMPION",
+  itv_s1:"PARTICIPANTS",itv_s2:"DISCIPLINES",itv_s3:"EPISODES",itv_s4:"CHAMPION",
   itv_con_ey:"The Concept",
-  itv_con_h:"64 PARTICIPANTS. 4 CATEGORIES. ZERO ALLIANCES.",
-  itv_con_body:"Every episode, teams are reshuffled at random. No alliance survives. Only the individual leaderboard matters. Pro athletes, athletic content creators, wildcards and Quebec legends — all on the same field, tested by the same disciplines.",
-  cat1_name:"PRO / SEMI-PRO ATHLETES QC",cat1_detail:"Basketball · Football · Soccer · Hockey · All-Canadians U Sport",
-  cat2_name:"ATHLETIC CREATORS",cat2_detail:"Séan Garnier · Deestroying · Touzani + CA/QC creators",
-  cat3_name:"WILDCARDS",cat3_detail:"Parkour · Olympic Breakdance · Martial Arts · Gymnastics",
-  cat4_name:"QC LEGENDS",cat4_detail:"GSP · Laurent Duvernay-Tardif · Hayley Wickenheiser",
+  itv_con_h:"32 PARTICIPANTS. 4 CATEGORIES. ZERO ALLIANCES.",
+  itv_con_body:"Every episode, teams are reshuffled at random. No alliance survives. Only the individual leaderboard matters. Former university athletes, former pros, multi-sport competitors and athletic creators — all on the same field, tested by the same 6 disciplines.",
+  cat1_name:"FORMER UNIVERSITY ATHLETES",cat1_detail:"Basketball · Football · Soccer · Hockey · All-Canadians U Sport",
+  cat2_name:"FORMER PROS",cat2_detail:"Former professional players turned competitors",
+  cat3_name:"ATHLETES",cat3_detail:"Multi-sport athletes · Amateur competitors · Wildcards",
+  cat4_name:"ATHLETIC CREATORS",cat4_detail:"Creators with confirmed athletic background",
   itv_ph_ey:"The Mechanics",itv_ph_h:"THE NARRATIVE ARC. 4 PHASES.",
-  ph1_eps:"EP. 1–3",ph1_t:"THE REVEAL",ph1_d:"64 participants discover the format. Teams are drawn at random. Pro athletes underestimate the creators. The first upsets arrive at station 1.",
-  ph2_eps:"EP. 4–7",ph2_t:"THE FRACTURE",ph2_d:"A star athlete is eliminated. A creator dominates the leaderboard. The question becomes real: who is truly the most complete? The internet ignites.",
-  ph3_eps:"EP. 8–11",ph3_t:"THE PROOF",ph3_d:"Top 16. Everyone has earned their spot. Teams shuffle again. Every discipline decides. The individual leaderboard becomes ruthless.",
-  ph4_eps:"EP. 12 — FINALE",ph4_t:"THE FINALE",ph4_d:"Live TV. Full arena. 4 finalists. All 5 disciplines. The winner could be anyone — that's the show.",
-  pp1:"64 PARTICIPANTS",pp5:"1 CHAMPION",
-  itv_disc_ey:"The Disciplines",itv_disc_h:"5 DISCIPLINES. ONE TRUTH.",
+  ph1_eps:"EP. 1–3",ph1_t:"THE REVEAL",ph1_d:"32 participants discover the format. Teams are drawn at random. Former pros underestimate the athletes. The first upsets arrive at discipline 1.",
+  ph2_eps:"EP. 4–7",ph2_t:"THE FRACTURE",ph2_d:"A former pro is eliminated. An athlete dominates the leaderboard. The question becomes real: who is truly the most complete? The internet ignites.",
+  ph3_eps:"EP. 8–11",ph3_t:"THE PROOF",ph3_d:"Top 8. Everyone has earned their spot. Teams shuffle again. Every discipline decides. The individual leaderboard becomes ruthless.",
+  ph4_eps:"EP. 12 — FINALE",ph4_t:"THE FINALE",ph4_d:"Live TV. Full arena. 4 finalists. All 6 disciplines. The winner could be anyone — that's the show.",
+  pp1:"32 PARTICIPANTS",pp5:"1 CHAMPION",
+  itv_disc_ey:"The Disciplines",itv_disc_h:"6 DISCIPLINES. ONE TRUTH.",
   itv_disc_sub:"Each discipline gives a different edge to athletes or creators. That's why nobody knows who's going to win.",
   disc1_d:"Sprint, reaction time",disc1_adv:"Edge: Traditional Athlete",
   disc2_d:"Ball, precision, control",disc2_adv:"Edge: Creator",
   disc3_d:"Dribble, shot, technique",disc3_adv:"Edge: Creator",
   disc4_d:"Changes of direction",disc4_adv:"Edge: 50/50",
   disc5_d:"Reading the game, decision-making",disc5_adv:"Edge: Creator",
-  disc_quote:'"3 out of 5 disciplines favor creators. But speed kills them. That\'s instinct."',
+  disc6_d:"Cardio, mental endurance",disc6_adv:"Edge: Traditional Athlete",
+  disc_quote:'"3 out of 6 disciplines favor creators. But speed and endurance catch up with them. That\'s instinct."',
   itv_tens_ey:"The Debate",
   itv_tens_h:"THE DEBATE EVERYONE HAD IN A SCHOOLYARD — IN PRIME TIME.",
   vs_ath:"PRO ATHLETE SAYS:",vs_cre:"CREATOR REPLIES:",
