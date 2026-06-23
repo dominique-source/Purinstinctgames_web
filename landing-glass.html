@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PürInstinct Games — Ton instinct. Ton arène.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root {
+  --bg:     #0A0A0A;
+  --lime:   #CCFF00;
+  --white:  #F4F4F2;
+  --muted:  #9C9C96;
+  --red:    #FF4438;
+  --blue:   #2D7DFF;
+  --green:  #2EE06A;
+  --yellow: #FFC400;
+  --purple: #A45CFF;
+
+  /* RGB counterparts for rgba() */
+  --lime-rgb:   204,255,0;
+  --red-rgb:    255,68,56;
+  --blue-rgb:   45,125,255;
+  --green-rgb:  46,224,106;
+  --yellow-rgb: 255,196,0;
+  --purple-rgb: 164,92,255;
+
+  /* Glass system */
+  --glass:        rgba(255,255,255,.045);
+  --glass-hi:     rgba(255,255,255,.08);
+  --glass-border: rgba(255,255,255,.09);
+  --blur:  20px;
+  --r:     20px;
+
+  --display: 'Barlow Condensed',sans-serif;
+  --body:    'Barlow',sans-serif;
+}
+
+/* ============ RESET ============ */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img,svg { display:block; max-width:100%; }
+a { color:inherit; text-decoration:none; }
+button { font:inherit; cursor:pointer; border:0; background:none; color:inherit; }
+::selection { background:var(--lime); color:#0A0A0A; }
+
+/* ============ TYPE ============ */
+h1,h2,h3,.disp {
+  font-family: var(--display);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -.015em;
+  line-height: .92;
+}
+.eyebrow {
+  font-family: var(--display);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  color: var(--lime);
+  letter-spacing: .1em;
+  font-size: clamp(12px,1.3vw,15px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.eyebrow::before {
+  content:"";
+  width:24px; height:2px;
+  background:var(--lime);
+  transform:skewX(-28deg);
+  flex:none;
+}
+.lime { color:var(--lime); }
+
+/* ============ AMBIENT LAYER ============ */
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+.orb-1 {
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, rgba(var(--lime-rgb),.18), transparent 70%);
+  top: -200px; left: -180px;
+  animation: drift1 16s ease-in-out infinite alternate;
+}
+.orb-2 {
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(var(--purple-rgb),.18), transparent 70%);
+  bottom: -120px; right: -120px;
+  animation: drift2 20s ease-in-out infinite alternate;
+}
+.orb-3 {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(var(--blue-rgb),.12), transparent 70%);
+  top: 45%; right: 12%;
+  animation: drift3 14s ease-in-out infinite alternate;
+}
+@keyframes drift1 { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(50px,-60px) scale(1.08)} }
+@keyframes drift2 { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(-40px,50px) scale(1.06)} }
+@keyframes drift3 { 0%{transform:translate(0,0)} 100%{transform:translate(-30px,40px)} }
+
+/* Noise grain */
+body::after {
+  content:"";
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:1;
+  opacity:.45;
+}
+
+/* ============ NAV ============ */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px clamp(20px,5vw,52px);
+  background: rgba(10,10,10,.65);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-bottom: 1px solid rgba(255,255,255,.055);
+}
+.logo {
+  font-family: var(--display);
+  font-weight:900; font-style:italic;
+  font-size:22px; text-transform:uppercase;
+  white-space:nowrap; position:relative; z-index:2;
+}
+.logo .sl { color:var(--lime); margin:0 2px; }
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.nav-links a {
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:15px; letter-spacing:.05em;
+  color:rgba(244,244,242,.65); transition:color .2s;
+}
+.nav-links a:hover { color:var(--lime); }
+.nav-cta {
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:14px; letter-spacing:.06em;
+  background:rgba(var(--lime-rgb),.1);
+  border:1px solid rgba(var(--lime-rgb),.35);
+  color:var(--lime); padding:9px 22px 10px;
+  border-radius:50px; backdrop-filter:blur(8px);
+  transition:background .2s, border-color .2s, box-shadow .25s;
+}
+.nav-cta:hover {
+  background:rgba(var(--lime-rgb),.18);
+  border-color:var(--lime);
+  box-shadow:0 0 22px rgba(var(--lime-rgb),.28);
+}
+.burger { display:none; flex-direction:column; gap:5px; padding:6px; }
+.burger span { width:22px; height:2.5px; background:var(--lime); transform:skewX(-18deg); }
+@media(max-width:860px) {
+  .nav-links { display:none; }
+  .burger { display:flex; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  position:relative;
+  min-height:100svh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:100px clamp(20px,5vw,52px) 64px;
+  z-index:2;
+}
+.hero-video-wrap {
+  position:absolute; inset:0; z-index:0; overflow:hidden;
+}
+.hero-video-wrap video {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 40%;
+  opacity:.22;
+}
+.hero-video-wrap::after {
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.1) 40%, rgba(10,10,10,.85) 100%),
+              radial-gradient(ellipse 90% 70% at 50% 50%, transparent 30%, rgba(10,10,10,.5) 100%);
+}
+.hero-body {
+  position:relative; z-index:3;
+  width:min(1100px,100%); margin:0 auto;
+}
+
+/* Glass hero panel */
+.hero-panel {
+  background: rgba(255,255,255,.035);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 28px;
+  padding: clamp(36px,5vw,64px);
+  margin-bottom: 20px;
+  box-shadow:
+    0 50px 100px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 -1px 0 rgba(255,255,255,.02);
+  position:relative; overflow:hidden;
+}
+/* Top-edge lime shimmer on panel */
+.hero-panel::before {
+  content:"";
+  position:absolute; top:0; left:-30%; width:60%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(var(--lime-rgb),.7), transparent);
+  animation: panelShimmer 5s ease-in-out infinite;
+}
+@keyframes panelShimmer {
+  0%,100%{left:-30%;opacity:.5} 50%{left:70%;opacity:1}
+}
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(var(--lime-rgb),.1);
+  border:1px solid rgba(var(--lime-rgb),.28);
+  border-radius:40px; padding:5px 14px 6px;
+  font-family:var(--display); font-weight:900; font-style:italic;
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--lime); margin-bottom:26px; backdrop-filter:blur(8px);
+}
+.hero-badge::before {
+  content:"";
+  width:6px; height:6px; border-radius:50%;
+  background:var(--lime); box-shadow:0 0 8px var(--lime);
+  animation:pulseDot 2.2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%,100%{box-shadow:0 0 6px var(--lime);opacity:1}
+  50%{box-shadow:0 0 18px var(--lime),0 0 30px rgba(var(--lime-rgb),.4);opacity:.6}
+}
+
+.hero h1 {
+  font-size:clamp(56px,10.5vw,148px);
+  margin-bottom:20px;
+}
+.hero h1 .line-a { display:block; color:var(--white); }
+.hero h1 .line-b { display:block; color:var(--lime); }
+
+.hero-sub {
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:clamp(17px,2.2vw,25px);
+  color:rgba(244,244,242,.5); margin-bottom:36px; letter-spacing:.04em;
+}
+.hero-sub b { color:var(--white); }
+
+.ctas {
+  display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+}
+.btn-primary {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:clamp(16px,2vw,22px);
+  letter-spacing:.04em;
+  background:var(--lime); color:#0A0A0A;
+  padding:15px 36px 17px; border-radius:50px;
+  cursor:pointer;
+  transition:transform .18s, box-shadow .25s;
+}
+.btn-primary:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 50px rgba(var(--lime-rgb),.55), 0 22px 45px rgba(0,0,0,.35);
+}
+.btn-primary svg { transition:transform .2s; }
+.btn-primary:hover svg { transform:translateX(4px); }
+
+.btn-ghost {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:clamp(14px,1.7vw,18px);
+  letter-spacing:.04em;
+  color:rgba(244,244,242,.65);
+  border:1px solid rgba(255,255,255,.14);
+  padding:14px 28px 16px; border-radius:50px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(8px);
+  transition:all .2s;
+}
+.btn-ghost:hover {
+  color:var(--white);
+  border-color:rgba(255,255,255,.38);
+  background:rgba(255,255,255,.08);
+}
+
+/* ============ STAT CHIPS ============ */
+.stat-chips {
+  display:flex; gap:12px; flex-wrap:wrap;
+}
+.chip {
+  flex:1; min-width:140px;
+  padding:18px 22px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;
+  position:relative; overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
+}
+.chip::before {
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(var(--lime-rgb),.055) 0%, transparent 60%);
+  pointer-events:none;
+}
+.chip:hover {
+  border-color:rgba(var(--lime-rgb),.28);
+  box-shadow:0 0 22px rgba(var(--lime-rgb),.07);
+}
+.chip-num {
+  font-family:var(--display); font-weight:900; font-style:italic;
+  font-size:clamp(30px,3.5vw,48px); color:var(--lime);
+  line-height:1; font-variant-numeric:tabular-nums;
+  display:block;
+}
+.chip-lbl {
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:12px; letter-spacing:.14em;
+  color:var(--muted); display:block; margin-top:4px;
+}
+
+/* ============ SHARED SECTION ============ */
+.section {
+  position:relative; z-index:2;
+  padding:clamp(80px,10vw,130px) clamp(20px,5vw,52px);
+}
+.wrap { width:min(1100px,100%); margin:0 auto; }
+.section-head { margin-bottom:48px; }
+.section-head h2 { font-size:clamp(42px,6.5vw,96px); margin-bottom:14px; }
+.section-head p { color:var(--muted); max-width:58ch; font-size:16px; line-height:1.7; }
+
+/* ============ INSTINCT CARDS ============ */
+.instincts-grid {
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:16px;
+}
+/* row 1 — 3 equal */
+.icard:nth-child(1),.icard:nth-child(2),.icard:nth-child(3) { grid-column:span 2; }
+/* row 2 — 2 wider */
+.icard:nth-child(4),.icard:nth-child(5) { grid-column:span 3; }
+
+.icard {
+  --zc:var(--lime); --zrgb:var(--lime-rgb);
+  position:relative;
+  padding:clamp(24px,2.8vw,38px);
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(var(--zrgb),.16);
+  border-radius:20px; overflow:hidden;
+  cursor:default;
+  transition:
+    transform .32s cubic-bezier(.16,1,.3,1),
+    border-color .3s,
+    background .3s,
+    box-shadow .3s;
+}
+
+/* radial glow top */
+.icard::before {
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 65% 45% at 50% 0%, rgba(var(--zrgb),.12), transparent 70%);
+  pointer-events:none;
+  transition:opacity .3s;
+}
+/* bottom accent line */
+.icard::after {
+  content:"";
+  position:absolute; bottom:0; left:10%; right:10%; height:2px;
+  background:linear-gradient(90deg, transparent, rgba(var(--zrgb),.7), transparent);
+  opacity:0; transition:opacity .3s;
+  border-radius:2px;
+}
+
+.icard:hover {
+  transform:translateY(-8px);
+  background:rgba(255,255,255,.065);
+  border-color:rgba(var(--zrgb),.45);
+  box-shadow:
+    0 0 0 1px rgba(var(--zrgb),.1),
+    0 24px 64px rgba(0,0,0,.45),
+    0 0 50px rgba(var(--zrgb),.1);
+}
+.icard:hover::after { opacity:1; }
+
+/* zone overrides */
+.icard.vitesse { --zc:var(--red);    --zrgb:var(--red-rgb); }
+.icard.mains   { --zc:var(--blue);   --zrgb:var(--blue-rgb); }
+.icard.pieds   { --zc:var(--green);  --zrgb:var(--green-rgb); }
+.icard.agilite { --zc:var(--yellow); --zrgb:var(--yellow-rgb); }
+.icard.iq      { --zc:var(--purple); --zrgb:var(--purple-rgb); }
+
+.icard-tag {
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:11.5px; letter-spacing:.2em;
+  color:var(--zc);
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:14px;
+}
+.icard-tag::before {
+  content:"";
+  width:16px; height:2px;
+  background:var(--zc); transform:skewX(-20deg);
+}
+.icard-icon {
+  width:52px; height:52px; margin-bottom:18px;
+  position:relative;
+}
+.icard-icon img {
+  width:100%; height:100%; object-fit:contain;
+  filter:drop-shadow(0 0 14px rgba(var(--zrgb),.7));
+  transition:filter .3s;
+}
+.icard:hover .icard-icon img {
+  filter:drop-shadow(0 0 22px rgba(var(--zrgb),.95)) drop-shadow(0 0 6px rgba(var(--zrgb),.5));
+}
+.icard h3 {
+  font-size:clamp(28px,3.8vw,54px);
+  color:var(--white); margin-bottom:10px;
+}
+.icard p {
+  color:var(--muted); font-size:14.5px; line-height:1.65; max-width:38ch;
+}
+/* Ghost number watermark */
+.icard-num {
+  position:absolute; bottom:-14px; right:-4px;
+  font-family:var(--display); font-weight:900; font-style:italic;
+  font-size:clamp(90px,12vw,150px);
+  color:transparent;
+  -webkit-text-stroke:1px rgba(var(--zrgb),.12);
+  line-height:1; pointer-events:none; user-select:none;
+  transition:-webkit-text-stroke-color .3s;
+}
+.icard:hover .icard-num { -webkit-text-stroke-color:rgba(var(--zrgb),.28); }
+
+/* ============ CTA SECTION ============ */
+.cta-section {
+  position:relative; z-index:2;
+  padding:0 clamp(20px,5vw,52px) clamp(90px,10vw,130px);
+}
+.cta-wrap { max-width:1100px; margin:0 auto; }
+
+/* Animated conic border — @property for modern browsers */
+@property --ba {
+  syntax:'<angle>';
+  initial-value:0deg;
+  inherits:false;
+}
+.cta-shell {
+  position:relative; padding:2px; border-radius:26px;
+  background:conic-gradient(
+    from var(--ba),
+    rgba(var(--lime-rgb),.9) 0%,
+    rgba(var(--red-rgb),.7) 16%,
+    rgba(var(--blue-rgb),.7) 32%,
+    rgba(var(--green-rgb),.7) 48%,
+    rgba(var(--yellow-rgb),.7) 64%,
+    rgba(var(--purple-rgb),.7) 80%,
+    rgba(var(--lime-rgb),.9) 100%
+  );
+  animation:spinBorder 6s linear infinite;
+  box-shadow:
+    0 0 60px rgba(var(--lime-rgb),.1),
+    0 50px 100px rgba(0,0,0,.55);
+}
+/* Fallback for browsers without @property — static rainbow border */
+@supports not (background:conic-gradient(from 0deg,red,blue)) {
+  .cta-shell { background:linear-gradient(135deg, var(--lime), var(--purple), var(--blue), var(--lime)); }
+}
+@keyframes spinBorder { to { --ba:360deg; } }
+
+.cta-inner {
+  background:rgba(8,8,8,.95);
+  backdrop-filter:blur(32px); -webkit-backdrop-filter:blur(32px);
+  border-radius:24px;
+  padding:clamp(48px,6vw,88px) clamp(32px,5vw,80px);
+  text-align:center; position:relative; overflow:hidden;
+}
+/* Lime glow zenith */
+.cta-inner::before {
+  content:"";
+  position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:60%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(var(--lime-rgb),.8), transparent);
+}
+/* Ambient glow blob */
+.cta-inner::after {
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 65% 55% at 50% -10%, rgba(var(--lime-rgb),.07), transparent 65%);
+}
+.cta-inner .eyebrow { justify-content:center; }
+.cta-inner h2 {
+  font-size:clamp(44px,7.5vw,108px);
+  margin-bottom:18px;
+  position:relative; z-index:1;
+}
+.cta-inner > p {
+  color:var(--muted); font-size:clamp(15px,1.8vw,18px);
+  max-width:54ch; margin:0 auto 40px;
+  position:relative; z-index:1;
+}
+.cta-inner .btn-primary {
+  font-size:clamp(17px,2.2vw,24px);
+  padding:17px 50px 19px;
+  margin:0 auto;
+  position:relative; z-index:1;
+}
+.cta-note {
+  margin-top:20px;
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:12px; letter-spacing:.12em;
+  color:var(--muted); position:relative; z-index:1;
+}
+.cta-note b { color:var(--lime); }
+
+/* ============ FOOTER ============ */
+footer {
+  position:relative; z-index:2;
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:38px clamp(20px,5vw,52px) 36px;
+}
+.foot-row {
+  max-width:1100px; margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:16px;
+}
+.foot-copy { color:var(--muted); font-size:13.5px; }
+.foot-links { display:flex; gap:22px; }
+.foot-links a {
+  font-family:var(--display); font-weight:900; font-style:italic;
+  text-transform:uppercase; font-size:13px; letter-spacing:.08em;
+  color:var(--muted); transition:color .2s;
+}
+.foot-links a:hover { color:var(--lime); }
+
+/* ============ REVEALS ============ */
+.reveal {
+  opacity:0;
+  transform:translateY(36px);
+  transition:
+    opacity .7s cubic-bezier(.16,1,.3,1),
+    transform .7s cubic-bezier(.16,1,.3,1);
+}
+.reveal.in { opacity:1; transform:none; }
+.reveal.d1 { transition-delay:.08s; }
+.reveal.d2 { transition-delay:.16s; }
+.reveal.d3 { transition-delay:.24s; }
+.reveal.d4 { transition-delay:.32s; }
+.reveal.d5 { transition-delay:.40s; }
+
+/* ============ SCROLL HINT ============ */
+.scroll-hint {
+  position:absolute; bottom:28px; left:50%;
+  transform:translateX(-50%);
+  z-index:5; display:flex; flex-direction:column;
+  align-items:center; gap:8px; opacity:.5;
+  animation:hintFloat 2.2s ease-in-out infinite;
+}
+.scroll-hint span {
+  font-family:var(--display); font-style:italic; font-weight:900;
+  font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--lime);
+}
+@keyframes hintFloat {
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(10px)}
+}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:900px) {
+  .instincts-grid { grid-template-columns:1fr 1fr; }
+  .icard:nth-child(n) { grid-column:span 1; }
+  .icard:nth-child(5) { grid-column:span 2; }
+  .stat-chips { flex-wrap:wrap; }
+  .chip { min-width:calc(50% - 6px); flex:auto; }
+}
+@media(max-width:600px) {
+  .hero-panel { padding:28px 22px; }
+  .instincts-grid { grid-template-columns:1fr; }
+  .icard:nth-child(n) { grid-column:span 1; }
+  .stat-chips { flex-direction:column; }
+  .chip { width:100%; }
+  .ctas { flex-direction:column; align-items:flex-start; }
+  .cta-inner { padding:36px 24px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.001s !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001s !important;
+  }
+  .reveal { opacity:1; transform:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── AMBIENT ORBS ── -->
+<div class="ambient" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="nav" aria-label="Navigation principale">
+  <a href="#top" class="logo" aria-label="PürInstinct Games — accueil">
+    PÜRINSTINCT<span class="sl">/</span>GAMES
+  </a>
+  <div class="nav-links" role="list">
+    <a href="#instincts" role="listitem">Les 5 instincts</a>
+    <a href="#arena" role="listitem">L'arène</a>
+    <a href="#reserve" role="listitem">Billets</a>
+  </div>
+  <a class="nav-cta" href="#reserve" aria-label="Réserver une session">Réserve →</a>
+  <button class="burger" aria-label="Menu mobile" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero" id="top" aria-label="PürInstinct Games — section hero">
+
+  <!-- Video background -->
+  <div class="hero-video-wrap" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/arena-hero.png">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="hero-body">
+    <!-- Glass panel -->
+    <div class="hero-panel">
+      <div class="hero-badge" aria-label="Arène portable — saison 2025">
+        L'arène portable · Saison 2025
+      </div>
+
+      <h1>
+        <span class="line-a">Ton instinct.</span>
+        <span class="line-b">Ton arène.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Le sport à l'état <b>Pur.</b> Instinctif. <b>Collectif.</b>
+      </p>
+
+      <div class="ctas">
+        <a href="#reserve" class="btn-primary">
+          Réserve ta session
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#instincts" class="btn-ghost">Découvrir les 5 instincts</a>
+      </div>
+    </div>
+
+    <!-- Stat chips -->
+    <div class="stat-chips" role="list" aria-label="Chiffres clés">
+      <div class="chip" role="listitem">
+        <span class="chip-num" data-count="9">9</span>
+        <span class="chip-lbl">Stations</span>
+      </div>
+      <div class="chip" role="listitem">
+        <span class="chip-num" data-count="300">300</span>
+        <span class="chip-lbl">Athlètes / session</span>
+      </div>
+      <div class="chip" role="listitem">
+        <span class="chip-num" data-count="5">5</span>
+        <span class="chip-lbl">Instincts naturels</span>
+      </div>
+      <div class="chip" role="listitem">
+        <span class="chip-num">1</span>
+        <span class="chip-lbl">Leaderboard live</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Descends</span>
+    <svg width="18" height="28" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1.5" y="1.5" width="15" height="25" rx="7.5" stroke="#CCFF00" stroke-width="1.5" opacity=".5"/>
+      <circle cx="9" cy="8" r="2.5" fill="#CCFF00">
+        <animateTransform attributeName="transform" type="translate" values="0,0;0,7;0,0" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+</header>
+
+<!-- ── 5 INSTINCTS ── -->
+<section class="section" id="instincts" aria-labelledby="instincts-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Les 5 instincts naturels</span>
+      <h2 id="instincts-title" class="reveal d1">
+        5 forces.<br><span class="lime">1 arène.</span>
+      </h2>
+      <p class="reveal d2">
+        Chaque instinct teste un aspect fondamental de ton athlétisme. Maîtrise-les tous pour dominer le leaderboard en temps réel.
+      </p>
+    </div>
+
+    <div class="instincts-grid">
+
+      <!-- VITESSE -->
+      <article class="icard vitesse reveal" aria-label="Zone Vitesse">
+        <div class="icard-tag">Z1 · Vitesse</div>
+        <div class="icard-icon">
+          <img src="assets/logo-speed.png" alt="" loading="lazy" aria-hidden="true">
+        </div>
+        <h3>Vitesse</h3>
+        <p>Sprint sur 40 m en 5 niveaux de difficulté. Explose au départ, mesure-toi contre le chrono.</p>
+        <span class="icard-num" aria-hidden="true">01</span>
+      </article>
+
+      <!-- MAINS -->
+      <article class="icard mains reveal d1" aria-label="Zone Mains">
+        <div class="icard-tag">Z2 · Mains</div>
+        <div class="icard-icon">
+          <img src="assets/logo-hand.png" alt="" loading="lazy" aria-hidden="true">
+        </div>
+        <h3>Mains</h3>
+        <p>Lancers de précision et duels 3 contre 3. Coordination, réflexes et précision sous pression.</p>
+        <span class="icard-num" aria-hidden="true">02</span>
+      </article>
+
+      <!-- PIEDS -->
+      <article class="icard pieds reveal d2" aria-label="Zone Pieds">
+        <div class="icard-tag">Z3 · Pieds</div>
+        <div class="icard-icon">
+          <img src="assets/logo-foot.png" alt="" loading="lazy" aria-hidden="true">
+        </div>
+        <h3>Pieds</h3>
+        <p>Duels 1 contre 1 de pure technicité. Dribble, finte et déstabilise ton adversaire.</p>
+        <span class="icard-num" aria-hidden="true">03</span>
+      </article>
+
+      <!-- AGILITÉ -->
+      <article class="icard agilite reveal d3" aria-label="Zone Agilité">
+        <div class="icard-tag">Z4 · Agilité</div>
+        <div class="icard-icon">
+          <img src="assets/logo-agility.png" alt="" loading="lazy" aria-hidden="true">
+        </div>
+        <h3>Agilité</h3>
+        <p>Tag et cubes d'obstacles : vitesse de réaction, changements de direction, explosivité totale.</p>
+        <span class="icard-num" aria-hidden="true">04</span>
+      </article>
+
+      <!-- IQ DE JEU -->
+      <article class="icard iq reveal d4" aria-label="Zone IQ de Jeu">
+        <div class="icard-tag">Z5 · IQ de Jeu</div>
+        <div class="icard-icon">
+          <img src="assets/logo-iq.png" alt="" loading="lazy" aria-hidden="true">
+        </div>
+        <h3>IQ de Jeu</h3>
+        <p>Stratégie collective 3 contre 3. Lecture de jeu, prise de décision et intelligence tactique.</p>
+        <span class="icard-num" aria-hidden="true">05</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="reserve" aria-labelledby="cta-title">
+  <div class="cta-wrap">
+    <div class="cta-shell reveal">
+      <div class="cta-inner">
+        <span class="eyebrow">Billet Beta · Places limitées</span>
+        <h2 id="cta-title">
+          Prêt à entrer<br>
+          <span class="lime">dans l'arène&nbsp;?</span>
+        </h2>
+        <p>300 athlètes maximum par session. Rejoins les premiers à vivre l'expérience PürInstinct&nbsp;— ton instinct t'attend.</p>
+        <a href="#" class="btn-primary" aria-label="Réserver une session PürInstinct">
+          Réserve ta session
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <p class="cta-note">Billet <b>BETA</b> · Accès exclusif · Tarif fondateur</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer aria-label="Pied de page">
+  <div class="foot-row">
+    <div>
+      <div class="logo" style="font-size:19px;margin-bottom:6px;" aria-hidden="true">
+        PÜRINSTINCT<span class="sl">/</span>GAMES
+      </div>
+      <p class="foot-copy">© 2025 PürInstinct Games. Tous droits réservés.</p>
+    </div>
+    <nav class="foot-links" aria-label="Liens légaux">
+      <a href="#">Contact</a>
+      <a href="#">Presse</a>
+      <a href="#">Confidentialité</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* ── Scroll reveal ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ── Count-up ── */
+function countUp(el, target, ms = 1300) {
+  const t0 = performance.now();
+  const tick = now => {
+    const p = Math.min((now - t0) / ms, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target);
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+const co = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const n = parseInt(e.target.dataset.count, 10);
+      if (n) countUp(e.target, n);
+      co.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => co.observe(el));
+
+/* ── Mobile menu ── */
+const burger = document.querySelector('.burger');
+const navLinks = document.querySelector('.nav-links');
+if (burger && navLinks) {
+  burger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+    navLinks.style.cssText = open
+      ? 'display:flex;flex-direction:column;position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid rgba(204,255,0,.15);padding:28px 32px;gap:22px;backdrop-filter:blur(20px);z-index:99;min-width:220px;'
+      : '';
+  });
+}
+</script>
+</body>
+</html>

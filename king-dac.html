@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>King Dac × PürInstinct Games — Darius Clark</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="manifest" href="site.webmanifest">
+<meta name="description" content="King Dac (Darius Clark), spécialiste du saut en hauteur, entre dans l'arène PürInstinct Games pour une session explosive et exclusive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --gold:#F0B429;
+  --white:#F4F4F2;
+  --muted:#9C9C96;
+  --line:rgba(204,255,0,.18);
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,.disp{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lead{color:var(--muted);max-width:62ch}
+.lime{color:var(--lime)}
+.gold{color:var(--gold)}
+.cta{
+  display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;background:var(--lime);color:#0A0A0A;
+  padding:14px 28px 15px;font-size:19px;letter-spacing:.02em;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+  transition:.2s;
+}
+.cta:hover{box-shadow:0 0 28px rgba(204,255,0,.55);transform:translateY(-2px)}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-links a.active{color:var(--lime);opacity:1}
+.nav-badge{
+  display:inline-block;background:var(--lime);color:#0A0A0A;
+  font-size:8px;font-weight:900;font-style:normal;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 6px;border-radius:3px;
+  vertical-align:middle;margin-left:5px;line-height:1.5;white-space:nowrap;
+}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw;max-height:calc(100dvh - 70px);overflow-y:auto}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-badge{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:360px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+
+/* ============ NAV DROPDOWN ============ */
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-btn.active{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:220px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:not(.soon):hover{color:var(--lime);background:rgba(204,255,0,.04)}
+.nav-drop-item.active{color:var(--lime)}
+.nav-drop-item.soon{color:var(--muted);cursor:default;pointer-events:none}
+.nav-drop-soon-tag{
+  font-size:9px;letter-spacing:.1em;padding:2px 7px;
+  border:1px solid rgba(255,255,255,.18);color:var(--muted);
+  font-style:normal;font-weight:700;white-space:nowrap;border-radius:2px;
+}
+
+/* ============ PAGE HERO ============ */
+.kd-hero{
+  position:relative;min-height:70vh;display:flex;align-items:flex-end;
+  padding-top:80px;overflow:hidden;background:#0A0A0A;
+}
+.kd-hero-img{
+  position:absolute;inset:0;z-index:0;
+  background:url('3ple%20jump.png') center 20% / cover no-repeat;
+}
+.kd-hero-img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to right, rgba(0,0,0,.88) 0%, rgba(0,0,0,.60) 50%, rgba(0,0,0,.25) 100%),
+             linear-gradient(to top, rgba(10,10,10,.97) 0%, rgba(10,10,10,.4) 40%, transparent 70%);
+}
+.kd-hero-inner{
+  position:relative;z-index:1;
+  padding:clamp(60px,10vw,120px) 0 clamp(56px,7vw,80px);
+  max-width:700px;
+}
+.kd-hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:var(--lime);margin-bottom:20px;
+}
+.kd-hero-tag::before{content:"";width:28px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.kd-hero h1{
+  font-size:clamp(52px,9vw,120px);line-height:.88;
+  letter-spacing:-.02em;margin-bottom:28px;
+}
+.kd-hero h1 .dim{opacity:.5}
+.kd-hero h1 .lime{color:var(--lime)}
+.kd-hero-sub{
+  font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:52ch;line-height:1.5;
+}
+
+/* ============ MAIN CONTENT ============ */
+.kd-main{padding:clamp(48px,7vw,90px) 0}
+.kd-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+@media(max-width:860px){.kd-layout{grid-template-columns:1fr}}
+
+.kd-quote{
+  border-left:3px solid var(--lime);padding:16px 0 16px 22px;
+  margin:28px 0 24px;font-size:clamp(16px,2vw,20px);font-style:italic;
+  color:var(--white);line-height:1.45;opacity:.9;
+}
+
+.kd-facts{display:flex;gap:clamp(20px,4vw,40px);margin:28px 0 36px;flex-wrap:wrap}
+.kd-fact{display:flex;flex-direction:column;gap:4px}
+.kd-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,44px);color:var(--lime);line-height:1}
+.kd-l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* ============ PORTRAIT PHOTO ============ */
+.kd-photo-wrap{
+  position:sticky;top:84px;
+  display:flex;flex-direction:column;gap:0;
+}
+.kd-photo{
+  position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;
+  border:2px solid rgba(204,255,0,.22);
+}
+.kd-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.kd-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(10,10,10,.7) 0%, transparent 45%);
+}
+.kd-photo-caption{
+  background:#111;border:2px solid rgba(204,255,0,.22);border-top:none;
+  padding:18px 22px;display:flex;align-items:center;justify-content:space-between;
+}
+.kd-photo-name{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(18px,2.5vw,26px);letter-spacing:-.01em;
+}
+.kd-photo-name span{color:var(--lime)}
+.kd-photo-badge{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:10px;letter-spacing:.12em;color:#0A0A0A;
+  background:var(--lime);padding:4px 10px;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
+  white-space:nowrap;
+}
+@media(max-width:860px){.kd-photo-wrap{position:static}}
+
+/* ============ INFO STRIP ============ */
+.kd-strip{
+  background:#0d0d0d;border-top:1px solid rgba(204,255,0,.12);
+  border-bottom:1px solid rgba(204,255,0,.12);
+  padding:clamp(16px,2.4vw,26px) 0;margin-bottom:clamp(28px,4vw,52px);
+}
+.kd-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,30px)}
+@media(max-width:640px){.kd-strip-grid{grid-template-columns:1fr;gap:0}}
+.kd-strip-item{display:flex;align-items:flex-start;gap:13px;position:relative}
+@media(min-width:641px){.kd-strip-item:not(:last-child)::after{content:"";position:absolute;right:calc(-1*clamp(8px,1.1vw,15px));top:1px;bottom:1px;width:1px;background:rgba(204,255,0,.12)}}
+@media(max-width:640px){
+  .kd-strip-item{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+  .kd-strip-item:last-child{border-bottom:none}
+}
+.kd-strip-icon{
+  flex:none;width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(204,255,0,.28);background:rgba(204,255,0,.06);color:var(--lime);
+}
+.kd-strip-icon svg{width:19px;height:19px;stroke:currentColor;fill:none}
+.kd-strip-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.kd-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.7vw,18px);color:var(--white);line-height:1.05}
+.kd-strip-sub{font-size:13px;color:var(--muted);line-height:1.4}
+
+/* ============ PROGRAMME ============ */
+.prog-section{
+  background:var(--bg-2);padding:clamp(56px,7vw,100px) 0;
+  border-top:1px solid rgba(204,255,0,.10);
+  position:relative;
+}
+.prog-photo-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('Kingdac2.png') center 40% / cover no-repeat;
+  opacity:.05;
+}
+.prog-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(16px,2.5vw,28px);margin-top:clamp(32px,4vw,52px);
+}
+@media(max-width:860px){.prog-grid{grid-template-columns:1fr;max-width:480px}}
+.prog-card{
+  position:relative;background:#0f0f0f;
+  border:1.5px solid rgba(255,255,255,.07);border-radius:4px;
+  padding:36px 28px 32px;overflow:hidden;display:flex;flex-direction:column;gap:14px;
+  transition:transform .34s cubic-bezier(.34,1.4,.6,1),opacity .28s ease,border-color .25s,box-shadow .25s,background .25s;cursor:pointer;
+}
+.prog-card.featured{border-color:rgba(204,255,0,.3);background:#101a00}
+.prog-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.08)}
+.prog-card.featured::before{background:var(--lime)}
+.prog-card-num{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
+}
+.prog-card.featured .prog-card-num{color:var(--lime)}
+.prog-card-icon{
+  width:54px;height:54px;border-radius:13px;margin-bottom:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(255,255,255,.10);background:rgba(255,255,255,.035);
+  color:var(--white);transition:border-color .25s,background .25s,color .25s;
+}
+.prog-card-icon svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none}
+.prog-card:hover .prog-card-icon{border-color:rgba(204,255,0,.28)}
+.prog-card.featured .prog-card-icon{
+  border-color:rgba(204,255,0,.38);background:rgba(204,255,0,.07);
+  color:var(--lime);box-shadow:0 0 18px rgba(204,255,0,.12);
+}
+.prog-card-title{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(20px,2.5vw,26px);letter-spacing:-.01em;line-height:.95;
+  color:var(--white);
+}
+.prog-card.featured .prog-card-title{color:var(--lime)}
+.prog-card-desc{font-size:14px;color:var(--muted);line-height:1.55;flex:1}
+.prog-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.prog-tag{
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.12);color:var(--muted);
+}
+.prog-card.featured .prog-tag{border-color:rgba(204,255,0,.3);color:var(--lime)}
+.prog-card-hint{
+  display:flex;align-items:center;gap:6px;margin-top:12px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:12px;letter-spacing:.08em;color:var(--muted);transition:.2s;
+}
+.prog-card:hover .prog-card-hint{color:var(--lime)}
+.prog-card-hint::after{content:"→";transition:transform .2s}
+.prog-card:hover .prog-card-hint::after{transform:translateX(4px)}
+.prog-card.featured .prog-card-hint{color:rgba(204,255,0,.6)}
+.prog-card.featured:hover .prog-card-hint{color:var(--lime)}
+
+/* ===== Interactive spotlight: the lime accent follows the cursor across the 3 events ===== */
+@media(hover:hover){
+  /* hovered card = full lime + 15% zoom, lifts above siblings */
+  .prog-card:hover{
+    transform:scale(1.15);z-index:5;
+    border-color:rgba(204,255,0,.5);background:#101a00;
+    box-shadow:0 14px 46px rgba(204,255,0,.16);
+  }
+  .prog-card:hover::before{background:var(--lime)}
+  .prog-card:hover .prog-card-num{color:var(--lime)}
+  .prog-card:hover .prog-card-title{color:var(--lime)}
+  .prog-card:hover .prog-card-icon{
+    border-color:rgba(204,255,0,.45);background:rgba(204,255,0,.08);
+    color:var(--lime);box-shadow:0 0 20px rgba(204,255,0,.18);
+  }
+  .prog-card:hover .prog-tag{border-color:rgba(204,255,0,.4);color:var(--lime)}
+  .prog-card:hover .prog-card-hint{color:var(--lime)}
+
+  /* while hovering the grid, every non-hovered card fades + drops its lime */
+  .prog-grid:hover .prog-card:not(:hover){opacity:.4}
+  .prog-grid:hover .prog-card.featured:not(:hover){border-color:rgba(255,255,255,.07);background:#0f0f0f;box-shadow:none}
+  .prog-grid:hover .prog-card.featured:not(:hover)::before{background:rgba(255,255,255,.08)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-num{color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-title{color:var(--white)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-icon{
+    border-color:rgba(255,255,255,.10);background:rgba(255,255,255,.035);color:var(--white);box-shadow:none;
+  }
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-tag{border-color:rgba(255,255,255,.12);color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-hint{color:rgba(204,255,0,.6)}
+}
+@media(prefers-reduced-motion:reduce){.prog-card:hover{transform:none}}
+.prog-slash{
+  position:absolute;bottom:-16px;right:-16px;width:100px;height:100px;
+  background:repeating-linear-gradient(-60deg,rgba(204,255,0,.08) 0,rgba(204,255,0,.08) 2px,transparent 2px,transparent 14px);
+  transform:skewX(-8deg);pointer-events:none;
+}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+
+/* ============ MODAL ============ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.88);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{
+  position:relative;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;
+  background:#0f0f0f;border:1.5px solid rgba(204,255,0,.25);
+  transform:translateY(24px) scale(.97);transition:transform .35s cubic-bezier(.2,.9,.3,1);
+}
+.modal-overlay.open .modal-box{transform:none}
+.modal-img{
+  width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;
+}
+.modal-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.modal-img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(15,15,15,.85) 0%,transparent 55%);
+}
+.modal-body{padding:32px 36px 36px}
+.modal-num{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:11px;letter-spacing:.16em;color:var(--lime);text-transform:uppercase;margin-bottom:10px;
+}
+.modal-title{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(28px,4vw,44px);letter-spacing:-.01em;line-height:.92;margin-bottom:18px;
+}
+.modal-desc{font-size:16px;color:var(--muted);line-height:1.6;margin-bottom:24px;max-width:56ch}
+.modal-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.modal-tag{
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 14px;border-radius:99px;border:1px solid rgba(204,255,0,.3);color:var(--lime);
+}
+.modal-cta{
+  display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;font-size:17px;letter-spacing:.03em;
+  background:var(--lime);color:#0A0A0A;padding:12px 28px 13px;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:.2s;
+}
+.modal-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.5);transform:translateY(-1px)}
+.modal-close{
+  position:absolute;top:14px;right:14px;z-index:10;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);
+  color:var(--white);font-size:18px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:.2s;
+}
+.modal-close:hover{background:var(--lime);color:#0A0A0A;border-color:var(--lime)}
+@media(max-width:640px){.modal-body{padding:22px 20px 28px}}
+
+/* ============ TRIPLE JUMP SHOWCASE ============ */
+.jump-show{background:var(--bg);padding:clamp(56px,7vw,100px) 0;border-top:1px solid rgba(204,255,0,.10);position:relative;overflow:hidden}
+.jump-head{margin-bottom:clamp(26px,4vw,42px);max-width:760px}
+.jump-head h2{font-size:clamp(34px,5.2vw,64px);margin-bottom:16px}
+.jump-head p{color:var(--muted);font-size:clamp(15px,1.6vw,17px);line-height:1.55;max-width:60ch}
+.jump-stage-wrap{
+  position:relative;width:100%;border:1.5px solid rgba(204,255,0,.18);border-radius:8px;
+  background:radial-gradient(120% 90% at 50% 8%,#141414 0%,#0b0b0b 55%,#060606 100%);
+  overflow:hidden;box-shadow:inset 0 0 80px rgba(0,0,0,.6);
+}
+.jump-stage{display:block;width:100%;height:auto}
+.jump-hud{
+  position:absolute;top:clamp(12px,2.2vw,22px);left:clamp(14px,2.4vw,26px);right:clamp(14px,2.4vw,26px);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:14px;pointer-events:none;
+}
+.jump-dist{font-family:var(--display);font-weight:900;font-style:italic;line-height:.82}
+.jump-dist .num{font-size:clamp(36px,6.4vw,72px);color:var(--lime);font-variant-numeric:tabular-nums;text-shadow:0 0 24px rgba(204,255,0,.35)}
+.jump-dist .num .u{font-size:.42em;color:var(--white);margin-left:4px}
+.jump-dist .lab{display:block;font-size:clamp(9px,1vw,11px);letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+.jump-pips{display:flex;gap:7px;align-items:center}
+.jump-pip{width:clamp(22px,3vw,38px);height:6px;border-radius:3px;background:rgba(255,255,255,.14);transition:background .3s,box-shadow .3s}
+.jump-pip.on{background:var(--lime);box-shadow:0 0 14px rgba(204,255,0,.65)}
+.jump-replay{
+  position:absolute;bottom:clamp(12px,2vw,20px);right:clamp(14px,2.4vw,26px);z-index:4;pointer-events:auto;
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:14px;letter-spacing:.04em;color:#0A0A0A;background:var(--lime);
+  padding:9px 18px 10px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:.2s;
+}
+.jump-replay:hover{box-shadow:0 0 22px rgba(204,255,0,.55);transform:translateY(-1px)}
+.jump-replay svg{width:15px;height:15px}
+.jump-tag{
+  position:absolute;bottom:clamp(12px,2vw,20px);left:clamp(14px,2.4vw,26px);z-index:4;pointer-events:none;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(10px,1.2vw,13px);letter-spacing:.14em;color:var(--muted);
+  display:flex;align-items:center;gap:9px;
+}
+.jump-tag b{color:var(--gold)}
+/* SVG athlete styling */
+.ath-limb{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ath-near{stroke:var(--lime)}
+.ath-far{stroke:#566a17}
+.ath-foot-near{fill:var(--lime)}
+.ath-foot-far{fill:#566a17}
+.ath-torso{fill:var(--lime)}
+.ath-torso-stripe{fill:#0A0A0A;opacity:.55}
+.ath-head{fill:var(--lime)}
+.ath-visor{fill:#0A0A0A;opacity:.5}
+.jump-tick{stroke:rgba(255,255,255,.12);stroke-width:1.5}
+.jump-tick-major{stroke:rgba(204,255,0,.28);stroke-width:2}
+.jump-tick-lab{fill:rgba(255,255,255,.32);font-family:var(--display);font-weight:900;font-style:italic;font-size:13px}
+.jump-ground{stroke:rgba(204,255,0,.35);stroke-width:2.5}
+.jump-flag-pole{stroke:var(--gold);stroke-width:2.5}
+.jump-flag{fill:var(--gold)}
+.jump-flag-lab{fill:var(--gold);font-family:var(--display);font-weight:900;font-style:italic;font-size:15px}
+.dust{fill:rgba(204,255,0,.5)}
+.jump-shadow{fill:#000}
+/* Mobile: keep the replay button clear of King Dac's landing (bottom-right) */
+@media(max-width:640px){
+  .jump-hud{flex-direction:column;align-items:flex-start;gap:10px}
+  .jump-replay{top:12px;bottom:auto;font-size:12px;padding:7px 13px 8px}
+  .jump-tag{display:none}
+}
+@media(prefers-reduced-motion:reduce){.jump-replay{display:none}}
+
+/* ============ FOCUS / A11Y ============ */
+a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:1px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#concept" data-i18n="nav_concept">Le concept</a>
+    <a href="index.html#arena" data-i18n="nav_arena">L'arène</a>
+    <a href="index.html#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <div class="nav-drop" id="navDrop">
+      <button class="nav-drop-btn active" aria-haspopup="true" aria-expanded="false">
+        <span data-i18n="nav_special">Projets spéciaux</span><span class="nav-drop-arrow">▾</span>
+      </button>
+      <div class="nav-drop-menu" role="menu">
+        <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
+        <a href="championship.html" class="nav-drop-item" data-i18n="nav_champ">Championship</a>
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="king-dac.html" class="nav-drop-item active" data-i18n="nav_kd">King Dac</a>
+        <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
+      </div>
+    </div>
+    <a href="index.html#billets" data-i18n="nav_tickets">Billets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <a class="nav-cta" href="index.html#billets" data-i18n="nav_cta">Réserve</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="kd-hero">
+  <div class="kd-hero-img"></div>
+  <div class="wrap kd-hero-inner">
+    <div class="kd-hero-tag" data-i18n="kd_eyebrow">Projet spécial · Athlète signature</div>
+    <h1>
+      <span class="dim" data-i18n="kd_h1a">KING</span><br>
+      <span class="lime" data-i18n="kd_h1b">DAC</span><br>
+      <span data-i18n="kd_h1c">DANS L'ARÈNE.</span>
+    </h1>
+    <p class="kd-hero-sub" data-i18n="kd_herosub">Recordman mondial Guinness du saut vertical avec 51 pouces (1,27 m), Darius Clark entre dans l'arène PürInstinct Games pour une session exclusive.</p>
+  </div>
+</header>
+
+<!-- ============ INFO STRIP ============ -->
+<div class="kd-strip">
+  <div class="wrap">
+    <div class="kd-strip-grid">
+      <div class="kd-strip-item">
+        <div class="kd-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 9.5h18"/></svg></div>
+        <div class="kd-strip-txt">
+          <div class="kd-strip-label" data-i18n="kd_s1l">Date à confirmer</div>
+          <div class="kd-strip-sub" data-i18n="kd_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
+        </div>
+      </div>
+      <div class="kd-strip-item">
+        <div class="kd-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H5a2 2 0 0 1-2-2 2 2 0 0 0 0-4Z"/><path d="M15 7v10"/></svg></div>
+        <div class="kd-strip-txt">
+          <div class="kd-strip-label" data-i18n="kd_s2l">Session exclusive</div>
+          <div class="kd-strip-sub" data-i18n="kd_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
+        </div>
+      </div>
+      <div class="kd-strip-item">
+        <div class="kd-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <div class="kd-strip-txt">
+          <div class="kd-strip-label" data-i18n="kd_s3l">Il concourt avec toi</div>
+          <div class="kd-strip-sub" data-i18n="kd_s3b">King Dac participe aux concours et défie chaque participant sur le terrain.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN CONTENT ============ -->
+<main class="kd-main">
+  <div class="wrap">
+    <div class="kd-layout">
+
+      <!-- LEFT: copy -->
+      <div>
+        <span class="eyebrow" data-i18n="kd_who_ey">Qui est King Dac ?</span>
+        <h2 style="font-size:clamp(34px,5vw,60px);margin-bottom:20px" data-i18n="kd_who_t">Le détenteur du record mondial Guinness du saut vertical.</h2>
+        <div class="kd-quote" data-i18n="kd_quote">« Le saut, c'est l'instinct à l'état pur. Le corps réagit avant que le cerveau comprenne — c'est ça, PürInstinct. »</div>
+        <p class="lead" style="margin-bottom:18px" data-i18n="kd_body">Darius Clark, alias King Dac, détient le record mondial Guinness du saut vertical avec élan : 51 pouces (1,27 m). Un bond qui défie la physique et place Darius au sommet de l'athlétisme mondial. Sa verticalité explosive lui a valu une reconnaissance internationale dans le monde du sport et du basketball.</p>
+        <p class="lead" style="margin-bottom:32px" data-i18n="kd_body2">Pour cette session exclusive, King Dac débarque dans l'arène PürInstinct Games avec ses deux concours signature — saut en hauteur et triple saut horizontal à deux pieds — et une démo de dunk explosive aux côtés d'invités surprises.</p>
+
+        <div class="kd-facts">
+          <div class="kd-fact"><span class="kd-n">51"</span><span class="kd-l" data-i18n="kd_f1">saut vertical</span></div>
+          <div class="kd-fact"><span class="kd-n">1.27 m</span><span class="kd-l" data-i18n="kd_f2">record officiel</span></div>
+          <div class="kd-fact"><span class="kd-n">#1</span><span class="kd-l" data-i18n="kd_f3">Guinness World Record</span></div>
+        </div>
+
+        <a class="cta" href="index.html#billets" data-i18n="kd_cta">Réserve ta place</a>
+      </div>
+
+      <!-- RIGHT: portrait photo -->
+      <div>
+        <div class="kd-photo-wrap">
+          <div class="kd-photo">
+            <img src="Kingdac2.png" alt="King Dac (Darius Clark) × PürInstinct Games">
+          </div>
+          <div class="kd-photo-caption">
+            <div class="kd-photo-name">KING <span>DAC</span></div>
+            <div class="kd-photo-badge" data-i18n="kd_card_tag">SESSION EXCLUSIVE</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ============ PROGRAMME ============ -->
+<section class="prog-section">
+  <div class="prog-photo-bg"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <span class="eyebrow" data-i18n="prog_eyebrow">Au programme</span>
+    <h2 style="font-size:clamp(36px,5.5vw,68px)" data-i18n="prog_title">3 DÉFIS SIGNATURE.<br>UN SEUL ÉVÉNEMENT.</h2>
+
+    <div class="prog-grid">
+
+      <!-- PürInstinct Games -->
+      <div class="prog-card featured" data-discipline="1">
+        <div class="prog-card-num" data-i18n="prog_1_num">Événement 01</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <div class="prog-card-title" data-i18n="prog_1_t">PürInstinct Games</div>
+        <p class="prog-card-desc" data-i18n="prog_1_b">Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon. King Dac entre dans l'arène et défie les meilleurs.</p>
+        <div class="prog-card-tags">
+          <span class="prog-tag" data-i18n="prog_1_t1">9 stations</span>
+          <span class="prog-tag" data-i18n="prog_1_t2">Score en direct</span>
+          <span class="prog-tag" data-i18n="prog_1_t3">Avec King Dac</span>
+        </div>
+        <span class="prog-card-hint" data-i18n="prog_hint">Voir l'événement</span>
+        <div class="prog-slash"></div>
+      </div>
+
+      <!-- Vertical & horizontal jump challenge -->
+      <div class="prog-card" data-discipline="2">
+        <div class="prog-card-num" data-i18n="prog_2_num">Défi 02</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19 Q 12 2 20.5 19"/><path d="M16.5 17.6 20.5 19 19.2 15"/><path d="M3 20.5 H21"/></svg></div>
+        <div class="prog-card-title" data-i18n="prog_2_t">Vertical & Horizontal<br>Jump Challenge</div>
+        <p class="prog-card-desc" data-i18n="prog_2_b">Les deux concours signature de King Dac réunis : saut en hauteur (franchis la barre) et triple saut horizontal à deux pieds (la distance la plus longue). Pure puissance, pure explosivité, vers le haut et vers l'avant.</p>
+        <div class="prog-card-tags">
+          <span class="prog-tag" data-i18n="prog_2_t1">Saut en hauteur</span>
+          <span class="prog-tag" data-i18n="prog_2_t2">Triple saut horizontal</span>
+          <span class="prog-tag" data-i18n="prog_2_t3">Jugé par King Dac</span>
+        </div>
+        <span class="prog-card-hint" data-i18n="prog_hint">Voir le défi</span>
+        <div class="prog-slash"></div>
+      </div>
+
+      <!-- Dunk showcase -->
+      <div class="prog-card" data-discipline="3">
+        <div class="prog-card-num" data-i18n="prog_3_num">Showcase 03</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3v18"/><path d="M5.6 5.6c3 2.6 3 10.2 0 12.8"/><path d="M18.4 5.6c-3 2.6-3 10.2 0 12.8"/></svg></div>
+        <div class="prog-card-title" data-i18n="prog_3_t">Dunk Showcase</div>
+        <p class="prog-card-desc" data-i18n="prog_3_b">King Dac prend la barre de basket et invite des guests à se surpasser. Des dunks explosifs, des alley-oops, des moments qui font lever la salle. Une démonstration pure de verticalité et d'instinct athlétique.</p>
+        <div class="prog-card-tags">
+          <span class="prog-tag" data-i18n="prog_3_t1">King Dac live</span>
+          <span class="prog-tag" data-i18n="prog_3_t2">Invités surprise</span>
+          <span class="prog-tag" data-i18n="prog_3_t3">Slam dunk</span>
+        </div>
+        <span class="prog-card-hint" data-i18n="prog_hint">Voir le showcase</span>
+        <div class="prog-slash"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRIPLE JUMP SHOWCASE ============ -->
+<section class="jump-show" id="jumpShow">
+  <div class="wrap">
+    <div class="jump-head">
+      <span class="eyebrow" data-i18n="jump_eyebrow">Concours signature · En action</span>
+      <h2 data-i18n="jump_title">LE TRIPLE SAUT<br>HORIZONTAL.</h2>
+      <p data-i18n="jump_sub">Trois bonds consécutifs à deux pieds, sans élan. Pure puissance, pure explosivité. Regarde la distance grimper à chaque bond.</p>
+    </div>
+
+    <div class="jump-stage-wrap">
+      <svg class="jump-stage" id="jumpStage" viewBox="0 0 1000 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <filter id="speedBlur" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur id="speedBlurNode" in="SourceGraphic" stdDeviation="0 0"/>
+          </filter>
+          <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(204,255,0,.05)"/>
+            <stop offset="1" stop-color="rgba(204,255,0,0)"/>
+          </linearGradient>
+        </defs>
+        <!-- floor glow -->
+        <rect x="0" y="362" width="1000" height="78" fill="url(#floorGrad)"/>
+        <!-- ruler ticks + ground built by JS into #jumpRuler -->
+        <g id="jumpRuler"></g>
+        <line class="jump-ground" x1="40" y1="360" x2="965" y2="360"/>
+        <!-- fx (dust) -->
+        <g id="jumpFx"></g>
+        <!-- athlete -->
+        <g id="jumpAthlete" filter="url(#speedBlur)"></g>
+      </svg>
+
+      <div class="jump-hud">
+        <div class="jump-dist">
+          <span class="num"><span id="jumpNum">0.00</span><span class="u">m</span></span>
+          <span class="lab" data-i18n="jump_dist_label">Distance · 3 bonds</span>
+        </div>
+        <div class="jump-pips" aria-hidden="true">
+          <span class="jump-pip" id="pip1"></span>
+          <span class="jump-pip" id="pip2"></span>
+          <span class="jump-pip" id="pip3"></span>
+        </div>
+      </div>
+
+      <div class="jump-tag"><b data-i18n="jump_tag_b">King Dac</b> <span data-i18n="jump_tag">démontre. À toi de battre la marque.</span></div>
+
+      <button class="jump-replay" id="jumpReplay" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+        <span data-i18n="jump_replay">Rejouer</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="index.html#billets" data-i18n="f_book">Réserver une session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport at its purest. Instinct at its highest.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Détails du concours">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+    <div class="modal-img">
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-body">
+      <div class="modal-num" id="modalNum"></div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-tags" id="modalTags"></div>
+      <a class="modal-cta" href="index.html#billets" id="modalCta" data-i18n="kd_cta">Réserve ta place</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ====================================================== */
+/* i18n */
+/* ====================================================== */
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
+  kd_eyebrow:"Projet spécial · Athlète signature",
+  kd_h1a:"KING",kd_h1b:"DAC",kd_h1c:"DANS L'ARÈNE.",
+  kd_herosub:"Recordman mondial Guinness du saut vertical avec 51 pouces (1,27 m), Darius Clark entre dans l'arène PürInstinct Games pour une session exclusive.",
+  kd_s1l:"Date à confirmer",kd_s1b:"Réserve ta place maintenant pour être notifié en premier.",
+  kd_s2l:"Session exclusive",kd_s2b:"Nombre de places limité. Une seule date, une seule chance.",
+  kd_s3l:"Il concourt avec toi",kd_s3b:"King Dac participe aux concours et défie chaque participant sur le terrain.",
+  kd_who_ey:"Qui est King Dac ?",kd_who_t:"Le détenteur du record mondial Guinness du saut vertical.",
+  kd_quote:"« Le saut, c'est l'instinct à l'état pur. Le corps réagit avant que le cerveau comprenne — c'est ça, PürInstinct. »",
+  kd_body:"Darius Clark, alias King Dac, détient le record mondial Guinness du saut vertical avec élan : 51 pouces (1,27 m). Un bond qui défie la physique et place Darius au sommet de l'athlétisme mondial. Sa verticalité explosive lui a valu une reconnaissance internationale dans le monde du sport et du basketball.",
+  kd_body2:"Pour cette session exclusive, King Dac débarque dans l'arène PürInstinct Games avec ses deux concours signature — saut en hauteur et triple saut horizontal à deux pieds — et une démo de dunk explosive aux côtés d'invités surprises.",
+  kd_f1:"saut vertical",kd_f2:"record officiel",kd_f3:"Guinness World Record",
+  kd_cta:"Réserve ta place",kd_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE",
+  prog_eyebrow:"Au programme",prog_title:"3 DÉFIS SIGNATURE.<br>UN SEUL ÉVÉNEMENT.",
+  prog_1_num:"Événement 01",prog_1_t:"PürInstinct Games",prog_1_b:"Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon. King Dac entre dans l'arène et défie les meilleurs.",prog_1_t1:"9 stations",prog_1_t2:"Score en direct",prog_1_t3:"Avec King Dac",
+  prog_2_num:"Défi 02",prog_2_t:"Vertical & Horizontal<br>Jump Challenge",prog_2_b:"Les deux concours signature de King Dac réunis : saut en hauteur (franchis la barre) et triple saut horizontal à deux pieds (la distance la plus longue). Pure puissance, pure explosivité, vers le haut et vers l'avant.",prog_2_t1:"Saut en hauteur",prog_2_t2:"Triple saut horizontal",prog_2_t3:"Jugé par King Dac",
+  prog_3_num:"Showcase 03",prog_3_t:"Dunk Showcase",prog_3_b:"King Dac prend la barre de basket et invite des guests à se surpasser. Des dunks explosifs, des alley-oops, des moments qui font lever la salle. Une démonstration pure de verticalité et d'instinct athlétique.",prog_3_t1:"King Dac live",prog_3_t2:"Invités surprise",prog_3_t3:"Slam dunk",
+  prog_hint:"Voir les détails",
+  jump_eyebrow:"Concours signature · En action",jump_title:"LE TRIPLE SAUT<br>HORIZONTAL.",jump_sub:"Trois bonds consécutifs à deux pieds, sans élan. Pure puissance, pure explosivité. Regarde la distance grimper à chaque bond.",jump_dist_label:"Distance · 3 bonds",jump_tag_b:"King Dac",jump_tag:"démontre. À toi de battre la marque.",jump_replay:"Rejouer",
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Le sport à son état pur. L'instinct à son sommet."
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
+  kd_eyebrow:"Special project · Signature athlete",
+  kd_h1a:"KING",kd_h1b:"DAC",kd_h1c:"IN THE ARENA.",
+  kd_herosub:"Guinness World Record holder for the highest vertical leap — 51 inches (1.27 m) — Darius Clark steps into the PürInstinct Games arena for one exclusive session.",
+  kd_s1l:"Date to be confirmed",kd_s1b:"Save your spot now to be the first notified.",
+  kd_s2l:"Exclusive session",kd_s2b:"Limited spots. One date, one chance.",
+  kd_s3l:"He competes with you",kd_s3b:"King Dac takes part in every contest and challenges each participant on the floor.",
+  kd_who_ey:"Who is King Dac?",kd_who_t:"The Guinness World Record holder for the highest vertical leap.",
+  kd_quote:"« Jumping is pure instinct. The body reacts before the brain understands — that's PürInstinct. »",
+  kd_body:"Darius Clark, known as King Dac, holds the Guinness World Record for the highest vertical leap with a running start: 51 inches (1.27 m). A jump that defies physics and places Darius at the very top of world athletics. His explosive verticality has earned him international recognition across sport and basketball.",
+  kd_body2:"For this exclusive session, King Dac brings his two signature contests to the PürInstinct Games arena — high jump and two-foot horizontal triple jump — plus an explosive dunk demo alongside surprise guests.",
+  kd_f1:"vertical leap",kd_f2:"official record",kd_f3:"Guinness World Record",
+  kd_cta:"Save your spot",kd_card_tag:"EXCLUSIVE SESSION · ONE DATE ONLY",
+  prog_eyebrow:"On the program",prog_title:"3 SIGNATURE EVENTS.<br>ONE SESSION.",
+  prog_1_num:"Event 01",prog_1_t:"PürInstinct Games",prog_1_b:"The arena's signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball. King Dac steps into the arena and challenges the best.",prog_1_t1:"9 stations",prog_1_t2:"Live score",prog_1_t3:"With King Dac",
+  prog_2_num:"Challenge 02",prog_2_t:"Vertical & Horizontal<br>Jump Challenge",prog_2_b:"King Dac's two signature contests combined: high jump (clear the bar) and two-foot horizontal triple jump (longest distance). Pure power, pure explosiveness, up and out.",prog_2_t1:"High jump",prog_2_t2:"Horizontal triple jump",prog_2_t3:"Judged by King Dac",
+  prog_3_num:"Showcase 03",prog_3_t:"Dunk Showcase",prog_3_b:"King Dac takes the basketball hoop and invites guests to push their limits. Explosive dunks, alley-oops, moments that bring the house down. A pure display of verticality and athletic instinct.",prog_3_t1:"King Dac live",prog_3_t2:"Surprise guests",prog_3_t3:"Slam dunk",
+  prog_hint:"See details",
+  jump_eyebrow:"Signature contest · In action",jump_title:"THE HORIZONTAL<br>TRIPLE JUMP.",jump_sub:"Three consecutive two-footed bounds from a standing start. Pure power, pure explosiveness. Watch the distance climb with every jump.",jump_dist_label:"Distance · 3 bounds",jump_tag_b:"King Dac",jump_tag:"demos. Now beat the mark.",jump_replay:"Replay",
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"Sport at its purest. Instinct at its highest."
+}};
+
+let lang = localStorage.getItem("pi_lang") || "fr";
+const RICH = new Set(["prog_title","prog_2_t","prog_3_t","jump_title"]);
+function applyLang(){
+  const t = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if(t[k] !== undefined) RICH.has(k) ? el.innerHTML = t[k] : el.textContent = t[k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById('footLang').textContent = lang==="fr" ? "English" : "Français";
+}
+
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+document.getElementById('footLang').addEventListener('click', e => { e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang(); });
+
+/* burger */
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+document.addEventListener('click', e => { if(!burger.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove('open'); });
+
+/* nav dropdown */
+const navDrop = document.getElementById('navDrop');
+if(navDrop){
+  navDrop.querySelector('.nav-drop-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    navDrop.classList.toggle('open');
+    navDrop.querySelector('.nav-drop-btn').setAttribute('aria-expanded', navDrop.classList.contains('open'));
+  });
+  document.addEventListener('click', e => { if(!navDrop.contains(e.target)) navDrop.classList.remove('open'); });
+}
+
+/* year */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+applyLang();
+
+/* ====================================================== */
+/* Modal */
+/* ====================================================== */
+const DISCIPLINES = {
+  '1': {
+    img: 'img-purinstinct-games.png', imgPos: 'center 40%',
+    fr: { num:'Événement 01', title:'PürInstinct Games',
+      desc:'Le sport signature de l\'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2. King Dac entre dans l\'arène, observe, commente et défie les meilleurs en direct.',
+      tags:['9 stations','Leaderboard live','Sans contact','Avec King Dac'], cta:'Réserve ta place' },
+    en: { num:'Event 01', title:'PürInstinct Games',
+      desc:'The arena\'s signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball — always 3 against 2. King Dac steps into the arena, watches, comments and challenges the top performers live.',
+      tags:['9 stations','Live leaderboard','No contact','With King Dac'], cta:'Save your spot' }
+  },
+  '2': {
+    img: 'vertical jump.png', imgPos: 'center 20%',
+    fr: { num:'Défi 02', title:'Vertical & Horizontal Jump Challenge',
+      desc:'Les deux concours signature de King Dac réunis. Saut en hauteur : franchis la barre, qui monte à chaque tour, jusqu\'à l\'élimination. Triple saut horizontal à deux pieds : trois bonds consécutifs vers l\'avant, sans élan, la distance la plus longue gagne. Pure puissance, vers le haut et vers l\'avant. King Dac démontre, puis c\'est à toi.',
+      tags:['Saut en hauteur','Triple saut horizontal','Jugé par King Dac','Record à battre'], cta:'Réserve ta place' },
+    en: { num:'Challenge 02', title:'Vertical & Horizontal Jump Challenge',
+      desc:'King Dac\'s two signature contests combined. High jump: clear the bar as it rises each round until elimination. Two-foot horizontal triple jump: three consecutive forward bounds from a standing start, longest distance wins. Pure power, up and out. King Dac demos, then it\'s your turn.',
+      tags:['High jump','Horizontal triple jump','Judged by King Dac','Record to beat'], cta:'Save your spot' }
+  },
+  '3': {
+    img: 'Kingdac2.png', imgPos: 'center 25%',
+    fr: { num:'Showcase 03', title:'Dunk Showcase — King Dac & Invités',
+      desc:'King Dac prend possession du terrain de basket et invite des guests à se surpasser. Des dunks à une main, des alley-oops, des approches créatives — une démonstration qui met en valeur la verticalité et l\'explosivité à leur niveau le plus pur. Les invités peuvent inclure d\'autres athlètes, des participants choisis sur place ou des surprises.',
+      tags:['King Dac live','Invités surprise','Slam dunk','Alley-oop'], cta:'Réserve ta place' },
+    en: { num:'Showcase 03', title:'Dunk Showcase — King Dac & Guests',
+      desc:'King Dac takes the basketball court and invites guests to push their limits. One-handed dunks, alley-oops, creative approaches — a showcase that puts verticality and explosiveness on full display. Guests may include other athletes, participants selected on the spot, or surprise appearances.',
+      tags:['King Dac live','Surprise guests','Slam dunk','Alley-oop'], cta:'Save your spot' }
+  }
+};
+
+const overlay = document.getElementById('modalOverlay');
+const mImg    = document.getElementById('modalImg');
+const mNum    = document.getElementById('modalNum');
+const mTitle  = document.getElementById('modalTitle');
+const mDesc   = document.getElementById('modalDesc');
+const mTags   = document.getElementById('modalTags');
+const mCta    = document.getElementById('modalCta');
+const mClose  = document.getElementById('modalClose');
+
+function openModal(id) {
+  const d = DISCIPLINES[id]; if(!d) return;
+  const v = d[lang] || d.fr;
+  mImg.src = d.img;
+  mImg.style.objectPosition = d.imgPos;
+  mNum.textContent   = v.num;
+  mTitle.textContent = v.title;
+  mDesc.textContent  = v.desc;
+  mTags.innerHTML = v.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+  mCta.textContent = v.cta;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.prog-card[data-discipline]').forEach(card => {
+  card.addEventListener('click', () => openModal(card.dataset.discipline));
+});
+mClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+/* ====================================================== */
+/* Triple jump showcase — real photo sequence of Darius Clark */
+/* Frame order: 1 · (2-3-4-5-6) ×3 bounds · 1                 */
+(function(){
+  var SVGNS='http://www.w3.org/2000/svg', XLINK='http://www.w3.org/1999/xlink';
+  var stage = document.getElementById('jumpStage');
+  var gAth  = document.getElementById('jumpAthlete');
+  var gFx   = document.getElementById('jumpFx');
+  var gRuler= document.getElementById('jumpRuler');
+  var numEl = document.getElementById('jumpNum');
+  var replay= document.getElementById('jumpReplay');
+  var pips  = [document.getElementById('pip1'),document.getElementById('pip2'),document.getElementById('pip3')];
+  if(!stage || !gAth) return;
+  gAth.removeAttribute('filter'); // photos shouldn't be hard-smeared
+
+  var GROUND=360, X0=150, XF=858, TOTAL_M=8.40;
+  var pxPerM=(XF-X0)/TOTAL_M;
+  var SCALE=0.34;
+
+  // sprite frames cropped to figure: [src, origW, origH]
+  // f = horizontal fraction of the image where the feet are (foot anchor),
+  // so the feet ride the distance line and only ever move forward.
+  var FR={
+    1:{src:'kd-pose1.png',w:121,h:497,f:0.40},   // stand
+    2:{src:'kd-pose2.png',w:258,h:357,f:0.54},   // load / crouch (ground)
+    '7a':{src:'kd-pose7a.png',w:568,h:587,f:0.08},// takeoff dive (steep rise)
+    '7':{src:'kd-pose7.png',w:586,h:482,f:0.06},  // dive (flattening out)
+    3:{src:'kd-pose3.png',w:617,h:336,f:0.04},   // full superman flight
+    4:{src:'kd-pose4.png',w:279,h:345,f:0.73},   // tuck knees up
+    5:{src:'kd-pose5.png',w:357,h:369,f:0.72},   // descending reach
+    6:{src:'kd-pose6.png',w:313,h:384,f:0.59}    // landing absorb (ground)
+  };
+  for(var k in FR){ var pim=new Image(); pim.src=FR[k].src; }
+
+  // ground shadow + sprite + dust layer
+  var shadow=document.createElementNS(SVGNS,'ellipse');
+  shadow.setAttribute('class','jump-shadow');
+  gFx.appendChild(shadow);
+  var dustG=document.createElementNS(SVGNS,'g');
+  gFx.appendChild(dustG);
+  var sprite=document.createElementNS(SVGNS,'image');
+  sprite.setAttribute('preserveAspectRatio','xMidYMax meet');
+  gAth.appendChild(sprite);
+
+  function setFrame(n){
+    var f=FR[n];
+    sprite.setAttributeNS(XLINK,'href',f.src);
+    sprite.setAttribute('href',f.src);
+    sprite._n=n;
+  }
+  function place(n,x,h,sq){
+    if(sprite._n!==n) setFrame(n);
+    var fr=FR[n], w=fr.w*SCALE, ht=fr.h*SCALE*sq, wq=w/sq;
+    var by=GROUND-h;
+    sprite.setAttribute('width', wq.toFixed(1));
+    sprite.setAttribute('height', ht.toFixed(1));
+    sprite.setAttribute('x',(x-wq*fr.f).toFixed(1));
+    sprite.setAttribute('y',(by-ht).toFixed(1));
+    var lift=h/165; if(lift>1)lift=1;
+    shadow.setAttribute('cx',x.toFixed(1));
+    shadow.setAttribute('cy',(GROUND+4).toFixed(1));
+    shadow.setAttribute('rx',(Math.max(22,w*0.62)*(1-0.42*lift)).toFixed(1));
+    shadow.setAttribute('ry',(6*(1-0.4*lift)).toFixed(1));
+    shadow.setAttribute('opacity',(0.36*(1-0.62*lift)).toFixed(2));
+  }
+
+  // bounds: [startX, endX, peakHeight]
+  var B=[[150,398,150],[398,632,166],[632,858,150]];
+  function ss(x){x=x<0?0:x>1?1:x;return x*x*(3-2*x);}
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  var INTRO=0.07, OUTRO=0.07, bSpan=(1-INTRO-OUTRO)/3;
+
+  function render(p){
+    var frame,x,h=0,sq=1;
+    if(p<INTRO){ frame=1; x=X0; }
+    else if(p>1-OUTRO){ frame=1; x=XF; }
+    else{
+      var bp=(p-INTRO)/bSpan, bi=Math.floor(bp); if(bi>2)bi=2;
+      var u=bp-bi, b=B[bi];
+      if(u<0.16){            // load (frame 2) on the ground, slight dip
+        frame=2; x=b[0];
+        var lu=u/0.16; h = -3*Math.sin(Math.PI*lu);
+      } else if(u<0.84){     // airborne: 7a -> 7 -> 3 -> 4 -> 5 along the arc
+        var au=(u-0.16)/0.68;
+        x=lerp(b[0],b[1], ss(au));
+        h=b[2]*Math.sin(Math.PI*au);
+        frame = au<0.20 ? '7a' : au<0.40 ? '7' : au<0.62 ? 3 : au<0.81 ? 4 : 5;
+      } else {               // land (frame 6) — squash & recover
+        frame=6; x=b[1];
+        var ld=(u-0.84)/0.16;
+        sq = 1 - 0.16*Math.sin(Math.PI*ld);
+      }
+    }
+    place(frame,x,h,sq);
+    var dist=Math.max(0,Math.min(TOTAL_M,(x-X0)/pxPerM));
+    numEl.textContent=dist.toFixed(2);
+    return {frame:frame,x:x,h:h};
+  }
+
+  /* --- dust burst --- */
+  function dust(x,y){
+    for(var i=0;i<9;i++){
+      var c=document.createElementNS(SVGNS,'circle');
+      c.setAttribute('class','dust');
+      c.setAttribute('cx',x); c.setAttribute('cy',y);
+      c.setAttribute('r',2+Math.random()*3.5);
+      dustG.appendChild(c);
+      var ang=-Math.PI*(0.12+Math.random()*0.76), sp=22+Math.random()*46;
+      var dx=Math.cos(ang)*sp*(Math.random()<.5?-1:1), dy=Math.sin(ang)*sp;
+      var t0=performance.now();
+      (function(c,dx,dy,t0){
+        function step(now){
+          var kk=(now-t0)/640; if(kk>=1){ c.remove(); return; }
+          c.setAttribute('transform','translate('+(dx*kk).toFixed(1)+','+(dy*kk-0.5*70*kk*kk).toFixed(1)+')');
+          c.setAttribute('opacity',(0.6*(1-kk)).toFixed(2));
+          requestAnimationFrame(step);
+        } requestAnimationFrame(step);
+      })(c,dx,dy,t0);
+    }
+  }
+
+  /* --- ruler / ticks --- */
+  (function buildRuler(){
+    for(var m=0;m<=8;m++){
+      var x=X0+m*pxPerM, major=(m%2===0);
+      var ln=document.createElementNS(SVGNS,'line');
+      ln.setAttribute('class', major?'jump-tick-major':'jump-tick');
+      ln.setAttribute('x1',x); ln.setAttribute('x2',x);
+      ln.setAttribute('y1',360); ln.setAttribute('y2', major?342:350);
+      gRuler.appendChild(ln);
+      if(major){
+        var tx=document.createElementNS(SVGNS,'text');
+        tx.setAttribute('class','jump-tick-lab');
+        tx.setAttribute('x',x+4); tx.setAttribute('y',337);
+        tx.textContent=m+'m'; gRuler.appendChild(tx);
+      }
+    }
+    var fx=XF;
+    var pole=document.createElementNS(SVGNS,'line');
+    pole.setAttribute('class','jump-flag-pole');
+    pole.setAttribute('x1',fx);pole.setAttribute('x2',fx);pole.setAttribute('y1',360);pole.setAttribute('y2',300);
+    gRuler.appendChild(pole);
+    var fl=document.createElementNS(SVGNS,'polygon');
+    fl.setAttribute('class','jump-flag');
+    fl.setAttribute('points',fx+',300 '+(fx+30)+',308 '+fx+',316');
+    gRuler.appendChild(fl);
+    var lab=document.createElementNS(SVGNS,'text');
+    lab.setAttribute('class','jump-flag-lab');
+    lab.setAttribute('x',fx-4);lab.setAttribute('y',294);lab.setAttribute('text-anchor','end');
+    lab.textContent='8.40 m'; gRuler.appendChild(lab);
+  })();
+
+  /* --- runner --- */
+  var DUR=6200, start=null, raf=null, lastX=null, lastFrame=null;
+  function tick(now){
+    if(start===null) start=now;
+    var p=(now-start)/DUR; if(p>1)p=1;
+    var s=render(p);
+    if(lastX!==null){
+      var v=Math.abs(s.x-lastX);
+      sprite.style.filter = v>2.4 ? 'blur('+Math.min(2.2,(v-2.4)*0.45).toFixed(2)+'px)' : 'none';
+    }
+    lastX=s.x;
+    if(lastFrame!==s.frame){
+      if(s.frame==='7a') dust(s.x,GROUND); // takeoff
+      if(s.frame===6) dust(s.x,GROUND);    // landing
+      lastFrame=s.frame;
+    }
+    var done=0; for(var i=0;i<3;i++){ if(p>=INTRO+i*bSpan+0.84*bSpan) done=i+1; }
+    for(var j=0;j<3;j++) pips[j].classList.toggle('on', j<done);
+    if(p<1) raf=requestAnimationFrame(tick);
+    else sprite.style.filter='none';
+  }
+  function play(){
+    if(raf) cancelAnimationFrame(raf);
+    start=null; lastX=null; lastFrame=null;
+    while(dustG.firstChild) dustG.removeChild(dustG.firstChild);
+    raf=requestAnimationFrame(tick);
+  }
+  function showFinal(){ render(1); numEl.textContent=TOTAL_M.toFixed(2); pips.forEach(function(p){p.classList.add('on');}); }
+
+  replay.addEventListener('click', play);
+
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduce){ showFinal(); }
+  else{
+    render(0);
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } });
+    },{threshold:0.35});
+    io.observe(document.getElementById('jumpShow'));
+  }
+}());
+</script>
+</body>
+</html>

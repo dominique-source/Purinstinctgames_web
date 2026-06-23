@@ -94,7 +94,7 @@ h1,h2,h3,.disp{
 .burger{display:none;flex-direction:column;gap:5px;padding:6px}
 .burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
 @media(max-width:860px){
-  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw;max-height:calc(100dvh - 70px);overflow-y:auto}
   .nav-links.open{transform:none}
   .burger{display:flex}
   .nav-cta{display:none}
@@ -106,7 +106,7 @@ h1,h2,h3,.disp{
     min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
     padding-left:14px;margin-top:2px;box-shadow:none;
   }
-  .nav-drop.open .nav-drop-menu{max-height:200px}
+  .nav-drop.open .nav-drop-menu{max-height:360px}
   .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
 }
 
@@ -239,19 +239,27 @@ h1,h2,h3,.disp{
 
 /* ============ INFO STRIP ============ */
 .sg-strip{
-  background:#111;border-top:1px solid rgba(204,255,0,.12);
+  background:#0d0d0d;border-top:1px solid rgba(204,255,0,.12);
   border-bottom:1px solid rgba(204,255,0,.12);
-  padding:clamp(28px,4vw,48px) 0;margin-bottom:clamp(32px,5vw,60px);
+  padding:clamp(16px,2.4vw,26px) 0;margin-bottom:clamp(28px,4vw,52px);
 }
-.sg-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(204,255,0,.12)}
-@media(max-width:640px){.sg-strip-grid{grid-template-columns:1fr}}
-.sg-strip-item{
-  background:#111;padding:28px 32px;
-  display:flex;flex-direction:column;gap:8px;
+.sg-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,30px)}
+@media(max-width:640px){.sg-strip-grid{grid-template-columns:1fr;gap:0}}
+.sg-strip-item{display:flex;align-items:flex-start;gap:13px;position:relative}
+@media(min-width:641px){.sg-strip-item:not(:last-child)::after{content:"";position:absolute;right:calc(-1*clamp(8px,1.1vw,15px));top:1px;bottom:1px;width:1px;background:rgba(204,255,0,.12)}}
+@media(max-width:640px){
+  .sg-strip-item{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+  .sg-strip-item:last-child{border-bottom:none}
 }
-.sg-strip-icon{font-size:22px;margin-bottom:4px}
-.sg-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,2vw,20px);color:var(--white)}
-.sg-strip-sub{font-size:14px;color:var(--muted);line-height:1.45}
+.sg-strip-icon{
+  flex:none;width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(204,255,0,.28);background:rgba(204,255,0,.06);color:var(--lime);
+}
+.sg-strip-icon svg{width:19px;height:19px;stroke:currentColor;fill:none}
+.sg-strip-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.sg-strip-label{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.7vw,18px);color:var(--white);line-height:1.05}
+.sg-strip-sub{font-size:14px;color:var(--muted);line-height:1.4}
 
 /* ============ PROGRAMME ============ */
 .prog-section{
@@ -267,9 +275,8 @@ h1,h2,h3,.disp{
   position:relative;background:#0f0f0f;
   border:1.5px solid rgba(255,255,255,.07);border-radius:4px;
   padding:36px 28px 32px;overflow:hidden;display:flex;flex-direction:column;gap:14px;
-  transition:border-color .25s,box-shadow .25s;
+  transition:transform .34s cubic-bezier(.34,1.4,.6,1),opacity .28s ease,border-color .25s,box-shadow .25s,background .25s;
 }
-.prog-card:hover{border-color:rgba(204,255,0,.35);box-shadow:0 4px 32px rgba(204,255,0,.08)}
 .prog-card.featured{border-color:rgba(204,255,0,.3);background:#101a00}
 .prog-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.08)}
 .prog-card.featured::before{background:var(--lime)}
@@ -278,7 +285,17 @@ h1,h2,h3,.disp{
   font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
 }
 .prog-card.featured .prog-card-num{color:var(--lime)}
-.prog-card-icon{font-size:30px;line-height:1;margin-bottom:4px}
+.prog-card-icon{
+  width:54px;height:54px;border-radius:13px;margin-bottom:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(255,255,255,.10);background:rgba(255,255,255,.035);
+  color:var(--white);transition:border-color .25s,background .25s,color .25s;
+}
+.prog-card-icon svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none}
+.prog-card.featured .prog-card-icon{
+  border-color:rgba(204,255,0,.38);background:rgba(204,255,0,.07);
+  color:var(--lime);box-shadow:0 0 18px rgba(204,255,0,.12);
+}
 .prog-card-title{
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:clamp(20px,2.5vw,26px);letter-spacing:-.01em;line-height:.95;
@@ -335,6 +352,36 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .prog-card:hover .prog-card-hint::after{transform:translateX(4px)}
 .prog-card.featured .prog-card-hint{color:rgba(204,255,0,.6)}
 .prog-card.featured:hover .prog-card-hint{color:var(--lime)}
+
+/* ===== Interactive spotlight: the lime accent follows the cursor across the 3 events ===== */
+@media(hover:hover){
+  .prog-card:hover{
+    transform:scale(1.15);z-index:5;
+    border-color:rgba(204,255,0,.5);background:#101a00;
+    box-shadow:0 14px 46px rgba(204,255,0,.16);
+  }
+  .prog-card:hover::before{background:var(--lime)}
+  .prog-card:hover .prog-card-num{color:var(--lime)}
+  .prog-card:hover .prog-card-title{color:var(--lime)}
+  .prog-card:hover .prog-card-icon{
+    border-color:rgba(204,255,0,.45);background:rgba(204,255,0,.08);
+    color:var(--lime);box-shadow:0 0 20px rgba(204,255,0,.18);
+  }
+  .prog-card:hover .prog-tag{border-color:rgba(204,255,0,.4);color:var(--lime)}
+  .prog-card:hover .prog-card-hint{color:var(--lime)}
+
+  .prog-grid:hover .prog-card:not(:hover){opacity:.4}
+  .prog-grid:hover .prog-card.featured:not(:hover){border-color:rgba(255,255,255,.07);background:#0f0f0f;box-shadow:none}
+  .prog-grid:hover .prog-card.featured:not(:hover)::before{background:rgba(255,255,255,.08)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-num{color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-title{color:var(--white)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-icon{
+    border-color:rgba(255,255,255,.10);background:rgba(255,255,255,.035);color:var(--white);box-shadow:none;
+  }
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-tag{border-color:rgba(255,255,255,.12);color:var(--muted)}
+  .prog-grid:hover .prog-card.featured:not(:hover) .prog-card-hint{color:rgba(204,255,0,.6)}
+}
+@media(prefers-reduced-motion:reduce){.prog-card:hover{transform:none}}
 
 .modal-overlay{
   position:fixed;inset:0;z-index:200;
@@ -409,6 +456,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
         <a href="championship.html" class="nav-drop-item" data-i18n="nav_champ">Championship</a>
         <a href="projet-special.html" class="nav-drop-item active" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="king-dac.html" class="nav-drop-item" data-i18n="nav_kd">King Dac</a>
         <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
         <a href="instinct-tv.html" class="nav-drop-item" data-i18n="nav_tv">INSTINCT: La Série TV</a>
       </div>
@@ -441,19 +489,25 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   <div class="wrap">
     <div class="sg-strip-grid">
       <div class="sg-strip-item">
-        <div class="sg-strip-icon">📅</div>
-        <div class="sg-strip-label" data-i18n="sg_s1l">Date à confirmer</div>
-        <div class="sg-strip-sub" data-i18n="sg_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
+        <div class="sg-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 9.5h18"/></svg></div>
+        <div class="sg-strip-txt">
+          <div class="sg-strip-label" data-i18n="sg_s1l">Date à confirmer</div>
+          <div class="sg-strip-sub" data-i18n="sg_s1b">Réserve ta place maintenant pour être notifié en premier.</div>
+        </div>
       </div>
       <div class="sg-strip-item">
-        <div class="sg-strip-icon">🏟️</div>
-        <div class="sg-strip-label" data-i18n="sg_s2l">Session exclusive</div>
-        <div class="sg-strip-sub" data-i18n="sg_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
+        <div class="sg-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H5a2 2 0 0 1-2-2 2 2 0 0 0 0-4Z"/><path d="M15 7v10"/></svg></div>
+        <div class="sg-strip-txt">
+          <div class="sg-strip-label" data-i18n="sg_s2l">Session exclusive</div>
+          <div class="sg-strip-sub" data-i18n="sg_s2b">Nombre de places limité. Une seule date, une seule chance.</div>
+        </div>
       </div>
       <div class="sg-strip-item">
-        <div class="sg-strip-icon">⚡</div>
-        <div class="sg-strip-label" data-i18n="sg_s3l">Il joue avec toi</div>
-        <div class="sg-strip-sub" data-i18n="sg_s3b">Séan Garnier anime, défie et joue dans l'arène aux côtés des participants.</div>
+        <div class="sg-strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <div class="sg-strip-txt">
+          <div class="sg-strip-label" data-i18n="sg_s3l">Il joue avec toi</div>
+          <div class="sg-strip-sub" data-i18n="sg_s3b">Séan Garnier anime, défie et joue dans l'arène aux côtés des participants.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -511,9 +565,9 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <!-- PürInstinct Games -->
       <div class="prog-card featured" data-discipline="1">
         <div class="prog-card-num" data-i18n="prog_1_num">Activité 01</div>
-        <div class="prog-card-icon">🏟️</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_1_t">PürInstinct Games</div>
-        <p class="prog-card-desc" data-i18n="prog_1_b">Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2.</p>
+        <p class="prog-card-desc" data-i18n="prog_1_b">Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2. Séan Garnier observe, commente et défie les meilleurs en direct.</p>
         <div class="prog-card-tags">
           <span class="prog-tag" data-i18n="prog_1_t1">9 stations</span>
           <span class="prog-tag" data-i18n="prog_1_t2">Score en direct</span>
@@ -526,7 +580,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <!-- Panna 1v1 -->
       <div class="prog-card" data-discipline="2">
         <div class="prog-card-num" data-i18n="prog_2_num">Activité 02</div>
-        <div class="prog-card-icon">⚽</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.6 14.7 9.5 13.7 12.7 10.3 12.7 9.3 9.5Z"/><path d="M12 7.6V3.2M14.7 9.5 18.6 8.2M13.7 12.7 16.2 16M10.3 12.7 7.8 16M9.3 9.5 5.4 8.2"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_2_t">Tournoi Panna 1v1</div>
         <p class="prog-card-desc" data-i18n="prog_2_b">Le duel de rue le plus électrique du soccer : passe le ballon entre les jambes de ton adversaire pour marquer le panna et remporter le point. Format élimination directe, Séan Garnier comme juge suprême.</p>
         <div class="prog-card-tags">
@@ -541,7 +595,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <!-- Freestyle -->
       <div class="prog-card" data-discipline="3">
         <div class="prog-card-num" data-i18n="prog_3_num">Activité 03</div>
-        <div class="prog-card-icon">🌀</div>
+        <div class="prog-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 3.5 13.3 8.2 18 10 13.3 11.8 11.5 16.5 9.7 11.8 5 10 9.7 8.2Z"/><path d="M18 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></div>
         <div class="prog-card-title" data-i18n="prog_3_t">Tournoi Freestyle Soccer</div>
         <p class="prog-card-desc" data-i18n="prog_3_b">Jongle, invente, impressionne. Chaque participant présente une routine libre devant les autres athlètes et Séan Garnier. Les juges notent la créativité, la maîtrise technique et le style. Le meilleur freestyler repart avec un prix.</p>
         <div class="prog-card-tags">
@@ -611,7 +665,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 /* ====================================================== */
 const I18N = {
 fr:{
-  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
   sg_eyebrow:"Projet spécial",
   sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"DANS L'ARÈNE.",
   sg_herosub:"Le freestyler le plus visionné de l'histoire entre dans l'arène PürInstinct Games pour une session exclusive.",
@@ -625,7 +679,7 @@ fr:{
   sg_f1:"vues cumulées",sg_f2:"freestyler mondial",sg_f3:"ans de carrière",sg_f4:"présence mondiale",
   sg_cta:"Réserve ta place",sg_cta2:"Je veux ma place",sg_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE",
   prog_eyebrow:"Au programme",prog_title:"3 DISCIPLINES.<br>UN SEUL ÉVÉNEMENT.",
-  prog_1_num:"Activité 01",prog_1_t:"PürInstinct Games",prog_1_b:"Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2.",prog_1_t1:"9 stations",prog_1_t2:"Score en direct",prog_1_t3:"Sans contact",
+  prog_1_num:"Activité 01",prog_1_t:"PürInstinct Games",prog_1_b:"Le sport signature de l'arène : 9 stations, 5 instincts naturels, un leaderboard individuel en temps réel. Traverse le terrain sans être touché, sans échapper le ballon — toujours 3 contre 2. Séan Garnier observe, commente et défie les meilleurs en direct.",prog_1_t1:"9 stations",prog_1_t2:"Score en direct",prog_1_t3:"Sans contact",
   prog_2_num:"Activité 02",prog_2_t:"Séan Garnier Challenge",prog_2_b:"Le tournoi officiel de Panna 1 contre 1. Affronte les autres participants dans une cage Panna et démontre ta créativité, ton contrôle et ta capacité à éliminer ton adversaire.",prog_2_t1:"Panna 1v1",prog_2_t2:"Élimination directe",prog_2_t3:"Animé par Séan",
   prog_3_num:"Activité 03",prog_3_t:"Freestyle Showcase",prog_3_b:"Un spectacle de freestyle football présenté par des athlètes de haut niveau. Des routines impressionnantes alliant technique, créativité et maîtrise du ballon.",prog_3_t1:"Athlètes élites",prog_3_t2:"Routines exclusives",prog_3_t3:"Inspirant",
   prog_cta:"Réserve ta place",prog_hint:"Voir l'activité",
@@ -633,7 +687,7 @@ fr:{
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
 },
 en:{
-  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
   sg_eyebrow:"Special project",
   sg_h1a:"SÉAN",sg_h1b:"GARNIER",sg_h1c:"IN THE ARENA.",
   sg_herosub:"The most-watched freestyler in history steps into the PürInstinct Games arena for one exclusive session.",
@@ -647,7 +701,7 @@ en:{
   sg_f1:"combined views",sg_f2:"world freestyler",sg_f3:"years of career",sg_f4:"worldwide presence",
   sg_cta:"Save your spot",sg_cta2:"I want my spot",sg_card_tag:"EXCLUSIVE SESSION · ONE DATE ONLY",
   prog_eyebrow:"On the program",prog_title:"3 DISCIPLINES.<br>ONE EVENT.",
-  prog_1_num:"Activity 01",prog_1_t:"PürInstinct Games",prog_1_b:"The arena's signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball — always 3 against 2.",prog_1_t1:"9 stations",prog_1_t2:"Live score",prog_1_t3:"No contact",
+  prog_1_num:"Activity 01",prog_1_t:"PürInstinct Games",prog_1_b:"The arena's signature sport: 9 stations, 5 natural instincts, one live individual leaderboard. Cross the field without being touched, without dropping the ball — always 3 against 2. Séan Garnier watches, comments and challenges the top performers live.",prog_1_t1:"9 stations",prog_1_t2:"Live score",prog_1_t3:"No contact",
   prog_2_num:"Activity 02",prog_2_t:"Séan Garnier Challenge",prog_2_b:"The official Panna 1v1 tournament. Face other participants in a Panna cage and show your creativity, control and ability to eliminate your opponent.",prog_2_t1:"Panna 1v1",prog_2_t2:"Single elimination",prog_2_t3:"Hosted by Séan",
   prog_3_num:"Activity 03",prog_3_t:"Freestyle Showcase",prog_3_b:"A freestyle football showcase performed by elite athletes. Breathtaking routines combining technique, creativity and ball mastery.",prog_3_t1:"Elite athletes",prog_3_t2:"Exclusive routines",prog_3_t3:"Inspiring",
   prog_cta:"Save your spot",prog_hint:"See the activity",

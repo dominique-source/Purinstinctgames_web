@@ -79,7 +79,7 @@ h1,h2,h3,.disp{
 .burger{display:none;flex-direction:column;gap:5px;padding:6px}
 .burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
 @media(max-width:860px){
-  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw;max-height:calc(100dvh - 70px);overflow-y:auto}
   .nav-links.open{transform:none}
   .burger{display:flex}
   .nav-cta{display:none}
@@ -90,7 +90,7 @@ h1,h2,h3,.disp{
     min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
     padding-left:14px;margin-top:2px;box-shadow:none;
   }
-  .nav-drop.open .nav-drop-menu{max-height:200px}
+  .nav-drop.open .nav-drop-menu{max-height:360px}
   .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
 }
 .nav-drop{position:relative;display:flex;align-items:center}
@@ -415,6 +415,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
         <a href="championship.html" class="nav-drop-item" data-i18n="nav_champ">Championship</a>
         <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="king-dac.html" class="nav-drop-item" data-i18n="nav_kd">King Dac</a>
         <a href="youtube-series.html" class="nav-drop-item active" data-i18n="nav_yt">YouTube Series</a>
         <a href="instinct-tv.html" class="nav-drop-item" data-i18n="nav_tv">INSTINCT: La Série TV</a>
       </div>
@@ -768,7 +769,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <script>
 const I18N = {
 fr:{
-  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
   yt_eyebrow:"Série YouTube",
   yt_h1a:"TES GAMES.",yt_h1b:"TON ÉQUIPE.",yt_h1c:"TON HÉRITAGE.",
   yt_herosub:"Un créateur. Un co-animateur. 25 athlètes. Six disciplines. Deux heures. Des caméras partout.",
@@ -794,7 +795,7 @@ fr:{
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
 },
 en:{
-  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
   yt_eyebrow:"YouTube Series",
   yt_h1a:"YOUR GAMES.",yt_h1b:"YOUR CREW.",yt_h1c:"YOUR LEGACY.",
   yt_herosub:"One creator. One co-host. 25 athletes. Six disciplines. Two hours. Cameras everywhere.",

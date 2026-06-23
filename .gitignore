@@ -1,0 +1,9 @@
+.vercel
+.DS_Store
+.claude/
+.agents/
+.vscode/
+ui-ux-pro-max-skill-main/
+node_modules/
+bracelet-remotion/node_modules/
+bracelet-remotion/.cache/

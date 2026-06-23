@@ -18,8 +18,8 @@
   --bg:#0A0A0A;
   --bg-2:#101010;
   --lime:#CCFF00;
-  --gold:#D4AF37;
-  --gold-glow:rgba(212,175,55,.22);
+  --gold:#F0B429;
+  --gold-glow:rgba(240,180,41,.22);
   --white:#F4F4F2;
   --muted:#888888;
   --line:rgba(204,255,0,.18);
@@ -37,6 +37,10 @@ body{
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+/* §1 Accessibility — visible keyboard focus on every interactive element */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:3px solid var(--lime);outline-offset:3px;border-radius:1px;
+}
 h1,h2,h3,.disp{
   font-family:var(--display);font-weight:900;font-style:italic;
   text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
@@ -84,7 +88,7 @@ h1,h2,h3,.disp{
 .burger{display:none;flex-direction:column;gap:5px;padding:6px}
 .burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
 @media(max-width:860px){
-  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw}
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw;max-height:calc(100dvh - 70px);overflow-y:auto}
   .nav-links.open{transform:none}
   .burger{display:flex}
   .nav-cta{display:none}
@@ -95,7 +99,7 @@ h1,h2,h3,.disp{
     min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
     padding-left:14px;margin-top:2px;box-shadow:none;
   }
-  .nav-drop.open .nav-drop-menu{max-height:200px}
+  .nav-drop.open .nav-drop-menu{max-height:360px}
   .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
 }
 .nav-drop{position:relative;display:flex;align-items:center}
@@ -136,7 +140,7 @@ h1,h2,h3,.disp{
 }
 .ch-hero-img{
   position:absolute;inset:0;z-index:0;
-  background:url('narr-08-champion.png') center 30% / cover no-repeat;
+  background:url('champion hero.png') center 30% / cover no-repeat;
 }
 .ch-hero-img::after{
   content:"";position:absolute;inset:0;
@@ -167,7 +171,7 @@ h1,h2,h3,.disp{
 .cta{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(17px,2.2vw,23px);background:var(--lime);color:#0A0A0A;padding:15px 38px 17px;letter-spacing:.02em;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:transform .15s;text-decoration:none}
 .cta:hover{transform:translateY(-2px);filter:drop-shadow(0 0 14px rgba(204,255,0,.7))}
 .cta--gold{background:var(--gold);color:#0A0A0A}
-.cta--gold:hover{filter:drop-shadow(0 0 14px rgba(212,175,55,.7))}
+.cta--gold:hover{filter:drop-shadow(0 0 14px rgba(240,180,41,.7))}
 .cta-outline{display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.9vw,20px);border:2px solid var(--lime);color:var(--lime);padding:13px 36px 15px;letter-spacing:.02em;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:background .2s,color .2s,transform .15s;text-decoration:none}
 .cta-outline:hover{background:var(--lime);color:#0A0A0A;transform:translateY(-2px)}
 .ch-hero-scroll{
@@ -183,13 +187,13 @@ h1,h2,h3,.disp{
 /* ============ STAT STRIP ============ */
 .ch-stats{
   background:linear-gradient(90deg,#0d0d0d 0%,#111 50%,#0d0d0d 100%);
-  border-top:2px solid var(--gold);border-bottom:1px solid rgba(212,175,55,.15);
+  border-top:2px solid var(--gold);border-bottom:1px solid rgba(240,180,41,.15);
   padding:clamp(28px,4vw,44px) 0;
   position:relative;overflow:hidden;
 }
 .ch-stats::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(212,175,55,.04) 50%,transparent);
+  background:linear-gradient(90deg,transparent,rgba(240,180,41,.04) 50%,transparent);
   pointer-events:none;
 }
 .ch-stats-grid{
@@ -200,7 +204,7 @@ h1,h2,h3,.disp{
 .ch-stat-n{
   font-family:var(--display);font-weight:900;font-style:italic;
   font-size:clamp(36px,5.5vw,72px);line-height:1;letter-spacing:-.02em;
-  color:var(--gold);
+  color:var(--gold);font-variant-numeric:tabular-nums;
 }
 .ch-stat-n sup{font-size:.45em;vertical-align:super;letter-spacing:0}
 .ch-stat-l{
@@ -231,7 +235,7 @@ h1,h2,h3,.disp{
 .ch-event-body{font-size:clamp(15px,1.6vw,17px);color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:26px;max-width:54ch}
 .ch-event-pull{
   border-left:3px solid var(--gold);padding:18px 22px;
-  background:rgba(212,175,55,.05);margin-bottom:28px;
+  background:rgba(240,180,41,.05);margin-bottom:28px;
 }
 .ch-event-pull p{
   font-family:var(--display);font-weight:900;font-style:italic;
@@ -252,22 +256,29 @@ h1,h2,h3,.disp{
 }
 
 /* ============ FESTIVAL ============ */
-.ch-festival{padding:clamp(72px,10vw,120px) 0}
+.ch-festival{padding:clamp(72px,10vw,120px) 0 0;position:relative}
 .ch-festival-header{margin-bottom:clamp(40px,6vw,64px)}
 .ch-festival-header h2{font-size:clamp(38px,6.5vw,88px);margin-bottom:14px}
 .ch-festival-header p{font-size:clamp(15px,1.6vw,17px);color:var(--muted);max-width:60ch;line-height:1.6}
-.ch-fest-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2px;
+
+/* scroll-driven pan */
+#chfDriver{position:relative}
+.chf-sticky{position:absolute;left:0;right:0;top:0;overflow:hidden}
+.chf-track{
+  display:flex;gap:12px;will-change:transform;
+  padding-left:max(4vw,calc((100vw - 1180px) / 2));
+  padding-right:max(4vw,calc((100vw - 1180px) / 2));
+  padding-bottom:clamp(72px,10vw,120px);
 }
-@media(max-width:760px){.ch-fest-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.ch-fest-grid{grid-template-columns:1fr}}
+.chf-bar{position:absolute;bottom:clamp(36px,5vw,60px);left:max(4vw,calc((100vw - 1180px)/2));right:max(4vw,calc((100vw - 1180px)/2));height:2px;background:rgba(255,255,255,.08)}
+.chf-bar-fill{height:100%;width:0%;background:var(--lime);transition:width .1s linear}
+
 .ch-fest-card{
+  flex:0 0 clamp(260px,30vw,380px);
   background:#111;border:1px solid rgba(255,255,255,.06);
   padding:clamp(26px,3.5vw,36px) clamp(22px,3vw,32px);
   position:relative;overflow:hidden;
-  transition:border-color .25s,background .25s;
+  transition:border-color .25s,background .25s,opacity .25s,transform .25s;
 }
 .ch-fest-card:hover{border-color:rgba(204,255,0,.25);background:#131313}
 .ch-fest-card::before{
@@ -276,15 +287,27 @@ h1,h2,h3,.disp{
   transition:transform .3s ease;
 }
 .ch-fest-card:hover::before{transform:scaleX(1)}
+.ch-fest-img{width:100%;aspect-ratio:16/9;overflow:hidden;margin:-clamp(26px,3.5vw,36px) -clamp(22px,3vw,32px) 20px;width:calc(100% + clamp(44px,6vw,64px))}
+.ch-fest-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.ch-fest-card:hover .ch-fest-img img{transform:scale(1.05)}
 .ch-fest-icon{
   font-size:clamp(28px,4vw,38px);margin-bottom:18px;display:block;
-  filter:grayscale(30%);
 }
 .ch-fest-title{
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
   font-size:clamp(18px,2.2vw,24px);color:var(--white);margin-bottom:8px;line-height:1;
 }
 .ch-fest-body{font-size:clamp(13px,1.3vw,14px);color:var(--muted);line-height:1.6}
+
+/* mobile: native scroll-snap */
+@media(max-width:700px),(prefers-reduced-motion:reduce){
+  #chfDriver{height:auto!important}
+  .chf-sticky{position:relative!important;top:auto!important;bottom:auto!important;
+    overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .chf-track{transform:none!important;padding-bottom:clamp(48px,7vw,80px)}
+  .ch-fest-card{scroll-snap-align:start;opacity:1!important;transform:none!important}
+  .chf-bar{display:none}
+}
 
 /* ============ TOURNAMENT FORMAT ============ */
 .ch-format{
@@ -294,48 +317,56 @@ h1,h2,h3,.disp{
 .ch-format-header{margin-bottom:clamp(48px,7vw,72px);text-align:center}
 .ch-format-header h2{font-size:clamp(36px,6vw,82px)}
 .ch-format-header p{font-size:clamp(14px,1.5vw,16px);color:var(--muted);max-width:55ch;margin:14px auto 0;line-height:1.6}
-.ch-steps{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  position:relative;
-}
-@media(max-width:760px){.ch-steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.ch-steps{grid-template-columns:1fr}}
-.ch-steps::before{
-  content:"";position:absolute;top:44px;left:12.5%;right:12.5%;height:2px;
-  background:linear-gradient(90deg,var(--lime),var(--gold));
-  z-index:0;
-}
-@media(max-width:760px){.ch-steps::before{display:none}}
-.ch-step{
-  display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:0 clamp(12px,2vw,24px) 40px;position:relative;z-index:1;
-}
-.ch-step-num{
-  width:clamp(44px,5.5vw,56px);height:clamp(44px,5.5vw,56px);
-  display:flex;align-items:center;justify-content:center;
-  background:var(--bg);border:2px solid var(--lime);
-  font-family:var(--display);font-weight:900;font-style:italic;
-  font-size:clamp(18px,2.5vw,24px);color:var(--lime);
-  margin-bottom:20px;
-  position:relative;
-}
-.ch-step:last-child .ch-step-num{
-  border-color:var(--gold);color:var(--gold);
-  background:rgba(212,175,55,.08);
-  box-shadow:0 0 24px rgba(212,175,55,.3);
-}
-.ch-step-label{
+/* ===== ROAD TO THE CHAMPIONSHIP — scroll-scrubbed interactive map ===== */
+#roadDriver{position:relative}
+.road-sticky{position:absolute;left:0;right:0;top:0;overflow:hidden}
+.road-wrap{width:min(1180px,92%);margin:0 auto;position:relative;padding:clamp(30px,5vw,52px) 0 clamp(20px,3vw,34px)}
+.road-map{width:100%;height:auto;display:block;overflow:visible}
+.road-hint{
+  position:absolute;left:50%;top:2px;transform:translateX(-50%);
   font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
-  font-size:clamp(14px,1.8vw,20px);color:var(--white);margin-bottom:8px;line-height:1;
+  font-size:clamp(11px,1.3vw,13px);letter-spacing:.16em;color:var(--lime);
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+  transition:opacity .4s ease;pointer-events:none;z-index:3;
 }
-.ch-step:last-child .ch-step-label{color:var(--gold)}
-.ch-step-sub{font-size:clamp(12px,1.2vw,13px);color:var(--muted);line-height:1.5;max-width:18ch;margin:0 auto}
+.road-hint::after{content:"↓";font-style:normal;animation:scrollBounce 2s ease-in-out infinite}
+.road-prog{position:relative;height:3px;background:rgba(255,255,255,.08);margin-top:16px;border-radius:3px;overflow:hidden}
+.road-prog-fill{position:absolute;inset:0 auto 0 0;width:0%;background:linear-gradient(90deg,var(--lime),var(--gold))}
+.road-prog-pct{position:absolute;right:0;top:-21px;font-family:var(--display);font-weight:900;font-style:italic;font-size:13px;color:var(--gold);font-variant-numeric:tabular-nums}
+.road-stops{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}
+@media(max-width:560px){.road-stops{grid-template-columns:repeat(2,1fr);gap:22px 10px}}
+.road-stop{text-align:center;will-change:opacity,transform}
+.road-stop-scope{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:10px;letter-spacing:.2em;color:var(--lime);margin-bottom:5px}
+.road-stop:last-child .road-stop-scope{color:var(--gold)}
+.road-stop-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(15px,1.9vw,22px);color:var(--white);line-height:1;margin-bottom:6px}
+.road-stop:last-child .road-stop-name{color:var(--gold)}
+.road-stop-sub{font-size:clamp(11px,1.2vw,13px);color:var(--muted);line-height:1.45;max-width:20ch;margin:0 auto}
+.road-track{fill:none;stroke:rgba(255,255,255,.10);stroke-width:2}
+.road-line{fill:none;stroke:url(#roadGrad);stroke-width:3.5;stroke-linecap:round}
+.road-node{transform-box:fill-box;transform-origin:center;will-change:transform,opacity}
+.road-node-box{fill:#0c0c0c;stroke:var(--lime);stroke-width:2}
+.road-node--champ .road-node-box{stroke:var(--gold)}
+.road-node-glyph{fill:var(--lime);font-family:var(--display);font-weight:900;font-style:italic}
+.road-node--champ .road-node-glyph{fill:var(--gold)}
+.road-ring{fill:none;transform-box:fill-box;transform-origin:center}
+.road-node .road-ring{stroke:var(--lime)}
+.road-node--champ .road-ring{stroke:var(--gold)}
+.road-node--champ.is-live .road-ring{animation:roadPulse 2.3s ease-in-out infinite}
+@keyframes roadPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+.road-traveler{fill:var(--lime);filter:drop-shadow(0 0 7px rgba(204,255,0,.9))}
+.road-traveler-ring{fill:none;stroke:var(--lime);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:roadPing 1.9s ease-out infinite}
+@keyframes roadPing{0%{transform:scale(.5);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+@media(max-width:760px),(prefers-reduced-motion:reduce){
+  #roadDriver{height:auto!important}
+  .road-sticky{position:relative!important;top:auto!important;bottom:auto!important;height:auto!important}
+  .road-hint{display:none}
+}
 
 /* ============ PRIZE MONEY ============ */
 .ch-prize{padding:clamp(72px,10vw,120px) 0;position:relative;overflow:hidden}
 .ch-prize::before{
   content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(212,175,55,.06),transparent);
+  background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(240,180,41,.06),transparent);
   pointer-events:none;
 }
 .ch-prize-header{text-align:center;margin-bottom:clamp(48px,7vw,80px)}
@@ -356,7 +387,7 @@ h1,h2,h3,.disp{
 .ch-podium--1st{
   background:linear-gradient(160deg,#161400,#111);
   border-color:var(--gold);
-  box-shadow:0 0 40px rgba(212,175,55,.2),inset 0 0 60px rgba(212,175,55,.04);
+  box-shadow:0 0 40px rgba(240,180,41,.2),inset 0 0 60px rgba(240,180,41,.04);
 }
 .ch-podium--2nd,.ch-podium--3rd{margin-bottom:clamp(16px,3vw,32px)}
 @media(max-width:640px){.ch-podium--2nd,.ch-podium--3rd{margin-bottom:0;order:1}}
@@ -366,11 +397,15 @@ h1,h2,h3,.disp{
   font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:14px;
 }
 .ch-podium--1st .ch-podium-rank{color:var(--gold)}
-.ch-podium-trophy{font-size:clamp(28px,4vw,40px);margin-bottom:12px;display:block}
+.ch-podium-trophy{display:flex;justify-content:center;margin-bottom:14px;color:var(--muted)}
+.ch-podium-trophy svg{width:clamp(34px,4.6vw,48px);height:auto;display:block}
+.ch-podium--1st .ch-podium-trophy{color:var(--gold);filter:drop-shadow(0 0 14px rgba(240,180,41,.45))}
+.ch-podium--2nd .ch-podium-trophy{color:#C8CBD0}
+.ch-podium--3rd .ch-podium-trophy{color:#C08552}
 .ch-podium-amount{
   font-family:var(--display);font-weight:900;font-style:italic;
   font-size:clamp(36px,5.5vw,64px);color:var(--white);line-height:1;
-  margin-bottom:6px;
+  margin-bottom:6px;font-variant-numeric:tabular-nums;
 }
 .ch-podium--1st .ch-podium-amount{color:var(--gold)}
 .ch-podium-label{font-size:clamp(12px,1.3vw,14px);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
@@ -383,22 +418,22 @@ h1,h2,h3,.disp{
 }
 .ch-editions-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
 @media(max-width:860px){.ch-editions-grid{grid-template-columns:1fr}}
-.ch-timer{background:#111;border:1px solid rgba(212,175,55,.3);padding:clamp(24px,3.5vw,36px) clamp(22px,4vw,40px);position:relative;overflow:hidden;margin-bottom:32px}
-.ch-timer::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,175,55,.06) 0%,transparent 60%);pointer-events:none}
+.ch-timer{background:#111;border:1px solid rgba(240,180,41,.3);padding:clamp(24px,3.5vw,36px) clamp(22px,4vw,40px);position:relative;overflow:hidden;margin-bottom:32px}
+.ch-timer::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(240,180,41,.06) 0%,transparent 60%);pointer-events:none}
 .ch-timer-label{font-family:var(--display);font-weight:900;font-style:italic;font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
 .ch-timer-event{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(18px,2.8vw,30px);color:var(--white);text-transform:uppercase;margin-bottom:20px}
 .ch-timer-digits{display:flex;align-items:flex-end;gap:6px;flex-wrap:wrap}
 .ch-timer-unit{display:flex;flex-direction:column;align-items:center;min-width:56px}
-.ch-timer-unit span{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(34px,5vw,58px);color:var(--gold);line-height:1;letter-spacing:-.01em}
+.ch-timer-unit span{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(34px,5vw,58px);color:var(--gold);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
 .ch-timer-unit em{font-style:normal;font-size:10px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-top:4px}
-.ch-timer-sep{font-family:var(--display);font-weight:900;font-size:clamp(26px,4.5vw,44px);color:rgba(212,175,55,.4);padding-bottom:18px;margin:0 2px}
+.ch-timer-sep{font-family:var(--display);font-weight:900;font-size:clamp(26px,4.5vw,44px);color:rgba(240,180,41,.4);padding-bottom:18px;margin:0 2px}
 .ch-edlist{display:flex;flex-direction:column;gap:0}
 .ch-ed-row{
   display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:14px 20px;
   padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s;
 }
 .ch-ed-row:hover{background:rgba(255,255,255,.02)}
-.ch-ed-row--next{background:rgba(212,175,55,.05);border-left:3px solid var(--gold);padding-left:16px;margin-left:-19px;border-bottom-color:rgba(212,175,55,.15)}
+.ch-ed-row--next{background:rgba(240,180,41,.05);border-left:3px solid var(--gold);padding-left:16px;margin-left:-19px;border-bottom-color:rgba(240,180,41,.15)}
 .ch-ed-row--past{opacity:.4}
 .ch-ed-num{
   font-family:var(--display);font-weight:900;font-style:italic;
@@ -448,7 +483,8 @@ h1,h2,h3,.disp{
 .ch-form-submit:hover{filter:drop-shadow(0 0 12px rgba(204,255,0,.5));opacity:.92}
 .ch-form-submit:disabled{opacity:.4;cursor:not-allowed}
 .ch-form-success{display:none;text-align:center;padding:32px 20px}
-.ch-form-success-icon{font-size:44px;margin-bottom:14px}
+.ch-form-success-icon{display:flex;justify-content:center;margin-bottom:14px;color:var(--gold);filter:drop-shadow(0 0 14px rgba(240,180,41,.45))}
+.ch-form-success-icon svg{width:48px;height:auto}
 .ch-form-success-title{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(22px,3vw,30px);color:var(--gold);text-transform:uppercase;margin-bottom:8px}
 .ch-form-success-sub{font-size:14px;color:var(--muted);line-height:1.6}
 
@@ -463,7 +499,7 @@ h1,h2,h3,.disp{
 
 /* ============ FOOTER ============ */
 footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
-footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(212,175,55,.08),transparent 60%);transform:skewX(-20deg)}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(240,180,41,.08),transparent 60%);transform:skewX(-20deg)}
 .foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
 .foot-brand .logo{font-size:30px}
 .foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
@@ -480,6 +516,30 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 .reveal-right{opacity:0;transform:translateX(32px);transition:opacity .65s ease,transform .65s ease}
 .reveal-right.is-visible{opacity:1;transform:none}
 .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}.delay-5{transition-delay:.5s}
+
+/* ============ PODIUM SEQUENTIAL ENTRANCE ============ */
+.ch-podium.podium-ready{opacity:0;transform:translateY(64px) scale(0.80);transition:none}
+.ch-podium.podium-ready.podium-in{
+  opacity:1;transform:none;
+  transition:opacity .46s cubic-bezier(.34,1.56,.64,1),transform .50s cubic-bezier(.34,1.56,.64,1);
+}
+.ch-podium--1st.podium-hero{
+  animation:podiumHero .72s cubic-bezier(.34,1.56,.64,1) both;
+  transition:none;
+}
+@keyframes podiumHero{
+  0%{opacity:0;transform:translateY(44px) scale(0.78)}
+  68%{opacity:1;transform:translateY(-10px) scale(1.07)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* §7 Respect reduced-motion: no bounce, instant reveals */
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important}
+  .ch-hero-scroll{animation:none}
+  .reveal,.reveal-left,.reveal-right{opacity:1;transform:none;transition:none}
+  .road-node--champ.is-live .road-ring,.road-traveler-ring,.road-hint::after{animation:none}
+}
 </style>
 </head>
 <body>
@@ -500,6 +560,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
         <a href="championship.html" class="nav-drop-item active" data-i18n="nav_champ">Championship</a>
         <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="king-dac.html" class="nav-drop-item" data-i18n="nav_kd">King Dac</a>
         <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
         <a href="instinct-tv.html" class="nav-drop-item" data-i18n="nav_tv">INSTINCT: La Série TV</a>
       </div>
@@ -537,7 +598,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   <div class="wrap">
     <div class="ch-stats-grid">
       <div class="ch-stat reveal delay-1">
-        <div class="ch-stat-n"><sup>$</sup>10K</div>
+        <div class="ch-stat-n"><sup>$</sup>30K</div>
         <div class="ch-stat-l" data-i18n="stat_prize">Prix total</div>
       </div>
       <div class="ch-stat reveal delay-2">
@@ -562,7 +623,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <div class="ch-event-grid">
       <div class="reveal-left">
         <div class="ch-event-img-wrap">
-          <img src="narr-05-mainevent-new.png" alt="Main Event PürInstinct Championship" class="ch-event-img">
+          <img src="Image du championship.png" alt="Main Event PürInstinct Championship" class="ch-event-img">
           <div class="ch-event-gutter">
             <div class="ch-event-gutter-tag" data-i18n="ch_img_tag">THE MAIN EVENT</div>
             <div class="ch-event-gutter-title" data-i18n="ch_img_title">L'instinct contre l'instinct</div>
@@ -602,37 +663,42 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </h2>
       <p data-i18n="ch_fest_sub">Le Championship, c'est une journée entière. Un terrain transformé en expérience totale : musique, nourriture, créateurs de contenu, et la compétition la plus intense de l'année.</p>
     </div>
-    <div class="ch-fest-grid">
-      <div class="ch-fest-card reveal delay-1">
-        <span class="ch-fest-icon">🎵</span>
-        <div class="ch-fest-title" data-i18n="fest_dj">Live DJ</div>
-        <p class="ch-fest-body" data-i18n="fest_dj_sub">Un set continu du matin jusqu'à la finale. L'énergie ne tombe jamais.</p>
+  </div>
+  <div id="chfDriver">
+    <div class="chf-sticky">
+      <div class="chf-track">
+        <div class="ch-fest-card">
+          <div class="ch-fest-img"><img src="dj.png" alt="Live DJ"></div>
+          <div class="ch-fest-title" data-i18n="fest_dj">Live DJ</div>
+          <p class="ch-fest-body" data-i18n="fest_dj_sub">Un set continu du matin jusqu'à la finale. L'énergie ne tombe jamais.</p>
+        </div>
+        <div class="ch-fest-card">
+          <div class="ch-fest-img"><img src="live band.png" alt="Live Band"></div>
+          <div class="ch-fest-title" data-i18n="fest_band">Live Band</div>
+          <p class="ch-fest-body" data-i18n="fest_band_sub">Showcase live pour la cérémonie d'ouverture et la remise des trophées.</p>
+        </div>
+        <div class="ch-fest-card">
+          <div class="ch-fest-img"><img src="food truck.png" alt="Food Trucks"></div>
+          <div class="ch-fest-title" data-i18n="fest_food">Food Trucks</div>
+          <p class="ch-fest-body" data-i18n="fest_food_sub">Une sélection culinaire sur site. On mange bien avant de jouer mieux.</p>
+        </div>
+        <div class="ch-fest-card">
+          <div class="ch-fest-img"><img src="content creator.png" alt="Créateurs"></div>
+          <div class="ch-fest-title" data-i18n="fest_creators">Créateurs &amp; Contenu</div>
+          <p class="ch-fest-body" data-i18n="fest_creators_sub">Des créateurs sur place pour capturer chaque moment fort de la journée.</p>
+        </div>
+        <div class="ch-fest-card">
+          <div class="ch-fest-img"><img src="expanded zones.png" alt="Expanded Zones"></div>
+          <div class="ch-fest-title" data-i18n="fest_zones">Zones Élargies</div>
+          <p class="ch-fest-body" data-i18n="fest_zones_sub">Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.</p>
+        </div>
+        <div class="ch-fest-card">
+          <div class="ch-fest-img"><img src="entertainment.png" alt="Live Entertainment"></div>
+          <div class="ch-fest-title" data-i18n="fest_ent">Live Entertainment</div>
+          <p class="ch-fest-body" data-i18n="fest_ent_sub">Shows freestyle, battles surprises et animations entre chaque match.</p>
+        </div>
       </div>
-      <div class="ch-fest-card reveal delay-2">
-        <span class="ch-fest-icon">🎸</span>
-        <div class="ch-fest-title" data-i18n="fest_band">Live Band</div>
-        <p class="ch-fest-body" data-i18n="fest_band_sub">Showcase live pour la cérémonie d'ouverture et la remise des trophées.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-3">
-        <span class="ch-fest-icon">🍔</span>
-        <div class="ch-fest-title" data-i18n="fest_food">Food Trucks</div>
-        <p class="ch-fest-body" data-i18n="fest_food_sub">Une sélection culinaire sur site. On mange bien avant de jouer mieux.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-4">
-        <span class="ch-fest-icon">📱</span>
-        <div class="ch-fest-title" data-i18n="fest_creators">Créateurs &amp; Contenu</div>
-        <p class="ch-fest-body" data-i18n="fest_creators_sub">Des créateurs sur place pour capturer chaque moment fort de la journée.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-5">
-        <span class="ch-fest-icon">⚡</span>
-        <div class="ch-fest-title" data-i18n="fest_zones">Zones Élargies</div>
-        <p class="ch-fest-body" data-i18n="fest_zones_sub">Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.</p>
-      </div>
-      <div class="ch-fest-card reveal delay-5">
-        <span class="ch-fest-icon">🎪</span>
-        <div class="ch-fest-title" data-i18n="fest_ent">Live Entertainment</div>
-        <p class="ch-fest-body" data-i18n="fest_ent_sub">Shows freestyle, battles surprises et animations entre chaque match.</p>
-      </div>
+      <div class="chf-bar"><div class="chf-bar-fill" id="chfBarFill"></div></div>
     </div>
   </div>
 </section>
@@ -645,26 +711,69 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <h2 data-i18n="ch_fmt_h2">COMMENT ON ARRIVE AU SOMMET.</h2>
       <p data-i18n="ch_fmt_sub">Quatre étapes. Un seul champion. Le format conçu pour que chaque match compte et que l'instinct soit récompensé jusqu'au bout.</p>
     </div>
-    <div class="ch-steps">
-      <div class="ch-step reveal delay-1">
-        <div class="ch-step-num">1</div>
-        <div class="ch-step-label" data-i18n="fmt_s1">Qualifications</div>
-        <div class="ch-step-sub" data-i18n="fmt_s1_sub">Championnats locaux dans chaque ville participante</div>
-      </div>
-      <div class="ch-step reveal delay-2">
-        <div class="ch-step-num">2</div>
-        <div class="ch-step-label" data-i18n="fmt_s2">Phase de groupes</div>
-        <div class="ch-step-sub" data-i18n="fmt_s2_sub">Round-robin entre équipes qualifiées de toutes les villes</div>
-      </div>
-      <div class="ch-step reveal delay-3">
-        <div class="ch-step-num">3</div>
-        <div class="ch-step-label" data-i18n="fmt_s3">Demi-finales</div>
-        <div class="ch-step-sub" data-i18n="fmt_s3_sub">Les 4 meilleures équipes s'affrontent en élimination directe</div>
-      </div>
-      <div class="ch-step reveal delay-4">
-        <div class="ch-step-num">★</div>
-        <div class="ch-step-label" data-i18n="fmt_s4">LA GRANDE FINALE</div>
-        <div class="ch-step-sub" data-i18n="fmt_s4_sub">Devant la foule. Pour le trophée. Pour l'argent. Pour la légende.</div>
+  </div>
+
+  <div id="roadDriver">
+    <div class="road-sticky">
+      <div class="road-wrap">
+        <div class="road-hint" id="roadHint" data-i18n="road_hint">Fais défiler pour voyager</div>
+        <svg class="road-map" viewBox="0 0 1160 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs><linearGradient id="roadGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#CCFF00"/><stop offset="1" stop-color="#F0B429"/>
+          </linearGradient></defs>
+          <path class="road-track" d="M145 310 C 250 300, 330 252, 435 250 C 560 248, 610 176, 725 178 C 845 180, 905 112, 1015 76"/>
+          <path class="road-line" id="roadLine" d="M145 310 C 250 300, 330 252, 435 250 C 560 248, 610 176, 725 178 C 845 180, 905 112, 1015 76"/>
+          <g class="road-node">
+            <circle class="road-ring" cx="145" cy="310" r="22" opacity=".4"/>
+            <rect class="road-node-box" x="124" y="289" width="42" height="42"/>
+            <text class="road-node-glyph" x="145" y="310" text-anchor="middle" dominant-baseline="central" font-size="22">1</text>
+          </g>
+          <g class="road-node">
+            <circle class="road-ring" cx="435" cy="250" r="38" opacity=".26"/>
+            <circle class="road-ring" cx="435" cy="250" r="22" opacity=".4"/>
+            <rect class="road-node-box" x="414" y="229" width="42" height="42"/>
+            <text class="road-node-glyph" x="435" y="250" text-anchor="middle" dominant-baseline="central" font-size="22">2</text>
+          </g>
+          <g class="road-node">
+            <circle class="road-ring" cx="725" cy="178" r="54" opacity=".16"/>
+            <circle class="road-ring" cx="725" cy="178" r="38" opacity=".26"/>
+            <circle class="road-ring" cx="725" cy="178" r="22" opacity=".4"/>
+            <rect class="road-node-box" x="704" y="157" width="42" height="42"/>
+            <text class="road-node-glyph" x="725" y="178" text-anchor="middle" dominant-baseline="central" font-size="22">3</text>
+          </g>
+          <g class="road-node road-node--champ">
+            <circle class="road-ring" cx="1015" cy="76" r="66" opacity=".16"/>
+            <circle class="road-ring" cx="1015" cy="76" r="46" opacity=".3"/>
+            <circle class="road-ring" cx="1015" cy="76" r="24" opacity=".45"/>
+            <rect class="road-node-box" x="992" y="53" width="46" height="46"/>
+            <path class="road-node-glyph" transform="translate(1015,76)" d="M0,-12 L3.5,-4.9 L11.4,-3.7 L5.7,1.9 L7,9.7 L0,6 L-7,9.7 L-5.7,1.9 L-11.4,-3.7 L-3.5,-4.9 Z"/>
+          </g>
+          <circle class="road-traveler-ring" id="roadTravelerRing" cx="145" cy="310" r="9" style="opacity:0"/>
+          <circle class="road-traveler" id="roadTraveler" cx="145" cy="310" r="6" style="opacity:0"/>
+        </svg>
+        <div class="road-prog"><div class="road-prog-fill" id="roadFill"></div><span class="road-prog-pct" id="roadPct">0%</span></div>
+        <div class="road-stops">
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc1">Ta ville</div>
+            <div class="road-stop-name" data-i18n="fmt_s1">Local</div>
+            <div class="road-stop-sub" data-i18n="fmt_s1_sub">Qualifie ton équipe dans ta ville.</div>
+          </div>
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc2">Ton pays</div>
+            <div class="road-stop-name" data-i18n="fmt_s2">National</div>
+            <div class="road-stop-sub" data-i18n="fmt_s2_sub">Les meilleures équipes du pays se rejoignent.</div>
+          </div>
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc3">Le monde</div>
+            <div class="road-stop-name" data-i18n="fmt_s3">International</div>
+            <div class="road-stop-sub" data-i18n="fmt_s3_sub">Des équipes de plusieurs pays s'affrontent.</div>
+          </div>
+          <div class="road-stop">
+            <div class="road-stop-scope" data-i18n="road_sc4">Le sommet</div>
+            <div class="road-stop-name" data-i18n="fmt_s4">Championship</div>
+            <div class="road-stop-sub" data-i18n="fmt_s4_sub">La grande finale. Le titre. La légende.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -679,21 +788,21 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       <p data-i18n="ch_prize_sub">Le talent mérite d'être payé. Le Championship distribue des prix réels à chaque édition — parce que l'instinct a une valeur.</p>
     </div>
     <div class="ch-prize-grid">
-      <div class="ch-podium ch-podium--2nd reveal delay-2">
+      <div class="ch-podium ch-podium--2nd">
         <div class="ch-podium-rank" data-i18n="prize_2nd">2e place</div>
-        <span class="ch-podium-trophy">🥈</span>
+        <span class="ch-podium-trophy" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></span>
         <div class="ch-podium-amount">$2 500</div>
         <div class="ch-podium-label" data-i18n="prize_cash">en prix</div>
       </div>
-      <div class="ch-podium ch-podium--1st reveal delay-1">
+      <div class="ch-podium ch-podium--1st">
         <div class="ch-podium-rank" data-i18n="prize_1st">1re place — Champion</div>
-        <span class="ch-podium-trophy">🏆</span>
-        <div class="ch-podium-amount">$5 000</div>
+        <span class="ch-podium-trophy" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span>
+        <div class="ch-podium-amount">$25 000</div>
         <div class="ch-podium-label" data-i18n="prize_cash">en prix</div>
       </div>
-      <div class="ch-podium ch-podium--3rd reveal delay-3">
+      <div class="ch-podium ch-podium--3rd">
         <div class="ch-podium-rank" data-i18n="prize_3rd">3e place</div>
-        <span class="ch-podium-trophy">🥉</span>
+        <span class="ch-podium-trophy" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg></span>
         <div class="ch-podium-amount">$1 500</div>
         <div class="ch-podium-label" data-i18n="prize_cash">en prix</div>
       </div>
@@ -750,43 +859,40 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
           <div class="ch-form-title" data-i18n="ch_form_title">Inscrire mon équipe</div>
           <div class="ch-field-row">
             <div class="ch-field">
-              <label data-i18n="ch_f_captain">Capitaine — Prénom</label>
-              <input id="chFirstName" type="text" autocomplete="given-name">
+              <label for="chFirstName" data-i18n="ch_f_captain">Capitaine — Prénom</label>
+              <input id="chFirstName" type="text" autocomplete="given-name" required aria-required="true">
             </div>
             <div class="ch-field">
-              <label data-i18n="ch_f_lname">Nom</label>
-              <input id="chLastName" type="text" autocomplete="family-name">
+              <label for="chLastName" data-i18n="ch_f_lname">Nom</label>
+              <input id="chLastName" type="text" autocomplete="family-name" required aria-required="true">
             </div>
           </div>
           <div class="ch-field">
-            <label data-i18n="ch_f_email">Courriel</label>
-            <input id="chEmail" type="email" autocomplete="email">
+            <label for="chEmail" data-i18n="ch_f_email">Courriel</label>
+            <input id="chEmail" type="email" inputmode="email" autocomplete="email" required aria-required="true">
           </div>
           <div class="ch-field">
-            <label data-i18n="ch_f_team">Nom de l'équipe</label>
-            <input id="chTeam" type="text">
+            <label for="chTeam" data-i18n="ch_f_team">Nom de l'équipe</label>
+            <input id="chTeam" type="text" required aria-required="true">
           </div>
           <div class="ch-field-row">
             <div class="ch-field">
-              <label data-i18n="ch_f_city">Ville</label>
-              <input id="chCity" type="text">
+              <label for="chCity" data-i18n="ch_f_city">Ville</label>
+              <input id="chCity" type="text" autocomplete="address-level2">
             </div>
             <div class="ch-field">
-              <label data-i18n="ch_f_size">Taille de l'équipe</label>
+              <label for="chSize" data-i18n="ch_f_size">Taille de l'équipe</label>
               <select id="chSize">
                 <option value="">—</option>
-                <option value="2">2 joueurs</option>
-                <option value="3">3 joueurs</option>
-                <option value="4">4 joueurs</option>
-                <option value="5">5 joueurs</option>
-                <option value="6+">6+ joueurs</option>
+                <option value="6">6 joueurs</option>
+                <option value="7">7 joueurs</option>
               </select>
             </div>
           </div>
           <button class="ch-form-submit" id="chSubmit" onclick="submitChReg()" data-i18n="ch_f_submit">CONFIRMER L'INSCRIPTION →</button>
         </div>
-        <div class="ch-form-success" id="chSuccess">
-          <div class="ch-form-success-icon">🏆</div>
+        <div class="ch-form-success" id="chSuccess" role="status" aria-live="polite">
+          <div class="ch-form-success-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
           <div class="ch-form-success-title" data-i18n="ch_ok_title">ÉQUIPE INSCRITE !</div>
           <p class="ch-form-success-sub" id="chSuccessSub"></p>
         </div>
@@ -833,7 +939,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
-      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+      <span data-i18n="f_nc">Le sport à son état pur. L'instinct à son sommet.</span>
     </div>
   </div>
 </footer>
@@ -845,7 +951,7 @@ const I18N = {
 fr:{
   nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",
   nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",
-  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
+  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
 
   ch_eyebrow:"L'ÉVÉNEMENT PRINCIPAL — CHAMPIONSHIP",
   ch_h1a:"THE",ch_h1b:"CHAMPIONSHIP",ch_h1c:"PürInstinct.",
@@ -874,13 +980,15 @@ fr:{
   fest_zones:"Zones Élargies",fest_zones_sub:"Toutes les zones disponibles, plus grandes, plus intenses qu'en saison régulière.",
   fest_ent:"Live Entertainment",fest_ent_sub:"Shows freestyle, battles surprises et animations entre chaque match.",
 
-  ch_fmt_eyebrow:"Format du tournoi",
+  ch_fmt_eyebrow:"La route vers le championnat",
   ch_fmt_h2:"COMMENT ON ARRIVE AU SOMMET.",
-  ch_fmt_sub:"Quatre étapes. Un seul champion. Le format conçu pour que chaque match compte et que l'instinct soit récompensé jusqu'au bout.",
-  fmt_s1:"Qualifications",fmt_s1_sub:"Championnats locaux dans chaque ville participante",
-  fmt_s2:"Phase de groupes",fmt_s2_sub:"Round-robin entre équipes qualifiées de toutes les villes",
-  fmt_s3:"Demi-finales",fmt_s3_sub:"Les 4 meilleures équipes s'affrontent en élimination directe",
-  fmt_s4:"LA GRANDE FINALE",fmt_s4_sub:"Devant la foule. Pour le trophée. Pour l'argent. Pour la légende.",
+  ch_fmt_sub:"Du local au mondial. Fais défiler pour parcourir la route — chaque étape se dévoile en chemin.",
+  road_hint:"Fais défiler pour voyager",
+  road_sc1:"Ta ville",road_sc2:"Ton pays",road_sc3:"Le monde",road_sc4:"Le sommet",
+  fmt_s1:"Local",fmt_s1_sub:"Qualifie ton équipe dans ta ville.",
+  fmt_s2:"National",fmt_s2_sub:"Les meilleures équipes du pays se rejoignent.",
+  fmt_s3:"International",fmt_s3_sub:"Des équipes de plusieurs pays s'affrontent.",
+  fmt_s4:"Championship",fmt_s4_sub:"La grande finale. Le titre. La légende.",
 
   ch_prize_eyebrow:"Prix en jeu",
   ch_prize_h2:"DE VRAIS PRIX. DE VRAIES RÉCOMPENSES.",
@@ -908,18 +1016,18 @@ fr:{
 
   ctb_hl:"LE PROCHAIN CHAMPION",ctb_hl2:"C'EST PEUT-ÊTRE TOI.",
   ctb_primary:"INSCRIRE MON ÉQUIPE →",ctb_secondary:"PARTENARIAT / COMMANDITE",
-  ctb_micro:"Deux fois par an · Villes multiples · $10 000 en prix",
+  ctb_micro:"Deux fois par an · Villes multiples · $30 000 en prix",
 
   f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_reg:"Inscrire mon équipe",
   f_follow:"Suis l'arène",f_lang:"Langue",
-  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur.",
+  f_rights:"Tous droits réservés.",f_nc:"Le sport à son état pur. L'instinct à son sommet.",
 
   ed_next:"PROCHAIN",ed_past:"TERMINÉ",ed_reg:"INSCRIPTION →",ed_soon:"BIENTÔT"
 },
 en:{
   nav_concept:"The Concept",nav_arena:"The Arena",nav_instincts:"The 5 Instincts",nav_lb:"Leaderboard",
   nav_tickets:"Tickets",nav_cta:"Reserve",nav_special:"Special Projects",
-  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
+  nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
 
   ch_eyebrow:"THE MAIN EVENT — CHAMPIONSHIP",
   ch_h1a:"THE",ch_h1b:"CHAMPIONSHIP",ch_h1c:"PürInstinct.",
@@ -948,13 +1056,15 @@ en:{
   fest_zones:"Expanded Zones",fest_zones_sub:"All zones available — bigger and more intense than the regular season.",
   fest_ent:"Live Entertainment",fest_ent_sub:"Freestyle shows, surprise battles and entertainment between every match.",
 
-  ch_fmt_eyebrow:"Tournament format",
+  ch_fmt_eyebrow:"The road to the championship",
   ch_fmt_h2:"HOW YOU REACH THE TOP.",
-  ch_fmt_sub:"Four stages. One champion. A format designed so every match matters and instinct is rewarded all the way to the end.",
-  fmt_s1:"Qualifiers",fmt_s1_sub:"Local championships in each participating city",
-  fmt_s2:"Group Stage",fmt_s2_sub:"Round-robin between qualified teams from all cities",
-  fmt_s3:"Semi-finals",fmt_s3_sub:"Top 4 teams face off in single elimination",
-  fmt_s4:"THE GRAND FINAL",fmt_s4_sub:"In front of the crowd. For the trophy. For the prize. For the legend.",
+  ch_fmt_sub:"From local to global. Scroll to travel the road — each stage reveals as you go.",
+  road_hint:"Scroll to travel",
+  road_sc1:"Your city",road_sc2:"Your country",road_sc3:"The world",road_sc4:"The summit",
+  fmt_s1:"Local",fmt_s1_sub:"Qualify your team in your city.",
+  fmt_s2:"National",fmt_s2_sub:"The best teams in the country converge.",
+  fmt_s3:"International",fmt_s3_sub:"Teams from multiple countries face off.",
+  fmt_s4:"Championship",fmt_s4_sub:"The grand final. The title. The legend.",
 
   ch_prize_eyebrow:"Prize money",
   ch_prize_h2:"REAL PRIZES. REAL REWARDS.",
@@ -982,11 +1092,11 @@ en:{
 
   ctb_hl:"THE NEXT CHAMPION",ctb_hl2:"MIGHT BE YOU.",
   ctb_primary:"REGISTER MY TEAM →",ctb_secondary:"PARTNERSHIP / SPONSORSHIP",
-  ctb_micro:"Twice a year · Multiple cities · $10,000 in prizes",
+  ctb_micro:"Twice a year · Multiple cities · $30,000 in prizes",
 
   f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_reg:"Register my team",
   f_follow:"Follow the arena",f_lang:"Language",
-  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player.",
+  f_rights:"All rights reserved.",f_nc:"Sport at its purest. Instinct at its highest.",
 
   ed_next:"NEXT",ed_past:"DONE",ed_reg:"REGISTER →",ed_soon:"COMING SOON"
 }};
@@ -1103,11 +1213,17 @@ setInterval(runCountdown, 1000);
 
 /* ── Team registration ── */
 function submitChReg(){
-  const fn = document.getElementById('chFirstName').value.trim();
-  const ln = document.getElementById('chLastName').value.trim();
-  const em = document.getElementById('chEmail').value.trim();
-  const team = document.getElementById('chTeam').value.trim();
-  if(!fn||!ln||!em||!em.includes('@')||!team) return;
+  const fnEl = document.getElementById('chFirstName');
+  const lnEl = document.getElementById('chLastName');
+  const emEl = document.getElementById('chEmail');
+  const teamEl = document.getElementById('chTeam');
+  const fn = fnEl.value.trim();
+  const ln = lnEl.value.trim();
+  const em = emEl.value.trim();
+  const team = teamEl.value.trim();
+  // §8 focus-management: send keyboard/SR users straight to the first invalid field
+  const firstInvalid = !fn ? fnEl : !ln ? lnEl : (!em||!em.includes('@')) ? emEl : !team ? teamEl : null;
+  if(firstInvalid){ firstInvalid.focus(); return; }
   const btn = document.getElementById('chSubmit');
   btn.disabled=true; btn.textContent='…';
   const payload = {
@@ -1126,6 +1242,135 @@ function submitChReg(){
   }
 }
 
+/* ── Festival: vertical scroll → horizontal pan ── */
+(function(){
+  if(window.matchMedia('(max-width:700px),(prefers-reduced-motion:reduce)').matches) return;
+  var driver  = document.getElementById('chfDriver');
+  var sticky  = driver && driver.querySelector('.chf-sticky');
+  var track   = driver && driver.querySelector('.chf-track');
+  var barFill = document.getElementById('chfBarFill');
+  if(!driver || !sticky || !track) return;
+  var nav   = document.querySelector('nav');
+  var cards = track.querySelectorAll('.ch-fest-card');
+  var N     = cards.length;
+
+  function setDriverHeight(){
+    var sH = sticky.offsetHeight || 500;
+    driver.style.height = sH + N * Math.round(window.innerHeight * 0.38) + 'px';
+  }
+  setDriverHeight();
+
+  var rafPending = false;
+  function update(){
+    rafPending = false;
+    var navH    = nav ? nav.offsetHeight : 0;
+    var sH      = sticky.offsetHeight;
+    var rect    = driver.getBoundingClientRect();
+    var driverH = driver.offsetHeight;
+    var scrollable  = driverH - sH;
+    var rawProgress = -(rect.top - navH) / scrollable;
+    var progress    = Math.max(0, Math.min(1, rawProgress));
+
+    if(rect.top <= navH && rect.bottom >= navH + sH){
+      sticky.style.cssText = 'position:fixed;top:'+navH+'px;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else if(rect.bottom < navH + sH){
+      sticky.style.cssText = 'position:absolute;bottom:0;top:auto;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else {
+      sticky.style.cssText = 'position:absolute;top:0;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    }
+
+    var cardW     = cards[0].offsetWidth;
+    var totalMove = (N - 1) * (cardW + 12);
+    track.style.transform = 'translate3d('+(-progress * totalMove)+'px,0,0)';
+
+    var panelPos = progress * (N - 1);
+    for(var i = 0; i < N; i++){
+      var d = Math.min(1, Math.abs(i - panelPos));
+      cards[i].style.opacity   = 0.40 + 0.60 * (1 - d);
+      cards[i].style.transform = 'scale('+(0.93 + 0.07 * (1 - d))+')';
+    }
+    if(barFill) barFill.style.width = (progress * 100)+'%';
+  }
+
+  window.addEventListener('scroll', function(){ if(!rafPending){ rafPending=true; requestAnimationFrame(update); } }, {passive:true});
+  window.addEventListener('resize', function(){ setDriverHeight(); update(); });
+  update();
+}());
+
+/* ── The Road to the Championship: scroll-scrubbed map (reversible) ── */
+(function(){
+  var driver = document.getElementById('roadDriver');
+  if(!driver) return;
+  var sticky = driver.querySelector('.road-sticky');
+  var nav    = document.querySelector('nav');
+  var line   = document.getElementById('roadLine');
+  var travel = document.getElementById('roadTraveler');
+  var travelRing = document.getElementById('roadTravelerRing');
+  var nodes  = [].slice.call(driver.querySelectorAll('.road-node'));
+  var stops  = [].slice.call(driver.querySelectorAll('.road-stop'));
+  var champ  = driver.querySelector('.road-node--champ');
+  var fill   = document.getElementById('roadFill');
+  var pct    = document.getElementById('roadPct');
+  var hint   = document.getElementById('roadHint');
+  if(!line || !sticky) return;
+  var starts = [-0.25, 0.08, 0.38, 0.65];
+  function ss(x){ x = x<0?0:x>1?1:x; return x*x*(3-2*x); }
+  var len = line.getTotalLength();
+  line.style.strokeDasharray = len;
+
+  function render(p){
+    line.style.strokeDashoffset = len * (1 - p);
+    if(travel){
+      var pt = line.getPointAtLength(len * (p<=0 ? 0.0001 : p));
+      travel.setAttribute('cx', pt.x); travel.setAttribute('cy', pt.y);
+      travelRing.setAttribute('cx', pt.x); travelRing.setAttribute('cy', pt.y);
+      var v = p>0.012 ? 1 : 0;
+      travel.style.opacity = v; travelRing.style.opacity = v ? 0.6 : 0;
+    }
+    for(var i=0;i<nodes.length;i++){
+      var a = ss((p - starts[i]) / 0.22);
+      nodes[i].style.opacity = (0.16 + 0.84*a).toFixed(3);
+      nodes[i].style.transform = 'scale(' + (0.72 + 0.28*a).toFixed(3) + ')';
+      if(stops[i]){
+        stops[i].style.opacity = (0.10 + 0.90*a).toFixed(3);
+        stops[i].style.transform = 'translateY(' + ((1-a)*16).toFixed(1) + 'px)';
+      }
+    }
+    if(champ) champ.classList.toggle('is-live', ss((p - starts[3]) / 0.22) > 0.72);
+    if(fill) fill.style.width = (p*100).toFixed(1) + '%';
+    if(pct)  pct.textContent = Math.round(p*100) + '%';
+    if(hint) hint.style.opacity = p<0.04 ? '1' : '0';
+  }
+
+  if(window.matchMedia('(max-width:760px),(prefers-reduced-motion:reduce)').matches){
+    render(1); return;
+  }
+
+  function setH(){ var sH = sticky.offsetHeight || 500; driver.style.height = (sH + Math.round(window.innerHeight * 1.7)) + 'px'; }
+  setH();
+  var raf = false;
+  function update(){
+    raf = false;
+    var navH = nav ? nav.offsetHeight : 0;
+    var sH = sticky.offsetHeight;
+    var rect = driver.getBoundingClientRect();
+    var driverH = driver.offsetHeight;
+    var scrollable = driverH - sH;
+    var p = Math.max(0, Math.min(1, -(rect.top - navH) / scrollable));
+    if(rect.top <= navH && rect.bottom >= navH + sH){
+      sticky.style.cssText = 'position:fixed;top:'+navH+'px;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else if(rect.bottom < navH + sH){
+      sticky.style.cssText = 'position:absolute;bottom:0;top:auto;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    } else {
+      sticky.style.cssText = 'position:absolute;top:0;left:0;right:0;overflow:hidden;height:'+sH+'px';
+    }
+    render(p);
+  }
+  window.addEventListener('scroll', function(){ if(!raf){ raf=true; requestAnimationFrame(update); } }, {passive:true});
+  window.addEventListener('resize', function(){ setH(); update(); });
+  update();
+}());
+
 /* ── Reveal on scroll ── */
 (function(){
   const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
@@ -1134,6 +1379,53 @@ function submitChReg(){
     entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('is-visible'); });
   }, {threshold:0.12});
   els.forEach(function(el){ io.observe(el); });
+}());
+
+// Podium sequential reveal: 3rd → 2nd → 1st
+(function(){
+  var grid = document.querySelector('.ch-prize-grid');
+  var p3 = document.querySelector('.ch-podium--3rd');
+  var p2 = document.querySelector('.ch-podium--2nd');
+  var p1 = document.querySelector('.ch-podium--1st');
+  if(!grid||!p3||!p2||!p1) return;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+  function showCard(card, isHero){
+    card.classList.add('podium-in');
+    if(isHero){
+      card.classList.add('podium-hero');
+      card.addEventListener('animationend', function(){
+        card.classList.remove('podium-ready','podium-in','podium-hero');
+        card.style.opacity='1';
+      }, {once:true});
+    } else {
+      card.addEventListener('transitionend', function h(e){
+        if(e.propertyName!=='transform') return;
+        card.removeEventListener('transitionend',h);
+        card.classList.remove('podium-ready','podium-in');
+        card.style.opacity='1';
+      });
+    }
+  }
+
+  [p3,p2,p1].forEach(function(c){ c.classList.add('podium-ready'); });
+
+  var fired = false;
+  var io = new IntersectionObserver(function(entries){
+    if(!entries[0].isIntersecting||fired) return;
+    fired = true; io.disconnect();
+    var mobile = window.innerWidth <= 640;
+    if(mobile){
+      setTimeout(function(){ showCard(p1,false); }, 0);
+      setTimeout(function(){ showCard(p2,false); }, 80);
+      setTimeout(function(){ showCard(p3,false); }, 160);
+    } else {
+      setTimeout(function(){ showCard(p3,false); }, 0);
+      setTimeout(function(){ showCard(p2,false); }, 130);
+      setTimeout(function(){ showCard(p1,true);  }, 270);
+    }
+  },{threshold:0.18});
+  io.observe(grid);
 }());
 
 applyLang();
