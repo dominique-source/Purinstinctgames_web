@@ -524,39 +524,38 @@ h1,h2,h3,.disp{
 }
 .spch{
   position:absolute;z-index:3;
-  background:rgba(4,4,4,.88);
-  border:1.5px solid rgba(255,255,255,.2);
-  border-radius:5px;
-  padding:7px 13px 9px;
-  max-width:21%;
-  backdrop-filter:blur(4px);
+  background:#0A0A0A;
+  border-left:3px solid var(--lime);
+  padding:9px 14px 10px 12px;
+  max-width:22%;
   pointer-events:none;
 }
 .spch-text{
   font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
-  text-transform:uppercase;font-size:clamp(9px,.95vw,14px);line-height:1.12;
-  color:#F4F4F2;display:block;
+  text-transform:uppercase;font-size:clamp(12px,1.25vw,17px);line-height:1.06;
+  color:#F4F4F2;display:block;letter-spacing:.01em;
 }
 /* tail: down */
 .spch-td::after{
-  content:"";position:absolute;bottom:-8px;left:14px;
-  border-left:7px solid transparent;border-right:7px solid transparent;
-  border-top:8px solid rgba(4,4,4,.88);
+  content:"";position:absolute;bottom:-9px;left:18px;
+  border-left:8px solid transparent;border-right:8px solid transparent;
+  border-top:9px solid #0A0A0A;
 }
 /* tail: right */
 .spch-tr::after{
-  content:"";position:absolute;right:-8px;top:10px;
-  border-top:7px solid transparent;border-bottom:7px solid transparent;
-  border-left:8px solid rgba(4,4,4,.88);
+  content:"";position:absolute;right:-9px;top:11px;
+  border-top:8px solid transparent;border-bottom:8px solid transparent;
+  border-left:9px solid #0A0A0A;
 }
 /* tail: left */
 .spch-tl::after{
-  content:"";position:absolute;left:-8px;top:10px;
-  border-top:7px solid transparent;border-bottom:7px solid transparent;
-  border-right:8px solid rgba(4,4,4,.88);
+  content:"";position:absolute;left:-9px;top:11px;
+  border-top:8px solid transparent;border-bottom:8px solid transparent;
+  border-right:9px solid #0A0A0A;
 }
 @media(max-width:600px){
-  .spch{max-width:34%;padding:5px 9px 7px}
+  .spch{max-width:36%;padding:7px 11px 8px 10px}
+  .spch-text{font-size:clamp(11px,2.8vw,14px)}
 }
 
 .tens-img{margin-top:clamp(32px,5vw,56px);position:relative;overflow:hidden}
@@ -994,10 +993,10 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
 
     <!-- bulles — décalées pour éviter le titre -->
-    <div class="spch spch-td" style="left:38%;top:8%">
+    <div class="spch spch-td" style="left:38%;top:14%">
       <span class="spch-text" data-i18n="bub1">"IL VA VITE, C'EST LUI !"</span>
     </div>
-    <div class="spch spch-td" style="right:3.5%;top:8%">
+    <div class="spch spch-td" style="right:3.5%;top:14%">
       <span class="spch-text" data-i18n="bub2">"IL A DES MAINS DE DINGUE !"</span>
     </div>
     <div class="spch spch-td" style="left:31%;top:40%">
