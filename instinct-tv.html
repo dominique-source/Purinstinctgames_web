@@ -715,14 +715,14 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
               <text class="dst-tag" x="64" y="505" opacity=".5">D03</text>
             </g>
 
-            <!-- D6 ENDURANCE — center dominant block -->
+            <!-- D6 PÜRINSTINCT — center dominant block -->
             <g class="disc-station" data-zone="endurance">
-              <rect class="body" x="268" y="158" width="364" height="360" fill="rgba(255,140,66,.12)" stroke="#FF8C42" stroke-width="2.5"/>
+              <rect class="body" x="268" y="158" width="364" height="360" fill="rgba(204,255,0,.07)" stroke="#CCFF00" stroke-width="2.5"/>
               <!-- horizontal midline -->
-              <line x1="278" y1="338" x2="622" y2="338" stroke="#FF8C42" stroke-width="1" opacity=".35" stroke-dasharray="10 8"/>
-              <text class="dst-label" text-anchor="middle" x="450" y="306" fill="#FF8C42" font-size="24">ENDURANCE</text>
-              <text class="dst-tag" text-anchor="middle" x="450" y="330">CARDIO · RÉSISTANCE MENTALE</text>
-              <text class="dst-tag" text-anchor="middle" x="450" y="498" opacity=".5">D06 · DISCIPLINE CENTRALE</text>
+              <line x1="278" y1="338" x2="622" y2="338" stroke="#CCFF00" stroke-width="1" opacity=".35" stroke-dasharray="10 8"/>
+              <text class="dst-label" text-anchor="middle" x="450" y="300" fill="#CCFF00" font-size="22">PÜRINSTINCT</text>
+              <text class="dst-tag" text-anchor="middle" x="450" y="324">3 V 2 · SANS CONTACT</text>
+              <text class="dst-tag" text-anchor="middle" x="450" y="498" opacity=".5">D06 · TERRAIN CENTRAL</text>
             </g>
 
             <!-- D4 AGILITY — right top -->
@@ -990,8 +990,8 @@ fr:{
   disc3_d:"Dribble, frappe, geste",disc3_adv:"Avantage : Créateur",
   disc4_d:"Changements de direction",disc4_adv:"Avantage : 50/50",
   disc5_d:"Lecture du jeu, décision",disc5_adv:"Avantage : Créateur",
-  disc6_d:"Cardio, résistance mentale",disc6_adv:"Avantage : Athlète traditionnel",
-  disc_quote:'"3 disciplines sur 6 avantagent les créateurs. Mais le speed et l\'endurance les rattrapent. C\'est ça l\'instinct."',
+  disc6_d:"3 v 2 · sans contact · terrain central",disc6_adv:"Avantage : 50/50",
+  disc_quote:'"3 disciplines sur 6 avantagent les créateurs. Mais PürInstinct remet tout à zéro. C\'est ça l\'instinct."',
   itv_tens_ey:"Le Débat",
   itv_tens_h:"LE DÉBAT QUE TOUT LE MONDE A EU DANS UNE COUR D'ÉCOLE — EN PRIME TIME.",
   vs_ath:"ATHLÈTE PRO DIT :",vs_cre:"CRÉATEUR RÉPOND :",
@@ -1051,8 +1051,8 @@ en:{
   disc3_d:"Dribble, shot, technique",disc3_adv:"Edge: Creator",
   disc4_d:"Changes of direction",disc4_adv:"Edge: 50/50",
   disc5_d:"Reading the game, decision-making",disc5_adv:"Edge: Creator",
-  disc6_d:"Cardio, mental endurance",disc6_adv:"Edge: Traditional Athlete",
-  disc_quote:'"3 out of 6 disciplines favor creators. But speed and endurance catch up with them. That\'s instinct."',
+  disc6_d:"3 v 2 · no contact · central court",disc6_adv:"Edge: 50/50",
+  disc_quote:'"3 out of 6 disciplines favor creators. But PürInstinct resets everything. That\'s instinct."',
   itv_tens_ey:"The Debate",
   itv_tens_h:"THE DEBATE EVERYONE HAD IN A SCHOOLYARD — IN PRIME TIME.",
   vs_ath:"PRO ATHLETE SAYS:",vs_cre:"CREATOR REPLIES:",
@@ -1178,14 +1178,14 @@ const DISC_ZONES = {
   },
   endurance:{
     img:"assets/render-field.jpg",
-    color:"#FF8C42",
+    color:"#CCFF00",
     video:"",
-    fr:{tag:"DISCIPLINE 06 · CENTRALE",name:"ENDURANCE",
-        desc:"Cardio, résistance mentale, format cumul sur plusieurs épreuves. La discipline qu'on ne peut pas improviser — les années d'entraînement structuré paient ici, et les créateurs le savent.",
-        adv:"Avantage : Athlète traditionnel",advType:"ath",btn:"VOIR L'ÉPREUVE →"},
-    en:{tag:"DISCIPLINE 06 · CORE",name:"ENDURANCE",
-        desc:"Cardio, mental resilience, cumulative multi-event format. The discipline you cannot fake — years of structured training pay off here, and athletic creators know it.",
-        adv:"Edge: Traditional Athlete",advType:"ath",btn:"WATCH THE EVENT →"}
+    fr:{tag:"DISCIPLINE 06 · TERRAIN CENTRAL",name:"PÜRINSTINCT",
+        desc:"Le sport signature : traverser le terrain sans être touché avec le ballon, toujours en 3 contre 2. La discipline la plus complète du format — vitesse, lecture du jeu, habiletés et décision en une seule épreuve.",
+        adv:"Avantage : 50/50",advType:"mix",btn:"VOIR LE SPORT →"},
+    en:{tag:"DISCIPLINE 06 · CENTRAL COURT",name:"PÜRINSTINCT",
+        desc:"The signature sport: cross the field without being touched while carrying the ball, always 3 against 2. The most complete discipline — speed, game IQ, skills and decision-making in one.",
+        adv:"Edge: 50/50",advType:"mix",btn:"WATCH THE SPORT →"}
   }
 };
 
