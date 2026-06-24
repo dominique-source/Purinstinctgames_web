@@ -609,29 +609,6 @@ h1,h2,h3,.disp{
   background:linear-gradient(to right,rgba(10,10,10,.55) 0%,rgba(10,10,10,0) 40%);
 }
 
-/* ============ MOMENT FACTORY — SPLIT ============ */
-.mf-wrap{border-top:1px solid rgba(204,255,0,.08)}
-.mf-split{display:grid;grid-template-columns:1fr 1fr}
-@media(max-width:720px){.mf-split{grid-template-columns:1fr}}
-
-.mf-left{background:#0d0d0d;padding:clamp(40px,6vw,72px) clamp(28px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:22px}
-.mf-right{background:var(--lime);padding:clamp(40px,6vw,72px) clamp(28px,5vw,60px);display:flex;flex-direction:column;justify-content:center;gap:22px;color:#0A0A0A}
-.mf-eyebrow{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:12px;letter-spacing:.14em;margin-bottom:4px}
-.mf-left .mf-eyebrow{color:var(--muted)}
-.mf-right .mf-eyebrow{color:rgba(0,0,0,.5)}
-.mf-h{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(32px,4.8vw,62px);line-height:.88;margin:0}
-.mf-left .mf-h{color:var(--white)}
-.mf-right .mf-h{color:#0A0A0A}
-.mf-body{font-size:clamp(13.5px,1.4vw,16px);line-height:1.6}
-.mf-left .mf-body{color:var(--muted)}
-.mf-right .mf-body{color:rgba(0,0,0,.68)}
-.mf-list{display:flex;flex-direction:column;gap:10px;list-style:none}
-.mf-list li{font-size:clamp(12.5px,1.3vw,15px);display:flex;align-items:flex-start;gap:10px;line-height:1.4}
-.mf-left .mf-list li{color:var(--white)}
-.mf-right .mf-list li{color:#0A0A0A;font-weight:600}
-.mf-check{font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;flex-shrink:0;margin-top:-1px}
-.mf-left .mf-check{color:var(--lime)}
-.mf-right .mf-check{color:#0A0A0A}
 
 /* ============ CTA FINAL ============ */
 .itv-cta{
@@ -1088,40 +1065,6 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     </div>
   </div>
 </section>
-
-<!-- ============ SECTION: MOMENT FACTORY UPGRADE ============ -->
-<div class="mf-wrap">
-  <div class="mf-split">
-    <div class="mf-left">
-      <div>
-        <div class="mf-eyebrow" data-i18n="mf_ey1">Version de base</div>
-        <h2 class="mf-h" data-i18n="mf_h1">MÊME ARÈNE.</h2>
-      </div>
-      <p class="mf-body" data-i18n="mf_body1">Structure physique identique. Éclairage standard, chronos, filets. 100% du show est déjà là.</p>
-      <ul class="mf-list">
-        <li><span class="mf-check">✓</span><span data-i18n="mf1_i1">9 stations complètes</span></li>
-        <li><span class="mf-check">✓</span><span data-i18n="mf1_i2">Scoring en temps réel</span></li>
-        <li><span class="mf-check">✓</span><span data-i18n="mf1_i3">Multi-caméras</span></li>
-        <li><span class="mf-check">✓</span><span data-i18n="mf1_i4">Animations participants</span></li>
-      </ul>
-    </div>
-    <div class="mf-right">
-      <div>
-        <div class="mf-eyebrow" data-i18n="mf_ey2">+ Moment Factory</div>
-        <h2 class="mf-h" data-i18n="mf_h2">AUTRE PLANÈTE.</h2>
-      </div>
-      <p class="mf-body" data-i18n="mf_body2">La même arène. Zéro modification de structure. Le spectacle devient le sport.</p>
-      <ul class="mf-list">
-        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i1">Projection mapping sur chaque station</span></li>
-        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i2">Floor LED interactif &amp; réactif</span></li>
-        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i3">Audio spatial immersif</span></li>
-        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i4">Leaderboard vivant — XR diffusion</span></li>
-        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i5">Highlight cam IA — clip automatique</span></li>
-        <li><span class="mf-check">⚡</span><span data-i18n="mf2_i6">Intro VJ-style pour chaque participant</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <!-- ============ CTA FINAL ============ -->
 <section class="itv-cta" id="contact">
