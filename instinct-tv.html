@@ -495,18 +495,35 @@ h1,h2,h3,.disp{
   color:#CCFF00;margin:0;
 }
 
-/* debate arena — image + overlay bubbles */
+/* debate arena — image + overlay text + bubbles */
 .tens-arena{
-  position:relative;width:100%;
-  margin-top:clamp(28px,4vw,52px);overflow:hidden;
+  position:relative;width:100%;overflow:hidden;
 }
-.tens-arena-img{width:100%;display:block;height:auto}
+.tens-arena-img{width:100%;display:block;height:auto;min-height:420px;object-fit:cover}
 .tens-arena::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(to bottom,rgba(10,10,10,.1) 50%,rgba(10,10,10,.75) 100%);
+  background:
+    linear-gradient(to bottom, rgba(10,10,10,.78) 0%, rgba(10,10,10,.25) 38%, rgba(10,10,10,0) 58%),
+    linear-gradient(to top,    rgba(10,10,10,.72) 0%, rgba(10,10,10,0)   42%);
+}
+/* text overlay — positioned over the image */
+.tens-text-overlay{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(28px,4vw,52px) clamp(28px,5vw,72px);
+  pointer-events:none;
+}
+.tens-text-overlay .eyebrow{pointer-events:none}
+.tens-text-overlay .tens-h{margin-bottom:0;pointer-events:none}
+.tens-text-overlay .tens-question{
+  margin-bottom:0;max-width:clamp(280px,50%,640px);pointer-events:none;
+}
+@media(max-width:640px){
+  .tens-text-overlay{padding:20px 18px}
+  .tens-text-overlay .tens-question{max-width:100%}
 }
 .spch{
-  position:absolute;z-index:2;
+  position:absolute;z-index:3;
   background:rgba(4,4,4,.88);
   border:1.5px solid rgba(255,255,255,.2);
   border-radius:5px;
@@ -960,40 +977,36 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 </section>
 
 <!-- ============ SECTION: LA TENSION ============ -->
-<section class="sec-dark" id="tension">
-  <div class="wrap">
-    <span class="eyebrow" data-i18n="itv_tens_ey">Le Débat</span>
-    <h2 class="tens-h" data-i18n="itv_tens_h">LE DÉBAT QUE TOUT LE MONDE<br>A EU DANS UNE COUR D'ÉCOLE —<br><span class="lime" data-i18n="itv_tens_h2">EN PRIME TIME.</span></h2>
-
-    <!-- La grande question -->
-    <div class="tens-question">
-      <span class="tens-q-label" data-i18n="tens_q_label">La question à 32 participants</span>
-      <p class="tens-q-text" data-i18n="tens_q">QUI EST VRAIMENT L'ATHLÈTE LE PLUS COMPLET ?</p>
-    </div>
-
-  </div><!-- /.wrap -->
-
-  <!-- Pleine largeur : image fond + bulles en calque -->
+<section class="sec-dark" id="tension" style="padding:0">
   <div class="tens-arena">
     <img src="débat.png" class="tens-arena-img" alt="Le Débat — INSTINCT" loading="lazy">
-    <!-- bubble 1 — top left -->
-    <div class="spch spch-td" style="left:5.5%;top:7%">
+
+    <!-- texte superposé sur l'image -->
+    <div class="tens-text-overlay">
+      <div>
+        <span class="eyebrow" data-i18n="itv_tens_ey">Le Débat</span>
+        <h2 class="tens-h" data-i18n="itv_tens_h">LE DÉBAT QUE TOUT LE MONDE<br>A EU DANS UNE COUR D'ÉCOLE —<br><span class="lime" data-i18n="itv_tens_h2">EN PRIME TIME.</span></h2>
+      </div>
+      <div class="tens-question">
+        <span class="tens-q-label" data-i18n="tens_q_label">La question à 32 participants</span>
+        <p class="tens-q-text" data-i18n="tens_q">QUI EST VRAIMENT L'ATHLÈTE LE PLUS COMPLET ?</p>
+      </div>
+    </div>
+
+    <!-- bulles — décalées pour éviter le titre -->
+    <div class="spch spch-td" style="left:38%;top:8%">
       <span class="spch-text" data-i18n="bub1">"IL VA VITE, C'EST LUI !"</span>
     </div>
-    <!-- bubble 2 — top right -->
-    <div class="spch spch-td" style="right:3.5%;top:7%">
+    <div class="spch spch-td" style="right:3.5%;top:8%">
       <span class="spch-text" data-i18n="bub2">"IL A DES MAINS DE DINGUE !"</span>
     </div>
-    <!-- bubble 3 — center -->
     <div class="spch spch-td" style="left:31%;top:40%">
       <span class="spch-text" data-i18n="bub3">"ELLE EST PARTOUT, TROP COMPLÈTE !"</span>
     </div>
-    <!-- bubble 4 — bottom left -->
-    <div class="spch spch-tr" style="left:4%;top:57%">
+    <div class="spch spch-tr" style="right:22%;top:62%">
       <span class="spch-text" data-i18n="bub4">"IL VOIT LE JEU COMME PERSONNE !"</span>
     </div>
-    <!-- bubble 5 — bottom right -->
-    <div class="spch spch-tl" style="right:3.5%;top:59%">
+    <div class="spch spch-tl" style="right:3.5%;top:64%">
       <span class="spch-text" data-i18n="bub5">"LE ROI DE L'AGILITÉ !"</span>
     </div>
   </div>
