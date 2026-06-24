@@ -287,18 +287,63 @@ h1,h2,h3,.disp{
 .prog-pill.champ{background:var(--lime);color:#0A0A0A;border-color:var(--lime)}
 .prog-arrow{color:rgba(204,255,0,.4);font-size:14px;font-family:sans-serif;line-height:1}
 
-/* ============ DISCIPLINES ============ */
-.disc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.2vw,14px);margin-top:clamp(32px,5vw,52px)}
-@media(max-width:860px){.disc-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.disc-grid{grid-template-columns:1fr}}
+/* ============ DISCIPLINES ARENA ============ */
+.disc-arena-wrap{margin-top:clamp(32px,5vw,52px)}
+.disc-arena-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(20px,3.5vw,50px);align-items:stretch}
+@media(max-width:920px){.disc-arena-grid{grid-template-columns:1fr}}
 
-.disc-card{
-  background:#0A0A0A;border:1.5px solid rgba(10,10,10,.1);
-  padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:7px;
+.disc-svg-wrap svg{width:100%;height:auto;filter:drop-shadow(0 12px 44px rgba(0,0,0,.22))}
+.disc-station{cursor:pointer;transition:filter .22s}
+.disc-station rect.body{transition:fill .22s,filter .22s}
+.disc-station:hover rect.body,.disc-station.active rect.body{filter:brightness(1.55) saturate(1.3)}
+.disc-station text{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;text-transform:uppercase;pointer-events:none}
+.dst-label{fill:#fff;font-size:17px}
+.dst-label-sm{fill:#fff;font-size:14px}
+.dst-tag{fill:rgba(255,255,255,.5);font-size:10.5px;letter-spacing:.1em}
+.dst-hint{margin-top:12px;color:#777;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.dst-hint::before{content:"";width:22px;height:2px;background:#5a7500;transform:skewX(-30deg);flex-shrink:0}
+
+.disc-zone-card{
+  background:#fff;border:1.5px solid rgba(0,0,0,.09);position:relative;
+  padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:12px;justify-content:center;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 24px),calc(100% - 24px) 100%,0 100%);
+  min-height:360px;
 }
-.disc-icon{font-size:clamp(22px,2.8vw,30px);line-height:1;margin-bottom:2px}
-.disc-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(16px,1.9vw,22px);line-height:1;color:#0A0A0A}
-.disc-detail{font-size:12.5px;color:#555;line-height:1.4}
+.disc-zone-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--dzc,#5a7500);transition:background .3s}
+.dzc-tag{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.14em;color:var(--dzc,#5a7500);transition:color .3s}
+.dzc-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(32px,3.8vw,52px);color:#0A0A0A;line-height:.9;margin:0}
+.dzc-desc{font-size:clamp(13px,1.35vw,15px);color:#555;line-height:1.6;margin:0}
+.dzc-adv{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:4px 12px;display:inline-block;width:fit-content}
+.dzc-adv.ath{background:rgba(59,130,246,.12);color:#2563EB}
+.dzc-adv.cre{background:rgba(90,117,0,.12);color:#5a7500}
+.dzc-adv.mix{background:rgba(249,115,22,.1);color:#C2610A}
+.dzc-img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid rgba(0,0,0,.08);display:none}
+.dzc-swap{animation:dzcIn .32s cubic-bezier(.16,1,.3,1)}
+@keyframes dzcIn{from{opacity:0;transform:translateX(22px) skewX(-3deg)}to{opacity:1;transform:none}}
+
+.btn-disc-video{
+  display:none;align-items:center;gap:10px;margin-top:2px;
+  padding:11px 22px 12px;background:transparent;border:1.5px solid rgba(0,0,0,.15);
+  color:#0A0A0A;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
+  font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+  transition:border-color .2s,background .2s,box-shadow .2s;width:fit-content;
+}
+.btn-disc-video .play-ico{
+  width:26px;height:26px;background:#0A0A0A;color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:9px;padding-left:2px;flex-shrink:0;
+  transition:background .2s;
+}
+.btn-disc-video:hover{border-color:var(--dzc,#5a7500);box-shadow:0 0 14px rgba(0,0,0,.12)}
+.btn-disc-video:hover .play-ico{background:var(--dzc,#5a7500)}
+
+/* Video modal */
+.disc-video-modal{display:none;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;background:rgba(0,0,0,.93);backdrop-filter:blur(10px)}
+.disc-video-modal.open{display:flex}
+.disc-video-modal-inner{position:relative;width:min(820px,96vw);aspect-ratio:16/9;overflow:hidden;box-shadow:0 0 80px rgba(0,0,0,.9)}
+.disc-video-modal-inner iframe{width:100%;height:100%;border:0;display:block}
+.disc-video-modal-close{position:absolute;top:-48px;right:0;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;line-height:1;opacity:.7;transition:opacity .2s;font-family:sans-serif}
+.disc-video-modal-close:hover{opacity:1}
+
 .disc-adv{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;display:inline-block;margin-top:3px}
 .disc-adv.ath{background:rgba(59,130,246,.12);color:#2563EB}
 .disc-adv.cre{background:rgba(90,117,0,.12);color:#5a7500}
@@ -626,44 +671,96 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <span class="eyebrow" style="color:#5a7500" data-i18n="itv_disc_ey">Les Disciplines</span>
     <h2 class="itv-sec-h" data-i18n="itv_disc_h">6 DISCIPLINES. <span style="color:#5a7500">UNE VÉRITÉ.</span></h2>
     <p class="itv-sec-sub" data-i18n="itv_disc_sub">Chaque discipline avantage différemment les athlètes et les créateurs. C'est pour ça que personne ne sait qui va gagner.</p>
-    <div class="disc-grid">
-      <div class="disc-card">
-        <div class="disc-icon">⚡</div>
-        <div class="disc-name">SPEED</div>
-        <div class="disc-detail" data-i18n="disc1_d">Sprint, réactivité</div>
-        <span class="disc-adv ath" data-i18n="disc1_adv">Avantage : Athlète traditionnel</span>
-      </div>
-      <div class="disc-card">
-        <div class="disc-icon">✋</div>
-        <div class="disc-name">HAND SKILLS</div>
-        <div class="disc-detail" data-i18n="disc2_d">Balle, précision, contrôle</div>
-        <span class="disc-adv cre" data-i18n="disc2_adv">Avantage : Créateur</span>
-      </div>
-      <div class="disc-card">
-        <div class="disc-icon">⚽</div>
-        <div class="disc-name">FOOT SKILLS</div>
-        <div class="disc-detail" data-i18n="disc3_d">Dribble, frappe, geste</div>
-        <span class="disc-adv cre" data-i18n="disc3_adv">Avantage : Créateur</span>
-      </div>
-      <div class="disc-card">
-        <div class="disc-icon">🔀</div>
-        <div class="disc-name">AGILITY</div>
-        <div class="disc-detail" data-i18n="disc4_d">Changements de direction</div>
-        <span class="disc-adv mix" data-i18n="disc4_adv">Avantage : 50/50</span>
-      </div>
-      <div class="disc-card">
-        <div class="disc-icon">🧠</div>
-        <div class="disc-name">GAME IQ</div>
-        <div class="disc-detail" data-i18n="disc5_d">Lecture du jeu, décision</div>
-        <span class="disc-adv cre" data-i18n="disc5_adv">Avantage : Créateur</span>
-      </div>
-      <div class="disc-card">
-        <div class="disc-icon">💪</div>
-        <div class="disc-name">ENDURANCE</div>
-        <div class="disc-detail" data-i18n="disc6_d">Cardio, résistance mentale</div>
-        <span class="disc-adv ath" data-i18n="disc6_adv">Avantage : Athlète traditionnel</span>
-      </div>
-    </div>
+    <!-- Interactive arena map -->
+    <div class="disc-arena-wrap">
+      <div class="disc-arena-grid">
+
+        <!-- SVG arena map -->
+        <div class="disc-svg-wrap">
+          <svg id="discSvg" viewBox="0 0 900 560" role="img" aria-label="Carte des 6 disciplines INSTINCT">
+            <defs>
+              <filter id="discGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- arena shell -->
+            <polygon points="20,40 880,10 880,540 20,520" fill="#0E0E0E" stroke="rgba(90,117,0,.28)" stroke-width="2"/>
+            <polygon points="20,40 880,10 880,30 20,60" fill="rgba(90,117,0,.09)"/>
+
+            <!-- D1 SPEED — top sprint strip -->
+            <g class="disc-station" data-zone="speed">
+              <rect class="body" x="50" y="60" width="800" height="74" fill="rgba(255,68,56,.16)" stroke="#FF4438" stroke-width="2"/>
+              <line x1="60" y1="97" x2="840" y2="97" stroke="#FF4438" stroke-width="1.5" stroke-dasharray="14 12" opacity=".55"/>
+              <text class="dst-label" x="66" y="92" fill="#FF4438">SPEED</text>
+              <text class="dst-tag" x="66" y="112">40 M · RÉACTIVITÉ PURE</text>
+              <text class="dst-tag" x="740" y="112" text-anchor="end">D01</text>
+            </g>
+
+            <!-- D2 HAND SKILLS — left top -->
+            <g class="disc-station" data-zone="hands">
+              <rect class="body" x="50" y="158" width="190" height="170" fill="rgba(45,125,255,.16)" stroke="#2D7DFF" stroke-width="2"/>
+              <text class="dst-label" x="64" y="192" fill="#2D7DFF">HAND</text>
+              <text class="dst-label" x="64" y="214" fill="#2D7DFF">SKILLS</text>
+              <text class="dst-tag" x="64" y="234">LANCERS · PRÉCISION</text>
+              <text class="dst-tag" x="64" y="315" opacity=".5">D02</text>
+            </g>
+
+            <!-- D3 FOOT SKILLS — left bottom -->
+            <g class="disc-station" data-zone="feet">
+              <rect class="body" x="50" y="352" width="190" height="166" fill="rgba(46,224,106,.15)" stroke="#2EE06A" stroke-width="2"/>
+              <text class="dst-label" x="64" y="386" fill="#2EE06A">FOOT</text>
+              <text class="dst-label" x="64" y="408" fill="#2EE06A">SKILLS</text>
+              <text class="dst-tag" x="64" y="428">1 V 1 · DUELS</text>
+              <text class="dst-tag" x="64" y="505" opacity=".5">D03</text>
+            </g>
+
+            <!-- D6 ENDURANCE — center dominant block -->
+            <g class="disc-station" data-zone="endurance">
+              <rect class="body" x="268" y="158" width="364" height="360" fill="rgba(255,140,66,.12)" stroke="#FF8C42" stroke-width="2.5"/>
+              <!-- horizontal midline -->
+              <line x1="278" y1="338" x2="622" y2="338" stroke="#FF8C42" stroke-width="1" opacity=".35" stroke-dasharray="10 8"/>
+              <text class="dst-label" text-anchor="middle" x="450" y="306" fill="#FF8C42" font-size="24">ENDURANCE</text>
+              <text class="dst-tag" text-anchor="middle" x="450" y="330">CARDIO · RÉSISTANCE MENTALE</text>
+              <text class="dst-tag" text-anchor="middle" x="450" y="498" opacity=".5">D06 · DISCIPLINE CENTRALE</text>
+            </g>
+
+            <!-- D4 AGILITY — right top -->
+            <g class="disc-station" data-zone="agility">
+              <rect class="body" x="660" y="158" width="190" height="170" fill="rgba(255,196,0,.14)" stroke="#FFC400" stroke-width="2"/>
+              <text class="dst-label" x="674" y="192" fill="#FFC400">AGILITY</text>
+              <text class="dst-tag" x="674" y="210">TAG · OBSTACLES</text>
+              <text class="dst-tag" x="674" y="315" opacity=".5">D04</text>
+            </g>
+
+            <!-- D5 GAME IQ — right bottom -->
+            <g class="disc-station" data-zone="iq">
+              <rect class="body" x="660" y="352" width="190" height="166" fill="rgba(164,92,255,.15)" stroke="#A45CFF" stroke-width="2"/>
+              <text class="dst-label" x="674" y="386" fill="#A45CFF">GAME IQ</text>
+              <text class="dst-tag" x="674" y="404">STRATÉGIE 3 V 3</text>
+              <text class="dst-tag" x="674" y="505" opacity=".5">D05</text>
+            </g>
+          </svg>
+          <p class="dst-hint" data-i18n="disc_hint">Survole ou clique une discipline pour explorer son format</p>
+        </div>
+
+        <!-- Zone info card -->
+        <aside class="disc-zone-card" id="discZoneCard" style="--dzc:#5a7500">
+          <div id="discZoneInner" class="dzc-swap">
+            <span class="dzc-tag" id="dzcTag">Les 6 disciplines</span>
+            <h3 class="dzc-name" id="dzcName">L'ARÈNE</h3>
+            <p class="dzc-desc" id="dzcDesc">Survole une des 6 zones pour explorer son gameplay, son avantage stratégique et voir une vidéo.</p>
+            <img class="dzc-img" id="dzcImg" src="" alt="" loading="lazy">
+            <button class="btn-disc-video" id="discVideoBtn" aria-label="Voir la vidéo">
+              <span class="play-ico" aria-hidden="true">▶</span>
+              <span id="discVideoBtnLabel">VOIR LA VIDÉO</span>
+            </button>
+          </div>
+        </aside>
+
+      </div><!-- /.disc-arena-grid -->
+    </div><!-- /.disc-arena-wrap -->
+
     <div class="disc-quote">
       <p data-i18n="disc_quote">"3 disciplines sur 6 avantagent les créateurs. Mais le speed et l'endurance les rattrapent. C'est ça l'instinct."</p>
     </div>
@@ -886,7 +983,7 @@ fr:{
   ph3_eps:"ÉP. 8–11",ph3_t:"LA PREUVE",ph3_d:"Top 8. Tout le monde est légitime. Les équipes changent encore. Chaque discipline décide. Le leaderboard individuel devient impitoyable.",
   ph4_eps:"ÉP. 12 — FINALE",ph4_t:"LA FINALE",ph4_d:"Live TV. Arène pleine. 4 finalistes. Les 6 disciplines complètes. Le gagnant peut être n'importe qui — c'est ça le show.",
   pp1:"32 PARTICIPANTS",pp5:"1 CHAMPION",
-  itv_disc_ey:"Les Disciplines",itv_disc_h:"6 DISCIPLINES. UNE VÉRITÉ.",
+  itv_disc_ey:"Les Disciplines",itv_disc_h:"6 DISCIPLINES. UNE VÉRITÉ.",disc_hint:"Survole ou clique une discipline pour explorer son format",
   itv_disc_sub:"Chaque discipline avantage différemment les athlètes et les créateurs. C'est pour ça que personne ne sait qui va gagner.",
   disc1_d:"Sprint, réactivité",disc1_adv:"Avantage : Athlète traditionnel",
   disc2_d:"Balle, précision, contrôle",disc2_adv:"Avantage : Créateur",
@@ -947,7 +1044,7 @@ en:{
   ph3_eps:"EP. 8–11",ph3_t:"THE PROOF",ph3_d:"Top 8. Everyone has earned their spot. Teams shuffle again. Every discipline decides. The individual leaderboard becomes ruthless.",
   ph4_eps:"EP. 12 — FINALE",ph4_t:"THE FINALE",ph4_d:"Live TV. Full arena. 4 finalists. All 6 disciplines. The winner could be anyone — that's the show.",
   pp1:"32 PARTICIPANTS",pp5:"1 CHAMPION",
-  itv_disc_ey:"The Disciplines",itv_disc_h:"6 DISCIPLINES. ONE TRUTH.",
+  itv_disc_ey:"The Disciplines",itv_disc_h:"6 DISCIPLINES. ONE TRUTH.",disc_hint:"Hover or click a discipline to explore its format",
   itv_disc_sub:"Each discipline gives a different edge to athletes or creators. That's why nobody knows who's going to win.",
   disc1_d:"Sprint, reaction time",disc1_adv:"Edge: Traditional Athlete",
   disc2_d:"Ball, precision, control",disc2_adv:"Edge: Creator",
@@ -1019,8 +1116,181 @@ if(navDrop){
 }
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ====================================================== */
+/* Disciplines arena                                       */
+/* ====================================================== */
+const DISC_ZONES = {
+  speed:{
+    img:"assets/render-speed.jpg",
+    color:"#FF4438",
+    video:"",  /* ← Paste YouTube video ID here */
+    fr:{tag:"DISCIPLINE 01 · VITESSE",name:"SPEED",
+        desc:"Sprint de 40 m, réactivité pure. Qui démarre le plus vite? C'est là que les années d'entraînement structuré font la différence. Le créateur sportif peut surprendre — mais rarement au top.",
+        adv:"Avantage : Athlète traditionnel",advType:"ath",btn:"VOIR LE SPRINT →"},
+    en:{tag:"DISCIPLINE 01 · SPEED",name:"SPEED",
+        desc:"40m sprint, pure reactivity. Who starts fastest? Years of structured training show here. The athletic creator can surprise — but rarely at the top.",
+        adv:"Edge: Traditional Athlete",advType:"ath",btn:"WATCH THE SPRINT →"}
+  },
+  hands:{
+    img:"assets/render-hand.jpg",
+    color:"#2D7DFF",
+    video:"",
+    fr:{tag:"DISCIPLINE 02 · HABILETÉS",name:"HAND SKILLS",
+        desc:"Lancers, précision, contrôle du ballon. Ceux qui ont grandi à jouer librement avec un ballon ont un avantage naturel sur ceux qui ont appris dans un cadre structuré.",
+        adv:"Avantage : Créateur sportif",advType:"cre",btn:"VOIR LA DISCIPLINE →"},
+    en:{tag:"DISCIPLINE 02 · SKILLS",name:"HAND SKILLS",
+        desc:"Ball throwing, precision, control. Those who grew up playing freely with a ball have a natural edge over those who trained in a structured system.",
+        adv:"Edge: Athletic Creator",advType:"cre",btn:"WATCH THE DISCIPLINE →"}
+  },
+  feet:{
+    img:"assets/render-foot.jpg",
+    color:"#2EE06A",
+    video:"",
+    fr:{tag:"DISCIPLINE 03 · HABILETÉS",name:"FOOT SKILLS",
+        desc:"Dribble, frappe, geste technique. Duels 1 contre 1 sur plaques lumineuses réactives. La créativité libre bat souvent la formation rigide — mais pas toujours.",
+        adv:"Avantage : Créateur sportif",advType:"cre",btn:"VOIR LES DUELS →"},
+    en:{tag:"DISCIPLINE 03 · SKILLS",name:"FOOT SKILLS",
+        desc:"Dribble, shot, technique. 1v1 duels on reactive light pads. Free creativity often beats rigid training — but not always.",
+        adv:"Edge: Athletic Creator",advType:"cre",btn:"WATCH THE DUELS →"}
+  },
+  agility:{
+    img:"assets/render-agility.jpg",
+    color:"#FFC400",
+    video:"",
+    fr:{tag:"DISCIPLINE 04 · AGILITÉ",name:"AGILITY",
+        desc:"Changements de direction, obstacles, réactivité spatiale. La discipline la plus équilibrée du format — l'explosivité athlétique affronte la fluidité créative. Personne n'a l'avantage.",
+        adv:"Avantage : 50/50",advType:"mix",btn:"VOIR L'AGILITÉ →"},
+    en:{tag:"DISCIPLINE 04 · AGILITY",name:"AGILITY",
+        desc:"Direction changes, obstacles, spatial reactivity. The most balanced discipline — explosive athletic power meets creative fluidity. Nobody has the edge.",
+        adv:"Edge: 50/50",advType:"mix",btn:"WATCH AGILITY →"}
+  },
+  iq:{
+    img:"assets/render-iq.jpg",
+    color:"#A45CFF",
+    video:"",
+    fr:{tag:"DISCIPLINE 05 · STRATÉGIE",name:"GAME IQ",
+        desc:"Lecture du jeu, prise de décision rapide, stratégie 3 contre 3 avec ballon. Ceux qui ont joué hors structure pendant des années développent une lecture du jeu souvent supérieure.",
+        adv:"Avantage : Créateur sportif",advType:"cre",btn:"VOIR LA STRATÉGIE →"},
+    en:{tag:"DISCIPLINE 05 · STRATEGY",name:"GAME IQ",
+        desc:"Reading the game, fast decision-making, 3v3 strategy with a ball. Those who played outside structure for years develop a game sense that often outperforms the trained athlete.",
+        adv:"Edge: Athletic Creator",advType:"cre",btn:"WATCH THE STRATEGY →"}
+  },
+  endurance:{
+    img:"assets/render-field.jpg",
+    color:"#FF8C42",
+    video:"",
+    fr:{tag:"DISCIPLINE 06 · CENTRALE",name:"ENDURANCE",
+        desc:"Cardio, résistance mentale, format cumul sur plusieurs épreuves. La discipline qu'on ne peut pas improviser — les années d'entraînement structuré paient ici, et les créateurs le savent.",
+        adv:"Avantage : Athlète traditionnel",advType:"ath",btn:"VOIR L'ÉPREUVE →"},
+    en:{tag:"DISCIPLINE 06 · CORE",name:"ENDURANCE",
+        desc:"Cardio, mental resilience, cumulative multi-event format. The discipline you cannot fake — years of structured training pay off here, and athletic creators know it.",
+        adv:"Edge: Traditional Athlete",advType:"ath",btn:"WATCH THE EVENT →"}
+  }
+};
+
+let currentDiscZone = null;
+const discZoneCard  = document.getElementById("discZoneCard");
+const discZoneInner = document.getElementById("discZoneInner");
+const dzcTagEl  = document.getElementById("dzcTag");
+const dzcNameEl = document.getElementById("dzcName");
+const dzcDescEl = document.getElementById("dzcDesc");
+const dzcImgEl  = document.getElementById("dzcImg");
+const discVideoBtn = document.getElementById("discVideoBtn");
+const discVideoBtnLabel = document.getElementById("discVideoBtnLabel");
+let dzcAdvEl = null;
+
+function renderDiscZone(key){
+  const z = DISC_ZONES[key], d = z[lang];
+  currentDiscZone = key;
+  discZoneCard.style.setProperty("--dzc", z.color);
+  discVideoBtn.style.setProperty("--dzc", z.color);
+  dzcTagEl.textContent  = d.tag;
+  dzcNameEl.textContent = d.name;
+  dzcDescEl.textContent = d.desc;
+  if(dzcAdvEl){ dzcAdvEl.remove(); dzcAdvEl = null; }
+  const adv = document.createElement("span");
+  adv.className = `dzc-adv ${d.advType}`;
+  adv.textContent = d.adv;
+  dzcAdvEl = adv;
+  dzcDescEl.after(adv);
+  if(z.img){ dzcImgEl.src = z.img; dzcImgEl.alt = d.name; dzcImgEl.style.display = "block"; }
+  else { dzcImgEl.style.display = "none"; }
+  if(z.video){ discVideoBtn.dataset.videoId = z.video; discVideoBtnLabel.textContent = d.btn; discVideoBtn.style.display = "flex"; }
+  else { discVideoBtn.style.display = "none"; }
+  discZoneInner.classList.remove("dzc-swap"); void discZoneInner.offsetWidth; discZoneInner.classList.add("dzc-swap");
+}
+
+document.querySelectorAll("#discSvg .disc-station").forEach(st => {
+  const key = st.dataset.zone;
+  const activate = () => {
+    document.querySelectorAll("#discSvg .disc-station").forEach(s => s.classList.remove("active"));
+    st.classList.add("active");
+    renderDiscZone(key);
+  };
+  st.addEventListener("click", activate);
+  st.addEventListener("mouseenter", activate);
+});
+
+/* proximity glow */
+const discSvg = document.getElementById("discSvg");
+if(discSvg && matchMedia("(pointer:fine)").matches){
+  let raf2 = null;
+  discSvg.addEventListener("mousemove", e => {
+    if(raf2) return;
+    raf2 = requestAnimationFrame(() => {
+      raf2 = null;
+      const r = discSvg.getBoundingClientRect();
+      discSvg.querySelectorAll(".disc-station rect.body").forEach(rect => {
+        const b = rect.getBoundingClientRect();
+        const cx = b.left+b.width/2, cy = b.top+b.height/2;
+        const dist = Math.hypot(e.clientX-cx, e.clientY-cy);
+        const k = Math.max(0, 1-dist/(r.width*.38));
+        rect.style.filter = k > 0.05 ? `brightness(${1+k*.7})` : "";
+      });
+    });
+  });
+  discSvg.addEventListener("mouseleave", () =>
+    discSvg.querySelectorAll(".disc-station rect.body").forEach(r => r.style.filter = ""));
+}
+
+/* video modal */
+const discVideoModal = document.getElementById("discVideoModal");
+const discVideoFrame = document.getElementById("discVideoFrame");
+document.getElementById("discVideoClose").addEventListener("click", () => {
+  discVideoModal.classList.remove("open");
+  discVideoFrame.src = "";
+});
+discVideoModal.addEventListener("click", e => {
+  if(e.target === discVideoModal){ discVideoModal.classList.remove("open"); discVideoFrame.src = ""; }
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && discVideoModal.classList.contains("open")){ discVideoModal.classList.remove("open"); discVideoFrame.src = ""; }
+});
+discVideoBtn.addEventListener("click", () => {
+  const vid = discVideoBtn.dataset.videoId;
+  if(!vid) return;
+  discVideoFrame.src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+  discVideoModal.classList.add("open");
+});
+
+/* re-render on lang switch */
+const _origApplyLang = applyLang;
+applyLang = function(){
+  _origApplyLang();
+  if(currentDiscZone) renderDiscZone(currentDiscZone);
+};
+
 applyLang();
 </script>
+
+<!-- ============ DISC VIDEO MODAL ============ -->
+<div class="disc-video-modal" id="discVideoModal" role="dialog" aria-modal="true" aria-label="Vidéo discipline">
+  <div class="disc-video-modal-inner">
+    <button class="disc-video-modal-close" id="discVideoClose" aria-label="Fermer">×</button>
+    <iframe id="discVideoFrame" src="" allowfullscreen allow="autoplay; fullscreen"></iframe>
+  </div>
+</div>
 
 </body>
 </html>
