@@ -20,12 +20,15 @@ function isAllowed(actifRaw, expirationRaw) {
   return expiration >= today;
 }
 
-function buildRawEmail({ to, from, subject, html }) {
-  const encodedSubject = `=?UTF-8?B?${Buffer.from(subject, 'utf-8').toString('base64')}?=`;
+function encodeHeaderWord(str) {
+  return `=?UTF-8?B?${Buffer.from(str, 'utf-8').toString('base64')}?=`;
+}
+
+function buildRawEmail({ to, fromName, fromEmail, subject, html }) {
   const message = [
     `To: ${to}`,
-    `From: ${from}`,
-    `Subject: ${encodedSubject}`,
+    `From: ${encodeHeaderWord(fromName)} <${fromEmail}>`,
+    `Subject: ${encodeHeaderWord(subject)}`,
     'MIME-Version: 1.0',
     'Content-Type: text/html; charset=UTF-8',
     '',
@@ -97,7 +100,8 @@ export default {
 
           const raw = buildRawEmail({
             to: email,
-            from: `PürInstinct Games <${process.env.GOOGLE_IMPERSONATE_EMAIL}>`,
+            fromName: 'PürInstinct Games',
+            fromEmail: process.env.GOOGLE_IMPERSONATE_EMAIL,
             subject: 'Votre lien d’accès — PurInstinct Games',
             html: `
               <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">

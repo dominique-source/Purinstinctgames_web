@@ -143,7 +143,7 @@
         const data = await res.json();
         if (data.ok) {
           form.style.display = 'none';
-          showMessage('Si cette adresse a accès, un lien vient de lui être envoyé. Vérifiez votre boîte de réception.', 'success');
+          showMessage("Si cette adresse a accès, un lien vient de lui être envoyé. Une première demande peut prendre de quelques secondes jusqu'à 5 minutes à être traitée — vérifiez votre boîte de réception (et les spams).", 'success');
         } else {
           showMessage("Adresse invalide. Vérifiez votre saisie.", 'error');
           submitBtn.disabled = false;
