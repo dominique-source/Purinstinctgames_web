@@ -2,7 +2,7 @@ import { next } from '@vercel/functions';
 import { verifyToken } from './lib/token.js';
 
 export const config = {
-  matcher: ['/((?!api|access\\.html|favicon\\.png|favicon\\.ico).*)'],
+  matcher: ['/((?!api|access\\.html|favicon\\.png|favicon\\.ico|assets/arena-hero\\.jpg).*)'],
 };
 
 function getCookie(request, name) {
