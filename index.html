@@ -107,6 +107,10 @@ h1,h2,h3,.disp{
 .logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
 .logo .sl{color:var(--lime);margin:0 2px}
 .nav-links{display:flex;gap:26px;align-items:center}
+.nav-instinct-link{display:flex;align-items:center;padding:4px 0}
+.nav-instinct-link img{height:34px;width:auto;display:block;transition:filter .2s ease,transform .2s ease}
+.nav-instinct-link:hover img{filter:drop-shadow(0 0 8px rgba(204,255,0,.5));transform:scale(1.04)}
+@media(max-width:900px){.nav-instinct-link img{height:28px}}
 .nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
 .nav-links a:hover{color:var(--lime);opacity:1}
 .nav-cta{
@@ -1083,6 +1087,9 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <nav class="nav">
   <a href="#top" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
   <div class="nav-links" id="navLinks">
+    <a href="instinct-tv.html" class="nav-instinct-link" aria-label="INSTINCT: The Sports Reality Show">
+      <img class="nav-instinct-logo" src="assets/instinct-logo-fr.png" data-logo-fr="assets/instinct-logo-fr.png" data-logo-en="assets/instinct-logo-en.png" alt="INSTINCT: The Sports Reality Show">
+    </a>
     <a href="#concept" data-i18n="nav_concept">Le concept</a>
     <a href="#arena" data-i18n="nav_arena">L'arène</a>
     <a href="#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
@@ -1097,7 +1104,6 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
         <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
         <a href="king-dac.html" class="nav-drop-item" data-i18n="nav_kd">King Dac</a>
         <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
-        <a href="instinct-tv.html" class="nav-drop-item" data-i18n="nav_tv">INSTINCT: La Série TV</a>
       </div>
     </div>
     <a href="#billets" data-i18n="nav_tickets">Billets</a>
@@ -1867,6 +1873,9 @@ function applyLang(){
   document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
   // swap zone logos FR/EN
   document.querySelectorAll(".zone-logo").forEach(img=>{
+    img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
+  });
+  document.querySelectorAll(".nav-instinct-logo").forEach(img=>{
     img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
   });
   renderZoneCard(currentZone);
