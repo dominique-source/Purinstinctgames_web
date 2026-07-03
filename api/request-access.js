@@ -20,37 +20,12 @@ function isAllowed(actifRaw, expirationRaw) {
   return expiration >= today;
 }
 
-function encodeHeaderWord(str) {
-  return `=?UTF-8?B?${Buffer.from(str, 'utf-8').toString('base64')}?=`;
-}
-
-function buildRawEmail({ to, fromName, fromEmail, subject, html }) {
-  const message = [
-    `To: ${to}`,
-    `From: ${encodeHeaderWord(fromName)} <${fromEmail}>`,
-    `Subject: ${encodeHeaderWord(subject)}`,
-    'MIME-Version: 1.0',
-    'Content-Type: text/html; charset=UTF-8',
-    '',
-    html,
-  ].join('\r\n');
-
-  return Buffer.from(message, 'utf-8')
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '');
-}
-
 async function getAccessToken() {
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
   const client = new JWT({
     email: credentials.client_email,
     key: credentials.private_key,
-    scopes: [
-      'https://www.googleapis.com/auth/gmail.send',
-      'https://www.googleapis.com/auth/spreadsheets.readonly',
-    ],
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
     subject: process.env.GOOGLE_IMPERSONATE_EMAIL,
   });
   const { token } = await client.getAccessToken();
@@ -98,35 +73,29 @@ export default {
           const origin = `https://${request.headers.get('host')}`;
           const link = `${origin}/api/verify?token=${encodeURIComponent(token)}`;
 
-          const raw = buildRawEmail({
-            to: email,
-            fromName: 'PürInstinct Games',
-            fromEmail: process.env.GOOGLE_IMPERSONATE_EMAIL,
-            subject: 'Votre lien d’accès — PurInstinct Games',
-            html: `
-              <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">
-                <h1 style="color:#CCFF00;font-size:20px;margin:0 0 16px">PürInstinct Games</h1>
-                <p>Voici votre lien d'acc&egrave;s au site, valide 15 minutes :</p>
-                <p><a href="${link}" style="color:#CCFF00">${link}</a></p>
-                <p style="color:#888;font-size:13px">Si vous n'avez rien demand&eacute;, ignorez simplement cet email.</p>
-              </div>
-            `,
+          const sendRes = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              from: `PürInstinct Games <${process.env.EMAIL_FROM}>`,
+              to: email,
+              subject: 'Votre lien d’accès — PurInstinct Games',
+              html: `
+                <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">
+                  <h1 style="color:#CCFF00;font-size:20px;margin:0 0 16px">PürInstinct Games</h1>
+                  <p>Voici votre lien d'acc&egrave;s au site, valide 15 minutes :</p>
+                  <p><a href="${link}" style="color:#CCFF00">${link}</a></p>
+                  <p style="color:#888;font-size:13px">Si vous n'avez rien demand&eacute;, ignorez simplement cet email.</p>
+                </div>
+              `,
+            }),
           });
 
-          const sendRes = await fetch(
-            'https://gmail.googleapis.com/gmail/v1/users/me/messages/send',
-            {
-              method: 'POST',
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ raw }),
-            },
-          );
-
           if (!sendRes.ok) {
-            console.error('Gmail API error', sendRes.status, await sendRes.text());
+            console.error('Resend error', sendRes.status, await sendRes.text());
           }
         }
       }
