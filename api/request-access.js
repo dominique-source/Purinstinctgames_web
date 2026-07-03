@@ -32,6 +32,26 @@ async function getAccessToken() {
   return token;
 }
 
+async function sendEmail({ to, subject, html }) {
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: `PürInstinct Games <${process.env.EMAIL_FROM}>`,
+      to,
+      subject,
+      html,
+    }),
+  });
+
+  if (!res.ok) {
+    console.error('Resend error', res.status, await res.text());
+  }
+}
+
 export default {
   async fetch(request) {
     if (request.method !== 'POST') {
@@ -73,38 +93,36 @@ export default {
           const origin = `https://${request.headers.get('host')}`;
           const link = `${origin}/api/verify?token=${encodeURIComponent(token)}`;
 
-          const sendRes = await fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              from: `PürInstinct Games <${process.env.EMAIL_FROM}>`,
-              to: email,
-              subject: 'Votre lien d’accès — PurInstinct Games',
-              html: `
-                <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">
-                  <h1 style="color:#CCFF00;font-size:20px;margin:0 0 16px">PürInstinct Games</h1>
-                  <p>Voici votre lien d'acc&egrave;s au site, valide 15 minutes :</p>
-                  <p><a href="${link}" style="color:#CCFF00">${link}</a></p>
-                  <p style="color:#888;font-size:13px">Si vous n'avez rien demand&eacute;, ignorez simplement cet email.</p>
-                </div>
-              `,
-            }),
+          await sendEmail({
+            to: email,
+            subject: 'Votre lien d’accès — PurInstinct Games',
+            html: `
+              <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">
+                <h1 style="color:#CCFF00;font-size:20px;margin:0 0 16px">PürInstinct Games</h1>
+                <p>Voici votre lien d'acc&egrave;s au site, valide 15 minutes :</p>
+                <p><a href="${link}" style="color:#CCFF00">${link}</a></p>
+                <p style="color:#888;font-size:13px">Si vous n'avez rien demand&eacute;, ignorez simplement cet email.</p>
+              </div>
+            `,
           });
-
-          if (!sendRes.ok) {
-            console.error('Resend error', sendRes.status, await sendRes.text());
-          }
+        } else {
+          await sendEmail({
+            to: email,
+            subject: 'Tentative de connexion — PurInstinct Games',
+            html: `
+              <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">
+                <h1 style="color:#CCFF00;font-size:20px;margin:0 0 16px">PürInstinct Games</h1>
+                <p>Vous avez tent&eacute; de vous connecter au site PurInstinct Games avec cette adresse, mais elle n'a pas encore acc&egrave;s.</p>
+                <p style="color:#888;font-size:13px">Si vous pensez que c'est une erreur, ou si vous souhaitez obtenir un acc&egrave;s, contactez l'administrateur pour recevoir votre autorisation.</p>
+              </div>
+            `,
+          });
         }
       }
     } catch (err) {
       console.error('Failed to send access email', err);
     }
 
-    // Same response whether or not the email is on the allowlist, so outsiders
-    // can't use this endpoint to probe which addresses have access.
     return Response.json({ ok: true });
   },
 };
