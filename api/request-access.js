@@ -108,12 +108,14 @@ export default {
         } else {
           await sendEmail({
             to: email,
-            subject: 'Tentative de connexion — PurInstinct Games',
+            subject: 'Votre accès à purinstinctgames.com n’est pas encore activé',
             html: `
               <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">
                 <h1 style="color:#CCFF00;font-size:20px;margin:0 0 16px">PürInstinct Games</h1>
-                <p>Vous avez tent&eacute; de vous connecter au site PurInstinct Games avec cette adresse, mais elle n'a pas encore acc&egrave;s.</p>
-                <p style="color:#888;font-size:13px">Si vous pensez que c'est une erreur, ou si vous souhaitez obtenir un acc&egrave;s, contactez l'administrateur pour recevoir votre autorisation.</p>
+                <p>Bonjour,</p>
+                <p>Quelqu'un a utilis&eacute; cette adresse pour demander un acc&egrave;s au site <a href="https://purinstinctgames.com" style="color:#CCFF00">purinstinctgames.com</a>, mais elle n'est pas encore autoris&eacute;e.</p>
+                <p>Si c'est vous et que vous souhaitez obtenir l'acc&egrave;s, &eacute;crivez &agrave; <a href="mailto:dominique@purinstinct.com" style="color:#CCFF00">dominique@purinstinct.com</a>.</p>
+                <p style="color:#888;font-size:13px">Si vous n'avez pas fait cette demande, vous pouvez ignorer cet email.</p>
               </div>
             `,
           });
