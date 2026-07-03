@@ -1,7 +1,7 @@
 import { JWT } from 'google-auth-library';
 import { signToken } from '../lib/token.js';
 
-const MAGIC_LINK_TTL_MS = 10 * 60 * 1000;
+const MAGIC_LINK_TTL_MS = 15 * 60 * 1000;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SHEET_RANGE = 'A2:D';
 
@@ -102,7 +102,7 @@ export default {
             html: `
               <div style="font-family:sans-serif;background:#0A0A0A;color:#fff;padding:32px">
                 <h1 style="color:#CCFF00;font-size:20px;margin:0 0 16px">PürInstinct Games</h1>
-                <p>Voici votre lien d'acc&egrave;s au site, valide 10 minutes :</p>
+                <p>Voici votre lien d'acc&egrave;s au site, valide 15 minutes :</p>
                 <p><a href="${link}" style="color:#CCFF00">${link}</a></p>
                 <p style="color:#888;font-size:13px">Si vous n'avez rien demand&eacute;, ignorez simplement cet email.</p>
               </div>
