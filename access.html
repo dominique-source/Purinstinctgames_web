@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Accès — PürInstinct Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --lime: #CCFF00;
+    --body: 'Barlow', sans-serif;
+    --display: 'Barlow Condensed', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--bg);
+    color: #fff;
+    font-family: var(--body);
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: radial-gradient(circle at 50% 0%, #161616 0%, #0A0A0A 60%);
+  }
+  .card {
+    width: 100%;
+    max-width: 420px;
+    background: #101010;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  h1 {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px;
+    color: #fff;
+  }
+  h1 span { color: var(--lime); }
+  p.subtitle {
+    color: #999;
+    font-size: 14px;
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+  form { display: flex; flex-direction: column; gap: 14px; }
+  input[type="email"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+    background: #0e0e0e;
+    color: #fff;
+    font-family: var(--body);
+    font-size: 15px;
+    outline: none;
+  }
+  input[type="email"]:focus { border-color: var(--lime); }
+  button {
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: none;
+    background: var(--lime);
+    color: #0A0A0A;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  button:hover { opacity: 0.85; }
+  button:disabled { opacity: 0.5; cursor: default; }
+  .message {
+    margin-top: 18px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    display: none;
+  }
+  .message.show { display: block; }
+  .message.success { color: var(--lime); }
+  .message.error { color: #FF4438; }
+  .footer-note {
+    margin-top: 24px;
+    font-size: 11.5px;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Pür<span>Instinct</span> Games</h1>
+    <p class="subtitle">Ce site est en accès privé. Entrez votre email pour recevoir un lien d'accès valide 10 minutes.</p>
+    <form id="access-form">
+      <input type="email" id="email" name="email" placeholder="votre@email.com" required autocomplete="email" />
+      <button type="submit" id="submit-btn">Recevoir mon lien d'accès</button>
+    </form>
+    <div class="message" id="message"></div>
+    <p class="footer-note">L'accès expire après 24h — vous devrez redemander un lien.</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('access-form');
+    const emailInput = document.getElementById('email');
+    const submitBtn = document.getElementById('submit-btn');
+    const message = document.getElementById('message');
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = 'message show ' + type;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('error') === 'expired') {
+      showMessage("Ce lien a expiré ou n'est plus valide. Demandez-en un nouveau ci-dessus.", 'error');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours…';
+
+      try {
+        const res = await fetch('/api/request-access', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          form.style.display = 'none';
+          showMessage('Si cette adresse a accès, un lien vient de lui être envoyé. Vérifiez votre boîte de réception.', 'success');
+        } else {
+          showMessage("Adresse invalide. Vérifiez votre saisie.", 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Recevoir mon lien d'accès";
+        }
+      } catch (err) {
+        showMessage('Une erreur est survenue. Réessayez.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Recevoir mon lien d'accès";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -7,3 +7,5 @@ ui-ux-pro-max-skill-main/
 node_modules/
 bracelet-remotion/node_modules/
 bracelet-remotion/.cache/
+.env.local
+.env*.local

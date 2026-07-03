@@ -1,0 +1,9 @@
+{
+  "name": "purinstinct-web",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/functions": "^3.7.5",
+    "google-auth-library": "^10.9.0"
+  }
+}
