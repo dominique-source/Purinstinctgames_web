@@ -111,6 +111,13 @@ h1,h2,h3,.disp{
 .nav-instinct-link img{height:34px;width:auto;display:block;transition:filter .2s ease,transform .2s ease}
 .nav-instinct-link:hover img{filter:drop-shadow(0 0 8px rgba(204,255,0,.5));transform:scale(1.04)}
 @media(max-width:900px){.nav-instinct-link img{height:28px}}
+.nav-app-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:.2s;
+}
+.nav-app-btn:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px);opacity:1}
 .nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
 .nav-links a:hover{color:var(--lime);opacity:1}
 .nav-cta{
@@ -1090,6 +1097,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <a href="instinct-tv.html" class="nav-instinct-link" aria-label="INSTINCT: The Sports Reality Show">
       <img class="nav-instinct-logo" src="assets/instinct-logo-fr.png" data-logo-fr="assets/instinct-logo-fr.png" data-logo-en="assets/instinct-logo-en.png" alt="INSTINCT: The Sports Reality Show">
     </a>
+    <a href="/app" class="nav-app-btn" data-i18n="nav_app">App</a>
     <a href="#concept" data-i18n="nav_concept">Le concept</a>
     <a href="#arena" data-i18n="nav_arena">L'arène</a>
     <a href="#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
@@ -1709,7 +1717,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 /* ====================================================== */
 const I18N = {
 fr:{
-  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",
+  nav_app:"App",nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",
   h1_a:"TON INSTINCT.",h1_b:"TON ARÈNE.",h1_sub:"Le sport à l'état <b>Pur.</b> Instinctif",h1_cta:"Rejoins l'arène →",
   cta2_hl:"Tu comprends le concept.<br>Maintenant vis-le.",cta2_btn:"Je veux jouer",cta2_micro:"Gratuit pour commencer &nbsp;·&nbsp; Aucune inscription complexe",
   cta3_hl:"10 000 participants<br>ne peuvent pas avoir tort.",cta3_btn:"Rejoins le mouvement",cta3_micro:"Rejoins le mouvement.",
@@ -1771,7 +1779,7 @@ fr:{
   sg_cta:"Réserve ta place",sg_cta2:"Je veux ma place",sg_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE"
 },
 en:{
-  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",
+  nav_app:"App",nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",
   h1_a:"YOUR INSTINCT.",h1_b:"YOUR ARENA.",h1_sub:"Sport at its purest. Instinct at its highest.",h1_cta:"Enter the Arena →",
   cta2_hl:"You get it.<br>Now come play it.",cta2_btn:"I Want to Play",cta2_micro:"Free to start &nbsp;·&nbsp; No complicated registration",
   cta3_hl:"10,000 participants<br>can't be wrong.",cta3_btn:"Join the Movement",cta3_micro:"Join the movement.",
