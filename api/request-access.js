@@ -25,11 +25,35 @@ async function getAccessToken() {
   const client = new JWT({
     email: credentials.client_email,
     key: credentials.private_key,
-    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     subject: process.env.GOOGLE_IMPERSONATE_EMAIL,
   });
   const { token } = await client.getAccessToken();
   return token;
+}
+
+async function logAttempt({ accessToken, sheetId, email, status }) {
+  const timestamp = new Intl.DateTimeFormat('fr-CA', {
+    timeZone: 'America/Toronto',
+    dateStyle: 'short',
+    timeStyle: 'medium',
+  }).format(new Date());
+
+  const res = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Journal!A:C:append?valueInputOption=USER_ENTERED`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ values: [[timestamp, email, status]] }),
+    },
+  );
+
+  if (!res.ok) {
+    console.error('Sheets append error', res.status, await res.text());
+  }
 }
 
 async function sendEmail({ to, subject, html }) {
@@ -86,6 +110,8 @@ export default {
         const match = values.find((row) => String(row[1] || '').trim().toLowerCase() === email);
 
         if (match && isAllowed(match[2], match[3])) {
+          await logAttempt({ accessToken, sheetId, email, status: 'Autorisé' });
+
           const token = await signToken(
             { email, purpose: 'magic', exp: Date.now() + MAGIC_LINK_TTL_MS },
             process.env.AUTH_SECRET,
@@ -106,6 +132,8 @@ export default {
             `,
           });
         } else {
+          await logAttempt({ accessToken, sheetId, email, status: 'Refusé' });
+
           await sendEmail({
             to: email,
             subject: 'Votre accès à purinstinctgames.com n’est pas encore activé',
