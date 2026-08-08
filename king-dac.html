@@ -72,6 +72,7 @@ h1,h2,h3,.disp{
 .logo .sl{color:var(--lime);margin:0 2px}
 .nav-links{display:flex;gap:26px;align-items:center}
 .nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a,.nav-drop-btn{white-space:nowrap}
 .nav-links a:hover{color:var(--lime);opacity:1}
 .nav-links a.active{color:var(--lime);opacity:1}
 .nav-badge{
@@ -503,6 +504,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offse
     <a href="index.html#concept" data-i18n="nav_concept">Le concept</a>
     <a href="index.html#arena" data-i18n="nav_arena">L'arène</a>
     <a href="index.html#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="pur-id.html" data-i18n="nav_purid">PÜR ID</a>
     <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
     <div class="nav-drop" id="navDrop">
       <button class="nav-drop-btn active" aria-haspopup="true" aria-expanded="false">
@@ -772,7 +774,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offse
 /* ====================================================== */
 const I18N = {
 fr:{
-  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
   kd_eyebrow:"Projet spécial · Athlète signature",
   kd_h1a:"KING",kd_h1b:"DAC",kd_h1c:"DANS L'ARÈNE.",
   kd_herosub:"Recordman mondial Guinness du saut vertical avec 51 pouces (1,27 m), Darius Clark entre dans l'arène PürInstinct Games pour une session exclusive.",
@@ -795,7 +797,7 @@ fr:{
   f_rights:"Tous droits réservés.",f_nc:"Le sport à son état pur. L'instinct à son sommet."
 },
 en:{
-  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",
   kd_eyebrow:"Special project · Signature athlete",
   kd_h1a:"KING",kd_h1b:"DAC",kd_h1c:"IN THE ARENA.",
   kd_herosub:"Guinness World Record holder for the highest vertical leap — 51 inches (1.27 m) — Darius Clark steps into the PürInstinct Games arena for one exclusive session.",

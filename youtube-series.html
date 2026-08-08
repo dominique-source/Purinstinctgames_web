@@ -61,6 +61,7 @@ h1,h2,h3,.disp{
 .logo .sl{color:var(--lime);margin:0 2px}
 .nav-links{display:flex;gap:26px;align-items:center}
 .nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a,.nav-drop-btn{white-space:nowrap}
 .nav-links a:hover{color:var(--lime);opacity:1}
 .nav-links a.active{color:var(--lime);opacity:1}
 .nav-cta{
@@ -406,6 +407,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <a href="index.html#concept" data-i18n="nav_concept">The concept</a>
     <a href="index.html#arena" data-i18n="nav_arena">The arena</a>
     <a href="index.html#instincts" data-i18n="nav_instincts">The 5 instincts</a>
+    <a href="pur-id.html" data-i18n="nav_purid">PÜR ID</a>
     <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
     <div class="nav-drop" id="navDrop">
       <button class="nav-drop-btn active" aria-haspopup="true" aria-expanded="false">
@@ -769,7 +771,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <script>
 const I18N = {
 fr:{
-  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
   yt_eyebrow:"Série YouTube",
   yt_h1a:"TES GAMES.",yt_h1b:"TON ÉQUIPE.",yt_h1c:"TON HÉRITAGE.",
   yt_herosub:"Un créateur. Un co-animateur. 25 athlètes. Six disciplines. Deux heures. Des caméras partout.",
@@ -795,7 +797,7 @@ fr:{
   f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
 },
 en:{
-  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
   yt_eyebrow:"YouTube Series",
   yt_h1a:"YOUR GAMES.",yt_h1b:"YOUR CREW.",yt_h1c:"YOUR LEGACY.",
   yt_herosub:"One creator. One co-host. 25 athletes. Six disciplines. Two hours. Cameras everywhere.",

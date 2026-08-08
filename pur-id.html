@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PÜR ID — L'identité athlétique universelle | PürInstinct Games</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="description" content="PÜR ID — un score athlétique unique qui te suit partout. École, corporatif, festival, compétition nationale. Six instincts mesurés, une identité persistante.">
+<meta property="og:title" content="PÜR ID — L'identité athlétique universelle">
+<meta property="og:description" content="Un score. Six instincts. Une identité qui te suit partout.">
+<meta property="og:image" content="https://purinstinctgames.com/assets/arena-hero.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --white:#F4F4F2;
+  --muted:#888888;
+  --line:rgba(204,255,0,.18);
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+  --speed:#FF4438;
+  --hand:#2D7DFF;
+  --foot:#2EE06A;
+  --agility:#FFC400;
+  --iq:#A45CFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,.disp{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:-.015em;line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lime{color:var(--lime)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a,.nav-drop-btn{white-space:nowrap}
+@media(max-width:1400px){.nav-links{gap:17px}.nav-instinct-link img{height:30px}.nav-app-link img{height:33px}}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-links a.active{color:var(--lime);opacity:1}
+.nav-instinct-link{display:flex;align-items:center;padding:4px 0}
+.nav-instinct-link img{height:34px;width:auto;display:block;transition:filter .2s ease,transform .2s ease}
+.nav-instinct-link:hover img{filter:drop-shadow(0 0 8px rgba(204,255,0,.5));transform:scale(1.04)}
+@media(max-width:900px){.nav-instinct-link img{height:28px}}
+.nav-app-link{display:flex;align-items:center;padding:4px 0}
+.nav-app-link img{height:38px;width:auto;display:block;transition:filter .2s ease,transform .2s ease}
+.nav-app-link:hover img{filter:drop-shadow(0 0 8px rgba(204,255,0,.5));transform:scale(1.04)}
+@media(max-width:900px){.nav-app-link img{height:30px}}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:240px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;gap:10px;padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  border-bottom:1px solid rgba(255,255,255,.05);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:hover{background:rgba(204,255,0,.08);color:var(--lime);opacity:1}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw;max-height:calc(100dvh - 70px);overflow-y:auto}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:360px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ============ HERO ============ */
+.pid-hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  padding:120px 0 70px;overflow:hidden;
+}
+.pid-hero-grid{
+  position:absolute;inset:0;z-index:0;opacity:.5;
+  background-image:linear-gradient(rgba(204,255,0,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(204,255,0,.045) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 45%,#000 25%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 45%,#000 25%,transparent 75%);
+}
+.pid-hero-glow{
+  position:absolute;z-index:0;width:min(760px,110vw);aspect-ratio:1;border-radius:50%;
+  right:-10%;top:8%;pointer-events:none;
+  background:radial-gradient(circle,rgba(204,255,0,.14),transparent 62%);
+  filter:blur(28px);
+}
+.pid-hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+@media(max-width:980px){.pid-hero-inner{grid-template-columns:1fr;gap:44px}}
+.pid-h1{font-size:clamp(46px,8.2vw,104px)}
+.pid-h1 span{display:block}
+.pid-lede{color:#c9c9c4;font-size:clamp(16.5px,1.75vw,20px);max-width:46ch;margin-top:22px}
+.pid-hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn-primary{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:14px 30px 15px;font-size:20px;letter-spacing:.02em;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+  transition:box-shadow .2s,transform .2s;display:inline-block;
+}
+.btn-primary:hover{box-shadow:0 0 30px rgba(204,255,0,.5);transform:translateY(-2px)}
+.btn-ghost{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  border:1.5px solid rgba(204,255,0,.5);color:var(--lime);padding:13px 28px 14px;font-size:20px;
+  clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+  transition:.2s;display:inline-block;
+}
+.btn-ghost:hover{background:rgba(204,255,0,.1);border-color:var(--lime)}
+
+/* ============ THE ID CARD ============ */
+.pid-stage{perspective:1400px;display:flex;justify-content:center}
+.pid-card{
+  position:relative;width:min(430px,100%);
+  background:linear-gradient(155deg,#181818 0%,#0e0e0e 55%,#121212 100%);
+  border:1px solid rgba(204,255,0,.28);
+  padding:26px 26px 22px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%);
+  box-shadow:0 30px 80px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.03) inset;
+  transform-style:preserve-3d;transition:transform .18s ease-out;
+  overflow:hidden;
+}
+.pid-card::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(112deg,transparent 34%,rgba(204,255,0,.13) 46%,rgba(255,255,255,.09) 51%,rgba(204,255,0,.10) 56%,transparent 68%);
+  transform:translateX(-120%);
+  animation:pidSheen 7s cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes pidSheen{0%,72%{transform:translateX(-120%)}92%,100%{transform:translateX(120%)}}
+.pid-card > *{position:relative;z-index:2}
+.pid-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.pid-brand{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:15px;letter-spacing:.14em;color:var(--muted)}
+.pid-brand b{color:var(--lime)}
+.pid-live{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:12.5px;letter-spacing:.16em;color:var(--lime);
+  border:1px solid rgba(204,255,0,.35);padding:4px 10px 5px;
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);
+}
+.pid-live i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pidPulse 1.8s ease-in-out infinite;box-shadow:0 0 0 0 rgba(204,255,0,.7)}
+@keyframes pidPulse{0%{box-shadow:0 0 0 0 rgba(204,255,0,.65)}70%{box-shadow:0 0 0 9px rgba(204,255,0,0)}100%{box-shadow:0 0 0 0 rgba(204,255,0,0)}}
+.pid-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(30px,4.4vw,40px);line-height:.95;margin-top:20px}
+.pid-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pid-chip{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:11.5px;letter-spacing:.1em;color:var(--muted);
+  border:1px solid rgba(255,255,255,.13);padding:3px 9px 4px;
+}
+.pid-chip.demo{color:var(--lime);border-color:rgba(204,255,0,.3)}
+.pid-overall{
+  display:flex;align-items:flex-end;gap:16px;margin:24px 0 4px;
+  padding:18px 0 16px;border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);
+}
+.pid-overall-num{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(64px,10vw,88px);line-height:.82;color:var(--lime);
+  text-shadow:0 0 42px rgba(204,255,0,.35);
+}
+.pid-overall-label{padding-bottom:8px}
+.pid-overall-label b{display:block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:16px;letter-spacing:.1em}
+.pid-overall-label span{display:block;color:var(--muted);font-size:13px;letter-spacing:.02em}
+.pid-trend{
+  margin-left:auto;padding-bottom:10px;text-align:right;
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:19px;color:var(--foot);
+}
+.pid-trend small{display:block;font-size:11.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.pid-bars{display:grid;gap:9px;margin-top:18px}
+.pid-bar-row{display:grid;grid-template-columns:74px 1fr 32px;align-items:center;gap:11px}
+.pid-bar-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:13.5px;letter-spacing:.06em;color:#bdbdb8}
+.pid-bar-track{height:7px;background:rgba(255,255,255,.07);position:relative;overflow:hidden}
+.pid-bar-fill{position:absolute;inset:0 auto 0 0;width:0;transition:width 1.3s cubic-bezier(.2,.7,.25,1)}
+.pid-bar-val{font-family:var(--display);font-weight:900;font-style:italic;font-size:15.5px;text-align:right;font-variant-numeric:tabular-nums}
+.pid-card-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#6d6d6a;
+  font-family:var(--display);font-weight:900;font-style:italic;
+}
+.pid-sync i{color:var(--lime);font-style:normal}
+
+/* ============ SECTION SHELL ============ */
+.sec{padding:clamp(80px,10vw,130px) 0;position:relative}
+.sec-head{max-width:62ch}
+.sec-title{font-size:clamp(34px,5.4vw,66px)}
+.sec-sub{color:#b6b6b1;margin-top:18px;font-size:clamp(16px,1.6vw,18.5px)}
+
+/* ============ FRAGMENT ============ */
+.frag{background:var(--bg-2);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.frag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:44px}
+.frag-card{
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.02);
+  padding:22px 20px;position:relative;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%);
+}
+.frag-card h4{font-size:22px;color:#8e8e8a}
+.frag-card p{font-size:14.5px;color:#66665f;margin-top:7px;line-height:1.45}
+.frag-card::after{content:"";position:absolute;left:20px;right:20px;bottom:14px;height:1px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 6px,transparent 6px 12px)}
+.frag-arrow{display:flex;justify-content:center;margin:38px 0 6px}
+.frag-arrow span{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.14em;font-size:15px;display:inline-flex;align-items:center;gap:14px;
+}
+.frag-arrow span::before,.frag-arrow span::after{content:"";width:46px;height:2px;background:linear-gradient(90deg,transparent,var(--lime));transform:skewX(-30deg)}
+.frag-arrow span::after{background:linear-gradient(90deg,var(--lime),transparent)}
+.frag-unified{
+  margin-top:22px;border:1.5px solid rgba(204,255,0,.34);background:linear-gradient(140deg,rgba(204,255,0,.07),transparent 62%);
+  padding:34px clamp(22px,4vw,44px);text-align:center;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%);
+}
+.frag-unified h3{font-size:clamp(28px,4.4vw,46px)}
+.frag-unified p{color:#b6b6b1;margin-top:12px;max-width:60ch;margin-inline:auto}
+
+/* ============ RADAR ============ */
+.radar-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,66px);align-items:center;margin-top:52px}
+@media(max-width:900px){.radar-grid{grid-template-columns:1fr;gap:40px}}
+.radar-box{position:relative;display:flex;justify-content:center}
+.radar-box svg{width:min(460px,100%);height:auto;overflow:visible}
+.radar-poly{transition:opacity .3s}
+.radar-axis-label{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:14px;letter-spacing:.05em;fill:#9b9b96;transition:fill .2s;
+}
+.radar-axis-label.on{fill:var(--white)}
+.radar-dot{transition:r .2s}
+.dims{display:flex;flex-direction:column;gap:2px}
+.dim{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
+  padding:15px 16px;border:1px solid transparent;border-left:3px solid;
+  background:rgba(255,255,255,.02);cursor:default;transition:background .2s,border-color .2s,transform .2s;
+}
+.dim:hover{background:rgba(255,255,255,.05);transform:translateX(4px)}
+.dim-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(19px,2.2vw,24px);line-height:1}
+.dim-desc{color:#87877f;font-size:14px;line-height:1.4;grid-column:2;margin-top:3px}
+.dim-val{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.4vw,38px);line-height:1;font-variant-numeric:tabular-nums}
+
+/* ============ JOURNEY ============ */
+.journey{background:var(--bg-2);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden}
+.jrn-rail{position:relative;margin-top:60px}
+.jrn-track{
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,1fr);gap:0;
+  position:relative;overflow-x:auto;scrollbar-width:thin;padding-bottom:6px;
+}
+.jrn-track::-webkit-scrollbar{height:4px}
+.jrn-track::-webkit-scrollbar-thumb{background:rgba(204,255,0,.3)}
+.jrn-step{position:relative;padding:0 18px 6px;text-align:center}
+.jrn-step::before{
+  content:"";position:absolute;left:0;right:0;top:64px;height:2px;
+  background:repeating-linear-gradient(90deg,rgba(204,255,0,.28) 0 8px,transparent 8px 16px);
+}
+.jrn-step:first-child::before{left:50%}
+.jrn-step:last-child::before{right:50%}
+.jrn-num{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:12.5px;
+  letter-spacing:.16em;color:#5f5f5a;
+}
+.jrn-score{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(34px,4.6vw,46px);line-height:1;color:var(--lime);
+  margin-top:4px;font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(204,255,0,.25);
+}
+.jrn-node{
+  width:15px;height:15px;margin:14px auto 0;position:relative;z-index:2;
+  background:var(--bg-2);border:2.5px solid var(--lime);transform:rotate(45deg);
+}
+.jrn-body{margin-top:20px}
+.jrn-body h4{font-size:clamp(19px,2.2vw,23px)}
+.jrn-body p{color:#83837c;font-size:14px;margin-top:6px;line-height:1.45}
+.jrn-note{
+  margin-top:52px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  border-left:3px solid var(--lime);padding:6px 0 6px 18px;
+}
+.jrn-note b{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(20px,2.6vw,27px)}
+.jrn-note span{color:#9a9a94;font-size:15.5px}
+
+/* ============ DATASET ============ */
+.ds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:52px}
+.ds-card{
+  border:1px solid rgba(255,255,255,.09);padding:28px 24px;position:relative;overflow:hidden;
+  background:linear-gradient(155deg,rgba(255,255,255,.035),transparent 70%);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
+}
+.ds-card b{
+  display:block;font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(38px,5vw,52px);line-height:1;color:var(--lime);font-variant-numeric:tabular-nums;
+}
+.ds-card h4{font-size:20px;margin-top:12px}
+.ds-card p{color:#83837c;font-size:14.5px;margin-top:7px;line-height:1.45}
+
+/* ============ CTA ============ */
+.cta{text-align:center;position:relative;overflow:hidden}
+.cta::before{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(900px,120vw);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(204,255,0,.11),transparent 60%);filter:blur(30px);
+}
+.cta h2{font-size:clamp(36px,6.4vw,80px)}
+.cta p{color:#b6b6b1;max-width:52ch;margin:20px auto 0;font-size:clamp(16px,1.7vw,19px)}
+.cta .pid-hero-actions{justify-content:center}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+
+@media(prefers-reduced-motion:reduce){
+  .pid-card::before{animation:none;opacity:0}
+  .pid-live i{animation:none}
+  .pid-card{transition:none!important}
+}
+</style>
+<noscript><style>
+  /* Almost every block on this page is revealed by IntersectionObserver.
+     Without JS the page would render blank, so show everything up front. */
+  .rv{opacity:1!important;transform:none!important}
+  .pid-card::before{display:none}
+</style></noscript>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+  <div class="nav-links" id="navLinks">
+    <a href="instinct-tv.html" class="nav-instinct-link" aria-label="INSTINCT: The Sports Reality Show">
+      <img class="nav-instinct-logo" src="assets/instinct-logo-fr.png" data-logo-fr="assets/instinct-logo-fr.png" data-logo-en="assets/instinct-logo-en.png" alt="INSTINCT: The Sports Reality Show">
+    </a>
+    <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">
+      <img src="assets/app-logo.png" alt="App PürInstinct Games">
+    </a>
+    <a href="index.html#concept" data-i18n="nav_concept">Le concept</a>
+    <a href="index.html#arena" data-i18n="nav_arena">L'arène</a>
+    <a href="index.html#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
+    <a href="pur-id.html" class="active" data-i18n="nav_purid">PÜR ID</a>
+    <a href="index.html#leaderboard" data-i18n="nav_lb">Leaderboard</a>
+    <div class="nav-drop" id="navDrop">
+      <button class="nav-drop-btn" aria-haspopup="true" aria-expanded="false">
+        <span data-i18n="nav_special">Projets spéciaux</span><span class="nav-drop-arrow">▾</span>
+      </button>
+      <div class="nav-drop-menu" role="menu">
+        <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
+        <a href="championship.html" class="nav-drop-item" data-i18n="nav_champ">Championship</a>
+        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
+        <a href="king-dac.html" class="nav-drop-item" data-i18n="nav_kd">King Dac</a>
+        <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
+      </div>
+    </div>
+    <a href="index.html#billets" data-i18n="nav_tickets">Billets</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <a class="nav-cta" href="index.html#billets" data-i18n="nav_cta">Réserve</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="pid-hero">
+  <div class="pid-hero-grid"></div>
+  <div class="pid-hero-glow"></div>
+  <div class="wrap">
+    <div class="pid-hero-inner">
+      <div>
+        <span class="eyebrow" data-i18n="hero_eyebrow">L'identité athlétique universelle</span>
+        <h1 class="pid-h1">
+          <span data-i18n="hero_h1a">Ton score</span>
+          <span class="lime" data-i18n="hero_h1b">te suit</span>
+          <span data-i18n="hero_h1c">partout.</span>
+        </h1>
+        <p class="pid-lede" data-i18n="hero_lede">Le coureur a Strava. Le golfeur a son handicap. Le joueur de pickleball a son rating. Mais l'athlète amateur complet n'a rien. PÜR ID mesure six instincts, en fait un seul score — et le transporte avec toi, à vie.</p>
+        <div class="pid-hero-actions">
+          <a href="#dimensions" class="btn-primary" data-i18n="hero_cta1">Voir les 6 instincts →</a>
+          <a href="#parcours" class="btn-ghost" data-i18n="hero_cta2">Le parcours</a>
+        </div>
+      </div>
+
+      <div class="pid-stage">
+        <article class="pid-card" id="pidCard">
+          <div class="pid-card-top">
+            <span class="pid-brand">PÜR <b>ID</b></span>
+            <span class="pid-live"><i></i><span data-i18n="card_live">En direct</span></span>
+          </div>
+
+          <h2 class="pid-name">Dominique<br>Soucy</h2>
+
+          <div class="pid-meta">
+            <span class="pid-chip">QC · CAN</span>
+            <span class="pid-chip" data-i18n="card_since">Membre depuis 2026</span>
+            <span class="pid-chip demo" data-i18n="card_demo">Aperçu</span>
+          </div>
+
+          <div class="pid-overall">
+            <div class="pid-overall-num num" id="overallNum">0.0</div>
+            <div class="pid-overall-label">
+              <b data-i18n="card_overall">Score global</b>
+              <span data-i18n="card_scale">sur 100</span>
+            </div>
+            <div class="pid-trend">
+              <span id="trendVal">+0.0</span>
+              <small data-i18n="card_trend">12 derniers mois</small>
+            </div>
+          </div>
+
+          <div class="pid-bars" id="pidBars"></div>
+
+          <div class="pid-card-foot">
+            <span class="pid-sync"><i>●</i> <span data-i18n="card_sync">Synchronisé il y a</span> <span id="syncAgo">2 s</span></span>
+            <span id="pidCode">PIG-2026-0001</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ FRAGMENTATION ============ -->
+<section class="sec frag">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="frag_eyebrow">Le problème</span>
+      <h2 class="sec-title" data-i18n="frag_title">Ton identité sportive est en miettes.</h2>
+      <p class="sec-sub" data-i18n="frag_sub">Chaque sport garde sa propre mesure, dans son propre silo. Aucune ne parle à l'autre. Aucune ne dit qui tu es comme athlète complet.</p>
+    </div>
+
+    <div class="frag-grid">
+      <div class="frag-card rv"><h4>Strava</h4><p data-i18n="frag_1">Connaît ta course. Rien d'autre.</p></div>
+      <div class="frag-card rv"><h4 data-i18n="frag_2t">Golf</h4><p data-i18n="frag_2">Un handicap. Sur un seul terrain.</p></div>
+      <div class="frag-card rv"><h4>Pickleball</h4><p data-i18n="frag_3">Un rating, valide dans une seule ligue.</p></div>
+      <div class="frag-card rv"><h4>HYROX</h4><p data-i18n="frag_4">Un chrono, pour un seul format.</p></div>
+    </div>
+
+    <div class="frag-arrow rv"><span data-i18n="frag_arrow">Une seule identité</span></div>
+
+    <div class="frag-unified rv">
+      <h3 data-i18n="frag_uni_t">Six instincts. Un score. Une vie.</h3>
+      <p data-i18n="frag_uni_p">PÜR ID ne remplace rien. Il mesure ce qu'aucun autre ne mesure : l'athlète complet — vitesse, mains, pieds, agilité, lecture du jeu, instinct.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIMENSIONS / RADAR ============ -->
+<section class="sec" id="dimensions">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="dim_eyebrow">La mesure</span>
+      <h2 class="sec-title" data-i18n="dim_title">Six instincts, mesurés à chaque passage.</h2>
+      <p class="sec-sub" data-i18n="dim_sub">Chaque station de l'arène alimente une dimension. Rien n'est déclaré, tout est mesuré — puis recalculé en temps réel.</p>
+    </div>
+
+    <div class="radar-grid">
+      <div class="radar-box rv"><svg id="radar" viewBox="0 0 340 340" role="img" aria-label="Radar PÜR ID"></svg></div>
+      <div class="dims rv" id="dimsList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section class="sec journey" id="parcours">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="jrn_eyebrow">La persistance</span>
+      <h2 class="sec-title" data-i18n="jrn_title">Un seul dossier. Toute une vie d'athlète.</h2>
+      <p class="sec-sub" data-i18n="jrn_sub">L'école. Le corporatif. Le festival. Le national. Chaque participation nourrit le même score — celui qui te suit.</p>
+    </div>
+
+    <div class="jrn-rail">
+      <div class="jrn-track" id="jrnTrack"></div>
+    </div>
+
+    <div class="jrn-note rv">
+      <b data-i18n="jrn_note_b">Chaque passage améliore la donnée.</b>
+      <span data-i18n="jrn_note_s">Plus tu joues, plus ton PÜR ID devient précis — et plus il devient difficile à ignorer.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATASET ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="ds_eyebrow">Ce que ça change</span>
+      <h2 class="sec-title" data-i18n="ds_title">L'amateur mérite le même dossier que le pro.</h2>
+      <p class="sec-sub" data-i18n="ds_sub">Le sport professionnel a construit des profils persistants pour ses partisans. Personne ne l'a fait pour les gens qui jouent réellement.</p>
+    </div>
+
+    <div class="ds-grid">
+      <div class="ds-card rv"><b class="cnt" data-to="6">0</b><h4 data-i18n="ds_1t">Dimensions</h4><p data-i18n="ds_1p">Un profil complet plutôt qu'une seule statistique isolée.</p></div>
+      <div class="ds-card rv"><b class="cnt" data-to="9">0</b><h4 data-i18n="ds_2t">Stations</h4><p data-i18n="ds_2p">Chacune alimente le score en données mesurées, pas déclarées.</p></div>
+      <div class="ds-card rv"><b><span class="cnt" data-to="100">0</span>%</b><h4 data-i18n="ds_3t">Portable</h4><p data-i18n="ds_3p">Le score t'appartient et voyage avec toi, d'un contexte à l'autre.</p></div>
+      <div class="ds-card rv"><b data-i18n="ds_4n">À vie</b><h4 data-i18n="ds_4t">Persistant</h4><p data-i18n="ds_4p">Aucune remise à zéro. Ton historique devient ton identité.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="sec cta">
+  <div class="wrap">
+    <h2 class="rv" data-i18n="cta_title">Viens chercher ton numéro.</h2>
+    <p class="rv" data-i18n="cta_sub">Une session dans l'arène suffit pour créer ton PÜR ID. Ensuite, il ne te quitte plus.</p>
+    <div class="pid-hero-actions rv">
+      <a href="index.html#billets" class="btn-primary" data-i18n="cta_btn">Réserver ma session →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="index.html#billets" data-i18n="f_book">Réserver une session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ====================================================== */
+/* DATA                                                    */
+/* ====================================================== */
+const DIMS = [
+  {key:"speed",   val:87, color:"#FF4438", fr:{n:"Vitesse",     d:"Accélération, vitesse de pointe, temps de réaction au départ."},        en:{n:"Speed",       d:"Acceleration, top speed, reaction time off the mark."}},
+  {key:"hand",    val:91, color:"#2D7DFF", fr:{n:"Mains",       d:"Précision de lancer, réception, contrôle sous pression."},              en:{n:"Hands",       d:"Throwing precision, catching, control under pressure."}},
+  {key:"foot",    val:68, color:"#2EE06A", fr:{n:"Pieds",       d:"Contrôle du ballon, frappe, technique en duel."},                       en:{n:"Feet",        d:"Ball control, striking, technique in a duel."}},
+  {key:"purinst", val:82, color:"#CCFF00", fr:{n:"PürInstinct", d:"Ta note dans le sport signature : traverser sans se faire toucher."},   en:{n:"PürInstinct", d:"Your rating in the signature sport: cross without being touched."}},
+  {key:"iq",      val:94, color:"#A45CFF", fr:{n:"IQ de jeu",   d:"Lecture du jeu, décision rapide, positionnement."},                     en:{n:"Game IQ",     d:"Reading the play, fast decisions, positioning."}},
+  {key:"agility", val:74, color:"#FFC400", fr:{n:"Agilité",     d:"Changements de direction, coordination, équilibre."},                   en:{n:"Agility",     d:"Change of direction, coordination, balance."}}
+];
+const OVERALL = 83.1;
+const TREND = 6.4;
+
+const JOURNEY = [
+  {score:"71.4", fr:{t:"École secondaire",   d:"Premier passage de l'arène. Le dossier s'ouvre."},         en:{t:"High school",        d:"First run through the arena. The record opens."}},
+  {score:"74.8", fr:{t:"Jeux corporatifs",   d:"Deux ans plus tard, même score, nouveau contexte."},       en:{t:"Corporate Games",    d:"Two years later, same score, new context."}},
+  {score:"78.2", fr:{t:"Festival",           d:"Format court, foule dense. La donnée s'affine."},          en:{t:"Festival",           d:"Short format, dense crowd. The data sharpens."}},
+  {score:"83.1", fr:{t:"PürInstinct Games",  d:"Les 9 stations au complet. Profil pleinement mesuré."},    en:{t:"PürInstinct Games",  d:"All 9 stations. Profile fully measured."}},
+  {score:"—",    fr:{t:"Compétition nationale", d:"La suite. Le même dossier, jamais remis à zéro."},      en:{t:"National competition", d:"What's next. Same record, never reset."}}
+];
+
+/* ====================================================== */
+/* I18N                                                    */
+/* ====================================================== */
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",
+  nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",
+  nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tickets:"Billets",nav_cta:"Réserve",
+
+  hero_eyebrow:"L'identité athlétique universelle",
+  hero_h1a:"Ton score",hero_h1b:"te suit",hero_h1c:"partout.",
+  hero_lede:"Le coureur a Strava. Le golfeur a son handicap. Le joueur de pickleball a son rating. Mais l'athlète amateur complet n'a rien. PÜR ID mesure six instincts, en fait un seul score — et le transporte avec toi, à vie.",
+  hero_cta1:"Voir les 6 instincts →",hero_cta2:"Le parcours",
+
+  card_live:"En direct",card_since:"Membre depuis 2026",card_demo:"Aperçu",
+  card_overall:"Score global",card_scale:"sur 100",card_trend:"12 derniers mois",card_sync:"Synchronisé il y a",
+
+  frag_eyebrow:"Le problème",
+  frag_title:"Ton identité sportive est en miettes.",
+  frag_sub:"Chaque sport garde sa propre mesure, dans son propre silo. Aucune ne parle à l'autre. Aucune ne dit qui tu es comme athlète complet.",
+  frag_1:"Connaît ta course. Rien d'autre.",frag_2t:"Golf",frag_2:"Un handicap. Sur un seul terrain.",
+  frag_3:"Un rating, valide dans une seule ligue.",frag_4:"Un chrono, pour un seul format.",
+  frag_arrow:"Une seule identité",
+  frag_uni_t:"Six instincts. Un score. Une vie.",
+  frag_uni_p:"PÜR ID ne remplace rien. Il mesure ce qu'aucun autre ne mesure : l'athlète complet — vitesse, mains, pieds, agilité, lecture du jeu, instinct.",
+
+  dim_eyebrow:"La mesure",
+  dim_title:"Six instincts, mesurés à chaque passage.",
+  dim_sub:"Chaque station de l'arène alimente une dimension. Rien n'est déclaré, tout est mesuré — puis recalculé en temps réel.",
+
+  jrn_eyebrow:"La persistance",
+  jrn_title:"Un seul dossier. Toute une vie d'athlète.",
+  jrn_sub:"L'école. Le corporatif. Le festival. Le national. Chaque participation nourrit le même score — celui qui te suit.",
+  jrn_note_b:"Chaque passage améliore la donnée.",
+  jrn_note_s:"Plus tu joues, plus ton PÜR ID devient précis — et plus il devient difficile à ignorer.",
+
+  ds_eyebrow:"Ce que ça change",
+  ds_title:"L'amateur mérite le même dossier que le pro.",
+  ds_sub:"Le sport professionnel a construit des profils persistants pour ses partisans. Personne ne l'a fait pour les gens qui jouent réellement.",
+  ds_1t:"Dimensions",ds_1p:"Un profil complet plutôt qu'une seule statistique isolée.",
+  ds_2t:"Stations",ds_2p:"Chacune alimente le score en données mesurées, pas déclarées.",
+  ds_3t:"Portable",ds_3p:"Le score t'appartient et voyage avec toi, d'un contexte à l'autre.",
+  ds_4n:"À vie",ds_4t:"Persistant",ds_4p:"Aucune remise à zéro. Ton historique devient ton identité.",
+
+  cta_title:"Viens chercher ton numéro.",
+  cta_sub:"Une session dans l'arène suffit pour créer ton PÜR ID. Ensuite, il ne te quitte plus.",
+  cta_btn:"Réserver ma session →",
+
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",
+  f_follow:"Suis l'arène",f_lang:"Langue",f_rights:"Tous droits réservés.",
+  f_nc:"Sport sans contact — on touche le ballon, jamais le joueur."
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",
+  nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",
+  nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tickets:"Tickets",nav_cta:"Book now",
+
+  hero_eyebrow:"The universal athlete identity",
+  hero_h1a:"Your score",hero_h1b:"follows you",hero_h1c:"everywhere.",
+  hero_lede:"Runners have Strava. Golfers have a handicap. Pickleball has ratings. But the complete amateur athlete has nothing. PÜR ID measures six instincts, turns them into one score — and carries it with you, for life.",
+  hero_cta1:"See the 6 instincts →",hero_cta2:"The journey",
+
+  card_live:"Live",card_since:"Member since 2026",card_demo:"Preview",
+  card_overall:"Overall score",card_scale:"out of 100",card_trend:"last 12 months",card_sync:"Synced",
+
+  frag_eyebrow:"The problem",
+  frag_title:"Your athletic identity is in pieces.",
+  frag_sub:"Every sport keeps its own measure, in its own silo. None of them talk to each other. None of them say who you are as a complete athlete.",
+  frag_1:"Knows your run. Nothing else.",frag_2t:"Golf",frag_2:"A handicap. On one course.",
+  frag_3:"A rating, valid in one league.",frag_4:"A time, for one format.",
+  frag_arrow:"One single identity",
+  frag_uni_t:"Six instincts. One score. One life.",
+  frag_uni_p:"PÜR ID replaces nothing. It measures what nothing else does: the complete athlete — speed, hands, feet, agility, game reading, instinct.",
+
+  dim_eyebrow:"The measure",
+  dim_title:"Six instincts, measured every time you play.",
+  dim_sub:"Every station in the arena feeds one dimension. Nothing is self-reported, everything is measured — then recalculated in real time.",
+
+  jrn_eyebrow:"Persistence",
+  jrn_title:"One record. A whole athletic life.",
+  jrn_sub:"School. Corporate. Festival. National. Every participation feeds the same score — the one that follows you.",
+  jrn_note_b:"Every run improves the data.",
+  jrn_note_s:"The more you play, the sharper your PÜR ID gets — and the harder it becomes to ignore.",
+
+  ds_eyebrow:"Why it matters",
+  ds_title:"Amateurs deserve the same record as pros.",
+  ds_sub:"Professional sport built persistent profiles for its fans. Nobody built one for the people actually playing.",
+  ds_1t:"Dimensions",ds_1p:"A complete profile instead of one isolated statistic.",
+  ds_2t:"Stations",ds_2p:"Each one feeds the score with measured data, not self-reported claims.",
+  ds_3t:"Portable",ds_3p:"The score is yours and travels with you, from one context to the next.",
+  ds_4n:"For life",ds_4t:"Persistent",ds_4p:"No reset, ever. Your history becomes your identity.",
+
+  cta_title:"Come get your number.",
+  cta_sub:"One session in the arena is all it takes to create your PÜR ID. After that, it never leaves you.",
+  cta_btn:"Book my session →",
+
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",
+  f_follow:"Follow the arena",f_lang:"Language",f_rights:"All rights reserved.",
+  f_nc:"No-contact sport — we touch the ball, never the player."
+}};
+
+let lang = localStorage.getItem("pi_lang") || "fr";
+
+/* ====================================================== */
+/* BUILD: card bars                                        */
+/* ====================================================== */
+const barsEl = document.getElementById("pidBars");
+DIMS.forEach(d=>{
+  const row = document.createElement("div");
+  row.className = "pid-bar-row";
+  row.innerHTML =
+    '<span class="pid-bar-name" data-dim-name="'+d.key+'"></span>'+
+    '<span class="pid-bar-track"><span class="pid-bar-fill" data-dim-fill="'+d.key+'" style="background:'+d.color+'"></span></span>'+
+    '<span class="pid-bar-val num" style="color:'+d.color+'">'+d.val+'</span>';
+  barsEl.appendChild(row);
+});
+
+/* ====================================================== */
+/* BUILD: dimension list                                   */
+/* ====================================================== */
+const dimsList = document.getElementById("dimsList");
+DIMS.forEach((d,i)=>{
+  const el = document.createElement("div");
+  el.className = "dim";
+  el.style.borderLeftColor = d.color;
+  el.dataset.idx = i;
+  el.innerHTML =
+    '<span class="dim-name" data-dim-name="'+d.key+'" style="color:'+d.color+'"></span>'+
+    '<span></span>'+
+    '<span class="dim-val" style="color:'+d.color+'">'+d.val+'</span>'+
+    '<span class="dim-desc" data-dim-desc="'+d.key+'"></span>';
+  el.addEventListener("mouseenter",()=>highlightAxis(i));
+  el.addEventListener("mouseleave",()=>highlightAxis(-1));
+  dimsList.appendChild(el);
+});
+
+/* ====================================================== */
+/* BUILD: journey                                          */
+/* ====================================================== */
+const jrnTrack = document.getElementById("jrnTrack");
+JOURNEY.forEach((s,i)=>{
+  const el = document.createElement("div");
+  el.className = "jrn-step";
+  el.innerHTML =
+    '<div class="jrn-num">'+String(i+1).padStart(2,"0")+'</div>'+
+    '<div class="jrn-score num">'+s.score+'</div>'+
+    '<div class="jrn-node"></div>'+
+    '<div class="jrn-body"><h4 data-jrn-t="'+i+'"></h4><p data-jrn-d="'+i+'"></p></div>';
+  jrnTrack.appendChild(el);
+});
+
+/* ====================================================== */
+/* RADAR                                                   */
+/* ====================================================== */
+const SVG_NS = "http://www.w3.org/2000/svg";
+const CX = 170, CY = 170, R = 112;
+
+function axisPoint(i, ratio){
+  const a = (-90 + i * 60) * Math.PI / 180;
+  return [CX + Math.cos(a) * R * ratio, CY + Math.sin(a) * R * ratio];
+}
+function ringPath(ratio){
+  return DIMS.map((_,i)=>axisPoint(i,ratio).map(n=>n.toFixed(1)).join(",")).join(" ");
+}
+function mk(tag, attrs){
+  const el = document.createElementNS(SVG_NS, tag);
+  for(const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+
+const radar = document.getElementById("radar");
+[.25,.5,.75,1].forEach(r=>{
+  radar.appendChild(mk("polygon",{points:ringPath(r),fill:"none",stroke:"rgba(255,255,255,.09)","stroke-width":1}));
+});
+DIMS.forEach((d,i)=>{
+  const [x,y] = axisPoint(i,1);
+  radar.appendChild(mk("line",{x1:CX,y1:CY,x2:x,y2:y,stroke:"rgba(255,255,255,.09)","stroke-width":1}));
+});
+
+const grad = mk("radialGradient",{id:"radarFill",cx:"50%",cy:"50%",r:"50%"});
+grad.appendChild(mk("stop",{offset:"0%","stop-color":"#CCFF00","stop-opacity":".38"}));
+grad.appendChild(mk("stop",{offset:"100%","stop-color":"#CCFF00","stop-opacity":".10"}));
+const defs = mk("defs",{});
+defs.appendChild(grad);
+radar.appendChild(defs);
+
+const valuePoly = mk("polygon",{points:ringPath(0),fill:"url(#radarFill)",stroke:"#CCFF00","stroke-width":2,"stroke-linejoin":"round",class:"radar-poly"});
+radar.appendChild(valuePoly);
+
+const dots = DIMS.map((d,i)=>{
+  const c = mk("circle",{cx:CX,cy:CY,r:4,fill:d.color,stroke:"#0A0A0A","stroke-width":2,class:"radar-dot"});
+  radar.appendChild(c);
+  return c;
+});
+
+const labels = DIMS.map((d,i)=>{
+  const [x,y] = axisPoint(i,1.24);
+  const t = mk("text",{x:x.toFixed(1),y:y.toFixed(1),class:"radar-axis-label","text-anchor":"middle","dominant-baseline":"middle"});
+  radar.appendChild(t);
+  return t;
+});
+
+function highlightAxis(idx){
+  labels.forEach((l,i)=>l.classList.toggle("on", i===idx));
+  dots.forEach((c,i)=>c.setAttribute("r", i===idx ? 7 : 4));
+}
+
+function drawRadar(progress){
+  const pts = DIMS.map((d,i)=>{
+    const ratio = (d.val/100) * progress;
+    return axisPoint(i,ratio).map(n=>n.toFixed(1)).join(",");
+  });
+  valuePoly.setAttribute("points", pts.join(" "));
+  DIMS.forEach((d,i)=>{
+    const [x,y] = axisPoint(i,(d.val/100)*progress);
+    dots[i].setAttribute("cx",x.toFixed(1));
+    dots[i].setAttribute("cy",y.toFixed(1));
+  });
+}
+
+/* ====================================================== */
+/* ANIMATION HELPERS                                       */
+/* ====================================================== */
+const easeOut = t => 1 - Math.pow(1-t, 3);
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function animate(dur, onFrame, onDone){
+  if(reduceMotion){ onFrame(1); if(onDone) onDone(); return; }
+  const t0 = performance.now();
+  (function step(now){
+    const p = Math.min(1,(now-t0)/dur);
+    onFrame(easeOut(p));
+    if(p<1) requestAnimationFrame(step); else if(onDone) onDone();
+  })(performance.now());
+}
+
+function once(el, cb, threshold){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ cb(); io.disconnect(); } });
+  },{threshold: threshold || .3});
+  io.observe(el);
+}
+
+/* ====================================================== */
+/* HERO CARD ANIMATION                                     */
+/* ====================================================== */
+const overallEl = document.getElementById("overallNum");
+const trendEl = document.getElementById("trendVal");
+
+function runCardIntro(){
+  animate(1600, p=>{ overallEl.textContent = (OVERALL*p).toFixed(1); });
+  animate(1600, p=>{ trendEl.textContent = "+" + (TREND*p).toFixed(1); });
+  DIMS.forEach((d,i)=>{
+    const fill = barsEl.querySelector('[data-dim-fill="'+d.key+'"]');
+    setTimeout(()=>{ fill.style.width = d.val + "%"; }, 180 + i*90);
+  });
+}
+setTimeout(runCardIntro, 350);
+
+/* live "synced X ago" ticker */
+let syncSeconds = 2;
+const syncEl = document.getElementById("syncAgo");
+setInterval(()=>{
+  syncSeconds++;
+  if(syncSeconds >= 45){ syncSeconds = 1; }
+  syncEl.textContent = syncSeconds + " s";
+}, 1000);
+
+/* 3D tilt on the card */
+const card = document.getElementById("pidCard");
+if(!reduceMotion && window.matchMedia("(hover:hover)").matches){
+  const stage = card.parentElement;
+  stage.addEventListener("mousemove", e=>{
+    const r = card.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width/2)) / (r.width/2);
+    const dy = (e.clientY - (r.top + r.height/2)) / (r.height/2);
+    card.style.transform = "rotateY("+(dx*7).toFixed(2)+"deg) rotateX("+(-dy*7).toFixed(2)+"deg) translateZ(0)";
+  });
+  stage.addEventListener("mouseleave", ()=>{ card.style.transform = ""; });
+}
+
+/* ====================================================== */
+/* SCROLL-TRIGGERED                                        */
+/* ====================================================== */
+once(radar, ()=>{ animate(1500, drawRadar); }, .25);
+
+document.querySelectorAll(".cnt").forEach(el=>{
+  const to = parseInt(el.dataset.to,10);
+  once(el, ()=>{ animate(1200, p=>{ el.textContent = Math.round(to*p); }); }, .5);
+});
+
+const revealIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); revealIO.unobserve(e.target); } });
+},{threshold:.14, rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".rv").forEach((el,i)=>{
+  el.style.transitionDelay = (i%4)*70 + "ms";
+  revealIO.observe(el);
+});
+
+/* ====================================================== */
+/* LANGUAGE                                                */
+/* ====================================================== */
+function applyLang(){
+  const t = I18N[lang];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.dataset.i18n;
+    if(t[k] !== undefined) el.textContent = t[k];
+  });
+  DIMS.forEach(d=>{
+    document.querySelectorAll('[data-dim-name="'+d.key+'"]').forEach(el=>{ el.textContent = d[lang].n; });
+    document.querySelectorAll('[data-dim-desc="'+d.key+'"]').forEach(el=>{ el.textContent = d[lang].d; });
+  });
+  DIMS.forEach((d,i)=>{ labels[i].textContent = d[lang].n; });
+  JOURNEY.forEach((s,i)=>{
+    document.querySelector('[data-jrn-t="'+i+'"]').textContent = s[lang].t;
+    document.querySelector('[data-jrn-d="'+i+'"]').textContent = s[lang].d;
+  });
+  document.querySelectorAll(".nav-instinct-logo").forEach(img=>{
+    img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
+  });
+  document.documentElement.lang = lang;
+  document.getElementById("langBtn").textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
+}
+applyLang();
+
+document.getElementById("langBtn").addEventListener("click",()=>{
+  lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang();
+});
+document.getElementById("footLang").addEventListener("click",e=>{
+  e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang();
+});
+
+/* ====================================================== */
+/* NAV                                                     */
+/* ====================================================== */
+const burger = document.getElementById("burger");
+const navLinks = document.getElementById("navLinks");
+burger.addEventListener("click", ()=>navLinks.classList.toggle("open"));
+document.addEventListener("click", e=>{ if(!burger.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove("open"); });
+
+const navDrop = document.getElementById("navDrop");
+navDrop.querySelector(".nav-drop-btn").addEventListener("click", e=>{
+  e.stopPropagation();
+  navDrop.classList.toggle("open");
+  navDrop.querySelector(".nav-drop-btn").setAttribute("aria-expanded", navDrop.classList.contains("open"));
+});
+document.addEventListener("click", e=>{ if(!navDrop.contains(e.target)) navDrop.classList.remove("open"); });
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
