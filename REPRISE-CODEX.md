@@ -35,3 +35,11 @@ L’utilisateur autorise maintenant la fusion des deux branches et la production
 Les 5 tests du script ont été relancés avec succès. Publier cette branche après
 confirmation de la production premium de l’application ; vérifier le vrai lien APP.
 Le contrôle d’accès privé doit rester en place.
+
+## Production publiée — 2 novembre 2026
+- PR #3 fusionnée ; main : 671786db10e33fd2638f75090da581ba8fe5e3d3.
+- Déploiement purinstinct-web dpl_CsH4LN8jZwswFbR4RzHiXqgACGH3 : production READY, adresses existantes affectées.
+- L’application premium est également en production (main f144d6e).
+- L’accès privé par courriel est conservé et bloque encore la vérification du clic APP dans le navigateur de contrôle.
+- Prochaine étape : après ouverture d’une session autorisée par l’utilisateur, vérifier le vrai bouton APP sur purinstinct-web.vercel.app et capturer le résultat.
+- Avertissement de build existant : middleware Edge déprécié ; migration Node à traiter séparément si demandée, sans altérer les protections pendant cette livraison.
