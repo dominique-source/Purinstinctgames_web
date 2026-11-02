@@ -29,3 +29,9 @@
 - En-tête hero réel inclus dans l’effet de recul. Source formatée et syntaxe vérifiée.
 - Le parcours en ligne reste soumis à la session privée existante ; aucune modification de middleware ou de permissions.
 - Prochaine étape : validation utilisateur de l’aperçu, puis seulement sur instruction nouvelle, fusion/déploiement.
+
+## Publication autorisée — 2 novembre 2026
+L’utilisateur autorise maintenant la fusion des deux branches et la production.
+Les 5 tests du script ont été relancés avec succès. Publier cette branche après
+confirmation de la production premium de l’application ; vérifier le vrai lien APP.
+Le contrôle d’accès privé doit rester en place.
