@@ -21,3 +21,11 @@
 - Tester le parcours complet local : node scripts/preview-public.mjs --site=/Users/client/Documents/ChatGPT/purinstinct-web-premium --port=4174 depuis le dépôt app.
 - Terminer les contrôles navigateur et sauvegarder cette branche sur GitHub.
 - Aucune fusion main ni production sans nouvelle instruction.
+
+## QA terminée
+- Parcours site local → APP → accueil testé avec un vrai lien /app ; arrivée portal confirmée.
+- Préchargement sur focus confirmé (document et photo École seulement).
+- 5 tests node réussis : clics modifiés, mouvements réduits, économiseur de données, navigation garantie en cas d’échec visuel et nettoyage pageshow.
+- En-tête hero réel inclus dans l’effet de recul. Source formatée et syntaxe vérifiée.
+- Le parcours en ligne reste soumis à la session privée existante ; aucune modification de middleware ou de permissions.
+- Prochaine étape : validation utilisateur de l’aperçu, puis seulement sur instruction nouvelle, fusion/déploiement.
