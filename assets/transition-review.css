@@ -1,0 +1,39 @@
+.transition-review:not([hidden]) {
+  position: fixed;
+  z-index: 100;
+  inset: auto 12px 12px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: calc(100% - 24px);
+  padding: 6px;
+  border: 1px solid #777;
+  border-radius: 8px;
+  background: #0a0a0a;
+}
+.transition-review button {
+  min-height: 38px;
+  border: 1px solid #888;
+  border-radius: 4px;
+  background: #222;
+  color: #f4f4ef;
+  cursor: pointer;
+}
+.transition-review button[aria-pressed="true"] { background: var(--lime); color: #0a0a0a; }
+@media (prefers-reduced-motion: no-preference) {
+  [data-transition] .match-screen { position: sticky; top: var(--review-nav); }
+  [data-transition] .match-copy {
+    opacity: var(--copy-opacity, 1);
+    transform: translateY(var(--copy-y, 0px));
+  }
+  [data-transition] .match-copy:focus-within { opacity: 1; }
+  [data-transition="a"] .match-photo {
+    transform: scale(var(--match-scale, 1)) translateY(var(--match-y, 0px));
+    transform-origin: 70% 45%;
+  }
+  [data-transition] .arena-screen { z-index: 2; }
+  [data-transition="b"] .arena-screen {
+    transform: translateY(var(--arena-y, 0px));
+    clip-path: polygon(0 var(--line-left, 0%), 100% var(--line-right, 0%), 100% 100%, 0 100%);
+  }
+}

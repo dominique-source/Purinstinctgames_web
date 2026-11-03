@@ -9,6 +9,8 @@
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js" defer></script>
   <link rel="stylesheet" href="/assets/two-screens.css">
+  <link rel="stylesheet" href="/assets/transition-review.css">
+  <script src="/assets/transition-review.js" defer></script>
   <title>PürInstinct Games</title>
 </head>
 <body>
@@ -28,6 +30,11 @@
   <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
+<aside class="transition-review" aria-label="Comparaison des transitions" hidden>
+  <button type="button" data-effect="a" aria-pressed="true">A · Parallaxe</button>
+  <button type="button" data-effect="b" aria-pressed="false">B · Ligne d’en-but</button>
+  <button type="button" data-replay>Rejouer l’effet</button>
+</aside>
 <main class="two-screens">
   <section class="match-screen" aria-labelledby="match-title">
   <div class="match-copy">
