@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js" defer></script>
+  <link rel="stylesheet" href="/assets/two-screens.css">
   <title>PürInstinct Games</title>
 </head>
 <body>
@@ -27,9 +28,10 @@
   <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<main class="games-home">
+<main class="two-screens">
+  <section class="match-screen" aria-labelledby="match-title">
   <div>
-    <h1>PÜRINSTINCT <em>GAMES</em></h1>
+    <h1 id="match-title">PÜRINSTINCT <em>GAMES</em></h1>
     <p>Cinq zones pour développer tes habiletés. Un terrain pour les utiliser en match.</p>
     <ul class="skills" aria-label="Les cinq habiletés">
       <li><a href="/zones.html#vitesse">Vitesse</a></li>
@@ -40,7 +42,20 @@
     </ul>
     <a class="games-cta" href="/concept.html">Voir comment se déroulent les Games</a>
   </div>
-  <img class="games-overview" src="/assets/homepage/vue-aerienne-mobile.png" width="887" height="484" alt="Sur le gazon, cinq zones de défis entourent le terrain de match noir.">
+    <div class="match-photo">
+      <img src="/assets/homepage/match.jpg" width="1672" height="941" fetchpriority="high" alt="Une joueuse court vers la zone d’en-but avec le ballon, suivie des autres joueurs.">
+    </div>
+  </section>
+  <section class="arena-screen" aria-labelledby="arena-title">
+    <h2 id="arena-title" class="visually-hidden">Le terrain. Les 5 zones.</h2>
+    <img src="/assets/homepage/arene.jpg" width="1672" height="941" loading="lazy" alt="Vue aérienne du terrain central entouré des zones Vitesse, Agilité, Habiletés manuelles, Habiletés au pied et Game IQ.">
+    <a class="arena-link" href="/concept.html#arena"><span class="visually-hidden">Explorer l’arène</span></a>
+  </section>
 </main>
+<footer class="home-secondary">
+  <a href="/zones.html">Les 5 zones</a>
+  <a href="/pur-id.html">Pür ID</a>
+  <a href="/pour-les-ecoles.html">Pour les écoles</a>
+</footer>
 </body>
 </html>
