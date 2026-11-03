@@ -7,7 +7,7 @@
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   let warmed = false;
   let departing = false;
-  let navigationTimer;
+  let resetTimer;
   const prefetch = () => {
     if (
       warmed ||
@@ -19,7 +19,7 @@
     // One document and the first visible photo, only on intent.
     for (const [href, as] of [
       ["/app/", "document"],
-      ["/app/images/competitions/ecole.png", "image"],
+      ["/app/images/competitions/ecole-verticale.png", "image"],
     ]) {
       const link = document.createElement("link");
       link.rel = "prefetch";
@@ -29,7 +29,7 @@
     }
   };
   const reset = () => {
-    clearTimeout(navigationTimer);
+    clearTimeout(resetTimer);
     departing = false;
     document.body.classList.remove("pi-portal-departure");
     document.getElementById("pi-app-portal")?.remove();
@@ -67,14 +67,9 @@
         /* Optional choreography marker. */
       }
       if (reduced.matches) return;
-      const destination = link.href;
-      event.preventDefault();
+      // Leave navigation to the anchor so Back keeps the source document.
       departing = true;
-      // Schedule navigation first: visual setup can never strand the visitor.
-      navigationTimer = setTimeout(
-        () => window.location.assign(destination),
-        180,
-      );
+      resetTimer = setTimeout(reset, 1100);
       try {
         const rect = link.getBoundingClientRect();
         const portal = document.createElement("div");
@@ -93,10 +88,8 @@
         document.body.append(portal);
         document.body.classList.add("pi-portal-departure");
         link.classList.add("pi-app-pressed");
-        // A failed/slow navigation reveals the still-usable site again.
-        setTimeout(reset, 1100);
       } catch {
-        /* The already-scheduled real navigation still executes. */
+        /* Native anchor navigation still proceeds. */
       }
     });
   }
