@@ -37,3 +37,18 @@
   .schools-booking { order: -1; }
   .schools h1, .schools p { order: -2; }
 }
+
+.schools-contact { width: min(100%, 680px); margin: 20px auto 0; scroll-margin-top: 80px; }
+.schools-contact h2 { font-size: clamp(30px, 5vw, 48px); margin-bottom: 12px; }
+.schools-contact form, .schools-contact label { display: grid; gap: 6px; }
+.schools-contact form { gap: 12px; margin-block: 16px; }
+.schools-contact input, .schools-contact textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid #888;
+  background: #171717;
+  color: inherit;
+  font: inherit;
+}
+.schools-contact button { justify-self: start; border: 0; font: inherit; font-weight: 700; cursor: pointer; }

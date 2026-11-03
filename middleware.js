@@ -5,6 +5,18 @@ export const config = {
   matcher: ['/((?!api|access\\.html|favicon\\.png|favicon\\.ico|assets/arena-hero\\.jpg).*)'],
 };
 
+const schoolPublicPaths = new Set([
+  '/pour-les-ecoles.html',
+  '/assets/ecoles.css',
+  '/assets/games.css',
+  '/assets/app-portal.css',
+  '/assets/games-menu.js',
+  '/assets/app-portal.js',
+  '/assets/ecoles-contact.js',
+  '/assets/homepage/ecole.png',
+  '/assets/homepage/logo.png',
+]);
+
 function getCookie(request, name) {
   const header = request.headers.get('cookie') || '';
   const match = header.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
@@ -12,6 +24,8 @@ function getCookie(request, name) {
 }
 
 export default async function middleware(request) {
+  if (schoolPublicPaths.has(new URL(request.url).pathname)) return next();
+
   const session = getCookie(request, 'pig_session');
   const payload = session ? await verifyToken(session, process.env.AUTH_SECRET) : null;
 
