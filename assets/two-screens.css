@@ -1,25 +1,61 @@
 .two-screens { max-width: 1672px; margin-inline: auto; }
 .match-screen {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  align-items: center;
-  gap: clamp(16px, 3vw, 48px);
-  padding: clamp(16px, 3vw, 48px);
-  min-height: calc(100svh - 61px);
-}
-.match-screen p { max-width: 34ch; font-size: clamp(18px, 2vw, 26px); }
-.match-photo {
   position: relative;
+  isolation: isolate;
+  aspect-ratio: 1672 / 870;
+}
+.match-copy {
+  position: relative;
+  z-index: 1;
+  padding: 4.3% 2.7%;
+}
+.match-copy h1 {
+  font-size: clamp(42px, 8vw, 134px);
+  line-height: .86;
+}
+.match-copy h1 em { display: block; }
+.match-screen p {
+  margin: .85em 0 1.25em;
+  font-size: clamp(16px, 1.85vw, 31px);
+  line-height: 1.14;
+  font-style: italic;
+}
+.match-copy .skills { gap: clamp(6px, 1.2vw, 20px); }
+.match-copy .skills a {
+  max-width: 9ch;
+  padding: 0 0 3px;
+  border: 0;
+  border-bottom: 2px solid var(--lime);
+  border-radius: 0;
+  font: italic 900 clamp(13px, 1.25vw, 21px)/1 var(--display);
+}
+.match-copy .games-cta {
+  gap: .65em;
+  margin-top: .8em;
+  padding: .55em 1.1em;
+  border-radius: 0;
+  clip-path: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
+  font: italic 900 clamp(16px, 1.55vw, 26px)/1 var(--display);
+}
+.match-copy .games-cta:focus-visible { box-shadow: inset 0 0 0 4px white; }
+.match-photo {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  aspect-ratio: 1.22;
+  z-index: -1;
 }
 .match-photo img {
-  position: absolute;
-  width: 156%;
+  display: block;
+  width: 100%;
   height: auto;
-  max-width: none;
-  right: 0;
-  top: -8%;
+  margin-top: -4.25%;
+}
+.match-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #0a0a0a 30%, #0a0a0a 34%, transparent 52%);
+  mask-image: linear-gradient(#000 82%, transparent 100%);
 }
 .arena-screen { position: relative; }
 .arena-screen img { display: block; width: 100%; height: auto; }
@@ -39,9 +75,24 @@
   white-space: nowrap;
 }
 .home-secondary { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; padding: 18px; }
-@media (max-width: 650px) {
-  .match-screen { grid-template-columns: 1fr; min-height: 0; }
-  .match-photo { grid-row: 1; }
-  .match-screen p { margin-block: 10px; }
+@media (max-width: 750px) {
+  .match-screen { aspect-ratio: auto; }
+  .match-copy { padding: 16px; }
+  .match-photo {
+    position: relative;
+    z-index: 0;
+    aspect-ratio: 1.5;
+  }
+  .match-photo img { width: 156%; margin-left: -56%; margin-top: -8%; }
+  .match-photo::after { display: none; }
   .arena-link { inset: auto 2% 3% 72%; }
+}
+@media (min-width: 751px) {
+  .match-copy { padding-top: 5.3%; }
+  .match-copy h1 { transform: scaleX(.8); transform-origin: left center; }
+  .match-copy .skills { gap: clamp(10px, 1.6vw, 27px); }
+}
+@media (max-width: 750px) {
+  .match-screen { display: flex; flex-direction: column; }
+  .match-photo { order: -1; }
 }
