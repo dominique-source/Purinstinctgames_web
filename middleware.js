@@ -9,6 +9,7 @@ const publicPaths = new Set([
   '/',
   '/index.html',
   '/assets/two-screens.css',
+  '/assets/home-parallax.js',
   '/assets/homepage/match.jpg',
   '/assets/homepage/arene.jpg',
   '/pour-les-ecoles.html',

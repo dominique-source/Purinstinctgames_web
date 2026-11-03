@@ -96,3 +96,19 @@
   .match-screen { display: flex; flex-direction: column; }
   .match-photo { order: -1; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .two-screens[data-parallax] .match-copy {
+    opacity: var(--copy-opacity, 1);
+    transform: translateY(var(--copy-y, 0px));
+  }
+  .two-screens[data-parallax] .match-copy:focus-within { opacity: 1; }
+}
+@media (min-width: 751px) and (prefers-reduced-motion: no-preference) {
+  .two-screens[data-parallax] .match-screen { position: sticky; top: var(--nav-height); }
+  .two-screens[data-parallax] .match-photo {
+    transform: scale(var(--match-scale, 1)) translateY(var(--match-y, 0px));
+    transform-origin: 70% 45%;
+  }
+  .two-screens[data-parallax] .arena-screen { z-index: 2; }
+}
