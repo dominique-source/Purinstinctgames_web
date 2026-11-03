@@ -38,14 +38,15 @@
   <a class="games-cta schools-booking" href="#contact">Réserver 20 minutes avec Dominique Soucy</a>
   <section class="schools-contact" id="contact" aria-labelledby="contact-title">
     <h2 id="contact-title">Écrire à Dominique Soucy</h2>
-    <p>Le formulaire prépare un courriel que tu peux relire et envoyer depuis ta messagerie.</p>
-    <form id="schools-contact-form">
-      <label>Nom <input name="Nom" autocomplete="name" required></label>
-      <label>École <input name="École" autocomplete="organization" required></label>
-      <label>Ville <input name="Ville" autocomplete="address-level2" required></label>
-      <label>Courriel <input name="Courriel" type="email" autocomplete="email" required></label>
-      <label>Commentaires <textarea name="Commentaires" rows="4"></textarea></label>
-      <button class="games-cta" type="submit">Préparer le courriel</button>
+    <p>Remplis le formulaire pour envoyer ton message à Dominique.</p>
+    <form id="schools-contact-form" action="/api/schools-contact" method="post">
+      <label>Nom <input name="Nom" maxlength="100" autocomplete="name" required></label>
+      <label>École <input name="École" maxlength="150" autocomplete="organization" required></label>
+      <label>Ville <input name="Ville" maxlength="100" autocomplete="address-level2" required></label>
+      <label>Courriel <input name="Courriel" maxlength="254" type="email" autocomplete="email" required></label>
+      <label>Commentaires <textarea name="Commentaires" maxlength="2000" rows="4"></textarea></label>
+      <button class="games-cta" type="submit">Envoyer le message</button>
+      <p id="schools-contact-status" role="status"></p>
     </form>
     <p><a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a></p>
   </section>
