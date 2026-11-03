@@ -82,7 +82,7 @@ test("prefetches only one document and one critical photo on intent", () => {
   f.handlers.pointerenter();
   assert.deepEqual(
     f.prefetched.map((e) => e.href),
-    ["/app/", "/app/images/competitions/ecole.png"],
+    ["/app/", "/app/images/competitions/ecole-verticale.png"],
   );
   const saver = fixture({ saveData: true });
   saver.handlers.focus();
@@ -101,19 +101,17 @@ test("reduced motion preserves immediate navigation with no visual delay", () =>
   assert.equal(f.timers.length, 0);
   assert.equal(f.classes.has("pi-portal-departure"), false);
 });
-test("normal activation schedules real navigation before the visual and cleans up on Back", () => {
+test("normal activation uses the native link and cleans up on Back", () => {
   const f = fixture();
-  assert.equal(f.click(), true);
-  assert.equal(f.timers[0].delay, 180);
-  f.timers[0].fn();
-  assert.deepEqual(f.navigations, ["http://localhost/app"]);
+  assert.equal(f.click(), false);
+  assert.equal(f.timers[0].delay, 1100);
+  assert.deepEqual(f.navigations, []);
   assert.equal(f.classes.has("pi-portal-departure"), true);
   f.events.pageshow();
   assert.equal(f.classes.has("pi-portal-departure"), false);
 });
 test("a failed visual still navigates", () => {
   const f = fixture({ failVisual: true });
-  assert.equal(f.click(), true);
-  f.timers[0].fn();
-  assert.deepEqual(f.navigations, ["http://localhost/app"]);
+  assert.equal(f.click(), false);
+  assert.deepEqual(f.navigations, []);
 });
