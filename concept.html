@@ -1,0 +1,2874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le concept | PürInstinct Games</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="manifest" href="site.webmanifest">
+<meta name="description" content="PürInstinct Games — l'arène portable de 9 stations. Le sport à l'état Pur. Instinctif. Réserve ta session.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#101010;
+  --lime:#CCFF00;
+  --white:#F4F4F2;
+  --muted:#9C9C96;
+  --line:rgba(204,255,0,.18);
+  --red:#FF4438;
+  --blue:#2D7DFF;
+  --green:#2EE06A;
+  --yellow:#FFC400;
+  --purple:#A45CFF;
+  --display:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+  --slash:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.55;
+  overflow-x:hidden;
+  max-width:100%;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--lime);color:#0A0A0A}
+img,svg{display:block;max-width:100%}
+@media(max-width:860px){
+  *{max-width:100%;box-sizing:border-box}
+  img,video,canvas,svg,iframe{width:100% !important;height:auto}
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+h1,h2,h3,.disp{
+  font-family:var(--display);
+  font-weight:900;
+  font-style:italic;
+  text-transform:uppercase;
+  letter-spacing:-.015em;
+  line-height:.92;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  color:var(--lime);letter-spacing:.06em;font-size:clamp(15px,1.6vw,19px);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--lime);transform:skewX(-30deg)}
+.section{position:relative;padding:clamp(44px,6vw,84px) 0}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.lead{color:var(--muted);max-width:62ch}
+.lime{color:var(--lime)}
+
+/* slanted section divider */
+.slash-top{--cut:clamp(28px,4vw,64px);clip-path:polygon(0 var(--cut),100% 0,100% 100%,0 100%);margin-top:calc(var(--cut)*-1);padding-top:calc(clamp(44px,6vw,84px) + var(--cut))}
+.divider-streak{position:absolute;left:-10%;top:0;width:120%;height:3px;background:linear-gradient(90deg,transparent,var(--lime) 35%,var(--lime) 65%,transparent);transform:rotate(-2.6deg);transform-origin:left;opacity:0;box-shadow:0 0 18px rgba(204,255,0,.45),0 6px 0 rgba(204,255,0,.12)}
+.divider-streak::after{content:"";position:absolute;right:-2px;top:50%;width:64px;height:7px;transform:translateY(-50%) skewX(-30deg);background:linear-gradient(90deg,transparent,#EAFF8C);filter:drop-shadow(0 0 10px var(--lime));opacity:0}
+.in .divider-streak{animation:streak .9s cubic-bezier(.2,.9,.2,1) forwards}
+.in .divider-streak::after{animation:cometHead .9s cubic-bezier(.2,.9,.2,1) forwards}
+@keyframes streak{0%{opacity:0;clip-path:inset(0 100% 0 0)}25%{opacity:1}100%{opacity:.9;clip-path:inset(0 0 0 0)}}
+@keyframes cometHead{0%,55%{opacity:1}100%{opacity:0}}
+/* slash wipe sweeping across slanted sections on entry */
+.slash-top::before{
+  content:"";position:absolute;top:0;bottom:0;left:-35%;width:22%;z-index:1;
+  background:linear-gradient(90deg,transparent,rgba(204,255,0,.10),rgba(204,255,0,.02),transparent);
+  transform:skewX(-22deg);pointer-events:none;opacity:0;
+}
+.slash-top.in::before{animation:sectionWipe 1s cubic-bezier(.55,0,.2,1) .1s 1 both}
+@keyframes sectionWipe{0%{left:-35%;opacity:1}100%{left:135%;opacity:1}}
+
+/* scroll connector: links one section to the next */
+.link-down{display:flex;justify-content:center;margin-top:clamp(30px,5vw,56px);position:relative;z-index:3;pointer-events:none}
+.link-down i{position:relative;display:block;width:2px;height:clamp(46px,6vw,70px);background:linear-gradient(180deg,transparent,rgba(204,255,0,.16) 28%,var(--lime));box-shadow:0 0 12px rgba(204,255,0,.22)}
+.link-down i::before{content:"";position:absolute;left:50%;margin-left:-3px;width:6px;height:16px;border-radius:3px;background:var(--lime);filter:drop-shadow(0 0 7px var(--lime));animation:linkFall 1.9s cubic-bezier(.45,0,.55,1) infinite}
+.link-down i::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-6px;width:11px;height:11px;border-right:2.5px solid var(--lime);border-bottom:2.5px solid var(--lime);transform:rotate(45deg);filter:drop-shadow(1px 1px 5px rgba(204,255,0,.5))}
+@keyframes linkFall{0%{top:-10px;opacity:0}15%{opacity:1}70%{opacity:1}100%{top:100%;opacity:0}}
+@media(prefers-reduced-motion:reduce){.link-down i::before{display:none}}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.72));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-family:var(--display);font-weight:900;font-style:italic;font-size:24px;text-transform:uppercase;letter-spacing:0;white-space:nowrap}
+.logo .sl{color:var(--lime);margin:0 2px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-instinct-link{display:flex;align-items:center;padding:4px 0}
+.nav-instinct-link img{height:34px;width:auto;display:block;transition:filter .2s ease,transform .2s ease}
+.nav-instinct-link:hover img{filter:drop-shadow(0 0 8px rgba(204,255,0,.5));transform:scale(1.04)}
+@media(max-width:900px){.nav-instinct-link img{height:28px}}
+.nav-app-link{display:flex;align-items:center;padding:4px 0}
+.nav-app-link img{height:38px;width:auto;display:block;transition:filter .2s ease,transform .2s ease}
+.nav-app-link:hover img{filter:drop-shadow(0 0 8px rgba(204,255,0,.5));transform:scale(1.04)}
+@media(max-width:900px){.nav-app-link img{height:30px}}
+.nav-links a{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;transition:.2s}
+.nav-links a,.nav-drop-btn{white-space:nowrap}
+@media(max-width:1400px){.nav-links{gap:17px}.nav-instinct-link img{height:30px}.nav-app-link img{height:33px}}
+.nav-links a:hover{color:var(--lime);opacity:1}
+.nav-cta{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  background:var(--lime);color:#0A0A0A;padding:9px 20px 10px;font-size:17px;letter-spacing:.02em;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:.2s;
+}
+.nav-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.lang-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:16px;
+  border:1.5px solid var(--lime);color:var(--lime);padding:6px 14px 7px;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
+  transition:.2s;
+}
+.lang-btn:hover{background:var(--lime);color:#0A0A0A}
+.nav-right{display:flex;gap:14px;align-items:center}
+.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger span{width:24px;height:3px;background:var(--lime);transform:skewX(-20deg)}
+.nav-badge{
+  display:inline-block;background:var(--lime);color:#0A0A0A;
+  font-size:8px;font-weight:900;font-style:normal;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 6px;border-radius:3px;
+  vertical-align:middle;margin-left:5px;line-height:1.5;white-space:nowrap;
+}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:58px;right:0;background:#0c0c0c;border-left:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:26px 30px;gap:20px;transform:translateX(110%);transition:.3s;min-width:220px;max-width:90vw;max-height:calc(100dvh - 70px);overflow-y:auto}
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .nav-badge{display:none}
+  .nav-drop{flex-direction:column;align-items:flex-start;width:100%}
+  .nav-drop-menu{
+    position:static;opacity:1;pointer-events:all;transform:none;
+    border:none;border-left:2px solid rgba(204,255,0,.22);background:transparent;
+    min-width:0;max-height:0;overflow:hidden;transition:max-height .3s;
+    padding-left:14px;margin-top:2px;box-shadow:none;
+  }
+  .nav-drop.open .nav-drop-menu{max-height:360px}
+  .nav-drop-item{padding:7px 0;font-size:14px;border-bottom:none}
+}
+
+/* ============ NAV DROPDOWN ============ */
+.nav-drop{position:relative;display:flex;align-items:center}
+.nav-drop-btn{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:17px;letter-spacing:.03em;color:var(--white);opacity:.85;
+  cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.2s;
+}
+.nav-drop-btn:hover,.nav-drop.open .nav-drop-btn{color:var(--lime);opacity:1}
+.nav-drop-btn.active{color:var(--lime);opacity:1}
+.nav-drop-arrow{font-size:11px;font-style:normal;line-height:1;transition:transform .2s}
+.nav-drop.open .nav-drop-arrow{transform:rotate(180deg)}
+.nav-drop::after{content:"";position:absolute;top:100%;left:0;right:0;height:16px}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:0;min-width:220px;
+  background:#111;border:1.5px solid rgba(204,255,0,.22);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop.open .nav-drop-menu{opacity:1;pointer-events:all;transform:none}
+.nav-drop-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 18px;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;color:var(--white);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:.2s;
+}
+.nav-drop-item:last-child{border-bottom:none}
+.nav-drop-item:not(.soon):hover{color:var(--lime);background:rgba(204,255,0,.04)}
+.nav-drop-item.active{color:var(--lime)}
+.nav-drop-item.soon{color:var(--muted);cursor:default;pointer-events:none}
+.nav-drop-soon-tag{
+  font-size:9px;letter-spacing:.1em;padding:2px 7px;
+  border:1px solid rgba(255,255,255,.18);color:var(--muted);
+  font-style:normal;font-weight:700;white-space:nowrap;border-radius:2px;
+}
+
+/* ============ PROJET SPÉCIAL ============ */
+.sg-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+@media(max-width:860px){.sg-layout{grid-template-columns:1fr}}
+.sg-facts{display:flex;gap:clamp(20px,4vw,40px);margin:28px 0 36px;flex-wrap:wrap}
+.sg-fact{display:flex;flex-direction:column;gap:4px}
+.sg-n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(28px,3.5vw,44px);color:var(--lime);line-height:1}
+.sg-l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.sg-visual{display:flex;justify-content:center;align-items:flex-start}
+.sg-card{
+  position:relative;background:#111111;
+  border:1.5px solid rgba(204,255,0,.25);border-radius:4px;
+  padding:40px 36px 36px;width:100%;max-width:400px;overflow:hidden;
+}
+.sg-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--lime)}
+.sg-card-tag{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:11px;letter-spacing:.14em;color:var(--lime);text-transform:uppercase;margin-bottom:22px;
+}
+.sg-name-block{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;line-height:.88;letter-spacing:-.02em;margin-bottom:28px}
+.sg-firstname{font-size:clamp(44px,7vw,72px);color:rgba(244,244,242,.55)}
+.sg-lastname{font-size:clamp(44px,7vw,72px);color:var(--lime)}
+.sg-card-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.sg-pill{
+  font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:5px 12px;border-radius:99px;border:1px solid rgba(204,255,0,.3);color:var(--muted);
+}
+.sg-card-cta{
+  display:inline-block;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:15px;letter-spacing:.03em;
+  background:var(--lime);color:#0A0A0A;padding:10px 22px 11px;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:.2s;margin-top:4px;
+}
+.sg-card-cta:hover{box-shadow:0 0 24px rgba(204,255,0,.55);transform:translateY(-1px)}
+.sg-slash-deco{
+  position:absolute;bottom:-24px;right:-24px;
+  width:140px;height:140px;
+  background:repeating-linear-gradient(-60deg,rgba(204,255,0,.12) 0,rgba(204,255,0,.12) 3px,transparent 3px,transparent 16px);
+  transform:skewX(-8deg);pointer-events:none;
+}
+.sg-quote{
+  border-left:3px solid var(--lime);padding:16px 0 16px 22px;
+  margin:28px 0 32px;font-size:clamp(16px,2vw,20px);font-style:italic;
+  color:var(--white);line-height:1.45;opacity:.9;
+}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+
+/* Hero video background */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  overflow:hidden;
+}
+.hero-bg video{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 40%;
+  /* Static cover scale on its own GPU layer. A continuously animated
+     transform on a decoding full-screen video causes judder on desktop. */
+  transform:scale(1.04) translateZ(0);
+  backface-visibility:hidden;
+}
+
+/* dark cinematic vignette over photo */
+.hero-vignette{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg, rgba(6,7,15,.55) 0%, rgba(6,7,15,.15) 40%, rgba(6,7,15,.72) 100%),
+    radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(6,7,15,.65) 100%);
+}
+
+.hero-bg.hidden{display:none}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,transparent 30%,rgba(10,10,10,.55) 90%);z-index:3;pointer-events:none}
+.hero .wrap{padding-top:90px;will-change:transform,opacity}
+.hero h1{font-size:clamp(58px,11vw,164px);position:relative;overflow:hidden}
+/* lime slash sweep across headline after the slam */
+.hero h1::after{
+  content:"";position:absolute;top:0;bottom:0;left:-30%;width:18%;
+  background:linear-gradient(90deg,transparent,rgba(204,255,0,.35),rgba(255,255,255,.18),transparent);
+  transform:skewX(-22deg);
+  animation:h1sweep 1.1s cubic-bezier(.6,0,.2,1) .55s 1 both;
+  pointer-events:none;
+}
+@keyframes h1sweep{from{left:-30%}to{left:130%}}
+.hero h1 .word{display:inline-block;opacity:0;transform:translateX(-60px) skewX(-12deg);animation:slam .55s cubic-bezier(.16,1,.3,1) forwards}
+.hero h1 .word:nth-child(2){animation-delay:.12s;transform:translateX(60px) skewX(-12deg)}
+.hero h1 .word.arene{color:var(--lime);animation-delay:.24s;transform:translateX(-60px) skewX(-12deg)}
+@keyframes slam{to{opacity:1;transform:none}}
+.hero .sub{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(20px,3vw,30px);color:var(--muted);margin:14px 0 30px;
+  opacity:0;animation:fadeUp .6s .42s forwards;
+}
+.hero .sub b{color:var(--white);font-weight:900}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.cta{
+  display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(19px,2.4vw,25px);background:var(--lime);color:#0A0A0A;
+  padding:15px 36px 17px;letter-spacing:.02em;
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
+  transition:transform .15s;
+  position:relative;
+}
+.cta:hover{transform:translateY(-2px);animation:padPulse 1s infinite}
+@keyframes padPulse{0%,100%{filter:drop-shadow(0 0 2px rgba(204,255,0,.35))}50%{filter:drop-shadow(0 0 16px rgba(204,255,0,.85))}}
+.hero .cta{opacity:0;animation:fadeUp .6s .55s forwards}
+.hero .cta:hover{opacity:1;animation:padPulse 1s infinite}
+.counter-strip{
+  margin-top:clamp(40px,7vh,72px);display:flex;flex-wrap:wrap;gap:0;
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  opacity:0;animation:fadeUp .6s .7s forwards;
+}
+.counter-strip .chip{
+  display:flex;align-items:baseline;gap:8px;padding:10px 26px 12px;border:1px solid var(--line);
+  border-right:0;background:rgba(10,10,10,.55);backdrop-filter:blur(4px);
+}
+.counter-strip .chip:first-child{clip-path:polygon(14px 0,100% 0,100% 100%,0 100%)}
+.counter-strip .chip:last-child{border-right:1px solid var(--line);clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.counter-strip .num{font-size:clamp(26px,3.4vw,40px);color:var(--lime)}
+.counter-strip .lbl{font-size:clamp(13px,1.5vw,16px);color:var(--muted);letter-spacing:.05em}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;color:var(--lime);font-family:var(--display);font-style:italic;font-weight:900;font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;animation:hintBob 1.8s infinite}
+@keyframes hintBob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ============ REVEALS ============ */
+.reveal{opacity:0;transform:perspective(900px) translateY(56px) rotateX(7deg) scale(.97);transform-origin:50% 100%;transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1),filter .7s cubic-bezier(.2,.8,.2,1);filter:blur(5px)}
+.in .reveal,.reveal.in{opacity:1;transform:none;filter:blur(0)}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+/* ============ CONCEPT ============ */
+#concept{background:var(--bg-2)}
+.kinetic{font-size:clamp(44px,7.6vw,104px);margin:8px 0 34px}
+.kinetic .line{display:block;overflow:hidden}
+.kinetic .line span{display:inline-block;opacity:0;transform:translateX(-90px) skewX(-14deg);transition:all .65s cubic-bezier(.16,1,.3,1)}
+.kinetic .line:nth-child(2n) span{transform:translateX(90px) skewX(-14deg)}
+.in .kinetic .line:nth-child(1) span{transition-delay:.05s}
+.in .kinetic .line:nth-child(2) span{transition-delay:.2s}
+.in .kinetic .line:nth-child(3) span{transition-delay:.35s}
+.in .kinetic .line span{opacity:1;transform:none}
+.kinetic .alt{color:var(--lime)}
+.concept-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,5vw,70px);align-items:start}
+.concept-points{display:grid;gap:18px}
+.cpoint{border-left:3px solid var(--lime);padding:6px 0 6px 18px}
+.cpoint h3{font-size:22px;margin-bottom:4px;letter-spacing:.02em}
+.cpoint p{color:var(--muted);font-size:15.5px}
+@media(max-width:860px){.concept-grid{grid-template-columns:1fr}}
+.btn-watch-video{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:13px 26px;border-radius:50px;background:rgba(var(--lime-rgb),.1);border:1px solid rgba(var(--lime-rgb),.35);color:var(--lime);font-family:var(--display);font-weight:900;font-style:italic;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .25s}
+.btn-watch-video:hover{background:rgba(var(--lime-rgb),.18);border-color:var(--lime);box-shadow:0 0 22px rgba(var(--lime-rgb),.28)}
+/* ── VIDEO MODAL ── */
+.video-modal{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;background:rgba(0,0,0,.88);backdrop-filter:blur(8px)}
+.video-modal.open{display:flex}
+.video-modal-inner{position:relative;width:min(400px,92vw);aspect-ratio:9/16;max-height:90vh;border-radius:14px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.8)}
+.video-modal-inner iframe,.video-modal-inner video{width:100%;height:100%;border:0;display:block;object-fit:cover}
+.video-modal-close{position:absolute;top:-42px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;opacity:.7;transition:opacity .2s}
+.video-modal-close:hover{opacity:1}
+
+/* ============ ARENA MAP ============ */
+#arena{overflow:hidden}
+.arena-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,56px);align-items:stretch}
+@media(max-width:920px){.arena-grid{grid-template-columns:1fr}}
+.arena-svg-wrap{position:relative}
+.arena-svg-wrap svg{width:100%;height:auto;filter:drop-shadow(0 20px 60px rgba(0,0,0,.6))}
+#arena3d{display:none;position:relative;width:100%;aspect-ratio:900/620;border-radius:16px;overflow:hidden;cursor:grab;
+  background:radial-gradient(ellipse 80% 60% at 50% 30%,#121408 0%,#0A0A0A 70%);
+  border:1px solid rgba(204,255,0,.14);touch-action:pan-y}
+#arena3d.on{display:block}
+#arena3d.on ~ #arenaSvg{display:none}
+#arena3d:active{cursor:grabbing}
+#arena3d canvas{display:block;width:100%;height:100%}
+.a3d-badge{position:absolute;top:14px;right:14px;z-index:3;font-family:var(--display);font-style:italic;font-weight:900;
+  font-size:13px;letter-spacing:.12em;color:var(--lime);border:1px solid rgba(204,255,0,.4);padding:4px 12px;
+  border-radius:30px;background:rgba(10,10,10,.55);backdrop-filter:blur(4px);pointer-events:none}
+.zc-img{width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);margin-top:6px;aspect-ratio:5/4;object-fit:cover}
+.station{cursor:pointer;transition:filter .25s}
+.station rect.body{transition:all .25s}
+.station:hover rect.body,.station.active rect.body{filter:brightness(1.5)}
+.station text{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;pointer-events:none}
+.st-label{fill:#fff;font-size:17px}
+.st-tag{fill:rgba(255,255,255,.55);font-size:11px;letter-spacing:.1em}
+.mf-glow{animation:mfPulse 2.4s infinite}
+@keyframes mfPulse{0%,100%{opacity:.25}50%{opacity:.7}}
+.zone-card{
+  background:#101010;border:1px solid rgba(255,255,255,.08);position:relative;
+  padding:clamp(24px,3vw,38px);display:flex;flex-direction:column;gap:14px;justify-content:center;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%);
+  min-height:340px;
+}
+.zone-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--zc,#CCFF00);transition:background .3s}
+.zone-card .zc-tag{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:14px;letter-spacing:.14em;color:var(--zc,#CCFF00);transition:color .3s}
+.zone-card h3{font-size:clamp(34px,4vw,52px)}
+.zone-card p{color:var(--muted)}
+.zone-card .zc-mf{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--lime);font-weight:600}
+.zone-card .zc-mf::before{content:"";width:9px;height:9px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 12px var(--lime)}
+.zone-card .swap{animation:cardIn .35s cubic-bezier(.16,1,.3,1)}
+@keyframes cardIn{from{opacity:0;transform:translateX(26px) skewX(-4deg)}to{opacity:1;transform:none}}
+.arena-hint{margin-top:14px;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px}
+.arena-hint::before{content:"";width:22px;height:2px;background:var(--lime);transform:skewX(-30deg)}
+
+/* ============ PRICING : COUNTDOWN + WAITLIST ============ */
+.launch-strip{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(18px,3vw,34px);align-items:stretch;
+  margin-bottom:26px}
+@media(max-width:860px){.launch-strip{grid-template-columns:1fr}}
+.countdown{background:#101010;border:1px solid rgba(204,255,0,.22);border-radius:14px;padding:18px 22px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+.cd-head{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:14px;letter-spacing:.14em;color:var(--lime);margin-bottom:10px}
+.cd-blocks{display:flex;align-items:flex-start;gap:clamp(8px,1.6vw,16px)}
+.cd-b{display:flex;flex-direction:column;align-items:center;min-width:58px}
+.cd-n{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(34px,4.4vw,52px);
+  line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
+.cd-l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.cd-sep{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.4vw,40px);color:rgba(204,255,0,.5);line-height:1.2}
+.cd-n.tick{animation:cdTick .4s ease}
+@keyframes cdTick{0%{transform:translateY(-5px);opacity:.4;color:var(--lime)}100%{transform:none;opacity:1}}
+.spots{background:#101010;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 22px;
+  display:flex;flex-direction:column;justify-content:center;gap:10px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+.spots-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.spots-n{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(26px,3vw,36px);color:var(--white)}
+.spots-n b{color:var(--lime);font-variant-numeric:tabular-nums}
+.spots-l{color:var(--muted);font-size:14px}
+.spots-bar{height:8px;background:rgba(255,255,255,.08);border-radius:6px;overflow:hidden}
+.spots-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#9bc400,var(--lime));
+  border-radius:6px;transition:width 1.1s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px rgba(204,255,0,.6)}
+.spots-n b.bump{animation:spotBump .5s ease}
+@keyframes spotBump{0%{transform:scale(1.25);color:#fff}100%{transform:none}}
+.waitform{background:#101010;border:1px solid rgba(204,255,0,.3);border-radius:14px;
+  padding:clamp(18px,2.6vw,26px);margin-bottom:40px;position:relative;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%)}
+.wf-headline{font-family:var(--display);font-style:italic;font-weight:900;
+  font-size:clamp(18px,2.2vw,26px);letter-spacing:.04em;text-transform:uppercase;
+  color:var(--white);margin-bottom:16px}
+.wf-fields{display:grid;grid-template-columns:1.2fr 1fr auto;gap:12px}
+@media(max-width:760px){.wf-fields{grid-template-columns:1fr}}
+.waitform input[type=email],.waitform input[type=tel]{
+  background:#0A0A0A;border:1px solid rgba(255,255,255,.16);border-radius:10px;color:var(--white);
+  font-family:var(--body);font-size:16px;padding:14px 16px;width:100%;transition:border-color .25s,box-shadow .25s}
+.waitform input::placeholder{color:rgba(255,255,255,.35)}
+.waitform input:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 3px rgba(204,255,0,.15)}
+.waitform input.err{border-color:#FF4438;box-shadow:0 0 0 3px rgba(255,68,56,.15)}
+.wf-btn{border:none;white-space:nowrap}
+.wf-note{margin-top:10px;font-size:13px;color:var(--muted)}
+.wf-ok{display:flex;flex-direction:column;gap:4px;padding:6px 2px 0}
+.wf-ok b{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:22px;color:var(--lime)}
+.wf-ok span{color:var(--muted)}
+.waitform.done .wf-fields,.waitform.done .wf-note{display:none}
+.waitform.flash{animation:wfFlash .8s ease}
+@keyframes wfFlash{0%{box-shadow:0 0 0 4px rgba(204,255,0,.5)}100%{box-shadow:none}}
+
+/* ============ ATHLETE JOURNEY ============ */
+.journey{position:relative;padding:clamp(40px,6vw,80px) 0 clamp(60px,8vw,100px)}
+.j-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.j-line{fill:none;stroke:rgba(255,255,255,.10);stroke-width:2.5;stroke-dasharray:7 9}
+.j-line-fill{fill:none;stroke:var(--lime);stroke-width:3;filter:drop-shadow(0 0 8px rgba(204,255,0,.55))}
+.j-player{position:absolute;top:0;left:0;width:40px;height:40px;border-radius:50%;background:var(--lime);
+  display:flex;align-items:center;justify-content:center;z-index:5;pointer-events:none;
+  box-shadow:0 0 0 5px rgba(204,255,0,.18),0 0 26px rgba(204,255,0,.65);
+  transform:translate(-50%,-50%);will-change:transform}
+.j-stop{position:relative;display:grid;grid-template-columns:1fr 110px 1fr;align-items:center;
+  padding:clamp(36px,5vw,70px) 0;z-index:2}
+.j-node{grid-column:2;justify-self:center;width:52px;height:52px;border-radius:50%;
+  background:#0A0A0A;border:2.5px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;
+  transition:border-color .45s,box-shadow .45s,background .45s;z-index:3}
+.j-node span{font-family:var(--display);font-style:italic;font-weight:900;font-size:17px;color:rgba(255,255,255,.45);transition:color .45s}
+.j-stop.lit .j-node{border-color:var(--zc);box-shadow:0 0 18px color-mix(in srgb,var(--zc) 55%,transparent);background:#101010}
+.j-stop.lit .j-node span{color:var(--zc)}
+.j-stop[data-side=left] .j-card{grid-column:1;grid-row:1;justify-self:end}
+.j-stop[data-side=right] .j-card{grid-column:3;grid-row:1;justify-self:start}
+.j-card{max-width:520px;width:100%;display:flex;flex-direction:column;gap:18px;
+  opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.j-stop.in .j-card{opacity:1;transform:none}
+.j-media{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%)}
+.j-media img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.j-media[data-video]{cursor:pointer}
+.j-media[data-video]:hover img{transform:scale(1.045)}
+.j-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,10,10,.55));pointer-events:none}
+.j-play{position:absolute;right:16px;bottom:16px;width:46px;height:46px;border-radius:50%;background:var(--lime);
+  display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .25s;
+  box-shadow:0 0 18px rgba(204,255,0,.5)}
+.j-play::before{content:"";display:block;width:0;height:0;border-style:solid;border-width:8px 0 8px 14px;
+  border-color:transparent transparent transparent #0A0A0A;margin-left:4px}
+.j-media[data-video]:hover .j-play{transform:scale(1.12)}
+.j-step{font-family:var(--display);font-style:italic;font-weight:900;font-size:14px;letter-spacing:.16em;color:var(--zc);text-transform:uppercase}
+.j-copy h3{font-size:clamp(30px,3.6vw,46px);color:var(--white);margin:2px 0 8px}
+.j-copy p{color:var(--muted);max-width:46ch}
+.j-copy .mfnote{margin-top:12px;color:var(--lime);font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px}
+.j-copy .mfnote::before{content:"";width:8px;height:8px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 10px var(--lime)}
+.j-cta{margin-top:18px;align-self:flex-start}
+/* ── 360° bracelet viewer ── */
+.w360-hub{width:100%;max-width:460px}
+.w360-video{width:100%;height:auto;display:block;border-radius:12px}
+.w360-track{perspective:900px;width:100%;cursor:grab;touch-action:pan-y}
+.w360-track.dragging{cursor:grabbing}
+.w360-stage{
+  position:relative;width:100%;height:clamp(180px,44vw,270px);
+  transform-style:preserve-3d;will-change:transform}
+.w360-face{
+  position:absolute;inset:0;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center}
+.w360-face:nth-child(1){transform:rotateY(0deg)   translateZ(var(--tz,200px))}
+.w360-face:nth-child(2){transform:rotateY(90deg)  translateZ(var(--tz,200px))}
+.w360-face:nth-child(3){transform:rotateY(180deg) translateZ(var(--tz,200px))}
+.w360-face:nth-child(4){transform:rotateY(270deg) translateZ(var(--tz,200px))}
+.w360-img{
+  width:100%;height:auto;max-height:80%;
+  object-fit:contain;display:block;
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.75)) drop-shadow(0 0 28px rgba(204,255,0,.22))}
+.w360-chip{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:10px 16px 12px}
+.w360-chip svg{width:22px;height:22px;color:var(--lime);flex:none;
+  filter:drop-shadow(0 0 7px rgba(204,255,0,.65))}
+.w360-chip span{font-family:var(--display);font-style:italic;font-weight:900;
+  font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.w360-nav{display:flex;justify-content:center;gap:9px;margin-top:14px}
+.w360-dot{width:8px;height:8px;border-radius:50%;border:none;padding:0;
+  background:rgba(204,255,0,.22);cursor:pointer;
+  transition:background .2s,transform .2s,box-shadow .2s}
+.w360-dot.active{background:var(--lime);transform:scale(1.35);box-shadow:0 0 10px rgba(204,255,0,.7)}
+.w360-hint{text-align:center;margin-top:10px;
+  font-family:var(--display);font-style:italic;font-weight:700;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.32);transition:opacity .5s;pointer-events:none}
+.w360-hint.gone{opacity:0}
+@media(max-width:860px){.w360-hub{max-width:340px;margin:0 auto}}
+/* ── bracelet halo next to each journey stop (desktop only) ── */
+.j-brace{display:none}
+@media(min-width:861px){
+  .j-brace{
+    display:block;
+    position:absolute;top:50%;width:clamp(260px,34vw,500px);height:auto;
+    object-fit:contain;
+    transform:translateY(-50%);
+    opacity:0;pointer-events:none;
+    transition:opacity .6s,filter .6s;
+    filter:drop-shadow(0 0 0 transparent);
+  }
+  /* j-brace is a direct child of j-stop (position:relative, grid 1fr 110px 1fr)
+     50% + 55px puts us at the right/left edge of the 110px center column */
+  .j-stop[data-side=left] .j-brace{left:calc(50% + 79px)}
+  .j-stop[data-side=right] .j-brace{right:calc(50% + 79px)}
+  .j-stop.lit .j-brace{
+    opacity:.82;
+    filter:drop-shadow(0 0 8px rgba(204,255,0,.65)) drop-shadow(0 0 22px rgba(204,255,0,.28))
+  }
+  @keyframes braceArrival{
+    0%,100%{opacity:.82;filter:drop-shadow(0 0 8px rgba(204,255,0,.65))}
+    50%{opacity:1;filter:drop-shadow(0 0 22px rgba(204,255,0,1)) drop-shadow(0 0 44px rgba(204,255,0,.55))}
+  }
+  .j-stop.blink .j-brace{animation:braceArrival .48s ease-in-out 3}
+}
+/* podium */
+.j-podium{display:flex;align-items:flex-end;gap:8px;height:150px;max-width:330px}
+.j-pod{flex:1;background:#161616;border:1px solid rgba(255,255,255,.1);border-bottom:none;border-radius:8px 8px 0 0;
+  display:flex;align-items:flex-start;justify-content:center;padding-top:10px;position:relative}
+.j-pod i{font-family:var(--display);font-style:italic;font-weight:900;font-size:22px;color:rgba(255,255,255,.5)}
+.j-pod.p1{height:100%;background:linear-gradient(180deg,rgba(204,255,0,.22),rgba(204,255,0,.05));border-color:rgba(204,255,0,.5)}
+.j-pod.p1 i{color:var(--lime)}
+.j-pod.p1::before{content:"";position:absolute;top:-26px;width:20px;height:20px;background:var(--lime);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  filter:drop-shadow(0 0 10px rgba(204,255,0,.8))}
+.j-pod.p2{height:72%}.j-pod.p3{height:52%}
+/* difficulty levels ladder */
+.j-levels{display:flex;align-items:flex-end;gap:7px;height:150px;max-width:330px}
+.j-lvl{flex:1;height:var(--h);background:#161616;border:1px solid rgba(255,255,255,.1);border-bottom:none;
+  border-radius:6px 6px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:7px}
+.j-lvl i{font-family:var(--display);font-style:italic;font-weight:900;font-size:13px;color:rgba(255,255,255,.45)}
+.j-lvl.on{background:linear-gradient(180deg,rgba(204,255,0,.25),rgba(204,255,0,.05));border-color:rgba(204,255,0,.55)}
+.j-lvl.on i{color:var(--lime)}
+.j-stop.in .j-lvl{animation:lvlUp .7s cubic-bezier(.16,1,.3,1) both}
+.j-stop.in .j-lvl:nth-child(2){animation-delay:.08s}.j-stop.in .j-lvl:nth-child(3){animation-delay:.16s}
+.j-stop.in .j-lvl:nth-child(4){animation-delay:.24s}.j-stop.in .j-lvl:nth-child(5){animation-delay:.32s}
+.j-stop.in .j-lvl:nth-child(6){animation-delay:.4s}
+@keyframes lvlUp{from{transform:scaleY(.2);transform-origin:bottom;opacity:0}to{transform:none;opacity:1}}
+.j-lvl{cursor:pointer;transition:background .25s,border-color .25s,transform .2s;font:inherit;color:inherit}
+.j-lvl:hover{border-color:rgba(204,255,0,.5);transform:translateY(-3px)}
+.j-lvl.sel{background:linear-gradient(180deg,rgba(204,255,0,.32),rgba(204,255,0,.08));border-color:var(--lime);
+  box-shadow:0 0 16px rgba(204,255,0,.35)}
+.j-lvl.sel i{color:var(--lime)}
+.j-lvl:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.j-lvl-detail{margin-top:14px;background:#101010;border:1px solid rgba(204,255,0,.3);border-radius:14px;
+  padding:16px 18px;max-width:330px;animation:lvlDetailIn .35s cubic-bezier(.16,1,.3,1);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%)}
+@keyframes lvlDetailIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.lvl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.lvl-tag{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:14px;letter-spacing:.12em;color:#0A0A0A;background:var(--lime);padding:3px 12px;
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.lvl-close{background:none;border:1px solid rgba(255,255,255,.2);border-radius:50%;width:26px;height:26px;
+  color:var(--muted);cursor:pointer;font-size:12px;line-height:1;transition:border-color .2s,color .2s}
+.lvl-close:hover{border-color:var(--lime);color:var(--lime)}
+.lvl-svg svg{width:100%;height:auto;display:block;border-radius:8px}
+.lvl-rule{margin-top:10px;font-size:14.5px;color:var(--muted);line-height:1.5}
+@media(max-width:860px){
+  .j-stop{grid-template-columns:64px 1fr;padding:clamp(30px,7vw,48px) 0}
+  .j-node{grid-column:1;width:44px;height:44px}
+  .j-node span{font-size:15px}
+  .j-stop[data-side=left] .j-card,.j-stop[data-side=right] .j-card{grid-column:2;grid-row:1;justify-self:start;max-width:none}
+  .j-player{width:34px;height:34px}
+  .j-player svg{width:18px;height:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .j-card{opacity:1;transform:none;transition:none}
+  .j-player{display:none}
+  .j-line-fill{display:none}
+  .j-stop .j-node{border-color:var(--zc)}
+  .j-stop .j-node span{color:var(--zc)}
+}
+
+/* ============ INSTINCTS (legacy) ============ */
+.zone-panel{
+  position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);
+  padding:clamp(48px,7vw,86px) 0;
+}
+/* ============ INSTINCTS STICKY LAYOUT ============ */
+.instincts-layout{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  align-items:start;
+}
+.instincts-sticky-img{
+  position:sticky;
+  top:0;height:100vh;
+  overflow:hidden;
+  order:2;
+}
+.instincts-sticky-img img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+}
+.instincts-content{order:1;min-width:0;}
+@media(max-width:900px){
+  .instincts-layout{display:block}
+  .instincts-sticky-img{display:none}
+}
+/* push existing content above */
+.zone-panel .wrap{position:relative;z-index:2;}
+.zone-panel::before{z-index:1;}
+.zone-panel .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,64px);align-items:center}
+@media(max-width:860px){.zone-panel .wrap{grid-template-columns:1fr}}
+.zone-panel h3{font-size:clamp(48px,7vw,96px);color:var(--zc)}
+.zone-panel h3 small{display:block;font-size:clamp(15px,1.6vw,19px);color:var(--white);opacity:.6;letter-spacing:.18em;margin-bottom:4px}
+.zone-panel p{color:var(--muted);margin-top:14px;max-width:54ch}
+.zone-panel .mfnote{margin-top:14px;color:var(--lime);font-weight:600;font-size:14.5px;display:flex;align-items:center;gap:9px}
+.zone-panel .mfnote::before{content:"";width:9px;height:9px;background:var(--lime);transform:rotate(45deg);box-shadow:0 0 10px var(--lime)}
+.zone-panel::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 78% 50%,color-mix(in srgb,var(--zc) 13%,transparent),transparent 70%);pointer-events:none}
+.zone-num{position:absolute;right:-1.5%;top:50%;transform:translateY(-50%) skewX(-10deg);font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(160px,26vw,340px);color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--zc) 35%,transparent);line-height:1;pointer-events:none;user-select:none;will-change:transform}
+/* ============ ZONE LOGO SLAM ============ */
+.zone-logo-wrap{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,3vw,40px) 0;
+  perspective:700px;
+}
+/* shockwave ring fired right after the slam lands */
+.zone-logo-wrap::after{
+  content:"";position:absolute;left:50%;top:50%;width:120px;height:120px;
+  margin:-60px 0 0 -60px;border:2px solid var(--zc);border-radius:50%;
+  opacity:0;transform:scale(.4);pointer-events:none;
+}
+.in .zone-logo-wrap::after{animation:shockwave .8s cubic-bezier(.2,.8,.2,1) .62s 1 both}
+@keyframes shockwave{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(2.6)}}
+.zone-logo{
+  width:min(300px,80%);
+  height:auto;
+  mix-blend-mode:screen;
+  opacity:0;
+  transform:scale(1.35) translateY(30px) skewY(-4deg);
+  filter:blur(14px);
+  transition:none;
+}
+.in .zone-logo{
+  animation:zoneSlam .65s cubic-bezier(.16,1,.3,1) .1s forwards;
+}
+@keyframes zoneSlam{
+  0%  {opacity:0;transform:scale(1.35) translateY(30px) skewY(-4deg);filter:blur(14px)}
+  60% {opacity:1;transform:scale(.97) translateY(-4px) skewY(0deg);filter:blur(0)}
+  80% {transform:scale(1.03) translateY(2px)}
+  100%{opacity:1;transform:scale(1) translateY(0) skewY(0deg);filter:blur(0)}
+}
+/* glow pulse after slam */
+.in .zone-logo{
+  animation:zoneSlam .65s cubic-bezier(.16,1,.3,1) .1s forwards,
+            zoneGlow 2.4s ease-in-out .8s infinite;
+}
+@keyframes zoneGlow{
+  0%,100%{filter:drop-shadow(0 0 8px color-mix(in srgb,var(--zc) 55%,transparent))}
+  50%    {filter:drop-shadow(0 0 28px color-mix(in srgb,var(--zc) 90%,transparent)) drop-shadow(0 0 60px color-mix(in srgb,var(--zc) 40%,transparent))}
+}
+
+.motif{position:relative;height:clamp(180px,24vw,280px)}
+/* speed lines */
+.m-speed i{position:absolute;height:3px;background:linear-gradient(90deg,transparent,var(--zc));transform:skewX(-30deg);animation:dash 1.4s linear infinite;opacity:.85}
+@keyframes dash{from{transform:translateX(-140%) skewX(-30deg)}to{transform:translateX(260%) skewX(-30deg)}}
+/* ball arcs */
+.m-arcs svg path{stroke:var(--zc);stroke-width:3;fill:none;stroke-dasharray:8 10;animation:arcFlow 2.2s linear infinite}
+.m-arcs svg circle{fill:var(--zc)}
+@keyframes arcFlow{to{stroke-dashoffset:-72}}
+/* light pads */
+.m-pads{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-content:center;height:100%}
+.m-pads i{aspect-ratio:1;background:color-mix(in srgb,var(--zc) 14%,#0f0f0f);border:1px solid color-mix(in srgb,var(--zc) 35%,transparent);clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);animation:pad 1.8s infinite}
+@keyframes pad{0%,70%,100%{background:color-mix(in srgb,var(--zc) 12%,#0f0f0f);box-shadow:none}78%,88%{background:var(--zc);box-shadow:0 0 26px var(--zc)}}
+/* cubes */
+.m-cubes{display:flex;gap:16px;align-items:center;justify-content:center;height:100%}
+.m-cubes i{width:clamp(40px,6vw,68px);aspect-ratio:1;border:2px solid var(--zc);background:color-mix(in srgb,var(--zc) 10%,transparent);animation:cube 2.6s ease-in-out infinite}
+@keyframes cube{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-26px) rotate(12deg)}}
+/* IQ grid */
+.m-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-content:center;height:100%}
+.m-grid i{aspect-ratio:1;background:color-mix(in srgb,var(--zc) 10%,#0e0e0e);border:1px solid color-mix(in srgb,var(--zc) 25%,transparent);animation:flick 2.4s steps(2) infinite}
+@keyframes flick{0%,60%,100%{background:color-mix(in srgb,var(--zc) 10%,#0e0e0e)}65%,80%{background:var(--zc);box-shadow:0 0 16px var(--zc)}}
+
+/* ============ ZONE VIDEO PLAYER ============ */
+#zoneVideoPlayer{
+  position:fixed;inset:0;z-index:300;
+  background:#000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+#zoneVideoPlayer.active{opacity:1;pointer-events:all;}
+#zoneVideo{
+  width:100%;height:100%;
+  object-fit:contain;
+}
+#zoneVideoClose{
+  position:absolute;top:20px;right:24px;z-index:10;
+  font-size:28px;color:#fff;background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.3);
+  width:44px;height:44px;border-radius:50%;
+  cursor:pointer;transition:.2s;
+  display:flex;align-items:center;justify-content:center;
+}
+#zoneVideoClose:hover{background:rgba(255,255,255,.2);}
+/* play hint cursor on zone logos */
+.zone-logo-wrap{cursor:pointer;}
+
+/* ============ ZONE ENTRY TRANSITION ============ */
+#zoneEntry{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  pointer-events:none;opacity:0;
+  overflow:hidden;
+}
+#zoneEntry.active{pointer-events:all;}
+
+/* scanline texture overlay */
+#zoneEntry::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0px,rgba(0,0,0,.18) 1px,transparent 1px,transparent 3px);
+  z-index:1;pointer-events:none;
+}
+
+.ze-bg{
+  position:absolute;inset:0;
+  background:var(--ze-color,#FF4438);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:none;
+}
+.ze-flash{
+  position:absolute;inset:0;
+  background:#fff;
+  opacity:0;
+}
+.ze-num{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(120px,28vw,320px);color:transparent;
+  -webkit-text-stroke:2px rgba(255,255,255,.18);
+  line-height:1;position:absolute;
+  bottom:-10%;right:-2%;
+  z-index:2;
+}
+.ze-content{
+  position:relative;z-index:3;text-align:center;
+  transform:translateY(40px);opacity:0;
+}
+.ze-tag{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(13px,1.4vw,16px);letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);margin-bottom:8px;display:block;
+}
+.ze-name{
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:clamp(52px,10vw,130px);text-transform:uppercase;
+  color:#fff;line-height:.9;
+  text-shadow:0 0 60px rgba(255,255,255,.4);
+}
+.ze-img{
+  width:min(220px,55vw);height:auto;
+  mix-blend-mode:screen;
+  margin-top:24px;
+  opacity:0;
+}
+
+/* ============ LEADERBOARD ============ */
+#leaderboard{background:var(--bg-2)}
+.lb-shell{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:900px){.lb-shell{grid-template-columns:1fr}}
+.lb-card{
+  position:relative;background:rgba(16,16,16,.7);backdrop-filter:blur(8px);
+  border:1px solid rgba(204,255,0,.25);padding:22px 0 16px;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 60px rgba(204,255,0,.04);
+}
+.lb-head{display:flex;justify-content:space-between;padding:0 26px 14px;border-bottom:1px solid rgba(255,255,255,.08);font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase}
+.lb-head .t{font-size:21px}.lb-head .live{color:var(--lime);display:flex;gap:8px;align-items:center;font-size:15px}
+.lb-head .live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--lime);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.lb-rows{position:relative;height:528px}
+.lb-row{
+  position:absolute;left:0;right:0;height:48px;display:flex;align-items:center;gap:14px;
+  padding:0 26px;transition:top .65s cubic-bezier(.2,.8,.2,1);
+  font-family:var(--display);font-weight:900;font-style:italic;font-size:19px;text-transform:uppercase;
+}
+.lb-row .rk{width:30px;color:var(--muted);font-size:17px}
+.lb-row .nm{flex:1;letter-spacing:.02em}
+.lb-row .up-arrow{font-size:13px;color:var(--lime);opacity:0;transform:translateY(6px);margin-right:-6px}
+.lb-row.rank-up .up-arrow{animation:arrowPop 1.4s ease forwards}
+@keyframes arrowPop{0%{opacity:1;transform:none}70%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-4px)}}
+.lb-row.rank-up{animation:rowFlash 1.3s cubic-bezier(.2,.8,.2,1);z-index:3}
+@keyframes rowFlash{0%{background:rgba(204,255,0,.34);box-shadow:inset 3px 0 0 var(--lime);transform:scale(1.025)}55%{background:rgba(204,255,0,.12);box-shadow:inset 3px 0 0 var(--lime)}100%{background:transparent;box-shadow:none;transform:none}}
+.lb-row.rank-down{animation:rowDim 1s ease}
+@keyframes rowDim{0%{opacity:.45}100%{opacity:1}}
+.lb-row .sc{color:var(--white);font-variant-numeric:tabular-nums}
+.lb-row.top .sc{animation:scorePulse 2.1s ease-in-out infinite}
+@keyframes scorePulse{0%,100%{text-shadow:0 0 5px rgba(204,255,0,.2)}50%{text-shadow:0 0 20px rgba(204,255,0,.95),0 0 36px rgba(204,255,0,.4)}}
+.lb-row .gain{
+  position:absolute;right:26px;top:-4px;
+  font-family:var(--display);font-weight:900;font-style:italic;
+  font-size:13px;color:#0A0A0A;background:var(--gc,var(--lime));padding:2px 9px 3px;
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);
+  animation:gainFloat 1.45s cubic-bezier(.2,.8,.2,1) forwards;pointer-events:none;
+  white-space:nowrap;letter-spacing:.04em;
+}
+@keyframes gainFloat{0%{opacity:0;transform:translateY(6px) scale(.85)}14%{opacity:1;transform:scale(1.08)}26%{transform:scale(1)}78%{opacity:1}100%{opacity:0;transform:translateY(-26px)}}
+.lb-card::after{
+  content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;
+  background:linear-gradient(105deg,transparent,rgba(204,255,0,.07),rgba(255,255,255,.05),transparent);
+  transform:skewX(-18deg);pointer-events:none;opacity:0;
+}
+.lb-card.sheen::after{animation:lbSheen 1.2s cubic-bezier(.5,0,.3,1) 1}
+@keyframes lbSheen{0%{left:-40%;opacity:1}100%{left:140%;opacity:1}}
+.lb-row.top .rk,.lb-row.top .sc{color:var(--lime)}
+.lb-row.top .nm{color:var(--white)}
+.lb-row.top{text-shadow:0 0 22px rgba(204,255,0,.25)}
+.lb-divider{position:absolute;left:26px;right:26px;height:2px;background:var(--lime);box-shadow:0 0 14px rgba(204,255,0,.7);top:158px;transition:top .65s}
+.lb-copy h2{font-size:clamp(42px,6vw,84px)}
+.lb-copy p{margin-top:18px}
+
+/* ============ MOMENT FACTORY ============ */
+#mf{position:relative;overflow:hidden}
+#mf::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(115deg,transparent 0 90px,rgba(204,255,0,.04) 90px 92px)}
+#mf h2{font-size:clamp(40px,6vw,80px)}
+#mf .mf-name{color:var(--lime)}
+.mf-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,70px);align-items:center}
+@media(max-width:860px){.mf-grid{grid-template-columns:1fr}}
+.mf-visual{position:relative;height:clamp(220px,28vw,330px);border:1px solid var(--line);overflow:hidden;clip-path:polygon(0 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%)}
+.mf-visual i{position:absolute;width:160%;height:3px;left:-30%;background:linear-gradient(90deg,transparent,var(--lime),transparent);transform:rotate(-18deg);animation:beamSweep 3.4s linear infinite;opacity:.7}
+.mf-visual i:nth-child(2){animation-delay:1.1s;transform:rotate(14deg)}
+.mf-visual i:nth-child(3){animation-delay:2.2s;transform:rotate(-6deg)}
+@keyframes beamSweep{from{top:-12%}to{top:112%}}
+
+/* ============ STATS ============ */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.07)}
+@media(max-width:860px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg);padding:clamp(28px,4vw,52px) clamp(18px,2.5vw,34px);position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-18px;top:-18px;width:46px;height:46px;background:var(--lime);transform:rotate(45deg);opacity:.12}
+.stat .n{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(48px,6.5vw,86px);color:var(--lime);line-height:1;font-variant-numeric:tabular-nums}
+.stat .l{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--white);font-size:clamp(16px,1.8vw,21px);margin-top:6px;letter-spacing:.05em}
+.stats-tag{margin-top:30px;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(22px,3vw,34px)}
+.stats-tag .lime{color:var(--lime)}
+
+/* ============ PRICING ============ */
+#billets{background:var(--bg-2)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:42px}
+@media(max-width:860px){.price-grid{grid-template-columns:1fr}}
+.price-card{
+  position:relative;background:#0e0e0e;border:1px solid rgba(255,255,255,.09);
+  padding:clamp(28px,3vw,40px);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%);
+  display:flex;flex-direction:column;gap:14px;transition:.25s;
+}
+.price-card:hover{border-color:rgba(204,255,0,.5);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 30px rgba(204,255,0,.12)}
+.price-card.featured{border-color:rgba(204,255,0,.55);background:linear-gradient(170deg,#121405,#0e0e0e 55%)}
+.price-card .tier{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;font-size:23px;letter-spacing:.05em}
+.price-card .amount{font-family:var(--display);font-weight:900;font-style:italic;font-size:clamp(56px,6vw,84px);line-height:1;color:var(--lime)}
+.price-card .per{color:var(--muted);font-size:14.5px}
+.price-card ul{list-style:none;display:grid;gap:9px;margin:6px 0 8px;color:var(--muted);font-size:15px}
+.price-card li{display:flex;gap:10px;align-items:baseline}
+.price-card li::before{content:"";width:10px;height:2.5px;background:var(--lime);transform:skewX(-30deg);flex:none;position:relative;top:-3px}
+.price-card .cta{font-size:19px;text-align:center;margin-top:auto}
+
+/* ── Session type tiles ── */
+.sess-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,18px);margin:36px 0 0}
+/* Last two tiles (Family & For All is 5th) center gracefully */
+.sess-tile:nth-child(4),.sess-tile:nth-child(5){}
+@media(max-width:860px){.sess-tiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sess-tiles{grid-template-columns:1fr}}
+.sess-tile{
+  position:relative;background:#0e0e0e;border:1px solid rgba(255,255,255,.08);
+  border-radius:4px;padding:clamp(18px,2.4vw,28px);
+  display:flex;flex-direction:column;gap:8px;
+  cursor:pointer;transition:border-color .22s,transform .22s,box-shadow .22s;
+  text-align:left;
+}
+.sess-tile:hover,.sess-tile:focus-visible{
+  border-color:rgba(204,255,0,.45);transform:translateY(-4px);
+  box-shadow:0 18px 48px rgba(0,0,0,.55),0 0 24px rgba(204,255,0,.09);
+  outline:none;
+}
+.sess-tile.special{border-color:rgba(204,255,0,.22);background:linear-gradient(160deg,#111502,#0e0e0e 60%)}
+.sess-tile.special:hover,.sess-tile.special:focus-visible{border-color:rgba(204,255,0,.6);box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 32px rgba(204,255,0,.14)}
+.st-tag{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:9px;letter-spacing:.22em;color:var(--lime);opacity:.65;margin-bottom:2px}
+.st-name{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(20px,2.4vw,30px);line-height:1;color:var(--white)}
+.st-sub{font-size:clamp(12px,1.3vw,14px);color:rgba(255,255,255,.5);line-height:1.45;margin-top:4px}
+.st-tagline{font-size:clamp(12px,1.3vw,14px);color:rgba(204,255,0,.75);line-height:1.45;margin-top:6px;font-style:italic}
+.st-cta{margin-top:auto;padding-top:14px;font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;font-size:11px;letter-spacing:.18em;color:var(--lime);opacity:.8}
+.sess-tiles-head{margin-top:52px;margin-bottom:0}
+.cta-group-btn{
+  display:inline-block;font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(16px,2vw,22px);
+  border:2px solid var(--lime);color:var(--lime);
+  padding:16px 40px 18px;letter-spacing:.02em;
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
+  transition:background .2s,color .2s,transform .15s;
+  text-align:center;
+}
+.cta-group-btn:hover{background:var(--lime);color:#0A0A0A;transform:translateY(-2px);box-shadow:0 0 28px rgba(204,255,0,.45)}
+.session-note{margin-top:26px;color:var(--muted);font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(16px,2vw,21px);letter-spacing:.04em}
+
+/* ════════════════════════════════
+   CTA BANDS — mid-page conviction
+   ════════════════════════════════ */
+.cta-band{
+  width:100%;background:#0F0F0F;
+  padding:clamp(64px,9vw,100px) 0;
+  text-align:center;
+  position:relative;
+}
+/* Placement 4 variant — lime rule above */
+.cta-band--lime-rule::before{
+  content:"";display:block;
+  position:absolute;top:0;left:0;right:0;
+  height:1px;background:#ccff00;opacity:.1;
+}
+/* Placement 5 variant — signals page wrap-up */
+.cta-band--close{background:#141414}
+.cta-band .inner{max-width:640px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+.cta-band-hl{
+  font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(28px,4vw,56px);line-height:.95;
+  color:var(--white);margin:0 0 clamp(28px,3.5vw,44px);
+  letter-spacing:-.01em;
+}
+.cta-band-micro{
+  margin-top:clamp(16px,2vw,24px);
+  font-size:clamp(13px,1.4vw,15px);color:rgba(255,255,255,.45);
+  letter-spacing:.04em;
+}
+.cta-band-micro a{color:rgba(204,255,0,.6);text-decoration:none}
+.cta-band-micro a:hover{color:var(--lime)}
+
+/* ════════════════════════════════
+   #billets — ACTION ZONE treatment
+   ════════════════════════════════ */
+#billets{background:#111;position:relative}
+#billets::before{
+  content:"";display:block;
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(to right,transparent 0%,#ccff00 20%,#ccff00 80%,transparent 100%);
+  opacity:.55;
+}
+#billets .eyebrow{
+  background:rgba(204,255,0,.08);
+  border:1px solid rgba(204,255,0,.25);
+  border-radius:2px;
+  padding:5px 14px;
+  letter-spacing:.22em;
+  color:var(--lime) !important;
+  opacity:1 !important;
+}
+
+/* ════════════════════════════════
+   MOBILE STICKY BAR
+   ════════════════════════════════ */
+.sticky-play{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  height:64px;background:#ccff00;z-index:9999;
+  align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:900;font-style:italic;
+  text-transform:uppercase;font-size:18px;letter-spacing:.04em;
+  color:#0A0A0A;text-decoration:none;
+  transform:translateY(100%);
+  transition:transform .3s ease;
+  border:none;cursor:pointer;
+}
+.sticky-play.visible{transform:translateY(0)}
+@media(max-width:768px){.sticky-play{display:flex}}
+.session-note b{color:var(--lime)}
+
+/* ============ CALENDRIER ============ */
+.cal-section-head{margin:clamp(36px,5vw,60px) 0 24px}
+/* ── calendar accordion ── */
+.cal-acc{display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
+.cac-city{background:#101010;border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden}
+.cac-city-hd{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;
+  user-select:none;transition:background .15s;border-bottom:1px solid transparent}
+.cac-city-hd:hover{background:rgba(255,255,255,.03)}
+.cac-city-hd.open{border-bottom-color:rgba(255,255,255,.07);background:rgba(204,255,0,.03)}
+.cac-chev{width:18px;height:18px;flex:none;color:var(--muted);transition:transform .22s,color .22s}
+.cac-city-hd.open .cac-chev{transform:rotate(90deg);color:var(--lime)}
+.cac-city-name{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;
+  font-size:clamp(16px,2vw,20px);letter-spacing:.06em;flex:1}
+.cac-city-count{font-size:12px;color:var(--muted)}
+.cac-date-row{border-top:1px solid rgba(255,255,255,.05)}
+.cac-date-hd{display:flex;align-items:center;gap:10px;padding:13px 20px 13px 36px;
+  cursor:pointer;user-select:none;transition:background .15s}
+.cac-date-hd:hover{background:rgba(255,255,255,.025)}
+.cac-date-hd.open{background:rgba(204,255,0,.04)}
+.cac-dchev{width:14px;height:14px;flex:none;color:var(--muted);transition:transform .22s,color .22s}
+.cac-date-hd.open .cac-dchev{transform:rotate(90deg);color:var(--lime)}
+.cac-date-main{flex:1;min-width:0}
+.cac-date-lbl{font-family:var(--display);font-style:italic;font-weight:900;font-size:15px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cac-date-venue{font-size:12px;color:var(--muted);margin-top:2px}
+.cac-dots{display:flex;gap:5px;align-items:center;flex-shrink:0}
+.cac-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+.cac-dot.ok{background:var(--lime);box-shadow:0 0 5px rgba(204,255,0,.55)}
+.cac-dot.low{background:var(--red)}
+.cal-launch{font-family:var(--display);font-style:italic;font-weight:900;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;background:var(--lime);color:#0A0A0A;
+  padding:1px 7px;border-radius:3px}
+.cac-detail{padding:14px 20px 20px 36px;border-top:1px solid rgba(204,255,0,.1);display:none}
+.cac-date-row.open>.cac-detail{display:block}
+.cal-sess-grid{display:grid;gap:10px;margin-bottom:24px}
+.cal-sess-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;
+  background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:10px;
+  padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s}
+.cal-sess-row:hover,.cal-sess-row.sel{border-color:rgba(204,255,0,.5);background:rgba(204,255,0,.04)}
+.cal-sess-row.full{opacity:.45;cursor:default;pointer-events:none}
+.cs-type{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:19px;transition:color .2s}
+.cal-sess-row.sel .cs-type{color:var(--lime)}
+.cs-time{font-size:13px;color:var(--muted);margin-top:2px}
+.cs-bar-wrap{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-top:7px}
+.cs-bar{height:100%;background:var(--lime);border-radius:3px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.cs-bar.low{background:var(--red)}
+.cs-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.cs-spots{font-family:var(--display);font-style:italic;font-weight:900;font-size:13px;white-space:nowrap;color:var(--muted)}
+.cs-spots b{color:var(--lime);font-size:21px;line-height:1}
+.cs-spots.low b{color:var(--red)}
+.cs-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all .2s}
+.cal-sess-row.sel .cs-check{background:var(--lime);border-color:var(--lime);color:#0A0A0A}
+/* cal form */
+.cal-form{border-top:1px solid rgba(255,255,255,.07);padding-top:20px}
+.cal-sel-lbl{font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:15px;color:var(--lime);margin-bottom:12px}
+.cal-no-sel{color:var(--muted);font-size:14px;font-style:italic;margin-bottom:12px}
+.cal-reg-fields{display:grid;grid-template-columns:1fr 1fr auto;gap:10px}
+@media(max-width:680px){.cal-reg-fields{grid-template-columns:1fr}}
+.cal-ok{background:rgba(204,255,0,.07);border:1px solid rgba(204,255,0,.28);border-radius:10px;padding:16px 20px;display:none}
+.cal-ok.show{display:block}
+.cal-ok b{color:var(--lime);display:block;margin-bottom:4px}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:60px 0 40px;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;height:280px;background:linear-gradient(135deg,rgba(204,255,0,.1),transparent 60%);transform:skewX(-20deg)}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-start}
+.foot-brand .logo{font-size:30px}
+.foot-brand p{color:var(--muted);margin-top:8px;font-family:var(--display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:17px}
+.foot-col h4{font-family:var(--display);font-weight:900;font-style:italic;text-transform:uppercase;color:var(--lime);font-size:16px;letter-spacing:.08em;margin-bottom:12px}
+.foot-col a{display:block;color:var(--muted);margin-bottom:8px;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime)}
+.foot-bottom{margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:13.5px}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;filter:none}
+  .kinetic .line span{opacity:1;transform:none}
+}
+</style>
+<link rel="stylesheet" href="/assets/app-portal.css">
+<link rel="stylesheet" href="/assets/homepage.css">
+<script src="/assets/app-portal.js" defer></script>
+<style>@view-transition { navigation: none; }</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" aria-label="Navigation principale">
+  <a href="/" class="home-logo">
+    <img src="/assets/homepage/logo.png" alt="">
+    <span>PürInstinct <em>Games</em></span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="/zones.html">Les 5 zones</a>
+    <a href="/concept.html#arena">L’Arène</a>
+    <a href="/concept.html">Le concept</a>
+    <a href="/pur-id.html">Pür ID</a>
+    <a href="/app/competitions/ecole">Pour les écoles</a>
+    <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a>
+  </div>
+  <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="metadata" poster="assets/arena-hero.jpg">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-vignette"></div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="wrap" id="heroWrap" style="z-index:4">
+    <h1>
+      Le concept
+    </h1>
+    <p class="sub">Découvre comment se déroulent les PürInstinct Games.</p>
+  </div>
+</header>
+
+<section class="section" aria-labelledby="games-flow">
+  <div class="wrap">
+    <h2 class="disp" id="games-flow">Comment se déroulent les Games</h2>
+    <ol class="lead">
+      <li>À ton arrivée, reçois ton bracelet et découvre les zones.</li>
+      <li>Relève les défis des cinq zones pour travailler tes habiletés.</li>
+      <li>En match, trois attaquants affrontent deux défenseurs. Traverse le terrain avec le ballon jusqu’à la zone de but.</li>
+    </ol>
+    <p class="lead">Le match se joue sans contact. Les défenseurs cherchent à toucher le ballon. Les attaquants essaient de franchir le terrain sans le faire tomber.</p>
+  </div>
+</section>
+
+<!-- ============ CONCEPT ============ -->
+<section class="section slash-top obs" id="concept">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="c_eyebrow">Le concept</span>
+    <h2 class="kinetic">
+      <span class="line"><span data-i18n="c_l1">Ici, on ne regarde pas.</span></span>
+      <span class="line"><span class="alt" data-i18n="c_l2">On compétitionne.</span></span>
+      <span class="line"><span data-i18n="c_l3">On bouge. Ensemble.</span></span>
+    </h2>
+    <div class="concept-grid">
+      <p class="lead reveal" data-i18n="c_body">PürInstinct Games n'est pas un spectacle. C'est une arène portable de 9 stations qui tourne de ville en ville — et tout le monde y est athlète. Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2. Autour : une technologie immersive qui fait bouger les gens dans le vrai monde — au lieu de les laisser fixer chacun leur écran.</p>
+      <button class="btn-watch-video reveal" id="btnWatchVideo" onclick="openVideoModal()" data-i18n-watch>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span data-i18n="watch_btn">See the complete video</span>
+      </button>
+      <div class="concept-points">
+        <div class="cpoint reveal d1"><h3 data-i18n="c_p1t">Sport basé sur l'instinct et les prises de décisions rapides</h3><p data-i18n="c_p1b">Traverse le terrain sans être touché, sans échapper le ballon. Strictement sans contact.</p></div>
+        <div class="cpoint reveal d2"><h3 data-i18n="c_p2t">5 instincts naturels</h3><p data-i18n="c_p2b">Vitesse, agilité des mains, agilité des pieds, agilité générale, IQ de jeu.</p></div>
+        <div class="cpoint reveal d3"><h3 data-i18n="c_p3t">Un classement vivant</h3><p data-i18n="c_p3b">Chaque station alimente ton score individuel, en temps réel.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="link-down" aria-hidden="true"><i></i></div>
+</section>
+
+<!-- ── CTA BAND 2: POST-EXPLANATION ── -->
+<div class="cta-band obs" id="ctaBand2">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta2_hl">Tu comprends le concept.<br>Maintenant vis-le.</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta2_btn">Je veux jouer</a>
+    <p class="cta-band-micro reveal d2" data-i18n="cta2_micro">Gratuit pour commencer &nbsp;·&nbsp; Aucune inscription complexe</p>
+  </div>
+</div>
+
+<!-- ============ ARENA MAP ============ -->
+<section class="section obs" id="arena">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="a_eyebrow">L'arène</span>
+    <h2 class="disp reveal" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="a_title">9 stations. Une arène.</h2>
+    <p class="lead reveal d1" style="margin:14px 0 36px" data-i18n="a_sub">Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 zones augmentées par la technologie.</p>
+    <div class="arena-grid">
+      <div class="arena-svg-wrap reveal d2">
+        <div id="arena3d" aria-label="Arène 3D PürInstinct Games — glisse pour tourner à 360°">
+          <span class="a3d-badge">360°</span>
+        </div>
+        <svg id="arenaSvg" viewBox="0 0 900 560" role="img" aria-label="Plan de l'arène PürInstinct Games">
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- arena shell -->
+          <polygon points="20,40 880,10 880,540 20,520" fill="#0E0E0E" stroke="rgba(204,255,0,.25)" stroke-width="2"/>
+          <polygon points="20,40 880,10 880,30 20,60" fill="rgba(204,255,0,.07)"/>
+          <!-- Z1 VITESSE : long sprint strip -->
+          <g class="station" data-zone="vitesse">
+            <rect class="body" x="50" y="60" width="800" height="74" fill="rgba(255,68,56,.16)" stroke="#FF4438" stroke-width="2"/>
+            <line x1="60" y1="97" x2="840" y2="97" stroke="#FF4438" stroke-width="1.5" stroke-dasharray="14 12" opacity=".6"/>
+            <text class="st-label" x="66" y="92" fill="#FF4438">VITESSE</text>
+            <text class="st-tag" x="66" y="112">40 M — 5 NIVEAUX</text>
+          </g>
+          <!-- Z2 MAINS -->
+          <g class="station" data-zone="mains">
+            <rect class="body" x="50" y="158" width="190" height="170" fill="rgba(45,125,255,.16)" stroke="#2D7DFF" stroke-width="2"/>
+            <text class="st-label" x="64" y="190" fill="#2D7DFF">MAINS</text>
+            <text class="st-tag" x="64" y="208">LANCERS · 3 V 3</text>
+          </g>
+          <!-- Z3 PIEDS -->
+          <g class="station" data-zone="pieds">
+            <rect class="body" x="50" y="352" width="190" height="166" fill="rgba(46,224,106,.15)" stroke="#2EE06A" stroke-width="2"/>
+            <text class="st-label" x="64" y="384" fill="#2EE06A">PIEDS</text>
+            <text class="st-tag" x="64" y="402">DUELS 1 V 1</text>
+          </g>
+          <!-- Z4 AGILITÉ -->
+          <g class="station" data-zone="agilite">
+            <rect class="body" x="660" y="158" width="190" height="170" fill="rgba(255,196,0,.14)" stroke="#FFC400" stroke-width="2"/>
+            <text class="st-label" x="674" y="190" fill="#FFC400">AGILITÉ</text>
+            <text class="st-tag" x="674" y="208">TAG · CUBES</text>
+          </g>
+          <!-- Z5 IQ -->
+          <g class="station" data-zone="iq">
+            <rect class="body" x="660" y="352" width="190" height="166" fill="rgba(164,92,255,.15)" stroke="#A45CFF" stroke-width="2"/>
+            <text class="st-label" x="674" y="384" fill="#A45CFF">IQ DE JEU</text>
+            <text class="st-tag" x="674" y="402">STRATÉGIE 3 V 3</text>
+          </g>
+          <!-- PI terrains center -->
+          <g class="station" data-zone="pi1">
+            <rect class="body" x="268" y="158" width="176" height="170" fill="rgba(204,255,0,.07)" stroke="#CCFF00" stroke-width="2.5"/>
+            <line x1="356" y1="166" x2="356" y2="320" stroke="#CCFF00" stroke-width="1.5" opacity=".5" stroke-dasharray="8 8"/>
+            <text class="st-label" x="282" y="190" fill="#CCFF00">PÜRINSTINCT 1</text>
+            <text class="st-tag" x="282" y="208">3 V 2 · SANS CONTACT</text>
+          </g>
+          <g class="station" data-zone="pi2">
+            <rect class="body" x="456" y="158" width="176" height="170" fill="rgba(204,255,0,.07)" stroke="#CCFF00" stroke-width="2.5"/>
+            <line x1="544" y1="166" x2="544" y2="320" stroke="#CCFF00" stroke-width="1.5" opacity=".5" stroke-dasharray="8 8"/>
+            <text class="st-label" x="470" y="190" fill="#CCFF00">PÜRINSTINCT 2</text>
+            <text class="st-tag" x="470" y="208">3 V 2 · SANS CONTACT</text>
+          </g>
+          <!-- MF terrains bottom -->
+          <g class="station" data-zone="mf1">
+            <rect class="mf-glow" x="262" y="346" width="188" height="178" fill="#CCFF00" opacity=".35"/>
+            <rect class="body" x="268" y="352" width="176" height="166" fill="rgba(204,255,0,.12)" stroke="#CCFF00" stroke-width="2.5" filter="url(#glow)"/>
+            <text class="st-label" x="282" y="384" fill="#CCFF00">REACTION WALL</text>
+            <text class="st-tag" x="282" y="402">MOMENT FACTORY</text>
+          </g>
+          <g class="station" data-zone="mf2">
+            <rect class="mf-glow" x="450" y="346" width="188" height="178" fill="#CCFF00" opacity=".35"/>
+            <rect class="body" x="456" y="352" width="176" height="166" fill="rgba(204,255,0,.12)" stroke="#CCFF00" stroke-width="2.5" filter="url(#glow)"/>
+            <text class="st-label" x="470" y="384" fill="#CCFF00">ZONE IMMERSIVE</text>
+            <text class="st-tag" x="470" y="402">MOMENT FACTORY</text>
+          </g>
+        </svg>
+        <p class="arena-hint" data-i18n="a_hint">Glisse pour tourner à 360° · Touche une station pour explorer sa zone</p>
+      </div>
+      <aside class="zone-card reveal d3" id="zoneCard" style="--zc:#CCFF00">
+        <div id="zoneCardInner" class="swap">
+          <span class="zc-tag" data-role="tag">Zone signature</span>
+          <h3 data-role="name">L'Arène</h3>
+          <p data-role="desc">Sélectionne une des 9 stations sur le plan pour découvrir son gameplay.</p>
+          <span class="zc-mf" data-role="mf" style="display:none"></span>
+          <img class="zc-img" data-role="img" src="" alt="" style="display:none" loading="lazy">
+        </div>
+      </aside>
+    </div>
+  </div>
+  <div class="link-down" aria-hidden="true"><i></i></div>
+</section>
+
+<!-- ============ INSTINCTS : ATHLETE JOURNEY ============ -->
+<section id="instincts">
+  <div class="wrap" style="padding-top:clamp(60px,8vw,110px)">
+    <span class="eyebrow" data-i18n="i_eyebrow">Le parcours athlète</span>
+    <h2 class="disp obs reveal in-place" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="i_title">De l'inscription au podium.</h2>
+    <p class="lead obs reveal" style="margin:14px 0 0;max-width:62ch" data-i18n="i_sub2">Suis le parcours d'un athlète : une session de 120 minutes, un dossard, neuf stations — et un seul score.</p>
+  </div>
+  <div class="journey wrap" id="journey">
+    <svg class="j-svg" aria-hidden="true">
+      <path class="j-line" d=""/>
+      <path class="j-line-fill" d=""/>
+    </svg>
+    <div class="j-player" id="jPlayer" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="#0A0A0A"><path d="M13.5 5.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM9.8 8.9 7.2 22h2.1l1.6-7 2.1 2v5h2v-6.5l-2.1-2 .6-3A7.3 7.3 0 0 0 19 12.5v-2c-1.8 0-3.4-.9-4.2-2.3l-1-1.6a2 2 0 0 0-1.7-1c-.3 0-.5 0-.8.1L6 7.8v4.7h2V9.6l1.8-.7z"/></svg>
+    </div>
+
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
+      <div class="j-node"><span>01</span></div>
+      <div class="j-card">
+        <div class="w360-hub">
+          <video class="w360-video"
+            autoplay loop muted playsinline preload="auto"
+            aria-label="Bracelet PürInstinct — rotation 360°">
+            <source src="assets/bracelet-360.mp4" type="video/mp4">
+            <source src="assets/bracelet-360.webm" type="video/webm">
+          </video>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_reg_s">DÉPART</span>
+          <h3 data-i18n="j_reg_t">Inscription</h3>
+          <p data-i18n="j_reg_b">Reçois ton bracelet connecté PürInstinct : t'inscrire à un jeu, suivre ton score, lancer un défi, récupérer tes prix — il te suit partout dans l'arène, en temps réel.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
+      <div class="j-node"><span>02</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-levels" role="tablist" aria-label="6 niveaux de difficulté">
+          <button class="j-lvl" type="button" data-lvl="1" style="--h:22%"><i>N1</i></button>
+          <button class="j-lvl" type="button" data-lvl="2" style="--h:36%"><i>N2</i></button>
+          <button class="j-lvl" type="button" data-lvl="3" style="--h:50%"><i>N3</i></button>
+          <button class="j-lvl" type="button" data-lvl="4" style="--h:64%"><i>N4</i></button>
+          <button class="j-lvl" type="button" data-lvl="5" style="--h:80%"><i>N5</i></button>
+          <button class="j-lvl" type="button" data-lvl="6" style="--h:100%"><i>N6</i></button>
+        </div>
+        <div class="j-lvl-detail" id="lvlDetail" hidden>
+          <div class="lvl-head">
+            <span class="lvl-tag" id="lvlTag">Niveau 1</span>
+            <button class="lvl-close" id="lvlClose" type="button" aria-label="Fermer">✕</button>
+          </div>
+          <div class="lvl-svg" id="lvlSvg"></div>
+          <p class="lvl-rule" id="lvlRule"></p>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_learn_s">LE SPORT</span>
+          <h3 data-i18n="j_learn_t">Apprendre PürInstinct</h3>
+          <p data-i18n="j_learn_b">6 niveaux de difficulté pour maîtriser le sport signature : tu progresses à ton rythme, du premier essai jusqu'au niveau élite.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
+      <div class="j-node"><span>03</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media">
+          <img src="assets/render-field.jpg" alt="Terrain PürInstinct" loading="lazy">
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_play_s">LE MATCH</span>
+          <h3 data-i18n="j_play_t">Joue à PürInstinct</h3>
+          <p data-i18n="j_play_b">Équipe aléatoire : tu es jumelé à de nouveaux coéquipiers. Traverse le terrain en 3 contre 2, sans contact, sans échapper le ballon.</p>
+        </div>
+      </div>
+    </article>
+
+    <article id="zone-speed" class="j-stop obs" data-side="right" style="--zc:var(--red)">
+      <div class="j-node"><span>04</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media" data-video="zone-speed.mp4">
+          <img src="assets/render-speed.jpg" alt="Zone Vitesse" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <h3 data-i18n="z1_t"></h3>
+          <p data-i18n="z1_b"></p>
+          <span class="mfnote" data-i18n="mf_note">+ Zone augmentée par la technologie</span>
+        </div>
+      </div>
+    </article>
+
+    <article id="zone-hand" class="j-stop obs" data-side="left" style="--zc:var(--blue)">
+      <div class="j-node"><span>05</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media" data-video="zone-hand.mp4">
+          <img src="assets/render-hand.jpg" alt="Zone Agilité des mains" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <h3 data-i18n="z2_t"></h3>
+          <p data-i18n="z2_b"></p>
+          <span class="mfnote" data-i18n="mf_note2">+ Zone augmentée par la technologie</span>
+        </div>
+      </div>
+    </article>
+
+    <article id="zone-foot" class="j-stop obs" data-side="right" style="--zc:var(--green)">
+      <div class="j-node"><span>06</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media" data-video="zone-foot.mp4">
+          <img src="assets/render-foot.jpg" alt="Zone Agilité des pieds" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <h3 data-i18n="z3_t"></h3>
+          <p data-i18n="z3_b"></p>
+          <span class="mfnote" data-i18n="mf_note3">+ Zone augmentée par la technologie</span>
+        </div>
+      </div>
+    </article>
+
+    <article id="zone-agility" class="j-stop obs" data-side="left" style="--zc:var(--yellow)">
+      <div class="j-node"><span>07</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media" data-video="zone-agility.mp4">
+          <img src="assets/render-agility.jpg" alt="Zone Agilité générale" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <h3 data-i18n="z4_t"></h3>
+          <p data-i18n="z4_b"></p>
+          <span class="mfnote" data-i18n="mf_note4">+ Zone augmentée par la technologie</span>
+        </div>
+      </div>
+    </article>
+
+    <article id="zone-iq" class="j-stop obs" data-side="right" style="--zc:var(--purple)">
+      <div class="j-node"><span>08</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media" data-video="zone-iq.mp4">
+          <img src="assets/render-iq.jpg" alt="Zone IQ de jeu" loading="lazy">
+          <span class="j-play" aria-hidden="true"></span>
+        </div>
+        <div class="j-copy">
+          <h3 data-i18n="z5_t"></h3>
+          <p data-i18n="z5_b"></p>
+          <span class="mfnote" data-i18n="mf_note5">+ Zone augmentée par la technologie</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
+      <div class="j-node"><span>09</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media">
+          <img src="assets/render-mf1.jpg" alt="Sports tech zone 1" loading="lazy">
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_mf_s">ZONE AUGMENTÉE PAR LA TECHNOLOGIE</span>
+          <h3 data-i18n="j_mf1_t">Sports tech zone 1</h3>
+          <p data-i18n="j_mf1_b">Mur de cibles lumineuses : touche les tiennes plus vite que ton adversaire. Réflexes purs, technologie augmentée.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="right" style="--zc:var(--lime)">
+      <div class="j-node"><span>10</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-media">
+          <img src="assets/render-mf2.jpg" alt="Sports tech zone 2" loading="lazy">
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_mf_s2">ZONE AUGMENTÉE PAR LA TECHNOLOGIE</span>
+          <h3 data-i18n="j_mf2_t">Sports tech zone 2</h3>
+          <p data-i18n="j_mf2_b">Projections 360°, environnements dynamiques au sol et aux murs. Habileté, agilité et décisions rapides.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="j-stop obs" data-side="left" style="--zc:var(--lime)">
+      <div class="j-node j-node-finish"><span>11</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
+      <div class="j-card">
+        <div class="j-podium" aria-hidden="true">
+          <div class="j-pod p2"><i>2</i></div>
+          <div class="j-pod p1"><i>1</i></div>
+          <div class="j-pod p3"><i>3</i></div>
+        </div>
+        <div class="j-copy">
+          <span class="j-step" data-i18n="j_fin_s">ARRIVÉE</span>
+          <h3 data-i18n="j_fin_t">Le podium</h3>
+          <p data-i18n="j_fin_b">Chaque zone a nourri ton score. Le leaderboard décide.</p>
+          <a class="cta j-cta" href="#leaderboard" data-i18n="j_fin_cta">Voir le leaderboard</a>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="link-down" aria-hidden="true"><i></i></div>
+</section>
+
+<!-- ============ LEADERBOARD ============ -->
+<section class="section slash-top obs" id="leaderboard">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <div class="lb-shell">
+      <div class="lb-copy reveal">
+        <span class="eyebrow" data-i18n="lb_eyebrow">Le leaderboard vivant</span>
+        <h2 data-i18n="lb_title">Chaque geste compte.</h2>
+        <p class="lead" data-i18n="lb_body">Un seul classement individuel traverse toute l'arène : chaque sprint, chaque lancer, chaque réaction à chaque station alimente ton score en direct. 300 athlètes par session — un seul tableau.</p>
+      </div>
+      <div class="lb-card reveal d2">
+        <div class="lb-head">
+          <span class="t" data-i18n="lb_card_t">Classement en direct</span>
+          <span class="live" data-i18n="lb_live">En direct</span>
+        </div>
+        <div class="lb-rows" id="lbRows"><div class="lb-divider" id="lbDivider"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="link-down" aria-hidden="true"><i></i></div>
+</section>
+
+
+
+<!-- ============ MOMENT FACTORY ============ -->
+<section class="section obs" id="mf">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <div class="mf-grid">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="mf_eyebrow">Zone augmentée par la technologie</span>
+        <h2 data-i18n="mf_title_a">Sports tech zone <span class="mf-name">1 &amp; 2</span></h2>
+        <p class="lead" style="margin-top:18px" data-i18n="mf_body">Deux terrains augmentés transforment la lumière, le son et l'interactivité en mouvement collectif. Dans l'arène, la technologie ne se regarde pas : elle se joue. Une expérience qui fait bouger les gens, ensemble, dans le vrai monde.</p>
+      </div>
+      <div class="mf-visual reveal d2" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+  <div class="link-down" aria-hidden="true"><i></i></div>
+</section>
+
+<!-- ── CTA BAND 4: POST-VISUAL (Moment Factory) ── -->
+<div class="cta-band cta-band--lime-rule obs" id="ctaBand4">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta4_hl">L'arène t'attend.</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta4_btn">Je veux être là</a>
+  </div>
+</div>
+
+<!-- ============ STATS ============ -->
+<section class="section obs" id="preuve">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="s_eyebrow">10 ans de preuve</span>
+    <h2 class="disp reveal" style="font-size:clamp(42px,6.5vw,88px);margin-bottom:38px" data-i18n="s_title">Le sport est validé.</h2>
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="n"><span class="count" data-to="10">0</span></div><div class="l" data-i18n="s1">Ans de développement</div></div>
+      <div class="stat reveal d1"><div class="n"><span class="count" data-to="150">0</span>+</div><div class="l" data-i18n="s2">Écoles partenaires</div></div>
+      <div class="stat reveal d2"><div class="n"><span class="count" data-to="10000" data-fmt="k">0</span>+</div><div class="l" data-i18n="s3">Participants</div></div>
+      <div class="stat reveal d3"><div class="n"><span class="count" data-to="5">0</span></div><div class="l" data-i18n="s4">Disciplines</div></div>
+    </div>
+    <p class="stats-tag reveal d4"><span data-i18n="s_tag_a">Bâti au Québec.</span> <span class="lime" data-i18n="s_tag_b">Les Games sont le prochain chapitre.</span></p>
+  </div>
+  <div class="link-down" aria-hidden="true"><i></i></div>
+</section>
+
+<!-- ── CTA BAND 3: POST-SOCIAL PROOF (Stats) ── -->
+<div class="cta-band obs" id="ctaBand3">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta3_hl">10 000 participants<br>ne peuvent pas avoir tort.</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta3_btn">Rejoins le mouvement</a>
+    <p class="cta-band-micro reveal d2" data-i18n="cta3_micro">Rejoins le mouvement.</p>
+  </div>
+</div>
+
+<!-- ============ PRICING ============ -->
+<section class="section slash-top obs" id="billets">
+  <span class="divider-streak"></span>
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="p_eyebrow">Sessions &amp; billets</span>
+    <h2 class="disp reveal" style="font-size:clamp(42px,6.5vw,88px)" data-i18n="p_title">Entre dans l'arène.</h2>
+    <p class="lead reveal d1" style="margin:14px 0 28px" data-i18n="p_waitlist">Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.</p>
+
+    <div class="launch-strip reveal d2">
+      <div class="countdown" id="countdown" role="timer">
+        <div class="cd-head" data-i18n="cd_title">Première session — 5 sept. 2026</div>
+        <div class="cd-blocks">
+          <div class="cd-b"><span class="cd-n" id="cdD">000</span><span class="cd-l" data-i18n="cd_d">Jours</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-b"><span class="cd-n" id="cdH">00</span><span class="cd-l" data-i18n="cd_h">Heures</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-b"><span class="cd-n" id="cdM">00</span><span class="cd-l" data-i18n="cd_m">Min</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-b"><span class="cd-n" id="cdS">00</span><span class="cd-l" data-i18n="cd_s">Sec</span></div>
+        </div>
+      </div>
+      <div class="spots">
+        <div class="spots-top">
+          <span class="spots-n"><b id="spotsN">0</b></span>
+          <span class="spots-l" data-i18n="sp_label">places réservées cette semaine</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="wf-headline reveal d3" data-i18n="wf_headline">Reçois les nouvelles avant tout le monde</p>
+    <form class="waitform reveal d3" id="waitForm" novalidate>
+      <span id="wfTier" style="display:none" data-i18n="wf_tier_def">Liste d'attente</span>
+      <div class="wf-fields">
+        <input type="email" id="wfEmail" name="email" autocomplete="email" required data-i18n-ph="wf_email" placeholder="Ton courriel">
+        <input type="tel" id="wfPhone" name="phone" autocomplete="tel" required data-i18n-ph="wf_phone" placeholder="Ton cellulaire">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <button type="submit" class="cta wf-btn" data-i18n="wf_btn">Réserve ma place</button>
+      </div>
+      <p class="wf-note" data-i18n="wf_note">Pas de spam. Juste ta place et les premières dates.</p>
+      <div class="wf-ok" id="wfOk" hidden>
+        <b data-i18n="wf_ok_t">Tu es sur la liste.</b>
+        <span data-i18n="wf_ok_b">On te texte dès l'ouverture des billets pour le 5 septembre 2026.</span>
+      </div>
+    </form>
+
+    <!-- ── SESSION TYPES ── -->
+    <h3 class="sess-tiles-head disp reveal d2" style="font-size:clamp(22px,2.8vw,36px);margin-top:52px" data-i18n="st_head">Choisis ta session</h3>
+    <div class="sess-tiles reveal d3">
+      <!-- Youth -->
+      <div class="sess-tile tier-cta" data-tier="Jeunesse" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_youth_tag">10–17 ans</span>
+        <div class="st-name" data-i18n="st_youth_name">Jeunesse</div>
+        <p class="st-sub" data-i18n="st_youth_sub">Pour les 10 à 17 ans. 9 stations. Un seul score.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Adult -->
+      <div class="sess-tile tier-cta" data-tier="Adulte" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_adult_tag">18 ans et +</span>
+        <div class="st-name" data-i18n="st_adult_name">Adulte</div>
+        <p class="st-sub" data-i18n="st_adult_sub">Compétition individuelle. Leaderboard en direct. Instinct à l'état pur.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Corporate -->
+      <div class="sess-tile tier-cta" data-tier="Corporatif" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_corp_tag">Équipes & entreprises</span>
+        <div class="st-name" data-i18n="st_corp_name">Corporatif</div>
+        <p class="st-sub" data-i18n="st_corp_sub">Session privée, classement d'entreprise dédié, expérience complète.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Elite -->
+      <div class="sess-tile tier-cta" data-tier="Elite" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_elite_tag">Niveau élite</span>
+        <div class="st-name" data-i18n="st_elite_name">Élite</div>
+        <p class="st-sub" data-i18n="st_elite_sub">Les meilleurs athlètes. Les vrais scores. La vraie compétition.</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+      <!-- Family and for All -->
+      <div class="sess-tile special tier-cta" data-tier="Famille" role="button" tabindex="0">
+        <span class="st-tag" data-i18n="st_fam_tag">Tous âges · En famille · Pour tous</span>
+        <div class="st-name" data-i18n="st_fam_name">Famille &amp; Pour tous</div>
+        <p class="st-sub" data-i18n="st_fam_sub">Parents, enfants, amis — tout le monde joue. Personne ne regarde.</p>
+        <p class="st-tagline" data-i18n="st_fam_tagline">Ce n'est pas ton sport traditionnel — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game!</p>
+        <span class="st-cta" data-i18n="st_book">Réserve ta place →</span>
+      </div>
+    </div>
+
+    <!-- ── CALENDRIER ── -->
+    <div class="cal-section-head reveal d2">
+      <h3 class="disp" style="font-size:clamp(26px,3.5vw,42px)" data-i18n="cal_title">Prochains événements</h3>
+      <p style="color:var(--muted);margin-top:8px;font-size:15px" data-i18n="cal_sub">Choisis ta ville, sélectionne une session, réserve ta place.</p>
+    </div>
+    <div class="cal-acc reveal d3" id="calAcc"></div>
+    <p class="session-note" style="margin-top:32px" data-i18n="p_note"><b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard</p>
+    <p class="session-note" style="margin-top:14px;font-size:clamp(13px,1.6vw,17px);opacity:.7" data-i18n="p_bracelet_tip">Économise <b>5$</b> pour le prochain événement en gardant ton bracelet</p>
+  </div>
+</section>
+
+<!-- Mobile sticky play bar — must be before <script> so applyLang() processes it -->
+
+
+<!-- ============ ZONE VIDEO PLAYER ============ -->
+<div id="zoneVideoPlayer">
+  <button id="zoneVideoClose" aria-label="Fermer">✕</button>
+  <video id="zoneVideo" playsinline></video>
+</div>
+
+<!-- ============ ZONE ENTRY OVERLAY ============ -->
+<div id="zoneEntry" aria-hidden="true">
+  <div class="ze-bg"></div>
+  <div class="ze-flash"></div>
+  <span class="ze-num">01</span>
+  <div class="ze-content">
+    <span class="ze-tag">Zone</span>
+    <div class="ze-name">Vitesse</div>
+    <img class="ze-img" src="" alt="">
+  </div>
+</div>
+
+<!-- ── CTA BAND 5: PRE-FOOTER ── -->
+<div class="cta-band cta-band--close obs" id="ctaBand5">
+  <div class="inner">
+    <p class="cta-band-hl reveal" data-i18n="cta5_hl">Prêt à jouer ?</p>
+    <a class="cta reveal d1" href="#billets" data-i18n="cta5_btn">Commencer maintenant</a>
+    <p class="cta-band-micro reveal d2"><span data-i18n="cta5_micro">Des questions ?</span> <a href="mailto:dominique@purinstinct.com" data-i18n="cta5_micro_link">Écris-nous.</a></p>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</span>
+        <p data-i18n="f_tag">Ton instinct. Ton arène.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_contact">Contact</h4>
+        <a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a>
+        <a href="#billets" data-i18n="f_book">Réserver une session</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_follow">Suis l'arène</h4>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="f_lang">Langue</h4>
+        <a href="#" id="footLang">English</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> PürInstinct Worldwide Inc. <span data-i18n="f_rights">Tous droits réservés.</span></span>
+      <span data-i18n="f_nc">Sport sans contact — on touche le ballon, jamais le joueur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ====================================================== */
+/* i18n */
+/* ====================================================== */
+const I18N = {
+fr:{
+  nav_concept:"Le concept",nav_arena:"L'arène",nav_instincts:"Les 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",nav_tickets:"Billets",nav_cta:"Réserve",
+  h1_a:"TON INSTINCT.",h1_b:"TON ARÈNE.",h1_sub:"Le sport à l'état <b>Pur.</b> Instinctif",h1_cta:"Rejoins l'arène →",
+  cta2_hl:"Tu comprends le concept.<br>Maintenant vis-le.",cta2_btn:"Je veux jouer",cta2_micro:"Gratuit pour commencer &nbsp;·&nbsp; Aucune inscription complexe",
+  cta3_hl:"10 000 participants<br>ne peuvent pas avoir tort.",cta3_btn:"Rejoins le mouvement",cta3_micro:"Rejoins le mouvement.",
+  cta4_hl:"L'arène t'attend.",cta4_btn:"Je veux être là",
+  cta5_hl:"Prêt à jouer ?",cta5_btn:"Commencer maintenant",cta5_micro:"Des questions ?",cta5_micro_link:"Écris-nous.",
+  sticky_play:"JOUE MAINTENANT →",
+  strip_st:"Stations",strip_ath:"Athlètes / session",strip_lb:"Leaderboard",scroll_hint:"Descends dans l'arène",
+  c_eyebrow:"Le concept",c_l1:"Ici, on ne regarde pas.",c_l2:"On compétitionne.",c_l3:"On bouge. Ensemble.",
+  c_body:"PürInstinct Games n'est pas un spectacle. C'est une arène portable de 9 stations qui tourne de ville en ville — et tout le monde y est athlète. Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2. Autour : une technologie immersive qui fait bouger les gens dans le vrai monde — au lieu de les laisser fixer chacun leur écran.",
+  watch_btn:"Voir la vidéo complète",
+  c_p1t:"Sport basé sur l'instinct et les prises de décisions rapides",c_p1b:"Traverse le terrain sans être touché, sans échapper le ballon. Strictement sans contact.",
+  c_p2t:"5 instincts naturels",c_p2b:"Vitesse, agilité des mains, agilité des pieds, agilité générale, IQ de jeu.",
+  c_p3t:"Un classement vivant",c_p3b:"Chaque station alimente ton score individuel, en temps réel.",
+  a_eyebrow:"L'arène",a_title:"9 stations. Une arène.",
+  a_sub:"Survole le complexe : 5 zones d'habiletés, 2 terrains PürInstinct au centre, 2 zones augmentées par la technologie.",
+  a_hint:"Glisse pour tourner à 360° · Touche une station pour explorer sa zone",
+  i_eyebrow:"Le parcours athlète",i_title:"De l'inscription au podium.",i_sub2:"Suis le parcours d'un athlète : une session de 120 minutes, un dossard, neuf stations — et un seul score.",j_bib:"TON NOM",j_bib_kind:"Pass athlète",j_band_live:"En direct",j_band_tag:"Ton score · 9 stations",j_feat_reg:"S'inscrire à un jeu",j_feat_score:"Voir ton score",j_feat_chal:"Lancer un défi",j_feat_prize:"Récupérer tes prix",w360_hint:"⟲ Fais tourner",j_reg_s:"DÉPART",j_reg_t:"Inscription",j_reg_b:"Reçois ton bracelet connecté PürInstinct : t'inscrire à un jeu, suivre ton score, lancer un défi, récupérer tes prix — il te suit partout dans l'arène, en temps réel.",j_learn_s:"LE SPORT",j_learn_t:"Apprendre PürInstinct",j_learn_b:"6 niveaux de difficulté pour maîtriser le sport signature : tu progresses à ton rythme, du premier essai jusqu'au niveau élite.",j_play_s:"LE MATCH",j_play_t:"Joue à PürInstinct",j_play_b:"Équipe aléatoire : tu es jumelé à de nouveaux coéquipiers. Traverse le terrain en 3 contre 2, sans contact, sans échapper le ballon.",j_mf_s:"ZONE AUGMENTÉE PAR LA TECHNOLOGIE",j_mf_s2:"ZONE AUGMENTÉE PAR LA TECHNOLOGIE",j_mf1_t:"Sports tech zone 1",j_mf1_b:"Mur de cibles lumineuses : touche les tiennes plus vite que ton adversaire. Réflexes purs, technologie augmentée.",j_mf2_t:"Sports tech zone 2",j_mf2_b:"Projections 360°, environnements dynamiques au sol et aux murs. Habileté, agilité et décisions rapides.",j_fin_s:"ARRIVÉE",j_fin_t:"Le podium",j_fin_b:"Chaque zone a nourri ton score. Le leaderboard décide.",j_fin_cta:"Voir le leaderboard",
+  z1_en:"SPEED",z1_t:"Vitesse",z1_b:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",
+  z2_en:"HAND SKILLS",z2_t:"Agilité des mains",z2_b:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",
+  z3_en:"FOOT SKILLS",z3_t:"Agilité des pieds",z3_b:"Plaques lumineuses réactives, duels 1 contre 1.",
+  z4_en:"AGILITY",z4_t:"Agilité générale",z4_b:"Arène de tag avec obstacles, équipes de 3.",
+  z5_en:"GAME IQ",z5_t:"IQ de jeu",z5_b:"Stratégie rapide 3 contre 3 avec ballon.",
+  mf_note:"+ Zone augmentée par la technologie",mf_note2:"+ Zone augmentée par la technologie",mf_note3:"+ Zone augmentée par la technologie",mf_note4:"+ Zone augmentée par la technologie",mf_note5:"+ Zone augmentée par la technologie",
+  lb_eyebrow:"Le leaderboard vivant",lb_title:"Chaque geste compte.",
+  lb_body:"Un seul classement individuel traverse toute l'arène : chaque sprint, chaque lancer, chaque réaction à chaque station alimente ton score en direct. 300 athlètes par session — un seul tableau.",
+  lb_card_t:"Classement en direct",lb_live:"En direct",
+  mf_eyebrow:"Zone augmentée par la technologie",mf_title_a:'Sports tech zone <span class="mf-name">1 &amp; 2</span>',
+  mf_body:"Deux terrains augmentés transforment la lumière, le son et l'interactivité en mouvement collectif. Dans l'arène, la technologie ne se regarde pas : elle se joue. Une expérience qui fait bouger les gens, ensemble, dans le vrai monde.",
+  s_eyebrow:"10 ans de preuve",s_title:"Le sport est validé.",
+  s1:"Ans de développement",s2:"Écoles partenaires",s3:"Participants",s4:"Disciplines",
+  s_tag_a:"Bâti au Québec.",s_tag_b:"Les Games sont le prochain chapitre.",
+  cal_title:"Prochains événements",cal_sub:"Choisis ta ville, sélectionne une session, réserve ta place.",cal_all:"Toutes les villes",cal_pick:"Sélectionne une session ci-dessus",cal_launch:"Lancement",cal_full:"Complet",cal_left:"restantes",
+  p_eyebrow:"Sessions & billets",p_title:"Entre dans l'arène.",p_waitlist:"Première session : le 5 septembre 2026. Réserve ta place sur la liste d'attente.",cd_title:"Première session — 5 sept. 2026",cd_d:"Jours",cd_h:"Heures",cd_m:"Min",cd_s:"Sec",sp_label:"places réservées cette semaine",wf_headline:"Reçois les nouvelles avant tout le monde",wf_tier_def:"Liste d'attente",wf_email:"Ton courriel",wf_phone:"Ton cellulaire",wf_btn:"Réserve ma place",wf_note:"Pas de spam. Juste ta place et les premières dates.",wf_ok_t:"Tu es sur la liste.",wf_ok_b:"On te texte dès l'ouverture des billets pour le 5 septembre 2026.",tier_Jeunesse:"Jeunesse",tier_Adulte:"Adulte",tier_Corporatif:"Corporatif",tier_Groupe:"Groupe",tier_Famille:"Famille & Pour tous",p_newsletter:"Rejoins la newsletter",p_group_cta:"Réserve une journée pour une école, une commission scolaire ou une entreprise",
+  st_head:"Choisis ta session",
+  st_youth_tag:"10–17 ans",st_youth_name:"Jeunesse",st_youth_sub:"Pour les 10 à 17 ans. 9 stations. Un seul score.",
+  st_adult_tag:"18 ans et +",st_adult_name:"Adulte",st_adult_sub:"Compétition individuelle. Leaderboard en direct. Instinct à l'état pur.",
+  st_corp_tag:"Équipes & entreprises",st_corp_name:"Corporatif",st_corp_sub:"Session privée, classement d'entreprise dédié, expérience complète.",
+  st_elite_tag:"Niveau élite",st_elite_name:"Élite",st_elite_sub:"Les meilleurs athlètes. Les vrais scores. La vraie compétition.",
+  st_fam_tag:"Tous âges · En famille · Pour tous",st_fam_name:"Famille & Pour tous",st_fam_sub:"Parents, enfants, amis — tout le monde joue. Personne ne regarde.",
+  st_fam_tagline:"Ce n'est pas ton sport traditionnel — ici, personne ne reste dans les gradins. Tout le monde joue. Get in the game!",
+  st_book:"Réserve ta place →",
+  p1_t:"Jeunesse",p2_t:"Adulte",p3_t:"Corporatif",
+  p_per1:"par athlète / session",p_per2:"par athlète / session",p_per3:"par athlète / session",
+  p_f1:"Accès aux 9 stations",p_f2:"Score individuel en direct",p_f3:"Sports tech zone 1 & 2",
+  p_f1b:"Accès aux 9 stations",p_f2b:"Score individuel en direct",p_f3b:"Sports tech zone 1 & 2",
+  p_f1c:"Sessions privées d'équipe",p_f2c:"Classement d'entreprise dédié",p_f3c:"Expérience augmentée complète",
+  p_cta1:"Réserve",p_cta2:"Réserve",p_cta3:"Réserve",
+  p_note:"<b>7 sessions par jour</b> · 300 participants par session · Un seul leaderboard",
+  p_bracelet_tip:"Économise <b>5$</b> pour le prochain événement en gardant ton bracelet",
+  f_tag:"Ton instinct. Ton arène.",f_contact:"Contact",f_book:"Réserver une session",f_follow:"Suis l'arène",f_lang:"Langue",
+  f_rights:"Tous droits réservés.",f_nc:"Sport sans contact — on touche le ballon, jamais le joueur.",
+  zc_default_tag:"Zone signature",zc_default_name:"L'Arène",zc_default_desc:"Sélectionne une des 9 stations sur le plan pour découvrir son gameplay.",
+  zc_mf:"Zone augmentée par la technologie incluse",
+  nav_special:"Projets spéciaux",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: La Série TV",
+  sg_eyebrow:"Projet spécial",sg_title:"SÉAN GARNIER<br>DANS L'ARÈNE.",
+  sg_quote:"&ldquo;Le freestyle, c'est libérer l'instinct. PürInstinct Games, c'est exactement ça — mais à 300 athlètes en même temps.&rdquo;",
+  sg_body:"Le joueur le plus visionné de l'histoire du football freestyle — 1 milliard de vues — prend la direction de l'arène pour une session exclusive. Il anime, il défie, il joue. Une seule date, un nombre limité de places.",
+  sg_f1:"vues cumulées",sg_f2:"freestyler mondial",sg_f3:"session exclusive",
+  sg_cta:"Réserve ta place",sg_cta2:"Je veux ma place",sg_card_tag:"SESSION EXCLUSIVE · DATE UNIQUE"
+},
+en:{
+  nav_concept:"The concept",nav_arena:"The arena",nav_instincts:"The 5 instincts",nav_purid:"PÜR ID",nav_lb:"Leaderboard",nav_tickets:"Tickets",nav_cta:"Book now",
+  h1_a:"YOUR INSTINCT.",h1_b:"YOUR ARENA.",h1_sub:"Sport at its purest. Instinct at its highest.",h1_cta:"Enter the Arena →",
+  cta2_hl:"You get it.<br>Now come play it.",cta2_btn:"I Want to Play",cta2_micro:"Free to start &nbsp;·&nbsp; No complicated registration",
+  cta3_hl:"10,000 participants<br>can't be wrong.",cta3_btn:"Join the Movement",cta3_micro:"Join the movement.",
+  cta4_hl:"The arena is waiting.",cta4_btn:"I Want In",
+  cta5_hl:"Ready to play?",cta5_btn:"Start Now",cta5_micro:"Questions?",cta5_micro_link:"Reach out.",
+  sticky_play:"PLAY NOW →",
+  strip_st:"Stations",strip_ath:"Athletes / session",strip_lb:"Leaderboard",scroll_hint:"Descend into the arena",
+  c_eyebrow:"The concept",c_l1:"Nobody here watches.",c_l2:"Everybody competes.",c_l3:"We move. Together.",
+  c_body:"PürInstinct Games is not a show. It's a portable 9-station arena touring city to city — and everyone in it is an athlete. The signature sport: a no-contact sport built on 5 natural instincts. Objective: cross the field without being touched while carrying the ball and without dropping it, always 3 against 2. Around it: immersive technology that makes people move in the real world — instead of staring at individual screens.",
+  watch_btn:"See the complete video",
+  c_p1t:"Sport based on instinct and fast decision-making",c_p1b:"Cross the field without being touched, without dropping the ball. Strictly no contact.",
+  c_p2t:"5 natural instincts",c_p2b:"Speed, hand skills, foot skills, agility, game IQ.",
+  c_p3t:"One living leaderboard",c_p3b:"Every station feeds your individual score, in real time.",
+  a_eyebrow:"The arena",a_title:"9 stations. One arena.",
+  a_sub:"Fly over the complex: 5 skill zones, 2 PürInstinct courts at center, 2 augmented tech zones.",
+  a_hint:"Drag to spin 360° · Tap a station to explore its zone",
+  i_eyebrow:"The athlete journey",i_title:"From sign-up to the podium.",i_sub2:"Follow one athlete's journey: a 120-minute session, one bib, nine stations — and a single score.",j_bib:"YOUR NAME",j_bib_kind:"Athlete pass",j_band_live:"Live",j_band_tag:"Your score · 9 stations",j_feat_reg:"Join a game",j_feat_score:"Track your score",j_feat_chal:"Send a challenge",j_feat_prize:"Claim your prizes",w360_hint:"⟲ Drag to rotate",j_reg_s:"START",j_reg_t:"Registration",j_reg_b:"Get your connected PürInstinct wristband: join a game, track your score, send a challenge, claim your prizes — it follows you everywhere in the arena, in real time.",j_learn_s:"THE SPORT",j_learn_t:"Learn PürInstinct",j_learn_b:"6 difficulty levels to master the signature sport — progress at your own pace, from first try to elite.",j_play_s:"THE MATCH",j_play_t:"Play PürInstinct",j_play_b:"Random team: you're matched with new teammates. Cross the field 3 v 2, no contact, never drop the ball.",j_mf_s:"AUGMENTED TECH ZONE",j_mf_s2:"AUGMENTED TECH ZONE",j_mf1_t:"Sports tech zone 1",j_mf1_b:"A wall of light targets: hit yours faster than your opponent. Pure reflexes, augmented technology.",j_mf2_t:"Sports tech zone 2",j_mf2_b:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",j_fin_s:"FINISH",j_fin_t:"The podium",j_fin_b:"Every zone fed your score. The leaderboard decides.",j_fin_cta:"See the leaderboard",
+  z1_en:"SPEED",z1_t:"Speed",z1_b:"40m sprint, 5 handicap levels: everyone starts on equal footing.",
+  z2_en:"HAND SKILLS",z2_t:"Hand skills",z2_b:"Ball-throwing arena, teams of 3. Precision, ball reaction.",
+  z3_en:"FOOT SKILLS",z3_t:"Foot skills",z3_b:"Reactive light-pad system, 1v1 duels.",
+  z4_en:"AGILITY",z4_t:"Agility",z4_b:"Tag arena with obstacles, teams of 3.",
+  z5_en:"GAME IQ",z5_t:"Game IQ",z5_b:"Fast 3v3 strategy with a ball.",
+  mf_note:"+ Augmented tech zone",mf_note2:"+ Augmented tech zone",mf_note3:"+ Augmented tech zone",mf_note4:"+ Augmented tech zone",mf_note5:"+ Augmented tech zone",
+  lb_eyebrow:"The living leaderboard",lb_title:"Every move counts.",
+  lb_body:"One individual ranking runs across the whole arena: every sprint, every throw, every reaction at every station feeds your live score. 300 athletes per session — one board.",
+  lb_card_t:"Live ranking",lb_live:"Live",
+  mf_eyebrow:"Augmented tech zone",mf_title_a:'Sports tech zone <span class="mf-name">1 &amp; 2</span>',
+  mf_body:"Two augmented courts transform light, sound and interactivity into collective movement. In the arena, the technology isn't watched: it's played. An experience that makes people move, together, in the real world.",
+  s_eyebrow:"10 years of proof",s_title:"The sport is validated.",
+  s1:"Years of development",s2:"Partner schools",s3:"Participants",s4:"Disciplines",
+  s_tag_a:"Built in Quebec.",s_tag_b:"The Games are the next chapter.",
+  cal_title:"Upcoming events",cal_sub:"Choose your city, pick a session, book your spot.",cal_all:"All cities",cal_pick:"Select a session above",cal_launch:"Launch",cal_full:"Full",cal_left:"spots left",
+  p_eyebrow:"Sessions & tickets",p_title:"Step into the arena.",p_waitlist:"First session: September 5, 2026. Save your spot on the waitlist.",cd_title:"First session — Sept 5, 2026",cd_d:"Days",cd_h:"Hours",cd_m:"Min",cd_s:"Sec",sp_label:"spots reserved this week",wf_headline:"Be the first to know",wf_tier_def:"Waitlist",wf_email:"Your email",wf_phone:"Your cell number",wf_btn:"Save my spot",wf_note:"No spam. Just your spot and the first dates.",wf_ok_t:"You're on the list.",wf_ok_b:"We'll text you the moment tickets open for September 5, 2026.",tier_Jeunesse:"Youth",tier_Adulte:"Adult",tier_Corporatif:"Corporate",tier_Groupe:"Group",tier_Famille:"Family & For All",p_newsletter:"Join the newsletter",p_group_cta:"Book a day for a school, school board or a company",
+  st_head:"Choose your session",
+  st_youth_tag:"Ages 10–17",st_youth_name:"Youth",st_youth_sub:"For ages 10 to 17. 9 stations. One score.",
+  st_adult_tag:"18 and up",st_adult_name:"Adult",st_adult_sub:"Individual competition. Live leaderboard. Pure instinct.",
+  st_corp_tag:"Teams & companies",st_corp_name:"Corporate",st_corp_sub:"Private session, dedicated company leaderboard, full augmented experience.",
+  st_elite_tag:"Elite level",st_elite_name:"Elite",st_elite_sub:"The best athletes. Real scores. Real competition.",
+  st_fam_tag:"All ages · Family · For All",st_fam_name:"Family & For All",st_fam_sub:"Parents, kids, friends — everybody plays. Nobody watches.",
+  st_fam_tagline:"This is not your traditional sport — here, nobody sits in the stands. Everybody plays. Get in the game!",
+  st_book:"Save your spot →",
+  p1_t:"Youth",p2_t:"Adult",p3_t:"Corporate",
+  p_per1:"per athlete / session",p_per2:"per athlete / session",p_per3:"per athlete / session",
+  p_f1:"Access to all 9 stations",p_f2:"Live individual score",p_f3:"Sports tech zone 1 & 2",
+  p_f1b:"Access to all 9 stations",p_f2b:"Live individual score",p_f3b:"Sports tech zone 1 & 2",
+  p_f1c:"Private team sessions",p_f2c:"Dedicated company leaderboard",p_f3c:"Full augmented experience",
+  p_cta1:"Book",p_cta2:"Book",p_cta3:"Book",
+  p_note:"<b>7 sessions per day</b> · 300 participants per session · One leaderboard",
+  p_bracelet_tip:"Save <b>$5</b> on your next event by keeping your bracelet",
+  f_tag:"Your instinct. Your arena.",f_contact:"Contact",f_book:"Book a session",f_follow:"Follow the arena",f_lang:"Language",
+  f_rights:"All rights reserved.",f_nc:"No-contact sport — touch the ball, never the player.",
+  zc_default_tag:"Signature zone",zc_default_name:"The Arena",zc_default_desc:"Select one of the 9 stations on the map to discover its gameplay.",
+  zc_mf:"Augmented tech zone included",
+  nav_special:"Special projects",nav_ct:"College Tour",nav_champ:"Championship",nav_sg:"Séan Garnier",nav_kd:"King Dac",nav_yt:"YouTube Series",nav_tv:"INSTINCT: The TV Show",
+  sg_eyebrow:"Special project",sg_title:"SÉAN GARNIER<br>IN THE ARENA.",
+  sg_quote:"&ldquo;Freestyle is about releasing pure instinct. PürInstinct Games is exactly that — but with 300 athletes at once.&rdquo;",
+  sg_body:"The most-watched player in freestyle football history — 1 billion views — takes over the arena for one exclusive session. He hosts, he challenges, he plays. One date only, limited spots.",
+  sg_f1:"combined views",sg_f2:"world freestyler",sg_f3:"exclusive session",
+  sg_cta:"Save your spot",sg_cta2:"I want my spot",sg_card_tag:"EXCLUSIVE SESSION · ONE DATE ONLY"
+}};
+
+/* Zone data for the interactive map card */
+const ZONES = {
+  vitesse:{img:"assets/render-speed.jpg",color:"#FF4438",fr:{tag:"Zone 01 — Vitesse",name:"Vitesse",desc:"Sprint de 40 m, 5 niveaux de handicap: tout le monde part à chances égales.",mf:true},
+           en:{tag:"Zone 01 — Speed",name:"Speed",desc:"40m sprint, 5 handicap levels: everyone starts on equal footing.",mf:true}},
+  mains:{img:"assets/render-hand.jpg",color:"#2D7DFF",fr:{tag:"Zone 02 — Agilité des mains",name:"Mains",desc:"Arène de lancers, équipes de 3. Précision, réaction au ballon.",mf:true},
+         en:{tag:"Zone 02 — Hand skills",name:"Hands",desc:"Ball-throwing arena, teams of 3. Precision, ball reaction.",mf:true}},
+  pieds:{img:"assets/render-foot.jpg",color:"#2EE06A",fr:{tag:"Zone 03 — Agilité des pieds",name:"Pieds",desc:"Plaques lumineuses réactives, duels 1 contre 1.",mf:true},
+         en:{tag:"Zone 03 — Foot skills",name:"Feet",desc:"Reactive light-pad system, 1v1 duels.",mf:true}},
+  agilite:{img:"assets/render-agility.jpg",color:"#FFC400",fr:{tag:"Zone 04 — Agilité générale",name:"Agilité",desc:"Arène de tag avec obstacles, équipes de 3.",mf:true},
+           en:{tag:"Zone 04 — Agility",name:"Agility",desc:"Tag arena with obstacles, teams of 3.",mf:true}},
+  iq:{img:"assets/render-iq.jpg",color:"#A45CFF",fr:{tag:"Zone 05 — IQ de jeu",name:"IQ de jeu",desc:"Stratégie rapide 3 contre 3 avec ballon.",mf:true},
+      en:{tag:"Zone 05 — Game IQ",name:"Game IQ",desc:"Fast 3v3 strategy with a ball.",mf:true}},
+  pi1:{img:"assets/render-field.jpg",color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 1",desc:"Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2.",mf:false},
+       en:{tag:"Signature court",name:"PürInstinct 1",desc:"The signature sport: a no-contact sport built on 5 natural instincts. Objective: cross the field without being touched while carrying the ball and without dropping it, always 3 against 2.",mf:false}},
+  pi2:{img:"assets/render-field.jpg",color:"#CCFF00",fr:{tag:"Terrain signature",name:"PürInstinct 2",desc:"Le sport signature : un sport sans contact bâti sur 5 instincts naturels. Objectif: traverser le terrain sans se faire toucher avec le ballon et sans échapper le ballon, toujours en 3 contre 2.",mf:false},
+       en:{tag:"Signature court",name:"PürInstinct 2",desc:"The signature sport: a no-contact sport built on 5 natural instincts. Objective: cross the field without being touched while carrying the ball and without dropping it, always 3 against 2.",mf:false}},
+  mf1:{img:"assets/render-mf1.jpg",color:"#CCFF00",fr:{tag:"Zone augmentée par la technologie",name:"Sports tech zone 1",desc:"Mur de cibles lumineuses : touche les tiennes plus vite que ton adversaire. Réflexes purs, technologie augmentée.",mf:false},
+       en:{tag:"Augmented tech zone",name:"Sports tech zone 1",desc:"A wall of light targets: hit yours faster than your opponent. Pure reflexes, augmented technology.",mf:false}},
+  mf2:{img:"assets/render-mf2.jpg",color:"#CCFF00",fr:{tag:"Zone augmentée par la technologie",name:"Sports tech zone 2",desc:"Projections 360°, environnements dynamiques au sol et aux murs. Habileté, agilité et décisions rapides.",mf:false},
+       en:{tag:"Augmented tech zone",name:"Sports tech zone 2",desc:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",mf:false}}
+};
+
+let lang = localStorage.getItem("pi_lang") || "fr";
+const RICH = new Set(["h1_sub","mf_title_a","p_note","p_bracelet_tip","sg_title","sg_quote","cta2_hl","cta3_hl","cta2_micro"]); // keys containing safe inline HTML
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    const v = I18N[lang][k];
+    if(v==null) return;
+    if(RICH.has(k)) el.innerHTML = v; else el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    const v = I18N[lang][el.getAttribute("data-i18n-ph")];
+    if(v!=null) el.placeholder = v;
+  });
+  document.getElementById("langBtn").textContent = lang==="fr" ? "EN" : "FR";
+  document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
+  // swap zone logos FR/EN
+  document.querySelectorAll(".zone-logo").forEach(img=>{
+    img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
+  });
+  document.querySelectorAll(".nav-instinct-logo").forEach(img=>{
+    img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
+  });
+  renderZoneCard(currentZone);
+  if(window.__arena3dSetLang) window.__arena3dSetLang(lang);
+  if(window.__lvlRefresh) window.__lvlRefresh();
+  if(window.__calRender) window.__calRender();
+}
+document.getElementById("langBtn")?.addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
+document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
+
+/* Burger */
+const burger = document.getElementById("burger"), navLinks = document.getElementById("navLinks");
+function setMenu(open) {
+  navLinks.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", String(open));
+}
+burger.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && navLinks.classList.contains("open")) {
+    setMenu(false);
+    burger.focus();
+  }
+});
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* Hero mouse parallax (desktop) + scroll fade-out */
+const heroWrap = document.getElementById("heroWrap");
+const heroEl = document.querySelector(".hero");
+if(heroWrap && !reduceMotion){
+  let mx=0,my=0,px=0,py=0,scY=0,ticking=false;
+  const fine = matchMedia("(pointer:fine)").matches;
+  function applyHero(){
+    ticking=false;
+    px += (mx-px)*.08; py += (my-py)*.08;
+    const fade = Math.max(0, 1 - scY/(window.innerHeight*.85));
+    heroWrap.style.transform = `translate3d(${px.toFixed(2)}px,${(py + scY*.28).toFixed(2)}px,0)`;
+    heroWrap.style.opacity = fade.toFixed(3);
+    if(Math.abs(mx-px)>.1||Math.abs(my-py)>.1) tick();
+  }
+  function tick(){ if(!ticking){ ticking=true; requestAnimationFrame(applyHero); } }
+  if(fine){
+    heroEl.addEventListener("mousemove",e=>{
+      const r=heroEl.getBoundingClientRect();
+      mx = ((e.clientX-r.left)/r.width - .5)*-14;
+      my = ((e.clientY-r.top)/r.height - .5)*-8;
+      tick();
+    });
+    heroEl.addEventListener("mouseleave",()=>{mx=0;my=0;tick();});
+  }
+  window.addEventListener("scroll",()=>{
+    scY = Math.min(window.scrollY, window.innerHeight);
+    tick();
+  },{passive:true});
+}
+/* Bracelet 360 video: force play on mobile when scrolled into view */
+const braceVid = document.querySelector(".w360-video");
+if(braceVid && !reduceMotion){
+  const tryPlay = ()=>{ braceVid.play().catch(()=>{}); };
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting) tryPlay(); else braceVid.pause(); });
+    },{threshold:.1}).observe(braceVid);
+  } else { tryPlay(); }
+}
+
+/* ====================================================== */
+/* Zone panels: transform parallax (iOS-safe) + logo tilt  */
+/* ====================================================== */
+(function(){
+  if(reduceMotion) return;
+  const panels = [...document.querySelectorAll(".zone-panel")].map(p=>({
+    el:p, photo:p.querySelector(".zp-photo"), num:p.querySelector(".zone-num")
+  })).filter(x=>x.photo||x.num);
+  if(panels.length){
+    let ticking=false;
+    function parallax(){
+      ticking=false;
+      const vh = window.innerHeight;
+      panels.forEach(x=>{
+        const r = x.el.getBoundingClientRect();
+        if(r.bottom<0||r.top>vh) return;
+        const prog = (r.top + r.height/2 - vh/2)/vh;
+        if(x.photo) x.photo.style.transform = `translate3d(0,${(prog*14).toFixed(2)}%,0)`;
+        if(x.num) x.num.style.transform = `translateY(calc(-50% + ${(prog*-60).toFixed(1)}px)) skewX(-10deg)`;
+      });
+    }
+    window.addEventListener("scroll",()=>{ if(!ticking){ticking=true;requestAnimationFrame(parallax);} },{passive:true});
+    parallax();
+  }
+  /* logo hover tilt (desktop) */
+  if(matchMedia("(pointer:fine)").matches){
+    document.querySelectorAll(".zone-logo-wrap").forEach(wrap=>{
+      const img = wrap.querySelector(".zone-logo"); if(!img) return;
+      wrap.addEventListener("mouseenter",()=>{
+        /* slam animation fills forwards and locks transform — release it once landed */
+        img.style.animation="none"; img.style.opacity="1"; img.style.filter="none";
+      });
+      wrap.addEventListener("mousemove",e=>{
+        const r=wrap.getBoundingClientRect();
+        const rx=((e.clientY-r.top)/r.height-.5)*-10;
+        const ry=((e.clientX-r.left)/r.width-.5)*12;
+        img.style.transform=`rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg) scale(1.04)`;
+        img.style.transition="transform .12s ease-out";
+      });
+      wrap.addEventListener("mouseleave",()=>{
+        img.style.transform=""; img.style.transition="transform .4s ease";
+      });
+    });
+  }
+})();
+
+/* ====================================================== */
+/* Scroll reveals */
+/* ====================================================== */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+},{threshold:.18,rootMargin:"0px 0px -6% 0px"});
+document.querySelectorAll(".obs").forEach(el=>io.observe(el));
+
+/* ====================================================== */
+/* Arena map interaction */
+/* ====================================================== */
+let currentZone = null;
+const zoneCard = document.getElementById("zoneCard");
+const zoneInner = document.getElementById("zoneCardInner");
+function renderZoneCard(key){
+  const t = I18N[lang];
+  const tagEl = zoneInner.querySelector("[data-role=tag]");
+  const nameEl = zoneInner.querySelector("[data-role=name]");
+  const descEl = zoneInner.querySelector("[data-role=desc]");
+  const mfEl = zoneInner.querySelector("[data-role=mf]");
+  const imgEl = zoneInner.querySelector("[data-role=img]");
+  if(!key){
+    zoneCard.style.setProperty("--zc","#CCFF00");
+    tagEl.textContent=t.zc_default_tag; nameEl.textContent=t.zc_default_name; descEl.textContent=t.zc_default_desc;
+    mfEl.style.display="none"; imgEl.style.display="none"; return;
+  }
+  const z = ZONES[key], d = z[lang];
+  zoneCard.style.setProperty("--zc",z.color);
+  tagEl.textContent=d.tag; nameEl.textContent=d.name; descEl.textContent=d.desc;
+  if(d.mf){ mfEl.style.display="flex"; mfEl.textContent=t.zc_mf; } else mfEl.style.display="none";
+  if(z.img){ imgEl.src=z.img; imgEl.alt=d.name; imgEl.style.display="block"; } else imgEl.style.display="none";
+  zoneInner.classList.remove("swap"); void zoneInner.offsetWidth; zoneInner.classList.add("swap");
+}
+document.querySelectorAll("#arenaSvg .station").forEach(st=>{
+  const key = st.getAttribute("data-zone");
+  const activate = ()=>{
+    document.querySelectorAll("#arenaSvg .station").forEach(s=>s.classList.remove("active"));
+    st.classList.add("active"); currentZone = key; renderZoneCard(key);
+  };
+  st.addEventListener("click",activate);
+  st.addEventListener("mouseenter",activate);
+});
+/* cursor-proximity glow on zone blocks */
+const arenaSvg = document.getElementById("arenaSvg");
+if(!reduceMotion && matchMedia("(pointer:fine)").matches){
+  let raf=null;
+  arenaSvg.addEventListener("mousemove",e=>{
+    if(raf) return;
+    raf=requestAnimationFrame(()=>{
+      raf=null;
+      const r = arenaSvg.getBoundingClientRect();
+      const mx=e.clientX, my=e.clientY;
+      arenaSvg.querySelectorAll(".station rect.body").forEach(rect=>{
+        const b = rect.getBoundingClientRect();
+        const cx=b.left+b.width/2, cy=b.top+b.height/2;
+        const d=Math.hypot(mx-cx,my-cy);
+        const k=Math.max(0,1-d/(r.width*.45));
+        rect.style.filter = k>0.05 ? `brightness(${1+k*.8}) drop-shadow(0 0 ${k*14}px currentColor)` : "";
+      });
+    });
+  });
+  arenaSvg.addEventListener("mouseleave",()=>arenaSvg.querySelectorAll(".station rect.body").forEach(r=>r.style.filter=""));
+}
+
+/* ====================================================== */
+/* Leaderboard — live mock */
+/* ====================================================== */
+const NAMES=["M. Tremblay","A. Bouchard","S. Nguyen","J. Gagnon","L. Côté","K. Diallo","É. Fortin","C. Lavoie","R. Petit","N. Roy"];
+const LB_ZONES=[
+  {n:"VITESSE",c:"#FF4438"},{n:"MAINS",c:"#2D7DFF"},{n:"PIEDS",c:"#2EE06A"},
+  {n:"AGILITÉ",c:"#FFC400"},{n:"IQ",c:"#A45CFF"},{n:"PÜRINSTINCT",c:"#CCFF00"},{n:"AUGMENTÉ",c:"#CCFF00"}
+];
+let lb = NAMES.map((n,i)=>({name:n,score:8600 - i*420 - Math.floor(Math.random()*120)}));
+const lbRows = document.getElementById("lbRows");
+const lbDivider = document.getElementById("lbDivider");
+const ROW_H=48, PAD_T=10;
+const rowEls = lb.map((p,i)=>{
+  const el=document.createElement("div");
+  el.className="lb-row";
+  el.innerHTML=`<span class="rk"></span><span class="nm">${p.name}</span><span class="up-arrow">\u25B2</span><span class="sc">0</span>`;
+  el.style.top=(PAD_T+i*ROW_H)+"px";
+  lbRows.appendChild(el);
+  return el;
+});
+lbRows.style.height=(PAD_T*2+ROW_H*lb.length)+"px";
+let prevRanks=null;
+function paintLb(animateScores){
+  const sorted=[...lb].sort((a,b)=>b.score-a.score);
+  const card=document.querySelector(".lb-card");
+  let anyMove=false;
+  sorted.forEach((p,rank)=>{
+    const idx=lb.indexOf(p), el=rowEls[idx];
+    el.style.top=(PAD_T+rank*ROW_H)+"px";
+    el.classList.toggle("top",rank<3);
+    if(prevRanks && prevRanks[idx]>rank && !reduceMotion){
+      anyMove=true;
+      el.classList.remove("rank-up"); void el.offsetWidth; el.classList.add("rank-up");
+    } else if(prevRanks && prevRanks[idx]<rank && !reduceMotion){
+      el.classList.remove("rank-down"); void el.offsetWidth; el.classList.add("rank-down");
+    }
+    el.querySelector(".rk").textContent=(rank+1).toString().padStart(2,"0");
+    const scEl=el.querySelector(".sc");
+    if(animateScores && !reduceMotion){
+      const from=parseInt(scEl.dataset.val||"0",10), to=p.score, t0=performance.now();
+      if(prevRanks && to>from){
+        const g=document.createElement("span");
+        g.className="gain";
+        if(p.lastBurst && p.lastZone){
+          g.textContent="+"+p.lastBurst+" · "+p.lastZone.n;
+          g.style.setProperty("--gc", p.lastZone.c);
+          p.lastBurst=null; p.lastZone=null;
+        } else {
+          g.textContent="+"+(to-from);
+        }
+        el.appendChild(g);
+        setTimeout(()=>g.remove(),1500);
+      }
+      const step=now=>{const k=Math.min(1,(now-t0)/700);
+        scEl.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))).toLocaleString("fr-CA");
+        if(k<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+      scEl.dataset.val=to;
+    } else { scEl.textContent=p.score.toLocaleString("fr-CA"); scEl.dataset.val=p.score; }
+  });
+  if(anyMove && card){ card.classList.remove("sheen"); void card.offsetWidth; card.classList.add("sheen"); }
+  const pr=new Array(lb.length);
+  sorted.forEach((p,rank)=>{ pr[lb.indexOf(p)]=rank; });
+  prevRanks=pr;
+  lbDivider.style.top=(PAD_T+3*ROW_H-4)+"px";
+}
+const lbSection=document.getElementById("leaderboard");
+let lbStarted=false;
+new IntersectionObserver((es,obs)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting && !lbStarted){
+      lbStarted=true; paintLb(true);
+      if(!reduceMotion){
+        setInterval(()=>{
+          /* small organic gains everywhere */
+          lb.forEach(p=>{ if(Math.random()<.4) p.score+=Math.floor(Math.random()*90); });
+          /* guaranteed overtake: a chaser jumps past the player above */
+          const sorted=[...lb].sort((a,b)=>b.score-a.score);
+          const surges = 1 + (Math.random()<.35?1:0);
+          for(let n=0;n<surges;n++){
+            const i = 1 + Math.floor(Math.random()*(sorted.length-1));
+            const chaser = sorted[i], target = sorted[i-1];
+            const gap = target.score - chaser.score;
+            const burst = gap + 60 + Math.floor(Math.random()*240);
+            chaser.score += burst;
+            chaser.lastBurst = burst;
+            chaser.lastZone = LB_ZONES[Math.floor(Math.random()*LB_ZONES.length)];
+          }
+          paintLb(true);
+        },3000);
+      }
+      obs.disconnect();
+    }
+  });
+},{threshold:.3}).observe(lbSection);
+paintLb(false);
+
+/* ====================================================== */
+/* Stat counters */
+/* ====================================================== */
+document.querySelectorAll(".count").forEach(el=>{
+  new IntersectionObserver((es,obs)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      obs.disconnect();
+      const to=+el.dataset.to, t0=performance.now(), dur=1400;
+      if(reduceMotion){el.textContent=to.toLocaleString("fr-CA");return;}
+      const step=now=>{const k=Math.min(1,(now-t0)/dur);
+        el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString("fr-CA");
+        if(k<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+    });
+  },{threshold:.5}).observe(el);
+});
+
+/* ====================================================== */
+/* Pricing — countdown, spots counter, waitlist form */
+/* ====================================================== */
+const LAUNCH_DATE = new Date("2026-09-05T09:00:00-04:00");
+/* Google Sheets backend — see waitlist-apps-script.gs for setup.
+   Paste your Apps Script web-app URL below (ends in /exec). */
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyUEaOiLGiV8PIC7_DGi3ZuYt2PPOqJJjj-Mlnchtt811p4ncuBGcqIV0U7Mcw3Hh37lg/exec";
+
+(function(){
+  const dEl=document.getElementById("cdD"),hEl=document.getElementById("cdH"),
+        mEl=document.getElementById("cdM"),sEl=document.getElementById("cdS");
+  if(!dEl) return;
+  let last={};
+  function setN(el,key,val){
+    const v=String(val).padStart(key==="d"?3:2,"0");
+    if(last[key]!==v){
+      el.textContent=v;
+      if(!reduceMotion && last[key]!==undefined){el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick");}
+      last[key]=v;
+    }
+  }
+  function tick(){
+    let ms=LAUNCH_DATE-new Date();
+    if(ms<0) ms=0;
+    const d=Math.floor(ms/864e5), h=Math.floor(ms/36e5)%24, m=Math.floor(ms/6e4)%60, sec=Math.floor(ms/1e3)%60;
+    setN(dEl,"d",d); setN(hEl,"h",h); setN(mEl,"m",m); setN(sEl,"s",sec);
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+
+(function(){
+  const nEl=document.getElementById("spotsN");
+  if(!nEl) return;
+  const now=new Date();
+  const week=Math.floor((now-new Date(now.getFullYear(),0,1))/6048e5);
+  let spots=170+((week*73+now.getDay()*11)%70);
+  function paint(bump){
+    nEl.textContent=spots;
+    if(bump&&!reduceMotion){nEl.classList.remove("bump");void nEl.offsetWidth;nEl.classList.add("bump");}
+  }
+  new IntersectionObserver((es,obs)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      obs.disconnect();
+      setTimeout(()=>paint(false),250);
+      if(!reduceMotion) setInterval(()=>{ if(Math.random()<.5){spots+=1+(Math.random()<.2?1:0);paint(true);} },6500);
+    });
+  },{threshold:.4}).observe(nEl);
+})();
+
+(function(){
+  const form=document.getElementById("waitForm");
+  if(!form) return;
+  const tierEl=document.getElementById("wfTier");
+  const email=document.getElementById("wfEmail"), phone=document.getElementById("wfPhone");
+  let tier="Liste d'attente";
+  document.querySelectorAll(".tier-cta").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      tier=btn.dataset.tier;
+      const t=I18N[lang];
+      tierEl.textContent=(lang==="fr"?"Réservation — ":"Booking — ")+(t["tier_"+tier]||tier);
+      form.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"center"});
+      form.classList.remove("flash"); void form.offsetWidth; form.classList.add("flash");
+      setTimeout(()=>email.focus({preventScroll:true}),reduceMotion?0:550);
+    });
+  });
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();
+    let bad=false;
+    if(!email.value || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)){email.classList.add("err");bad=true;}
+    else email.classList.remove("err");
+    if(!phone.value || phone.value.replace(/\D/g,"").length<10){phone.classList.add("err");bad=true;}
+    else phone.classList.remove("err");
+    if(bad) return;
+    const btn=form.querySelector(".wf-btn");
+    btn.disabled=true; btn.style.opacity=".6";
+    try{
+      if(SHEET_ENDPOINT.startsWith("https://")){
+        const data=new URLSearchParams({
+          email:email.value, phone:phone.value, tier:tier, lang:lang,
+          page:location.href, ts:new Date().toISOString()
+        });
+        await fetch(SHEET_ENDPOINT,{method:"POST",mode:"no-cors",
+          headers:{"Content-Type":"application/x-www-form-urlencoded"},body:data});
+      } else {
+        console.warn("Waitlist: paste your Google Apps Script URL into SHEET_ENDPOINT to collect signups.");
+        await new Promise(r=>setTimeout(r,500));
+      }
+    }catch(err){/* still show success — data also kept below */}
+    try{
+      const list=JSON.parse(localStorage.getItem("pi_waitlist")||"[]");
+      list.push({email:email.value,phone:phone.value,tier:tier,at:new Date().toISOString()});
+      localStorage.setItem("pi_waitlist",JSON.stringify(list));
+    }catch(err){}
+    form.classList.add("done");
+    document.getElementById("wfOk").hidden=false;
+  });
+  /* tier hidden field for Formspree payload */
+  const hid=document.createElement("input");
+  hid.type="hidden"; hid.name="tier";
+  form.appendChild(hid);
+  form.addEventListener("submit",()=>{hid.value=tier;},true);
+})();
+
+/* ====================================================== */
+/* CALENDRIER ÉVÉNEMENTS — accordion                       */
+/* ====================================================== */
+(function(){
+  const EVENTS=[
+    {id:"mtl-0905",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",isLaunch:true,
+     date:new Date("2026-09-05T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:38},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:52},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:72},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:14},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:9},
+]},
+    {id:"mtl-0919",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
+     date:new Date("2026-09-19T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:52},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:65},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:88},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:22},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:15},
+]},
+    {id:"qc-0926",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
+     date:new Date("2026-09-26T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"sept.",mEn:"Sept.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:55},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:68},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:95},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:24},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:18},
+]},
+    {id:"mtl-1003",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
+     date:new Date("2026-10-03T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:44},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:58},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:82},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:18},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:12},
+]},
+    {id:"lav-1010",city:"Laval",cityKey:"laval",venue:"À confirmer, Laval",
+     date:new Date("2026-10-10T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:58},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:72},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:101},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:26},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:16},
+]},
+    {id:"ott-1017",city:"Ottawa",cityKey:"ottawa",venue:"À confirmer, Ottawa",
+     date:new Date("2026-10-17T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:56},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:70},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:110},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:27},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:17},
+]},
+    {id:"mtl-1024",city:"Montréal",cityKey:"montreal",venue:"Claude-Robillard, Montréal",
+     date:new Date("2026-10-24T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"oct.",mEn:"Oct.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:76},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:118},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:29},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20},
+]},
+    {id:"qc-1107",city:"Québec",cityKey:"quebec",venue:"À confirmer, Québec",
+     date:new Date("2026-11-07T12:00:00"),dayFr:"Sam",dayEn:"Sat",mFr:"nov.",mEn:"Nov.",
+     sessions:[
+       {fr:"10–17 ans",en:"Youth 10–17",time:"10h00",max:60,spots:60},
+       {fr:"Famille & Pour tous",en:"Family & For All",time:"11h30",max:80,spots:80},
+       {fr:"Adultes",en:"Adults",time:"13h00",max:120,spots:120},
+       {fr:"Corporate",en:"Corporate",time:"16h00",max:30,spots:30},
+       {fr:"Élite",en:"Elite",time:"19h00",max:20,spots:20},
+]}
+  ];
+
+  const acc=document.getElementById("calAcc");
+  if(!acc) return;
+
+  function sClass(s){ const p=s.spots/s.max; return s.spots===0?"full":p<.18||s.spots<=5?"low":"avail"; }
+
+  // Group events by city, preserving order
+  const cityOrder=[], cityMap={};
+  EVENTS.forEach(ev=>{
+    if(!cityMap[ev.cityKey]){ cityMap[ev.cityKey]={name:ev.city,key:ev.cityKey,events:[]}; cityOrder.push(cityMap[ev.cityKey]); }
+    cityMap[ev.cityKey].events.push(ev);
+  });
+
+  let openCity=null, openDate=null;
+
+  const SVG_CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+
+  function dotsHtml(ev){
+    return ev.sessions.map(s=>{
+      const sc=sClass(s);
+      return `<span class="cac-dot${sc==="ok"||sc==="avail"?" ok":sc==="low"?" low":""}"></span>`;
+    }).join("");
+  }
+
+  function sessDetailHtml(ev){
+    const isFr=lang==="fr";
+    const rows=ev.sessions.map((s,i)=>{
+      const sc=sClass(s); const lbl=isFr?s.fr:s.en;
+      const pct=Math.round((1-s.spots/s.max)*100);
+      const spotsHtml=s.spots===0
+        ?`<span class="cs-spots">${isFr?"Complet":"Full"}</span>`
+        :`<span class="cs-spots${sc==="low"?" low":""}"><b>${s.spots}</b> ${isFr?"restantes":"left"}</span>`;
+      return `<div class="cal-sess-row${sc==="full"?" full":""}" data-eid="${ev.id}" data-i="${i}" role="button" tabindex="${sc==="full"?-1:0}">
+        <div><div class="cs-type">${lbl}</div><div class="cs-time">${s.time}</div>
+        <div class="cs-bar-wrap"><div class="cs-bar${sc==="low"?" low":""}" style="width:${pct}%"></div></div></div>
+        <div class="cs-right">${spotsHtml}<div class="cs-check">✓</div></div>
+      </div>`;
+    }).join("");
+    const pick=isFr?"Sélectionne une session ci-dessus":"Select a session above";
+    const btn=isFr?"Réserve ma place":"Save my spot";
+    return `<div class="cal-sess-grid">${rows}</div>
+    <div class="cal-form">
+      <p class="cal-no-sel cac-pick" data-eid="${ev.id}">${pick}</p>
+      <div class="cal-reg-fields cac-fields" data-eid="${ev.id}" style="display:none">
+        <input type="email" class="cac-email" autocomplete="email" required placeholder="${isFr?"Ton courriel":"Your email"}">
+        <input type="tel" class="cac-phone" autocomplete="tel" placeholder="${isFr?"Ton cellulaire":"Your cell number"}">
+        <button type="button" class="cta cac-submit" data-eid="${ev.id}">${btn}</button>
+      </div>
+      <div class="cal-ok cac-ok" data-eid="${ev.id}">
+        <b>${isFr?"Tu es sur la liste.":"You're on the list."}</b>
+        <span class="cac-ok-msg"></span>
+      </div>
+    </div>`;
+  }
+
+  function renderAcc(){
+    const isFr=lang==="fr";
+    acc.innerHTML=cityOrder.map(city=>{
+      const isOpenC=openCity===city.key;
+      const n=city.events.length;
+      const countLbl=n===1?(isFr?"1 événement":"1 event"):(isFr?`${n} événements`:`${n} events`);
+      const datesHtml=isOpenC?city.events.map(ev=>{
+        const isOpenD=openDate===ev.id;
+        const d=ev.date.getDate(), m=isFr?ev.mFr:ev.mEn, day=isFr?ev.dayFr:ev.dayEn, y=ev.date.getFullYear();
+        const launch=ev.isLaunch?`<span class="cal-launch">${isFr?"Lancement":"Launch"}</span>`:"";
+        return `<div class="cac-date-row${isOpenD?" open":""}" data-eid="${ev.id}">
+          <div class="cac-date-hd${isOpenD?" open":""}" data-eid="${ev.id}" role="button" tabindex="0" aria-expanded="${isOpenD}">
+            <span class="cac-dchev">${SVG_CHEV}</span>
+            <div class="cac-date-main">
+              <div class="cac-date-lbl">${launch}${day} ${d} ${m} ${y}</div>
+              <div class="cac-date-venue">${ev.venue}</div>
+            </div>
+            <div class="cac-dots">${dotsHtml(ev)}</div>
+          </div>
+          ${isOpenD?`<div class="cac-detail">${sessDetailHtml(ev)}</div>`:""}
+        </div>`;
+      }).join(""):"";
+      return `<div class="cac-city" data-ck="${city.key}">
+        <div class="cac-city-hd${isOpenC?" open":""}" data-ck="${city.key}" role="button" tabindex="0" aria-expanded="${isOpenC}">
+          <span class="cac-chev">${SVG_CHEV}</span>
+          <span class="cac-city-name">${city.name}</span>
+          <span class="cac-city-count">${countLbl}</span>
+        </div>
+        ${isOpenC?`<div class="cac-dates">${datesHtml}</div>`:""}
+      </div>`;
+    }).join("");
+    bindAcc();
+  }
+
+  function bindAcc(){
+    // City toggles
+    acc.querySelectorAll(".cac-city-hd").forEach(hd=>{
+      const ck=hd.dataset.ck;
+      const toggle=()=>{ openCity=openCity===ck?null:ck; if(openCity!==ck) openDate=null; renderAcc(); };
+      hd.addEventListener("click",toggle);
+      hd.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle();} });
+    });
+    // Date toggles
+    acc.querySelectorAll(".cac-date-hd").forEach(hd=>{
+      const eid=hd.dataset.eid;
+      const toggle=()=>{ openDate=openDate===eid?null:eid; renderAcc(); };
+      hd.addEventListener("click",toggle);
+      hd.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle();} });
+    });
+    // Session row selection
+    acc.querySelectorAll(".cal-sess-row:not(.full)").forEach(r=>{
+      r.addEventListener("click",()=>selectSess(r.dataset.eid,+r.dataset.i));
+      r.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" ") selectSess(r.dataset.eid,+r.dataset.i); });
+    });
+    // Submit buttons
+    acc.querySelectorAll(".cac-submit").forEach(btn=>{
+      btn.addEventListener("click",()=>submitForm(btn.dataset.eid));
+    });
+  }
+
+  // Per-event selected session index
+  const selMap={};
+
+  function selectSess(eid,i){
+    selMap[eid]=i;
+    const ev=EVENTS.find(e=>e.id===eid); if(!ev) return;
+    const isFr=lang==="fr";
+    const s=ev.sessions[i]; const lbl=isFr?s.fr:s.en;
+    // Update rows
+    acc.querySelectorAll(`.cal-sess-row[data-eid="${eid}"]`).forEach((r,j)=>r.classList.toggle("sel",j===i));
+    // Show fields, update pick label
+    const pickEl=acc.querySelector(`.cac-pick[data-eid="${eid}"]`);
+    const fieldsEl=acc.querySelector(`.cac-fields[data-eid="${eid}"]`);
+    if(pickEl){ pickEl.className="cal-sel-lbl cac-pick";
+      pickEl.textContent=isFr?`Session : ${lbl} — ${ev.city}`:`Session: ${lbl} — ${ev.city}`; }
+    if(fieldsEl){ fieldsEl.style.display=""; const em=fieldsEl.querySelector(".cac-email"); if(em) setTimeout(()=>em.focus({preventScroll:true}),80); }
+    const okEl=acc.querySelector(`.cac-ok[data-eid="${eid}"]`); if(okEl) okEl.classList.remove("show");
+  }
+
+  async function submitForm(eid){
+    const ev=EVENTS.find(e=>e.id===eid); if(!ev) return;
+    const i=selMap[eid]; if(i===undefined) return;
+    const fieldsEl=acc.querySelector(`.cac-fields[data-eid="${eid}"]`); if(!fieldsEl) return;
+    const emailEl=fieldsEl.querySelector(".cac-email"), phoneEl=fieldsEl.querySelector(".cac-phone");
+    const emailVal=emailEl?emailEl.value.trim():"";
+    if(!emailVal||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailVal)){ if(emailEl) emailEl.classList.add("err"); return; }
+    if(emailEl) emailEl.classList.remove("err");
+    const phoneVal=phoneEl?phoneEl.value.trim():"";
+    const btn=fieldsEl.querySelector(".cac-submit"); if(btn){btn.disabled=true;btn.style.opacity=".6";}
+    const s=ev.sessions[i]; const isFr=lang==="fr"; const sessionType=isFr?s.fr:s.en;
+    const eventDate=ev.date.toISOString().split("T")[0];
+    try{
+      if(SHEET_ENDPOINT.startsWith("https://")){
+        await fetch(SHEET_ENDPOINT,{method:"POST",mode:"no-cors",
+          headers:{"Content-Type":"application/x-www-form-urlencoded"},
+          body:new URLSearchParams({email:emailVal,phone:phoneVal,tier:sessionType,ville:ev.city,event_date:eventDate,session:sessionType,lang,page:location.href})});
+      } else { await new Promise(r=>setTimeout(r,400)); }
+    }catch(_){}
+    try{
+      const lst=JSON.parse(localStorage.getItem("pi_cal")||"[]");
+      lst.push({email:emailVal,phone:phoneVal,city:ev.city,date:eventDate,session:sessionType,at:new Date().toISOString()});
+      localStorage.setItem("pi_cal",JSON.stringify(lst));
+    }catch(_){}
+    const okEl=acc.querySelector(`.cac-ok[data-eid="${eid}"]`);
+    const msgEl=okEl?okEl.querySelector(".cac-ok-msg"):null;
+    if(okEl) okEl.classList.add("show");
+    if(fieldsEl) fieldsEl.style.display="none";
+    const pickEl=acc.querySelector(`.cac-pick[data-eid="${eid}"]`); if(pickEl) pickEl.style.display="none";
+    if(msgEl) msgEl.textContent=isFr
+      ?` On te contacte pour ta session ${sessionType} le ${ev.date.getDate()} ${ev.mFr} à ${ev.city}.`
+      :` We'll reach out for your ${sessionType} session on ${ev.mEn} ${ev.date.getDate()} in ${ev.city}.`;
+  }
+
+  window.__calRender=function(){ renderAcc(); };
+  renderAcc();
+})();
+
+document.getElementById("year").textContent=new Date().getFullYear();
+applyLang();
+
+
+
+/* ====================================================== */
+/* 6 difficulty levels — clickable, illustrated rules */
+/* ====================================================== */
+(function(){
+  const detail=document.getElementById("lvlDetail");
+  if(!detail) return;
+  const tagEl=document.getElementById("lvlTag"), svgEl=document.getElementById("lvlSvg"), ruleEl=document.getElementById("lvlRule");
+  const bars=[...document.querySelectorAll(".j-lvl")];
+
+  const RULES={
+    fr:["Toutes les passes sont permises.",
+        "Les passes vers l'avant sont interdites pour marquer (dernière passe). On peut marquer avec la course, les pokes (coup de poing), les bottés et les redirections.",
+        "Les passes avant sont interdites passé le centre de l'aire de jeu.",
+        "Aucune passe avant dans l'aire de jeu — seulement des coups de poing, des bottés et des redirections pour avancer le ballon.",
+        "Aucun poke dans la zone des buts.",
+        "Sur les bottés dans la zone des buts, le receveur doit être à l'extérieur de la zone au moment du coup de pied."],
+    en:["All passes are allowed.",
+        "Forward passes are forbidden to score (the final pass). You can score by running, pokes (punches), kicks and redirections.",
+        "Forward passes are forbidden past the centre of the playing area.",
+        "No forward passes anywhere — only punches, kicks and redirections to advance the ball.",
+        "No pokes in the goal zone.",
+        "On kicks into the goal zone, the receiver must be outside the zone at the moment of the kick."]
+  };
+  const LBL={
+    fr:{gz:"ZONE DES BUTS",ok:"PERMIS",no:"INTERDIT",punch:"POING",kick:"BOTTÉ",redir:"REDIRECTION",poke:"POKE",recv:"RECEVEUR",lvl:"Niveau",centre:"CENTRE",run:"COURSE",last:"DERNIÈRE PASSE"},
+    en:{gz:"GOAL ZONE",ok:"ALLOWED",no:"FORBIDDEN",punch:"PUNCH",kick:"KICK",redir:"REDIRECT",poke:"POKE",recv:"RECEIVER",lvl:"Level",centre:"CENTRE",run:"RUN",last:"FINAL PASS"}
+  };
+
+  const LIME="#CCFF00", RED="#FF4438", MUT="rgba(255,255,255,.55)";
+  function arrow(x1,y1,x2,y2,c,dash){
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="2.5" ${dash?'stroke-dasharray="6 5"':''} marker-end="url(#ah${c===RED?'r':'l'})"/>`;
+  }
+  function curve(x1,y1,x2,y2,c){
+    const mx=(x1+x2)/2, my=Math.min(y1,y2)-46;
+    return `<path d="M ${x1} ${y1} Q ${mx} ${my} ${x2} ${y2}" fill="none" stroke="${c}" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#ah${c===RED?'r':'l'})"/>`;
+  }
+  function cross(x,y){
+    return `<g stroke="${RED}" stroke-width="3.4" stroke-linecap="round"><line x1="${x-8}" y1="${y-8}" x2="${x+8}" y2="${y+8}"/><line x1="${x-8}" y1="${y+8}" x2="${x+8}" y2="${y-8}"/></g>`;
+  }
+  function check(x,y){
+    return `<path d="M ${x-7} ${y} l 5 6 l 10 -12" fill="none" stroke="${LIME}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
+  function player(x,y,c){ return `<circle cx="${x}" cy="${y}" r="8" fill="${c||LIME}" stroke="#0A0A0A" stroke-width="2"/>`; }
+  function ball(x,y){ return `<circle cx="${x}" cy="${y}" r="4.5" fill="#fff"/>`; }
+  function txt(x,y,t,c,sz,anchor){
+    return `<text x="${x}" y="${y}" fill="${c||MUT}" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-style="italic" font-size="${sz||12}" text-anchor="${anchor||'middle'}" letter-spacing="1">${t}</text>`;
+  }
+  function field(L,inner,opts){
+    opts=opts||{};
+    return `<svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        <marker id="ahl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${LIME}"/></marker>
+        <marker id="ahr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${RED}"/></marker>
+      </defs>
+      <rect x="6" y="6" width="328" height="188" rx="10" fill="#0d130a" stroke="rgba(204,255,0,.55)" stroke-width="2"/>
+      <rect x="264" y="8" width="68" height="184" fill="rgba(204,255,0,.10)"/>
+      <line x1="264" y1="8" x2="264" y2="192" stroke="${LIME}" stroke-width="1.6" opacity=".7"/>
+      ${opts.centre?`<line x1="170" y1="8" x2="170" y2="192" stroke="#fff" stroke-width="${opts.centreBold?2.4:1.2}" stroke-dasharray="8 7" opacity="${opts.centreBold?.9:.35}"/>`:""}
+      ${txt(298,103,L.gz,"rgba(204,255,0,.75)",13)}
+      ${inner}
+    </svg>`;
+  }
+
+  const DIAGRAMS=[
+    (L)=> field(L, [
+      player(120,100), ball(131,93),
+      arrow(134,92,210,58,LIME), arrow(134,100,215,100,LIME), arrow(128,112,80,160,LIME), arrow(116,90,70,55,LIME),
+      check(228,52), check(232,98), check(64,168), check(54,50),
+      txt(120,135,L.ok,LIME,14)
+    ].join(""), {centre:true}),
+    (L)=> field(L, [
+      /* forbidden: forward pass to score (the final pass) */
+      player(118,42), ball(129,35),
+      arrow(132,34,300,42,RED), cross(252,38),
+      txt(176,66,L.last,RED,11),
+      /* allowed: carry / run the ball into the goal zone */
+      player(38,100), ball(49,93),
+      arrow(52,92,236,98,LIME), check(238,98),
+      txt(96,120,L.run,LIME,11),
+      /* allowed: punch */
+      player(150,150), arrow(162,146,196,135,LIME), txt(164,176,L.punch,LIME,11),
+      /* allowed: kick */
+      player(214,150), curve(223,144,296,124,LIME), txt(228,176,L.kick,LIME,11),
+      /* allowed: redirection */
+      player(286,150), arrow(295,143,314,124,LIME), arrow(293,153,316,160,LIME), txt(300,176,L.redir,LIME,10)
+    ].join(""), {centre:false}),
+    (L)=> field(L, [
+      player(52,110), ball(63,103),
+      arrow(66,102,130,75,LIME), check(146,68),
+      player(205,110), ball(216,103),
+      arrow(219,102,285,75,RED), cross(252,86),
+      txt(170,28,L.centre,"#fff",12),
+      txt(95,150,L.ok,LIME,13), txt(245,150,L.no,RED,13)
+    ].join(""), {centre:true,centreBold:true}),
+    (L)=> field(L, [
+      arrow(60,48,140,30,RED), cross(100,38), txt(170,55,L.no+" — PASSE",RED,12,"middle"),
+      player(60,105), arrow(72,103,108,98,LIME), txt(88,128,L.punch,LIME,12),
+      player(150,105), curve(160,100,225,92,LIME), txt(188,128,L.kick,LIME,12),
+      player(228,105), arrow(237,98,258,72,LIME), arrow(235,108,266,122,LIME), txt(240,144,L.redir,LIME,12)
+    ].join(""), {centre:false}),
+    (L)=> field(L, [
+      player(280,90), ball(291,84),
+      arrow(293,83,318,70,RED), cross(305,76),
+      txt(298,130,L.poke,RED,13),
+      player(180,120), ball(191,113), arrow(194,112,250,95,LIME), check(243,121),
+      txt(185,150,L.ok,LIME,13)
+    ].join(""), {centre:true}),
+    (L)=> field(L, [
+      player(120,135), ball(131,128),
+      curve(134,127,290,75,LIME), txt(180,42,L.kick,LIME,13),
+      player(238,160,"#fff"), txt(238,184,L.recv,LIME,11),
+      arrow(247,153,285,120,LIME,true), check(222,142),
+      player(305,150,"#fff"), cross(305,128)
+    ].join(""), {centre:true})
+  ];
+
+  let cur=null;
+  function render(){
+    if(cur===null) return;
+    const L=LBL[lang], i=cur-1;
+    tagEl.textContent=L.lvl+" "+cur;
+    ruleEl.textContent=RULES[lang][i];
+    svgEl.innerHTML=DIAGRAMS[i](L);
+  }
+  function open(n){
+    cur=n;
+    bars.forEach(b=>b.classList.toggle("sel", +b.dataset.lvl===n));
+    detail.hidden=false;
+    render();
+    if(window.__journeyRebuild) setTimeout(window.__journeyRebuild,380);
+  }
+  function close(){
+    cur=null;
+    detail.hidden=true;
+    bars.forEach(b=>b.classList.remove("sel"));
+    if(window.__journeyRebuild) setTimeout(window.__journeyRebuild,50);
+  }
+  bars.forEach(b=>b.addEventListener("click",()=>{ +b.dataset.lvl===cur ? close() : open(+b.dataset.lvl); }));
+  document.getElementById("lvlClose").addEventListener("click",close);
+  window.__lvlRefresh=render;
+
+  // Default to level 1 (with its diagram) the first time the "Apprendre PürInstinct"
+  // step scrolls into view, so the graphic is shown by default.
+  const ladder=document.querySelector(".j-levels");
+  if(ladder && "IntersectionObserver" in window){
+    let done=false;
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !done && cur===null){ done=true; open(1); io.disconnect(); }
+      });
+    },{threshold:.5});
+    io.observe(ladder);
+  } else {
+    open(1);
+  }
+})();
+
+/* ====================================================== */
+/* Registration wristband — live score count-up           */
+/* ====================================================== */
+(function(){
+  const el=document.getElementById("jBandScore");
+  if(!el) return;
+  const target=2480;
+  const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g," ");
+  let done=false;
+  function run(){
+    if(done) return; done=true;
+    if(reduceMotion){ el.textContent=fmt(target); return; }
+    const dur=1500, t0=performance.now();
+    (function step(t){
+      const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+      el.textContent=fmt(target*e);
+      if(p<1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  if("IntersectionObserver" in window){
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ run(); io.disconnect(); }});},{threshold:.6});
+    io.observe(el);
+  } else run();
+})();
+
+/* ====================================================== */
+/* Bracelet 360° viewer — drag / touch / auto-rotate       */
+/* ====================================================== */
+(function(){
+  const hub=document.getElementById("w360Hub");
+  if(!hub) return;
+  const track=document.getElementById("w360Track");
+  const stage=document.getElementById("w360Stage");
+  const dots=hub.querySelectorAll(".w360-dot");
+  const hint=document.getElementById("w360Hint");
+
+  /* cylinder geometry: translateZ ≈ 55% of face width */
+  function setTZ(){ stage.style.setProperty("--tz",(stage.offsetWidth*.55)+"px"); }
+  setTZ();
+  window.addEventListener("resize",setTZ);
+
+  let rot=0, vel=0, isDrag=false, x0=0, rot0=0, prevX=0;
+  let rafId=null, autoRaf=null, autoTid=null, touched=false;
+
+  /* active face index from current rotation */
+  function faceIdx(){ return (((Math.round(-rot/90))%4)+4)%4; }
+
+  function paint(){
+    stage.style.transform="rotateY("+rot.toFixed(2)+"deg)";
+    const f=faceIdx();
+    dots.forEach((d,i)=>d.classList.toggle("active",i===f));
+  }
+
+  function stopRaf(){ if(rafId){cancelAnimationFrame(rafId);rafId=null;} }
+  function stopAuto(){ if(autoRaf){cancelAnimationFrame(autoRaf);autoRaf=null;} }
+  function clearAuto(){ clearTimeout(autoTid);autoTid=null; }
+
+  /* momentum → snap after release */
+  function runMomentum(){
+    vel*=0.86;
+    rot+=vel;
+    const snap=Math.round(rot/90)*90;
+    if(Math.abs(vel)<0.25){
+      vel=0;
+      (function snapLerp(){
+        const d=snap-rot;
+        if(Math.abs(d)<0.04){rot=snap;paint();rafId=null;schedAuto();return;}
+        rot+=d*.15;paint();
+        rafId=requestAnimationFrame(snapLerp);
+      })();
+      return;
+    }
+    paint();
+    rafId=requestAnimationFrame(runMomentum);
+  }
+
+  /* auto-rotate: slow continuous drift */
+  function startAuto(){
+    if(reduceMotion) return;
+    stopAuto();
+    (function tick(){
+      if(isDrag){stopAuto();return;}
+      rot-=.22;paint();
+      autoRaf=requestAnimationFrame(tick);
+    })();
+  }
+
+  function schedAuto(){
+    clearAuto();
+    if(!reduceMotion) autoTid=setTimeout(startAuto,4500);
+  }
+
+  function onStart(x){
+    isDrag=true; x0=x; rot0=rot; prevX=x; vel=0;
+    stopRaf(); stopAuto(); clearAuto();
+    track.classList.add("dragging");
+    if(!touched){ touched=true; if(hint) hint.classList.add("gone"); }
+  }
+  function onMove(x){
+    if(!isDrag) return;
+    vel=(x-prevX)*.45; prevX=x;
+    rot=rot0+(x-x0)*.45; paint();
+  }
+  function onEnd(){
+    if(!isDrag) return;
+    isDrag=false;
+    track.classList.remove("dragging");
+    rafId=requestAnimationFrame(runMomentum);
+  }
+
+  track.addEventListener("mousedown",e=>onStart(e.clientX));
+  window.addEventListener("mousemove",e=>{if(isDrag)onMove(e.clientX);});
+  window.addEventListener("mouseup",onEnd);
+
+  track.addEventListener("touchstart",e=>onStart(e.touches[0].clientX),{passive:true});
+  window.addEventListener("touchmove",e=>{if(isDrag)onMove(e.touches[0].clientX);},{passive:true});
+  window.addEventListener("touchend",onEnd);
+
+  /* dot clicks — shortest-path snap */
+  dots.forEach((d,i)=>d.addEventListener("click",()=>{
+    stopRaf(); stopAuto(); clearAuto();
+    if(!touched){touched=true;if(hint)hint.classList.add("gone");}
+    const base=Math.round(rot/90)*90;
+    let target=-i*90;
+    while(target-base>180) target-=360;
+    while(target-base<-180) target+=360;
+    rot=base;
+    (function go(){
+      const d=target-rot;
+      if(Math.abs(d)<0.05){rot=target;paint();schedAuto();return;}
+      rot+=d*.15;paint();
+      rafId=requestAnimationFrame(go);
+    })();
+  }));
+
+  /* start auto-rotate when section enters viewport */
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting&&!isDrag) schedAuto(); });
+    },{threshold:.4}).observe(hub);
+  }
+
+  paint();
+})();
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js" defer></script>
+<script src="arena3d.js" defer></script>
+
+<!-- ── VIDEO MODAL ── -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Complete video">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" onclick="closeVideoModal()" aria-label="Close">✕</button>
+    <div id="videoModalContent"></div>
+  </div>
+</div>
+
+<script>
+const VIDEO_URL = "Purinstinct -  video Presentation 720.mp4";
+
+function openVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const content = document.getElementById('videoModalContent');
+  if (VIDEO_URL) {
+    const ytId = VIDEO_URL.match(/(?:v=|youtu\.be\/)([^&?]+)/)?.[1];
+    if (ytId) {
+      content.innerHTML = '<iframe src="https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+    } else {
+      content.innerHTML = '<video src="' + VIDEO_URL + '" controls autoplay style="width:100%;height:100%"></video>';
+    }
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  document.getElementById('videoModal').classList.remove('open');
+  document.getElementById('videoModalContent').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('videoModal').addEventListener('click', function(e) {
+  if (e.target === this) closeVideoModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideoModal();
+});
+</script>
+</body>
+</html>

@@ -44,3 +44,10 @@ Le contrôle d’accès privé doit rester en place.
 - À 1440 et 390 px : cinq destinations, ouverture de l’Arène 3D et Pür ID, menu mobile, portail et trois compétitions, Précédent vers l’URL source et logo après accès direct. Pas de défilement horizontal.
 - Captures refonte-1440.jpg et refonte-390.jpg dans le dossier de captures Codex du chat.
 - Prochaine action : attendre la validation et l’autorisation de publication, puis vérifier le trajet avec une session de production autorisée.
+
+## Accueil centré sur les cinq habiletés
+- Branche codex/homepage-skill-navigation du dépôt dominique-source/Purinstinctgames_web.
+- Accueil court, cinq liens profonds vers zones.html et bouton principal vers concept.html. Vidéo et parallaxe restaurés. L’Arène reste accessible à son ancre dans concept.html. Pour les écoles utilise la compétition École.
+- Aperçu local http://127.0.0.1:4178/. Cinq tests Node réussis. Site statique sans commande de compilation.
+- Vérifiés à 1440 et 390 px : cinq liens de zone, vidéo et déplacement parallaxe au défilement, accès à L’Arène et à Pür ID, portail APP, retour à l’URL d’origine et logo après ouverture directe. Captures games-accueil-1440.jpg et games-accueil-390.jpg.
+- Prochaine action : attendre la validation et l’autorisation de mise en production, puis vérifier avec une session autorisée sur le site.

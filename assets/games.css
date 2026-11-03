@@ -1,0 +1,46 @@
+:root {
+  color-scheme: dark;
+  --ink: #0a0a0a;
+  --paper: #f4f4ef;
+  --lime: #ccff00;
+  --display: "Barlow Condensed", Impact, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ink); color: var(--paper); font: 400 18px/1.4 Barlow, sans-serif; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+.nav { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 8px clamp(16px, 4vw, 60px); background: var(--ink); border-bottom: 1px solid #ccff0060; }
+.home-logo, .nav-links a { display: flex; align-items: center; min-height: 44px; font: italic 900 19px/1 var(--display); text-transform: uppercase; text-decoration: none; }
+.home-logo { gap: 8px; }
+.home-logo img { width: 46px; height: 43px; object-fit: contain; }
+.home-logo em { display: block; }
+.nav-links { display: flex; gap: clamp(12px, 2vw, 30px); }
+.nav-links a:hover, em { color: var(--lime); }
+.burger { display: none; }
+.games-home, .games-zones { width: min(1500px, 100%); margin-inline: auto; padding: clamp(20px, 5vw, 76px) clamp(16px, 4vw, 60px); }
+.games-home { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr); align-items: center; gap: clamp(24px, 4vw, 64px); }
+h1, h2 { margin: 0; font: italic 900 clamp(46px, 6.5vw, 102px)/.95 var(--display); text-transform: uppercase; }
+.games-home p { max-width: 36ch; margin: 16px 0; font-weight: 600; font-size: clamp(18px, 2vw, 28px); }
+.skills { display: flex; flex-wrap: wrap; gap: 6px 8px; padding: 0; margin: 0 0 16px; list-style: none; }
+.skills a { display: flex; align-items: center; min-height: 44px; padding: 5px 10px; border: 1px solid #ccff0070; border-radius: 7px 2px; text-decoration: none; font-weight: 700; }
+.skills a:hover { color: var(--lime); border-color: var(--lime); }
+.games-cta { display: inline-flex; align-items: center; min-height: 48px; padding: 8px 14px; border-radius: 9px 2px; background: var(--lime); color: var(--ink); font-weight: 700; text-decoration: none; }
+.games-overview { display: block; width: 100%; height: auto; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); }
+.games-zones { max-width: 1060px; }
+.skill-detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: center; gap: 20px; padding-block: 24px; border-bottom: 1px solid #ccff0060; scroll-margin-top: 68px; }
+.skill-detail img { width: 100%; }
+.skill-detail h2 { font-size: clamp(30px, 4vw, 56px); color: var(--lime); }
+.skill-detail p { margin: 8px 0 0; }
+@media (max-width: 860px) {
+  .burger { display: grid; place-content: center; gap: 5px; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; }
+  .burger span { display: block; width: 25px; height: 3px; background: var(--lime); }
+  .nav-links { display: none; position: absolute; top: 100%; right: 0; padding: 8px 20px; background: var(--ink); border: 1px solid #ccff0060; }
+  .nav-links.open { display: block; }
+}
+@media (max-width: 650px) {
+  .games-home, .skill-detail { grid-template-columns: 1fr; }
+  .games-home { gap: 16px; }
+  .games-home p { margin-block: 10px; }
+  .skills { margin-bottom: 12px; }
+  .skills a { font-size: 16px; }
+}
