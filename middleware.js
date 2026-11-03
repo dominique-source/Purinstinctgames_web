@@ -5,7 +5,12 @@ export const config = {
   matcher: ['/((?!api|access\\.html|favicon\\.png|favicon\\.ico|assets/arena-hero\\.jpg).*)'],
 };
 
-const schoolPublicPaths = new Set([
+const publicPaths = new Set([
+  '/',
+  '/index.html',
+  '/assets/two-screens.css',
+  '/assets/homepage/match.jpg',
+  '/assets/homepage/arene.jpg',
   '/pour-les-ecoles.html',
   '/assets/ecoles.css',
   '/assets/games.css',
@@ -24,7 +29,7 @@ function getCookie(request, name) {
 }
 
 export default async function middleware(request) {
-  if (schoolPublicPaths.has(new URL(request.url).pathname)) return next();
+  if (publicPaths.has(new URL(request.url).pathname)) return next();
 
   const session = getCookie(request, 'pig_session');
   const payload = session ? await verifyToken(session, process.env.AUTH_SECRET) : null;
