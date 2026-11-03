@@ -98,17 +98,18 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .two-screens[data-parallax] .match-copy {
+  .two-screens[data-end-zone] .match-copy {
     opacity: var(--copy-opacity, 1);
     transform: translateY(var(--copy-y, 0px));
   }
-  .two-screens[data-parallax] .match-copy:focus-within { opacity: 1; }
+  .two-screens[data-end-zone] .match-copy:focus-within { opacity: 1; }
 }
 @media (min-width: 751px) and (prefers-reduced-motion: no-preference) {
-  .two-screens[data-parallax] .match-screen { position: sticky; top: var(--nav-height); }
-  .two-screens[data-parallax] .match-photo {
-    transform: scale(var(--match-scale, 1)) translateY(var(--match-y, 0px));
-    transform-origin: 70% 45%;
+  .two-screens[data-end-zone] .match-screen { position: sticky; top: var(--nav-height); }
+  .two-screens[data-end-zone] .arena-screen {
+    z-index: 2;
+    transform: translateY(var(--arena-y, 0px));
+    clip-path: polygon(0 var(--line-left, 100%), 100% var(--line-right, 100%), 100% 100%, 0 100%);
   }
-  .two-screens[data-parallax] .arena-screen { z-index: 2; }
+  .two-screens[data-end-zone] .arena-screen:focus-within { clip-path: none; }
 }
