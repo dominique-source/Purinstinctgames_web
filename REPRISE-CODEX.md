@@ -35,3 +35,12 @@ L’utilisateur autorise maintenant la fusion des deux branches et la production
 Les 5 tests du script ont été relancés avec succès. Publier cette branche après
 confirmation de la production premium de l’application ; vérifier le vrai lien APP.
 Le contrôle d’accès privé doit rester en place.
+
+## Refonte de l’accueil
+- Dépôt dominique-source/Purinstinctgames_web, branche codex/public-homepage.
+- ZIP purinstinct-accueil-ecole.zip lu depuis Downloads et confirmé dans dominique-source/purinstinct-app sur GitHub. La vue aérienne mobile est utilisée aux deux largeurs pour éviter le titre incrusté de la vue desktop.
+- Accueil, menu et cinq cartes en HTML. L’Arène et Pür ID restent dans leurs parcours existants. Pour les écoles cible la compétition École.
+- Tests node : 5 réussis. Diff vérifié. Le site est statique et ne définit pas de script de build. Aperçu local conjoint http://127.0.0.1:4178/.
+- À 1440 et 390 px : cinq destinations, ouverture de l’Arène 3D et Pür ID, menu mobile, portail et trois compétitions, Précédent vers l’URL source et logo après accès direct. Pas de défilement horizontal.
+- Captures refonte-1440.jpg et refonte-390.jpg dans le dossier de captures Codex du chat.
+- Prochaine action : attendre la validation et l’autorisation de publication, puis vérifier le trajet avec une session de production autorisée.

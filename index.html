@@ -1087,70 +1087,83 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 }
 </style>
 <link rel="stylesheet" href="/assets/app-portal.css">
+<link rel="stylesheet" href="/assets/homepage.css">
 <script src="/assets/app-portal.js" defer></script>
 </head>
 <body>
 
 <!-- ============ NAV ============ -->
-<nav class="nav">
-  <a href="#top" class="logo">PÜRINSTINCT<span class="sl">/</span>GAMES</a>
+<nav class="nav" aria-label="Navigation principale">
+  <a href="/" class="home-logo">
+    <img src="/assets/homepage/logo.png" alt="">
+    <span>PürInstinct <em>Games</em></span>
+  </a>
   <div class="nav-links" id="navLinks">
-    <a href="instinct-tv.html" class="nav-instinct-link" aria-label="INSTINCT: The Sports Reality Show">
-      <img class="nav-instinct-logo" src="assets/instinct-logo-fr.png" data-logo-fr="assets/instinct-logo-fr.png" data-logo-en="assets/instinct-logo-en.png" alt="INSTINCT: The Sports Reality Show">
-    </a>
-    <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">
-      <img src="assets/app-logo.png" alt="App PürInstinct Games">
-    </a>
-    <a href="#concept" data-i18n="nav_concept">Le concept</a>
-    <a href="#arena" data-i18n="nav_arena">L'arène</a>
-    <a href="#instincts" data-i18n="nav_instincts">Les 5 instincts</a>
-    <a href="pur-id.html" data-i18n="nav_purid">PÜR ID</a>
-    <a href="#leaderboard" data-i18n="nav_lb">Leaderboard</a>
-    <div class="nav-drop" id="navDrop">
-      <button class="nav-drop-btn" aria-haspopup="true" aria-expanded="false">
-        <span data-i18n="nav_special">Projets spéciaux</span><span class="nav-drop-arrow">▾</span>
-      </button>
-      <div class="nav-drop-menu" role="menu">
-        <a href="college-tour.html" class="nav-drop-item" data-i18n="nav_ct">College Tour</a>
-        <a href="championship.html" class="nav-drop-item" data-i18n="nav_champ">Championship</a>
-        <a href="projet-special.html" class="nav-drop-item" data-i18n="nav_sg">Séan Garnier</a>
-        <a href="king-dac.html" class="nav-drop-item" data-i18n="nav_kd">King Dac</a>
-        <a href="youtube-series.html" class="nav-drop-item" data-i18n="nav_yt">YouTube Series</a>
-      </div>
-    </div>
-    <a href="#billets" data-i18n="nav_tickets">Billets</a>
+    <a href="#les-5-zones">Les 5 zones</a>
+    <a href="#arena">L’Arène</a>
+    <a href="#concept">Le concept</a>
+    <a href="/app/competitions/ecole">Pour les écoles</a>
+    <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a>
   </div>
-  <div class="nav-right">
-    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
-    <a class="nav-cta" href="#billets" data-i18n="nav_cta">Réserve</a>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
+  <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ============ HERO ============ -->
-<header class="hero" id="top">
-  <div class="hero-bg">
-    <video autoplay muted loop playsinline preload="metadata" poster="assets/arena-hero.jpg">
-      <source src="hero.mp4" type="video/mp4">
-    </video>
+<header class="home-intro" id="top">
+  <div class="home-copy">
+    <h1>Un terrain de match. <em>Cinq zones de défis autour.</em></h1>
+    <p>Développe tes habiletés dans les zones. Utilise-les en match.</p>
   </div>
-  <div class="hero-vignette"></div>
-  <canvas id="heroCanvas"></canvas>
-  <div class="wrap" id="heroWrap" style="z-index:4">
-    <h1>
-      <span class="word" data-i18n="h1_a">TON INSTINCT.</span><br>
-      <span class="word arene" data-i18n="h1_b">TON ARÈNE.</span>
-    </h1>
-    <p class="sub" data-i18n="h1_sub">Le sport à l'état <b>Pur.</b> Instinctif</p>
-    <a class="cta" href="#billets" data-i18n="h1_cta">Rejoins l'arène →</a>
-    <div class="counter-strip">
-      <div class="chip"><span class="num">9</span><span class="lbl" data-i18n="strip_st">Stations</span></div>
-      <div class="chip"><span class="num">300</span><span class="lbl" data-i18n="strip_ath">Athlètes / session</span></div>
-      <div class="chip"><span class="num">1</span><span class="lbl" data-i18n="strip_lb">Leaderboard</span></div>
-    </div>
-  </div>
-  <div class="scroll-hint" data-i18n="scroll_hint">Descends dans l'arène</div>
+  <img class="home-overview" src="/assets/homepage/vue-aerienne-mobile.png" width="887" height="484"
+       alt="Sur le gazon, un terrain de match noir au centre et cinq zones de défis reliées par des allées. Trois attaquants rouges affrontent deux défenseurs noirs sur le terrain.">
 </header>
+
+<section class="home-zones" id="les-5-zones" aria-labelledby="home-zones-title">
+  <h2 id="home-zones-title">Les <em>5 zones</em></h2>
+  <ul class="home-zone-grid">
+        <li class="home-zone home-zone--foot">
+          <a href="#zone-foot">
+            <img src="/assets/homepage/habiletes-au-pied.png" alt="">
+            <span>Habiletés au pied <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="home-zone home-zone--agility">
+          <a href="#zone-agility">
+            <img src="/assets/homepage/agilite.png" alt="">
+            <span>Agilité <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="home-zone home-zone--iq">
+          <a href="#zone-iq">
+            <img src="/assets/homepage/game-iq.png" alt="">
+            <span>Game IQ <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="home-zone home-zone--hand">
+          <a href="#zone-hand">
+            <img src="/assets/homepage/habiletes-manuelles.png" alt="">
+            <span>Habiletés manuelles <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="home-zone home-zone--speed">
+          <a href="#zone-speed">
+            <img src="/assets/homepage/vitesse.png" alt="">
+            <span>Vitesse <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+  </ul>
+</section>
+<section class="home-experiences" aria-label="Explorer les expériences">
+  <a href="#arena">
+    <img src="/assets/homepage/apercu-arene.png" alt="" loading="lazy">
+    <h2>L’Arène</h2>
+    <span>Explorer le terrain <span aria-hidden="true">→</span></span>
+  </a>
+  <a href="/pur-id.html">
+    <img src="/assets/homepage/apercu-pur-id.png" alt="" loading="lazy">
+    <h2>Pür ID</h2>
+    <span>Découvrir Pür ID <span aria-hidden="true">→</span></span>
+  </a>
+</section>
 
 <!-- ============ CONCEPT ============ -->
 <section class="section slash-top obs" id="concept">
@@ -1358,7 +1371,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="right" style="--zc:var(--red)">
+    <article id="zone-speed" class="j-stop obs" data-side="right" style="--zc:var(--red)">
       <div class="j-node"><span>04</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-speed.mp4">
@@ -1373,7 +1386,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="left" style="--zc:var(--blue)">
+    <article id="zone-hand" class="j-stop obs" data-side="left" style="--zc:var(--blue)">
       <div class="j-node"><span>05</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-hand.mp4">
@@ -1388,7 +1401,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="right" style="--zc:var(--green)">
+    <article id="zone-foot" class="j-stop obs" data-side="right" style="--zc:var(--green)">
       <div class="j-node"><span>06</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-foot.mp4">
@@ -1403,7 +1416,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="left" style="--zc:var(--yellow)">
+    <article id="zone-agility" class="j-stop obs" data-side="left" style="--zc:var(--yellow)">
       <div class="j-node"><span>07</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-agility.mp4">
@@ -1418,7 +1431,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
       </div>
     </article>
 
-    <article class="j-stop obs" data-side="right" style="--zc:var(--purple)">
+    <article id="zone-iq" class="j-stop obs" data-side="right" style="--zc:var(--purple)">
       <div class="j-node"><span>08</span></div><img class="j-brace" src="assets/bracelet-nobg.png" alt="" aria-hidden="true" loading="eager">
       <div class="j-card">
         <div class="j-media" data-video="zone-iq.mp4">
@@ -1653,9 +1666,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 </section>
 
 <!-- Mobile sticky play bar — must be before <script> so applyLang() processes it -->
-<a href="#billets" class="sticky-play" id="stickyPlay" aria-label="Play Now">
-  <span data-i18n="sticky_play">JOUE MAINTENANT →</span>
-</a>
+
 
 <!-- ============ ZONE VIDEO PLAYER ============ -->
 <div id="zoneVideoPlayer">
@@ -1867,7 +1878,7 @@ const ZONES = {
        en:{tag:"Augmented tech zone",name:"Sports tech zone 2",desc:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",mf:false}}
 };
 
-let lang = localStorage.getItem("pi_lang") || "en";
+let lang = localStorage.getItem("pi_lang") || "fr";
 const RICH = new Set(["h1_sub","mf_title_a","p_note","p_bracelet_tip","sg_title","sg_quote","cta2_hl","cta3_hl","cta2_micro"]); // keys containing safe inline HTML
 function applyLang(){
   document.documentElement.lang = lang;
@@ -1895,141 +1906,24 @@ function applyLang(){
   if(window.__lvlRefresh) window.__lvlRefresh();
   if(window.__calRender) window.__calRender();
 }
-document.getElementById("langBtn").addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
+document.getElementById("langBtn")?.addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
 document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
 
 /* Burger */
 const burger = document.getElementById("burger"), navLinks = document.getElementById("navLinks");
-burger.addEventListener("click",()=>navLinks.classList.toggle("open"));
-navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("open")));
-
-/* nav dropdown */
-const navDrop = document.getElementById("navDrop");
-if(navDrop){
-  navDrop.querySelector(".nav-drop-btn").addEventListener("click",e=>{
-    e.stopPropagation();
-    navDrop.classList.toggle("open");
-    navDrop.querySelector(".nav-drop-btn").setAttribute("aria-expanded", navDrop.classList.contains("open"));
-  });
-  document.addEventListener("click",e=>{if(!navDrop.contains(e.target))navDrop.classList.remove("open");});
+function setMenu(open) {
+  navLinks.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", String(open));
 }
-
-/* ====================================================== */
-/* Hero canvas — beams + particles, moving from frame 0 */
-/* ====================================================== */
+burger.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && navLinks.classList.contains("open")) {
+    setMenu(false);
+    burger.focus();
+  }
+});
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const canvas = document.getElementById("heroCanvas");
-const ctx = canvas.getContext("2d");
-let W,H,particles=[],beams=[],streaks=[];
-function sizeCanvas(){
-  // Cap DPR: a full-screen canvas at DPR 2 on a large desktop display is a
-  // huge backing store to clear/fill every frame — main cause of hero jank.
-  const dpr = Math.min(window.devicePixelRatio||1,1.5);
-  W = canvas.clientWidth; H = canvas.clientHeight;
-  canvas.width = W*dpr; canvas.height = H*dpr;
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-}
-function initField(){
-  const n = W<700 ? 42 : 80;
-  particles = Array.from({length:n},()=>({
-    x:Math.random()*W,y:Math.random()*H,
-    vx:(Math.random()-.3)*.35,vy:(Math.random()-.5)*.18,
-    r:Math.random()*1.8+.4,a:Math.random()*.5+.15
-  }));
-  // Beam gradients live in each beam's local (rotated) space and never change,
-  // so build them once here instead of re-creating 4 gradients every frame.
-  beams = Array.from({length:4},(_,i)=>{
-    const hue=i%2===0, width=80+Math.random()*120, c=hue?"204,255,0":"255,255,255";
-    const grad=ctx.createLinearGradient(-width,0,width,0);
-    grad.addColorStop(0,`rgba(${c},0)`);
-    grad.addColorStop(.5,`rgba(${c},${hue?0.10:0.045})`);
-    grad.addColorStop(1,`rgba(${c},0)`);
-    return {p:Math.random(),speed:.0016+Math.random()*.0014,angle:(-24+i*14)*Math.PI/180,width,hue,grad};
-  });
-}
-function drawFrame(t){
-  rafId = (!reduceMotion && heroVisible) ? requestAnimationFrame(drawFrame) : null;
-  if(t && t-lastDraw < 30) return;   // ~33fps cap eases compositing over the hero video
-  lastDraw = t||0;
-  ctx.clearRect(0,0,W,H);
-  // floor grid hint
-  ctx.strokeStyle="rgba(204,255,0,.05)";
-  ctx.lineWidth=1;
-  for(let i=0;i<7;i++){
-    const y = H*0.55 + i*i*7;
-    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
-  }
-  // beams (diagonal light sweeps)
-  beams.forEach(b=>{
-    b.p += b.speed; if(b.p>1.25) b.p = -0.25;
-    const cx = b.p*(W+400)-200;
-    ctx.save();
-    ctx.translate(cx,H*.5); ctx.rotate(b.angle);
-    ctx.fillStyle=b.grad;
-    ctx.fillRect(-b.width,-H,b.width*2,H*2);
-    ctx.restore();
-  });
-  // particles
-  particles.forEach(p=>{
-    p.x+=p.vx; p.y+=p.vy;
-    if(p.x>W+10)p.x=-10; if(p.x<-10)p.x=W+10;
-    if(p.y>H+10)p.y=-10; if(p.y<-10)p.y=H+10;
-    ctx.beginPath();
-    ctx.fillStyle=`rgba(204,255,0,${p.a})`;
-    ctx.arc(p.x,p.y,p.r,0,7);
-    ctx.fill();
-  });
-  // speed streaks — fast diagonal comets shooting through
-  if(!reduceMotion && Math.random()<.022 && streaks.length<3){
-    const fromLeft = Math.random()<.5;
-    streaks.push({
-      x: fromLeft? -80 : W+80, y: Math.random()*H*.7+H*.1,
-      vx: (fromLeft?1:-1)*(14+Math.random()*10), vy: (Math.random()-.4)*3,
-      len: 90+Math.random()*120, life:1
-    });
-  }
-  streaks = streaks.filter(s=>s.life>0);
-  streaks.forEach(s=>{
-    s.x+=s.vx; s.y+=s.vy; s.life-=.012;
-    if(s.x<-200||s.x>W+200) s.life=0;
-    const g=ctx.createLinearGradient(s.x-s.len*Math.sign(s.vx),s.y-s.len*.18,s.x,s.y);
-    g.addColorStop(0,"rgba(204,255,0,0)");
-    g.addColorStop(1,`rgba(204,255,0,${.55*s.life})`);
-    ctx.strokeStyle=g; ctx.lineWidth=2.2;
-    ctx.beginPath();
-    ctx.moveTo(s.x-s.len*Math.sign(s.vx),s.y-s.len*.18);
-    ctx.lineTo(s.x,s.y);
-    ctx.stroke();
-    ctx.fillStyle=`rgba(234,255,140,${.9*s.life})`;
-    ctx.beginPath();ctx.arc(s.x,s.y,2.4,0,7);ctx.fill();
-  });
-}
-let rafId=null, heroVisible=true, lastDraw=0;
-function startHero(){ if(rafId==null && !reduceMotion && heroVisible) rafId=requestAnimationFrame(drawFrame); }
-sizeCanvas(); initField(); rafId = requestAnimationFrame(drawFrame);
-// Stop the canvas animation while the hero is scrolled out of view (saves the
-// main thread for the rest of the page; resumes when the hero returns).
-const heroForCanvas = document.querySelector(".hero");
-if(heroForCanvas && "IntersectionObserver" in window && !reduceMotion){
-  new IntersectionObserver(es=>{
-    es.forEach(e=>{ heroVisible = e.isIntersecting; if(heroVisible) startHero(); });
-  },{threshold:0}).observe(heroForCanvas);
-}
-
-/* Hero video: graceful fallback + battery-friendly playback */
-const heroBg = document.querySelector(".hero-bg");
-const heroVid = heroBg ? heroBg.querySelector("video") : null;
-if(heroVid){
-  heroVid.addEventListener("error",()=>heroBg.classList.add("hidden"),true);
-  const vsrc = heroVid.querySelector("source");
-  if(vsrc) vsrc.addEventListener("error",()=>heroBg.classList.add("hidden"));
-  if(reduceMotion){ heroVid.removeAttribute("autoplay"); heroVid.pause(); }
-  else{
-    new IntersectionObserver(es=>{
-      es.forEach(e=>{ if(e.isIntersecting) heroVid.play().catch(()=>{}); else heroVid.pause(); });
-    },{threshold:.05}).observe(heroBg);
-  }
-}
 
 /* Bracelet 360 video: force play on mobile when scrolled into view */
 const braceVid = document.querySelector(".w360-video");
@@ -2041,37 +1935,6 @@ if(braceVid && !reduceMotion){
     },{threshold:.1}).observe(braceVid);
   } else { tryPlay(); }
 }
-
-/* Hero mouse parallax (desktop) + scroll fade-out */
-const heroWrap = document.getElementById("heroWrap");
-const heroEl = document.querySelector(".hero");
-if(heroWrap && !reduceMotion){
-  let mx=0,my=0,px=0,py=0,scY=0,ticking=false;
-  const fine = matchMedia("(pointer:fine)").matches;
-  function applyHero(){
-    ticking=false;
-    px += (mx-px)*.08; py += (my-py)*.08;
-    const fade = Math.max(0, 1 - scY/(window.innerHeight*.85));
-    heroWrap.style.transform = `translate3d(${px.toFixed(2)}px,${(py + scY*.28).toFixed(2)}px,0)`;
-    heroWrap.style.opacity = fade.toFixed(3);
-    if(Math.abs(mx-px)>.1||Math.abs(my-py)>.1) tick();
-  }
-  function tick(){ if(!ticking){ ticking=true; requestAnimationFrame(applyHero); } }
-  if(fine){
-    heroEl.addEventListener("mousemove",e=>{
-      const r=heroEl.getBoundingClientRect();
-      mx = ((e.clientX-r.left)/r.width - .5)*-14;
-      my = ((e.clientY-r.top)/r.height - .5)*-8;
-      tick();
-    });
-    heroEl.addEventListener("mouseleave",()=>{mx=0;my=0;tick();});
-  }
-  window.addEventListener("scroll",()=>{
-    scY = Math.min(window.scrollY, window.innerHeight);
-    tick();
-  },{passive:true});
-}
-let rT; window.addEventListener("resize",()=>{clearTimeout(rT);rT=setTimeout(()=>{sizeCanvas();initField();if(reduceMotion)drawFrame();},150)});
 
 /* ====================================================== */
 /* Zone panels: transform parallax (iOS-safe) + logo tilt  */
@@ -2656,206 +2519,7 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyUEaOiLGiV8PIC7
 document.getElementById("year").textContent=new Date().getFullYear();
 applyLang();
 
-/* ── Mobile sticky play bar ── */
-(function(){
-  const bar = document.getElementById("stickyPlay");
-  if(!bar) return;
-  const heroCta = document.querySelector(".hero .cta");
-  const footer = document.querySelector("footer");
-  let shown = false;
 
-  function update(){
-    const scrollY = window.scrollY;
-    const total = document.body.scrollHeight - window.innerHeight;
-    const pct = total > 0 ? scrollY / total : 0;
-
-    // Hide if hero CTA is visible
-    const heroRect = heroCta ? heroCta.getBoundingClientRect() : null;
-    const heroVisible = heroRect && heroRect.bottom > 0 && heroRect.top < window.innerHeight;
-
-    // Hide near footer (200px)
-    const footRect = footer ? footer.getBoundingClientRect() : null;
-    const nearFooter = footRect && footRect.top < window.innerHeight + 200;
-
-    const shouldShow = pct >= 0.30 && !heroVisible && !nearFooter;
-    if(shouldShow === shown) return;
-    shown = shouldShow;
-    bar.classList.toggle("visible", shouldShow);
-  }
-
-  window.addEventListener("scroll", update, {passive:true});
-  update();
-})()
-
-/* ====================================================== */
-/* Zone Entry Transition                                   */
-/* ====================================================== */
-const ZONE_ENTRY_DATA = [
-  {num:"01", color:"var(--red)",   nameFr:"Vitesse",          nameEn:"Speed",      logoFr:"assets/logo-speed-fr.png",   logoEn:"assets/logo-speed.png"},
-  {num:"02", color:"var(--blue)",  nameFr:"Agilité des mains",nameEn:"Hand Skills",logoFr:"assets/logo-hand-fr.png",    logoEn:"assets/logo-hand.png"},
-  {num:"03", color:"var(--green)", nameFr:"Agilité des pieds",nameEn:"Foot Skills",logoFr:"assets/logo-foot-fr.png",    logoEn:"assets/logo-foot.png"},
-  {num:"04", color:"var(--yellow)",nameFr:"Agilité générale", nameEn:"Agility",    logoFr:"assets/logo-agility-fr.png", logoEn:"assets/logo-agility.png"},
-  {num:"05", color:"var(--purple)",nameFr:"IQ de jeu",        nameEn:"Game IQ",    logoFr:"assets/logo-iq-fr.png",      logoEn:"assets/logo-iq.png"},
-];
-
-const ze = document.getElementById("zoneEntry");
-const zeBg = ze.querySelector(".ze-bg");
-const zeFlash = ze.querySelector(".ze-flash");
-const zeNum = ze.querySelector(".ze-num");
-const zeName = ze.querySelector(".ze-name");
-const zeTag = ze.querySelector(".ze-tag");
-const zeImg = ze.querySelector(".ze-img");
-
-function triggerZoneEntry(idx, targetPanel) {
-  const d = ZONE_ENTRY_DATA[idx];
-  const name = lang === "fr" ? d.nameFr : d.nameEn;
-  const logo = lang === "fr" ? d.logoFr : d.logoEn;
-
-  // set content
-  zeNum.textContent = d.num;
-  zeName.textContent = name;
-  zeTag.textContent = lang === "fr" ? "Zone" : "Zone";
-  zeImg.src = logo;
-  ze.style.setProperty("--ze-color", d.color);
-
-  // reset states
-  zeBg.style.cssText = "transform:scaleY(0);transform-origin:bottom;transition:none";
-  zeFlash.style.cssText = "opacity:0;transition:none";
-  ze.querySelector(".ze-content").style.cssText = "transform:translateY(40px);opacity:0;transition:none";
-  zeImg.style.cssText = "opacity:0;transition:none;mix-blend-mode:screen;width:min(220px,55vw)";
-  ze.style.cssText = "opacity:1;pointer-events:all";
-  ze.classList.add("active");
-
-  // force reflow
-  ze.offsetHeight;
-
-  // animate bg slide up
-  requestAnimationFrame(()=>{
-    zeBg.style.cssText = "transform:scaleY(1);transform-origin:bottom;transition:transform .38s cubic-bezier(.16,1,.3,1)";
-
-    setTimeout(()=>{
-      // flash
-      zeFlash.style.cssText = "opacity:.55;transition:opacity .06s";
-      setTimeout(()=>{ zeFlash.style.cssText = "opacity:0;transition:opacity .18s"; }, 60);
-
-      // content slam in
-      ze.querySelector(".ze-content").style.cssText =
-        "transform:translateY(0);opacity:1;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .35s ease";
-
-      // logo fade in
-      setTimeout(()=>{
-        zeImg.style.cssText = "opacity:1;transition:opacity .4s ease .1s;mix-blend-mode:screen;width:min(220px,55vw)";
-      }, 120);
-
-      // hold then exit
-      setTimeout(()=>{
-        ze.style.cssText = "opacity:0;transition:opacity .4s ease;pointer-events:none";
-        setTimeout(()=>{
-          ze.classList.remove("active");
-          if(targetPanel) targetPanel.scrollIntoView({behavior:"smooth", block:"start"});
-        }, 420);
-      }, 900);
-
-    }, 380);
-  });
-}
-
-// attach click to each zone-logo-wrap — play zone video
-const ZONE_VIDEOS = ["zone-speed.mp4","zone-hand.mp4","zone-foot.mp4","zone-agility.mp4","zone-iq.mp4"];
-const zvPlayer = document.getElementById("zoneVideoPlayer");
-const zvVideo  = document.getElementById("zoneVideo");
-const zvClose  = document.getElementById("zoneVideoClose");
-
-function openZoneVideo(src){
-  zvVideo.src = src;
-  zvPlayer.classList.add("active");
-  zvVideo.play();
-}
-function closeZoneVideo(){
-  zvPlayer.classList.remove("active");
-  zvVideo.pause();
-  zvVideo.src = "";
-}
-zvClose.addEventListener("click", closeZoneVideo);
-zvVideo.addEventListener("ended", closeZoneVideo);
-zvPlayer.addEventListener("click", e=>{ if(e.target===zvPlayer) closeZoneVideo(); });
-document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeZoneVideo(); });
-
-document.querySelectorAll(".j-media[data-video]").forEach(media=>{
-  media.addEventListener("click", ()=> openZoneVideo(media.dataset.video));
-});
-
-/* ====================================================== */
-/* Athlete journey — path + scroll-driven player */
-/* ====================================================== */
-(function(){
-  const journey = document.getElementById("journey");
-  const player = document.getElementById("jPlayer");
-  if(!journey || !player) return;
-  const line = journey.querySelector(".j-line");
-  const fill = journey.querySelector(".j-line-fill");
-  const stops = [...journey.querySelectorAll(".j-stop")];
-  const nodes = stops.map(st=>st.querySelector(".j-node"));
-  let pts = [], totalLen = 0;
-
-  function build(){
-    const jr = journey.getBoundingClientRect();
-    pts = nodes.map(n=>{
-      const r = n.getBoundingClientRect();
-      return {x:r.left - jr.left + r.width/2, y:r.top - jr.top + r.height/2};
-    });
-    let d = `M ${pts[0].x} ${pts[0].y}`;
-    for(let i=1;i<pts.length;i++){
-      const a = pts[i-1], b = pts[i], dy = (b.y-a.y)*0.55;
-      d += ` C ${a.x} ${a.y+dy}, ${b.x} ${b.y-dy}, ${b.x} ${b.y}`;
-    }
-    line.setAttribute("d", d);
-    fill.setAttribute("d", d);
-    totalLen = fill.getTotalLength();
-    fill.style.strokeDasharray = totalLen;
-    update();
-  }
-
-  let raf = null;
-  let didLoad = false;   // suppress blink on initial paint
-  function update(){
-    raf = null;
-    if(!totalLen) return;
-    const jr = journey.getBoundingClientRect();
-    const focusY = window.innerHeight*0.42;
-    const firstY = pts[0].y, lastY = pts[pts.length-1].y;
-    const cur = Math.min(Math.max(focusY - jr.top, firstY), lastY);
-    /* find length along path whose point.y ≈ cur (path is monotonic in y) */
-    let lo = 0, hi = totalLen;
-    for(let i=0;i<22;i++){
-      const mid = (lo+hi)/2;
-      if(fill.getPointAtLength(mid).y < cur) lo = mid; else hi = mid;
-    }
-    const len = (lo+hi)/2;
-    const p = fill.getPointAtLength(len);
-    if(!reduceMotion){
-      player.style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%,-50%)`;
-      fill.style.strokeDashoffset = totalLen - len;
-    }
-    stops.forEach((st,i)=>{
-      const wasLit = st.classList.contains("lit");
-      const lit = pts[i].y <= cur + 6;
-      if(lit && !wasLit && didLoad && !reduceMotion){
-        st.classList.add("blink");
-        setTimeout(()=>st.classList.remove("blink"), 1500);
-      }
-      st.classList.toggle("lit", lit);
-    });
-  }
-  function onScroll(){ if(!raf) raf = requestAnimationFrame(update); }
-  window.addEventListener("scroll", onScroll, {passive:true});
-  let jrT; window.addEventListener("resize", ()=>{ clearTimeout(jrT); jrT = setTimeout(build, 150); });
-  /* rebuild once fonts/images settle */
-  window.addEventListener("load", build);
-  window.__journeyRebuild = build;
-  build();
-  setTimeout(()=>{ didLoad = true; }, 200);
-})();
 
 /* ====================================================== */
 /* 6 difficulty levels — clickable, illustrated rules */
