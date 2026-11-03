@@ -19,8 +19,8 @@ if (new URLSearchParams(location.search).has("transitions")) {
     stage.style.setProperty("--review-nav", nav.offsetHeight + "px");
     stage.style.setProperty("--copy-opacity", String(1 - clamp(progress * 3)));
     stage.style.setProperty("--copy-y", -progress * (narrow ? 24 : 90) + "px");
-    stage.style.setProperty("--match-scale", String(1 - progress * (narrow ? .025 : .075)));
-    stage.style.setProperty("--match-y", -progress * (narrow ? 5 : 22) + "px");
+    stage.style.setProperty("--match-scale", String(1 + Math.sin(Math.PI * progress) * (narrow ? .025 : .075)));
+    stage.style.setProperty("--match-y", -Math.sin(Math.PI * progress) * (narrow ? 4 : 18) + "px");
 
     // At rest the reveal is outside the frame. Its first visible edge crosses
     // the diagonal ground stripe, then sweeps up to uncover the whole image.

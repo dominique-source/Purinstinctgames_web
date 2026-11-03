@@ -37,3 +37,11 @@
     clip-path: polygon(0 var(--line-left, 0%), 100% var(--line-right, 0%), 100% 100%, 0 100%);
   }
 }
+@media (max-width: 750px) and (prefers-reduced-motion: no-preference) {
+  [data-transition] .match-screen { position: relative; top: auto; }
+  [data-transition] .match-photo { transform: none; }
+  [data-transition="b"] .arena-screen {
+    transform: none;
+    clip-path: none;
+  }
+}
