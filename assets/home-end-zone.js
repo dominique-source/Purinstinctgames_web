@@ -4,27 +4,30 @@ const nav = document.querySelector(".nav");
 const motion = matchMedia("(prefers-reduced-motion: no-preference)");
 const mobile = matchMedia("(max-width: 750px)");
 
-function renderParallax() {
+function renderEndZone() {
   const start = stage.getBoundingClientRect().top + scrollY - nav.offsetHeight;
   const progress = Math.min(1, Math.max(0, (scrollY - start) / match.offsetHeight));
-  const movement = Math.sin(Math.PI * progress);
+  const remaining = Math.max(0, start + match.offsetHeight - scrollY);
+  const leadIn = Math.max(0, 1 - progress / .2);
+  const sweep = Math.min(1, Math.max(0, (progress - .2) / .8));
 
   stage.style.setProperty("--nav-height", nav.offsetHeight + "px");
   stage.style.setProperty("--copy-opacity", String(Math.max(0, 1 - progress * 3)));
   stage.style.setProperty("--copy-y", -progress * (mobile.matches ? 24 : 90) + "px");
-  stage.style.setProperty("--match-scale", String(1 + movement * .075));
-  stage.style.setProperty("--match-y", -movement * 18 + "px");
+  stage.style.setProperty("--arena-y", progress > 0 ? -remaining + "px" : "0px");
+  stage.style.setProperty("--line-left", (86 * (1 - sweep) + 14 * leadIn) + "%");
+  stage.style.setProperty("--line-right", (70 * (1 - sweep) + 30 * leadIn) + "%");
 }
 
 function syncMotionPreference() {
-  stage.toggleAttribute("data-parallax", motion.matches);
+  stage.toggleAttribute("data-end-zone", motion.matches);
   if (motion.matches) {
-    renderParallax();
-    window.addEventListener("scroll", renderParallax, { passive: true });
-    window.addEventListener("resize", renderParallax);
+    renderEndZone();
+    window.addEventListener("scroll", renderEndZone, { passive: true });
+    window.addEventListener("resize", renderEndZone);
   } else {
-    window.removeEventListener("scroll", renderParallax);
-    window.removeEventListener("resize", renderParallax);
+    window.removeEventListener("scroll", renderEndZone);
+    window.removeEventListener("resize", renderEndZone);
   }
 }
 
