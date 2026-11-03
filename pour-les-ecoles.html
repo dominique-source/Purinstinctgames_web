@@ -10,6 +10,7 @@
   <script src="/assets/app-portal.js" defer></script>
   <title>Pour les écoles | PürInstinct Games</title>
   <link rel="stylesheet" href="/assets/ecoles.css">
+  <script src="/assets/ecoles-contact.js" defer></script>
 </head>
 <body>
 <nav class="nav" aria-label="Navigation principale">
@@ -34,7 +35,20 @@
   <p>On te montre comment ça se déroule et on voit ce qui pourrait convenir à ton école.</p>
   <img class="schools-photo" src="/assets/homepage/ecole.png" width="865" height="350"
        alt="Des élèves écoutent les consignes de leur entraîneur sur le terrain.">
-  <button class="games-cta schools-booking" type="button" disabled>Réserver 20 minutes avec Dominique Soucy</button>
+  <a class="games-cta schools-booking" href="#contact">Réserver 20 minutes avec Dominique Soucy</a>
+  <section class="schools-contact" id="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">Écrire à Dominique Soucy</h2>
+    <p>Le formulaire prépare un courriel que tu peux relire et envoyer depuis ta messagerie.</p>
+    <form id="schools-contact-form">
+      <label>Nom <input name="Nom" autocomplete="name" required></label>
+      <label>École <input name="École" autocomplete="organization" required></label>
+      <label>Ville <input name="Ville" autocomplete="address-level2" required></label>
+      <label>Courriel <input name="Courriel" type="email" autocomplete="email" required></label>
+      <label>Commentaires <textarea name="Commentaires" rows="4"></textarea></label>
+      <button class="games-cta" type="submit">Préparer le courriel</button>
+    </form>
+    <p><a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a></p>
+  </section>
 </main>
 </body>
 </html>
