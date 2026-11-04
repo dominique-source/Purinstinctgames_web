@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js" defer></script>
-  <link rel="stylesheet" href="/assets/two-screens.css">
-  <script src="/assets/home-end-zone.js" defer></script>
+  <link rel="stylesheet" href="/assets/school-home.css">
+  <script src="/assets/school-home.js" defer></script>
   <title>PürInstinct Games</title>
 </head>
 <body>
@@ -19,44 +19,123 @@
     <span>PürInstinct <em>Games</em></span>
   </a>
   <div class="nav-links" id="navLinks">
+    <a href="/pour-les-ecoles.html">Pour les écoles</a>
     <a href="/zones.html">Les 5 zones</a>
     <a href="/concept.html#arena">L’Arène</a>
     <a href="/concept.html">Le concept</a>
     <a href="/pur-id.html">Pür ID</a>
-    <a href="/pour-les-ecoles.html">Pour les écoles</a>
     <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a>
   </div>
   <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<main class="two-screens">
-  <section class="match-screen" aria-labelledby="match-title">
-  <div class="match-copy">
-    <h1 id="match-title">PÜRINSTINCT <em>GAMES</em></h1>
-    <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les utiliser en match.</p>
-    <ul class="skills" aria-label="Les cinq habiletés">
-      <li><a href="/zones.html#vitesse">Vitesse</a></li>
-      <li><a href="/zones.html#agilite">Agilité</a></li>
-      <li><a href="/zones.html#habiletes-manuelles">Habiletés manuelles</a></li>
-      <li><a href="/zones.html#habiletes-au-pied">Habiletés au pied</a></li>
-      <li><a href="/zones.html#game-iq">Game IQ</a></li>
-    </ul>
-    <a class="games-cta" href="/concept.html">Voir comment se déroulent les Games <span aria-hidden="true">→</span></a>
-  </div>
-    <div class="match-photo">
-      <img src="/assets/homepage/match.jpg" width="1672" height="941" fetchpriority="high" alt="Une joueuse court vers la zone d’en-but avec le ballon, suivie des autres joueurs.">
+<main class="school-home">
+<section class="school-hero" aria-labelledby="school-title">
+  <h1 id="school-title">PÜRINSTINCT GAMES <em>À L’ÉCOLE</em></h1>
+  <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les mettre en pratique en match.</p>
+  <div class="school-arena pointer-surface">
+    <div class="arena-layer">
+      <img src="/assets/school-home/arene-avec-reperes.webp" width="1024" height="825" alt="Vue aérienne des cinq zones autour du terrain PürInstinct." fetchpriority="high">
+      <a class="arena-pin" href="/zones.html#vitesse" data-zone="vitesse" style="--pin-x:86%;--pin-y:52%" aria-label="Vitesse"><span aria-hidden="true">+</span></a>
+      <a class="arena-pin" href="/zones.html#agilite" data-zone="agilite" style="--pin-x:21%;--pin-y:31%" aria-label="Agilité"><span aria-hidden="true">+</span></a>
+      <a class="arena-pin" href="/zones.html#habiletes-manuelles" data-zone="habiletes-manuelles" style="--pin-x:16%;--pin-y:52%" aria-label="Habiletés des mains"><span aria-hidden="true">+</span></a>
+      <a class="arena-pin" href="/zones.html#habiletes-au-pied" data-zone="habiletes-au-pied" style="--pin-x:82%;--pin-y:27%" aria-label="Habiletés des pieds"><span aria-hidden="true">+</span></a>
+      <a class="arena-pin" href="/zones.html#game-iq" data-zone="game-iq" style="--pin-x:22%;--pin-y:78%" aria-label="Game IQ"><span aria-hidden="true">+</span></a>
     </div>
-  </section>
-  <section class="arena-screen" aria-labelledby="arena-title">
-    <h2 id="arena-title" class="visually-hidden">Le terrain. Les 5 zones.</h2>
-    <img src="/assets/homepage/arene.jpg" width="1672" height="941" loading="lazy" alt="Vue aérienne du terrain central entouré des zones Vitesse, Agilité, Habiletés manuelles, Habiletés au pied et Game IQ.">
-    <a class="arena-link" href="/concept.html#arena"><span class="visually-hidden">Explorer l’arène</span></a>
-  </section>
+  </div>
+  <a class="school-button" href="#parcours">Voir comment se déroulent les Games <span aria-hidden="true">→</span></a>
+  <nav class="zone-grid" aria-label="Les cinq zones">
+    <a href="/zones.html#vitesse" data-zone="vitesse">Vitesse</a>
+    <a href="/zones.html#agilite" data-zone="agilite">Agilité</a>
+    <a href="/zones.html#habiletes-manuelles" data-zone="habiletes-manuelles">Habiletés des mains</a>
+    <a href="/zones.html#habiletes-au-pied" data-zone="habiletes-au-pied">Habiletés des pieds</a>
+    <a href="/zones.html#game-iq" data-zone="game-iq">Game IQ</a>
+  </nav>
+  <div class="zone-details">
+    <article class="zone-detail" id="zone-vitesse" hidden>
+      <img src="/assets/render-speed.jpg" alt="" loading="lazy">
+      <div><h2>Vitesse</h2><p>Accélère sur une courte distance et apprends à relancer ton sprint.</p><a href="/zones.html#vitesse">Découvrir la zone →</a></div>
+    </article>
+    <article class="zone-detail" id="zone-agilite" hidden>
+      <img src="/assets/render-agility.jpg" alt="" loading="lazy">
+      <div><h2>Agilité</h2><p>Change de direction et garde ton équilibre en mouvement.</p><a href="/zones.html#agilite">Découvrir la zone →</a></div>
+    </article>
+    <article class="zone-detail" id="zone-habiletes-manuelles" hidden>
+      <img src="/assets/render-hand.jpg" alt="" loading="lazy">
+      <div><h2>Habiletés des mains</h2><p>Travaille la précision de tes passes et de tes réceptions.</p><a href="/zones.html#habiletes-manuelles">Découvrir la zone →</a></div>
+    </article>
+    <article class="zone-detail" id="zone-habiletes-au-pied" hidden>
+      <img src="/assets/render-foot.jpg" alt="" loading="lazy">
+      <div><h2>Habiletés des pieds</h2><p>Travaille tes appuis et la précision de tes déplacements.</p><a href="/zones.html#habiletes-au-pied">Découvrir la zone →</a></div>
+    </article>
+    <article class="zone-detail" id="zone-game-iq" hidden>
+      <img src="/assets/render-iq.jpg" alt="" loading="lazy">
+      <div><h2>Game IQ</h2><p>Observe le jeu, anticipe et choisis la bonne action.</p><a href="/zones.html#game-iq">Découvrir la zone →</a></div>
+    </article>
+  </div>
+</section>
+<section class="school-section" id="parcours">
+  <h2 class="section-title">De la découverte aux <em>Games</em></h2>
+  <div class="school-cards">
+    <article class="school-card pointer-surface" style="--accent:#00ecf5;--step:0">
+      <img src="/assets/school-home/conference.webp" width="380" height="378" alt="" loading="lazy">
+      <div><h3><em>01</em> Conférence</h3><p>Dominique Soucy présente le sport et lance le projet auprès des élèves.</p></div>
+    </article>
+    <article class="school-card pointer-surface" style="--accent:#ad74ff;--step:1">
+      <img src="/assets/school-home/cliniques.webp" width="380" height="378" alt="" loading="lazy">
+      <div><h3><em>02</em> Cliniques</h3><p>Les élèves découvrent le jeu en pratiquant les habiletés dans les cinq zones.</p></div>
+    </article>
+    <article class="school-card pointer-surface" style="--accent:#58ee77;--step:2">
+      <img src="/assets/school-home/formation.webp" width="380" height="378" alt="" loading="lazy">
+      <div><h3><em>03</em> Formation</h3><p>Les enseignants apprennent à animer les activités et à encadrer les zones.</p></div>
+    </article>
+    <article class="school-card pointer-surface" style="--accent:#ffdf36;--step:3">
+      <img src="/assets/school-home/games.webp" width="380" height="378" alt="" loading="lazy">
+      <div><h3><em>04</em> Games</h3><p>Les élèves mettent leurs habiletés en pratique dans les défis et les matchs.</p></div>
+    </article>
+  </div>
+</section>
+<section class="school-section" id="configuration">
+  <h2 class="section-title">Configurez vos <em>Games</em></h2>
+  <div class="configuration-grid">
+    <div class="school-fields" role="group" aria-label="Configuration des Games">
+      <label>Élèves participants<input type="number" id="students" value="2000" min="1" max="999999" step="1" required></label>
+      <label>Enseignants disponibles<input type="number" id="teachers" value="12" min="0" max="999999" step="1" required></label>
+      <label>Autres adultes disponibles<input type="number" id="adults" value="3" min="0" max="999999" step="1" required></label>
+      <label>Plateaux intérieurs<input type="number" id="indoors" value="1" min="0" max="999999" step="1" required></label>
+      <label>Plateaux extérieurs<input type="number" id="outdoors" value="2" min="0" max="999999" step="1" required></label>
+      <p>1 plateau = la surface d’un terrain de basketball</p>
+      <small>Les plateaux mesurent l’espace disponible. Les zones sont les activités à encadrer.</small>
+    </div>
+    <img class="configuration-photo" src="/assets/school-home/action-ecole.webp" width="850" height="660" alt="Des élèves jouent avec un ballon noir PürInstinct sous la supervision de l’équipe." loading="lazy">
+  </div>
+<p class="school-summary" role="status"><strong data-total="students">2 000</strong> élèves · <strong data-total="adults">15</strong> adultes disponibles · <strong data-total="spaces">3</strong> plateaux</p>
+  <a class="school-button school-button-yellow" href="#forfait">Voir et ajuster mon estimation <span aria-hidden="true">↓</span></a>
+</section>
+<section class="school-section" id="forfait">
+  <h2 class="section-title">Ajustez votre <em>forfait</em></h2>
+  <a href="#configuration">Modifier ma configuration <span aria-hidden="true">↑</span></a>
+<p class="school-summary" role="status"><strong data-total="students">2 000</strong> élèves · <strong data-total="adults">15</strong> adultes disponibles · <strong data-total="spaces">3</strong> plateaux</p>
+  <div class="package-grid">
+    <div class="school-fields" role="group" aria-label="Réglages du forfait">
+      <label>Postes couverts par votre école (postes)<input type="number" id="roles" value="0" min="0" max="999999" step="1" required></label>
+      <label>Zones ouvertes (zones)<input type="number" id="zones" value="5" min="1" max="5" step="1" required></label>
+      <label>Durée des Games (heures)<input type="number" id="hours" value="8" min="1" max="999999" step="1" required></label>
+      <label>Cliniques (séances)<input type="number" id="clinics" value="0" min="0" max="999999" step="1" required></label>
+      <p id="configuration-error" role="status"></p>
+    </div>
+    <aside class="school-price" aria-label="Estimation">
+      <h3>Estimation à confirmer</h3>
+      <p>Votre scénario doit être validé par l’équipe PürInstinct.</p>
+      <div class="school-example">
+        <h4>Scénario de référence</h4>
+        <p><strong>14 500 $ CA</strong> pour 2 000 élèves<br><strong>7,25 $</strong> par élève</p>
+        <p>15 responsables de zones fournis par l’école et 5 intervenants PürInstinct pour 8 h.</p>
+      </div>
+    </aside>
+  </div>
+</section>
 </main>
-<footer class="home-secondary">
-  <a href="/zones.html">Les 5 zones</a>
-  <a href="/pur-id.html">Pür ID</a>
-  <a href="/pour-les-ecoles.html">Pour les écoles</a>
-</footer>
+<footer class="school-footer"><a href="/pour-les-ecoles.html">Pour les écoles</a><a href="/concept.html#arena">L’Arène</a><a href="/pur-id.html">Pür ID</a></footer>
 </body>
 </html>

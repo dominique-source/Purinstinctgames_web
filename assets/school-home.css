@@ -1,0 +1,73 @@
+body { background: radial-gradient(ellipse at 50% 10%, #072445, #020d1b 45%); --lime: #00edf5; }
+.nav { background: #031020; border-color: #00edf56a; }
+.school-home { max-width: 1550px; margin: auto; padding: 0 clamp(12px, 3vw, 48px); }
+.school-hero { text-align: center; padding-top: clamp(14px, 3vw, 42px); }
+.school-hero h1 { font-size: clamp(30px, 7.4vw, 112px); }
+.school-hero h1 em { display: block; }
+.school-hero > p { margin: 10px 0 16px; font-size: clamp(16px, 2.2vw, 28px); font-style: italic; line-height: 1.15; }
+.school-arena { position: relative; max-width: 1000px; margin: auto; border: 1px solid #00edf58a; border-radius: 16px 4px; overflow: hidden; }
+.arena-layer { position: relative; }
+.arena-layer img { display: block; width: 100%; height: auto; }
+.arena-pin { position: absolute; top: var(--pin-y); left: var(--pin-x); translate: -50% -50%; display: grid; place-items: center; width: 44px; height: 44px; text-decoration: none; }
+.arena-pin span { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid #00edf5; border-radius: 50%; color: #fff; background: #041324; font-weight: 700; }
+.arena-pin:is(:hover,:focus-visible,[data-selected]) span { background: #00edf5; color: #021423; box-shadow: 0 0 20px #00edf5; }
+.school-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; margin: 14px 0; padding: 12px 24px; min-height: 48px; background: #00edf5; color: #020e1b; border-radius: 14px 4px; font: italic 900 clamp(20px, 2.5vw, 32px)/1.05 var(--display); text-decoration: none; }
+.school-button-yellow { background: #ffdf36; }
+.school-button:active { transform: scale(.97); }
+.zone-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); max-width: 1000px; margin: auto; gap: 8px; }
+.zone-grid a { display: grid; place-items: center; min-height: 48px; padding: 6px; border: 1px solid #00edf580; border-radius: 10px 3px; background: #071a2e; font-weight: 700; text-decoration: none; }
+.zone-grid a:is(:hover,:focus-visible,[data-selected]) { color: #00edf5; border-color: #00edf5; }
+.zone-detail:not([hidden]) { display: grid; grid-template-columns: minmax(100px, 1fr) 2fr; align-items: center; gap: 16px; max-width: 700px; padding: 14px; margin: 12px auto; text-align: left; background: #0a223a; border: 1px solid #00edf5; }
+.zone-detail img { width: 100%; border-radius: 8px; }
+.zone-detail h2 { font-size: clamp(25px, 4vw, 40px); }
+.zone-detail p { margin: 6px 0; }
+.school-section { padding-block: clamp(22px, 5vw, 64px); scroll-margin-top: 76px; text-align: center; }
+.section-title { display: flex; align-items: center; justify-content: center; gap: .3em; flex-wrap: wrap; margin-bottom: 20px; font-size: clamp(32px, 5.5vw, 80px); text-transform: none; }
+.section-title::before, .section-title::after { content: ""; flex: 1; min-width: 15px; height: 2px; background: #00edf5; }
+.school-cards { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+.school-card { position: relative; text-align: left; background: #06192b; border: 1px solid var(--accent); border-bottom-width: 6px; border-radius: 18px 4px; overflow: hidden; }
+.school-card img { display: block; width: 100%; height: auto; }
+.school-card > div { padding: 14px; }
+.school-card h3 { margin: 0; font: italic 900 clamp(24px, 3vw, 43px)/1 var(--display); text-transform: uppercase; }
+.school-card h3 em { color: var(--accent); }
+.school-card p { margin: 10px 0 0; }
+.configuration-grid, .package-grid { display: grid; gap: 16px; align-items: start; grid-template-columns: minmax(290px, 1fr) 2fr; }
+.package-grid { grid-template-columns: 1.15fr 1fr; }
+.school-fields, .school-summary { padding: clamp(12px, 2.5vw, 28px); border: 2px solid #00edf5; border-radius: 20px 5px; background: #061c30; }
+.school-fields { display: grid; gap: 12px; text-align: left; }
+.school-fields label { display: grid; grid-template-columns: 1fr minmax(85px, 30%); gap: 12px; align-items: center; font-weight: 700; }
+.school-fields input { width: 100%; min-height: 46px; padding: 8px; border: 1px solid #00edf5; border-radius: 8px; background: #020e1b; color: inherit; font: 700 1.1rem Barlow,sans-serif; font-variant-numeric: tabular-nums; }
+.school-fields input:invalid { border-color: #ff9b90; }
+.school-fields p { margin: 0; }
+.configuration-photo { display: block; width: 100%; max-height: 560px; object-fit: cover; object-position: 60% 42%; clip-path: inset(0 0 0 2% round 16px 4px); border-radius: 16px 4px; }
+.school-summary { font-variant-numeric: tabular-nums; font-weight: 700; }
+.school-summary strong { color: #00edf5; font: italic 900 clamp(22px, 4vw, 44px)/1 var(--display); }
+.school-price { position: sticky; top: 80px; background: #ffdf36; color: #061423; padding: 20px; border-radius: 18px 4px; }
+.school-price h3, .school-price h4 { margin: 0; font: italic 900 28px/1 var(--display); }
+.school-example { padding: 12px; border: 1px solid currentColor; }
+.school-example p:last-child { margin-bottom: 0; }
+.school-footer { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; padding: 22px; }
+.pointer-surface::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--glow,0); background: radial-gradient(circle at var(--x,50%) var(--y,50%), #00edf553, transparent 35%); }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .school-card, .school-button span, .arena-pin span, .pointer-surface::after { transition: transform 180ms ease, opacity 180ms ease, box-shadow 180ms ease; }
+  .school-button:hover span { transform: translateX(4px); }
+  .arena-pin:is(:hover,:focus-visible,[data-selected]) span { transform: scale(1.12); }
+  .school-card.is-entering { animation: school-enter 320ms ease both; animation-delay: calc(var(--step) * 45ms); }
+  .school-summary strong.is-changing { animation: school-count 280ms ease; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .school-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 22px color-mix(in srgb,var(--accent),transparent 65%); }
+  .arena-layer { transform: translate(var(--dx,0px),var(--dy,0px)); }
+}
+@keyframes school-enter { from { opacity: .5; transform: translateY(12px); } }
+@keyframes school-count { 50% { color: white; } }
+@media (max-width: 950px) { .school-cards { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 650px) {
+  .school-home { padding-inline: 12px; }
+  .school-arena { margin-inline: -12px; border-inline: 0; border-radius: 0; }
+  .zone-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .school-cards, .configuration-grid, .package-grid { grid-template-columns: minmax(0,1fr); }
+  .school-price { position: static; }
+  .arena-pin span { width: 20px; height: 20px; }
+}
