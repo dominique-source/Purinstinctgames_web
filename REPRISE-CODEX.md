@@ -1,3 +1,34 @@
+# Reprise — couverture immersive du kit approuvé
+
+- Dépôt dominique-source/Purinstinctgames_web, projet Vercel purinstinct-web, domaine purinstinctgames.com.
+- Dossier /Users/client/Documents/ChatGPT/purinstinct-web-premium.
+- Branche codex/hero-deck.
+- Mission en aperçu, publication soumise à validation.
+
+## Terminé
+- Photos desktop et portrait sans annotations du kit, pinceau GAMES transparent, polices locales et licence.
+- Header superposé, titre HTML accessible, barre de six boutons avec icônes.
+- Repères et calques SVG communs à la transformation de chaque photo.
+- Panneaux bilingues, fermeture et Échap, conservation de la sélection, aperçu temporaire au survol.
+- Le contenu HTML à partir de #parcours est identique à main.
+- Seuls les actifs nécessaires au hero ont été ajoutés à la liste publique du middleware.
+
+## Vérifications
+- Syntaxe, git diff --check et cinq tests existants réussis.
+- Navigateur à 1920×1080, 1440×900, 1366×768, 390×844, 375×667 et 844×390.
+- Six sélections, clavier, fermeture, menu mobile et retour du focus, FR/EN, conservation du configurateur, CTA #parcours, APP et Précédent.
+- Test isolé des transitions rapides, du retour à la sélection et de la priorité du focus.
+- Les photos sans texte remplacent les annotations françaises incrustées.
+- Le navigateur disponible ne permet pas l’émulation de prefers-reduced-motion ni du zoom à 200 %. L’accès au service natif des réglages système échoue. Ces vérifications visuelles et un test tactile physique restent ouverts.
+- La réduction des animations est prévue dans le CSS et le suivi JS, avec arrêt des effets hors écran.
+
+## Prochaine action
+- Faire valider l’aperçu local http://127.0.0.1:4178/ et les captures.
+- Vérifier mouvement réduit et zoom réel à 200 % avec un navigateur permettant ces réglages.
+- Attendre une instruction explicite avant fusion dans main et production.
+
+---
+
 # Reprise — transition APP premium
 
 - Dépôt : dominique-source/Purinstinctgames_web

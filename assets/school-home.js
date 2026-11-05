@@ -2,18 +2,42 @@ const arena = document.querySelector(".school-arena");
 const zoneControls = [...document.querySelectorAll("[data-zone]")];
 const zonePanels = [...document.querySelectorAll(".zone-detail")];
 const arenaEffects = [...document.querySelectorAll("[data-effect]")];
-const arenaHint = document.querySelector(".arena-hint");
+const hero = document.querySelector(".school-hero");
+const scene = document.querySelector(".arena-layer");
+const panelContainer = document.querySelector(".zone-details");
+const closePanel = document.querySelector(".arena-close");
+const mobileScene = matchMedia("(max-width: 949px)");
+function fitScene() {
+  const width = hero.clientWidth;
+  const height = hero.clientHeight;
+  const sourceWidth = mobileScene.matches ? 910 : 1672;
+  const sourceHeight = mobileScene.matches ? 1728 : 941;
+  const scale = mobileScene.matches ? width / sourceWidth : Math.max(width / sourceWidth, height / sourceHeight);
+  const sceneWidth = sourceWidth * scale;
+  const sceneHeight = sourceHeight * scale;
+  scene.style.setProperty("--scene-width", sceneWidth + "px");
+  scene.style.setProperty("--scene-height", sceneHeight + "px");
+  scene.style.setProperty("--scene-left", (width - sceneWidth) / 2 + "px");
+  scene.style.setProperty("--scene-top", mobileScene.matches ? "40px" : (height - sceneHeight) / 2 + "px");
+}
+const sceneObserver = new ResizeObserver(fitScene);
+sceneObserver.observe(hero);
+mobileScene.addEventListener("change", fitScene);
+fitScene();
+let hoveredPanel = false;
+let previewTimer;
+let lastActivated;
 let selectedZone;
 let hoveredControl;
 let focusedControl;
 let displayedZone;
 
 function showZone(play = true) {
-  const zone = hoveredControl?.dataset.zone ?? focusedControl?.dataset.zone ?? selectedZone;
+  const zone = focusedControl?.dataset.zone ?? hoveredControl?.dataset.zone ?? (hoveredPanel ? displayedZone : selectedZone);
   if (zone === displayedZone) return;
   displayedZone = zone;
   arena.classList.toggle("has-zone", Boolean(zone));
-  arenaHint.hidden = Boolean(zone);
+  panelContainer.hidden = !zone;
   for (const control of zoneControls) {
     control.toggleAttribute("data-preview", control.dataset.zone === zone);
   }
@@ -28,13 +52,15 @@ function showZone(play = true) {
 for (const control of zoneControls) {
   control.addEventListener("pointerenter", event => {
     if (event.pointerType !== "mouse") return;
+    clearTimeout(previewTimer);
+    focusedControl = undefined;
     hoveredControl = control;
     showZone();
   });
   control.addEventListener("pointerleave", () => {
     if (hoveredControl !== control) return;
     hoveredControl = undefined;
-    showZone(false);
+    previewTimer = setTimeout(() => showZone(false), 100);
   });
   control.addEventListener("focus", () => {
     if (!control.matches(":focus-visible")) return;
@@ -47,6 +73,7 @@ for (const control of zoneControls) {
     showZone(false);
   });
   control.addEventListener("click", () => {
+    lastActivated = control;
     selectedZone = control.dataset.zone;
     for (const button of zoneControls) {
       button.setAttribute("aria-pressed", String(button.dataset.zone === selectedZone));
@@ -54,6 +81,46 @@ for (const control of zoneControls) {
     showZone();
   });
 }
+
+panelContainer.addEventListener("pointerenter", () => {
+  clearTimeout(previewTimer);
+  hoveredPanel = true;
+});
+panelContainer.addEventListener("pointerleave", () => {
+  hoveredPanel = false;
+  showZone(false);
+});
+function dismissPanel() {
+  selectedZone = hoveredControl = focusedControl = undefined;
+  hoveredPanel = false;
+  clearTimeout(previewTimer);
+  for (const control of zoneControls) control.setAttribute("aria-pressed", "false");
+  showZone(false);
+  const returnFocus = lastActivated;
+  lastActivated = undefined;
+  returnFocus?.focus({ preventScroll: true });
+  // Closing must win over the focus preview.
+  focusedControl = undefined;
+  displayedZone = undefined;
+  panelContainer.hidden = true;
+  for (const effect of arenaEffects) effect.classList.remove("is-active", "is-playing");
+  for (const control of zoneControls) control.removeAttribute("data-preview");
+}
+closePanel.addEventListener("click", dismissPanel);
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !panelContainer.hidden) dismissPanel();
+});
+const visibilityObserver = new IntersectionObserver(entries => {
+  hero.toggleAttribute("data-offscreen", !entries[0].isIntersecting);
+}, { threshold: .01 });
+visibilityObserver.observe(hero);
+window.addEventListener("pagehide", event => {
+  clearTimeout(previewTimer);
+  if (event.persisted) return;
+  sceneObserver.disconnect();
+  visibilityObserver.disconnect();
+  mobileScene.removeEventListener("change", fitScene);
+});
 
 function formatters() {
   const locale = document.documentElement.lang === "en" ? "en-CA" : "fr-CA";
@@ -134,12 +201,19 @@ for (const surface of document.querySelectorAll(".pointer-surface")) {
   let targetX = 50;
   let targetY = 50;
   function follow() {
+    if (!pointerEffects.matches || document.hidden || surface.closest("[data-offscreen]")) {
+      surface.style.setProperty("--glow", "0");
+      surface.style.setProperty("--dx", "0px");
+      surface.style.setProperty("--dy", "0px");
+      frame = 0;
+      return;
+    }
     x += (targetX - x) * .2;
     y += (targetY - y) * .2;
     surface.style.setProperty("--x", x + "%");
     surface.style.setProperty("--y", y + "%");
-    surface.style.setProperty("--dx", (x - 50) * .12 + "px");
-    surface.style.setProperty("--dy", (y - 50) * .12 + "px");
+    surface.style.setProperty("--dx", (x - 50) * .08 + "px");
+    surface.style.setProperty("--dy", (y - 50) * .08 + "px");
     frame = Math.abs(targetX - x) + Math.abs(targetY - y) > .25
       ? requestAnimationFrame(follow) : 0;
   }
@@ -158,4 +232,9 @@ for (const surface of document.querySelectorAll(".pointer-surface")) {
   }
   surface.addEventListener("pointerleave", resetPointer);
   pointerEffects.addEventListener("change", resetPointer);
+  document.addEventListener("visibilitychange", resetPointer);
+  window.addEventListener("pagehide", () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+  });
 }
