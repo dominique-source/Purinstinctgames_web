@@ -1,27 +1,94 @@
 body { background: radial-gradient(ellipse at 50% 10%, #072445, #020d1b 45%); --lime: #00edf5; }
 .nav { background: #031020; border-color: #00edf56a; }
-.school-home { max-width: 1550px; margin: auto; padding: 0 clamp(12px, 3vw, 48px); }
-.school-hero { text-align: center; padding-top: clamp(14px, 3vw, 42px); }
-.school-hero h1 { font-size: clamp(30px, 7.4vw, 112px); }
-.school-hero h1 em { display: block; }
-.school-hero > p { margin: 10px 0 16px; font-size: clamp(16px, 2.2vw, 28px); font-style: italic; line-height: 1.15; }
-.school-arena { position: relative; max-width: 1000px; margin: auto; border: 1px solid #00edf58a; border-radius: 16px 4px; overflow: hidden; }
+.school-home { margin: auto; }
+.school-hero {
+  display: grid;
+  grid-template-areas: "intro" "arena" "controls" "caption";
+  gap: 12px;
+  align-items: center;
+  padding: 16px clamp(12px, 3vw, 48px);
+  background: radial-gradient(ellipse at 72% 40%, #10345a, #031020 76%);
+  text-align: center;
+}
+.school-intro { grid-area: intro; }
+.school-intro h1 { font-size: clamp(36px, 7.4vw, 74px); }
+.school-intro h1 em { display: block; }
+.school-intro > p { margin: 10px 0 0; font-size: clamp(16px, 2vw, 24px); font-style: italic; line-height: 1.2; }
+.school-arena { grid-area: arena; position: relative; width: 100%; margin: auto; border-radius: 16px 4px; overflow: hidden; }
 .arena-layer { position: relative; }
 .arena-layer img { display: block; width: 100%; height: auto; }
-.arena-pin { position: absolute; top: var(--pin-y); left: var(--pin-x); translate: -50% -50%; display: grid; place-items: center; width: 44px; height: 44px; text-decoration: none; }
-.arena-pin span { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid #00edf5; border-radius: 50%; color: #fff; background: #041324; font-weight: 700; }
-.arena-pin:is(:hover,:focus-visible,[data-selected]) span { background: #00edf5; color: #021423; box-shadow: 0 0 20px #00edf5; }
+.arena-pin {
+  position: absolute; top: var(--pin-y); left: var(--pin-x); translate: -50% -50%;
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  background: transparent; border: 0; cursor: pointer; z-index: 1;
+}
+.arena-pin span {
+  display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid #00edf5;
+  border-radius: 50%; color: #fff; background: #041324; font: 700 16px/1 Barlow, sans-serif;
+}
+.has-zone .arena-pin:not([data-preview]) span { opacity: .65; }
+.arena-pin[data-preview] span { background: #00edf5; color: #021423; box-shadow: 0 0 20px #00edf5; }
+.arena-effects { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.arena-effects g { display: none; }
+.arena-effects .is-active { display: inline; }
+.arena-effects polygon { fill: #00edf525; stroke: #7affff; stroke-width: 2; stroke-linejoin: round; }
+.arena-trace, .arena-pulse { fill: none; stroke: #aaffff; stroke-width: 4; stroke-linecap: round; opacity: 0; }
+.arena-step, .arena-player { fill: #baffff; stroke: #031020; stroke-width: 2; opacity: 0; }
+.arena-player.defender { fill: #ff9b90; }
+@media (prefers-reduced-motion: no-preference) {
+  .is-playing .arena-trace { animation: arena-trace 480ms ease-out var(--delay) both; }
+  .is-playing .arena-pulse { animation: arena-trace 320ms ease-out 530ms both; }
+  .is-playing .arena-step { animation: arena-marker 320ms ease-out var(--delay) both; }
+  .is-playing .arena-player { animation: arena-marker 650ms ease-out both; }
+  [data-effect="game-iq"] .arena-trace:first-of-type { stroke: #fff; stroke-width: 2; }
+}
+@keyframes arena-trace {
+  0% { opacity: 1; stroke-dasharray: .24 1; stroke-dashoffset: .24; }
+  80% { opacity: 1; }
+  100% { opacity: 0; stroke-dasharray: .24 1; stroke-dashoffset: -1; }
+}
+@keyframes arena-marker { 0%, 75% { opacity: 1; } 100% { opacity: 0; } }
 .school-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; margin: 14px 0; padding: 12px 24px; min-height: 48px; background: #00edf5; color: #020e1b; border-radius: 14px 4px; font: italic 900 clamp(20px, 2.5vw, 32px)/1.05 var(--display); text-decoration: none; }
 .school-button-yellow { background: #ffdf36; }
 .school-button:active { transform: scale(.97); }
-.zone-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); max-width: 1000px; margin: auto; gap: 8px; }
-.zone-grid a { display: grid; place-items: center; min-height: 48px; padding: 6px; border: 1px solid #00edf580; border-radius: 10px 3px; background: #071a2e; font-weight: 700; text-decoration: none; }
-.zone-grid a:is(:hover,:focus-visible,[data-selected]) { color: #00edf5; border-color: #00edf5; }
-.zone-detail:not([hidden]) { display: grid; grid-template-columns: minmax(100px, 1fr) 2fr; align-items: center; gap: 16px; max-width: 700px; padding: 14px; margin: 12px auto; text-align: left; background: #0a223a; border: 1px solid #00edf5; }
-.zone-detail img { width: 100%; border-radius: 8px; }
-.zone-detail h2 { font-size: clamp(25px, 4vw, 40px); }
-.zone-detail p { margin: 6px 0; }
-.school-section { padding-block: clamp(22px, 5vw, 64px); scroll-margin-top: 76px; text-align: center; }
+.zone-grid { grid-area: controls; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; }
+.zone-grid button {
+  min-height: 44px; padding: 5px; border: 1px solid #00edf580; border-radius: 10px 3px;
+  background: #071a2e; color: inherit; font: 700 15px/1.1 Barlow, sans-serif; cursor: pointer;
+}
+.zone-grid button:is([data-preview],[aria-pressed="true"]) { color: #00edf5; border-color: #00edf5; }
+.zone-details {
+  grid-area: caption; align-self: start; min-height: 150px; padding: 12px;
+  text-align: left; background: #06182b; border-inline-start: 2px solid #00edf5;
+  font-size: 16px; line-height: 1.25;
+}
+.zone-detail h2 { font-size: clamp(24px, 3vw, 36px); }
+.zone-details p { margin: 6px 0; }
+.zone-detail a { display: inline-block; min-height: 28px; }
+@media (min-width: 950px) {
+  .school-hero {
+    --arena-height: max(320px, calc(100svh - 93px));
+    min-height: calc(100svh - 61px);
+    grid-template-areas: "intro arena" "controls arena" "caption arena";
+    grid-template-columns: minmax(270px, 1fr) minmax(0, 2fr);
+    grid-template-rows: auto auto 1fr;
+    gap: 8px clamp(20px, 3vw, 48px);
+    text-align: left;
+  }
+  .school-intro { align-self: end; padding-top: clamp(0px, calc(13svh - 78px), 70px); }
+  .school-intro h1 { font-size: clamp(42px, min(5.4vw, 11svh), 90px); }
+  .school-intro > p { font-size: clamp(16px, min(1.65vw, 3.3svh), 24px); }
+  .school-intro .school-button { font-size: clamp(20px, 2.1vw, 30px); }
+  .school-arena { max-width: calc(var(--arena-height) * 1024 / 825); }
+}
+@media (min-width: 950px) and (max-height: 670px) {
+  .school-hero { grid-template-rows: auto auto 1fr; }
+  .school-intro h1 { font-size: clamp(34px, 9svh, 62px); }
+  .school-intro .school-button { margin: 8px 0 0; min-height: 44px; }
+  .zone-details { min-height: 108px; padding: 8px; font-size: 14px; }
+  .zone-detail h2 { font-size: 24px; }
+}
+.school-section { max-width: 1550px; margin-inline: auto; padding-inline: clamp(12px, 3vw, 48px); padding-block: clamp(22px, 5vw, 64px); scroll-margin-top: 76px; text-align: center; }
 .section-title { display: flex; align-items: center; justify-content: center; gap: .3em; flex-wrap: wrap; margin-bottom: 20px; font-size: clamp(32px, 5.5vw, 80px); text-transform: none; }
 .section-title::before, .section-title::after { content: ""; flex: 1; min-width: 15px; height: 2px; background: #00edf5; }
 .school-cards { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
@@ -52,21 +119,17 @@ body { background: radial-gradient(ellipse at 50% 10%, #072445, #020d1b 45%); --
   html { scroll-behavior: smooth; }
   .school-card, .school-button span, .arena-pin span, .pointer-surface::after { transition: transform 180ms ease, opacity 180ms ease, box-shadow 180ms ease; }
   .school-button:hover span { transform: translateX(4px); }
-  .arena-pin:is(:hover,:focus-visible,[data-selected]) span { transform: scale(1.12); }
+  .arena-pin[data-preview] span { transform: scale(1.12); }
   .school-card.is-entering { animation: school-enter 320ms ease both; animation-delay: calc(var(--step) * 45ms); }
   .school-summary strong.is-changing { animation: school-count 280ms ease; }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .school-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 22px color-mix(in srgb,var(--accent),transparent 65%); }
-  .arena-layer { transform: translate(var(--dx,0px),var(--dy,0px)); }
 }
 @keyframes school-enter { from { opacity: .5; transform: translateY(12px); } }
 @keyframes school-count { 50% { color: white; } }
 @media (max-width: 950px) { .school-cards { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width: 650px) {
-  .school-home { padding-inline: 12px; }
-  .school-arena { margin-inline: -12px; border-inline: 0; border-radius: 0; }
-  .zone-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .school-cards, .configuration-grid, .package-grid { grid-template-columns: minmax(0,1fr); }
   .school-price { position: static; }
   .arena-pin span { width: 20px; height: 20px; }

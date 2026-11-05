@@ -1,4 +1,8 @@
 window.piTranslations = {
+  "Terrain PürInstinct": "PürInstinct field",
+  "Les cinq zones et le terrain": "The five zones and the field",
+  "Crée une ouverture à trois contre deux et passe vers la zone d’en-but.": "Create an opening three against two and pass toward the end zone.",
+  "Explore les cinq zones et découvre comment elles se rejoignent sur le terrain.": "Explore the five zones and see how their skills come together on the field.",
   "Navigation principale": "Main navigation",
   "Pour les écoles": "For schools",
   "Les 5 zones": "The 5 zones",

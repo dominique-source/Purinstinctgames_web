@@ -39,47 +39,58 @@
 
 <main class="school-home">
 <section class="school-hero" aria-labelledby="school-title">
+  <div class="school-intro">
   <h1 id="school-title">PÜRINSTINCT GAMES <em>À L’ÉCOLE</em></h1>
   <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les mettre en pratique en match.</p>
+  <a class="school-button" href="#parcours">Voir comment se déroulent les Games <span aria-hidden="true">→</span></a>
+  </div>
   <div class="school-arena pointer-surface">
     <div class="arena-layer">
       <img src="/assets/school-home/arene-avec-reperes.webp" width="1024" height="825" alt="Vue aérienne des cinq zones autour du terrain PürInstinct." fetchpriority="high">
-      <a class="arena-pin" href="/zones.html#vitesse" data-zone="vitesse" style="--pin-x:86%;--pin-y:52%" aria-label="Vitesse"><span aria-hidden="true">+</span></a>
-      <a class="arena-pin" href="/zones.html#agilite" data-zone="agilite" style="--pin-x:21%;--pin-y:31%" aria-label="Agilité"><span aria-hidden="true">+</span></a>
-      <a class="arena-pin" href="/zones.html#habiletes-manuelles" data-zone="habiletes-manuelles" style="--pin-x:16%;--pin-y:52%" aria-label="Habiletés des mains"><span aria-hidden="true">+</span></a>
-      <a class="arena-pin" href="/zones.html#habiletes-au-pied" data-zone="habiletes-au-pied" style="--pin-x:82%;--pin-y:27%" aria-label="Habiletés des pieds"><span aria-hidden="true">+</span></a>
-      <a class="arena-pin" href="/zones.html#game-iq" data-zone="game-iq" style="--pin-x:22%;--pin-y:78%" aria-label="Game IQ"><span aria-hidden="true">+</span></a>
+      <svg class="arena-effects" viewBox="0 0 600 483" preserveAspectRatio="none" aria-hidden="true">
+        <g data-effect="vitesse"><polygon points="438,218 519,218 590,342 500,342"/><path class="arena-trace" pathLength="1" d="M 473 229 L 530 319" style="--delay:0ms"/><path class="arena-trace" pathLength="1" d="M 490 229 L 550 319" style="--delay:100ms"/><path class="arena-pulse" pathLength="1" d="M 516 250 Q 408.0 206 300 241"/></g>
+        <g data-effect="agilite"><polygon points="80,141 193,138 168,202 53,202"/><path class="arena-trace" pathLength="1" d="M 85 185 L 130 173 L 153 151" style="--delay:0ms"/><circle class="arena-step" cx="85" cy="185" r="7" style="--delay:0ms"/><circle class="arena-step" cx="130" cy="173" r="7" style="--delay:95ms"/><circle class="arena-step" cx="153" cy="151" r="7" style="--delay:190ms"/><path class="arena-pulse" pathLength="1" d="M 128 151 Q 214.0 116 300 241"/></g>
+        <g data-effect="habiletes-manuelles"><polygon points="24,241 81,230 143,240 171,268 145,303 64,314 26,287"/><path class="arena-trace" pathLength="1" d="M 65 276 Q 95 231 129 269" style="--delay:0ms"/><path class="arena-pulse" pathLength="1" d="M 94 250 Q 197.0 206 300 241"/></g>
+        <g data-effect="habiletes-au-pied"><polygon points="402,145 434,124 495,119 555,139 556,169 507,187 440,186 405,166"/><path class="arena-trace" pathLength="1" d="M 429 152 L 455 171 L 481 154 L 510 170 L 535 154" style="--delay:0ms"/><circle class="arena-step" cx="429" cy="152" r="7" style="--delay:0ms"/><circle class="arena-step" cx="455" cy="171" r="7" style="--delay:95ms"/><circle class="arena-step" cx="481" cy="154" r="7" style="--delay:190ms"/><circle class="arena-step" cx="510" cy="170" r="7" style="--delay:285ms"/><circle class="arena-step" cx="535" cy="154" r="7" style="--delay:380ms"/><path class="arena-pulse" pathLength="1" d="M 489 132 Q 394.5 97 300 241"/></g>
+        <g data-effect="game-iq"><polygon points="48,363 241,363 249,441 35,441"/><path class="arena-trace" pathLength="1" d="M 106 413 L 153 409 L 186 423" style="--delay:0ms"/><path class="arena-trace" pathLength="1" d="M 106 413 L 142 384 L 206 385" style="--delay:100ms"/><path class="arena-pulse" pathLength="1" d="M 133 375 Q 216.5 206 300 241"/></g>
+        <g data-effect="terrain"><polygon points="226,121 368,121 456,346 185,346"/><circle class="arena-player " cx="236" cy="277" r="7"/><circle class="arena-player " cx="305" cy="230" r="7"/><circle class="arena-player " cx="342" cy="151" r="7"/><circle class="arena-player defender" cx="262" cy="201" r="7"/><circle class="arena-player defender" cx="355" cy="201" r="7"/><path class="arena-trace" pathLength="1" d="M 236 277 Q 268 232 305 230" style="--delay:0ms"/><path class="arena-trace" pathLength="1" d="M 305 230 Q 336 195 342 151" style="--delay:100ms"/></g>
+      </svg>
+      <button type="button" class="arena-pin" data-zone="vitesse" aria-pressed="false" aria-controls="zone-vitesse" style="--pin-x:86.00%;--pin-y:51.76%" aria-label="Vitesse"><span aria-hidden="true">+</span></button>
+      <button type="button" class="arena-pin" data-zone="agilite" aria-pressed="false" aria-controls="zone-agilite" style="--pin-x:21.33%;--pin-y:31.26%" aria-label="Agilité"><span aria-hidden="true">+</span></button>
+      <button type="button" class="arena-pin" data-zone="habiletes-manuelles" aria-pressed="false" aria-controls="zone-habiletes-manuelles" style="--pin-x:15.67%;--pin-y:51.76%" aria-label="Habiletés des mains"><span aria-hidden="true">+</span></button>
+      <button type="button" class="arena-pin" data-zone="habiletes-au-pied" aria-pressed="false" aria-controls="zone-habiletes-au-pied" style="--pin-x:81.50%;--pin-y:27.33%" aria-label="Habiletés des pieds"><span aria-hidden="true">+</span></button>
+      <button type="button" class="arena-pin" data-zone="game-iq" aria-pressed="false" aria-controls="zone-game-iq" style="--pin-x:22.17%;--pin-y:77.64%" aria-label="Game IQ"><span aria-hidden="true">+</span></button>
+      <button type="button" class="arena-pin" data-zone="terrain" aria-pressed="false" aria-controls="zone-terrain" style="--pin-x:49.33%;--pin-y:30.64%" aria-label="Terrain PürInstinct"><span aria-hidden="true">+</span></button>
     </div>
   </div>
-  <a class="school-button" href="#parcours">Voir comment se déroulent les Games <span aria-hidden="true">→</span></a>
-  <nav class="zone-grid" aria-label="Les cinq zones">
-    <a href="/zones.html#vitesse" data-zone="vitesse">Vitesse</a>
-    <a href="/zones.html#agilite" data-zone="agilite">Agilité</a>
-    <a href="/zones.html#habiletes-manuelles" data-zone="habiletes-manuelles">Habiletés des mains</a>
-    <a href="/zones.html#habiletes-au-pied" data-zone="habiletes-au-pied">Habiletés des pieds</a>
-    <a href="/zones.html#game-iq" data-zone="game-iq">Game IQ</a>
-  </nav>
+  <div class="zone-grid" role="group" aria-label="Les cinq zones et le terrain">
+    <button type="button" data-zone="vitesse" aria-pressed="false" aria-controls="zone-vitesse">Vitesse</button>
+    <button type="button" data-zone="agilite" aria-pressed="false" aria-controls="zone-agilite">Agilité</button>
+    <button type="button" data-zone="habiletes-manuelles" aria-pressed="false" aria-controls="zone-habiletes-manuelles">Habiletés des mains</button>
+    <button type="button" data-zone="habiletes-au-pied" aria-pressed="false" aria-controls="zone-habiletes-au-pied">Habiletés des pieds</button>
+    <button type="button" data-zone="game-iq" aria-pressed="false" aria-controls="zone-game-iq">Game IQ</button>
+    <button type="button" data-zone="terrain" aria-pressed="false" aria-controls="zone-terrain">Terrain PürInstinct</button>
+  </div>
   <div class="zone-details">
     <article class="zone-detail" id="zone-vitesse" hidden>
-      <img src="/assets/render-speed.jpg" alt="" loading="lazy">
       <div><h2>Vitesse</h2><p>Accélère sur une courte distance et apprends à relancer ton sprint.</p><a href="/zones.html#vitesse">Découvrir la zone →</a></div>
     </article>
     <article class="zone-detail" id="zone-agilite" hidden>
-      <img src="/assets/render-agility.jpg" alt="" loading="lazy">
       <div><h2>Agilité</h2><p>Change de direction et garde ton équilibre en mouvement.</p><a href="/zones.html#agilite">Découvrir la zone →</a></div>
     </article>
     <article class="zone-detail" id="zone-habiletes-manuelles" hidden>
-      <img src="/assets/render-hand.jpg" alt="" loading="lazy">
       <div><h2>Habiletés des mains</h2><p>Travaille la précision de tes passes et de tes réceptions.</p><a href="/zones.html#habiletes-manuelles">Découvrir la zone →</a></div>
     </article>
     <article class="zone-detail" id="zone-habiletes-au-pied" hidden>
-      <img src="/assets/render-foot.jpg" alt="" loading="lazy">
       <div><h2>Habiletés des pieds</h2><p>Travaille tes appuis et la précision de tes déplacements.</p><a href="/zones.html#habiletes-au-pied">Découvrir la zone →</a></div>
     </article>
     <article class="zone-detail" id="zone-game-iq" hidden>
-      <img src="/assets/render-iq.jpg" alt="" loading="lazy">
       <div><h2>Game IQ</h2><p>Observe le jeu, anticipe et choisis la bonne action.</p><a href="/zones.html#game-iq">Découvrir la zone →</a></div>
     </article>
+    <article class="zone-detail" id="zone-terrain" hidden>
+      <div><h2>Terrain PürInstinct</h2><p>Crée une ouverture à trois contre deux et passe vers la zone d’en-but.</p></div>
+    </article>
+    <p class="arena-hint">Explore les cinq zones et découvre comment elles se rejoignent sur le terrain.</p>
   </div>
 </section>
 <section class="school-section" id="parcours">
