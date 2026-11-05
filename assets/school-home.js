@@ -51,7 +51,7 @@ function showZone(play = true) {
 
 for (const control of zoneControls) {
   control.addEventListener("pointerenter", event => {
-    if (event.pointerType !== "mouse") return;
+    if (event.pointerType !== "mouse" || mobileScene.matches) return;
     clearTimeout(previewTimer);
     focusedControl = undefined;
     hoveredControl = control;
@@ -218,7 +218,7 @@ for (const surface of document.querySelectorAll(".pointer-surface")) {
       ? requestAnimationFrame(follow) : 0;
   }
   surface.addEventListener("pointermove", event => {
-    if (!pointerEffects.matches || event.pointerType !== "mouse") return;
+    if (!pointerEffects.matches || event.pointerType !== "mouse" || (surface === arena && mobileScene.matches)) return;
     const rect = surface.getBoundingClientRect();
     targetX = Math.max(0, Math.min(100, 100 * (event.clientX - rect.left) / rect.width));
     targetY = Math.max(0, Math.min(100, 100 * (event.clientY - rect.top) / rect.height));
