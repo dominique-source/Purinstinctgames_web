@@ -1,27 +1,58 @@
+const arena = document.querySelector(".school-arena");
 const zoneControls = [...document.querySelectorAll("[data-zone]")];
+const zonePanels = [...document.querySelectorAll(".zone-detail")];
+const arenaEffects = [...document.querySelectorAll("[data-effect]")];
+const arenaHint = document.querySelector(".arena-hint");
+let selectedZone;
+let hoveredControl;
+let focusedControl;
+let displayedZone;
+
+function showZone(play = true) {
+  const zone = hoveredControl?.dataset.zone ?? focusedControl?.dataset.zone ?? selectedZone;
+  if (zone === displayedZone) return;
+  displayedZone = zone;
+  arena.classList.toggle("has-zone", Boolean(zone));
+  arenaHint.hidden = Boolean(zone);
+  for (const control of zoneControls) {
+    control.toggleAttribute("data-preview", control.dataset.zone === zone);
+  }
+  for (const panel of zonePanels) panel.hidden = panel.id !== "zone-" + zone;
+  for (const effect of arenaEffects) {
+    const active = effect.dataset.effect === zone;
+    effect.classList.toggle("is-active", active);
+    effect.classList.toggle("is-playing", active && play);
+  }
+}
 
 for (const control of zoneControls) {
-  control.addEventListener("click", event => {
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    const key = control.dataset.zone;
-    for (const link of zoneControls) {
-      const selected = link.dataset.zone === key;
-      link.toggleAttribute("data-selected", selected);
-      link.setAttribute("aria-expanded", String(selected));
-    }
-    for (const panel of document.querySelectorAll(".zone-detail")) {
-      panel.hidden = panel.id !== "zone-" + key;
-    }
-    const panel = document.getElementById("zone-" + key);
-    if (control.classList.contains("arena-pin")) {
-      const next = zoneControls.find(link => link.dataset.zone === key && !link.classList.contains("arena-pin"));
-      next.focus({ preventScroll: true });
-      panel.scrollIntoView({ block: "nearest" });
-    }
+  control.addEventListener("pointerenter", event => {
+    if (event.pointerType !== "mouse") return;
+    hoveredControl = control;
+    showZone();
   });
-  control.setAttribute("aria-controls", "zone-" + control.dataset.zone);
-  control.setAttribute("aria-expanded", "false");
+  control.addEventListener("pointerleave", () => {
+    if (hoveredControl !== control) return;
+    hoveredControl = undefined;
+    showZone(false);
+  });
+  control.addEventListener("focus", () => {
+    if (!control.matches(":focus-visible")) return;
+    focusedControl = control;
+    showZone();
+  });
+  control.addEventListener("blur", () => {
+    if (focusedControl !== control) return;
+    focusedControl = undefined;
+    showZone(false);
+  });
+  control.addEventListener("click", () => {
+    selectedZone = control.dataset.zone;
+    for (const button of zoneControls) {
+      button.setAttribute("aria-pressed", String(button.dataset.zone === selectedZone));
+    }
+    showZone();
+  });
 }
 
 function formatters() {
