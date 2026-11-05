@@ -8,6 +8,7 @@ export const config = {
 const publicPaths = new Set([
   '/',
   '/index.html',
+  '/site.webmanifest',
   '/assets/site-translations.js',
   '/assets/site-language.js',
   '/assets/site-language.css',
