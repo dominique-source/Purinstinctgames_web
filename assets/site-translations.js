@@ -1,5 +1,5 @@
 window.piTranslations = {
-  "Terrain PürInstinct": "PürInstinct field",
+  "Terrain PürInstinct": "PürInstinct Field",
   "Les cinq zones et le terrain": "The five zones and the field",
   "Crée une ouverture à trois contre deux et passe vers la zone d’en-but.": "Create an opening three against two and pass toward the end zone.",
   "Explore les cinq zones et découvre comment elles se rejoignent sur le terrain.": "Explore the five zones and see how their skills come together on the field.",
@@ -11,12 +11,12 @@ window.piTranslations = {
   "App PürInstinct Games": "PürInstinct Games app",
   "À L’ÉCOLE": "AT SCHOOL",
   "Cinq zones pour développer tes habiletés.": "Five zones to develop your skills.",
-  "Un terrain pour les mettre en pratique en match.": "One field to put them into play.",
+  "Un terrain pour les mettre en pratique en match.": "One field to put them into practice in a match.",
   "Vue aérienne des cinq zones autour du terrain PürInstinct.": "Aerial view of the five zones around the PürInstinct field.",
   "Vitesse": "Speed",
   "Agilité": "Agility",
-  "Habiletés des mains": "Hand skills",
-  "Habiletés des pieds": "Foot skills",
+  "Habiletés des mains": "Hand Skills",
+  "Habiletés des pieds": "Foot Skills",
   "Voir comment se déroulent les Games": "See how the Games work",
   "Les cinq zones": "The five zones",
   "Accélère sur une courte distance et apprends à relancer ton sprint.": "Accelerate over a short distance and learn to pick up speed again.",
@@ -108,5 +108,13 @@ window.piTranslations = {
   "PÜR ID — L'identité athlétique universelle | PürInstinct Games": "Pür ID — Your universal athletic identity | PürInstinct Games",
   "PÜR ID — L'identité athlétique universelle": "Pür ID — Your universal athletic identity",
   "PÜR ID — un score athlétique unique qui te suit partout. École, corporatif, festival, compétition nationale. Six instincts mesurés, une identité persistante.": "Pür ID — one athletic score that follows you from school and workplace events to festivals and national competitions. Six instincts, one lasting identity.",
-  "Un score. Six instincts. Une identité qui te suit partout.": "One score. Six instincts. One identity that follows you everywhere."
+  "Un score. Six instincts. Une identité qui te suit partout.": "One score. Six instincts. One identity that follows you everywhere.",
+  "Voir le déroulement": "See how it works",
+  "Fermer le panneau": "Close panel",
+  "Explorer la zone →": "Explore the zone →",
+  "Changer de direction. Réagir. Esquiver.": "Change direction. React. Dodge.",
+  "Mains": "Hands",
+  "Pieds": "Feet",
+  "Terrain": "Field",
+  "Voir le parcours scolaire": "See the school journey"
 };
