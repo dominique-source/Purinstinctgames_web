@@ -1,0 +1,15 @@
+.site-language { display: inline-flex; flex: none; gap: 3px; }
+.site-language button {
+  min-width: 44px; min-height: 44px; padding: 0 5px;
+  border: 1px solid transparent; border-radius: 5px;
+  background: transparent; color: inherit; cursor: pointer;
+  font: 700 14px/1 system-ui, sans-serif;
+}
+.site-language button[aria-pressed="true"] {
+  color: var(--lime); border-color: currentColor;
+}
+.site-language button:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+@media (max-width: 960px) {
+  .nav:has(.site-language) { gap: 8px; }
+  .nav > .site-language { margin-inline-start: auto; }
+}

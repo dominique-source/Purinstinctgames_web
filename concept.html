@@ -1090,6 +1090,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
 <link rel="stylesheet" href="/assets/homepage.css">
 <script src="/assets/app-portal.js" defer></script>
 <style>@view-transition { navigation: none; }</style>
+  <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/concept.html?lang=fr">
+  <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/concept.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://purinstinctgames.com/concept.html">
+  <link rel="stylesheet" href="/assets/site-language.css">
+  <script src="/assets/site-translations.js" defer></script>
+  <script src="/assets/site-language.js" defer></script>
 </head>
 <body>
 
@@ -1107,6 +1113,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <a href="/pour-les-ecoles.html">Pour les écoles</a>
     <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a>
   </div>
+  <div class="site-language" role="group" aria-label="Langue du site"><button type="button" lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" aria-label="English" aria-pressed="false">EN</button></div>
   <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
@@ -1851,7 +1858,9 @@ const ZONES = {
        en:{tag:"Augmented tech zone",name:"Sports tech zone 2",desc:"360° projections, dynamic environments on floor and walls. Skill, agility and fast decisions.",mf:false}}
 };
 
-let lang = localStorage.getItem("pi_lang") || "fr";
+const requestedLanguage = new URLSearchParams(location.search).get("lang");
+let lang = ["fr", "en"].includes(requestedLanguage) ? requestedLanguage : localStorage.getItem("pi_lang") === "en" ? "en" : "fr";
+document.addEventListener("pi:language", event => { lang = event.detail; applyLang(); });
 const RICH = new Set(["h1_sub","mf_title_a","p_note","p_bracelet_tip","sg_title","sg_quote","cta2_hl","cta3_hl","cta2_micro"]); // keys containing safe inline HTML
 function applyLang(){
   document.documentElement.lang = lang;
@@ -1865,7 +1874,6 @@ function applyLang(){
     const v = I18N[lang][el.getAttribute("data-i18n-ph")];
     if(v!=null) el.placeholder = v;
   });
-  document.getElementById("langBtn").textContent = lang==="fr" ? "EN" : "FR";
   document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
   // swap zone logos FR/EN
   document.querySelectorAll(".zone-logo").forEach(img=>{
@@ -1880,7 +1888,10 @@ function applyLang(){
   if(window.__calRender) window.__calRender();
 }
 document.getElementById("langBtn")?.addEventListener("click",()=>{lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
-document.getElementById("footLang").addEventListener("click",e=>{e.preventDefault();lang = lang==="fr"?"en":"fr";localStorage.setItem("pi_lang",lang);applyLang();});
+document.getElementById("footLang").addEventListener("click", e => {
+  e.preventDefault();
+  document.querySelector('.site-language button[aria-pressed="false"]').click();
+});
 
 /* Burger */
 const burger = document.getElementById("burger"), navLinks = document.getElementById("navLinks");
@@ -2102,11 +2113,11 @@ function paintLb(animateScores){
         setTimeout(()=>g.remove(),1500);
       }
       const step=now=>{const k=Math.min(1,(now-t0)/700);
-        scEl.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))).toLocaleString("fr-CA");
+        scEl.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))).toLocaleString(lang === "en" ? "en-CA" : "fr-CA");
         if(k<1)requestAnimationFrame(step);};
       requestAnimationFrame(step);
       scEl.dataset.val=to;
-    } else { scEl.textContent=p.score.toLocaleString("fr-CA"); scEl.dataset.val=p.score; }
+    } else { scEl.textContent=p.score.toLocaleString(lang === "en" ? "en-CA" : "fr-CA"); scEl.dataset.val=p.score; }
   });
   if(anyMove && card){ card.classList.remove("sheen"); void card.offsetWidth; card.classList.add("sheen"); }
   const pr=new Array(lb.length);
@@ -2154,9 +2165,9 @@ document.querySelectorAll(".count").forEach(el=>{
       if(!e.isIntersecting) return;
       obs.disconnect();
       const to=+el.dataset.to, t0=performance.now(), dur=1400;
-      if(reduceMotion){el.textContent=to.toLocaleString("fr-CA");return;}
+      if(reduceMotion){el.textContent=to.toLocaleString(lang === "en" ? "en-CA" : "fr-CA");return;}
       const step=now=>{const k=Math.min(1,(now-t0)/dur);
-        el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString("fr-CA");
+        el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString(lang === "en" ? "en-CA" : "fr-CA");
         if(k<1)requestAnimationFrame(step);};
       requestAnimationFrame(step);
     });

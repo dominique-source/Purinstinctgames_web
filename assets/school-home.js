@@ -24,7 +24,16 @@ for (const control of zoneControls) {
   control.setAttribute("aria-expanded", "false");
 }
 
-const counts = new Intl.NumberFormat("fr-CA");
+function formatters() {
+  const locale = document.documentElement.lang === "en" ? "en-CA" : "fr-CA";
+  return {
+    counts: new Intl.NumberFormat(locale),
+    currency: new Intl.NumberFormat(locale, {
+      style: "currency", currency: "CAD", currencyDisplay: "code",
+      minimumFractionDigits: 0, maximumFractionDigits: 2,
+    }),
+  };
+}
 const field = id => document.getElementById(id);
 const value = id => {
   const input = field(id);
@@ -35,6 +44,10 @@ function sum(first, second) {
 }
 
 function updateConfiguration() {
+  const { counts, currency } = formatters();
+  for (const el of document.querySelectorAll("[data-cad]")) el.textContent = currency.format(Number(el.dataset.cad));
+  for (const el of document.querySelectorAll("[data-number]")) el.textContent = counts.format(Number(el.dataset.number));
+  const english = document.documentElement.lang === "en";
   const adults = sum(value("teachers"), value("adults"));
   const totals = {
     students: value("students"),
@@ -53,16 +66,21 @@ function updateConfiguration() {
   const roles = field("roles");
   roles.setCustomValidity("");
   if (adults !== null && roles.valueAsNumber > adults) {
-    roles.setCustomValidity("Les postes attribués dépassent le nombre d’adultes disponibles.");
+    roles.setCustomValidity(english
+      ? "Assigned roles exceed the number of available adults."
+      : "Les postes attribués dépassent le nombre d’adultes disponibles.");
   }
   const invalid = document.querySelector(".school-fields input:invalid");
   field("configuration-error").textContent = invalid
-    ? invalid.labels[0].textContent.trim() + " — " + invalid.validationMessage
+    ? invalid.labels[0].textContent.trim() + " — " + (invalid.validity.customError ? invalid.validationMessage : english
+      ? "Enter a whole number between " + counts.format(Number(invalid.min)) + " and " + counts.format(Number(invalid.max)) + "."
+      : "Saisissez un nombre entier entre " + counts.format(Number(invalid.min)) + " et " + counts.format(Number(invalid.max)) + ".")
     : "";
 }
 for (const input of document.querySelectorAll(".school-fields input")) {
   input.addEventListener("input", updateConfiguration);
 }
+document.addEventListener("pi:language", updateConfiguration);
 updateConfiguration();
 
 const motion = matchMedia("(prefers-reduced-motion: no-preference)");
