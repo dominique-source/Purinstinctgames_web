@@ -8,6 +8,9 @@ export const config = {
 const publicPaths = new Set([
   '/',
   '/index.html',
+  '/assets/site-translations.js',
+  '/assets/site-language.js',
+  '/assets/site-language.css',
   '/assets/school-home.css',
   '/assets/school-home.js',
   '/assets/school-home/arene-avec-reperes.webp',

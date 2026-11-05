@@ -396,6 +396,12 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
   .rv{opacity:1!important;transform:none!important}
   .pid-card::before{display:none}
 </style></noscript>
+  <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/pur-id.html?lang=fr">
+  <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/pur-id.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://purinstinctgames.com/pur-id.html">
+  <link rel="stylesheet" href="/assets/site-language.css">
+  <script src="/assets/site-translations.js" defer></script>
+  <script src="/assets/site-language.js" defer></script>
 </head>
 <body>
 
@@ -429,7 +435,7 @@ footer::before{content:"";position:absolute;right:-60px;top:-40px;width:280px;he
     <a href="/concept.html#billets" data-i18n="nav_tickets">Billets</a>
   </div>
   <div class="nav-right">
-    <button class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <div class="site-language" role="group" aria-label="Langue du site"><button type="button" lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" aria-label="English" aria-pressed="false">EN</button></div>
     <a class="nav-cta" href="/concept.html#billets" data-i18n="nav_cta">Réserve</a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -739,7 +745,9 @@ en:{
   f_nc:"No-contact sport — we touch the ball, never the player."
 }};
 
-let lang = localStorage.getItem("pi_lang") || "fr";
+const requestedLanguage = new URLSearchParams(location.search).get("lang");
+let lang = ["fr", "en"].includes(requestedLanguage) ? requestedLanguage : localStorage.getItem("pi_lang") === "en" ? "en" : "fr";
+document.addEventListener("pi:language", event => { lang = event.detail; applyLang(); });
 
 /* ====================================================== */
 /* BUILD: card bars                                        */
@@ -959,16 +967,13 @@ function applyLang(){
     img.src = lang==="fr" ? img.dataset.logoFr : img.dataset.logoEn;
   });
   document.documentElement.lang = lang;
-  document.getElementById("langBtn").textContent = lang==="fr" ? "EN" : "FR";
   document.getElementById("footLang").textContent = lang==="fr" ? "English" : "Français";
 }
 applyLang();
 
-document.getElementById("langBtn").addEventListener("click",()=>{
-  lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang();
-});
-document.getElementById("footLang").addEventListener("click",e=>{
-  e.preventDefault(); lang = lang==="fr"?"en":"fr"; localStorage.setItem("pi_lang",lang); applyLang();
+document.getElementById("footLang").addEventListener("click", e => {
+  e.preventDefault();
+  document.querySelector('.site-language button[aria-pressed="false"]').click();
 });
 
 /* ====================================================== */
