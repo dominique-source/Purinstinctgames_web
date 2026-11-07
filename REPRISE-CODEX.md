@@ -1,3 +1,11 @@
+## Vérification finale réussie — 7 novembre 2026
+
+PR23 et24 fusionnées. Production main bd04e63 ; déploiement dpl_Ed2kT2Z5nu7nUY4Mp8N3rbaaRnZs READY et alias purinstinctgames.com confirmés.
+
+Sans cookie : /app et /app/200, trois compétitions200, Horizon200, image panoramique200 image/png. Gestion/projection toujours redirigées vers access.html. Dans le navigateur : bouton APP desktop et menu mobile390 ouvrent le portail sans courriel, photos chargées, pas de débordement, rechargement section École, Précédent section→portail→site public vérifié. Sept tests Node et syntaxe réussis ; aucun script build dans ce site statique, compilation middleware Vercel réussie. Application et données inchangées.
+
+Captures : dossier Codex de ce chat school-v2/app-public-desktop.jpg et app-public-mobile.jpg. Tâche terminée, aucune publication supplémentaire requise.
+
 ## Publication et recette
 
 PR23 fusionnée : e71ee38. Déploiement purinstinct-web dpl_74XchbZ7K59LJn36EidcyGLTXS7x READY/production. APP desktop ouvre le portail sans login, toutes les images sont chargées, Back retourne à l’accueil public. Requêtes HTTP sans cookies : catégories et Horizon200, organisateur/projection redirigent vers access.html.
