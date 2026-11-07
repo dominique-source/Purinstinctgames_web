@@ -1,3 +1,13 @@
+# Accès APP public — 7 novembre 2026
+
+Dépôt dominique-source/Purinstinctgames_web, branche codex/public-app-access depuis main d517ddf. L’utilisateur autorise le portail APP sans connexion courriel et la publication production.
+
+Exemptions : portail /app, trois compétitions, activité publique Horizon et ressources statiques nécessaires. Pages organisateur/projection/opérationnelles toujours soumises au contrôle existant. L’exemption large de /app/ a été refusée par le contrôle automatique et n’a pas été appliquée.
+
+Prochaine action : fusion autorisée puis recette de production sur purinstinctgames.com, desktop/mobile et vérification sans cookie de session.
+
+---
+
 # Reprise — couverture immersive du kit approuvé
 
 - Dépôt dominique-source/Purinstinctgames_web, projet Vercel purinstinct-web, domaine purinstinctgames.com.
