@@ -8,6 +8,17 @@ export const config = {
 const publicPaths = new Set([
   '/',
   '/index.html',
+  '/app',
+  '/app/',
+  '/app/competitions/ecole',
+  '/app/competitions/ecole/',
+  '/app/competitions/interscolaire',
+  '/app/competitions/interscolaire/',
+  '/app/competitions/pour-tous',
+  '/app/competitions/pour-tous/',
+  '/app/activites/horizon',
+  '/app/activites/horizon/',
+  '/app/purinstinct-games-logo.png',
   '/assets/hero-deck/hero-desktop.webp',
   '/assets/hero-deck/hero-mobile.webp',
   '/assets/hero-deck/games-brush.png',
@@ -61,7 +72,12 @@ function getCookie(request, name) {
 }
 
 export default async function middleware(request) {
-  if (publicPaths.has(new URL(request.url).pathname)) return next();
+  const { pathname } = new URL(request.url);
+  // Only public portal pages and their static resources bypass the email gate.
+  // Organizer, projection and operational routes keep the existing session check.
+  if (publicPaths.has(pathname) ||
+      pathname.startsWith('/app/assets/') ||
+      pathname.startsWith('/app/images/competitions/')) return next();
 
   const session = getCookie(request, 'pig_session');
   const payload = session ? await verifyToken(session, process.env.AUTH_SECRET) : null;
