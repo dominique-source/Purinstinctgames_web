@@ -1,3 +1,9 @@
+## Publication et recette
+
+PR23 fusionnée : e71ee38. Déploiement purinstinct-web dpl_74XchbZ7K59LJn36EidcyGLTXS7x READY/production. APP desktop ouvre le portail sans login, toutes les images sont chargées, Back retourne à l’accueil public. Requêtes HTTP sans cookies : catégories et Horizon200, organisateur/projection redirigent vers access.html.
+
+La recette détecte un404 préexistant sur /app/ au proxy vide. Ajout d’une réécriture explicite /app/ vers le même portail déjà public, sans élargir les exemptions du middleware. Publier puis revalider /app et /app/ et le menu mobile.
+
 # Accès APP public — 7 novembre 2026
 
 Dépôt dominique-source/Purinstinctgames_web, branche codex/public-app-access depuis main d517ddf. L’utilisateur autorise le portail APP sans connexion courriel et la publication production.
