@@ -1,0 +1,36 @@
+✔ prefetches only one document and one critical photo on intent (6.619495ms)
+✔ modified clicks retain native navigation (5.713401ms)
+✔ reduced motion preserves immediate navigation with no visual delay (1.335253ms)
+✔ normal activation uses the native link and cleans up on Back (2.113717ms)
+✔ a failed visual still navigates (1.532225ms)
+✔ public APP portal and static resources work without an email session (116.6002ms)
+✔ organizer, projection and other private routes retain the email gate (1.657477ms)
+✔ the current configuration updates the 25/10 rate totals without changing resource inputs (96.983214ms)
+✔ invalid pupil counts do not produce a misleading zero or NaN estimate (8.082628ms)
+✔ English formatting and existing resource validation still run (2.732868ms)
+✔ both public pages distinguish price, pilot discount, travel and external funding (1.085114ms)
+✔ the homepage keeps configuration inputs and interactive field controls (0.669464ms)
+✔ school contact form keeps original fields, endpoint and submission handling (0.711861ms)
+✔ unchanged contact API relays the chosen configuration inside Comments (97.132228ms)
+✔ reveal waits for visibility, counts every integer from 25 to exactly 10, then never restarts (92.400491ms)
+✔ reduced motion and missing observer render the final price without animation (2.070723ms)
+✔ turning on reduced motion or leaving the page cancels an active counter (2.498083ms)
+✔ no-JS final price and a single proposal destination remain semantic; reveal cannot announce each frame (1.250093ms)
+✔ steppers respect field bounds, initialize optional counts, and use the existing input event (7.474293ms)
+✔ confirmed program rates remain independent of school staff; unknowns never become free (125.310527ms)
+✔ existing contact POST includes the visible validated configuration and original visitor message (6.942735ms)
+✔ failed contact request preserves answers and restores retry; no real email is sent (6.160774ms)
+✔ contact without configuration retains the original message and full comment limit (11.195333ms)
+✔ no player is created before explicit activation; one click creates a focused nocookie player (8.611857ms)
+✔ language changes translate only the accessible player name, with no restart (10.308325ms)
+✔ poster failure keeps play available, and embed error exposes a fallback status (1.193822ms)
+✔ one responsive video section precedes the existing program, with a permanent external fallback (1.735555ms)
+✔ fullscreen delegates to the native API only on user activation and reports a refusal (1.896444ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 450.869125

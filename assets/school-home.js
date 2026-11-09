@@ -260,6 +260,73 @@ for (const surface of document.querySelectorAll(".pointer-surface")) {
   });
 }
 
+// School offer steppers: native editable fields remain the source of truth.
+for (const button of document.querySelectorAll('[data-step-target]')) {
+  button.addEventListener('click', () => {
+    const input = document.getElementById(button.dataset.stepTarget);
+    const direction = Number(button.dataset.step);
+    const current = Number.isFinite(input.valueAsNumber) ? input.valueAsNumber : Number(input.min) - (direction > 0 ? 1 : -1);
+    input.value = String(Math.max(Number(input.min), Math.min(Number(input.max), current + direction)));
+    input.dispatchEvent(new Event('input', { bubbles:true }));
+  });
+}
+
+// One-shot school price reveal. Static HTML is the final, no-JavaScript offer.
+{
+  const panel = document.querySelector('[data-price-reveal]');
+  if (panel) {
+    const counter = panel.querySelector('[data-price-counter]');
+    const preference = matchMedia('(prefers-reduced-motion: reduce)');
+    const {regularRate, pilotRate} = window.piSchoolCommercial.policy;
+    let frame = 0;
+    let observer;
+    let started = false;
+    let startTime;
+    function finish(pulse = false) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      counter.textContent = String(pilotRate);
+      panel.dataset.revealState = 'complete';
+      if (pulse && !preference.matches) panel.classList.add('offer-arrival');
+      observer?.disconnect();
+    }
+    function tick(timestamp) {
+      startTime ??= timestamp;
+      const progress = Math.min(1, (timestamp - startTime) / 1800);
+      counter.textContent = String(Math.max(pilotRate, regularRate - Math.floor((regularRate - pilotRate) * progress)));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+      else finish(true);
+    }
+    function start() {
+      if (started) return;
+      started = true;
+      panel.dataset.revealState = 'running';
+      observer?.disconnect();
+      frame = requestAnimationFrame(tick);
+    }
+    function reduceMotion() {
+      if (preference.matches) { started = true; finish(); panel.classList.remove('offer-arrival'); }
+    }
+    if (preference.matches || !('IntersectionObserver' in window)) {
+      started = true;
+      finish();
+    } else {
+      counter.textContent = String(regularRate);
+      panel.dataset.revealState = 'pending';
+      observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= .4)) start();
+      }, {threshold:.4});
+      observer.observe(panel);
+    }
+    preference.addEventListener('change', reduceMotion);
+    window.addEventListener('pagehide', () => {
+      started = true;
+      finish();
+      preference.removeEventListener('change', reduceMotion);
+    }, {once:true});
+  }
+}
+
 // Click-to-play school video: no YouTube player or script before activation.
 {
   const play = document.getElementById('school-video-play');

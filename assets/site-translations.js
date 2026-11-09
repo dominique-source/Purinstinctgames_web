@@ -294,3 +294,40 @@ Object.assign(window.piTranslations, {
   "Plein écran": "Fullscreen",
   "Le plein écran est indisponible dans ce navigateur.": "Fullscreen is unavailable in this browser."
 });
+
+// Animated school offer — existing FR/EN system.
+Object.assign(window.piTranslations, {
+  "UNE EXPÉRIENCE COMPLÈTE": "A COMPLETE EXPERIENCE",
+  "À L’ÉCOLE": "AT SCHOOL",
+  "Plus d’un mois de préparation, de formation et d’accompagnement, jusqu’aux Games.": "More than a month of preparation, training and support, leading up to the Games.",
+  "Le budget peut sembler important pour une école. Il couvre une expérience complète, directement dans votre établissement, sur plusieurs semaines.": "The budget may seem substantial for a school. It covers a complete experience at your school over several weeks.",
+  "Des élèves jouent ensemble, accompagnés de l’équipe PürInstinct.": "Students play together with support from the PürInstinct team.",
+  "CA · par élève": "CAD · per student",
+  "Base de 10 $ CA par élève": "Base of CAD 10 per student",
+  "60 % de réduction offerte par PürInstinct": "60% discount provided by PürInstinct",
+  "Tarif régulier : 25 $ CA par élève. Cohorte pilote : base de 10 $ CA par élève. Une réduction commerciale de 60 % offerte par PürInstinct, avant déplacement et suppléments.": "Regular rate: CAD 25 per student. Pilot cohort: base of CAD 10 per student. A 60% commercial discount provided by PürInstinct, before travel expenses and supplements.",
+  "Frais de déplacement en sus. Personnel supplémentaire selon les besoins d’encadrement.": "Travel expenses are additional. Additional staff based on supervision requirements.",
+  "Composantes du programme": "Program components",
+  "Conférence de Dominique Soucy": "Talk by Dominique Soucy",
+  "Cliniques préparatoires": "Preparatory clinics",
+  "Formation des enseignants": "Teacher training",
+  "Accompagnement et coordination": "Support and coordination",
+  "Équipements et production": "Equipment and production",
+  "Games à l’école": "Games at school",
+  "CONFIGUREZ VOTRE ÉCOLE": "CONFIGURE YOUR SCHOOL",
+  "Diminuer": "Decrease",
+  "Augmenter": "Increase",
+  "Disponibilités et séances": "Availability and sessions",
+  "adultes disponibles": "available adults",
+  "plateaux": "playing areas",
+  "Total": "Total",
+  "Base par élève": "Base per student",
+  "Les ressources saisies servent à préparer la proposition. Elles ne réduisent pas la base du programme.": "The resources entered help prepare your proposal. They do not reduce the program base.",
+  "FINANCEMENT DIRECT": "DIRECT FUNDING",
+  "FINANCEMENT EXTERNE": "EXTERNAL FUNDING",
+  "L’école finance sa participation.": "The school funds its participation.",
+  "Subventions admissibles · Fondations · Commandites · Partenaires": "Eligible grants · Foundations · Sponsors · Partners",
+  "L’admissibilité et l’obtention de fonds ne sont pas garanties.": "Eligibility and funding are not guaranteed.",
+  "Une aide externe peut réduire la contribution de l’école, sans changer le prix du programme. Seules les contributions confirmées réduisent le montant à la charge de l’école.": "External funding may reduce the school’s contribution without changing the program price. Only confirmed contributions reduce the amount payable by the school.",
+  "DEMANDER MA PROPOSITION": "REQUEST MY PROPOSAL"
+});
