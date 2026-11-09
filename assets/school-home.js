@@ -159,11 +159,11 @@ function cfgNumeric(block,key,label,value,min,max) {
   const id='cfg-'+block.id+'-'+key;
   return '<div class="offer-field"><label for="'+id+'"><span>'+cfgEscape(cfgText(label))+'</span><input id="'+id+'" data-config-field="'+key+'" type="number" min="'+min+'" max="'+max+'" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="'+id+'" data-step="-1" aria-controls="'+id+'" aria-label="'+cfgEscape(cfgText('Diminuer')+' — '+cfgText(label))+'">−</button><button type="button" data-step-target="'+id+'" data-step="1" aria-controls="'+id+'" aria-label="'+cfgEscape(cfgText('Augmenter')+' — '+cfgText(label))+'">+</button></span></div>';
 }
-function renderConfiguration(raw) {
+function renderConfiguration(raw, countDraft = null) {
   const containers=['config-schedule','config-activities','config-staff'].map(cfgField);
   containers.forEach(el=>el.replaceChildren());
   cfgBlocks=raw.blocks.map(b=>({...b}));
-  cfgField('block-count').value=String(cfgBlocks.length);
+  cfgField('block-count').value=countDraft??String(cfgBlocks.length);
   cfgField('add-config-block').disabled=cfgBlocks.length>=commercial.limits.blocks;
   cfgField('config-legacy').hidden=!cfgLegacy;
   cfgBlocks.forEach((b,i)=>{
@@ -184,7 +184,7 @@ function renderConfiguration(raw) {
 function cfgRows(rows){return '<dl class="config-results">'+rows.map(([label,value])=>'<div><dt>'+cfgEscape(label)+'</dt><dd>'+cfgEscape(typeof value==='number'?new Intl.NumberFormat(cfgEnglish()?'en-CA':'fr-CA').format(value):value)+'</dd></div>').join('')+'</dl>';}
 const cfgWarnings={numbers:'Saisissez des nombres entiers dans les limites indiquées.',blocks:'Le nombre de blocs doit être compris dans les limites indiquées.',notes:'Le texte des précisions est trop long.',label:'Le libellé du bloc est trop long.',attendanceMax:'Un bloc ne peut pas dépasser l’effectif distinct.',attendanceCoverage:'La somme des présences doit couvrir l’effectif distinct déclaré.',activity:'Prévoyez au moins un terrain ou un jeu de zone dans chaque bloc.'};
 function updateConfiguration() {
-  const raw=readConfiguration(),checked=commercial.validate(raw),legacyReady=!cfgLegacy||cfgField('config-legacy-confirm').checked,result=checked.value&&legacyReady?commercial.calculate(checked.value):null;
+  const raw=readConfiguration(),checked=commercial.validate(raw),legacyReady=!cfgLegacy||cfgField('config-legacy-confirm').checked,countMatches=cfgField('block-count').valueAsNumber===cfgBlocks.length,result=checked.value&&legacyReady&&countMatches?commercial.calculate(checked.value):null;
   const money=n=>commercial.formatMoney(n,cfgEnglish()?'en':'fr');
   for(const el of configRoot.querySelectorAll('[aria-invalid]'))el.removeAttribute('aria-invalid');
   checked.errors.forEach(error=>cfgField(error.path)?.setAttribute('aria-invalid','true'));
@@ -224,16 +224,17 @@ function cfgResize(count) {
 }
 configRoot.addEventListener('input',event=>{
   if(event.target.id.endsWith('-override')&&event.target.checked){const id=event.target.id.slice(4,-9);if(!cfgOverrideEdited.has(id)){cfgField('cfg-'+id+'-indoors').value=cfgField('indoors').value;cfgField('cfg-'+id+'-outdoors').value=cfgField('outdoors').value;cfgOverrideEdited.add(id);}}
-  if(event.target.id!=='block-count')updateConfiguration();
+  updateConfiguration();
 });
 cfgField('block-count').addEventListener('change',event=>cfgResize(event.target.valueAsNumber));
+cfgField('block-count').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();cfgResize(event.target.valueAsNumber);}});
 configRoot.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;
   if(button.dataset.stepTarget){const input=cfgField(button.dataset.stepTarget),direction=Number(button.dataset.step);input.value=String(Math.min(Number(input.max),Math.max(Number(input.min),(Number.isFinite(input.valueAsNumber)?input.valueAsNumber:Number(input.min)-direction)+direction)));input.dispatchEvent(new Event('input',{bubbles:true}));}
   if(button.id==='add-config-block'){cfgResize(cfgBlocks.length+1);cfgField('cfg-'+cfgBlocks.at(-1).id+'-label').focus({preventScroll:true});}
   if(button.dataset.removeBlock){const raw=readConfiguration();raw.blocks=raw.blocks.filter(b=>b.id!==button.dataset.removeBlock);renderConfiguration(raw);cfgField('add-config-block').focus({preventScroll:true});}
 });
-document.addEventListener('pi:language',()=>{const raw=readConfiguration();cfgField('clinics').placeholder=cfgText('À préciser');cfgField('config-technical-limit').textContent=cfgText('Limite technique de cette demande : {blocks} blocs.').replace('{blocks}',commercial.limits.blocks);renderConfiguration(raw);});
+document.addEventListener('pi:language',()=>{const raw=readConfiguration(),countDraft=cfgField('block-count').value;cfgField('clinics').placeholder=cfgText('À préciser');cfgField('config-technical-limit').textContent=cfgText('Limite technique de cette demande : {blocks} blocs.').replace('{blocks}',commercial.limits.blocks);renderConfiguration(raw,countDraft);});
 let initial={students:200,indoors:1,outdoors:2,clinics:null,notes:'',blocks:cfgBlocks};
 try{const shared=commercial.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration')));if(shared){initial=shared;cfgLegacy=shared.legacy;}}catch{/* Ignore malformed legacy links. */}
 for(const key of ['students','indoors','outdoors','clinics'])cfgField(key).value=initial[key]??'';

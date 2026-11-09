@@ -1,19 +1,15 @@
-# Reprise — section scolaire en trois cartes
+# Reprise — configurateur public par blocs
 
 Dépôt : dominique-source/Purinstinctgames_web
 Dossier : /Users/client/Documents/ChatGPT/purinstinct-web-premium
-Branche : codex/school-journey-three-cards, base origin/main 8302de7.
+Branche : codex/school-configurator-blocks ; base codex/school-journey-three-cards (PR #29 non fusionnée, préservée).
+Production reste main 8302de7. Aucune fusion/publication autorisée pour cette mission.
 
-Mission : remplacer uniquement les anciens blocs parcours/déploiement par trois cartes avant/jour/après suivant la maquette. Pas de fusion ni production.
+Terminé : modèle commercial versionné, 3 étapes, blocs indépendants, capacités/surfaces/encadrement, base distincts×10 et renforts400/bloc, sous-total connu et coûts inconnus ; FR/EN ; récapitulatif complet vers le formulaire existant. 49 tests passent après remplacement des hypothèses anciennes. Cas réel navigateur 15jeux+2terrains :118/118/118,354mobilisés,21postes,18adultesécole→3renforts,3200CAD connus/16CADélève.
 
-Terminé : HTML/CSS ciblés et traductions approuvées ; mosaïque statique explicitement illustrative ; logistique conservée dans les détails du forfait ; anciennes ancres préservées. 41 tests réussis ; vérification locale et Vercel FR/EN à 1440×900 et 390×844.
+Adaptation associée : commentaire visiteur inchangé à2000caractères ; payload commentaires+résumé autorisé jusqu’à14000, requête48000, même endpoint/destinataire. Tests sans envoi réel. Limite technique12blocs avec libellés60caractères et précisions300, aucune règle commerciale inventée.
 
-Terminé : captures, rapport docs/school-journey-three-cards/REVIEW.md et comparaison du périmètre avec main. Aucun code d’arène, vidéo, calculateur, contact, APP ou protection modifié.
+En cours : finition tests navigateur multi-blocs, mobile et captures, puis PR et aperçu. Voir docs/school-configurator-blocks/PROGRESS.md.
+Points à confirmer : frais des blocs supplémentaires, compatibilités intérieures/dimensions/montage, déplacements, taxes, qualifications et rôles. Anciennes disponibilités partagées conservées comme contexte et doivent être revérifiées.
 
-Manque : photos séparées de la maquette, notamment élèves filmant/entrevues ; portfolio réel autorisé. Médias existants en usage, aucune génération ni faux bouton lecture.
-
-Prochaine action : revue utilisateur de la PR, aucune publication autorisée pour cette section. Production reste 8302de7 sur https://purinstinctgames.com/.
-
-Livraison : PR #29 https://github.com/dominique-source/Purinstinctgames_web/pull/29
-Aperçu final READY vérifié : https://purinstinct-ibv5pm9y5-dominique-soucy-s-projects.vercel.app/?lang=fr#parcours (code ff86705, target preview).
-41 tests, captures FR/EN et rapport sauvegardés ; aucune modification de main. Attendre la validation pour toute fusion/publication.
+Prochaine action : finir le contrôle mobile, sauvegarder/pousser la branche, livrer la PR sans production.

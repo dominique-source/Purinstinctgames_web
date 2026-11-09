@@ -357,3 +357,7 @@ html[lang="en"] .offer-counter { flex-direction:row-reverse; }
  .config-results dd { max-width:48%; overflow-wrap:anywhere; }
  .config-step .offer-field { padding:8px 0; }
 }
+.config-step h4,.config-results dt,.config-results dd { overflow-wrap:anywhere; min-width:0; }
+.config-results dd { max-width:55%; }
+#config-legacy label { display:flex; gap:10px; align-items:center; }
+#config-legacy input { width:24px; height:24px; accent-color:#ccff00; }
