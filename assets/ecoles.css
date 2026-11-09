@@ -52,3 +52,260 @@
   font: inherit;
 }
 .schools-contact button { justify-self: start; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+
+/* School commercial content only. Existing navigation and application stay intact. */
+.schools-commercial { max-width: 1240px; gap: clamp(28px,5vw,64px); }
+.commercial-intro, .commercial-section { width: 100%; color: #f4f4ef; }
+.schools-commercial .commercial-section { scroll-margin-top: 88px; }
+.commercial-intro h1 { margin-block: 14px 22px; }
+.commercial-intro .schools-photo { margin-top: 26px; border-radius: 12px; }
+.commercial-intro > p + p { margin-top: 12px; }
+.commercial-intro .commercial-lead { font-size: clamp(20px,2.2vw,28px); }
+.commercial-eyebrow { color: #ccff00; font-weight: 700; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; }
+.commercial-section h2 { font-size: clamp(32px,4vw,56px); line-height: 1.05; margin-bottom: 24px; }
+.commercial-section h3 { font: italic 900 clamp(23px,2.4vw,32px)/1.1 var(--display); margin: 0 0 12px; }
+.commercial-components { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin-block: 20px; }
+.commercial-component, .commercial-financing article { padding: 24px; border: 1px solid #f4f4ef40; border-radius: 12px; background: #111; min-width: 0; }
+.commercial-component p, .commercial-financing p { font-size: 17px; line-height: 1.5; }
+.commercial-timeline { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; padding: 0; margin: 24px 0; list-style: none; text-align: left; }
+.commercial-timeline li { border-top: 2px solid #ccff00; padding-top: 20px; }
+.commercial-step { display: block; color: #ccff00; font: italic 900 44px/1 var(--display); margin-bottom: 14px; }
+.commercial-section .commercial-lead, .commercial-budget-note { max-width: 72ch; line-height: 1.5; }
+.commercial-budget-note { margin: 16px auto; }
+.commercial-prices, .commercial-financing { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; margin-block: 24px; text-align: left; }
+.commercial-rate { padding: clamp(20px,3vw,36px); background: #101010; border: 1px solid #f4f4ef55; border-radius: 12px; min-width: 0; }
+.commercial-pilot { border: 2px solid #ccff00; }
+.commercial-amount { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; margin: 20px 0; }
+.commercial-amount strong { font: italic 900 clamp(48px,5vw,76px)/1 var(--display); white-space: nowrap; }
+.commercial-pilot .commercial-amount strong { color: #ccff00; }
+.commercial-amount span { font-size: 18px; }
+.commercial-rate p + p { margin-top: 16px; }
+.commercial-travel { font-weight: 700; color: #ccff00; }
+.commercial-section .commercial-note { font-size: 15px; line-height: 1.5; color: #ccc; margin-top: 16px; }
+.commercial-next { padding: 28px; border: 1px solid #ccff0070; background: #101010; border-radius: 12px; }
+.commercial-next a { margin: 20px 12px 0 0; }
+.commercial-document-link { display: inline-flex; align-items: center; min-height: 48px; font-weight: 700; }
+.commercial-estimate { background: #0a0a0a; padding: clamp(16px,2vw,28px); border: 1px solid #ccff0070; border-radius: 12px; position: sticky; top: 80px; text-align: left; }
+.commercial-estimate .commercial-prices { grid-template-columns: 1fr; gap: 12px; }
+.commercial-estimate .commercial-rate { padding: 18px; }
+.commercial-estimate .commercial-amount { margin-block: 12px; }
+.commercial-estimate .commercial-amount strong { font-size: 48px; }
+.commercial-example { border-top: 1px solid #f4f4ef55; padding-top: 16px; }
+.commercial-example p { display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; margin-block: 10px; }
+.commercial-example strong { font-variant-numeric: tabular-nums; }
+.commercial-example small { display: block; line-height: 1.5; color: #ccc; }
+.commercial-estimate .games-cta { margin-top: 20px; }
+.school-intro .commercial-hero-note { white-space: normal; max-width: 35ch; font: 700 clamp(14px,1.1vw,18px)/1.4 Barlow,sans-serif; }
+.school-home .commercial-section { background: #0a0a0a; --lime: #ccff00; }
+.commercial-configure { --lime: #ccff00; }
+.school-home .commercial-section .section-title::before, .school-home .commercial-section .section-title::after { background: #ccff00; }
+.school-home .commercial-section em { color: #ccff00; }
+@media (max-width: 900px) { .commercial-components { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 650px) {
+  .commercial-components, .commercial-timeline, .commercial-prices, .commercial-financing { grid-template-columns: minmax(0,1fr); }
+  .commercial-estimate { position: static; }
+  .commercial-next { padding: 20px; }
+  .commercial-next a { width: 100%; justify-content: center; text-align: center; }
+  .school-intro .commercial-hero-note { margin-inline: auto; font-size: 14px; }
+}
+
+/* Configuration and proposal: the base never implies a final all-in total. */
+.commercial-base { color: var(--lime); font: italic 900 clamp(40px,5vw,68px)/1.1 var(--display); margin-block: 18px; overflow-wrap: anywhere; }
+.commercial-breakdown { margin: 24px 0; }
+.commercial-breakdown > div { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f4f4ef40; }
+.commercial-breakdown dt, .commercial-breakdown dd { margin: 0; }
+.commercial-breakdown dd { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.commercial-total { color: var(--lime); }
+.commercial-estimate .games-cta { display: inline-flex; white-space: normal; text-align: center; }
+.commercial-configure { text-align: center; }
+.commercial-configure .games-cta { margin-top: 24px; }
+.school-home #configuration .school-fields, .school-home #forfait .school-fields,
+.school-home #configuration .school-summary, .school-home #forfait .school-summary { background: #0a0a0a; border-color: #ccff0060; }
+.school-home #configuration .school-fields input, .school-home #forfait .school-fields input { background: #151515; border-color: #f4f4ef66; }
+.school-home #configuration .school-summary strong, .school-home #forfait .school-summary strong { color: var(--lime); }
+#configuration-error { color: #ffaaa0; }
+#school-proposal { padding: 20px; background: #111; border: 1px solid #ccff0060; border-radius: 12px; }
+#school-proposal h3 { font: italic 900 28px/1.1 var(--display); }
+#school-proposal-summary { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: 16px; }
+[data-school-proposal][aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+@media (max-width:650px) {
+  .commercial-breakdown > div { grid-template-columns: minmax(0,1fr); gap: 6px; }
+  .commercial-breakdown dd { text-align: left; }
+  .commercial-rate { scroll-margin-top: 80px; }
+  .commercial-configure .games-cta { white-space: normal; text-align: center; }
+}
+@media (prefers-reduced-motion: no-preference) { .schools-commercial { scroll-behavior: smooth; } }
+
+#budget { scroll-margin-top: 90px; }
+.commercial-section .school-button, .commercial-configure .school-button { background: #ccff00; color: #0a0a0a; }
+.commercial-section input:focus-visible, .schools-commercial input:focus-visible, .schools-commercial textarea:focus-visible { outline: 2px solid #ccff00; outline-offset: 3px; }
+
+/* One click-to-play YouTube Short, scoped to the public school home. */
+.school-video { background: #0a0a0a; color: #f4f4ef; --lime: #ccff00; scroll-margin-top: 80px; }
+.school-video-layout { display: grid; grid-template-columns: minmax(220px,360px) minmax(0,1fr); gap: 24px clamp(24px,5vw,72px); align-items: center; max-width: 1120px; margin-inline: auto; text-align: left; }
+.school-video-copy { grid-column: 2; grid-row: 1; align-self: end; }
+.school-video-copy h2 { margin: 0 0 22px; font: italic 900 clamp(34px,4.5vw,64px)/1.04 var(--display); }
+.school-video-copy p { max-width: 42ch; margin: 0; font-size: clamp(18px,2vw,24px); line-height: 1.5; }
+.school-video-media { grid-column: 1; grid-row: 1/3; min-width: 0; justify-self: center; text-align: center; }
+.school-video-stage { position: relative; aspect-ratio: 9/16; height: min(64svh,600px); max-width: 100%; overflow: hidden; border: 1px solid #ccff0066; border-radius: 12px; background: #000; }
+.school-video-stage iframe, .school-video-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.school-video-play { padding: 0; background: #080808; color: #f4f4ef; cursor: pointer; font: inherit; }
+.school-video-play img { width: 100%; height: 100%; object-fit: contain; }
+.school-video-play-label { position: absolute; inset: auto 0 24px; display: grid; justify-items: center; gap: 12px; font-weight: 700; }
+.school-video-play-icon { display: grid; place-items: center; width: 64px; height: 64px; border: 2px solid #ccff00; border-radius: 50%; color: #ccff00; background: #0a0a0ae6; font-size: 24px; }
+.school-video-play:focus-visible { outline: 3px solid #ccff00; outline-offset: -5px; }
+.school-video-play:hover .school-video-play-icon { background: #ccff00; color: #0a0a0a; }
+.school-video-actions { grid-column: 2; grid-row: 2; align-self: start; }
+.school-video-actions .games-cta { white-space: normal; text-align: center; }
+.school-video-fallback { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; text-underline-offset: 4px; }
+#school-video-failure { max-width: 30ch; font-size: 15px; }
+@media (max-width:650px) {
+  .school-video-layout { grid-template-columns: minmax(0,1fr); gap: 24px; text-align: center; }
+  .school-video-copy, .school-video-media, .school-video-actions { grid-column: 1; grid-row: auto; justify-self: center; }
+  .school-video-copy { order: 0; }
+  .school-video-media { order: 1; }
+  .school-video-actions { order: 2; }
+  .school-video-copy h2 { font-size: clamp(32px,8vw,42px); }
+  .school-video-stage { height: min(58svh,520px); }
+}
+@media (prefers-reduced-motion:no-preference) {
+  .school-video.is-video-visible .school-video-layout { animation: school-video-reveal 280ms ease-out both; }
+  .school-video-play-icon { transition: transform 160ms ease, background-color 160ms ease, color 160ms ease; }
+  .school-video-play:hover .school-video-play-icon { transform: scale(1.06); }
+}
+@keyframes school-video-reveal { from { opacity: .6; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.school-video-fullscreen { min-height:44px; margin:8px 12px 0 0; padding:8px 14px; border:1px solid #ccff0066; border-radius:6px; color:#f4f4ef; background:#151515; cursor:pointer; font:inherit; }
+.school-video-fullscreen[hidden] { display:none; }
+.school-video-fullscreen:focus-visible { outline:2px solid #ccff00; outline-offset:3px; }
+.school-video-stage:fullscreen { width:100vw; height:100vh; max-width:none; border:0; border-radius:0; }
+
+/* School commercial composition: scoped to preserve the arena and school page. */
+.school-offer { --offer-lime:#ccff00; --offer-cyan:#65f5ff; --offer-ink:#0a0a0a; --offer-white:#f4f4ef; background:var(--offer-ink); color:var(--offer-white); padding:0 clamp(18px,3vw,48px) 72px; max-width:1600px; margin:auto; font-family:Barlow,sans-serif; }
+.school-offer *, .school-offer *::before, .school-offer *::after { box-sizing:border-box; }
+.school-offer h2,.school-offer h3,.offer-counter,.offer-regular strong,.offer-proposal { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic; }
+.school-offer h3 { margin:0; }
+.offer-intro { text-align:center; position:relative; padding:210px 0 22px; }
+.offer-panorama { position:absolute; top:0; left:0; width:100%; height:280px; object-fit:cover; object-position:50% 31%; mask-image:linear-gradient(#000 65%,transparent); }
+.offer-intro h2 { position:relative; margin:0; font-size:clamp(36px,4.8vw,76px); line-height:1.02; letter-spacing:-.02em; }
+.offer-intro h2 em { color:var(--offer-lime); }
+.offer-subtitle { position:relative; margin:10px auto 12px; font-size:clamp(20px,2vw,30px); font-weight:700; font-style:italic; }
+.offer-description { max-width:850px; margin:0 auto; font-size:16px; line-height:1.45; color:#c9cecc; }
+.offer-layout { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(350px,1fr); gap:22px; align-items:start; }
+.offer-frame { border:2px solid var(--offer-cyan); border-radius:22px 5px 22px 5px; padding:22px; background:linear-gradient(135deg,#11202280,transparent 35%),var(--offer-ink); box-shadow:0 0 12px #65f5ff45,inset 0 0 9px #65f5ff15; min-width:0; }
+.offer-price { grid-column:1; grid-row:1; }
+.offer-prices { display:grid; grid-template-columns:1fr 50px 1.35fr .95fr; align-items:center; gap:12px; min-height:180px; }
+.offer-regular h3 { font-size:clamp(22px,2.4vw,36px); text-transform:uppercase; }
+.offer-regular strong { display:block; font-size:clamp(66px,7.7vw,120px); line-height:1; white-space:nowrap; }
+.offer-regular>span { display:block; font-size:18px; font-weight:700; }
+.offer-arrow { color:var(--offer-lime); font-size:50px; }
+.offer-pilot { text-align:center; }
+.offer-counter { white-space:nowrap; font-size:clamp(72px,9vw,144px); line-height:1; color:var(--offer-lime); font-variant-numeric:tabular-nums; transform:scale(1); }
+[data-price-counter] { display:inline-block; min-width:1.05em; text-align:center; }
+.offer-pilot h3 { color:#0a0a0a; background:var(--offer-lime); border-radius:9px 2px; font-size:clamp(19px,1.8vw,29px); text-transform:uppercase; margin:9px 0 6px; }
+.offer-pilot>span { font-size:14px; }
+.offer-discount { color:var(--offer-lime); font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:900; font-size:clamp(21px,2.2vw,34px); line-height:1.05; border:2px solid currentColor; border-radius:18px 5px; padding:12px; text-align:center; transform:rotate(-4deg); }
+.offer-price-note { text-align:center; font-size:16px; margin:16px 0 4px; font-weight:700; font-style:italic; }
+.offer-disclaimer { font-size:14px; color:#c9cecc; text-align:center; margin:5px 0 0; }
+.offer-services { grid-column:1; grid-row:2; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); list-style:none; gap:18px 12px; margin:0; }
+.offer-services li { display:flex; align-items:center; gap:12px; font-family:'Barlow Condensed',sans-serif; font-style:italic; font-size:21px; line-height:1.1; }
+.offer-services img { flex:0 0 32px; filter:brightness(0) saturate(100%) invert(89%) sepia(87%) saturate(1993%) hue-rotate(12deg) brightness(107%) contrast(108%); }
+.offer-config { grid-column:2; grid-row:1 / span 3; }
+.offer-config>h3 { background:var(--offer-lime); color:var(--offer-ink); border-radius:12px 3px; padding:8px 12px; font-size:clamp(24px,2.2vw,34px); text-align:center; margin-bottom:14px; }
+.school-offer .school-fields { display:block; padding:0; background:none; border:0; }
+.offer-field { display:flex; align-items:center; min-width:0; gap:8px; border-bottom:1px solid #7a898970; padding:5px 0; }
+.school-offer .offer-field label { display:flex; align-items:center; justify-content:space-between; flex:1; gap:10px; min-width:0; font-weight:700; font-size:16px; }
+.school-offer .offer-field input { width:75px; min-width:65px; height:44px; border:1px solid #8e9999; border-radius:5px; background:#161b1b; color:var(--offer-white); padding:4px; font:700 21px Barlow,sans-serif; text-align:center; appearance:textfield; }
+.offer-field input::-webkit-inner-spin-button { appearance:none; }
+.offer-stepper { display:flex; gap:4px; }
+.offer-stepper button { width:44px; height:44px; padding:0; border:1px solid #7a8989; border-radius:5px; background:#111; color:var(--offer-lime); font-size:27px; cursor:pointer; }
+.offer-stepper button:hover { background:#2c3832; }
+.school-offer :is(button,input,a,summary):focus-visible { outline:3px solid var(--offer-lime); outline-offset:3px; }
+.offer-config details { margin-top:12px; }
+.offer-config summary { min-height:44px; padding:10px 0; cursor:pointer; color:var(--offer-cyan); font-weight:700; }
+.offer-help,.school-offer details p { font-size:14px; line-height:1.45; color:#c5cecc; margin:10px 0 0; }
+.offer-resources { font-size:14px; color:#c5cecc; margin:12px 0; }
+#configuration-error:not(:empty) { color:#ffc8ba; padding:12px 0; font-size:15px; }
+.offer-budget { margin:16px 0 0; }
+.offer-budget>div { display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-top:1px solid #7a8989; font-weight:700; font-size:16px; }
+.offer-budget dd { margin:0; text-align:right; white-space:nowrap; }
+.offer-budget .offer-total { background:var(--offer-lime); color:var(--offer-ink); border:0; border-radius:10px 2px; padding:10px; font-size:21px; }
+.offer-base { margin:10px 0; text-align:center; font-weight:700; }
+.offer-financing { grid-column:1; grid-row:3; display:grid; grid-template-columns:1fr 1.25fr; gap:14px; }
+.offer-financing h3 { font-size:clamp(22px,2.1vw,32px); line-height:1.1; color:var(--offer-lime); }
+.offer-financing h3 span { display:inline-block; margin-right:10px; }
+.offer-financing article>p:not(.offer-help) { font-size:19px; font-weight:700; line-height:1.35; margin:16px 0 0; }
+.offer-funding-note { grid-column:1 / -1; margin:0; }
+.offer-proposal { grid-column:2; grid-row:4; align-self:start; background:var(--offer-lime); color:var(--offer-ink); display:flex; justify-content:space-between; gap:12px; padding:18px 22px; border-radius:18px 3px; text-decoration:none; font-size:clamp(24px,2.35vw,36px); line-height:1.1; }
+.offer-proposal:hover { background:#e1ff66; }
+.offer-proposal[aria-disabled=true] { opacity:.55; cursor:not-allowed; }
+.offer-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+[data-price-reveal][data-reveal-state=pending] .offer-counter,[data-price-reveal][data-reveal-state=running] .offer-counter { color:var(--offer-white); transform:scale(.94); }
+[data-reveal-state=pending] :is(.offer-discount,.offer-pilot h3),[data-reveal-state=running] :is(.offer-discount,.offer-pilot h3) { opacity:0; }
+@media(prefers-reduced-motion:no-preference) {
+ .offer-counter,.offer-discount,.offer-pilot h3 { transition:color .2s,transform .2s,opacity .25s; }
+ [data-reveal-state=complete].offer-arrival .offer-counter { animation:offer-arrival .55s ease-out 1; }
+ @keyframes offer-arrival { 35% { text-shadow:0 0 24px #ccff0080; transform:scale(1.045); } }
+}
+@media(max-width:1100px) and (min-width:801px) {
+ .offer-layout { grid-template-columns:minmax(0,1.35fr) minmax(360px,1fr); }
+ .offer-prices { grid-template-columns:1fr 30px 1fr; }
+ .offer-discount { grid-column:1 / -1; font-size:22px; transform:none; margin:0; }
+ .offer-services { grid-template-columns:repeat(2,1fr); }
+ .offer-financing { grid-template-columns:1fr; }
+}
+@media(max-width:800px) {
+ .school-offer { padding:0 18px 48px; }
+ .offer-intro { padding-top:255px; }
+ .offer-panorama { height:280px; object-position:50% 30%; }
+ .offer-intro h2 { font-size:40px; }
+ .offer-subtitle { font-size:22px; line-height:1.2; }
+ .offer-description { font-size:16px; }
+ .offer-layout { display:flex; flex-direction:column; gap:18px; }
+ .offer-layout>* { width:100%; }
+ .offer-frame { padding:18px; }
+ .offer-prices { grid-template-columns:1fr 28px 1fr; gap:8px; min-height:0; }
+ .offer-regular h3 { font-size:22px; }
+ .offer-regular strong { font-size:70px; }
+ .offer-regular>span { font-size:15px; }
+ .offer-counter { font-size:80px; }
+ .offer-arrow { font-size:30px; }
+ .offer-pilot h3 { font-size:21px; }
+ .offer-discount { grid-column:1 / -1; font-size:25px; transform:none; margin:10px 0 0; padding:10px; }
+ .offer-services { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 12px; }
+ .offer-services li { font-size:19px; gap:9px; }
+ .offer-config>h3 { font-size:29px; }
+ .school-offer .offer-field label { font-size:15px; }
+ .offer-stepper { flex-direction:column; gap:4px; }
+ .offer-field { padding:8px 0; }
+ .offer-financing { display:grid; grid-template-columns:1fr; }
+ .offer-proposal { font-size:30px; }
+}
+/* Keep the lead athlete's entire face in the shallow desktop panorama. */
+@media(min-width:801px) { .offer-panorama { object-position:50% 8%; } }
+@media(min-width:801px) {
+ .offer-intro { padding-top:320px; }
+ .offer-panorama { height:365px; object-position:50% 12%; }
+}
+
+.offer-counter { display:flex; align-items:center; justify-content:center; gap:.06em; }
+html[lang="en"] .offer-counter { flex-direction:row-reverse; }
+
+/* The regular rate is a secondary commercial reference, never a school budget. */
+[data-reveal-state="complete"] .offer-regular strong { text-decoration:line-through; text-decoration-thickness:3px; text-decoration-color:#a5aeaa; color:#a5aeaa; transform:scale(.84); transform-origin:left center; }
+.offer-regular strong { text-decoration:line-through; text-decoration-thickness:3px; text-decoration-color:#a5aeaa; color:#a5aeaa; transform:scale(.84); transform-origin:left center; }
+[data-reveal-state="pending"] .offer-regular strong,[data-reveal-state="running"] .offer-regular strong { text-decoration:none; color:var(--offer-white); transform:none; }
+
+/* The existing contact form now completes the homepage. */
+.school-contact-section { background:#0a0a0a; --lime:#ccff00; color:#f4f4ef; max-width:1500px; margin:auto; padding:64px clamp(18px,4vw,60px); display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:40px; align-items:start; scroll-margin-top:84px; }
+.school-contact-intro h2 { font-size:clamp(38px,4.8vw,68px); line-height:1; }
+.school-contact-intro p { max-width:52ch; }
+.school-contact-intro .schools-photo { margin-top:24px; height:auto; border-radius:12px; }
+.school-contact-section .schools-contact { margin:0; width:100%; min-width:0; }
+.school-contact-section .contact-note { color:#c5cecc; font-size:15px; line-height:1.5; }
+.school-contact-section .schools-booking { white-space:normal; }
+.school-contact-section input:focus-visible,.school-contact-section textarea:focus-visible { outline:3px solid #ccff00; outline-offset:2px; }
+.school-contact-section button[type=submit] { min-height:48px; }
+@media(max-width:800px) { .school-contact-section { grid-template-columns:minmax(0,1fr); gap:24px; padding-top:42px; } }
+.school-contact-section #school-proposal summary { min-height:44px; cursor:pointer; font-weight:700; color:#ccff00; }
+.school-contact-section #school-proposal { margin-bottom:20px; }

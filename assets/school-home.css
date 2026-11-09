@@ -207,3 +207,30 @@ body { background: radial-gradient(ellipse at 50% 10%, #072445, #020d1b 45%); --
 }
 
 .school-arena.pointer-surface::after { background: radial-gradient(circle at var(--x,50%) var(--y,50%), #00d9e81a, transparent 24%); }
+
+/* In-place zone discovery. The original scene and its effects remain unchanged. */
+#top,#decouvrir-zones,#configuration,#tarifs,#financement,#budget,#schools-contact-form { scroll-margin-top:84px; }
+.zone-details { width:min(460px,36%); padding:16px; max-height:calc(100svh - 110px); overflow:auto; overscroll-behavior:contain; }
+.zone-detail:not([hidden]) { display:block; }
+.zone-detail>.zone-photo { display:block; width:100%; height:auto; aspect-ratio:5/3; object-fit:contain; background:#020b11; margin:24px 0 14px; border-radius:7px; }
+.zone-detail>div { border:0; padding:0; }
+.zone-detail h2 { font-size:30px; }
+.zone-detail p { font-size:16px; line-height:1.4; margin:10px 0 14px; }
+.zone-detail h2:focus-visible { outline:2px solid var(--pi-cyan); outline-offset:4px; }
+.zone-switcher { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; border-top:1px solid #00d9e84d; padding-top:12px; }
+.zone-switcher button { min-height:44px; border:1px solid #00d9e866; border-radius:5px; background:#041321; color:#f4f4ef; font:700 14px Barlow,sans-serif; cursor:pointer; }
+.zone-switcher button[aria-pressed=true] { border-width:2px; text-decoration:underline; text-underline-offset:4px; background:#12323c; }
+.zone-switcher button:hover { background:#16404b; }
+.zone-switcher button:focus-visible { outline:3px solid #f4f4ef; outline-offset:2px; }
+@media(max-width:949px) {
+ .school-hero:has(.zone-details:not([hidden])) { min-height:max(800px,100svh,calc(100vw * 1728 / 910)); }
+ .zone-details { position:fixed; top:80px; bottom:auto; left:12px; right:12px; width:auto; max-height:calc(100dvh - 100px); z-index:6; padding:14px; }
+ .zone-detail>.zone-photo { max-height:240px; }
+ .zone-detail h2 { font-size:28px; }
+}
+.zone-detail video { display:block; width:100%; max-height:260px; margin-top:24px; background:#000; }
+.zone-detail .zone-play:not([hidden]) { display:inline-flex; align-items:center; min-height:44px; padding:6px 12px; border:1px solid #00d9e8; border-radius:6px; background:#041321; color:#f4f4ef; font:inherit; cursor:pointer; }
+.zone-media-error:not([hidden]) { color:#ffd3c9; }
+.zone-photo[hidden],.zone-play[hidden],.zone-media-error[hidden] { display:none; }
+/* Keep the one-page destinations and language control available throughout the journey. */
+body>.nav { position:fixed; background:#041321; }

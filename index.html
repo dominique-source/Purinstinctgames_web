@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js" defer></script>
-  <link rel="stylesheet" href="/assets/school-home.css">
-  <script src="/assets/school-home.js" defer></script>
+  <link rel="stylesheet" href="/assets/school-home.css?v=onepage-20261109-3">
+  <link rel="stylesheet" href="/assets/ecoles.css">
   <title>PürInstinct Games à l’école</title>
   <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/?lang=fr">
   <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/?lang=en">
@@ -18,30 +18,31 @@
   <script src="/assets/site-translations.js" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css">
   <script src="/assets/site-language.js" defer></script>
+  <script src="/assets/school-home.js" defer></script>
+  <script src="/assets/ecoles-contact.js" defer></script>
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
 <nav class="nav" aria-label="Navigation principale">
-  <a href="/" class="home-logo">
+  <a href="#top" class="home-logo">
     <img src="/assets/homepage/logo.png" alt="">
     <span>PürInstinct <em>Games</em></span>
   </a>
   <div class="nav-links" id="navLinks">
-    <a href="/pour-les-ecoles.html">Pour les écoles</a>
-    <a href="/zones.html">Les 5 zones</a>
-    <a href="/concept.html#arena">L’Arène</a>
-    <a href="/concept.html">Le concept</a>
-    <a href="/pur-id.html">Pür ID</a>
+    <a href="#decouvrir-zones">Les 5 zones</a>
+    <a href="#parcours">Le programme</a>
+    <a href="#configuration">Configurer mon école</a>
+    <a href="#contact">Contact</a>
     <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a>
   </div>
   <div class="site-language" role="group" aria-label="Langue du site"><button type="button" lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" aria-label="English" aria-pressed="false">EN</button></div>
   <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<main class="school-home">
-<section class="school-hero" aria-labelledby="school-title">
+<main class="school-home" id="top">
+<section id="decouvrir-zones" class="school-hero" aria-labelledby="school-title">
   <div class="school-arena pointer-surface">
     <div class="arena-layer">
       <picture>
@@ -74,29 +75,30 @@
   </div>
   <div class="school-intro">
     <h1 id="school-title"><span class="hero-brand">PÜRINSTINCT</span><span class="hero-games"><span class="visually-hidden">GAMES</span><img src="/assets/hero-deck/games-brush.png" alt="" width="2087" height="754"></span><span class="hero-school">À L’ÉCOLE</span></h1>
-    <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les mettre en pratique en match.</p>
+    <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les mettre en pratique en match.</p><p class="commercial-hero-note">Une expérience sportive complète, directement à votre école, sur plus d’un mois.</p>
     <a class="school-button" href="#parcours"><span class="cta-desktop">Voir comment se déroulent les Games</span><span class="cta-mobile">Voir le déroulement</span><span aria-hidden="true">→</span></a>
   </div>
-  <div class="zone-details" id="arena-panel" hidden>
+  <div class="zone-details" id="arena-panel" role="region" aria-label="Détails des zones" hidden>
     <button type="button" class="arena-close" aria-label="Fermer le panneau">×</button>
-    <article class="zone-detail" id="zone-vitesse" hidden>
-      <img src="/assets/hero-deck/icons/speed.svg" alt="" width="32" height="32"><div><h2>Vitesse</h2><p>Accélère sur une courte distance et apprends à relancer ton sprint.</p><a href="/zones.html#vitesse">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-vitesse" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-speed.jpg" alt="Zone Vitesse : piste de sprint." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Vitesse</h2><p>Accélère sur une courte distance et apprends à relancer ton sprint.</p></div>
     </article>
-    <article class="zone-detail" id="zone-agilite" hidden>
-      <img src="/assets/hero-deck/icons/agility.svg" alt="" width="32" height="32"><div><h2>Agilité</h2><p>Changer de direction. Réagir. Esquiver.</p><a href="/zones.html#agilite">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-agilite" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-agility.jpg" alt="Zone Agilité : arène de déplacements." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Agilité</h2><p>Changer de direction. Réagir. Esquiver.</p></div>
     </article>
-    <article class="zone-detail" id="zone-habiletes-manuelles" hidden>
-      <img src="/assets/hero-deck/icons/hand.svg" alt="" width="32" height="32"><div><h2>Habiletés des mains</h2><p>Travaille la précision de tes passes et de tes réceptions.</p><a href="/zones.html#habiletes-manuelles">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-habiletes-manuelles" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-hand.jpg" alt="Zone Habiletés des mains : défis de précision." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Habiletés des mains</h2><p>Travaille la précision de tes passes et de tes réceptions.</p></div>
     </article>
-    <article class="zone-detail" id="zone-habiletes-au-pied" hidden>
-      <img src="/assets/hero-deck/icons/foot.svg" alt="" width="32" height="32"><div><h2>Habiletés des pieds</h2><p>Travaille tes appuis et la précision de tes déplacements.</p><a href="/zones.html#habiletes-au-pied">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-habiletes-au-pied" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-foot.jpg" alt="Zone Habiletés des pieds : défis d’appuis." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Habiletés des pieds</h2><p>Travaille tes appuis et la précision de tes déplacements.</p></div>
     </article>
-    <article class="zone-detail" id="zone-game-iq" hidden>
-      <img src="/assets/hero-deck/icons/iq.svg" alt="" width="32" height="32"><div><h2>Game IQ</h2><p>Observe le jeu, anticipe et choisis la bonne action.</p><a href="/zones.html#game-iq">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-game-iq" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-iq.jpg" alt="Zone Game IQ : terrain de stratégie." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Game IQ</h2><p>Observe le jeu, anticipe et choisis la bonne action.</p></div>
     </article>
-    <article class="zone-detail" id="zone-terrain" hidden>
-      <img src="/assets/hero-deck/icons/field.svg" alt="" width="32" height="32"><div><h2>Terrain PürInstinct</h2><p>Crée une ouverture à trois contre deux et passe vers la zone d’en-but.</p></div>
+    <article class="zone-detail" id="zone-terrain" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/school-home/arene-avec-reperes.webp" alt="Le terrain PürInstinct réunit les cinq habiletés en match." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Terrain PürInstinct</h2><p>Crée une ouverture à trois contre deux et passe vers la zone d’en-but.</p></div>
     </article>
+    <div class="zone-switcher" role="group" aria-label="Choisir une autre zone"><button type="button" data-zone="vitesse" aria-pressed="false" aria-controls="zone-vitesse">Vitesse</button><button type="button" data-zone="agilite" aria-pressed="false" aria-controls="zone-agilite">Agilité</button><button type="button" data-zone="habiletes-manuelles" aria-pressed="false" aria-controls="zone-habiletes-manuelles">Mains</button><button type="button" data-zone="habiletes-au-pied" aria-pressed="false" aria-controls="zone-habiletes-au-pied">Pieds</button><button type="button" data-zone="game-iq" aria-pressed="false" aria-controls="zone-game-iq">Game IQ</button><button type="button" data-zone="terrain" aria-pressed="false" aria-controls="zone-terrain">Terrain</button></div>
   </div>
 
   <div class="zone-grid" role="group" aria-label="Les cinq zones et le terrain">
@@ -108,6 +110,27 @@
     <button type="button" data-zone="terrain" aria-pressed="false" aria-controls="zone-terrain" aria-label="Terrain PürInstinct"><img src="/assets/hero-deck/icons/field.svg" alt="" width="32" height="32"><span class="zone-long">Terrain PürInstinct</span><span class="zone-short" aria-hidden="true">Terrain</span></button>
   </div>
   <a class="hero-scroll" href="#parcours" aria-label="Voir le parcours scolaire"><img src="/assets/hero-deck/icons/chevron.svg" alt="" width="28" height="28"></a>
+</section>
+<section class="school-section school-video" id="video-games" aria-labelledby="video-games-title">
+  <div class="school-video-layout">
+    <div class="school-video-copy">
+      <h2 id="video-games-title">Découvrez les PürInstinct Games</h2>
+      <p>Une expérience sportive à votre école, avec préparation, formation et accompagnement jusqu’aux Games.</p>
+    </div>
+    <div class="school-video-media">
+      <div class="school-video-stage" id="school-video-stage">
+        <button class="school-video-play" id="school-video-play" type="button" aria-label="Lire la vidéo">
+          <img id="school-video-poster" src="https://i.ytimg.com/vi/chfQomu8rZ4/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+          <span class="school-video-play-label"><span class="school-video-play-icon" aria-hidden="true">▶</span><span>Lire la vidéo</span></span>
+        </button>
+      </div>
+      <button id="school-video-fullscreen" class="school-video-fullscreen" type="button" aria-label="Afficher la vidéo en plein écran" hidden>Plein écran</button>
+      <p id="school-video-fullscreen-status" role="status" hidden>Le plein écran est indisponible dans ce navigateur.</p>
+      <p id="school-video-failure" role="status" hidden>La lecture intégrée est indisponible. Utilisez le lien YouTube.</p>
+      <a class="school-video-fallback" href="https://www.youtube.com/shorts/chfQomu8rZ4" target="_blank" rel="noopener noreferrer">Voir sur YouTube</a>
+    </div>
+    <div class="school-video-actions"><a class="games-cta" href="#parcours">Découvrir le programme scolaire</a></div>
+  </div>
 </section>
 <section class="school-section" id="parcours">
   <h2 class="section-title">De la découverte aux <em>Games</em></h2>
@@ -130,47 +153,93 @@
     </article>
   </div>
 </section>
-<section class="school-section" id="configuration">
-  <h2 class="section-title">Configurez vos <em>Games</em></h2>
-  <div class="configuration-grid">
-    <div class="school-fields" role="group" aria-label="Configuration des Games">
-      <label>Élèves participants<input type="number" id="students" value="2000" min="1" max="999999" step="1" required></label>
-      <label>Enseignants disponibles<input type="number" id="teachers" value="12" min="0" max="999999" step="1" required></label>
-      <label>Autres adultes disponibles<input type="number" id="adults" value="3" min="0" max="999999" step="1" required></label>
-      <label>Plateaux intérieurs<input type="number" id="indoors" value="1" min="0" max="999999" step="1" required></label>
-      <label>Plateaux extérieurs<input type="number" id="outdoors" value="2" min="0" max="999999" step="1" required></label>
-      <p>1 plateau = la surface d’un terrain de basketball</p>
-      <small>Les plateaux mesurent l’espace disponible. Les zones sont les activités à encadrer.</small>
-    </div>
-    <img class="configuration-photo" src="/assets/school-home/action-ecole.webp" width="850" height="660" alt="Des élèves jouent avec un ballon noir PürInstinct sous la supervision de l’équipe." loading="lazy">
+<section class="school-section commercial-section" id="deploiement"><h2 class="section-title">Plus d’un mois. Un parcours préparé ensemble.</h2><ol class="commercial-timeline"><li><span class="commercial-step" aria-hidden="true">01</span><h3>Préparer</h3><p>Définir les besoins, les espaces, les ressources et le calendrier avec l’école.</p></li><li><span class="commercial-step" aria-hidden="true">02</span><h3>Former et accompagner</h3><p>Déployer la conférence, les cliniques et la formation des enseignants sur plusieurs semaines.</p></li><li><span class="commercial-step" aria-hidden="true">03</span><h3>Vivre les Games</h3><p>Réunir les élèves pour l’événement final, après la préparation.</p></li></ol><p>Accompagnement et coordination, équipements et production, DJ et sonorisation complètent la conférence, les cliniques et la formation. Les ballons pédagogiques restent à l’école. Le matériel des Games est récupéré après l’événement.</p></section>
+<section class="school-offer" id="offre-ecoles" aria-labelledby="offer-title">
+ <header class="offer-intro">
+  <img class="offer-panorama" src="/assets/school-home/action-ecole.webp" width="850" height="660" alt="Des élèves jouent ensemble, accompagnés de l’équipe PürInstinct." loading="lazy" decoding="async">
+  <h2 id="offer-title">UNE EXPÉRIENCE COMPLÈTE <em>À L’ÉCOLE</em></h2>
+  <p class="offer-subtitle">Plus d’un mois de préparation, de formation et d’accompagnement, jusqu’aux Games.</p>
+  <p class="offer-description">Le budget peut sembler important pour une école. Il couvre une expérience complète, directement dans votre établissement, sur plusieurs semaines.</p>
+ </header>
+ <div class="offer-layout">
+  <div class="offer-frame offer-price" id="tarifs" data-price-reveal>
+   <div class="offer-prices">
+    <div class="offer-regular"><h3>Tarif régulier</h3><strong>25 $</strong><span>CA · par élève</span></div>
+    <span class="offer-arrow" aria-hidden="true">→</span>
+    <div class="offer-pilot" id="cohorte-pilote"><div class="offer-counter" aria-hidden="true" data-i18n><span data-price-counter>10</span><span class="offer-currency">$</span></div><h3>Cohorte pilote</h3><span>Base de 10 $ CA par élève</span></div>
+    <p class="offer-discount">60 % de réduction offerte par PürInstinct</p>
+   </div>
+   <p class="offer-sr">Tarif régulier : 25 $ CA par élève. Cohorte pilote : base de 10 $ CA par élève. Une réduction commerciale de 60 % offerte par PürInstinct, avant déplacement et suppléments.</p>
+   <p class="offer-price-note">Frais de déplacement en sus. Personnel supplémentaire selon les besoins d’encadrement.</p>
+   <p class="offer-disclaimer">Cette réduction n’est pas une subvention gouvernementale.</p>
   </div>
-<p class="school-summary" role="status"><strong data-total="students">2 000</strong> élèves · <strong data-total="adults">15</strong> adultes disponibles · <strong data-total="spaces">3</strong> plateaux</p>
-  <a class="school-button school-button-yellow" href="#forfait">Voir et ajuster mon estimation <span aria-hidden="true">↓</span></a>
-</section>
-<section class="school-section" id="forfait">
-  <h2 class="section-title">Ajustez votre <em>forfait</em></h2>
-  <a href="#configuration">Modifier ma configuration <span aria-hidden="true">↑</span></a>
-<p class="school-summary" role="status"><strong data-total="students">2 000</strong> élèves · <strong data-total="adults">15</strong> adultes disponibles · <strong data-total="spaces">3</strong> plateaux</p>
-  <div class="package-grid">
-    <div class="school-fields" role="group" aria-label="Réglages du forfait">
-      <label>Postes couverts par votre école (postes)<input type="number" id="roles" value="0" min="0" max="999999" step="1" required></label>
-      <label>Zones ouvertes (zones)<input type="number" id="zones" value="5" min="1" max="5" step="1" required></label>
-      <label>Durée des Games (heures)<input type="number" id="hours" value="8" min="1" max="999999" step="1" required></label>
-      <label>Cliniques (séances)<input type="number" id="clinics" value="0" min="0" max="999999" step="1" required></label>
-      <p id="configuration-error" role="status"></p>
-    </div>
-    <aside class="school-price" aria-label="Estimation">
-      <h3>Estimation à confirmer</h3>
-      <p>Votre scénario doit être validé par l’équipe PürInstinct.</p>
-      <div class="school-example">
-        <h4>Scénario de référence</h4>
-        <p><strong><span data-cad="14500">14 500 $ CA</span></strong> pour <span data-number="2000">2 000</span> élèves<br><strong data-cad="7.25">7,25 $</strong> par élève</p>
-        <p>15 responsables de zones fournis par l’école et 5 intervenants PürInstinct pour 8 h.</p>
-      </div>
-    </aside>
+  <ul class="offer-frame offer-services" aria-label="Composantes du programme"><li><img src="/assets/hero-deck/icons/iq.svg" alt="" width="32" height="32"><span>Conférence de Dominique Soucy</span></li><li><img src="/assets/hero-deck/icons/agility.svg" alt="" width="32" height="32"><span>Cliniques préparatoires</span></li><li><img src="/assets/hero-deck/icons/hand.svg" alt="" width="32" height="32"><span>Formation des enseignants</span></li><li><img src="/assets/hero-deck/icons/speed.svg" alt="" width="32" height="32"><span>Accompagnement et coordination</span></li><li><img src="/assets/hero-deck/icons/foot.svg" alt="" width="32" height="32"><span>Équipements et production</span></li><li><img src="/assets/hero-deck/icons/field.svg" alt="" width="32" height="32"><span>Games à l’école</span></li></ul>
+  <div class="offer-frame offer-config" id="configuration">
+   <h3>CONFIGUREZ VOTRE ÉCOLE</h3>
+   <div class="school-fields" role="group" aria-label="Configuration des Games"><div class="offer-field"><label><span id="students-label">Élèves participants</span><input type="number" id="students" value="200" min="1" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="students" data-step="-1" aria-label="Diminuer" aria-controls="students" aria-describedby="students-label">−</button><button type="button" data-step-target="students" data-step="1" aria-label="Augmenter" aria-controls="students" aria-describedby="students-label">+</button></span></div>
+<div class="offer-field"><label><span id="teachers-label">Enseignants disponibles</span><input type="number" id="teachers" value="12" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="teachers" data-step="-1" aria-label="Diminuer" aria-controls="teachers" aria-describedby="teachers-label">−</button><button type="button" data-step-target="teachers" data-step="1" aria-label="Augmenter" aria-controls="teachers" aria-describedby="teachers-label">+</button></span></div>
+<div class="offer-field"><label><span id="adults-label">Autres adultes ou bénévoles disponibles</span><input type="number" id="adults" value="3" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="adults" data-step="-1" aria-label="Diminuer" aria-controls="adults" aria-describedby="adults-label">−</button><button type="button" data-step-target="adults" data-step="1" aria-label="Augmenter" aria-controls="adults" aria-describedby="adults-label">+</button></span></div>
+<div class="offer-field"><label><span id="indoors-label">Plateaux intérieurs</span><input type="number" id="indoors" value="1" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="indoors" data-step="-1" aria-label="Diminuer" aria-controls="indoors" aria-describedby="indoors-label">−</button><button type="button" data-step-target="indoors" data-step="1" aria-label="Augmenter" aria-controls="indoors" aria-describedby="indoors-label">+</button></span></div>
+<div class="offer-field"><label><span id="outdoors-label">Plateaux extérieurs</span><input type="number" id="outdoors" value="2" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="outdoors" data-step="-1" aria-label="Diminuer" aria-controls="outdoors" aria-describedby="outdoors-label">−</button><button type="button" data-step-target="outdoors" data-step="1" aria-label="Augmenter" aria-controls="outdoors" aria-describedby="outdoors-label">+</button></span></div>
+    <p class="offer-help">Un plateau correspond à une surface approximativement équivalente à un terrain de basketball.</p>
+    <details><summary>Disponibilités et séances</summary><div class="offer-field"><label><span id="roles-label">Adultes de l’école disponibles en même temps</span><input type="number" id="roles" value="0" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="roles" data-step="-1" aria-label="Diminuer" aria-controls="roles" aria-describedby="roles-label">−</button><button type="button" data-step-target="roles" data-step="1" aria-label="Augmenter" aria-controls="roles" aria-describedby="roles-label">+</button></span></div>
+<div class="offer-field"><label><span id="zones-label">Zones ouvertes (zones)</span><input type="number" id="zones" value="5" min="1" max="5" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="zones" data-step="-1" aria-label="Diminuer" aria-controls="zones" aria-describedby="zones-label">−</button><button type="button" data-step-target="zones" data-step="1" aria-label="Augmenter" aria-controls="zones" aria-describedby="zones-label">+</button></span></div>
+<div class="offer-field"><label><span id="hours-label">Durée envisagée des Games (heures)</span><input type="number" id="hours" value="8" min="1" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="hours" data-step="-1" aria-label="Diminuer" aria-controls="hours" aria-describedby="hours-label">−</button><button type="button" data-step-target="hours" data-step="1" aria-label="Augmenter" aria-controls="hours" aria-describedby="hours-label">+</button></span></div>
+<div class="offer-field"><label><span id="clinics-label">Cliniques envisagées (séances)</span><input type="number" id="clinics" min="1" max="999999" step="1" placeholder="À préciser"></label><span class="offer-stepper"><button type="button" data-step-target="clinics" data-step="-1" aria-label="Diminuer" aria-controls="clinics" aria-describedby="clinics-label">−</button><button type="button" data-step-target="clinics" data-step="1" aria-label="Augmenter" aria-controls="clinics" aria-describedby="clinics-label">+</button></span></div>
+     <p>Le nombre de séances de cliniques sera confirmé avec l’école.</p>
+     <p>Le total d’adultes, leur présence simultanée et leurs créneaux de disponibilité sont distincts. Les créneaux de chaque adulte seront précisés avec l’école.</p>
+     <p>Un bénévole ne remplace pas automatiquement un intervenant spécialisé. Les rôles seront confirmés avec vous.</p>
+    </details>
+    <p id="configuration-error" role="status"></p>
+   </div>
+   <p class="offer-resources"><span data-total="students">200</span> <span>élèves</span> · <span data-total="adults">15</span> <span>adultes disponibles</span> · <span data-total="spaces">3</span> <span>plateaux</span></p>
+   <div id="forfait"><div id="budget">
+    <dl class="offer-budget">
+     <div><dt>Base du programme</dt><dd data-pilot-total>2 000 $ CA</dd></div>
+     <div><dt>Personnel supplémentaire</dt><dd>À confirmer</dd></div>
+     <div><dt>Déplacement</dt><dd>À confirmer</dd></div>
+     <div class="offer-total"><dt>Total</dt><dd>À confirmer</dd></div>
+    </dl>
+    <p class="offer-base"><span>Base par élève</span> : <strong data-commercial-rate="pilot">10 $ CA</strong></p>
+    <p class="offer-help">Les ressources saisies servent à préparer la proposition. Elles ne réduisent pas la base du programme.</p>
+    <p class="offer-help">Estimation indicative. Le montant final sera confirmé selon l’encadrement, les installations, le calendrier et les déplacements nécessaires.</p>
+    <p class="offer-help">Traitement des taxes à confirmer dans la proposition.</p>
+   </div></div>
   </div>
+  <div class="offer-financing" id="financement">
+   <article class="offer-frame"><h3><span aria-hidden="true">01</span> FINANCEMENT DIRECT</h3><p>L’école finance sa participation.</p></article>
+   <article class="offer-frame"><h3><span aria-hidden="true">02</span> FINANCEMENT EXTERNE</h3><p>Subventions admissibles · Fondations · Commandites · Partenaires</p><p class="offer-help">L’admissibilité et l’obtention de fonds ne sont pas garanties.</p></article>
+   <p class="offer-help offer-funding-note">Une aide externe peut réduire la contribution de l’école, sans changer le prix du programme. Seules les contributions confirmées réduisent le montant à la charge de l’école.</p>
+  </div>
+  <a class="offer-proposal" data-school-proposal href="#contact"><span>DEMANDER MA PROPOSITION</span><span aria-hidden="true">↗</span></a>
+ </div>
 </section>
+
+<section class="school-contact-section" id="contact" aria-labelledby="contact-title">
+ <div class="school-contact-intro">
+  <p class="commercial-eyebrow">Contact</p>
+  <h2 id="contact-title">Parlons de votre école</h2>
+  <p>Vos élèves développent cinq habiletés dans cinq zones. Découvrez comment les Games se déroulent et quelle formule pourrait convenir à votre école.</p>
+  <a class="games-cta schools-booking" href="#schools-contact-form">Réserver 20 minutes avec Dominique Soucy</a>
+  <p class="contact-note">Le formulaire permet de demander une rencontre. Dominique vous répondra pour convenir d’un moment.</p>
+  <img class="schools-photo" src="/assets/homepage/ecole.png" width="1961" height="802" alt="Des élèves écoutent leur coach sur le terrain" loading="lazy" decoding="async">
+ </div>
+ <div class="schools-contact">
+    <details id="school-proposal" hidden><summary>Votre configuration à transmettre</summary><p>Cette configuration sera jointe à votre message. Les montants restent indicatifs.</p><pre id="school-proposal-summary"></pre></details>
+    <form id="schools-contact-form" action="/api/schools-contact" method="post">
+      <label>Nom <input name="Nom" maxlength="100" autocomplete="name" required></label>
+      <label>École <input name="École" maxlength="150" autocomplete="organization" required></label>
+      <label>Ville <input name="Ville" maxlength="100" autocomplete="address-level2" required></label>
+      <label>Courriel <input name="Courriel" maxlength="254" type="email" autocomplete="email" required></label>
+      <label>Commentaires <textarea name="Commentaires" maxlength="2000" rows="4"></textarea></label>
+      <button class="games-cta" type="submit">Envoyer le message</button>
+      <p id="schools-contact-status" role="status"></p>
+    </form>
+  <p><a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a></p>
+ </div>
+</section>
+
 </main>
-<footer class="school-footer"><a href="/pour-les-ecoles.html">Pour les écoles</a><a href="/concept.html#arena">L’Arène</a><a href="/pur-id.html">Pür ID</a></footer>
+<footer class="school-footer"><a href="#top">PürInstinct Games</a><a href="#contact">Contact</a><a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a></footer>
 </body>
 </html>

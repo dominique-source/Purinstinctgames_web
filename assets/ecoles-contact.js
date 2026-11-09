@@ -2,7 +2,45 @@ const form = document.getElementById("schools-contact-form");
 const status = document.getElementById("schools-contact-status");
 const submit = form.querySelector("button");
 
+const policy = window.piSchoolCommercial;
+let proposal = null;
+try { proposal = policy.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration'))); } catch { /* Invalid/shared links are ignored. */ }
+function currentProposal() {
+  // On the unified homepage, read current fields at update/submit time — never a stale URL copy.
+  if (document.getElementById('students')) {
+    const raw = {};
+    for (const key of Object.keys(policy.limits)) {
+      const input = document.getElementById(key);
+      if (!input.validity.valid) return null;
+      raw[key] = input.value === '' ? null : input.valueAsNumber;
+    }
+    return policy.configuration(raw);
+  }
+  return proposal;
+}
+function proposalSummary() {
+  const current = currentProposal();
+  return current ? policy.summary(current, document.documentElement.lang) : '';
+}
+function updateProposal() {
+  for (const output of document.querySelectorAll("[data-commercial-discount]")) output.textContent = policy.discountText(document.documentElement.lang);
+  const summary = proposalSummary();
+  document.getElementById('school-proposal').hidden = !summary;
+  document.getElementById('school-proposal-summary').textContent = summary;
+  form.elements.namedItem('Commentaires').maxLength = 2000 - (summary ? summary.length + 2 : 0);
+  for (const output of document.querySelectorAll('[data-commercial-rate]')) {
+    const rate = policy.policy[output.dataset.commercialRate === 'regular' ? 'regularRate' : 'pilotRate'];
+    output.textContent = policy.formatMoney(rate, document.documentElement.lang);
+  }
+}
+document.addEventListener('pi:language', updateProposal);
+document.addEventListener('input', event => {
+  if (event.target.closest('.school-fields')) updateProposal();
+});
+updateProposal();
+
 const messages = {
+  configuration: ["Vérifiez les champs du configurateur avant d’envoyer votre demande.", "Check the configurator fields before sending your request."],
   sending: ["Envoi en cours…", "Sending…"],
   sent: ["Merci ! Ton message a été envoyé à Dominique.", "Thanks! Your message was sent to Dominique."],
   failed: ["L’envoi a échoué. Tes réponses sont encore ici. Tu peux réessayer.", "Your message could not be sent. Your answers are still here. You can try again."],
@@ -18,14 +56,19 @@ document.addEventListener("pi:language", () => showStatus());
 form.addEventListener("submit", async event => {
   event.preventDefault();
   if (submit.disabled) return;
+  if (document.getElementById("students") && !currentProposal()) { showStatus("configuration"); return; }
   submit.disabled = true;
   showStatus("sending");
 
   try {
+    const fields = Object.fromEntries(new FormData(form));
+    const summary = proposalSummary();
+    if (summary) fields.Commentaires = [fields.Commentaires, summary].filter(Boolean).join('\n\n');
+    if (fields.Commentaires.length > 2000) throw new Error('comments-too-long');
     const response = await fetch(form.action, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      body: JSON.stringify(fields),
     });
     if (!response.ok || !(await response.json()).ok) throw new Error();
     form.reset();

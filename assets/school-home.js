@@ -35,6 +35,7 @@ let displayedZone;
 function showZone(play = true) {
   const zone = focusedControl?.dataset.zone ?? hoveredControl?.dataset.zone ?? (hoveredPanel ? displayedZone : selectedZone);
   if (zone === displayedZone) return;
+  stopZoneClips();
   displayedZone = zone;
   arena.classList.toggle("has-zone", Boolean(zone));
   panelContainer.hidden = !zone;
@@ -51,7 +52,7 @@ function showZone(play = true) {
 
 for (const control of zoneControls) {
   control.addEventListener("pointerenter", event => {
-    if (event.pointerType !== "mouse" || mobileScene.matches) return;
+    if (event.pointerType !== "mouse" || mobileScene.matches || control.closest(".zone-switcher")) return;
     clearTimeout(previewTimer);
     focusedControl = undefined;
     hoveredControl = control;
@@ -73,12 +74,19 @@ for (const control of zoneControls) {
     showZone(false);
   });
   control.addEventListener("click", () => {
-    lastActivated = control;
+    lastActivated = control.closest(".zone-switcher")
+      ? zoneControls.find(item => item.classList.contains("arena-pin") && item.dataset.zone === control.dataset.zone)
+      : control;
     selectedZone = control.dataset.zone;
+    hoveredControl = focusedControl = undefined;
+    hoveredPanel = false;
     for (const button of zoneControls) {
       button.setAttribute("aria-pressed", String(button.dataset.zone === selectedZone));
     }
     showZone();
+    if (mobileScene.matches && !control.closest(".zone-switcher")) {
+      document.getElementById("zone-" + selectedZone).querySelector("h2").focus({preventScroll:true});
+    }
   });
 }
 
@@ -90,7 +98,7 @@ panelContainer.addEventListener("pointerleave", () => {
   hoveredPanel = false;
   showZone(false);
 });
-function dismissPanel() {
+function dismissPanel(restoreFocus = true) {
   selectedZone = hoveredControl = focusedControl = undefined;
   hoveredPanel = false;
   clearTimeout(previewTimer);
@@ -98,7 +106,7 @@ function dismissPanel() {
   showZone(false);
   const returnFocus = lastActivated;
   lastActivated = undefined;
-  returnFocus?.focus({ preventScroll: true });
+  if (restoreFocus) returnFocus?.focus({ preventScroll: true });
   // Closing must win over the focus preview.
   focusedControl = undefined;
   displayedZone = undefined;
@@ -106,15 +114,20 @@ function dismissPanel() {
   for (const effect of arenaEffects) effect.classList.remove("is-active", "is-playing");
   for (const control of zoneControls) control.removeAttribute("data-preview");
 }
-closePanel.addEventListener("click", dismissPanel);
+closePanel.addEventListener("click", () => dismissPanel());
+for (const link of document.querySelectorAll('.nav a[href^="#"], .hero-scroll, .school-intro a')) {
+  link.addEventListener("click", () => dismissPanel(false));
+}
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && !panelContainer.hidden) dismissPanel();
 });
 const visibilityObserver = new IntersectionObserver(entries => {
   hero.toggleAttribute("data-offscreen", !entries[0].isIntersecting);
+  if (!entries[0].isIntersecting && !panelContainer.hidden) dismissPanel(false);
 }, { threshold: .01 });
 visibilityObserver.observe(hero);
 window.addEventListener("pagehide", event => {
+  stopZoneClips();
   clearTimeout(previewTimer);
   if (event.persisted) return;
   sceneObserver.disconnect();
@@ -146,6 +159,7 @@ function updateConfiguration() {
   for (const el of document.querySelectorAll("[data-cad]")) el.textContent = currency.format(Number(el.dataset.cad));
   for (const el of document.querySelectorAll("[data-number]")) el.textContent = counts.format(Number(el.dataset.number));
   const english = document.documentElement.lang === "en";
+  field("clinics").placeholder = english ? "To be specified" : "À préciser";
   const adults = sum(value("teachers"), value("adults"));
   const totals = {
     students: value("students"),
@@ -161,12 +175,30 @@ function updateConfiguration() {
       requestAnimationFrame(() => output.classList.add("is-changing"));
     }
   }
+  const budget = window.piSchoolCommercial.estimate(totals.students);
+  for (const [selector, amount] of [["[data-pilot-total]", budget.base]]) {
+    for (const output of document.querySelectorAll(selector)) {
+      output.textContent = amount === null ? (english ? "Enter a valid student count" : "Saisissez un nombre d’élèves valide") : currency.format(amount);
+    }
+  }
+  for (const output of document.querySelectorAll("[data-commercial-discount]")) output.textContent = window.piSchoolCommercial.discountText(english ? "en" : "fr");
   const roles = field("roles");
   roles.setCustomValidity("");
   if (adults !== null && roles.valueAsNumber > adults) {
     roles.setCustomValidity(english
-      ? "Assigned roles exceed the number of available adults."
-      : "Les postes attribués dépassent le nombre d’adultes disponibles.");
+      ? "Simultaneously available adults exceed the declared total."
+      : "Le nombre d’adultes présents en même temps dépasse le total disponible.");
+  }
+  for (const output of document.querySelectorAll('[data-commercial-rate]')) {
+    const rate = window.piSchoolCommercial.policy[output.dataset.commercialRate === 'regular' ? 'regularRate' : 'pilotRate'];
+    output.textContent = currency.format(rate);
+  }
+  const raw = Object.fromEntries(Object.keys(window.piSchoolCommercial.limits).map(key => [key, value(key)]));
+  const configured = window.piSchoolCommercial.configuration(raw);
+  for (const link of document.querySelectorAll('[data-school-proposal]')) {
+    link.setAttribute('aria-disabled', String(!configured));
+    if (!configured) { link.removeAttribute('href'); continue; }
+    link.setAttribute('href', '#contact');
   }
   const invalid = document.querySelector(".school-fields input:invalid");
   field("configuration-error").textContent = invalid
@@ -175,6 +207,11 @@ function updateConfiguration() {
       : "Saisissez un nombre entier entre " + counts.format(Number(invalid.min)) + " et " + counts.format(Number(invalid.max)) + ".")
     : "";
 }
+// Compatibility with previously shared school proposal links. Never reset on language changes.
+try {
+  const shared = window.piSchoolCommercial.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration')));
+  if (shared) for (const [id, number] of Object.entries(shared)) field(id).value = number === null ? '' : String(number);
+} catch { /* Ignore malformed legacy links. */ }
 for (const input of document.querySelectorAll(".school-fields input")) {
   input.addEventListener("input", updateConfiguration);
 }
@@ -237,4 +274,154 @@ for (const surface of document.querySelectorAll(".pointer-surface")) {
     cancelAnimationFrame(frame);
     frame = 0;
   });
+}
+
+// School offer steppers: native editable fields remain the source of truth.
+for (const button of document.querySelectorAll('[data-step-target]')) {
+  button.addEventListener('click', () => {
+    const input = document.getElementById(button.dataset.stepTarget);
+    const direction = Number(button.dataset.step);
+    const current = Number.isFinite(input.valueAsNumber) ? input.valueAsNumber : Number(input.min) - (direction > 0 ? 1 : -1);
+    input.value = String(Math.max(Number(input.min), Math.min(Number(input.max), current + direction)));
+    input.dispatchEvent(new Event('input', { bubbles:true }));
+  });
+}
+
+// One-shot school price reveal. Static HTML is the final, no-JavaScript offer.
+{
+  const panel = document.querySelector('[data-price-reveal]');
+  if (panel) {
+    const counter = panel.querySelector('[data-price-counter]');
+    const preference = matchMedia('(prefers-reduced-motion: reduce)');
+    const {regularRate, pilotRate} = window.piSchoolCommercial.policy;
+    let frame = 0;
+    let observer;
+    let started = false;
+    let startTime;
+    function finish(pulse = false) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      counter.textContent = String(pilotRate);
+      panel.dataset.revealState = 'complete';
+      if (pulse && !preference.matches) panel.classList.add('offer-arrival');
+      observer?.disconnect();
+    }
+    function tick(timestamp) {
+      startTime ??= timestamp;
+      const progress = Math.min(1, (timestamp - startTime) / 1800);
+      counter.textContent = String(Math.max(pilotRate, regularRate - Math.floor((regularRate - pilotRate) * progress)));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+      else finish(true);
+    }
+    function start() {
+      if (started) return;
+      started = true;
+      panel.dataset.revealState = 'running';
+      observer?.disconnect();
+      frame = requestAnimationFrame(tick);
+    }
+    function reduceMotion() {
+      if (preference.matches) { started = true; finish(); panel.classList.remove('offer-arrival'); }
+    }
+    if (preference.matches || !('IntersectionObserver' in window)) {
+      started = true;
+      finish();
+    } else {
+      counter.textContent = String(regularRate);
+      panel.dataset.revealState = 'pending';
+      observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= .4)) start();
+      }, {threshold:.4});
+      observer.observe(panel);
+    }
+    preference.addEventListener('change', reduceMotion);
+    window.addEventListener('pagehide', () => {
+      started = true;
+      finish();
+      preference.removeEventListener('change', reduceMotion);
+    }, {once:true});
+  }
+}
+
+// Optional zone clips: empty configuration uses approved public images only.
+function stopZoneClips() {
+  for (const panel of zonePanels) {
+    for (const video of panel.querySelectorAll('video')) { video.pause(); video.remove(); }
+    panel.querySelector('.zone-photo').hidden = false;
+    panel.querySelector('.zone-play').hidden = !panel.dataset.zoneVideo;
+  }
+}
+for (const panel of zonePanels) {
+  const play = panel.querySelector('.zone-play');
+  const source = panel.dataset.zoneVideo;
+  if (!source) continue;
+  play.hidden = false;
+  play.addEventListener('click', async () => {
+    stopZoneClips();
+    const video = document.createElement('video');
+    video.src = source;
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'none';
+    video.poster = panel.querySelector('.zone-photo').src;
+    video.setAttribute('aria-labelledby', panel.id + '-title');
+    panel.querySelector('h2').id = panel.id + '-title';
+    panel.querySelector('.zone-photo').before(video);
+    panel.querySelector('.zone-photo').hidden = true;
+    play.hidden = true;
+    panel.querySelector('.zone-media-error').hidden = true;
+    video.addEventListener('error', () => {
+      stopZoneClips();
+      panel.querySelector('.zone-media-error').hidden = false;
+    });
+    video.focus({preventScroll:true});
+    try { await video.play(); } catch { /* Native controls remain available for voluntary playback. */ }
+  });
+}
+
+// Click-to-play school video: no YouTube player or script before activation.
+{
+  const play = document.getElementById('school-video-play');
+  const stage = document.getElementById('school-video-stage');
+  const poster = document.getElementById('school-video-poster');
+  const failure = document.getElementById('school-video-failure');
+  const fullscreen = document.getElementById('school-video-fullscreen');
+  const fullscreenStatus = document.getElementById('school-video-fullscreen-status');
+  fullscreen.addEventListener('click', async () => {
+    try { await stage.requestFullscreen(); } catch { fullscreenStatus.hidden = false; }
+  });
+  let player = null;
+  const playerTitle = () => document.documentElement.lang === 'en'
+    ? 'PürInstinct Games video' : 'Vidéo PürInstinct Games';
+  poster.addEventListener('error', () => { poster.hidden = true; });
+  play.addEventListener('click', () => {
+    if (player) return;
+    player = document.createElement('iframe');
+    const language = document.documentElement.lang === 'en' ? 'en' : 'fr';
+    player.title = playerTitle();
+    player.src = 'https://www.youtube-nocookie.com/embed/chfQomu8rZ4?autoplay=1&controls=1&playsinline=1&loop=0&rel=0&hl=' + language;
+    player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    player.allowFullscreen = true;
+    player.referrerPolicy = 'strict-origin-when-cross-origin';
+    player.tabIndex = 0;
+    player.addEventListener('error', () => { failure.hidden = false; });
+    stage.replaceChildren(player);
+    fullscreen.hidden = typeof stage.requestFullscreen !== 'function';
+    player.focus();
+  });
+  document.addEventListener('pi:language', () => {
+    // Change the accessible name only. Never reload an already playing video.
+    if (player) player.title = playerTitle();
+  });
+  const section = document.getElementById('video-games');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+    const reveal = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      section.classList.add('is-video-visible');
+      reveal.disconnect();
+    }, { threshold: .08 });
+    reveal.observe(section);
+    window.addEventListener('pagehide', event => { if (!event.persisted) reveal.disconnect(); });
+  }
 }

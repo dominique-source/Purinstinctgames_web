@@ -1,0 +1,26 @@
+✔ prefetches only one document and one critical photo on intent (7.596347ms)
+✔ modified clicks retain native navigation (64.66198ms)
+✔ reduced motion preserves immediate navigation with no visual delay (1.613161ms)
+✔ normal activation uses the native link and cleans up on Back (1.373122ms)
+✔ a failed visual still navigates (3.662449ms)
+✔ public APP portal and static resources work without an email session (111.630911ms)
+✔ organizer, projection and other private routes retain the email gate (2.36774ms)
+✔ the current configuration updates the 25/10 rate totals without changing resource inputs (130.839096ms)
+✔ invalid pupil counts do not produce a misleading zero or NaN estimate (16.199217ms)
+✔ English formatting and existing resource validation still run (12.890191ms)
+✔ both public pages distinguish price, pilot discount, travel and external funding (2.355552ms)
+✔ the homepage keeps configuration inputs and interactive field controls (0.680185ms)
+✔ school contact form keeps original fields, endpoint and submission handling (0.527349ms)
+✔ unchanged contact API relays the chosen configuration inside Comments (124.328622ms)
+✔ confirmed program rates remain independent of school staff; unknowns never become free (112.242819ms)
+✔ existing contact POST includes the visible validated configuration and original visitor message (7.306465ms)
+✔ failed contact request preserves answers and restores retry; no real email is sent (5.542708ms)
+✔ contact without configuration retains the original message and full comment limit (3.448404ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 465.4129
