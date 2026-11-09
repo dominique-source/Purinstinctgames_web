@@ -5,7 +5,23 @@ const submit = form.querySelector("button");
 const policy = window.piSchoolCommercial;
 let proposal = null;
 try { proposal = policy.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration'))); } catch { /* Invalid/shared links are ignored. */ }
-function proposalSummary() { return proposal ? policy.summary(proposal, document.documentElement.lang) : ''; }
+function currentProposal() {
+  // On the unified homepage, read current fields at update/submit time — never a stale URL copy.
+  if (document.getElementById('students')) {
+    const raw = {};
+    for (const key of Object.keys(policy.limits)) {
+      const input = document.getElementById(key);
+      if (!input.validity.valid) return null;
+      raw[key] = input.value === '' ? null : input.valueAsNumber;
+    }
+    return policy.configuration(raw);
+  }
+  return proposal;
+}
+function proposalSummary() {
+  const current = currentProposal();
+  return current ? policy.summary(current, document.documentElement.lang) : '';
+}
 function updateProposal() {
   for (const output of document.querySelectorAll("[data-commercial-discount]")) output.textContent = policy.discountText(document.documentElement.lang);
   const summary = proposalSummary();
@@ -18,9 +34,13 @@ function updateProposal() {
   }
 }
 document.addEventListener('pi:language', updateProposal);
+document.addEventListener('input', event => {
+  if (event.target.closest('.school-fields')) updateProposal();
+});
 updateProposal();
 
 const messages = {
+  configuration: ["Vérifiez les champs du configurateur avant d’envoyer votre demande.", "Check the configurator fields before sending your request."],
   sending: ["Envoi en cours…", "Sending…"],
   sent: ["Merci ! Ton message a été envoyé à Dominique.", "Thanks! Your message was sent to Dominique."],
   failed: ["L’envoi a échoué. Tes réponses sont encore ici. Tu peux réessayer.", "Your message could not be sent. Your answers are still here. You can try again."],
@@ -36,6 +56,7 @@ document.addEventListener("pi:language", () => showStatus());
 form.addEventListener("submit", async event => {
   event.preventDefault();
   if (submit.disabled) return;
+  if (document.getElementById("students") && !currentProposal()) { showStatus("configuration"); return; }
   submit.disabled = true;
   showStatus("sending");
 

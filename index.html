@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js" defer></script>
-  <link rel="stylesheet" href="/assets/school-home.css">
+  <link rel="stylesheet" href="/assets/school-home.css?v=onepage-20261109">
   <link rel="stylesheet" href="/assets/ecoles.css">
   <title>PürInstinct Games à l’école</title>
   <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/?lang=fr">
@@ -19,30 +19,30 @@
   <link rel="stylesheet" href="/assets/site-language.css">
   <script src="/assets/site-language.js" defer></script>
   <script src="/assets/school-home.js" defer></script>
+  <script src="/assets/ecoles-contact.js" defer></script>
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
 <nav class="nav" aria-label="Navigation principale">
-  <a href="/" class="home-logo">
+  <a href="#top" class="home-logo">
     <img src="/assets/homepage/logo.png" alt="">
     <span>PürInstinct <em>Games</em></span>
   </a>
   <div class="nav-links" id="navLinks">
-    <a href="/pour-les-ecoles.html">Pour les écoles</a>
-    <a href="/zones.html">Les 5 zones</a>
-    <a href="/concept.html#arena">L’Arène</a>
-    <a href="/concept.html">Le concept</a>
-    <a href="/pur-id.html">Pür ID</a>
+    <a href="#decouvrir-zones">Les 5 zones</a>
+    <a href="#parcours">Le programme</a>
+    <a href="#configuration">Configurer mon école</a>
+    <a href="#contact">Contact</a>
     <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a>
   </div>
   <div class="site-language" role="group" aria-label="Langue du site"><button type="button" lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" aria-label="English" aria-pressed="false">EN</button></div>
   <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<main class="school-home">
-<section class="school-hero" aria-labelledby="school-title">
+<main class="school-home" id="top">
+<section id="decouvrir-zones" class="school-hero" aria-labelledby="school-title">
   <div class="school-arena pointer-surface">
     <div class="arena-layer">
       <picture>
@@ -78,26 +78,27 @@
     <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les mettre en pratique en match.</p><p class="commercial-hero-note">Une expérience sportive complète, directement à votre école, sur plus d’un mois.</p>
     <a class="school-button" href="#parcours"><span class="cta-desktop">Voir comment se déroulent les Games</span><span class="cta-mobile">Voir le déroulement</span><span aria-hidden="true">→</span></a>
   </div>
-  <div class="zone-details" id="arena-panel" hidden>
+  <div class="zone-details" id="arena-panel" role="region" aria-label="Détails des zones" hidden>
     <button type="button" class="arena-close" aria-label="Fermer le panneau">×</button>
-    <article class="zone-detail" id="zone-vitesse" hidden>
-      <img src="/assets/hero-deck/icons/speed.svg" alt="" width="32" height="32"><div><h2>Vitesse</h2><p>Accélère sur une courte distance et apprends à relancer ton sprint.</p><a href="/zones.html#vitesse">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-vitesse" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-speed.jpg" alt="Zone Vitesse : piste de sprint." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Vitesse</h2><p>Accélère sur une courte distance et apprends à relancer ton sprint.</p></div>
     </article>
-    <article class="zone-detail" id="zone-agilite" hidden>
-      <img src="/assets/hero-deck/icons/agility.svg" alt="" width="32" height="32"><div><h2>Agilité</h2><p>Changer de direction. Réagir. Esquiver.</p><a href="/zones.html#agilite">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-agilite" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-agility.jpg" alt="Zone Agilité : arène de déplacements." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Agilité</h2><p>Changer de direction. Réagir. Esquiver.</p></div>
     </article>
-    <article class="zone-detail" id="zone-habiletes-manuelles" hidden>
-      <img src="/assets/hero-deck/icons/hand.svg" alt="" width="32" height="32"><div><h2>Habiletés des mains</h2><p>Travaille la précision de tes passes et de tes réceptions.</p><a href="/zones.html#habiletes-manuelles">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-habiletes-manuelles" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-hand.jpg" alt="Zone Habiletés des mains : défis de précision." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Habiletés des mains</h2><p>Travaille la précision de tes passes et de tes réceptions.</p></div>
     </article>
-    <article class="zone-detail" id="zone-habiletes-au-pied" hidden>
-      <img src="/assets/hero-deck/icons/foot.svg" alt="" width="32" height="32"><div><h2>Habiletés des pieds</h2><p>Travaille tes appuis et la précision de tes déplacements.</p><a href="/zones.html#habiletes-au-pied">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-habiletes-au-pied" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-foot.jpg" alt="Zone Habiletés des pieds : défis d’appuis." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Habiletés des pieds</h2><p>Travaille tes appuis et la précision de tes déplacements.</p></div>
     </article>
-    <article class="zone-detail" id="zone-game-iq" hidden>
-      <img src="/assets/hero-deck/icons/iq.svg" alt="" width="32" height="32"><div><h2>Game IQ</h2><p>Observe le jeu, anticipe et choisis la bonne action.</p><a href="/zones.html#game-iq">Explorer la zone →</a></div>
+    <article class="zone-detail" id="zone-game-iq" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/render-iq.jpg" alt="Zone Game IQ : terrain de stratégie." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Game IQ</h2><p>Observe le jeu, anticipe et choisis la bonne action.</p></div>
     </article>
-    <article class="zone-detail" id="zone-terrain" hidden>
-      <img src="/assets/hero-deck/icons/field.svg" alt="" width="32" height="32"><div><h2>Terrain PürInstinct</h2><p>Crée une ouverture à trois contre deux et passe vers la zone d’en-but.</p></div>
+    <article class="zone-detail" id="zone-terrain" data-zone-video="" hidden>
+      <img class="zone-photo" src="/assets/school-home/arene-avec-reperes.webp" alt="Le terrain PürInstinct réunit les cinq habiletés en match." width="900" height="720" loading="lazy" decoding="async"><button class="zone-play" type="button" hidden>Lire l’extrait</button><p class="zone-media-error" role="status" hidden>La vidéo est indisponible. L’image de la zone reste affichée.</p><div><h2 tabindex="-1">Terrain PürInstinct</h2><p>Crée une ouverture à trois contre deux et passe vers la zone d’en-but.</p></div>
     </article>
+    <div class="zone-switcher" role="group" aria-label="Choisir une autre zone"><button type="button" data-zone="vitesse" aria-pressed="false" aria-controls="zone-vitesse">Vitesse</button><button type="button" data-zone="agilite" aria-pressed="false" aria-controls="zone-agilite">Agilité</button><button type="button" data-zone="habiletes-manuelles" aria-pressed="false" aria-controls="zone-habiletes-manuelles">Mains</button><button type="button" data-zone="habiletes-au-pied" aria-pressed="false" aria-controls="zone-habiletes-au-pied">Pieds</button><button type="button" data-zone="game-iq" aria-pressed="false" aria-controls="zone-game-iq">Game IQ</button><button type="button" data-zone="terrain" aria-pressed="false" aria-controls="zone-terrain">Terrain</button></div>
   </div>
 
   <div class="zone-grid" role="group" aria-label="Les cinq zones et le terrain">
@@ -210,11 +211,35 @@
    <article class="offer-frame"><h3><span aria-hidden="true">02</span> FINANCEMENT EXTERNE</h3><p>Subventions admissibles · Fondations · Commandites · Partenaires</p><p class="offer-help">L’admissibilité et l’obtention de fonds ne sont pas garanties.</p></article>
    <p class="offer-help offer-funding-note">Une aide externe peut réduire la contribution de l’école, sans changer le prix du programme. Seules les contributions confirmées réduisent le montant à la charge de l’école.</p>
   </div>
-  <a class="offer-proposal" data-school-proposal href="/pour-les-ecoles.html#contact"><span>DEMANDER MA PROPOSITION</span><span aria-hidden="true">↗</span></a>
+  <a class="offer-proposal" data-school-proposal href="#contact"><span>DEMANDER MA PROPOSITION</span><span aria-hidden="true">↗</span></a>
+ </div>
+</section>
+
+<section class="school-contact-section" id="contact" aria-labelledby="contact-title">
+ <div class="school-contact-intro">
+  <p class="commercial-eyebrow">Contact</p>
+  <h2 id="contact-title">Parlons de votre école</h2>
+  <p>Vos élèves développent cinq habiletés dans cinq zones. Découvrez comment les Games se déroulent et quelle formule pourrait convenir à votre école.</p>
+  <a class="games-cta schools-booking" href="#schools-contact-form">Réserver 20 minutes avec Dominique Soucy</a>
+  <p class="contact-note">Le formulaire permet de demander une rencontre. Dominique vous répondra pour convenir d’un moment.</p>
+  <img class="schools-photo" src="/assets/homepage/ecole.png" width="1961" height="802" alt="Des élèves écoutent leur coach sur le terrain" loading="lazy" decoding="async">
+ </div>
+ <div class="schools-contact">
+    <details id="school-proposal" hidden><summary>Votre configuration à transmettre</summary><p>Cette configuration sera jointe à votre message. Les montants restent indicatifs.</p><pre id="school-proposal-summary"></pre></details>
+    <form id="schools-contact-form" action="/api/schools-contact" method="post">
+      <label>Nom <input name="Nom" maxlength="100" autocomplete="name" required></label>
+      <label>École <input name="École" maxlength="150" autocomplete="organization" required></label>
+      <label>Ville <input name="Ville" maxlength="100" autocomplete="address-level2" required></label>
+      <label>Courriel <input name="Courriel" maxlength="254" type="email" autocomplete="email" required></label>
+      <label>Commentaires <textarea name="Commentaires" maxlength="2000" rows="4"></textarea></label>
+      <button class="games-cta" type="submit">Envoyer le message</button>
+      <p id="schools-contact-status" role="status"></p>
+    </form>
+  <p><a href="mailto:dominique@purinstinct.com">dominique@purinstinct.com</a></p>
  </div>
 </section>
 
 </main>
-<footer class="school-footer"><a href="/pour-les-ecoles.html">Pour les écoles</a><a href="/concept.html#arena">L’Arène</a><a href="/pur-id.html">Pür ID</a></footer>
+<footer class="school-footer"><a href="#top">PürInstinct Games</a><a href="#contact">Contact</a><a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a></footer>
 </body>
 </html>

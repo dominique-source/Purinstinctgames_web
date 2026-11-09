@@ -90,3 +90,21 @@ test('French and English summaries and submitted comments contain only the pilot
   assert.match(result.payload.Commentaires,/20[\s\u00a0,]?000/);
  }
 });
+
+test('the unified contact reads current fields, preserves answers on language changes and posts the latest pilot summary',async()=>{
+ const policy=commercial(),events={};let submitted;
+ const fields=Object.fromEntries(Object.entries(chosen).map(([key,value])=>[key,{value:String(value),valueAsNumber:value,validity:{valid:true}}]));
+ const comments={value:'Question sur la rencontre',maxLength:2000};
+ const submit={disabled:false},status={textContent:''},summary={textContent:''},box={hidden:true};
+ const form={action:'/api/schools-contact',querySelector:()=>submit,elements:{namedItem:()=>comments},addEventListener:(key,fn)=>events.submit=fn,reset(){}};
+ const document={documentElement:{lang:'fr'},getElementById:id=>fields[id]??({'schools-contact-form':form,'schools-contact-status':status,'school-proposal-summary':summary,'school-proposal':box}[id]),querySelectorAll:()=>[],addEventListener:(name,fn)=>(events[name]??=[]).push(fn)};
+ runInNewContext(source('ecoles-contact.js'),{window:{piSchoolCommercial:policy},document,URL,location:{href:'https://example.test/'},FormData:class{*[Symbol.iterator](){yield*Object.entries({Nom:'Test',École:'Fictive',Ville:'Québec',Courriel:'test@example.invalid',Commentaires:comments.value});}},fetch:async(url,request)=>{submitted=JSON.parse(request.body);return {ok:true,json:async()=>({ok:true})};}});
+ assert.match(summary.textContent,/20\s?000/);
+ fields.students.value='200';fields.students.valueAsNumber=200;
+ for(const listener of events.input)listener({target:{closest:()=>true}});
+ assert.match(summary.textContent,/2\s?000/);assert.doesNotMatch(summary.textContent,/20\s?000/);
+ document.documentElement.lang='en';for(const listener of events['pi:language'])listener();
+ assert.equal(fields.students.value,'200');assert.equal(comments.value,'Question sur la rencontre');assert.match(summary.textContent,/Pilot program base/);
+ await events.submit({preventDefault(){}});assert.match(submitted.Commentaires,/Question sur la rencontre/);assert.match(submitted.Commentaires,/Pilot program base : CAD\s?2,000/);assert.doesNotMatch(submitted.Commentaires,/Regular program|50,000|5,000/);
+ submitted=undefined;fields.students.validity.valid=false;await events.submit({preventDefault(){}});assert.equal(submitted,undefined);assert.match(status.textContent,/Check the configurator/);
+});

@@ -328,3 +328,26 @@ Object.assign(window.piTranslations, {
   "Une aide externe peut réduire la contribution de l’école, sans changer le prix du programme. Seules les contributions confirmées réduisent le montant à la charge de l’école.": "External funding may reduce the school’s contribution without changing the program price. Only confirmed contributions reduce the amount payable by the school.",
   "DEMANDER MA PROPOSITION": "REQUEST MY PROPOSAL"
 });
+
+// Unified public discovery and contact, using the existing FR/EN mechanism.
+Object.assign(window.piTranslations, {
+  'Le programme':'The program',
+  'Configurer mon école':'Configure my school',
+  'Contact':'Contact',
+  'Détails des zones':'Zone details',
+  'Choisir une autre zone':'Choose another zone',
+  'Mains':'Hands', 'Pieds':'Feet', 'Terrain':'Field',
+  'Zone Vitesse : piste de sprint.':'Speed zone: sprint track.',
+  'Zone Agilité : arène de déplacements.':'Agility zone: movement arena.',
+  'Zone Habiletés des mains : défis de précision.':'Hand skills zone: precision challenges.',
+  'Zone Habiletés des pieds : défis d’appuis.':'Foot skills zone: footwork challenges.',
+  'Zone Game IQ : terrain de stratégie.':'Game IQ zone: strategy field.',
+  'Le terrain PürInstinct réunit les cinq habiletés en match.':'The PürInstinct field brings all five skills together in a match.',
+  'Parlons de votre école':'Let’s talk about your school',
+  'Vos élèves développent cinq habiletés dans cinq zones. Découvrez comment les Games se déroulent et quelle formule pourrait convenir à votre école.':'Your students develop five skills across five zones. Discover how the Games work and which format could suit your school.',
+  'Le formulaire permet de demander une rencontre. Dominique vous répondra pour convenir d’un moment.':'Use the form to request a meeting. Dominique will reply to agree on a time.'
+});
+Object.assign(window.piTranslations, {
+ 'Lire l’extrait':'Play clip',
+ 'La vidéo est indisponible. L’image de la zone reste affichée.':'The video is unavailable. The zone image remains available.'
+});

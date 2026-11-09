@@ -35,6 +35,7 @@ let displayedZone;
 function showZone(play = true) {
   const zone = focusedControl?.dataset.zone ?? hoveredControl?.dataset.zone ?? (hoveredPanel ? displayedZone : selectedZone);
   if (zone === displayedZone) return;
+  stopZoneClips();
   displayedZone = zone;
   arena.classList.toggle("has-zone", Boolean(zone));
   panelContainer.hidden = !zone;
@@ -51,7 +52,7 @@ function showZone(play = true) {
 
 for (const control of zoneControls) {
   control.addEventListener("pointerenter", event => {
-    if (event.pointerType !== "mouse" || mobileScene.matches) return;
+    if (event.pointerType !== "mouse" || mobileScene.matches || control.closest(".zone-switcher")) return;
     clearTimeout(previewTimer);
     focusedControl = undefined;
     hoveredControl = control;
@@ -73,12 +74,19 @@ for (const control of zoneControls) {
     showZone(false);
   });
   control.addEventListener("click", () => {
-    lastActivated = control;
+    lastActivated = control.closest(".zone-switcher")
+      ? zoneControls.find(item => item.classList.contains("arena-pin") && item.dataset.zone === control.dataset.zone)
+      : control;
     selectedZone = control.dataset.zone;
+    hoveredControl = focusedControl = undefined;
+    hoveredPanel = false;
     for (const button of zoneControls) {
       button.setAttribute("aria-pressed", String(button.dataset.zone === selectedZone));
     }
     showZone();
+    if (mobileScene.matches && !control.closest(".zone-switcher")) {
+      document.getElementById("zone-" + selectedZone).querySelector("h2").focus({preventScroll:true});
+    }
   });
 }
 
@@ -90,7 +98,7 @@ panelContainer.addEventListener("pointerleave", () => {
   hoveredPanel = false;
   showZone(false);
 });
-function dismissPanel() {
+function dismissPanel(restoreFocus = true) {
   selectedZone = hoveredControl = focusedControl = undefined;
   hoveredPanel = false;
   clearTimeout(previewTimer);
@@ -98,7 +106,7 @@ function dismissPanel() {
   showZone(false);
   const returnFocus = lastActivated;
   lastActivated = undefined;
-  returnFocus?.focus({ preventScroll: true });
+  if (restoreFocus) returnFocus?.focus({ preventScroll: true });
   // Closing must win over the focus preview.
   focusedControl = undefined;
   displayedZone = undefined;
@@ -106,15 +114,20 @@ function dismissPanel() {
   for (const effect of arenaEffects) effect.classList.remove("is-active", "is-playing");
   for (const control of zoneControls) control.removeAttribute("data-preview");
 }
-closePanel.addEventListener("click", dismissPanel);
+closePanel.addEventListener("click", () => dismissPanel());
+for (const link of document.querySelectorAll('.nav a[href^="#"], .hero-scroll, .school-intro a')) {
+  link.addEventListener("click", () => dismissPanel(false));
+}
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && !panelContainer.hidden) dismissPanel();
 });
 const visibilityObserver = new IntersectionObserver(entries => {
   hero.toggleAttribute("data-offscreen", !entries[0].isIntersecting);
+  if (!entries[0].isIntersecting && !panelContainer.hidden) dismissPanel(false);
 }, { threshold: .01 });
 visibilityObserver.observe(hero);
 window.addEventListener("pagehide", event => {
+  stopZoneClips();
   clearTimeout(previewTimer);
   if (event.persisted) return;
   sceneObserver.disconnect();
@@ -185,9 +198,7 @@ function updateConfiguration() {
   for (const link of document.querySelectorAll('[data-school-proposal]')) {
     link.setAttribute('aria-disabled', String(!configured));
     if (!configured) { link.removeAttribute('href'); continue; }
-    const query = new URLSearchParams({ configuration: JSON.stringify(configured) });
-    if (english) query.set('lang','en');
-    link.href = '/pour-les-ecoles.html?' + query + '#contact';
+    link.setAttribute('href', '#contact');
   }
   const invalid = document.querySelector(".school-fields input:invalid");
   field("configuration-error").textContent = invalid
@@ -196,6 +207,11 @@ function updateConfiguration() {
       : "Saisissez un nombre entier entre " + counts.format(Number(invalid.min)) + " et " + counts.format(Number(invalid.max)) + ".")
     : "";
 }
+// Compatibility with previously shared school proposal links. Never reset on language changes.
+try {
+  const shared = window.piSchoolCommercial.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration')));
+  if (shared) for (const [id, number] of Object.entries(shared)) field(id).value = number === null ? '' : String(number);
+} catch { /* Ignore malformed legacy links. */ }
 for (const input of document.querySelectorAll(".school-fields input")) {
   input.addEventListener("input", updateConfiguration);
 }
@@ -325,6 +341,42 @@ for (const button of document.querySelectorAll('[data-step-target]')) {
       preference.removeEventListener('change', reduceMotion);
     }, {once:true});
   }
+}
+
+// Optional zone clips: empty configuration uses approved public images only.
+function stopZoneClips() {
+  for (const panel of zonePanels) {
+    for (const video of panel.querySelectorAll('video')) { video.pause(); video.remove(); }
+    panel.querySelector('.zone-photo').hidden = false;
+    panel.querySelector('.zone-play').hidden = !panel.dataset.zoneVideo;
+  }
+}
+for (const panel of zonePanels) {
+  const play = panel.querySelector('.zone-play');
+  const source = panel.dataset.zoneVideo;
+  if (!source) continue;
+  play.hidden = false;
+  play.addEventListener('click', async () => {
+    stopZoneClips();
+    const video = document.createElement('video');
+    video.src = source;
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'none';
+    video.poster = panel.querySelector('.zone-photo').src;
+    video.setAttribute('aria-labelledby', panel.id + '-title');
+    panel.querySelector('h2').id = panel.id + '-title';
+    panel.querySelector('.zone-photo').before(video);
+    panel.querySelector('.zone-photo').hidden = true;
+    play.hidden = true;
+    panel.querySelector('.zone-media-error').hidden = true;
+    video.addEventListener('error', () => {
+      stopZoneClips();
+      panel.querySelector('.zone-media-error').hidden = false;
+    });
+    video.focus({preventScroll:true});
+    try { await video.play(); } catch { /* Native controls remain available for voluntary playback. */ }
+  });
 }
 
 // Click-to-play school video: no YouTube player or script before activation.

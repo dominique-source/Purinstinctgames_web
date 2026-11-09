@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const source=read('assets/school-home.js');
-const reveal=source.slice(source.indexOf('// One-shot school price reveal.'),source.indexOf('// Click-to-play school video:'));
+const reveal=source.slice(source.indexOf('// One-shot school price reveal.'),source.indexOf('// Optional zone clips:'));
 function mount(reduced=false,observerAvailable=true){
  const frames=new Map(),listeners={},classes=new Set(),values=[];let next=0,intersect,disconnects=0;
  const counter={set textContent(v){values.push(Number(v));},get textContent(){return String(values.at(-1));}};
@@ -41,7 +41,7 @@ test('no-JS final price and a single proposal destination remain semantic; revea
  assert.match(html,/class="offer-counter" aria-hidden="true" data-i18n/);
  assert.match(html,/data-price-counter>10<\/span>/);
  assert.match(html,/class="offer-sr">Tarif régulier : 25 \$ CA/);
- assert.match(html,/data-school-proposal href="\/pour-les-ecoles.html#contact"/);
+ assert.match(html,/data-school-proposal href="#contact"/);
  assert.doesNotMatch(reveal,/pi:language|wheel|preventDefault/);
 });
 

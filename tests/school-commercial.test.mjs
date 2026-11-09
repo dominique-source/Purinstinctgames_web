@@ -38,8 +38,8 @@ test('English formatting and existing resource validation still run',()=>{
  assert.match(outputs['[data-pilot-total]'].textContent,/2,000/);
  assert.match(fields['configuration-error'].textContent,/Simultaneously available adults/);
 });
-test('both public pages distinguish price, pilot discount, travel and external funding',()=>{
- for(const path of ['index.html','pour-les-ecoles.html']){
+test('the unified public page distinguishes price, pilot discount, travel and external funding',()=>{
+ for(const path of ['index.html']){
   const html=read(path);
   assert.ok(html.indexOf('Tarif régulier')<html.indexOf('Cohorte pilote'));
   for(const phrase of ['25 $','10 $','Frais de déplacement en sus','réduction commerciale de 60 %','Cette réduction n’est pas une subvention gouvernementale.','contributions confirmées','plus d’un mois'])assert.ok(html.includes(phrase),path+': '+phrase);
@@ -53,7 +53,7 @@ test('the homepage keeps configuration inputs and interactive field controls',()
  assert.ok(html.includes('assets/app-portal.js'));
 });
 test('school contact form keeps original fields, endpoint and submission handling',()=>{
- const html=read('pour-les-ecoles.html');
+ const html=read('index.html');
  assert.ok(html.includes('action="/api/schools-contact"'));
  for(const name of ['Nom','École','Ville','Courriel','Commentaires'])assert.ok(html.includes('name="'+name+'"'));
  assert.ok(read('assets/ecoles-contact.js').includes('Object.fromEntries(new FormData(form))'));
