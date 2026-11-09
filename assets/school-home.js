@@ -161,17 +161,32 @@ function updateConfiguration() {
       requestAnimationFrame(() => output.classList.add("is-changing"));
     }
   }
-  for (const [selector, rate] of [["[data-regular-total]", 25], ["[data-pilot-total]", 10]]) {
+  const budget = window.piSchoolCommercial.estimate(totals.students);
+  for (const [selector, amount] of [["[data-regular-total]", budget.regular], ["[data-pilot-total]", budget.base]]) {
     for (const output of document.querySelectorAll(selector)) {
-      output.textContent = totals.students === null ? (english ? "Enter a valid student count" : "Saisissez un nombre d’élèves valide") : currency.format(totals.students * rate);
+      output.textContent = amount === null ? (english ? "Enter a valid student count" : "Saisissez un nombre d’élèves valide") : currency.format(amount);
     }
   }
+  for (const output of document.querySelectorAll("[data-commercial-discount]")) output.textContent = window.piSchoolCommercial.discountText(english ? "en" : "fr");
   const roles = field("roles");
   roles.setCustomValidity("");
   if (adults !== null && roles.valueAsNumber > adults) {
     roles.setCustomValidity(english
-      ? "Assigned roles exceed the number of available adults."
-      : "Les postes attribués dépassent le nombre d’adultes disponibles.");
+      ? "Simultaneously available adults exceed the declared total."
+      : "Le nombre d’adultes présents en même temps dépasse le total disponible.");
+  }
+  for (const output of document.querySelectorAll('[data-commercial-rate]')) {
+    const rate = window.piSchoolCommercial.policy[output.dataset.commercialRate === 'regular' ? 'regularRate' : 'pilotRate'];
+    output.textContent = currency.format(rate);
+  }
+  const raw = Object.fromEntries(Object.keys(window.piSchoolCommercial.limits).map(key => [key, value(key)]));
+  const configured = window.piSchoolCommercial.configuration(raw);
+  for (const link of document.querySelectorAll('[data-school-proposal]')) {
+    link.setAttribute('aria-disabled', String(!configured));
+    if (!configured) { link.removeAttribute('href'); continue; }
+    const query = new URLSearchParams({ configuration: JSON.stringify(configured) });
+    if (english) query.set('lang','en');
+    link.href = '/pour-les-ecoles.html?' + query + '#contact';
   }
   const invalid = document.querySelector(".school-fields input:invalid");
   field("configuration-error").textContent = invalid

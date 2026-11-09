@@ -1,3 +1,55 @@
+// Shared public commercial policy. Unknown supplements are deliberately null,
+// never a free service or a public internal cost. No staffing ratio is inferred.
+window.piSchoolCommercial = (() => {
+  const policy = Object.freeze({ currency: 'CAD', regularRate: 25, pilotRate: 10,
+    staffSupplement: null, travel: null, taxes: null });
+  const limits = Object.freeze({ students: [1,999999], teachers: [0,999999], adults: [0,999999],
+    indoors: [0,999999], outdoors: [0,999999], roles: [0,999999], zones: [1,5], hours: [1,999999], clinics: [0,999999] });
+  function configuration(raw) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    const result = {};
+    for (const [key,[min,max]] of Object.entries(limits)) {
+      const value = raw[key];
+      if (value === '' || value === null || value === undefined || typeof value === 'boolean') return null;
+      const number = Number(value);
+      if (!Number.isSafeInteger(number) || number < min || number > max) return null;
+      result[key] = number;
+    }
+    return result.roles > result.teachers + result.adults ? null : result;
+  }
+  function estimate(students) {
+    const valid = Number.isSafeInteger(students) && students >= 1 && students <= limits.students[1];
+    return { regular: valid ? students * policy.regularRate : null,
+      base: valid ? students * policy.pilotRate : null, total: null,
+      staffSupplement: policy.staffSupplement, travel: policy.travel,
+      discount: Math.round((1-policy.pilotRate/policy.regularRate)*100) };
+  }
+  function formatMoney(value, language) {
+    return new Intl.NumberFormat(language === 'en' ? 'en-CA' : 'fr-CA', {
+      style:'currency', currency:policy.currency, currencyDisplay:'code', minimumFractionDigits:0, maximumFractionDigits:2,
+    }).format(value);
+  }
+  function summary(raw, language) {
+    const c = configuration(raw);
+    if (!c) return '';
+    const en = language === 'en';
+    const labels = en ? ['Students','Teachers (total)','Other adults / volunteers (total)','Indoor play areas','Outdoor play areas','School adults available simultaneously','Open zones','Planned Games duration (hours)','Planned clinics (sessions)'] : ['Élèves','Enseignants (total)','Autres adultes / bénévoles (total)','Plateaux intérieurs','Plateaux extérieurs','Adultes de l’école disponibles simultanément','Zones ouvertes','Durée envisagée des Games (heures)','Cliniques envisagées (séances)'];
+    const budget=estimate(c.students);
+    return [(en ? 'School configuration — indicative proposal' : 'Configuration scolaire — proposition indicative'),
+      ...Object.keys(limits).map((key,i)=>labels[i]+' : '+c[key]),
+      (en ? 'Pilot program base : ' : 'Base du programme pilote : ')+formatMoney(budget.base,language),
+      (en ? 'Regular program reference : ' : 'Référence régulière du programme : ')+formatMoney(budget.regular,language),
+      en ? 'Additional staffing: to be confirmed. Travel: additional, to be confirmed. Total: to be confirmed.' : 'Personnel supplémentaire : à confirmer. Déplacement : en sus, à confirmer. Total : à confirmer.',
+      en ? 'Availability times, specialist roles and tax treatment remain to be confirmed.' : 'Créneaux de disponibilité, rôles spécialisés et traitement des taxes à confirmer.'
+    ].join('\n');
+  }
+  function discountText(language) {
+    const discount = estimate(null).discount;
+    return language === 'en' ? `A ${discount}% commercial discount provided by PürInstinct, before travel expenses and supplements.` : `Une réduction commerciale de ${discount} % offerte par PürInstinct, avant déplacement et suppléments.`;
+  }
+  return Object.freeze({ policy, limits, configuration, estimate, formatMoney, summary, discountText });
+})();
+
 window.piTranslations = {
   "Terrain PürInstinct": "PürInstinct Field",
   "Les cinq zones et le terrain": "The five zones and the field",
@@ -184,3 +236,42 @@ Object.assign(window.piTranslations, {
   "25 $": "$25",
   "10 $": "$10"
 });
+
+Object.assign(window.piTranslations, {
+  "Les tarifs du programme": "Program rates",
+  "Configurer les Games de mon école": "Configure the Games for my school",
+  "Configurez les Games de votre école": "Configure the Games for your school",
+  "Précisez vos élèves, vos installations et les adultes disponibles. Nous pourrons estimer les ressources nécessaires et préparer une proposition adaptée.": "Tell us about your students, facilities and available adults. We can assess the resources needed and prepare a tailored proposal.",
+  "Autres adultes ou bénévoles disponibles": "Other available adults or volunteers",
+  "Un plateau correspond à une surface approximativement équivalente à un terrain de basketball.": "A play area is approximately the size of a basketball court.",
+  "Votre configuration et votre budget": "Your configuration and budget",
+  "Adultes de l’école disponibles en même temps": "School adults available at the same time",
+  "Durée envisagée des Games (heures)": "Planned Games duration (hours)",
+  "Cliniques envisagées (séances)": "Planned clinics (sessions)",
+  "Le total d’adultes, leur présence simultanée et leurs créneaux de disponibilité sont distincts. Les créneaux de chaque adulte seront précisés avec l’école.": "The total number of adults, their simultaneous presence and their availability times are different. Each adult’s availability will be confirmed with the school.",
+  "Un bénévole ne remplace pas automatiquement un intervenant spécialisé. Les rôles seront confirmés avec vous.": "A volunteer does not automatically replace a specialist. Roles will be confirmed with you.",
+  "Base du programme": "Program base",
+  "Équivalent par élève — base du programme uniquement": "Per-student equivalent — program base only",
+  "Référence régulière du programme": "Regular program reference",
+  "Personnel supplémentaire": "Additional staffing",
+  "À confirmer selon les ressources": "To be confirmed based on resources",
+  "Déplacement": "Travel",
+  "À confirmer selon le lieu": "To be confirmed based on location",
+  "Total à confirmer": "Total to be confirmed",
+  "À confirmer": "To be confirmed",
+  "Frais de déplacement en sus.": "Travel expenses are additional.",
+  "Frais de déplacement à confirmer selon le lieu.": "Travel expenses to be confirmed based on location.",
+  "Estimation indicative. Le montant final sera confirmé selon l’encadrement, les installations, le calendrier et les déplacements nécessaires.": "Indicative estimate. The final amount will be confirmed based on staffing, facilities, schedule and travel requirements.",
+  "Traitement des taxes à confirmer dans la proposition.": "Tax treatment will be confirmed in the proposal.",
+  "Le financement externe ne modifie pas le coût du programme. Aucune aide hypothétique n’est déduite.": "External funding does not change the program cost. No hypothetical funding is deducted.",
+  "Demander une proposition avec cette configuration": "Request a proposal with this configuration",
+  "Personnel supplémentaire selon les besoins d’encadrement.": "Additional staffing based on supervision requirements.",
+  "Une réduction commerciale de 60 % offerte par PürInstinct, avant déplacement et suppléments.": "A 60% commercial discount provided by PürInstinct, before travel expenses and supplements.",
+  "Le budget tient compte des ressources de votre école. Des frais supplémentaires peuvent s’appliquer lorsque PürInstinct fournit davantage de personnel.": "The budget takes your school’s resources into account. Additional charges may apply when PürInstinct provides more staff.",
+  "L’établissement finance la base du programme, les frais de déplacement et les suppléments applicables confirmés.": "The school funds the program base, travel expenses and confirmed applicable supplements.",
+  "Votre configuration à transmettre": "Your configuration to be sent",
+  "Cette configuration sera jointe à votre message. Les montants restent indicatifs.": "This configuration will be included with your message. Amounts remain indicative.",
+  "Accompagnement et coordination, équipements et production, DJ et sonorisation complètent la conférence, les cliniques et la formation. Les ballons pédagogiques restent à l’école. Le matériel des Games est récupéré après l’événement.": "Support and coordination, equipment and production, DJ and sound complement the talk, clinics and training. Teaching balls remain at the school. Games equipment is collected after the event."
+});
+
+Object.assign(window.piTranslations, {"Voir la base du programme":"View the program base"});

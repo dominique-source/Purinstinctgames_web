@@ -96,7 +96,8 @@
 .commercial-example small { display: block; line-height: 1.5; color: #ccc; }
 .commercial-estimate .games-cta { margin-top: 20px; }
 .school-intro .commercial-hero-note { white-space: normal; max-width: 35ch; font: 700 clamp(14px,1.1vw,18px)/1.4 Barlow,sans-serif; }
-.school-home .commercial-section { background: #0a0a0a; }
+.school-home .commercial-section { background: #0a0a0a; --lime: #ccff00; }
+.commercial-configure { --lime: #ccff00; }
 .school-home .commercial-section .section-title::before, .school-home .commercial-section .section-title::after { background: #ccff00; }
 .school-home .commercial-section em { color: #ccff00; }
 @media (max-width: 900px) { .commercial-components { grid-template-columns: repeat(2,minmax(0,1fr)); } }
@@ -107,3 +108,34 @@
   .commercial-next a { width: 100%; justify-content: center; text-align: center; }
   .school-intro .commercial-hero-note { margin-inline: auto; font-size: 14px; }
 }
+
+/* Configuration and proposal: the base never implies a final all-in total. */
+.commercial-base { color: var(--lime); font: italic 900 clamp(40px,5vw,68px)/1.1 var(--display); margin-block: 18px; overflow-wrap: anywhere; }
+.commercial-breakdown { margin: 24px 0; }
+.commercial-breakdown > div { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f4f4ef40; }
+.commercial-breakdown dt, .commercial-breakdown dd { margin: 0; }
+.commercial-breakdown dd { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.commercial-total { color: var(--lime); }
+.commercial-estimate .games-cta { display: inline-flex; white-space: normal; text-align: center; }
+.commercial-configure { text-align: center; }
+.commercial-configure .games-cta { margin-top: 24px; }
+.school-home #configuration .school-fields, .school-home #forfait .school-fields,
+.school-home #configuration .school-summary, .school-home #forfait .school-summary { background: #0a0a0a; border-color: #ccff0060; }
+.school-home #configuration .school-fields input, .school-home #forfait .school-fields input { background: #151515; border-color: #f4f4ef66; }
+.school-home #configuration .school-summary strong, .school-home #forfait .school-summary strong { color: var(--lime); }
+#configuration-error { color: #ffaaa0; }
+#school-proposal { padding: 20px; background: #111; border: 1px solid #ccff0060; border-radius: 12px; }
+#school-proposal h3 { font: italic 900 28px/1.1 var(--display); }
+#school-proposal-summary { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: 16px; }
+[data-school-proposal][aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+@media (max-width:650px) {
+  .commercial-breakdown > div { grid-template-columns: minmax(0,1fr); gap: 6px; }
+  .commercial-breakdown dd { text-align: left; }
+  .commercial-rate { scroll-margin-top: 80px; }
+  .commercial-configure .games-cta { white-space: normal; text-align: center; }
+}
+@media (prefers-reduced-motion: no-preference) { .schools-commercial { scroll-behavior: smooth; } }
+
+#budget { scroll-margin-top: 90px; }
+.commercial-section .school-button, .commercial-configure .school-button { background: #ccff00; color: #0a0a0a; }
+.commercial-section input:focus-visible, .schools-commercial input:focus-visible, .schools-commercial textarea:focus-visible { outline: 2px solid #ccff00; outline-offset: 3px; }

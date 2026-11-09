@@ -99,3 +99,30 @@ L’école peut financer sa participation directement ou explorer les programmes
 - Préciser conditions et admission à la cohorte, assiette d’élèves facturés, taxes et calcul des déplacements. Aucun de ces montants n’est inventé dans cette mise à jour.
 - Définir les conditions années2–3, sans appliquer les anciens exemples par défaut.
 - Identifier le fichier source final du deck avant intégration graphique; les versions locales peuvent être antérieures.
+
+## Correctif prioritaire : base et suppléments (dernière instruction)
+
+Ces formulations remplacent les passages incompatibles ci-dessus, sans prétendre que le PDF a été modifié.
+
+**Sous les deux cartes tarifaires :**
+« Une réduction commerciale de60% offerte par PürInstinct, avant déplacement et suppléments. Cette réduction n’est pas une subvention gouvernementale. Frais de déplacement en sus. Personnel supplémentaire selon les besoins d’encadrement. »
+
+**Remplacement de toute promesse “plus votre équipe s’implique, plus le coût diminue” (pages ressources/encadrement) :**
+« Le budget tient compte des ressources de votre école. Des frais supplémentaires peuvent s’appliquer lorsque PürInstinct fournit davantage de personnel. »
+
+**Exemple2 000élèves (bloc financier) :**
+Référence régulière du programme :50 000$CA. Base cohorte pilote :20 000$CA. Personnel supplémentaire :à confirmer selon les ressources. Déplacement :en sus, à confirmer selon le lieu. Total :à confirmer. L’équivalent10$/élève concerne seulement la base du programme, sans les suppléments ni le déplacement.
+
+**Pied de page financier :**
+« Estimation indicative. Le montant final sera confirmé selon l’encadrement, les installations, le calendrier et les déplacements nécessaires. »
+
+**Financement direct :**
+« L’établissement finance la base du programme, les frais de déplacement et les suppléments applicables confirmés. »
+
+**Financement externe :**
+« L’admissibilité et l’obtention de fonds ne sont pas garanties. » Le coût du programme reste distinct de la contribution nette de l’école ;aucune subvention supposée ne doit être déduite.
+
+**Séparation du matériel :**
+« Les ballons pédagogiques restent à l’école. Le matériel des Games est récupéré après l’événement. »
+
+Rôles, disponibilité simultanée et créneaux de chaque adulte à préciser avec l’école. Aucun tarif horaire public, effectif inclus, durée incluse ou traitement de taxes inventé. Les conditions restent à définir avant une proposition contractuelle.

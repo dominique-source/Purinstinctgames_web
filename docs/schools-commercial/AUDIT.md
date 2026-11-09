@@ -29,3 +29,13 @@ Protégés :middleware.js, vercel.json, API de contact, scripts de soumission, m
 ## Source des nouveaux tarifs
 
 Instruction commerciale explicite de Dominique du9novembre2026 :25$/élève régulier;10$/élève cohorte pilote; déplacement en sus; réduction60% avant déplacement. Ce n’est pas une subvention. L’existence opérationnelle de l’offre régulière, les conditions de cohorte et le périmètre contractuel restent à valider avant publication en production. La branche de travail ne simule pas une validation commerciale indépendante.
+
+## Complément du9novembre — instruction de configuration et suppléments
+
+PR25 déjà ouverte au commit b984cb5 :réutilisée et complétée sans doublon. La première version remplaçait les prix mais présentait encore les cartes tarifaires après le configurateur et n’explicitait pas la ventilation des suppléments ni la transmission des réglages au contact.
+
+Vérifications supplémentaires :aucune règle de vente confirmée pour le personnel additionnel, les déplacements ou les taxes. L’archive locale purinstinct-simulateur-ecoles-codex.zip contient un modèle **privé de coûts** destiné à mission-control ;ses hypothèses de rémunération ne deviennent pas des prix publics. Aucun ratio d’encadrement, nombre d’intervenants inclus ou heures incluses repris par défaut. Les champs existants décrivent des souhaits, sans promesse de capacité ni de prestation incluse.
+
+Référence visuelle examinée :Downloads/Exemple financier annuel pour une école.png, illustration historique14 500$/7,25$ avec conférence/cliniques/formation/coordination/installation/récupération/DJ/application. Elle n’est pas publiée comme image commerciale actuelle. Les quantités qu’elle montre ne sont pas réutilisées comme engagements. La seconde image commerciale mentionnée dans l’instruction n’a pas été identifiée sans ambiguïté dans le dépôt ;aucune nouvelle photo inventée. Photos actives du parcours préservées.
+
+Configuration unique dans assets/site-translations.js (piSchoolCommercial), fichier partagé déjà public sur les deux pages :25/10/CAD, supplément personnel/déplacement/taxes null. Choix de cet actif existant pour ne créer aucune exception supplémentaire au middleware. Les pages lisent cette politique et n’interprètent jamais null comme zéro. Aucun coût interne ni marge ajoutés aux assets publics.

@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 const read = path => readFileSync(new URL('../'+path, import.meta.url),'utf8');
 const source=read('assets/school-home.js');
+const shared={window:{}};
+runInNewContext(read('assets/site-translations.js'), shared);
 // Exercise the actual configuration function, not a second pricing formula.
 const calculation=source.slice(source.indexOf('function formatters()'),source.indexOf('for (const input of document.querySelectorAll(".school-fields input"))'));
 function configure(studentCount,lang='fr',roles=0){
@@ -13,7 +15,7 @@ function configure(studentCount,lang='fr',roles=0){
  }
  fields['configuration-error']={textContent:''};
  const outputs=Object.fromEntries(['[data-regular-total]','[data-pilot-total]','[data-total="students"]','[data-total="adults"]','[data-total="spaces"]'].map(x=>[x,{textContent:'',classList:{remove(){},add(){}}}]));
- runInNewContext(calculation+'\nupdateConfiguration();',{Intl,Number,document:{documentElement:{lang},getElementById:id=>fields[id],querySelectorAll:s=>outputs[s]?[outputs[s]]:[],querySelector:()=>Object.values(fields).find(f=>f.validity&&!f.validity.valid)},requestAnimationFrame:fn=>fn()});
+ runInNewContext(calculation+'\nupdateConfiguration();',{Intl,Number,URLSearchParams,window:shared.window,document:{documentElement:{lang},getElementById:id=>fields[id],querySelectorAll:s=>outputs[s]?[outputs[s]]:[],querySelector:()=>Object.values(fields).find(f=>f.validity&&!f.validity.valid)},requestAnimationFrame:fn=>fn()});
  return {outputs,fields};
 }
 test('the current configuration updates the 25/10 rate totals without changing resource inputs',()=>{
@@ -34,7 +36,7 @@ test('invalid pupil counts do not produce a misleading zero or NaN estimate',()=
 test('English formatting and existing resource validation still run',()=>{
  const {outputs,fields}=configure(200,'en',16);
  assert.match(outputs['[data-pilot-total]'].textContent,/2,000/);
- assert.match(fields['configuration-error'].textContent,/Assigned roles/);
+ assert.match(fields['configuration-error'].textContent,/Simultaneously available adults/);
 });
 test('both public pages distinguish price, pilot discount, travel and external funding',()=>{
  for(const path of ['index.html','pour-les-ecoles.html']){

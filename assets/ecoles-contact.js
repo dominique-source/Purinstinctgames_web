@@ -2,6 +2,24 @@ const form = document.getElementById("schools-contact-form");
 const status = document.getElementById("schools-contact-status");
 const submit = form.querySelector("button");
 
+const policy = window.piSchoolCommercial;
+let proposal = null;
+try { proposal = policy.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration'))); } catch { /* Invalid/shared links are ignored. */ }
+function proposalSummary() { return proposal ? policy.summary(proposal, document.documentElement.lang) : ''; }
+function updateProposal() {
+  for (const output of document.querySelectorAll("[data-commercial-discount]")) output.textContent = policy.discountText(document.documentElement.lang);
+  const summary = proposalSummary();
+  document.getElementById('school-proposal').hidden = !summary;
+  document.getElementById('school-proposal-summary').textContent = summary;
+  form.elements.namedItem('Commentaires').maxLength = 2000 - (summary ? summary.length + 2 : 0);
+  for (const output of document.querySelectorAll('[data-commercial-rate]')) {
+    const rate = policy.policy[output.dataset.commercialRate === 'regular' ? 'regularRate' : 'pilotRate'];
+    output.textContent = policy.formatMoney(rate, document.documentElement.lang);
+  }
+}
+document.addEventListener('pi:language', updateProposal);
+updateProposal();
+
 const messages = {
   sending: ["Envoi en cours…", "Sending…"],
   sent: ["Merci ! Ton message a été envoyé à Dominique.", "Thanks! Your message was sent to Dominique."],
@@ -22,10 +40,14 @@ form.addEventListener("submit", async event => {
   showStatus("sending");
 
   try {
+    const fields = Object.fromEntries(new FormData(form));
+    const summary = proposalSummary();
+    if (summary) fields.Commentaires = [fields.Commentaires, summary].filter(Boolean).join('\n\n');
+    if (fields.Commentaires.length > 2000) throw new Error('comments-too-long');
     const response = await fetch(form.action, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      body: JSON.stringify(fields),
     });
     if (!response.ok || !(await response.json()).ok) throw new Error();
     form.reset();
