@@ -139,3 +139,43 @@
 #budget { scroll-margin-top: 90px; }
 .commercial-section .school-button, .commercial-configure .school-button { background: #ccff00; color: #0a0a0a; }
 .commercial-section input:focus-visible, .schools-commercial input:focus-visible, .schools-commercial textarea:focus-visible { outline: 2px solid #ccff00; outline-offset: 3px; }
+
+/* One click-to-play YouTube Short, scoped to the public school home. */
+.school-video { background: #0a0a0a; color: #f4f4ef; --lime: #ccff00; scroll-margin-top: 80px; }
+.school-video-layout { display: grid; grid-template-columns: minmax(220px,360px) minmax(0,1fr); gap: 24px clamp(24px,5vw,72px); align-items: center; max-width: 1120px; margin-inline: auto; text-align: left; }
+.school-video-copy { grid-column: 2; grid-row: 1; align-self: end; }
+.school-video-copy h2 { margin: 0 0 22px; font: italic 900 clamp(34px,4.5vw,64px)/1.04 var(--display); }
+.school-video-copy p { max-width: 42ch; margin: 0; font-size: clamp(18px,2vw,24px); line-height: 1.5; }
+.school-video-media { grid-column: 1; grid-row: 1/3; min-width: 0; justify-self: center; text-align: center; }
+.school-video-stage { position: relative; aspect-ratio: 9/16; height: min(64svh,600px); max-width: 100%; overflow: hidden; border: 1px solid #ccff0066; border-radius: 12px; background: #000; }
+.school-video-stage iframe, .school-video-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.school-video-play { padding: 0; background: #080808; color: #f4f4ef; cursor: pointer; font: inherit; }
+.school-video-play img { width: 100%; height: 100%; object-fit: contain; }
+.school-video-play-label { position: absolute; inset: auto 0 24px; display: grid; justify-items: center; gap: 12px; font-weight: 700; }
+.school-video-play-icon { display: grid; place-items: center; width: 64px; height: 64px; border: 2px solid #ccff00; border-radius: 50%; color: #ccff00; background: #0a0a0ae6; font-size: 24px; }
+.school-video-play:focus-visible { outline: 3px solid #ccff00; outline-offset: -5px; }
+.school-video-play:hover .school-video-play-icon { background: #ccff00; color: #0a0a0a; }
+.school-video-actions { grid-column: 2; grid-row: 2; align-self: start; }
+.school-video-actions .games-cta { white-space: normal; text-align: center; }
+.school-video-fallback { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; text-underline-offset: 4px; }
+#school-video-failure { max-width: 30ch; font-size: 15px; }
+@media (max-width:650px) {
+  .school-video-layout { grid-template-columns: minmax(0,1fr); gap: 24px; text-align: center; }
+  .school-video-copy, .school-video-media, .school-video-actions { grid-column: 1; grid-row: auto; justify-self: center; }
+  .school-video-copy { order: 0; }
+  .school-video-media { order: 1; }
+  .school-video-actions { order: 2; }
+  .school-video-copy h2 { font-size: clamp(32px,8vw,42px); }
+  .school-video-stage { height: min(58svh,520px); }
+}
+@media (prefers-reduced-motion:no-preference) {
+  .school-video.is-video-visible .school-video-layout { animation: school-video-reveal 280ms ease-out both; }
+  .school-video-play-icon { transition: transform 160ms ease, background-color 160ms ease, color 160ms ease; }
+  .school-video-play:hover .school-video-play-icon { transform: scale(1.06); }
+}
+@keyframes school-video-reveal { from { opacity: .6; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.school-video-fullscreen { min-height:44px; margin:8px 12px 0 0; padding:8px 14px; border:1px solid #ccff0066; border-radius:6px; color:#f4f4ef; background:#151515; cursor:pointer; font:inherit; }
+.school-video-fullscreen[hidden] { display:none; }
+.school-video-fullscreen:focus-visible { outline:2px solid #ccff00; outline-offset:3px; }
+.school-video-stage:fullscreen { width:100vw; height:100vh; max-width:none; border:0; border-radius:0; }

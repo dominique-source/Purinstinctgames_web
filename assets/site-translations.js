@@ -278,3 +278,19 @@ Object.assign(window.piTranslations, {
 Object.assign(window.piTranslations, {"Voir la base du programme":"View the program base"});
 
 Object.assign(window.piTranslations, {"À préciser":"To be specified", "Le nombre de séances de cliniques sera confirmé avec l’école.":"The number of clinic sessions will be confirmed with the school."});
+
+// School video copy, using the existing language mechanism.
+Object.assign(window.piTranslations, {
+  "Découvrez les PürInstinct Games": "Discover PürInstinct Games",
+  "Une expérience sportive à votre école, avec préparation, formation et accompagnement jusqu’aux Games.": "A sports experience at your school, with preparation, training and support leading up to the Games.",
+  "Lire la vidéo": "Play video",
+  "Découvrir le programme scolaire": "Explore the school program",
+  "Voir sur YouTube": "Watch on YouTube",
+  "La lecture intégrée est indisponible. Utilisez le lien YouTube.": "Embedded playback is unavailable. Use the YouTube link."
+});
+
+Object.assign(window.piTranslations, {
+  "Afficher la vidéo en plein écran": "Show the video fullscreen",
+  "Plein écran": "Fullscreen",
+  "Le plein écran est indisponible dans ce navigateur.": "Fullscreen is unavailable in this browser."
+});

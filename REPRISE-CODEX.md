@@ -1,3 +1,11 @@
+# Vidéo scolaire —9novembre2026
+
+Branche codex/school-video, parent feat/schools-pilot-pricing-20261109 au commitb1ec296. Ajout uniquement vidéo chfQomu8rZ4 avant #parcours :miniature officielle, lecteur au clic, FR/EN sans redémarrage, fallback et plein écran natif.23tests passent, lecture YouTube réelle observée et formatsdesktop/mobile vérifiés. Plein écran visuel et préférence système de mouvement réduit non confirmés dans IAB.
+
+Voir docs/school-video/REVIEW.md. Aperçu local4182/#video-games. Prochaine action :revue de la PR vidéo empilée, puis validation matérielle/réseau scolaire. Pas de fusion ni production. Tarifs/configurateur/formulaire/accès et application restent inchangés dans ce diff.
+
+---
+
 # Reprise — configuration commerciale écoles —9novembre2026
 
 Dépôt dominique-source/Purinstinctgames_web. Branche feat/schools-pilot-pricing-20261109, PR25 existante complétée. Modèle25$/10$, base sans remise liée aux adultes, personnel/déplacement/total à confirmer. Formulaire unique existant reçoit un récapitulatif visible ;API inchangée. Programme sur plus d’un mois, financement séparé, ballons pédagogiques conservés par l’école et matériel Games récupéré.

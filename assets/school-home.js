@@ -259,3 +259,50 @@ for (const surface of document.querySelectorAll(".pointer-surface")) {
     frame = 0;
   });
 }
+
+// Click-to-play school video: no YouTube player or script before activation.
+{
+  const play = document.getElementById('school-video-play');
+  const stage = document.getElementById('school-video-stage');
+  const poster = document.getElementById('school-video-poster');
+  const failure = document.getElementById('school-video-failure');
+  const fullscreen = document.getElementById('school-video-fullscreen');
+  const fullscreenStatus = document.getElementById('school-video-fullscreen-status');
+  fullscreen.addEventListener('click', async () => {
+    try { await stage.requestFullscreen(); } catch { fullscreenStatus.hidden = false; }
+  });
+  let player = null;
+  const playerTitle = () => document.documentElement.lang === 'en'
+    ? 'PürInstinct Games video' : 'Vidéo PürInstinct Games';
+  poster.addEventListener('error', () => { poster.hidden = true; });
+  play.addEventListener('click', () => {
+    if (player) return;
+    player = document.createElement('iframe');
+    const language = document.documentElement.lang === 'en' ? 'en' : 'fr';
+    player.title = playerTitle();
+    player.src = 'https://www.youtube-nocookie.com/embed/chfQomu8rZ4?autoplay=1&controls=1&playsinline=1&loop=0&rel=0&hl=' + language;
+    player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    player.allowFullscreen = true;
+    player.referrerPolicy = 'strict-origin-when-cross-origin';
+    player.tabIndex = 0;
+    player.addEventListener('error', () => { failure.hidden = false; });
+    stage.replaceChildren(player);
+    fullscreen.hidden = typeof stage.requestFullscreen !== 'function';
+    player.focus();
+  });
+  document.addEventListener('pi:language', () => {
+    // Change the accessible name only. Never reload an already playing video.
+    if (player) player.title = playerTitle();
+  });
+  const section = document.getElementById('video-games');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+    const reveal = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      section.classList.add('is-video-visible');
+      reveal.disconnect();
+    }, { threshold: .08 });
+    reveal.observe(section);
+    window.addEventListener('pagehide', event => { if (!event.persisted) reveal.disconnect(); });
+  }
+}

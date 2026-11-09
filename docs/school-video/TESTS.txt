@@ -1,0 +1,31 @@
+✔ prefetches only one document and one critical photo on intent (6.302182ms)
+✔ modified clicks retain native navigation (7.516855ms)
+✔ reduced motion preserves immediate navigation with no visual delay (5.865572ms)
+✔ normal activation uses the native link and cleans up on Back (3.127441ms)
+✔ a failed visual still navigates (1.590154ms)
+✔ public APP portal and static resources work without an email session (47.018091ms)
+✔ organizer, projection and other private routes retain the email gate (2.099772ms)
+✔ the current configuration updates the 25/10 rate totals without changing resource inputs (121.521006ms)
+✔ invalid pupil counts do not produce a misleading zero or NaN estimate (5.644918ms)
+✔ English formatting and existing resource validation still run (3.889913ms)
+✔ both public pages distinguish price, pilot discount, travel and external funding (2.399518ms)
+✔ the homepage keeps configuration inputs and interactive field controls (0.76641ms)
+✔ school contact form keeps original fields, endpoint and submission handling (0.503232ms)
+✔ unchanged contact API relays the chosen configuration inside Comments (107.668643ms)
+✔ confirmed program rates remain independent of school staff; unknowns never become free (100.329832ms)
+✔ existing contact POST includes the visible validated configuration and original visitor message (7.02726ms)
+✔ failed contact request preserves answers and restores retry; no real email is sent (5.296764ms)
+✔ contact without configuration retains the original message and full comment limit (3.816769ms)
+✔ no player is created before explicit activation; one click creates a focused nocookie player (6.65324ms)
+✔ language changes translate only the accessible player name, with no restart (4.384598ms)
+✔ poster failure keeps play available, and embed error exposes a fallback status (1.170107ms)
+✔ one responsive video section precedes the existing program, with a permanent external fallback (1.128777ms)
+✔ fullscreen delegates to the native API only on user activation and reports a refusal (3.908398ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 334.574215
