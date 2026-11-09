@@ -1,24 +1,12 @@
-# Reprise Codex — parcours commercial animé
+# Reprise — parcours public unifié
 
-Dépôt : dominique-source/Purinstinctgames_web
-Dossier : /Users/client/Documents/ChatGPT/purinstinct-web-premium
-Branche : codex/animated-school-offer
-Base : codex/school-video (PR #26), au-dessus de feat/schools-pilot-pricing-20261109 (PR #25).
-
-## Terminé
-- Nouvelle séquence commerciale unique après le programme : photographie, prix 25→10, six services, calculateur conservant ses neuf champs, financement et proposition.
-- Révélation rAF de 1,8 s, une seule fois ; état final sans JS et avec mouvements réduits.
-- FR/EN et règles tarifaires centralisées préservées ; formulaire/recipient/API inchangés.
-- Tests automatisés : 30 réussis. Syntaxe JavaScript et diff sans erreur.
-- Navigateur local : 1440×900 et 390×844 ; 200/2000 élèves, budgets exclusivement au tarif pilote, saisies conservées en anglais, adultes simultanés invalides signalés, récapitulatif transféré au contact sans envoyer de message.
-
-## Ouvert
-- Personnel supplémentaire, déplacement et taxes : paramètres non confirmés, aucun total inventé.
-- Revue utilisateur à effectuer. Aperçu distant READY et contrôlé : https://purinstinct-45hpy1352-dominique-soucy-s-projects.vercel.app/?lang=fr#offre-ecoles
-
-## Prochaine action
-Relire docs/animated-school-offer/REVIEW.md et la PR, puis attendre la validation utilisateur. Ne pas fusionner ni déployer en production.
-
-Exécution locale : aucune garantie de poursuite pendant la veille ou l’arrêt de cet ordinateur.
-
-Correction prioritaire : 25 $ seulement comme repère commercial barré après la révélation. Aucun total à 25 $ dans le modèle, le configurateur, les résumés ou les messages FR/EN.
+- Dépôt : dominique-source/Purinstinctgames_web
+- Dossier : /Users/client/Documents/ChatGPT/purinstinct-web-premium
+- Branche : codex/single-page-public
+- Base : codex/animated-school-offer, PR #27 non fusionnée (dépend elle-même de #26 et #25).
+- Code sauvegardé : db83f43, regroupement sur l’accueil, six panneaux illustrés, sélection sur place, formulaire unique relié aux champs actuels, ancienne adresse scolaire redirigée en conservant langue/configuration.
+- Dernier ajustement : en-tête fixe et ancres dégagées ; vérification visuelle finale en cours.
+- Tests : 36 réussis ; aucun courriel réel. APP, middleware, accès privés et règles 10 $ pilote inchangés.
+- Médias : cinq MP4 existent mais leurs routes sont protégées. Images publiques en usage ; configuration data-zone-video vide, lecteur volontaire prêt à recevoir un extrait vérifié et publiquement autorisé. Aucun timecode inventé, aucune exposition nouvelle.
+- Prochaine action : compléter les captures ordinateur/mobile FR/EN, sauvegarder et pousser la branche, PR de revue/aperçu. Ne pas fusionner ni publier en production.
+- Exécution locale, sans garantie de continuation pendant la veille ou l’arrêt.

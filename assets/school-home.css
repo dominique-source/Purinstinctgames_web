@@ -232,3 +232,5 @@ body { background: radial-gradient(ellipse at 50% 10%, #072445, #020d1b 45%); --
 .zone-detail .zone-play:not([hidden]) { display:inline-flex; align-items:center; min-height:44px; padding:6px 12px; border:1px solid #00d9e8; border-radius:6px; background:#041321; color:#f4f4ef; font:inherit; cursor:pointer; }
 .zone-media-error:not([hidden]) { color:#ffd3c9; }
 .zone-photo[hidden],.zone-play[hidden],.zone-media-error[hidden] { display:none; }
+/* Keep the one-page destinations and language control available throughout the journey. */
+body>.nav { position:fixed; background:#041321; }
