@@ -48,7 +48,7 @@ function arenaMount(){
  const keys=['vitesse','agilite','habiletes-manuelles','habiletes-au-pied','game-iq','terrain'];
  const panels=keys.map(key=>({id:'zone-'+key,hidden:true,querySelector:()=>({focus:()=>focused.push('heading')})}));
  const controls=keys.map(key=>({dataset:{zone:key},events:{},classList:{contains:()=>true},setAttribute(name,value){this[name]=value;},toggleAttribute(){},removeAttribute(){},closest:()=>null,matches:()=>false,focus:()=>focused.push(key),addEventListener(name,fn){this.events[name]=fn;}}));
- const container={hidden:true,addEventListener(){}};
+ const container={hidden:true,events:{},addEventListener(name,fn){this.events[name]=fn;}};
  const close={addEventListener:(name,fn)=>listeners.close=fn};
  const document={getElementById:id=>panels.find(p=>p.id===id),querySelectorAll:()=>[],addEventListener:(name,fn)=>listeners[name]=fn};
  runInNewContext(js.slice(js.indexOf('let hoveredPanel'),js.indexOf('const visibilityObserver')),{zoneControls:controls,zonePanels:panels,arena:{classList:classes()},arenaEffects:keys.map(key=>({dataset:{effect:key},classList:classes()})),panelContainer:container,closePanel:close,mobileScene:{matches:false},document,stopZoneClips:()=>stops++,clearTimeout(){},setTimeout:fn=>fn()});
@@ -68,4 +68,12 @@ test('configured future clips load voluntarily and are released on switch/close 
  await handler();const video=videos[0];assert.equal(video.controls,true);assert.equal(video.preload,'none');assert.equal(image.hidden,true);
  ctx.stopZoneClips();assert.equal(video.paused,true);assert.equal(videos.length,0);assert.equal(image.hidden,false);
  await handler();videos[0].events.error();assert.equal(videos.length,0);assert.equal(error.hidden,false);assert.equal(image.hidden,false);
+});
+
+test('hovering the in-panel chooser cannot change the selected content before activation',()=>{
+ const m=arenaMount();m.controls[0].events.click();m.container.events.pointerenter();
+ m.controls[1].closest=()=>({});m.controls[1].events.pointerenter({pointerType:'mouse'});
+ assert.deepEqual(m.panels.filter(p=>!p.hidden).map(p=>p.id),['zone-vitesse']);
+ m.controls[1].events.click();assert.deepEqual(m.panels.filter(p=>!p.hidden).map(p=>p.id),['zone-agilite']);
+ assert.equal(m.controls[1]['aria-pressed'],'true');
 });
