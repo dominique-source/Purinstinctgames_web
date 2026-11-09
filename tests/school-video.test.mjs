@@ -42,7 +42,7 @@ test('one responsive video section precedes the existing program, with a permane
  const html=read('index.html');
  assert.equal((html.match(/id="video-games"/g)||[]).length,1);
  assert.ok(html.indexOf('id="video-games"')<html.indexOf('id="parcours"'));
- const section=html.slice(html.indexOf('<section class="school-section school-video"'),html.indexOf('<section class="school-section" id="parcours"'));
+ const section=html.slice(html.indexOf('<section class="school-section school-video"'),html.indexOf('<section class="school-section school-journey"'));
  assert.doesNotMatch(section,/<iframe|<script/);
  assert.match(section,/href="#parcours"/);
  assert.match(section,/href="https:\/\/www.youtube.com\/shorts\/chfQomu8rZ4"/);

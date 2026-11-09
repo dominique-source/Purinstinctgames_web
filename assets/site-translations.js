@@ -351,3 +351,23 @@ Object.assign(window.piTranslations, {
  'Lire l’extrait':'Play clip',
  'La vidéo est indisponible. L’image de la zone reste affichée.':'The video is unavailable. The zone image remains available.'
 });
+
+// Approved three-card school journey. No portfolio is represented as a delivered school archive.
+Object.assign(window.piTranslations, {
+ 'DE LA DÉCOUVERTE AUX':'FROM DISCOVERY TO THE',
+ 'Un programme déployé sur plus d’un mois, selon le calendrier de votre école.':'A program delivered over more than a month, according to your school’s schedule.',
+ 'AVANT LES GAMES':'BEFORE THE GAMES',
+ 'Conférence, cliniques et formation des enseignants.':'Talk, clinics and teacher training.',
+ 'LE JOUR DES GAMES':'GAMES DAY',
+ 'Installation, activités, matchs et animation.':'Setup, activities, matches and entertainment.',
+ 'APRÈS LES GAMES':'AFTER THE GAMES',
+ 'Photos, vidéos et mini-documentaire : le projet raconté par les élèves.':'Photos, videos and a mini-documentary: the project told by students.',
+ 'Illustration d’un coach qui accompagne des élèves à l’école.':'Illustration of a coach supporting students at school.',
+ 'Illustration d’élèves en action avec le ballon PürInstinct.':'Illustration of students in action with the PürInstinct ball.',
+ 'Mosaïque illustrative du projet scolaire':'Illustrative school project mosaic',
+ 'Illustration des activités d’une clinique.':'Illustration of clinic activities.',
+ 'Illustration d’une rencontre avec les élèves.':'Illustration of a meeting with students.',
+ 'Illustration d’un échange pendant la formation.':'Illustration of a discussion during training.',
+ 'Illustration d’un moment des Games à l’école.':'Illustration of a moment during the Games at school.',
+ 'Visuels illustratifs':'Illustrative visuals'
+});
