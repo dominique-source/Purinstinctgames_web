@@ -14,10 +14,10 @@ Base : codex/school-video (PR #26), au-dessus de feat/schools-pilot-pricing-2026
 
 ## Ouvert
 - Personnel supplémentaire, déplacement et taxes : paramètres non confirmés, aucun total inventé.
-- Derniers contrôles visuels/captures et PR de revue à terminer.
+- Revue utilisateur à effectuer. Aperçu distant READY et contrôlé : https://purinstinct-45hpy1352-dominique-soucy-s-projects.vercel.app/?lang=fr#offre-ecoles
 
 ## Prochaine action
-Terminer les captures, vérifier l’arène/vidéo et pousser la branche de revue. Ne pas fusionner ni déployer en production.
+Relire docs/animated-school-offer/REVIEW.md et la PR, puis attendre la validation utilisateur. Ne pas fusionner ni déployer en production.
 
 Exécution locale : aucune garantie de poursuite pendant la veille ou l’arrêt de cet ordinateur.
 
