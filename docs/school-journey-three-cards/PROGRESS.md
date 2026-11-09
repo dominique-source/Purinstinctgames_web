@@ -6,4 +6,4 @@ Terminé : audit ; fusion des quatre anciennes cartes et du bloc de déploiement
 
 Manque : photos distinctes de la maquette, notamment élèves filmant/entrevues, et portfolio réel autorisé. Les vignettes sont explicitement illustratives. Aucun extrait/trailer réutilisé, aucune image générée.
 
-Prochaine action : finir tests ciblés et vérifications 1440×900 / 390×844 FR/EN, captures, puis commit/branche distante et PR de revue. Pas de fusion ni production.
+Terminé : 41 tests, contrôles locaux et Vercel FR/EN aux deux tailles, captures et comparaison de périmètre avec main. Prochaine action : revue utilisateur de la PR. Pas de fusion ni production.

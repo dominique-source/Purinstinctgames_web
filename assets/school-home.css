@@ -236,7 +236,7 @@ body { background: radial-gradient(ellipse at 50% 10%, #072445, #020d1b 45%); --
 body>.nav { position:fixed; background:#041321; }
 
 /* One school journey, reusing the existing card reveal observer. */
-.school-journey { background:radial-gradient(ellipse at 75% 0,#04315175,transparent 58%); padding-block:40px 64px; }
+.school-journey { background:radial-gradient(ellipse at 75% 0,#04315175,transparent 58%); padding-block:34px 64px; }
 .journey-anchor,.journey-card { scroll-margin-top:84px; }
 .journey-heading { margin-bottom:32px; }
 .journey-heading h2 { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0 .22em; font:italic 900 clamp(34px,5.8vw,88px)/1.02 'Barlow Condensed',sans-serif; letter-spacing:-.018em; }
