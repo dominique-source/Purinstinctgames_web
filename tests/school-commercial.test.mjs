@@ -14,15 +14,15 @@ function configure(studentCount,lang='fr',roles=0){
   fields[id]={valueAsNumber:value,min: id==='students'?1:0,max:999999,validity:{valid:Number.isInteger(value)&&value>= (id==='students'?1:0),customError:false},labels:[{textContent:id}],validationMessage:'',setCustomValidity(message){this.validationMessage=message;this.validity.customError=!!message;this.validity.valid=!message;}};
  }
  fields['configuration-error']={textContent:''};
- const outputs=Object.fromEntries(['[data-regular-total]','[data-pilot-total]','[data-total="students"]','[data-total="adults"]','[data-total="spaces"]'].map(x=>[x,{textContent:'',classList:{remove(){},add(){}}}]));
+ const outputs=Object.fromEntries(['[data-pilot-total]','[data-total="students"]','[data-total="adults"]','[data-total="spaces"]'].map(x=>[x,{textContent:'',classList:{remove(){},add(){}}}]));
  runInNewContext(calculation+'\nupdateConfiguration();',{Intl,Number,URLSearchParams,window:shared.window,document:{documentElement:{lang},getElementById:id=>fields[id],querySelectorAll:s=>outputs[s]?[outputs[s]]:[],querySelector:()=>Object.values(fields).find(f=>f.validity&&!f.validity.valid)},requestAnimationFrame:fn=>fn()});
  return {outputs,fields};
 }
-test('the current configuration updates the 25/10 rate totals without changing resource inputs',()=>{
+test('the current configuration uses only the pilot rate without changing resource inputs',()=>{
  for(const students of [1,200,2000]){
   const {outputs,fields}=configure(students);
   const amount=s=>Number(outputs[s].textContent.replace(/[^0-9]/g,''));
-  assert.equal(amount('[data-regular-total]'),students*25);
+  assert.equal(outputs['[data-regular-total]'],undefined);
   assert.equal(amount('[data-pilot-total]'),students*10);
   assert.equal(fields.teachers.valueAsNumber,12);
  }

@@ -20,8 +20,7 @@ window.piSchoolCommercial = (() => {
   }
   function estimate(students) {
     const valid = Number.isSafeInteger(students) && students >= 1 && students <= limits.students[1];
-    return { regular: valid ? students * policy.regularRate : null,
-      base: valid ? students * policy.pilotRate : null, total: null,
+    return { base: valid ? students * policy.pilotRate : null, total: null,
       staffSupplement: policy.staffSupplement, travel: policy.travel,
       discount: Math.round((1-policy.pilotRate/policy.regularRate)*100) };
   }
@@ -39,7 +38,6 @@ window.piSchoolCommercial = (() => {
     return [(en ? 'School configuration — indicative proposal' : 'Configuration scolaire — proposition indicative'),
       ...Object.keys(limits).map((key,i)=>labels[i]+' : '+(c[key] === null ? (en ? 'To be confirmed' : 'À confirmer') : c[key])),
       (en ? 'Pilot program base : ' : 'Base du programme pilote : ')+formatMoney(budget.base,language),
-      (en ? 'Regular program reference : ' : 'Référence régulière du programme : ')+formatMoney(budget.regular,language),
       en ? 'Additional staffing: to be confirmed. Travel: additional, to be confirmed. Total: to be confirmed.' : 'Personnel supplémentaire : à confirmer. Déplacement : en sus, à confirmer. Total : à confirmer.',
       en ? 'Availability times, specialist roles and tax treatment remain to be confirmed.' : 'Créneaux de disponibilité, rôles spécialisés et traitement des taxes à confirmer.'
     ].join('\n');
@@ -253,7 +251,6 @@ Object.assign(window.piTranslations, {
   "Un bénévole ne remplace pas automatiquement un intervenant spécialisé. Les rôles seront confirmés avec vous.": "A volunteer does not automatically replace a specialist. Roles will be confirmed with you.",
   "Base du programme": "Program base",
   "Équivalent par élève — base du programme uniquement": "Per-student equivalent — program base only",
-  "Référence régulière du programme": "Regular program reference",
   "Personnel supplémentaire": "Additional staffing",
   "À confirmer selon les ressources": "To be confirmed based on resources",
   "Déplacement": "Travel",

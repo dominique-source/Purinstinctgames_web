@@ -163,7 +163,7 @@ function updateConfiguration() {
     }
   }
   const budget = window.piSchoolCommercial.estimate(totals.students);
-  for (const [selector, amount] of [["[data-regular-total]", budget.regular], ["[data-pilot-total]", budget.base]]) {
+  for (const [selector, amount] of [["[data-pilot-total]", budget.base]]) {
     for (const output of document.querySelectorAll(selector)) {
       output.textContent = amount === null ? (english ? "Enter a valid student count" : "Saisissez un nombre d’élèves valide") : currency.format(amount);
     }

@@ -14,7 +14,7 @@ test('confirmed program rates remain independent of school staff; unknowns never
  for(const students of [200,2000]) {
   const amounts=model.estimate(students);
   assert.equal(amounts.base,students*10);
-  assert.equal(amounts.regular,students*25);
+  assert.equal('regular' in amounts,false);
   assert.equal(amounts.discount,60);
   assert.equal(amounts.total,null);
   assert.equal(amounts.travel,null);
@@ -34,7 +34,7 @@ test('confirmed program rates remain independent of school staff; unknowns never
  assert.match(model.summary(chosen,'en'),/Total: to be confirmed/);
  assert.match(model.summary(chosen,'fr'),/Total : à confirmer/);
 });
-async function contact(responseOK=true,withConfiguration=true) {
+async function contact(responseOK=true,withConfiguration=true,language='fr') {
  const policy=commercial();
  const listeners={};
  const elements={
@@ -46,7 +46,7 @@ async function contact(responseOK=true,withConfiguration=true) {
  let reset=false, payload;
  const fields={Nom:'Test local',École:'Fictive',Ville:'Québec',Courriel:'test@example.invalid',Commentaires:'Bonjour'};
  const form={action:'/api/schools-contact',querySelector:()=>submit,elements:{namedItem:()=>comments},addEventListener:(name,fn)=>listeners[name]=fn,reset:()=>reset=true};
- const ctx={window:{piSchoolCommercial:policy},location:{href:'https://example.test/pour-les-ecoles.html'+(withConfiguration?'?configuration='+encodeURIComponent(JSON.stringify(chosen)):'')}, URL, FormData:class{*[Symbol.iterator](){yield* Object.entries(fields);}}, document:{documentElement:{lang:'fr'},getElementById:id=>id==='schools-contact-form'?form:elements[id],addEventListener(){},querySelectorAll:()=>[]}, fetch:async(url,request)=>{payload=JSON.parse(request.body);assert.equal(url,form.action);return {ok:responseOK,json:async()=>({ok:responseOK})};}};
+ const ctx={window:{piSchoolCommercial:policy},location:{href:'https://example.test/pour-les-ecoles.html'+(withConfiguration?'?configuration='+encodeURIComponent(JSON.stringify(chosen)):'')}, URL, FormData:class{*[Symbol.iterator](){yield* Object.entries(fields);}}, document:{documentElement:{lang:language},getElementById:id=>id==='schools-contact-form'?form:elements[id],addEventListener(){},querySelectorAll:()=>[]}, fetch:async(url,request)=>{payload=JSON.parse(request.body);assert.equal(url,form.action);return {ok:responseOK,json:async()=>({ok:responseOK})};}};
  runInNewContext(source('ecoles-contact.js'),ctx);
  await listeners.submit({preventDefault(){}});
  return {payload,reset,submit,elements,comments};
@@ -74,4 +74,19 @@ test('contact without configuration retains the original message and full commen
  assert.equal(r.payload.Commentaires,'Bonjour');
  assert.equal(r.elements['school-proposal'].hidden,true);
  assert.equal(r.comments.maxLength,2000);
+});
+
+test('French and English summaries and submitted comments contain only the pilot budget',async()=>{
+ const model=commercial();
+ for(const language of ['fr','en']){
+  for(const students of [200,2000]){
+   const summary=model.summary({...chosen,students},language);
+   assert.doesNotMatch(summary,/Regular program|Référence régulière|50[\s\u00a0,]?000|5[\s\u00a0,]?000/);
+   assert.match(summary,students===200?/2[\s\u00a0,]?000/:/20[\s\u00a0,]?000/);
+  }
+  const result=await contact(true,true,language);
+  assert.doesNotMatch(result.elements['school-proposal-summary'].textContent,/Regular program|Référence régulière|50[\s\u00a0,]?000/);
+  assert.doesNotMatch(result.payload.Commentaires,/Regular program|Référence régulière|50[\s\u00a0,]?000/);
+  assert.match(result.payload.Commentaires,/20[\s\u00a0,]?000/);
+ }
 });

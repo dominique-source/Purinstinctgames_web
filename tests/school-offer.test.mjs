@@ -55,3 +55,20 @@ test('steppers respect field bounds, initialize optional counts, and use the exi
   click();assert.equal(Number(input.value),wanted);assert.equal(dispatched.type,'input');assert.equal(dispatched.bubbles,true);
  }
 });
+
+test('the configurator never calculates a regular school budget, independently of the commercial counter',()=>{
+ const html=read('index.html');
+ const shared={window:{}};runInNewContext(read('assets/site-translations.js'),shared);
+ const model=shared.window.piSchoolCommercial;
+ assert.doesNotMatch(html,/data-regular-total|Référence régulière du programme/);
+ assert.doesNotMatch(source,/data-regular-total|budget\.regular/);
+ assert.doesNotMatch(reveal,/updateConfiguration|estimate\(|data-pilot-total|\.value\s*=/);
+ const m=mount();m.intersect(1);
+ for(const time of [0,300,900,1800]){
+  m.tick(time);
+  assert.equal(model.estimate(200).base,2000);
+  assert.equal(model.estimate(2000).base,20000);
+  assert.equal('regular' in model.estimate(2000),false);
+ }
+ assert.match(read('assets/ecoles.css'),/\[data-reveal-state="complete"\] \.offer-regular strong[^}]+line-through/);
+});

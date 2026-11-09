@@ -229,7 +229,6 @@
 .offer-budget { margin:16px 0 0; }
 .offer-budget>div { display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-top:1px solid #7a8989; font-weight:700; font-size:16px; }
 .offer-budget dd { margin:0; text-align:right; white-space:nowrap; }
-.offer-budget>div:nth-child(2) { font-size:14px; color:#c5cecc; }
 .offer-budget .offer-total { background:var(--offer-lime); color:var(--offer-ink); border:0; border-radius:10px 2px; padding:10px; font-size:21px; }
 .offer-base { margin:10px 0; text-align:center; font-weight:700; }
 .offer-financing { grid-column:1; grid-row:3; display:grid; grid-template-columns:1fr 1.25fr; gap:14px; }
@@ -291,3 +290,8 @@
 
 .offer-counter { display:flex; align-items:center; justify-content:center; gap:.06em; }
 html[lang="en"] .offer-counter { flex-direction:row-reverse; }
+
+/* The regular rate is a secondary commercial reference, never a school budget. */
+[data-reveal-state="complete"] .offer-regular strong { text-decoration:line-through; text-decoration-thickness:3px; text-decoration-color:#a5aeaa; color:#a5aeaa; transform:scale(.84); transform-origin:left center; }
+.offer-regular strong { text-decoration:line-through; text-decoration-thickness:3px; text-decoration-color:#a5aeaa; color:#a5aeaa; transform:scale(.84); transform-origin:left center; }
+[data-reveal-state="pending"] .offer-regular strong,[data-reveal-state="running"] .offer-regular strong { text-decoration:none; color:var(--offer-white); transform:none; }
