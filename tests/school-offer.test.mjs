@@ -45,17 +45,6 @@ test('no-JS final price and a single proposal destination remain semantic; revea
  assert.doesNotMatch(reveal,/pi:language|wheel|preventDefault/);
 });
 
-test('steppers respect field bounds, initialize optional counts, and use the existing input event',()=>{
- const code=source.slice(source.indexOf('// School offer steppers:'),source.indexOf('// One-shot school price reveal.'));
- for(const [current,min,max,step,wanted] of [[1,1,999999,-1,1],[5,1,5,1,5],[200,1,999999,1,201],[NaN,1,999999,1,1],[0,0,999999,-1,0]]){
-  let click,dispatched;
-  const input={valueAsNumber:current,min,max,dispatchEvent:e=>dispatched=e};
-  const button={dataset:{stepTarget:'field',step},addEventListener:(name,fn)=>click=fn};
-  runInNewContext(code,{document:{querySelectorAll:()=>[button],getElementById:()=>input},Event:class{constructor(type,options){this.type=type;this.bubbles=options.bubbles;}}});
-  click();assert.equal(Number(input.value),wanted);assert.equal(dispatched.type,'input');assert.equal(dispatched.bubbles,true);
- }
-});
-
 test('the configurator never calculates a regular school budget, independently of the commercial counter',()=>{
  const html=read('index.html');
  const shared={window:{}};runInNewContext(read('assets/site-translations.js'),shared);

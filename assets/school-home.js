@@ -135,88 +135,113 @@ window.addEventListener("pagehide", event => {
   mobileScene.removeEventListener("change", fitScene);
 });
 
-function formatters() {
-  const locale = document.documentElement.lang === "en" ? "en-CA" : "fr-CA";
-  return {
-    counts: new Intl.NumberFormat(locale),
-    currency: new Intl.NumberFormat(locale, {
-      style: "currency", currency: "CAD", currencyDisplay: "code",
-      minimumFractionDigits: 0, maximumFractionDigits: 2,
-    }),
-  };
+// Three-step public configurator. DOM inputs remain the source of truth.
+const commercial = window.piSchoolCommercial;
+const configRoot = document.querySelector('.config-v2');
+const cfgField = id => document.getElementById(id);
+const cfgEnglish = () => document.documentElement.lang === 'en';
+const cfgText = fr => cfgEnglish() ? window.piTranslations[fr] ?? fr : fr;
+const cfgEscape = text => String(text).replace(/[&<>"']/g, char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const cfgNumber = input => input.value === '' ? null : input.valueAsNumber;
+let cfgSerial = 1;
+let cfgBlocks = [{id:'b1',label:'',students:200,fields:1,games:9,teachers:12,adults:3,override:false,indoors:1,outdoors:2}];
+let cfgLegacy;
+const cfgOverrideEdited = new Set();
+const cfgName = (b,i) => commercial.blockName(b,i,cfgEnglish()?'en':'fr');
+function readConfiguration() {
+  return {version:commercial.policy.version,students:cfgNumber(cfgField('students')),indoors:cfgNumber(cfgField('indoors')),outdoors:cfgNumber(cfgField('outdoors')),clinics:cfgNumber(cfgField('clinics')),notes:cfgField('config-notes').value,legacy:cfgLegacy,
+    blocks:cfgBlocks.map(block=>({id:block.id,...Object.fromEntries(['label','students','fields','games','teachers','adults','override','indoors','outdoors'].map(key=>{
+      const input=cfgField('cfg-'+block.id+'-'+key);
+      return [key,key==='label'?input.value:key==='override'?input.checked:cfgNumber(input)];
+    }))}))};
 }
-const field = id => document.getElementById(id);
-const value = id => {
-  const input = field(id);
-  return input.validity.valid && Number.isFinite(input.valueAsNumber) ? input.valueAsNumber : null;
-};
-function sum(first, second) {
-  return first === null || second === null ? null : first + second;
+function cfgNumeric(block,key,label,value,min,max) {
+  const id='cfg-'+block.id+'-'+key;
+  return '<div class="offer-field"><label for="'+id+'"><span>'+cfgEscape(cfgText(label))+'</span><input id="'+id+'" data-config-field="'+key+'" type="number" min="'+min+'" max="'+max+'" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="'+id+'" data-step="-1" aria-controls="'+id+'" aria-label="'+cfgEscape(cfgText('Diminuer')+' — '+cfgText(label))+'">−</button><button type="button" data-step-target="'+id+'" data-step="1" aria-controls="'+id+'" aria-label="'+cfgEscape(cfgText('Augmenter')+' — '+cfgText(label))+'">+</button></span></div>';
 }
-
+function renderConfiguration(raw) {
+  const containers=['config-schedule','config-activities','config-staff'].map(cfgField);
+  containers.forEach(el=>el.replaceChildren());
+  cfgBlocks=raw.blocks.map(b=>({...b}));
+  cfgField('block-count').value=String(cfgBlocks.length);
+  cfgField('add-config-block').disabled=cfgBlocks.length>=commercial.limits.blocks;
+  cfgField('config-legacy').hidden=!cfgLegacy;
+  cfgBlocks.forEach((b,i)=>{
+    const heading='<h4 data-config-name="'+b.id+'">'+cfgEscape(cfgName(b,i))+'</h4>';
+    const schedule=document.createElement('div');schedule.className='config-block';
+    schedule.innerHTML=heading+'<label class="config-label" for="cfg-'+b.id+'-label">'+cfgEscape(cfgText('Libellé du bloc'))+'<input id="cfg-'+b.id+'-label" type="text" maxlength="'+commercial.limits.label+'"></label>'+cfgNumeric(b,'students','Élèves présents dans ce bloc',b.students,1,commercial.limits.students)+(i?'<button class="config-remove" type="button" data-remove-block="'+b.id+'">'+cfgEscape(cfgText('Retirer ce bloc'))+'</button>':'');
+    const activities=document.createElement('div');activities.className='config-block';
+    activities.innerHTML=heading+'<div class="config-pair">'+cfgNumeric(b,'fields','Terrains PürInstinct souhaités',b.fields,0,commercial.limits.installations)+cfgNumeric(b,'games','Jeux de zone souhaités',b.games,0,commercial.limits.installations)+'</div><label class="config-override"><input type="checkbox" id="cfg-'+b.id+'-override">'+cfgEscape(cfgText('Espaces différents pour ce bloc'))+'</label><div class="config-pair" data-space-override="'+b.id+'">'+cfgNumeric(b,'indoors','Plateaux intérieurs du bloc',b.indoors,0,commercial.limits.areas)+cfgNumeric(b,'outdoors','Plateaux extérieurs du bloc',b.outdoors,0,commercial.limits.areas)+'</div><div data-capacity="'+b.id+'"></div>';
+    const staff=document.createElement('div');staff.className='config-block';
+    staff.innerHTML=heading+'<div class="config-pair">'+cfgNumeric(b,'teachers','Enseignants simultanément disponibles',b.teachers,0,commercial.limits.adults)+cfgNumeric(b,'adults','Autres adultes simultanément disponibles',b.adults,0,commercial.limits.adults)+'</div><div data-staffing="'+b.id+'"></div>';
+    [schedule,activities,staff].forEach((el,n)=>containers[n].append(el));
+    for(const key of ['label','students','fields','games','teachers','adults','indoors','outdoors'])cfgField('cfg-'+b.id+'-'+key).value=b[key]??'';
+    cfgField('cfg-'+b.id+'-label').placeholder=cfgName({label:''},i);
+    cfgField('cfg-'+b.id+'-override').checked=b.override===true;
+  });
+  updateConfiguration();
+}
+function cfgRows(rows){return '<dl class="config-results">'+rows.map(([label,value])=>'<div><dt>'+cfgEscape(label)+'</dt><dd>'+cfgEscape(typeof value==='number'?new Intl.NumberFormat(cfgEnglish()?'en-CA':'fr-CA').format(value):value)+'</dd></div>').join('')+'</dl>';}
+const cfgWarnings={numbers:'Saisissez des nombres entiers dans les limites indiquées.',blocks:'Le nombre de blocs doit être compris dans les limites indiquées.',notes:'Le texte des précisions est trop long.',label:'Le libellé du bloc est trop long.',attendanceMax:'Un bloc ne peut pas dépasser l’effectif distinct.',attendanceCoverage:'La somme des présences doit couvrir l’effectif distinct déclaré.',activity:'Prévoyez au moins un terrain ou un jeu de zone dans chaque bloc.'};
 function updateConfiguration() {
-  const { counts, currency } = formatters();
-  for (const el of document.querySelectorAll("[data-cad]")) el.textContent = currency.format(Number(el.dataset.cad));
-  for (const el of document.querySelectorAll("[data-number]")) el.textContent = counts.format(Number(el.dataset.number));
-  const english = document.documentElement.lang === "en";
-  field("clinics").placeholder = english ? "To be specified" : "À préciser";
-  const adults = sum(value("teachers"), value("adults"));
-  const totals = {
-    students: value("students"),
-    adults,
-    spaces: sum(value("indoors"), value("outdoors")),
-  };
-  for (const [key, number] of Object.entries(totals)) {
-    for (const output of document.querySelectorAll('[data-total="' + key + '"]')) {
-      const next = number === null ? "—" : counts.format(number);
-      if (output.textContent === next) continue;
-      output.textContent = next;
-      output.classList.remove("is-changing");
-      requestAnimationFrame(() => output.classList.add("is-changing"));
-    }
-  }
-  const budget = window.piSchoolCommercial.estimate(totals.students);
-  for (const [selector, amount] of [["[data-pilot-total]", budget.base]]) {
-    for (const output of document.querySelectorAll(selector)) {
-      output.textContent = amount === null ? (english ? "Enter a valid student count" : "Saisissez un nombre d’élèves valide") : currency.format(amount);
-    }
-  }
-  for (const output of document.querySelectorAll("[data-commercial-discount]")) output.textContent = window.piSchoolCommercial.discountText(english ? "en" : "fr");
-  const roles = field("roles");
-  roles.setCustomValidity("");
-  if (adults !== null && roles.valueAsNumber > adults) {
-    roles.setCustomValidity(english
-      ? "Simultaneously available adults exceed the declared total."
-      : "Le nombre d’adultes présents en même temps dépasse le total disponible.");
-  }
-  for (const output of document.querySelectorAll('[data-commercial-rate]')) {
-    const rate = window.piSchoolCommercial.policy[output.dataset.commercialRate === 'regular' ? 'regularRate' : 'pilotRate'];
-    output.textContent = currency.format(rate);
-  }
-  const raw = Object.fromEntries(Object.keys(window.piSchoolCommercial.limits).map(key => [key, value(key)]));
-  const configured = window.piSchoolCommercial.configuration(raw);
-  for (const link of document.querySelectorAll('[data-school-proposal]')) {
-    link.setAttribute('aria-disabled', String(!configured));
-    if (!configured) { link.removeAttribute('href'); continue; }
-    link.setAttribute('href', '#contact');
-  }
-  const invalid = document.querySelector(".school-fields input:invalid");
-  field("configuration-error").textContent = invalid
-    ? invalid.labels[0].textContent.trim() + " — " + (invalid.validity.customError ? invalid.validationMessage : english
-      ? "Enter a whole number between " + counts.format(Number(invalid.min)) + " and " + counts.format(Number(invalid.max)) + "."
-      : "Saisissez un nombre entier entre " + counts.format(Number(invalid.min)) + " et " + counts.format(Number(invalid.max)) + ".")
-    : "";
+  const raw=readConfiguration(),checked=commercial.validate(raw),legacyReady=!cfgLegacy||cfgField('config-legacy-confirm').checked,result=checked.value&&legacyReady?commercial.calculate(checked.value):null;
+  const money=n=>commercial.formatMoney(n,cfgEnglish()?'en':'fr');
+  for(const el of configRoot.querySelectorAll('[aria-invalid]'))el.removeAttribute('aria-invalid');
+  checked.errors.forEach(error=>cfgField(error.path)?.setAttribute('aria-invalid','true'));
+  const countValid=Number.isInteger(cfgField('block-count').valueAsNumber)&&cfgField('block-count').valueAsNumber===cfgBlocks.length;
+  cfgField('configuration-error').textContent=[...new Set([...checked.errors.map(e=>cfgText(cfgWarnings[e.code])),...(!countValid?[cfgText(cfgWarnings.blocks)]:[]),...(!legacyReady?[cfgText('Vérifiez et confirmez les nouveaux blocs et disponibilités.')]:[])])].join(' ');
+  raw.blocks.forEach((b,i)=>{
+    configRoot.querySelectorAll('[data-config-name="'+b.id+'"]').forEach(el=>el.textContent=cfgName(b,i));
+    configRoot.querySelector('[data-space-override="'+b.id+'"]').hidden=!b.override;
+    const r=result?.blocks[i];
+    const capacity=configRoot.querySelector('[data-capacity="'+b.id+'"]'),staffing=configRoot.querySelector('[data-staffing="'+b.id+'"]');
+    if(!r){capacity.textContent=cfgText('Vérifiez les saisies pour afficher les capacités.');staffing.textContent='—';return;}
+    const c=r.capacity,s=r.staffing;
+    capacity.innerHTML=cfgRows([[cfgText('Surfaces nécessaires — minimum théorique'),c.minimumAreas],[cfgText('Surfaces physiques disponibles'),c.availableAreas],[cfgText('Élèves en jeu'),c.playing],[cfgText('Élèves en attente'),c.waiting],[cfgText('Élèves en transition'),c.transition],[cfgText('Capacité simultanée mobilisée'),c.mobilized],[cfgText('Adultes nécessaires aux jeux'),s.needed]])+
+      '<p class="config-caution">'+cfgEscape(cfgText('Répartition théorique extérieure : un terrain par plateau, deux jeux de zone par plateau compatible. Dimensions et montage à valider.'))+'</p>'+
+      (r.block.indoors>0?'<p class="config-warning">'+cfgEscape(cfgText('Compatibilité intérieure à confirmer. Aucun montage intérieur n’est certifié par ce calcul.'))+'</p>':'')+
+      (c.availableAreas<c.minimumAreas?'<p class="config-warning">'+cfgEscape(cfgText('Surfaces insuffisantes pour cette répartition. Ajoutez des plateaux compatibles ou ajustez les installations souhaitées.'))+'</p>':'')+
+      (c.mobilized<r.block.students?'<p class="config-warning">'+cfgEscape(cfgText('Capacité simultanée insuffisante : réduisez le groupe, ajoutez des surfaces et activités compatibles ou répartissez les élèves en blocs supplémentaires. Aucune rotation non documentée n’est supposée.'))+'</p>':'');
+    staffing.innerHTML=cfgRows([[cfgText('Adultes nécessaires aux jeux'),s.needed],[cfgText('Adultes fournis par l’école'),s.school],[cfgText('Renforts PürInstinct nécessaires'),s.reinforcements],[cfgText('Intervenants PürInstinct de base — en plus'),s.baseStaff],[cfgText('Équipe PürInstinct totale'),s.piTeam],[cfgText('Adultes sur place, équipe déclarée et renforts'),s.onSite],[cfgText('Supplément d’encadrement du bloc'),money(s.cost)]])+
+      '<p>'+cfgEscape(cfgText('Votre école fournit {school} adultes pour {needed} postes d’encadrement. Renforts PürInstinct nécessaires pour ce bloc : {reinforcements}, soit {cost}.').replace(/\{(school|needed|reinforcements|cost)\}/g,(_,key)=>({school:s.school,needed:s.needed,reinforcements:s.reinforcements,cost:money(s.cost)}[key])))+'</p>';
+  });
+  cfgField('config-capacity-rules').textContent=cfgText('Terrain : jeu / attente / transition / adultes : ')+[commercial.policy.field.playing,commercial.policy.field.waiting,commercial.policy.field.transition,commercial.policy.field.adults].join(' / ')+'. '+cfgText('Jeu de zone : ')+[commercial.policy.game.playing,commercial.policy.game.waiting,commercial.policy.game.transition,commercial.policy.game.adults].join(' / ')+'.';
+  if(result){const b=result.budget;
+    cfgField('config-budget-lines').innerHTML=cfgRows([[cfgText('Base du programme — élèves distincts'),money(b.base)],[cfgText('Premier bloc de quatre heures'),cfgText('Inclus')],[cfgText('Équipe de base du premier bloc'),commercial.policy.baseStaff+' — '+cfgText('Inclus')],...result.blocks.map((r,i)=>[cfgText('Renforts')+' · '+cfgName(r.block,i),r.staffing.reinforcements+' × '+money(commercial.policy.reinforcementBlockRate)+' = '+money(r.staffing.cost)]),[cfgText('Frais des blocs supplémentaires'),raw.blocks.length===1?cfgText('Sans objet'):money(b.extraBlocks)],[cfgText('Sous-total connu'),money(b.knownSubtotal)],[cfgText('Équivalent du sous-total connu par élève'),money(b.perStudent)],[cfgText('Déplacement'),money(b.travel)],[cfgText('Total à confirmer'),money(b.total)]])+'<p class="config-caution">'+cfgEscape(cfgText('Le sous-total connu et son équivalent par élève excluent les frais restant à confirmer.'))+'</p><p>'+cfgEscape(money(commercial.policy.reinforcementHourlyRate)+' × '+commercial.policy.blockHours+' h = '+money(commercial.policy.reinforcementBlockRate)+' · '+cfgText('par renfort et par bloc'))+'</p>';
+  }else cfgField('config-budget-lines').innerHTML=cfgRows([[cfgText('Base du programme — élèves distincts'),commercial.estimate(raw.students).base===null?'—':money(commercial.estimate(raw.students).base)]])+'<p>'+cfgEscape(cfgText('Vérifiez les saisies pour afficher le budget.'))+'</p>';
+  for(const link of document.querySelectorAll('[data-school-proposal]')){link.setAttribute('aria-disabled',String(!result||!countValid));if(result&&countValid)link.setAttribute('href','#contact');else link.removeAttribute('href');}
+  document.dispatchEvent(new CustomEvent('pi:configuration'));
 }
-// Compatibility with previously shared school proposal links. Never reset on language changes.
-try {
-  const shared = window.piSchoolCommercial.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration')));
-  if (shared) for (const [id, number] of Object.entries(shared)) field(id).value = number === null ? '' : String(number);
-} catch { /* Ignore malformed legacy links. */ }
-for (const input of document.querySelectorAll(".school-fields input")) {
-  input.addEventListener("input", updateConfiguration);
+window.piSchoolConfiguration=()=>{
+  if(cfgField('block-count').valueAsNumber!==cfgBlocks.length||(cfgLegacy&&!cfgField('config-legacy-confirm').checked))return null;
+  return commercial.configuration(readConfiguration());
+};
+function cfgResize(count) {
+  if(!Number.isInteger(count)||count<1||count>commercial.limits.blocks){updateConfiguration();return;}
+  const raw=readConfiguration();
+  while(raw.blocks.length<count){const first=raw.blocks[0];raw.blocks.push({id:'b'+(++cfgSerial),label:'',students:raw.students,fields:first.fields,games:first.games,teachers:0,adults:0,override:false,indoors:raw.indoors,outdoors:raw.outdoors});}
+  raw.blocks=raw.blocks.slice(0,count);renderConfiguration(raw);
 }
-document.addEventListener("pi:language", updateConfiguration);
-updateConfiguration();
+configRoot.addEventListener('input',event=>{
+  if(event.target.id.endsWith('-override')&&event.target.checked){const id=event.target.id.slice(4,-9);if(!cfgOverrideEdited.has(id)){cfgField('cfg-'+id+'-indoors').value=cfgField('indoors').value;cfgField('cfg-'+id+'-outdoors').value=cfgField('outdoors').value;cfgOverrideEdited.add(id);}}
+  if(event.target.id!=='block-count')updateConfiguration();
+});
+cfgField('block-count').addEventListener('change',event=>cfgResize(event.target.valueAsNumber));
+configRoot.addEventListener('click',event=>{
+  const button=event.target.closest('button');if(!button)return;
+  if(button.dataset.stepTarget){const input=cfgField(button.dataset.stepTarget),direction=Number(button.dataset.step);input.value=String(Math.min(Number(input.max),Math.max(Number(input.min),(Number.isFinite(input.valueAsNumber)?input.valueAsNumber:Number(input.min)-direction)+direction)));input.dispatchEvent(new Event('input',{bubbles:true}));}
+  if(button.id==='add-config-block'){cfgResize(cfgBlocks.length+1);cfgField('cfg-'+cfgBlocks.at(-1).id+'-label').focus({preventScroll:true});}
+  if(button.dataset.removeBlock){const raw=readConfiguration();raw.blocks=raw.blocks.filter(b=>b.id!==button.dataset.removeBlock);renderConfiguration(raw);cfgField('add-config-block').focus({preventScroll:true});}
+});
+document.addEventListener('pi:language',()=>{const raw=readConfiguration();cfgField('clinics').placeholder=cfgText('À préciser');cfgField('config-technical-limit').textContent=cfgText('Limite technique de cette demande : {blocks} blocs.').replace('{blocks}',commercial.limits.blocks);renderConfiguration(raw);});
+let initial={students:200,indoors:1,outdoors:2,clinics:null,notes:'',blocks:cfgBlocks};
+try{const shared=commercial.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration')));if(shared){initial=shared;cfgLegacy=shared.legacy;}}catch{/* Ignore malformed legacy links. */}
+for(const key of ['students','indoors','outdoors','clinics'])cfgField(key).value=initial[key]??'';
+cfgField('config-notes').value=initial.notes;
+cfgSerial=Math.max(1,...initial.blocks.map(b=>Number(b.id.replace(/^b/,''))||0));
+initial.blocks.filter(b=>b.override).forEach(b=>cfgOverrideEdited.add(b.id));
+cfgField('config-technical-limit').textContent=cfgText('Limite technique de cette demande : {blocks} blocs.').replace('{blocks}',commercial.limits.blocks);
+renderConfiguration(initial);
 
 const motion = matchMedia("(prefers-reduced-motion: no-preference)");
 if (motion.matches && "IntersectionObserver" in window) {
@@ -273,17 +298,6 @@ for (const surface of document.querySelectorAll(".pointer-surface")) {
   window.addEventListener("pagehide", () => {
     cancelAnimationFrame(frame);
     frame = 0;
-  });
-}
-
-// School offer steppers: native editable fields remain the source of truth.
-for (const button of document.querySelectorAll('[data-step-target]')) {
-  button.addEventListener('click', () => {
-    const input = document.getElementById(button.dataset.stepTarget);
-    const direction = Number(button.dataset.step);
-    const current = Number.isFinite(input.valueAsNumber) ? input.valueAsNumber : Number(input.min) - (direction > 0 ? 1 : -1);
-    input.value = String(Math.max(Number(input.min), Math.min(Number(input.max), current + direction)));
-    input.dispatchEvent(new Event('input', { bubbles:true }));
   });
 }
 

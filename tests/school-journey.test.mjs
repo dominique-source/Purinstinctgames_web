@@ -27,7 +27,7 @@ test('the illustrative portfolio is a four-image mosaic with no fake controls or
  }
 });
 test('logistics remain within the existing package details rather than under the cards',()=>{
- const details=html.match(/<details><summary>Disponibilités et séances<\/summary>[\s\S]*?<\/details>/)[0];
+ const details=html.match(/<details class="config-method">[\s\S]*?<\/details>/)[0];
  for(const copy of ['Définir les besoins, les espaces, les ressources et le calendrier avec l’école.','Accompagnement et coordination','équipements et production','DJ et sonorisation','Les ballons pédagogiques restent à l’école.','Le matériel des Games est récupéré après l’événement.'])assert.ok(details.includes(copy),copy);
 });
 test('all approved English copy and new accessible descriptions use the existing dictionary',()=>{

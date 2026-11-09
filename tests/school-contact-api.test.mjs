@@ -22,3 +22,15 @@ test('unchanged contact API relays the chosen configuration inside Comments', as
   if(originalKey===undefined) delete process.env.RESEND_API_KEY;else process.env.RESEND_API_KEY=originalKey;
  }
 });
+
+test('the same relay accepts a complete multi-block summary beyond the old limit and rejects oversized payloads before email',async()=>{
+ const original=globalThis.fetch;let sent,calls=0;
+ try{
+  globalThis.fetch=async(url,request)=>{calls++;sent=JSON.parse(request.body);return {ok:true};};
+  const fields={Nom:'Fictif',École:'Fictive',Ville:'Québec',Courriel:'test@example.invalid',Commentaires:'Configuration multi-blocs\n'+'Détails\n'.repeat(500)};
+  const request=body=>new Request('https://example.test/api/schools-contact',{method:'POST',body});
+  let response=await endpoint.fetch(request(JSON.stringify(fields)));assert.equal(response.status,200);assert.ok(sent.text.includes(fields.Commentaires));assert.equal(sent.to,'dominique@purinstinct.com');assert.equal(calls,1);
+  response=await endpoint.fetch(request(JSON.stringify({...fields,Commentaires:'x'.repeat(14001)})));assert.equal(response.status,400);assert.equal(calls,1);
+  response=await endpoint.fetch(request('x'.repeat(48001)));assert.equal(response.status,413);assert.equal(calls,1);
+ }finally{globalThis.fetch=original;}
+});

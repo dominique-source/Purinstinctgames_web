@@ -309,3 +309,51 @@ html[lang="en"] .offer-counter { flex-direction:row-reverse; }
 @media(max-width:800px) { .school-contact-section { grid-template-columns:minmax(0,1fr); gap:24px; padding-top:42px; } }
 .school-contact-section #school-proposal summary { min-height:44px; cursor:pointer; font-weight:700; color:#ccff00; }
 .school-contact-section #school-proposal { margin-bottom:20px; }
+
+/* Block-based configurator; all commercial presentation and funding styles are retained. */
+.offer-layout>.config-v2 { display:contents; }
+.config-steps { grid-column:1; grid-row:3; min-width:0; }
+.config-steps>h3 { font-size:clamp(30px,3vw,46px); margin:0 0 16px; }
+.config-nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.config-nav a { padding:10px 12px; border:1px solid #65f5ff70; border-radius:6px; text-decoration:none; font-size:16px; font-weight:700; min-height:44px; }
+.config-nav a:hover { color:#ccff00; }
+.config-step { margin:0 0 22px; padding:22px!important; min-width:0; scroll-margin-top:84px; }
+.config-step legend { padding:0 10px; color:#ccff00; font:italic 900 clamp(24px,2.2vw,34px)/1.15 'Barlow Condensed',sans-serif; }
+.config-step>p,.config-step details p { color:#c5cecc; font-size:15px; line-height:1.5; margin:12px 0; }
+.config-step h4 { font:italic 900 26px/1.2 'Barlow Condensed',sans-serif; margin:0 0 14px; color:#65f5ff; }
+.config-block { padding:18px 0; border-top:1px solid #65f5ff45; }
+.config-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.school-offer .config-label,.school-offer .config-count,.school-offer .config-notes { display:grid; grid-template-columns:1fr; gap:8px; margin:12px 0; font-size:16px; }
+.school-offer .config-label input,.school-offer .config-count input,.school-offer .config-notes textarea { width:100%; min-height:44px; padding:10px; border:1px solid #8e9999; border-radius:6px; background:#101818; color:#f4f4ef; font:inherit; }
+.school-offer .config-count input { width:110px; }
+.config-action,.config-remove { min-height:44px; padding:10px 14px; border:1px solid #ccff00; border-radius:6px; background:#101818; color:#ccff00; font:700 16px Barlow,sans-serif; cursor:pointer; margin:10px 0; }
+.config-action:disabled { opacity:.5; cursor:not-allowed; }
+.config-remove { color:#ffd3c9; border-color:#ffd3c9; }
+.school-offer .config-override { display:flex; align-items:center; gap:10px; margin:14px 0; font-size:16px; }
+.school-offer .config-override input { width:24px; height:24px; min-height:24px; accent-color:#ccff00; }
+.config-results { margin:14px 0; font-size:16px; }
+.config-results>div { display:flex; justify-content:space-between; gap:16px; border-top:1px solid #7a898970; padding:9px 0; }
+.config-results dt { flex:1; }
+.config-results dd { margin:0; font-weight:700; text-align:right; }
+.config-warning { border-left:3px solid #ffcb80; background:#ffcb800b; padding:12px; color:#ffe3b9!important; font-size:15px; line-height:1.5; }
+.config-warning:empty { display:none; }
+.config-caution { font-size:14px; color:#c5cecc; line-height:1.5; }
+.config-step [aria-invalid=true] { outline:2px solid #ffcb80; }
+[data-space-override][hidden],#config-legacy[hidden] { display:none; }
+.config-method summary { min-height:44px; cursor:pointer; color:#65f5ff; padding-block:10px; }
+.config-budget { grid-column:2; grid-row:1 / span 4; align-self:start; position:sticky; top:84px; max-height:calc(100svh - 100px); overflow:auto; }
+.config-budget h3 { font-size:clamp(28px,2.4vw,36px); color:#ccff00; }
+.config-budget>p { font-size:14px; line-height:1.5; color:#c5cecc; }
+.config-v2~.offer-financing { grid-row:4; }
+.config-budget .config-results>div:nth-last-child(4) { background:#ccff00; color:#0a0a0a; padding:10px; border-radius:6px; }
+.offer-proposal { grid-row:5; }
+@media(max-width:1200px) { .config-pair { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:800px) {
+ .offer-layout>.config-v2 { display:block; width:100%; }
+ .config-budget { position:static; max-height:none; overflow:visible; margin-top:20px; }
+ .config-step { padding:18px!important; }
+ .config-nav { display:grid; grid-template-columns:1fr; }
+ .config-results { font-size:15px; }
+ .config-results dd { max-width:48%; overflow-wrap:anywhere; }
+ .config-step .offer-field { padding:8px 0; }
+}

@@ -1,52 +1,109 @@
-// Shared public commercial policy. Unknown supplements are deliberately null,
-// never a free service or a public internal cost. No staffing ratio is inferred.
+// Versioned school commercial policy. Only confirmed rules are priced.
 window.piSchoolCommercial = (() => {
-  const policy = Object.freeze({ currency: 'CAD', regularRate: 25, pilotRate: 10,
-    staffSupplement: null, travel: null, taxes: null });
-  const limits = Object.freeze({ students: [1,999999], teachers: [0,999999], adults: [0,999999],
-    indoors: [0,999999], outdoors: [0,999999], roles: [0,999999], zones: [1,5], hours: [1,999999], clinics: [1,999999] });
-  function configuration(raw) {
-    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
-    const result = {};
-    for (const [key,[min,max]] of Object.entries(limits)) {
-      const value = raw[key];
-      if (key === 'clinics' && (value === '' || value === null || value === undefined)) { result[key] = null; continue; }
-      if (value === '' || value === null || value === undefined || typeof value === 'boolean') return null;
-      const number = Number(value);
-      if (!Number.isSafeInteger(number) || number < min || number > max) return null;
-      result[key] = number;
+  const blockHours = 4;
+  const reinforcementHourlyRate = 100;
+  const policy = Object.freeze({version:'school-blocks-2026-11-09',currency:'CAD',regularRate:25,pilotRate:10,
+    blockHours,baseStaff:3,reinforcementHourlyRate,reinforcementBlockRate:blockHours*reinforcementHourlyRate,
+    extraBlockRate:null,travel:null,taxes:null,zoneGamesPerArea:2,
+    field:Object.freeze({playing:14,waiting:14,transition:14,adults:3}),
+    game:Object.freeze({playing:6,waiting:6,transition:6,adults:1})});
+  // Technical input bounds, not eligibility, staffing or commercial limits.
+  const limits = Object.freeze({students:999999,areas:999,installations:999,adults:9999,blocks:12,label:60,notes:300,summary:10000});
+  const integer = (v,min,max) => !(typeof v==='string' && v.trim()==='') && v !== '' && v !== null && v !== undefined && typeof v !== 'boolean' && Number.isSafeInteger(Number(v)) && Number(v)>=min && Number(v)<=max;
+  function migrate(raw) {
+    if (!raw || typeof raw!=='object' || Array.isArray(raw)) return raw;
+    if ('blocks' in raw || raw.version===policy.version) return raw;
+    // Old totals are NOT evidence of simultaneous availability. Preserve them as context only.
+    if (!integer(raw.students,1,limits.students)) return raw;
+    return {version:policy.version,students:raw.students,indoors:raw.indoors,outdoors:raw.outdoors,clinics:raw.clinics??null,notes:'',
+      legacy:{teachers:raw.teachers,adults:raw.adults,roles:raw.roles,hours:raw.hours,zones:raw.zones},
+      blocks:[{id:'b1',label:'',students:raw.students,fields:1,games:9,teachers:0,adults:0,override:false,indoors:raw.indoors,outdoors:raw.outdoors}]};
+  }
+  function validate(input) {
+    const raw=migrate(input),errors=[];
+    if(!raw || typeof raw!=='object' || Array.isArray(raw))return {value:null,errors:[{path:'students',code:'numbers'}]};
+    const number=(value,min,max,path)=>{if(!integer(value,min,max)){errors.push({path,code:'numbers'});return null;}return Number(value);};
+    const c={version:policy.version,students:number(raw.students,1,limits.students,'students'),indoors:number(raw.indoors,0,limits.areas,'indoors'),outdoors:number(raw.outdoors,0,limits.areas,'outdoors'),
+      clinics:raw.clinics===''||raw.clinics==null?null:number(raw.clinics,1,999,'clinics'),notes:typeof raw.notes==='string'?raw.notes.trim():'',blocks:[]};
+    if(c.notes.length>limits.notes)errors.push({path:'config-notes',code:'notes'});
+    if(!Array.isArray(raw.blocks)||raw.blocks.length<1||raw.blocks.length>limits.blocks)return {value:null,errors:[...errors,{path:'block-count',code:'blocks'}]};
+    const seen=new Set();
+    for(const [i,b] of raw.blocks.entries()){
+      if(!b || typeof b!=='object'){errors.push({path:'block-count',code:'numbers'});continue;}
+      const id=typeof b.id==='string'&&/^[a-zA-Z0-9_-]{1,30}$/.test(b.id)?b.id:'b'+(i+1);
+      if(seen.has(id))errors.push({path:'block-count',code:'blocks'});seen.add(id);
+      const path=key=>'cfg-'+id+'-'+key;
+      const block={id,label:typeof b.label==='string'?b.label.trim():'',students:number(b.students,1,limits.students,path('students')),
+        fields:number(b.fields,0,limits.installations,path('fields')),games:number(b.games,0,limits.installations,path('games')),
+        teachers:number(b.teachers,0,limits.adults,path('teachers')),adults:number(b.adults,0,limits.adults,path('adults')),override:b.override===true};
+      if(block.label.length>limits.label)errors.push({path:path('label'),code:'label'});
+      block.indoors=block.override?number(b.indoors,0,limits.areas,path('indoors')):c.indoors;
+      block.outdoors=block.override?number(b.outdoors,0,limits.areas,path('outdoors')):c.outdoors;
+      if(block.students!==null&&c.students!==null&&block.students>c.students)errors.push({path:path('students'),code:'attendanceMax'});
+      if(block.fields===0&&block.games===0)errors.push({path:path('fields'),code:'activity'});
+      c.blocks.push(block);
     }
-    return result.roles > result.teachers + result.adults ? null : result;
+    if(c.students!==null&&c.blocks.every(b=>b.students!==null)&&c.blocks.reduce((n,b)=>n+b.students,0)<c.students)errors.push({path:'students',code:'attendanceCoverage'});
+    if(raw.legacy&&typeof raw.legacy==='object')c.legacy=Object.fromEntries(['teachers','adults','roles','hours','zones'].filter(k=>integer(raw.legacy[k],0,999999)).map(k=>[k,Number(raw.legacy[k])]));
+    return {value:errors.length?null:c,errors};
   }
-  function estimate(students) {
-    const valid = Number.isSafeInteger(students) && students >= 1 && students <= limits.students[1];
-    return { base: valid ? students * policy.pilotRate : null, total: null,
-      staffSupplement: policy.staffSupplement, travel: policy.travel,
-      discount: Math.round((1-policy.pilotRate/policy.regularRate)*100) };
+  const configuration=raw=>validate(raw).value;
+  function capacity(block){
+    const combine=key=>block.fields*policy.field[key]+block.games*policy.game[key];
+    const playing=combine('playing'),waiting=combine('waiting'),transition=combine('transition');
+    return {playing,waiting,transition,mobilized:playing+waiting+transition,minimumAreas:block.fields+Math.ceil(block.games/policy.zoneGamesPerArea),availableAreas:block.indoors+block.outdoors};
   }
-  function formatMoney(value, language) {
-    return new Intl.NumberFormat(language === 'en' ? 'en-CA' : 'fr-CA', {
-      style:'currency', currency:policy.currency, currencyDisplay:'code', minimumFractionDigits:0, maximumFractionDigits:2,
-    }).format(value);
+  function staffing(block){
+    const needed=block.fields*policy.field.adults+block.games*policy.game.adults;
+    const school=block.teachers+block.adults,reinforcements=Math.max(0,needed-school);
+    return {needed,school,reinforcements,baseStaff:policy.baseStaff,piTeam:policy.baseStaff+reinforcements,onSite:school+policy.baseStaff+reinforcements,cost:reinforcements*policy.reinforcementBlockRate};
   }
-  function summary(raw, language) {
-    const c = configuration(raw);
-    if (!c) return '';
-    const en = language === 'en';
-    const labels = en ? ['Students','Teachers (total)','Other adults / volunteers (total)','Indoor play areas','Outdoor play areas','School adults available simultaneously','Open zones','Planned Games duration (hours)','Planned clinics (sessions)'] : ['Élèves','Enseignants (total)','Autres adultes / bénévoles (total)','Plateaux intérieurs','Plateaux extérieurs','Adultes de l’école disponibles simultanément','Zones ouvertes','Durée envisagée des Games (heures)','Cliniques envisagées (séances)'];
-    const budget=estimate(c.students);
-    return [(en ? 'School configuration — indicative proposal' : 'Configuration scolaire — proposition indicative'),
-      ...Object.keys(limits).map((key,i)=>labels[i]+' : '+(c[key] === null ? (en ? 'To be confirmed' : 'À confirmer') : c[key])),
-      (en ? 'Pilot program base : ' : 'Base du programme pilote : ')+formatMoney(budget.base,language),
-      en ? 'Additional staffing: to be confirmed. Travel: additional, to be confirmed. Total: to be confirmed.' : 'Personnel supplémentaire : à confirmer. Déplacement : en sus, à confirmer. Total : à confirmer.',
-      en ? 'Availability times, specialist roles and tax treatment remain to be confirmed.' : 'Créneaux de disponibilité, rôles spécialisés et traitement des taxes à confirmer.'
-    ].join('\n');
+  function calculate(raw){
+    const c=configuration(raw);if(!c)return null;
+    const blocks=c.blocks.map(block=>({block,capacity:capacity(block),staffing:staffing(block)}));
+    const base=c.students*policy.pilotRate,reinforcements=blocks.reduce((n,b)=>n+b.staffing.cost,0);
+    const extraBlocks=c.blocks.length===1?0:policy.extraBlockRate===null?null:(c.blocks.length-1)*policy.extraBlockRate;
+    const knownSubtotal=base+reinforcements+(extraBlocks??0)+(policy.travel??0)+(policy.taxes??0);
+    const total=extraBlocks===null||policy.travel===null||policy.taxes===null?null:knownSubtotal;
+    return {configuration:c,blocks,budget:{base,reinforcements,extraBlocks,knownSubtotal,travel:policy.travel,taxes:policy.taxes,total,perStudent:knownSubtotal/c.students,partial:extraBlocks===null||policy.taxes===null}};
   }
-  function discountText(language) {
-    const discount = estimate(null).discount;
-    return language === 'en' ? `A ${discount}% commercial discount provided by PürInstinct, before travel expenses and supplements.` : `Une réduction commerciale de ${discount} % offerte par PürInstinct, avant déplacement et suppléments.`;
+  function estimate(students){return {base:integer(students,1,limits.students)?Number(students)*policy.pilotRate:null,total:null,discount:Math.round((1-policy.pilotRate/policy.regularRate)*100)};}
+  function formatMoney(amount,language){return amount===null?(language==='en'?'To be confirmed':'À confirmer'):new Intl.NumberFormat(language==='en'?'en-CA':'fr-CA',{style:'currency',currency:policy.currency,currencyDisplay:'code',minimumFractionDigits:0,maximumFractionDigits:2}).format(amount);}
+  const blockName=(block,index,lang)=>block.label||(lang==='en'?'Block ':'Bloc ')+(index+1);
+  function summary(raw,language){
+    const result=calculate(raw);if(!result)return '';
+    const en=language==='en',money=n=>formatMoney(n,language),c=result.configuration,b=result.budget;
+    const lines=[en?'School configuration — indicative proposal':'Configuration scolaire — proposition indicative',
+      (en?'Rules: ':'Règles : ')+policy.version,
+      (en?'Distinct students: ':'Élèves distincts : ')+c.students,
+      (en?'Shared indoor/outdoor areas: ':'Plateaux communs intérieurs/extérieurs : ')+c.indoors+'/'+c.outdoors,
+      (en?'Planned clinics: ':'Cliniques envisagées : ')+(c.clinics??(en?'To be confirmed':'À confirmer'))];
+    result.blocks.forEach((r,i)=>{const d=r.block,k=r.capacity,s=r.staffing;
+      lines.push(blockName(d,i,language)+' — '+policy.blockHours+' h',
+        (en?'Students / fields / zone games: ':'Élèves / terrains / jeux de zone : ')+d.students+' / '+d.fields+' / '+d.games,
+        (en?'Indoor/outdoor areas; theoretical minimum: ':'Plateaux int./ext. ; minimum théorique : ')+d.indoors+'/'+d.outdoors+' ; '+k.minimumAreas,
+        (en?'Playing / waiting / transitioning / mobilized: ':'En jeu / attente / transition / mobilisés : ')+[k.playing,k.waiting,k.transition,k.mobilized].join(' / '),
+        (en?'Teachers / other adults simultaneously: ':'Enseignants / autres adultes simultanés : ')+d.teachers+' / '+d.adults,
+        (en?'School posts / school adults / reinforcements / PI team: ':'Postes école / adultes école / renforts / équipe PI : ')+[s.needed,s.school,s.reinforcements,s.piTeam].join(' / '),
+        (en?'Reinforcement supplement: ':'Supplément renforts : ')+money(s.cost));
+      if(k.mobilized<d.students)lines.push(en?'WARNING: insufficient simultaneous capacity.':'AVERTISSEMENT : capacité simultanée insuffisante.');
+      if(k.availableAreas<k.minimumAreas)lines.push(en?'WARNING: insufficient physical areas.':'AVERTISSEMENT : plateaux physiques insuffisants.');
+      if(d.indoors>0)lines.push(en?'Indoor compatibility: to be confirmed.':'Compatibilité intérieure : à confirmer.');
+    });
+    lines.push((en?'Pilot program base: ':'Base du programme pilote : ')+money(b.base),
+      (en?'First block and base PI team: included.':'Premier bloc et équipe PI de base : inclus.'),
+      (en?'Reinforcements, all blocks: ':'Renforts, tous les blocs : ')+money(b.reinforcements),
+      (en?'Additional block fees: ':'Frais des blocs supplémentaires : ')+(c.blocks.length===1?(en?'Not applicable':'Sans objet'):money(b.extraBlocks)),
+      (en?'Known subtotal: ':'Sous-total connu : ')+money(b.knownSubtotal),
+      (en?'Known subtotal per student: ':'Sous-total connu par élève : ')+money(b.perStudent),
+      en?'Travel, tax treatment and final total: to be confirmed.':'Déplacement, traitement des taxes et total final : à confirmer.',
+      en?'Theoretical outdoor sharing only; indoor compatibility, dimensions and setup require validation. Capacity is not proof of completed rotations. Qualifications and roles require confirmation.':'Répartition extérieure théorique uniquement ; compatibilités intérieures, dimensions et montage à valider. Capacité ne prouve pas les rotations réalisées. Qualifications et rôles à confirmer.');
+    if(c.notes)lines.push((en?'Space/planning notes: ':'Précisions espaces/organisation : ')+c.notes);
+    if(c.legacy)lines.push((en?'Legacy context (not used as simultaneous staffing or extra blocks): ':'Contexte ancien (non utilisé comme disponibilité simultanée ou blocs supplémentaires) : ')+JSON.stringify(c.legacy));
+    return lines.join('\n');
   }
-  return Object.freeze({ policy, limits, configuration, estimate, formatMoney, summary, discountText });
+  function discountText(language){const discount=estimate(null).discount;return language==='en'?`A ${discount}% commercial discount provided by PürInstinct, before travel expenses and supplements.`:`Une réduction commerciale de ${discount} % offerte par PürInstinct, avant déplacement et suppléments.`;}
+  return Object.freeze({policy,limits,migrate,validate,configuration,capacity,staffing,calculate,estimate,formatMoney,blockName,summary,discountText});
 })();
 
 window.piTranslations = {
@@ -370,4 +427,93 @@ Object.assign(window.piTranslations, {
  'Illustration d’un échange pendant la formation.':'Illustration of a discussion during training.',
  'Illustration d’un moment des Games à l’école.':'Illustration of a moment during the Games at school.',
  'Visuels illustratifs':'Illustrative visuals'
+});
+
+// Block-based configurator copy; numeric rules remain exclusively in piSchoolCommercial.
+Object.assign(window.piTranslations, {
+  "Configurez votre projet scolaire": "Configure your school project",
+  "Étapes du configurateur": "Configurator steps",
+  "01 · Élèves et horaire": "01 · Students and schedule",
+  "02 · Espaces et activités": "02 · Spaces and activities",
+  "03 · Adultes disponibles": "03 · Available adults",
+  "01 · Vos élèves et votre horaire": "01 · Your students and schedule",
+  "02 · Vos espaces et vos activités": "02 · Your spaces and activities",
+  "03 · Votre équipe disponible": "03 · Your available team",
+  "Élèves participants distincts": "Distinct participating students",
+  "Chaque élève compte une seule fois dans la base, même s’il participe à plusieurs blocs. La somme des présences peut dépasser l’effectif distinct.": "Each student is counted once in the program base, even if they attend several blocks. Total attendance may exceed the distinct student count.",
+  "Nombre de blocs de quatre heures": "Number of four-hour blocks",
+  "Ajouter un bloc": "Add a block",
+  "Le premier bloc est inclus. Les frais des blocs supplémentaires sont à confirmer, séparément de leurs renforts.": "The first block is included. Additional block fees are to be confirmed, separately from their staffing reinforcements.",
+  "Un plateau physique correspond approximativement à un terrain de basketball. Une installation est un terrain PürInstinct ou un jeu de zone.": "A physical play area is approximately the size of a basketball court. An installation is a PürInstinct field or a zone game.",
+  "Plateaux intérieurs disponibles": "Available indoor play areas",
+  "Plateaux extérieurs disponibles": "Available outdoor play areas",
+  "Configuration ajustable, à valider avec l’école. Aucun changement d’installation ou de bloc n’est appliqué automatiquement.": "Adjustable configuration, to be validated with the school. No installation or block is changed automatically.",
+  "Précisions sur les espaces et le montage": "Space and setup notes",
+  "Hypothèses de capacité et logistique": "Capacity assumptions and logistics",
+  "La transition comprend boire, consulter son score et rejoindre une activité. Attente et transition ne sont pas du temps physiquement actif.": "Transition includes drinking, checking a score and joining an activity. Waiting and transitioning are not physically active time.",
+  "Ce modèle de planification ne prouve pas que tous les élèves auront réalisé toutes les activités. Les durées de rotation ne sont pas confirmées.": "This planning model does not prove that every student will complete every activity. Rotation times are not confirmed.",
+  "Déclarez les personnes présentes simultanément pour l’encadrement de chaque bloc. Ne comptez pas une même personne comme enseignant et bénévole.": "Declare people available simultaneously to supervise each block. Do not count the same person as both a teacher and a volunteer.",
+  "Les intervenants PürInstinct de base s’ajoutent aux adultes des jeux. Les qualifications et les rôles restent à confirmer ; un bénévole ne remplace pas automatiquement un intervenant spécialisé.": "The base PürInstinct staff are additional to the adults required for games. Qualifications and roles remain to be confirmed; a volunteer does not automatically replace a specialist.",
+  "Votre budget indicatif": "Your indicative budget",
+  "Base cohorte pilote : 10 $ CA par élève distinct.": "Pilot cohort base: CAD 10 per distinct student.",
+  "Suppléments et total à confirmer.": "Supplements and total to be confirmed.",
+  "Le sous-total chiffré n’est pas un total final. Les frais inconnus ne sont pas égaux à zéro.": "The priced subtotal is not a final total. Unknown fees are not zero.",
+  "Les frais supplémentaires de bloc couvriront notamment la prolongation de l’équipe de base. Ils restent à confirmer et sont distincts des renforts.": "Additional block fees will cover, among other items, extended time for the base team. They remain to be confirmed and are separate from reinforcements.",
+  "Cette configuration partagée utilise l’ancien modèle. Vérifiez les activités, les blocs et les disponibilités simultanées. Les anciens effectifs adultes restent dans le contexte transmis, sans être déduits automatiquement.": "This shared configuration uses the previous model. Check activities, blocks and simultaneous availability. Previous adult counts remain in the submitted context and are not automatically deducted.",
+  "Libellé du bloc": "Block label",
+  "Élèves présents dans ce bloc": "Students attending this block",
+  "Retirer ce bloc": "Remove this block",
+  "Terrains PürInstinct souhaités": "Requested PürInstinct fields",
+  "Jeux de zone souhaités": "Requested zone games",
+  "Espaces différents pour ce bloc": "Different spaces for this block",
+  "Plateaux intérieurs du bloc": "Indoor play areas for this block",
+  "Plateaux extérieurs du bloc": "Outdoor play areas for this block",
+  "Enseignants simultanément disponibles": "Teachers available simultaneously",
+  "Autres adultes simultanément disponibles": "Other adults available simultaneously",
+  "Saisissez des nombres entiers dans les limites indiquées.": "Enter whole numbers within the indicated limits.",
+  "Le nombre de blocs doit être compris dans les limites indiquées.": "The block count must be within the indicated limits.",
+  "Le texte des précisions est trop long.": "The notes are too long.",
+  "Le libellé du bloc est trop long.": "The block label is too long.",
+  "Un bloc ne peut pas dépasser l’effectif distinct.": "A block cannot exceed the distinct student count.",
+  "La somme des présences doit couvrir l’effectif distinct déclaré.": "Total attendance must cover the declared distinct student count.",
+  "Prévoyez au moins un terrain ou un jeu de zone dans chaque bloc.": "Include at least one field or zone game in each block.",
+  "Vérifiez les saisies pour afficher les capacités.": "Check the inputs to display capacities.",
+  "Surfaces nécessaires — minimum théorique": "Required areas — theoretical minimum",
+  "Surfaces physiques disponibles": "Available physical play areas",
+  "Élèves en jeu": "Students playing",
+  "Élèves en attente": "Students waiting",
+  "Élèves en transition": "Students transitioning",
+  "Capacité simultanée mobilisée": "Simultaneously mobilized capacity",
+  "Adultes nécessaires aux jeux": "Adults required for games",
+  "Répartition théorique extérieure : un terrain par plateau, deux jeux de zone par plateau compatible. Dimensions et montage à valider.": "Theoretical outdoor allocation: one field per play area, two zone games per compatible play area. Dimensions and setup require validation.",
+  "Compatibilité intérieure à confirmer. Aucun montage intérieur n’est certifié par ce calcul.": "Indoor compatibility must be confirmed. This calculation does not certify any indoor setup.",
+  "Surfaces insuffisantes pour cette répartition. Ajoutez des plateaux compatibles ou ajustez les installations souhaitées.": "Insufficient space for this allocation. Add compatible play areas or adjust the requested installations.",
+  "Capacité simultanée insuffisante : réduisez le groupe, ajoutez des surfaces et activités compatibles ou répartissez les élèves en blocs supplémentaires. Aucune rotation non documentée n’est supposée.": "Insufficient simultaneous capacity: reduce the group, add compatible spaces and activities, or distribute students across additional blocks. No undocumented rotations are assumed.",
+  "Adultes fournis par l’école": "Adults supplied by the school",
+  "Renforts PürInstinct nécessaires": "Required PürInstinct reinforcements",
+  "Intervenants PürInstinct de base — en plus": "Base PürInstinct staff — additional",
+  "Équipe PürInstinct totale": "Total PürInstinct team",
+  "Adultes sur place, équipe déclarée et renforts": "Adults on site, declared team and reinforcements",
+  "Supplément d’encadrement du bloc": "Staffing supplement for this block",
+  "Adultes fournis / postes nécessaires / renforts : ": "Supplied adults / required posts / reinforcements: ",
+  "Terrain : jeu / attente / transition / adultes : ": "Field: playing / waiting / transitioning / adults: ",
+  "Jeu de zone : ": "Zone game: ",
+  "Base du programme — élèves distincts": "Program base — distinct students",
+  "Premier bloc de quatre heures": "First four-hour block",
+  "Inclus": "Included",
+  "Équipe de base du premier bloc": "Base team for the first block",
+  "Renforts": "Reinforcements",
+  "Frais des blocs supplémentaires": "Additional block fees",
+  "Sans objet": "Not applicable",
+  "Sous-total connu": "Known subtotal",
+  "Équivalent du sous-total connu par élève": "Known subtotal per student",
+  "Le sous-total connu et son équivalent par élève excluent les frais restant à confirmer.": "The known subtotal and its per-student equivalent exclude fees still to be confirmed.",
+  "par renfort et par bloc": "per reinforcement and per block",
+  "Vérifiez les saisies pour afficher le budget.": "Check the inputs to display the budget."
+});
+Object.assign(window.piTranslations, {
+ 'Votre école fournit {school} adultes pour {needed} postes d’encadrement. Renforts PürInstinct nécessaires pour ce bloc : {reinforcements}, soit {cost}.':'Your school supplies {school} adults for {needed} supervision posts. PürInstinct reinforcements required for this block: {reinforcements}, costing {cost}.',
+ 'Limite technique de cette demande : {blocks} blocs.':'Technical limit for this request: {blocks} blocks.',
+ 'J’ai vérifié les nouveaux blocs et disponibilités.':'I have checked the new blocks and availability.',
+ 'Vérifiez et confirmez les nouveaux blocs et disponibilités.':'Check and confirm the new blocks and availability.'
 });
