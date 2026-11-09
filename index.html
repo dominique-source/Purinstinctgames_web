@@ -9,6 +9,7 @@
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js" defer></script>
   <link rel="stylesheet" href="/assets/school-home.css">
+  <link rel="stylesheet" href="/assets/ecoles.css">
   <script src="/assets/school-home.js" defer></script>
   <title>PürInstinct Games à l’école</title>
   <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/?lang=fr">
@@ -74,7 +75,7 @@
   </div>
   <div class="school-intro">
     <h1 id="school-title"><span class="hero-brand">PÜRINSTINCT</span><span class="hero-games"><span class="visually-hidden">GAMES</span><img src="/assets/hero-deck/games-brush.png" alt="" width="2087" height="754"></span><span class="hero-school">À L’ÉCOLE</span></h1>
-    <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les mettre en pratique en match.</p>
+    <p>Cinq zones pour développer tes habiletés.<br>Un terrain pour les mettre en pratique en match.</p><p class="commercial-hero-note">Une expérience sportive complète, directement à votre école, sur plus d’un mois.</p>
     <a class="school-button" href="#parcours"><span class="cta-desktop">Voir comment se déroulent les Games</span><span class="cta-mobile">Voir le déroulement</span><span aria-hidden="true">→</span></a>
   </div>
   <div class="zone-details" id="arena-panel" hidden>
@@ -130,6 +131,7 @@
     </article>
   </div>
 </section>
+<section class="school-section commercial-section" id="deploiement"><h2 class="section-title">Plus d’un mois. Un parcours préparé ensemble.</h2><ol class="commercial-timeline"><li><span class="commercial-step" aria-hidden="true">01</span><h3>Préparer</h3><p>Définir les besoins, les espaces, les ressources et le calendrier avec l’école.</p></li><li><span class="commercial-step" aria-hidden="true">02</span><h3>Former et accompagner</h3><p>Déployer la conférence, les cliniques et la formation des enseignants sur plusieurs semaines.</p></li><li><span class="commercial-step" aria-hidden="true">03</span><h3>Vivre les Games</h3><p>Réunir les élèves pour l’événement final, après la préparation.</p></li></ol><p>Accompagnement et coordination, équipements et production, DJ et sonorisation complètent la conférence, les cliniques et la formation. Les ballons pédagogiques restent à l’école.</p></section>
 <section class="school-section" id="configuration">
   <h2 class="section-title">Configurez vos <em>Games</em></h2>
   <div class="configuration-grid">
@@ -147,8 +149,8 @@
 <p class="school-summary" role="status"><strong data-total="students">2 000</strong> élèves · <strong data-total="adults">15</strong> adultes disponibles · <strong data-total="spaces">3</strong> plateaux</p>
   <a class="school-button school-button-yellow" href="#forfait">Voir et ajuster mon estimation <span aria-hidden="true">↓</span></a>
 </section>
-<section class="school-section" id="forfait">
-  <h2 class="section-title">Ajustez votre <em>forfait</em></h2>
+<section class="school-section commercial-section" id="forfait">
+  <h2 class="section-title">Votre formule. <em>Votre école.</em></h2><p class="commercial-budget-note">Le budget global peut dépasser celui d’une activité scolaire ponctuelle. Il couvre un programme sur plusieurs semaines : préparation, formation, accompagnement et événement final.</p><p class="commercial-budget-note">Ces réglages précisent vos besoins. Ils ne modifient pas automatiquement le tarif par élève de la cohorte pilote.</p>
   <a href="#configuration">Modifier ma configuration <span aria-hidden="true">↑</span></a>
 <p class="school-summary" role="status"><strong data-total="students">2 000</strong> élèves · <strong data-total="adults">15</strong> adultes disponibles · <strong data-total="spaces">3</strong> plateaux</p>
   <div class="package-grid">
@@ -159,17 +161,13 @@
       <label>Cliniques (séances)<input type="number" id="clinics" value="0" min="0" max="999999" step="1" required></label>
       <p id="configuration-error" role="status"></p>
     </div>
-    <aside class="school-price" aria-label="Estimation">
-      <h3>Estimation à confirmer</h3>
-      <p>Votre scénario doit être validé par l’équipe PürInstinct.</p>
-      <div class="school-example">
-        <h4>Scénario de référence</h4>
-        <p><strong><span data-cad="14500">14 500 $ CA</span></strong> pour <span data-number="2000">2 000</span> élèves<br><strong data-cad="7.25">7,25 $</strong> par élève</p>
-        <p>15 responsables de zones fournis par l’école et 5 intervenants PürInstinct pour 8 h.</p>
-      </div>
-    </aside>
+    <aside class="commercial-estimate" aria-label="Tarifs du programme scolaire"><h3>Du tarif régulier à la cohorte pilote</h3><div class="commercial-prices">
+ <article class="commercial-rate" aria-labelledby="regular-title"><p class="commercial-eyebrow" id="regular-title">Tarif régulier</p><p class="commercial-amount"><strong>25 $</strong><span>par élève</span></p><p>L’expérience scolaire complète sur plusieurs semaines.</p></article>
+ <article class="commercial-rate commercial-pilot" id="cohorte-pilote" aria-labelledby="pilot-title"><p class="commercial-eyebrow" id="pilot-title">Cohorte pilote</p><p class="commercial-amount"><strong>10 $</strong><span>par élève</span></p><p class="commercial-travel">Frais de déplacement en sus</p><p>Une réduction commerciale de 60 % accordée par PürInstinct, avant déplacement.</p><p class="commercial-note">Cette réduction n’est pas une subvention gouvernementale.</p></article>
+ </div><div class="commercial-example"><p>Exemple pour <span data-total="students">2 000</span> élèves</p><p><span>Budget régulier</span> <strong data-regular-total>50 000 $ CA</strong></p><p><span>Budget cohorte pilote</span> <strong data-pilot-total>20 000 $ CA</strong></p><small>Montants avant déplacement. Le financement externe ne change pas le prix du programme.</small></div><p class="commercial-note">Le nombre d’élèves, le calendrier et le périmètre de la formule sont à confirmer avec votre établissement.</p><a class="games-cta" href="/pour-les-ecoles.html#contact">Discuter de ma formule</a></aside>
   </div>
 </section>
+<section class="school-section commercial-section" id="financement"><h2 class="section-title">Financer votre participation</h2><div class="commercial-financing"><article><p class="commercial-eyebrow">A · Financement direct</p><h3>L’école finance sa participation</h3><p>L’établissement assume les 10 $ par élève de la cohorte pilote et les frais de déplacement.</p></article><article><p class="commercial-eyebrow">B · Financement externe</p><h3>L’école mobilise des partenaires</h3><p>Subventions admissibles, fondation scolaire, commandites et partenaires peuvent contribuer à réduire la part déboursée par l’école.</p></article></div><p class="commercial-note">Les pistes se vérifient avec le centre de services scolaire et les organismes concernés. L’admissibilité et l’obtention de fonds ne sont pas garanties. Seules les contributions confirmées réduisent le montant à la charge de l’école.</p><a class="school-button" href="/pour-les-ecoles.html#contact">Demander la documentation <span aria-hidden="true">→</span></a></section>
 </main>
 <footer class="school-footer"><a href="/pour-les-ecoles.html">Pour les écoles</a><a href="/concept.html#arena">L’Arène</a><a href="/pur-id.html">Pür ID</a></footer>
 </body>

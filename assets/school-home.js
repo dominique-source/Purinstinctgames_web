@@ -161,6 +161,11 @@ function updateConfiguration() {
       requestAnimationFrame(() => output.classList.add("is-changing"));
     }
   }
+  for (const [selector, rate] of [["[data-regular-total]", 25], ["[data-pilot-total]", 10]]) {
+    for (const output of document.querySelectorAll(selector)) {
+      output.textContent = totals.students === null ? (english ? "Enter a valid student count" : "Saisissez un nombre d’élèves valide") : currency.format(totals.students * rate);
+    }
+  }
   const roles = field("roles");
   roles.setCustomValidity("");
   if (adults !== null && roles.valueAsNumber > adults) {
