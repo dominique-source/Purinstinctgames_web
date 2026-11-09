@@ -39,3 +39,11 @@ Toutes les sources sont déjà publiques selon les règles existantes. Aucun ajo
 index.html ; assets/school-home.css ; assets/site-translations.js ; tests/school-video.test.mjs ; tests/school-journey.test.mjs ; documentation, captures et REPRISE-CODEX.md. Aucun autre composant, application ou média modifié.
 
 Les captures propres sont prises sur le serveur local avec le même code ; l’aperçu Vercel est également contrôlé aux deux dimensions. La petite commande du Vercel Toolbar éventuellement visible dans l’aperçu authentifié ne fait pas partie de la section.
+
+## Livraison vérifiée
+
+- PR de revue : https://github.com/dominique-source/Purinstinctgames_web/pull/29 (draft, base main).
+- Aperçu final : https://purinstinct-ibv5pm9y5-dominique-soucy-s-projects.vercel.app/?lang=fr#parcours
+- Vercel dpl_AyK5yrGQrujXpZ1pzk6Wg6jiHNUw, READY, target null (preview), commit ff86705477a5a683d2cafa3629cb57299f524ff7. Build réussi en environ 13 secondes hors attente.
+- Aperçu final contrôlé à 1440×900 : trois cartes de 427 px, bas des cadres à y≈895 ; à 390×844 : trois cartes de 354 px en une colonne, descriptions anglaises exactes. Aucun débordement ni erreur console constaté.
+- main reste 8302de7 ; aucune fusion ou production effectuée. Le commit de compte rendu ultérieur ne change que la documentation.

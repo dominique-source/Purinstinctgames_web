@@ -13,3 +13,7 @@ Terminé : captures, rapport docs/school-journey-three-cards/REVIEW.md et compar
 Manque : photos séparées de la maquette, notamment élèves filmant/entrevues ; portfolio réel autorisé. Médias existants en usage, aucune génération ni faux bouton lecture.
 
 Prochaine action : revue utilisateur de la PR, aucune publication autorisée pour cette section. Production reste 8302de7 sur https://purinstinctgames.com/.
+
+Livraison : PR #29 https://github.com/dominique-source/Purinstinctgames_web/pull/29
+Aperçu final READY vérifié : https://purinstinct-ibv5pm9y5-dominique-soucy-s-projects.vercel.app/?lang=fr#parcours (code ff86705, target preview).
+41 tests, captures FR/EN et rapport sauvegardés ; aucune modification de main. Attendre la validation pour toute fusion/publication.
