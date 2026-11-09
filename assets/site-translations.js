@@ -4,12 +4,13 @@ window.piSchoolCommercial = (() => {
   const policy = Object.freeze({ currency: 'CAD', regularRate: 25, pilotRate: 10,
     staffSupplement: null, travel: null, taxes: null });
   const limits = Object.freeze({ students: [1,999999], teachers: [0,999999], adults: [0,999999],
-    indoors: [0,999999], outdoors: [0,999999], roles: [0,999999], zones: [1,5], hours: [1,999999], clinics: [0,999999] });
+    indoors: [0,999999], outdoors: [0,999999], roles: [0,999999], zones: [1,5], hours: [1,999999], clinics: [1,999999] });
   function configuration(raw) {
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
     const result = {};
     for (const [key,[min,max]] of Object.entries(limits)) {
       const value = raw[key];
+      if (key === 'clinics' && (value === '' || value === null || value === undefined)) { result[key] = null; continue; }
       if (value === '' || value === null || value === undefined || typeof value === 'boolean') return null;
       const number = Number(value);
       if (!Number.isSafeInteger(number) || number < min || number > max) return null;
@@ -36,7 +37,7 @@ window.piSchoolCommercial = (() => {
     const labels = en ? ['Students','Teachers (total)','Other adults / volunteers (total)','Indoor play areas','Outdoor play areas','School adults available simultaneously','Open zones','Planned Games duration (hours)','Planned clinics (sessions)'] : ['Élèves','Enseignants (total)','Autres adultes / bénévoles (total)','Plateaux intérieurs','Plateaux extérieurs','Adultes de l’école disponibles simultanément','Zones ouvertes','Durée envisagée des Games (heures)','Cliniques envisagées (séances)'];
     const budget=estimate(c.students);
     return [(en ? 'School configuration — indicative proposal' : 'Configuration scolaire — proposition indicative'),
-      ...Object.keys(limits).map((key,i)=>labels[i]+' : '+c[key]),
+      ...Object.keys(limits).map((key,i)=>labels[i]+' : '+(c[key] === null ? (en ? 'To be confirmed' : 'À confirmer') : c[key])),
       (en ? 'Pilot program base : ' : 'Base du programme pilote : ')+formatMoney(budget.base,language),
       (en ? 'Regular program reference : ' : 'Référence régulière du programme : ')+formatMoney(budget.regular,language),
       en ? 'Additional staffing: to be confirmed. Travel: additional, to be confirmed. Total: to be confirmed.' : 'Personnel supplémentaire : à confirmer. Déplacement : en sus, à confirmer. Total : à confirmer.',
@@ -275,3 +276,5 @@ Object.assign(window.piTranslations, {
 });
 
 Object.assign(window.piTranslations, {"Voir la base du programme":"View the program base"});
+
+Object.assign(window.piTranslations, {"À préciser":"To be specified", "Le nombre de séances de cliniques sera confirmé avec l’école.":"The number of clinic sessions will be confirmed with the school."});

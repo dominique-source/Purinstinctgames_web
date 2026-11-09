@@ -29,6 +29,8 @@ test('confirmed program rates remain independent of school staff; unknowns never
  }
  assert.equal(model.configuration({...chosen,roles:16}),null);
  assert.equal(model.configuration({...chosen,students:''}),null);
+ assert.equal(model.configuration({...chosen,clinics:''}).clinics,null);
+ assert.match(model.summary({...chosen,clinics:null},'fr'),/Cliniques envisagées \(séances\) : À confirmer/);
  assert.match(model.summary(chosen,'en'),/Total: to be confirmed/);
  assert.match(model.summary(chosen,'fr'),/Total : à confirmer/);
 });

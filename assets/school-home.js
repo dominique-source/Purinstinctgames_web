@@ -146,6 +146,7 @@ function updateConfiguration() {
   for (const el of document.querySelectorAll("[data-cad]")) el.textContent = currency.format(Number(el.dataset.cad));
   for (const el of document.querySelectorAll("[data-number]")) el.textContent = counts.format(Number(el.dataset.number));
   const english = document.documentElement.lang === "en";
+  field("clinics").placeholder = english ? "To be specified" : "À préciser";
   const adults = sum(value("teachers"), value("adults"));
   const totals = {
     students: value("students"),

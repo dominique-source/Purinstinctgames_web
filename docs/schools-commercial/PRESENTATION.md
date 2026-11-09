@@ -53,13 +53,13 @@ COHORTE PILOTE
 FRAIS DE DÉPLACEMENT EN SUS
 
 **Mention**
-Une réduction commerciale de60% accordée par PürInstinct, avant déplacement. Cette réduction n’est pas une subvention gouvernementale.
+Une réduction commerciale de60% offerte par PürInstinct, avant déplacement et suppléments. Cette réduction n’est pas une subvention gouvernementale.
 
 **Pied de page**
 Le nombre d’élèves, le calendrier et le périmètre de la formule sont à confirmer avec votre établissement.
 
 **Mise en page**
-Conserver la photo et la hiérarchie typographique existantes. Tarif régulier visible avant le pilote, sans faux prix barré. Deux blocs, un court texte; ne pas réintroduire14 500$/7,25$. Si l’exemple2 000élèves est conservé :50 000$ régulier;20 000$ pilote avant déplacement. Ces montants sont les budgets du programme, pas une contribution nette après financement.
+Conserver la photo et la hiérarchie typographique existantes. Tarif régulier visible avant le pilote, sans faux prix barré. Deux blocs, un court texte; ne pas réintroduire14 500$/7,25$. Si l’exemple2 000élèves est conservé :50 000$ régulier;20 000$ de base pilote, avant déplacement et suppléments à confirmer. Ces montants concernent le programme seul, pas un total final ni une contribution nette après financement.
 
 ## Page financement
 
@@ -67,7 +67,7 @@ Conserver la photo et la hiérarchie typographique existantes. Tarif régulier v
 DEUX VOIES POUR FINANCER VOTRE PARTICIPATION
 
 **A · FINANCEMENT DIRECT**
-L’école assume les10$ par élève de la cohorte pilote et les frais de déplacement.
+L’école finance la base pilote de10$ par élève, les frais de déplacement et les suppléments applicables confirmés.
 
 **B · FINANCEMENT EXTERNE**
 Subventions admissibles, fondation scolaire, commandites et partenaires peuvent réduire la contribution directe de l’école.
@@ -89,7 +89,7 @@ Demandez la documentation ou réservez20minutes avec Dominique Soucy.
 
 Mais nous ne développons pas une activité ordinaire. Nous construisons une expérience sportive de qualité supérieure, directement dans votre école, sur plusieurs semaines.
 
-Le tarif régulier est de25$ par élève. Pour les établissements de notre cohorte pilote, nous proposons l’expérience complète à10$ par élève, plus les frais de déplacement.
+Le tarif régulier est de25$ par élève. Pour les établissements de notre cohorte pilote, la base du programme est de10$ par élève, avant déplacement et suppléments éventuels liés aux besoins d’encadrement.
 
 L’école peut financer sa participation directement ou explorer les programmes de subventions et les partenariats disponibles. »
 

@@ -1,3 +1,15 @@
+# Reprise — configuration commerciale écoles —9novembre2026
+
+Dépôt dominique-source/Purinstinctgames_web. Branche feat/schools-pilot-pricing-20261109, PR25 existante complétée. Modèle25$/10$, base sans remise liée aux adultes, personnel/déplacement/total à confirmer. Formulaire unique existant reçoit un récapitulatif visible ;API inchangée. Programme sur plus d’un mois, financement séparé, ballons pédagogiques conservés par l’école et matériel Games récupéré.
+
+18tests Node réussis, syntaxe et diff vérifiés, FR/EN/valeurs et captures1440×900/390×844, six zones et Échap contrôlés. Pas d’envoi réel de courriel. Inconnues de vente/taxes/encadrement documentées ;ne pas inventer de taux. Voir docs/schools-commercial/COMPTE-RENDU.md et PROGRESS.md.
+
+Aperçu local4182 (#tarifs/#budget). Aucun merge ni production ;prochaine action :revue de PR25 et validation des paramètres avant toute publication. Middleware, routes privées et application inchangés.
+
+L’audit RFID demandé auparavant est sauvegardé séparément dans /Users/client/Documents/ChatGPT/purinstinct-app/docs/rfid-audit-2026-11-09/RAPPORT.md, branche codex/rfid-readiness-audit-2026-11-09, commit9d1bbab. Les points bloquants matériels/multiappareils y sont détaillés. Ne pas mêler ce travail au correctif commercial.
+
+---
+
 ## Publication et recette
 
 PR23 fusionnée : e71ee38. Déploiement purinstinct-web dpl_74XchbZ7K59LJn36EidcyGLTXS7x READY/production. APP desktop ouvre le portail sans login, toutes les images sont chargées, Back retourne à l’accueil public. Requêtes HTTP sans cookies : catégories et Horizon200, organisateur/projection redirigent vers access.html.
