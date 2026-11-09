@@ -288,3 +288,6 @@
  .offer-intro { padding-top:320px; }
  .offer-panorama { height:365px; object-position:50% 12%; }
 }
+
+.offer-counter { display:flex; align-items:center; justify-content:center; gap:.06em; }
+html[lang="en"] .offer-counter { flex-direction:row-reverse; }
