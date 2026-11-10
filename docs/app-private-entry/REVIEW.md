@@ -1,6 +1,6 @@
 # APP à venir — revue, sans production
 
-Dépôt dominique-source/Purinstinctgames_web. Branche codex/app-coming-soon-private-access, base main0f6626b. Checkout isolé /tmp/purinstinct-web-app-review : ancien checkout préservé car référence locale codex/match-full-width endommagée empêchant git fetch. Ce checkout temporaire est sauvegardé par commits/push ; il ne constitue pas une exécution cloud autonome.
+Dépôt dominique-source/Purinstinctgames_web. Branche codex/app-coming-soon-private-access, base main0f6626b. Checkout isolé /Users/client/Documents/ChatGPT/purinstinct-web-app-review : ancien checkout préservé car référence locale codex/match-full-width endommagée empêchant git fetch. Ce checkout temporaire est sauvegardé par commits/push ; il ne constitue pas une exécution cloud autonome.
 
 ## Changements
 - APP devient un bouton HTML actif dans index/zones/concept/pur-id, même emplacement et style. Les anciennes pages scolaires redirigent déjà vers l’accueil public.
@@ -41,3 +41,7 @@ Ces modifications externes/de l’app ne sont PAS appliquées ici : mission inte
 PR30 fusionnée main0f6626b : trois cartes et configurateur, conformément à « rend tout live ». Vercel purinstinct-web dpl_E5VmDWKS8F99EqAzRW9tFYiycS6h READY, purinstinctgames.com. Calcul3200CAD + conservationEN confirmés en navigateur sur site réel. Aucun changement APP dans cette production.
 
 Captures locales de revue : captures/desktop-fr.jpg, captures/mobile-fr.jpg. PR31 : https://github.com/dominique-source/Purinstinctgames_web/pull/31 (brouillon).
+
+## Vérification hébergée finale
+Aperçu code2c98952 : https://purinstinct-kq1jq37py-dominique-soucy-s-projects.vercel.app/ ; dpl_A31Wye4ND4Gkb5gUv98YBHz4Fth1 READY. Requête anonyme sur / et /app/ :302 vers Vercel SSO (cache-control no-store), donc aperçu privé. Ce refus intervient AVANT le middleware applicatif ; il ne prouve pas l’exécution de son contrôle HMAC sur l’aperçu. Aucun lien de partage ni contournement généré. Accès propriétaire réel non vérifié. Aperçu local vérifié : http://127.0.0.1:4183/ . Le checkout a été déplacé vers un dossier permanent distinct /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche distante sauvegardée et dépôt ancien conservé.
+Production cartes/configurateur également vérifiée à390px : champs et calcul conservés aprèsFR/EN, aucun débordement. Le formulaire a été contrôlé via tests et résumé, sans soumission réelle. Aucun changement APP publié.
