@@ -17,7 +17,8 @@ test('the unified public page distinguishes price, pilot discount, travel and ex
 });
 test('the homepage keeps configuration inputs and interactive field controls',()=>{
  const html=read('index.html');
- for(const id of ['students','indoors','outdoors','clinics','block-count','config-schedule','config-activities','config-staff'])assert.ok(html.includes('id="'+id+'"'));
+ for(const id of ['students','reinforcements','extra-classes','multiple-blocks'])assert.ok(html.includes('id="'+id+'"'));
+ assert.doesNotMatch(html,/id="(?:block-count|config-schedule|config-activities|config-staff|indoors|outdoors)"/);
  assert.equal((html.match(/class="arena-pin"/g)||[]).length,6);
  assert.ok(html.includes('assets/app-portal.js'));
 });

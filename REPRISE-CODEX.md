@@ -1,7 +1,6 @@
-# Reprise — publication APP privée autorisée
-Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review, branche codex/app-coming-soon-private-access (PR31). Ancien checkout endommagé, app RFID et mission-control préservés.
-Autorisation actuelle : finaliser protection privée, fusionner et publier bouton APP À venir. Main actuel0f6626b (cartes/configurateur déjà live).
-Fait : Vercel projet purinstinct-app, équipe dominique-soucy-s-projects : SSO ALL activé. Anonyme /app/302SSO ; navigateur session existante ouvre accueil. Pas de nouveaux utilisateurs/partage/achat. Middleware web remplace proxy /app par redirection307no-store vers origine protégée fixe ; conserve paramètres et autres protections.54 tests passent.
-Firebase : règles historiques purinstinct-games lues uniquement, déjà expirées/fermées depuis29juin2026 ; pas de changement/donnée. Projet effectif du bundle non certifié par variables sensibles. Ne pas affirmer synchronisation tempsréel validée. Voir docs/app-private-entry/REVIEW.md.
-Prochaine action : vérifier aliases/routes/API anonymes et accès navigateur connecté, pousser commit, contrôler aperçu, fusion PR31 et vérifier production public/mobile FR/EN+accès privé. Pas de mail réel. Mise à jour finale des preuves après déploiement.
-Exécution locale ; travail sauvegardé par commits/branche GitHub. Pas d’exécution cloud autonome garantie.
+# Reprise — estimateur scolaire en revue
+Dépôt dominique-source/Purinstinctgames_web, /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche codex/simple-school-estimator, base main34a899f.
+Production actuelle : ancien configurateur +APPÀvenir privé (PR31). Ne pas fusionner/publier ce nouvel estimateur sans validation.
+Fait : remplace troisétapes par élèves/renforts/classescliniques ;10CADélève,400CADrenfort4h, forfaits0/400/750/1100/1400. Custom explicitement exclu, multiblocflag premierblocuniquement. Résumé vers formulaire existant, traductions, anciennes données partagées non supprimées et repriseutile seulement.62 tests passent.
+Browser1440/390 : calcul3550 et17,75,FR/ENconservechoix, invalidesaucunfauxbudget. Correction collisionconstscripts faite ; prochaineactionrecharger et vérifier résumé réel, capturesordinateur/mobile,legacyURL,CTA,console puis pousserbranche etPRreview. Aucun vrai courriel.
+Voir docs/simple-school-estimator/PROGRESS.md. Exécution locale, aucune autonomie cloud garantie. Autres sections,APP,tarifsanimation,financementcontenu,API et donnéesapp préservés.
