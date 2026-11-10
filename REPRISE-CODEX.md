@@ -1,8 +1,14 @@
-# Reprise — services et design estimateur, livraison en revue
-Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche codex/service-cards-estimator-design,base main40b6eaf. PR33ouverte : https://github.com/dominique-source/Purinstinctgames_web/pull/33
-Aucune fusion ni production autorisée. Production vérifiée toujours40b6eaf,dpl_93ahFoTqsTJJmTXJpWWh7iaSrDGb.
-Terminé :6cartesphoto3×2desktop/1col390px ;dialoguenatifuniqueFLIP240/160ms,fermeturesÉchap/extérieur/commande,focuscaptif/Yrestauréinstant,FR/ENinterneconservefocus,motionréduite ;estimateur1panneausombre+lime/CTA noir avecmoteur/default200/0/0inchangés. BlocprixHTML/CSS/animation inchangés,APP/API/formulaire/données préservés.
-69tests passent. QA1440/390 :6fenêtres/titres/photos,scrollYexact/focus,Tab/MajTab/close,traduction ;3550/17,75FR/EN/récapitulatifcohérent sansmail. Réductionmotiontestéeunitairement,pasréglageOS. CSS/JSservicesuniquesajoutslistedespagespubliques.
-Médiasexistantsillustratifs,conferencevue de dos ;coordinationecole.pngetéquipementsarena-hero.jpg remplacementsdocumentés,photosdédiéesmanquantes. Sources380pxlimitées366en carteset380enmodals(pasagrandissementflou).
-Aperçu hébergé vérifié https://purinstinct-c18x9h82a-dominique-soucy-s-projects.vercel.app/#services ;dpl_4oWvK3meLKz87phumUvVptG13coS READY(codebd0bd40). SessionVercelautorisée,sanspartage ;popupFR/EN,calc/résumé,consoleaucuneerreur. Capturesetrapport docs/service-cards-estimator/REVIEW.md et captures/.
-Prochaineaction :attendrevalidationpourfusion/publier. Aucuntravailrequissupplémentairepouraperçu. Notes/capturesàpoussersurbranche. Exécutionlocale,pasautonomiecloudpromise.
+# Reprise — bouton Compétition interscolaire en revue
+
+Dépôt : dominique-source/Purinstinctgames_web.
+Dossier : /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche : codex/interschool-menu-notice, basée sur origin/main 8b69bf1.
+
+Terminé : bouton immédiatement avant APP dans les menus existants (accueil, zones, concept, Pür ID), avis natif bilingue printemps 2028. Réutilisation du style APP sans modifier assets/app-portal.js ni assets/app-portal.css. Scripts et styles dédiés, deux ressources publiques autorisées par le middleware. Aucune nouvelle route ni fonctionnalité de compétition.
+
+Vérifié : 71 tests Node passent, syntaxe JS et git diff --check. Navigateur local : FR/EN, Entrée, Tab captif, Échap, fermeture par bouton et clic extérieur, focus restauré. APP conserve printemps 2027. Menu sans débordement à 1440, 1280, 1024, 390 et 320 pixels ; autres menus publics vérifiés à 1440 et Pür ID à 390. Menu replié sous 1200px pour accueillir le libellé long. Aucun déploiement effectué ; aucune fusion.
+
+Aperçu : http://127.0.0.1:4183/ (serveur local, dépend de cet ordinateur).
+Captures : /Users/client/.codex/visualizations/2026/11/02/01a199a7-889a-70e0-ac64-b5ab2ee8e3ce/interschool-menu/.
+
+Problèmes ouverts : aucun. Prochaine action : attendre la validation avant toute fusion ou publication. Branche conservée localement ; non poussée pour éviter de déclencher un déploiement automatique.

@@ -643,3 +643,5 @@ Object.assign(window.piTranslations, {
 });
 
 Object.assign(window.piTranslations, {"Langue du site":"Site language"});
+
+Object.assign(window.piTranslations, {"Compétition interscolaire":"Interschool Competition", "À venir au printemps 2028":"Coming spring 2028"});

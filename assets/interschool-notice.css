@@ -1,0 +1,11 @@
+
+/* Keep the added long label compact without changing APP's geometry. */
+.nav-links button.nav-interschool { max-width:180px; text-align:left; line-height:1.05; }
+@media (min-width:950px) { .nav-links:has([data-interschool-entry]) { gap:clamp(10px,1.3vw,22px); } }
+@media (max-width:1200px) {
+  .nav:has([data-interschool-entry]) .burger { display:grid; place-content:center; gap:5px; min-width:44px; min-height:44px; background:none; border:0; }
+  .nav:has([data-interschool-entry]) .burger span { display:block; width:25px; height:3px; background:currentColor; }
+  .nav:has([data-interschool-entry]) .nav-links:not(.open) { display:none; }
+  .nav:has([data-interschool-entry]) .nav-links.open { display:flex; flex-direction:column; position:absolute; top:100%; right:0; max-width:calc(100vw - 24px); max-height:calc(100dvh - 80px); overflow:auto; padding:12px 24px; gap:4px; background:#041321; visibility:visible; }
+  .nav-links button.nav-interschool { max-width:none; font-size:22px; }
+}
