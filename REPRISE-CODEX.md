@@ -1,8 +1,12 @@
-# Reprise — services et design estimateur, livraison en revue
-Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche codex/service-cards-estimator-design,base main40b6eaf. PR33ouverte : https://github.com/dominique-source/Purinstinctgames_web/pull/33
-Aucune fusion ni production autorisée. Production vérifiée toujours40b6eaf,dpl_93ahFoTqsTJJmTXJpWWh7iaSrDGb.
-Terminé :6cartesphoto3×2desktop/1col390px ;dialoguenatifuniqueFLIP240/160ms,fermeturesÉchap/extérieur/commande,focuscaptif/Yrestauréinstant,FR/ENinterneconservefocus,motionréduite ;estimateur1panneausombre+lime/CTA noir avecmoteur/default200/0/0inchangés. BlocprixHTML/CSS/animation inchangés,APP/API/formulaire/données préservés.
-69tests passent. QA1440/390 :6fenêtres/titres/photos,scrollYexact/focus,Tab/MajTab/close,traduction ;3550/17,75FR/EN/récapitulatifcohérent sansmail. Réductionmotiontestéeunitairement,pasréglageOS. CSS/JSservicesuniquesajoutslistedespagespubliques.
-Médiasexistantsillustratifs,conferencevue de dos ;coordinationecole.pngetéquipementsarena-hero.jpg remplacementsdocumentés,photosdédiéesmanquantes. Sources380pxlimitées366en carteset380enmodals(pasagrandissementflou).
-Aperçu hébergé vérifié https://purinstinct-c18x9h82a-dominique-soucy-s-projects.vercel.app/#services ;dpl_4oWvK3meLKz87phumUvVptG13coS READY(codebd0bd40). SessionVercelautorisée,sanspartage ;popupFR/EN,calc/résumé,consoleaucuneerreur. Capturesetrapport docs/service-cards-estimator/REVIEW.md et captures/.
-Prochaineaction :attendrevalidationpourfusion/publier. Aucuntravailrequissupplémentairepouraperçu. Notes/capturesàpoussersurbranche. Exécutionlocale,pasautonomiecloudpromise.
+# Reprise — financement et blocs supplémentaires en revue
+
+Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche codex/funding-multiple-blocks, basée sur codex/interschool-menu-notice (63281ae, préservée).
+
+Terminé : suppression de la case plusieurs blocs et de son message conditionnel ; lien au formulaire avec mention modifiable, non dupliquée et sans envoi ; cinq catégories de financement avec dialogue natif bilingue et accessible. Calculs et design de l’estimateur conservés. Rapport docs/school-funding/REVIEW.md et captures enregistrées.
+
+Vérifications : 74 tests passent, syntaxe JS/diff propres ; navigateur 1440×900 et 390×844, FR/EN, fenêtres, commentaires conservés, montant 3 550 $ inchangé avec 200 élèves/2 intervenants/2 classes, formulaire sous l’en-tête. Aucun courriel réel.
+
+Prochaine action : revue utilisateur ; aucune fusion ni mise en production autorisée. Aperçu local http://127.0.0.1:4183/#financement, dépend de l’ordinateur. Aucun blocage fonctionnel connu. Branche précédente menu conservée séparément ; PR de financement à baser dessus pour un diff ciblé.
+
+Branches sauvegardées sur origin. PR #34 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/34 ; base codex/interschool-menu-notice, aucune fusion.

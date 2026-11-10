@@ -52,7 +52,7 @@ test('public estimate replaces detailed planning, preserves funding separately a
  const html=read('index.html'),js=read('assets/school-home.js');
  assert.equal((html.match(/id="configuration"/g)||[]).length,1);
  assert.doesNotMatch(html,/config-v2|config-step|config-schedule|config-staff|12 blocs|config-notes/);
- assert.ok(html.indexOf('id="financement"')>html.indexOf('id="multiple-blocks"'));
+ assert.ok(html.indexOf('id="financement"')>html.indexOf('data-multiple-blocks-inquiry'));
  assert.match(html,/Classes supplémentaires de clinique/);assert.match(html,/DISCUTER DE MON PROJET/);
  assert.match(html,/<details class="estimate-help">/);
  assert.doesNotMatch(js.slice(js.indexOf('// Compact estimate:'),js.indexOf('const motion =')),/cfgBlocks|staffing\(|regularRate|localStorage|sessionStorage/);

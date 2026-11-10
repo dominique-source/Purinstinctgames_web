@@ -144,7 +144,7 @@ const estimateEnglish = () => document.documentElement.lang === 'en';
 const estimateText = fr => estimateEnglish() ? window.piTranslations[fr] ?? fr : fr;
 function readEstimate() {
   return {students:estimateField('students').value,reinforcements:estimateField('reinforcements').value,
-    extraClasses:estimateField('extra-classes').value,multipleBlocks:estimateField('multiple-blocks').checked};
+    extraClasses:estimateField('extra-classes').value,multipleBlocks:false};
 }
 function updateEstimate() {
   const raw=readEstimate(),result=estimator.calculate(raw);
@@ -159,9 +159,7 @@ function updateEstimate() {
   }
   set('estimate-error',result?'':estimateText('Saisissez un nombre entier d’élèves supérieur à zéro et un nombre entier d’intervenants égal ou supérieur à zéro.'));
   estimateField('estimate-custom-help').hidden=raw.extraClasses!=='custom';
-  estimateField('estimate-block-help').hidden=!raw.multipleBlocks;
   set('estimate-scope',estimateText(result?.customClinics?'Estimation hors cliniques sur mesure et déplacement':'Budget estimé avant déplacement'));
-  set('estimate-first-block',raw.multipleBlocks?estimateText('Montant pour le premier bloc de 4 h uniquement.'):'');
   set('estimate-program-label',interpolate('Programme · {count} élèves',{count:result?count(result.configuration.students):'—'}));
   set('estimate-staff-label',result&&result.configuration.reinforcements?result.configuration.reinforcements===1?estimateText('1 intervenant supplémentaire'):interpolate('{count} intervenants supplémentaires',{count:count(result.configuration.reinforcements)}):estimateText('Intervenants supplémentaires'));
   set('estimate-clinics-label',result&&!result.customClinics&&result.configuration.extraClasses!=='0'?result.configuration.extraClasses==='1'?estimateText('1 classe supplémentaire de clinique'):interpolate('{count} classes supplémentaires de clinique',{count:result.configuration.extraClasses}):estimateText('Classes supplémentaires de clinique'));
@@ -180,7 +178,6 @@ try {
   const restored=estimator.restore(raw);
   if(restored){
     for(const [id,key] of [['students','students'],['reinforcements','reinforcements'],['extra-classes','extraClasses']])estimateField(id).value=restored.value[key];
-    estimateField('multiple-blocks').checked=restored.value.multipleBlocks;
     estimateField('estimate-restored').hidden=!restored.legacy;
   }
 }catch{/* Malformed shared links do not replace the visible defaults. */}

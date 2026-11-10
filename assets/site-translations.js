@@ -643,3 +643,24 @@ Object.assign(window.piTranslations, {
 });
 
 Object.assign(window.piTranslations, {"Langue du site":"Site language"});
+
+Object.assign(window.piTranslations, {"Compétition interscolaire":"Interschool Competition", "À venir au printemps 2028":"Coming spring 2028"});
+
+Object.assign(window.piTranslations, {
+  "Vous envisagez plusieurs blocs de 4 h dans une même journée?": "Considering several 4-hour blocks on the same day?",
+  "Remplir le formulaire": "Fill out the form",
+  "Je souhaite discuter de plusieurs blocs de 4 heures dans une même journée.": "I would like to discuss several 4-hour blocks on the same day.",
+  "COMMENT FINANCER VOTRE PROJET?": "HOW CAN YOU FUND YOUR PROJECT?",
+  "Explorez les différentes possibilités de financement.": "Explore the different funding possibilities.",
+  "Les aides obtenues peuvent réduire la contribution de votre école. L’admissibilité et le financement ne sont pas garantis.": "Funding received may reduce your school’s contribution. Eligibility and funding are not guaranteed.",
+  "Budget de l’école.": "School budget.",
+  "L’école peut financer le projet directement à partir de son budget disponible. La proposition permet de préciser le montant à prévoir selon ses besoins.": "The school can fund the project directly from its available budget. The proposal helps clarify the amount to plan for based on its needs.",
+  "Subventions.": "Grants.",
+  "Certains programmes peuvent soutenir des projets sportifs ou éducatifs. Les possibilités dépendent des critères du programme, de l’établissement et du projet présenté.": "Some programs may support sports or educational projects. Opportunities depend on the criteria of the program, the institution and the proposed project.",
+  "Fondations.": "Foundations.",
+  "La fondation de l’école ou une fondation dont la mission correspond au projet peut être sollicitée pour contribuer au financement.": "The school foundation or a foundation whose mission aligns with the project may be approached to contribute funding.",
+  "Commandites.": "Sponsorships.",
+  "Des entreprises peuvent être sollicitées pour contribuer au projet. Les conditions de participation et de visibilité sont à convenir avec l’école et les partenaires concernés.": "Businesses may be approached to contribute to the project. Participation and visibility terms are to be agreed with the school and the partners concerned.",
+  "Partenaires locaux.": "Local partners.",
+  "Selon le projet, une municipalité, un organisme ou un partenaire de la communauté peut être approché pour une contribution financière ou matérielle.": "Depending on the project, a municipality, organization or community partner may be approached for a financial or material contribution."
+});

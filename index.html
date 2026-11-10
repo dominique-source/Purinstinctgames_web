@@ -15,16 +15,20 @@
   <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/?lang=en">
   <link rel="alternate" hreflang="x-default" href="https://purinstinctgames.com/">
   <meta name="description" content="Découvrez les cinq zones et configurez les Games pour votre école.">
-  <script src="/assets/site-translations.js?v=services-20261110" defer></script>
+  <script src="/assets/site-translations.js?v=funding-20261110?v=services-20261110" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css">
   <script src="/assets/site-language.js" defer></script>
-  <script src="/assets/school-home.js?v=services-20261110" defer></script>
+  <script src="/assets/school-home.js?v=funding-20261110" defer></script>
   <script src="/assets/ecoles-contact.js?v=services-20261110" defer></script>
   <link rel="stylesheet" href="/assets/school-services.css?v=services-20261110">
   <script src="/assets/school-services.js?v=services-20261110" defer></script>
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/assets/interschool-notice.css?v=20261110">
+  <script src="/assets/interschool-notice.js?v=20261110" defer></script>
+  <link rel="stylesheet" href="/assets/school-funding.css?v=20261110">
+  <script src="/assets/school-funding.js?v=20261110" defer></script>
 </head>
 <body>
 <nav class="nav" aria-label="Navigation principale">
@@ -37,6 +41,7 @@
     <a href="#parcours">Le programme</a>
     <a href="#configuration">Estimer mon budget</a>
     <a href="#contact">Contact</a>
+    <button type="button" data-interschool-entry class="nav-app-link nav-interschool">Compétition interscolaire</button>
     <button type="button" data-app-entry class="nav-app-link" aria-label="App PürInstinct Games">App</button>
   </div>
   <div class="site-language" role="group" aria-label="Langue du site"><button type="button" lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" aria-label="English" aria-pressed="false">EN</button></div>
@@ -223,22 +228,35 @@
     </div>
     <div class="estimate-result" id="budget" aria-labelledby="estimate-result-title"><span id="forfait"></span>
      <h4 class="offer-sr" id="estimate-result-title">VOTRE ESTIMATION</h4>
-     <div class="estimate-amount" role="status" aria-live="polite" aria-atomic="true"><p id="estimate-scope">Budget estimé avant déplacement</p><strong id="estimate-total">2 000 $</strong><p id="estimate-per-student">10 $ par élève</p><p id="estimate-first-block" class="estimate-short-note"></p></div>
+     <div class="estimate-amount" role="status" aria-live="polite" aria-atomic="true"><p id="estimate-scope">Budget estimé avant déplacement</p><strong id="estimate-total">2 000 $</strong><p id="estimate-per-student">10 $ par élève</p></div>
      <dl class="estimate-breakdown"><div><dt id="estimate-program-label">Programme · 200 élèves</dt><dd id="estimate-base">2 000 $</dd></div><div><dt id="estimate-staff-label">Intervenants supplémentaires</dt><dd id="estimate-staff">Aucun ajouté</dd></div><div><dt id="estimate-clinics-label">Classes supplémentaires de clinique</dt><dd id="estimate-clinics">Aucune ajoutée</dd></div></dl>
      <p class="estimate-currency">Dollars canadiens (CAD)</p>
      <a class="estimate-cta" data-school-proposal href="#contact"><span>DISCUTER DE MON PROJET</span><span aria-hidden="true">→</span></a>
     </div>
    </div>
    <p class="estimate-note">Événement final de 4 h. Déplacement en sus. Proposition adaptée à votre école.</p>
-   <label class="estimate-multiple"><input id="multiple-blocks" type="checkbox"> <span>J’envisage plusieurs blocs de 4 h</span></label>
-   <p id="estimate-block-help" class="estimate-short-note" hidden>Nous préciserons ensemble le budget des blocs supplémentaires.</p>
+   <div class="estimate-block-inquiry"><p>Vous envisagez plusieurs blocs de 4 h dans une même journée?</p><a class="funding-form-link" data-multiple-blocks-inquiry href="#schools-contact-form">Remplir le formulaire</a></div>
    <p class="estimate-tax">Traitement des taxes à confirmer dans la proposition.</p>
   </section>
-  <div class="offer-financing" id="financement">
-   <article class="offer-frame"><h3><span aria-hidden="true">01</span> FINANCEMENT DIRECT</h3><p>L’école finance sa participation.</p></article>
-   <article class="offer-frame"><h3><span aria-hidden="true">02</span> FINANCEMENT EXTERNE</h3><p>Subventions admissibles · Fondations · Commandites · Partenaires</p><p class="offer-help">L’admissibilité et l’obtention de fonds ne sont pas garanties.</p></article>
-   <p class="offer-help offer-funding-note">Une aide externe peut réduire la contribution de l’école, sans changer le prix du programme. Seules les contributions confirmées réduisent le montant à la charge de l’école.</p>
-  </div>
+  <section class="funding-options" id="financement" aria-labelledby="funding-title">
+   <h3 id="funding-title">COMMENT FINANCER VOTRE PROJET?</h3>
+   <p>Explorez les différentes possibilités de financement.</p>
+   <div class="funding-grid">
+    <button type="button" class="funding-card" data-funding="school" aria-haspopup="dialog" aria-controls="funding-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 3l9 7M5 9v12h14V9M9 21v-7h6v7"/></svg><span class="funding-label">Budget de l’école.</span><span class="funding-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="funding-card" data-funding="grants" aria-haspopup="dialog" aria-controls="funding-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18M5 10v10m7-10v10m7-10v10M2 21h20M3 7l9-5 9 5Z"/></svg><span class="funding-label">Subventions.</span><span class="funding-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="funding-card" data-funding="foundations" aria-haspopup="dialog" aria-controls="funding-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21S2 15 2 8a5 5 0 0 1 10-2 5 5 0 0 1 10 2c0 7-10 13-10 13Z"/></svg><span class="funding-label">Fondations.</span><span class="funding-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="funding-card" data-funding="sponsors" aria-haspopup="dialog" aria-controls="funding-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v12H3ZM8 21h8m-4-4v4M7 9h10m-10 4h6"/></svg><span class="funding-label">Commandites.</span><span class="funding-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="funding-card" data-funding="local" aria-haspopup="dialog" aria-controls="funding-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-4M13 3a4 4 0 0 1 0 8M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/></svg><span class="funding-label">Partenaires locaux.</span><span class="funding-plus" aria-hidden="true">+</span></button>
+   </div>
+   <p class="funding-note">Les aides obtenues peuvent réduire la contribution de votre école. L’admissibilité et le financement ne sont pas garantis.</p>
+   <div hidden>
+    <p data-funding-description="school">L’école peut financer le projet directement à partir de son budget disponible. La proposition permet de préciser le montant à prévoir selon ses besoins.</p>
+    <p data-funding-description="grants">Certains programmes peuvent soutenir des projets sportifs ou éducatifs. Les possibilités dépendent des critères du programme, de l’établissement et du projet présenté.</p>
+    <p data-funding-description="foundations">La fondation de l’école ou une fondation dont la mission correspond au projet peut être sollicitée pour contribuer au financement.</p>
+    <p data-funding-description="sponsors">Des entreprises peuvent être sollicitées pour contribuer au projet. Les conditions de participation et de visibilité sont à convenir avec l’école et les partenaires concernés.</p>
+    <p data-funding-description="local">Selon le projet, une municipalité, un organisme ou un partenaire de la communauté peut être approché pour une contribution financière ou matérielle.</p>
+   </div>
+  </section>
  </div>
 </section>
 
@@ -274,6 +292,13 @@
   <div class="service-dialog-language" role="group" aria-label="Langue du site"><button type="button" data-service-language="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" data-service-language="en" aria-label="English" aria-pressed="false">EN</button></div>
   <figure><img id="service-dialog-image" width="380" height="378" alt=""><figcaption>Visuel illustratif</figcaption></figure>
   <div class="service-dialog-copy"><h2 id="service-dialog-title"></h2><p id="service-dialog-description"></p></div>
+ </div>
+</dialog>
+<dialog id="funding-dialog" class="service-modal funding-modal" aria-labelledby="funding-dialog-title">
+ <div class="funding-dialog-surface">
+  <button type="button" class="service-close" data-funding-close autofocus>Fermer les détails</button>
+  <div class="service-dialog-language" role="group" aria-label="Langue du site"><button type="button" data-funding-language="fr" aria-label="Français">FR</button><button type="button" data-funding-language="en" aria-label="English">EN</button></div>
+  <h2 id="funding-dialog-title"></h2><p id="funding-dialog-description"></p>
  </div>
 </dialog>
 </body>
