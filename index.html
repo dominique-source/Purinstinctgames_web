@@ -8,18 +8,18 @@
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js?v=private-entry-20261110" defer></script>
-  <link rel="stylesheet" href="/assets/school-home.css?v=config-blocks-20261109">
-  <link rel="stylesheet" href="/assets/ecoles.css?v=config-blocks-20261109">
+  <link rel="stylesheet" href="/assets/school-home.css?v=estimate-20261110">
+  <link rel="stylesheet" href="/assets/ecoles.css?v=estimate-20261110">
   <title>PürInstinct Games à l’école</title>
   <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/?lang=fr">
   <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/?lang=en">
   <link rel="alternate" hreflang="x-default" href="https://purinstinctgames.com/">
   <meta name="description" content="Découvrez les cinq zones et configurez les Games pour votre école.">
-  <script src="/assets/site-translations.js?v=config-blocks-20261109" defer></script>
+  <script src="/assets/site-translations.js?v=estimate-20261110" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css">
   <script src="/assets/site-language.js" defer></script>
-  <script src="/assets/school-home.js?v=config-blocks-20261109" defer></script>
-  <script src="/assets/ecoles-contact.js?v=config-blocks-20261109" defer></script>
+  <script src="/assets/school-home.js?v=estimate-20261110" defer></script>
+  <script src="/assets/ecoles-contact.js?v=estimate-20261110" defer></script>
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -33,7 +33,7 @@
   <div class="nav-links" id="navLinks">
     <a href="#decouvrir-zones">Les 5 zones</a>
     <a href="#parcours">Le programme</a>
-    <a href="#configuration">Configurer mon école</a>
+    <a href="#configuration">Estimer mon budget</a>
     <a href="#contact">Contact</a>
     <button type="button" data-app-entry class="nav-app-link" aria-label="App PürInstinct Games">App</button>
   </div>
@@ -179,58 +179,47 @@
    <p class="offer-disclaimer">Cette réduction n’est pas une subvention gouvernementale.</p>
   </div>
   <ul class="offer-frame offer-services" aria-label="Composantes du programme"><li><img src="/assets/hero-deck/icons/iq.svg" alt="" width="32" height="32"><span>Conférence de Dominique Soucy</span></li><li><img src="/assets/hero-deck/icons/agility.svg" alt="" width="32" height="32"><span>Cliniques préparatoires</span></li><li><img src="/assets/hero-deck/icons/hand.svg" alt="" width="32" height="32"><span>Formation des enseignants</span></li><li><img src="/assets/hero-deck/icons/speed.svg" alt="" width="32" height="32"><span>Accompagnement et coordination</span></li><li><img src="/assets/hero-deck/icons/foot.svg" alt="" width="32" height="32"><span>Équipements et production</span></li><li><img src="/assets/hero-deck/icons/field.svg" alt="" width="32" height="32"><span>Games à l’école</span></li></ul>
-  <div class="offer-config config-v2">
-   <div class="config-steps" id="configuration" aria-labelledby="configuration-title">
-    <h3 id="configuration-title">Configurez votre projet scolaire</h3>
-    <nav class="config-nav" aria-label="Étapes du configurateur"><a href="#config-step-1">01 · Élèves et horaire</a><a href="#config-step-2">02 · Espaces et activités</a><a href="#config-step-3">03 · Adultes disponibles</a></nav>
-    <div id="config-legacy" class="config-warning" hidden><p>Cette configuration partagée utilise l’ancien modèle. Vérifiez les activités, les blocs et les disponibilités simultanées. Les anciens effectifs adultes restent dans le contexte transmis, sans être déduits automatiquement.</p><label><input type="checkbox" id="config-legacy-confirm"> J’ai vérifié les nouveaux blocs et disponibilités.</label></div>
-    <div class="school-fields">
-     <fieldset class="config-step offer-frame" id="config-step-1"><legend>01 · Vos élèves et votre horaire</legend>
-      <div class="offer-field"><label for="students">Élèves participants distincts<input id="students" type="number" min="1" max="999999" step="1" value="200" required></label><span class="offer-stepper"><button type="button" data-step-target="students" data-step="-1" aria-label="Diminuer" aria-controls="students">−</button><button type="button" data-step-target="students" data-step="1" aria-label="Augmenter" aria-controls="students">+</button></span></div>
-      <p>Chaque élève compte une seule fois dans la base, même s’il participe à plusieurs blocs. La somme des présences peut dépasser l’effectif distinct.</p>
-      <label class="config-count" for="block-count">Nombre de blocs de quatre heures<input id="block-count" type="number" min="1" max="12" step="1" value="1" required></label>
-      <p id="config-technical-limit" class="config-caution"></p><div id="config-schedule"></div><button id="add-config-block" class="config-action" type="button">Ajouter un bloc</button>
-      <p>Le premier bloc est inclus. Les frais des blocs supplémentaires sont à confirmer, séparément de leurs renforts.</p>
-     </fieldset>
-     <fieldset class="config-step offer-frame" id="config-step-2"><legend>02 · Vos espaces et vos activités</legend>
-      <p>Un plateau physique correspond approximativement à un terrain de basketball. Une installation est un terrain PürInstinct ou un jeu de zone.</p>
-      <div class="config-pair">
-       <div class="offer-field"><label for="indoors">Plateaux intérieurs disponibles<input id="indoors" type="number" min="0" max="999" step="1" value="1" required></label></div>
-       <div class="offer-field"><label for="outdoors">Plateaux extérieurs disponibles<input id="outdoors" type="number" min="0" max="999" step="1" value="2" required></label></div>
-      </div>
-      <p>Configuration ajustable, à valider avec l’école. Aucun changement d’installation ou de bloc n’est appliqué automatiquement.</p>
-      <div id="config-activities"></div>
-      <label class="config-notes" for="config-notes">Précisions sur les espaces et le montage<textarea id="config-notes" maxlength="300" rows="3"></textarea></label>
-      <details class="config-method"><summary>Hypothèses de capacité et logistique</summary>
-       <p id="config-capacity-rules"></p>
-       <p>La transition comprend boire, consulter son score et rejoindre une activité. Attente et transition ne sont pas du temps physiquement actif.</p>
-       <p>Ce modèle de planification ne prouve pas que tous les élèves auront réalisé toutes les activités. Les durées de rotation ne sont pas confirmées.</p>
-       <p>Définir les besoins, les espaces, les ressources et le calendrier avec l’école.</p>
-       <p>Accompagnement et coordination, équipements et production, DJ et sonorisation complètent la conférence, les cliniques et la formation. Les ballons pédagogiques restent à l’école. Le matériel des Games est récupéré après l’événement.</p>
-       <label for="clinics">Cliniques envisagées (séances)<input id="clinics" type="number" min="1" max="999" step="1" placeholder="À préciser"></label><p>Le nombre de séances de cliniques sera confirmé avec l’école.</p>
-      </details>
-     </fieldset>
-     <fieldset class="config-step offer-frame" id="config-step-3"><legend>03 · Votre équipe disponible</legend>
-      <p>Déclarez les personnes présentes simultanément pour l’encadrement de chaque bloc. Ne comptez pas une même personne comme enseignant et bénévole.</p>
-      <p>Les intervenants PürInstinct de base s’ajoutent aux adultes des jeux. Les qualifications et les rôles restent à confirmer ; un bénévole ne remplace pas automatiquement un intervenant spécialisé.</p>
-      <div id="config-staff"></div>
-     </fieldset>
-     <p id="configuration-error" class="config-warning" role="status"></p>
+  <section class="school-estimator" id="configuration" aria-labelledby="configuration-title">
+   <header class="estimate-heading"><h3 id="configuration-title">ESTIMEZ VOTRE <em>BUDGET</em></h3><p>Voyez ce qui fait varier le coût de votre projet.</p></header>
+   <p id="estimate-restored" class="estimate-restored" hidden>Effectif repris de votre ancien lien. Vérifiez les suppléments et le besoin de plusieurs blocs.</p>
+   <div class="estimate-grid">
+    <div class="estimate-controls" role="group" aria-label="Réglages de l’estimation">
+     <div class="estimate-setting">
+      <svg class="estimate-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="13" r="7"/><circle cx="8" cy="17" r="5"/><circle cx="40" cy="17" r="5"/><path d="M12 42v-8a12 12 0 0 1 24 0v8ZM0 39v-7a9 9 0 0 1 10-9l4 3a16 16 0 0 0-6 13Zm40 0a16 16 0 0 0-6-13l4-3a9 9 0 0 1 10 9v7Z"/></svg>
+      <div class="estimate-description"><label for="students">Élèves participants</label><p id="students-help">Base pilote : 10 $ par élève</p></div>
+      <div class="estimate-stepper"><button type="button" data-estimate-step="-1" aria-controls="students" aria-label="Diminuer le nombre d’élèves">−</button><input id="students" type="number" inputmode="numeric" min="1" max="999999" step="1" value="200" aria-describedby="students-help estimate-error" required><button type="button" data-estimate-step="1" aria-controls="students" aria-label="Augmenter le nombre d’élèves">+</button></div>
+     </div>
+     <div class="estimate-setting">
+      <svg class="estimate-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="11" r="8"/><path d="M5 46V35a19 19 0 0 1 38 0v11ZM17 24l7 12 7-12-3 18h-8Z"/></svg>
+      <div class="estimate-description"><label for="reinforcements">Intervenants supplémentaires</label><p id="reinforcements-help">3 intervenants inclus. +400 $ par personne pour 4 h.</p><details class="estimate-help"><summary>Combien en prévoir ?</summary><p>Les besoins dépendent des jeux installés et des adultes disponibles dans votre école. Nous les préciserons ensemble.</p><p>Les trois intervenants inclus s’ajoutent à l’encadrement des jeux fourni par l’école.</p></details></div>
+      <div class="estimate-stepper"><button type="button" data-estimate-step="-1" aria-controls="reinforcements" aria-label="Diminuer les intervenants supplémentaires">−</button><input id="reinforcements" type="number" inputmode="numeric" min="0" max="9999" step="1" value="0" aria-describedby="reinforcements-help estimate-error" required><button type="button" data-estimate-step="1" aria-controls="reinforcements" aria-label="Augmenter les intervenants supplémentaires">+</button></div>
+     </div>
+     <div class="estimate-setting">
+      <svg class="estimate-icon" viewBox="0 0 48 48" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" d="M8 40 19 6h10l11 34ZM15 18h18M11 30h26M3 42h42"/></svg>
+      <div class="estimate-description"><label for="extra-classes">Classes supplémentaires de clinique</label><p id="classes-help">75 minutes par classe. Tarifs pour une même journée.</p></div>
+      <select id="extra-classes" aria-describedby="classes-help estimate-custom-help"><option value="0">Aucune</option><option value="1">1 classe</option><option value="2">2 classes</option><option value="3">3 classes</option><option value="4">4 classes</option><option value="custom">Autre besoin</option></select>
+     </div>
+     <p id="estimate-custom-help" class="estimate-short-note" hidden>Plus de quatre classes ou plusieurs journées : formule à préciser ensemble.</p>
+     <p id="estimate-error" class="estimate-error" role="status"></p>
+    </div>
+    <div class="estimate-result" id="budget" aria-labelledby="estimate-result-title"><span id="forfait"></span>
+     <h4 id="estimate-result-title">VOTRE ESTIMATION</h4>
+     <dl class="estimate-breakdown"><div><dt id="estimate-program-label">Programme · 200 élèves</dt><dd id="estimate-base">2 000 $</dd></div><div><dt id="estimate-staff-label">Intervenants supplémentaires</dt><dd id="estimate-staff">Aucun ajouté</dd></div><div><dt id="estimate-clinics-label">Classes supplémentaires de clinique</dt><dd id="estimate-clinics">Aucune ajoutée</dd></div></dl>
+     <div class="estimate-amount" role="status" aria-live="polite" aria-atomic="true"><strong id="estimate-total">2 000 $</strong><p id="estimate-scope">Budget estimé avant déplacement</p><p id="estimate-per-student">10 $ par élève</p><p id="estimate-first-block" class="estimate-short-note"></p></div>
+     <p class="estimate-currency">Dollars canadiens (CAD)</p>
+     <a class="estimate-cta" data-school-proposal href="#contact"><span>DISCUTER DE MON PROJET</span><span aria-hidden="true">→</span></a>
     </div>
    </div>
-   <aside class="offer-frame config-budget" id="budget" aria-labelledby="config-budget-title"><span id="forfait"></span>
-    <h3 id="config-budget-title">Votre budget indicatif</h3><div id="config-budget-lines"><p>Base cohorte pilote : 10 $ CA par élève distinct.</p><p>Suppléments et total à confirmer.</p></div>
-    <p>Le sous-total chiffré n’est pas un total final. Les frais inconnus ne sont pas égaux à zéro.</p>
-    <p>Frais de déplacement en sus.</p><p>Traitement des taxes à confirmer dans la proposition.</p>
-    <p>Les frais supplémentaires de bloc couvriront notamment la prolongation de l’équipe de base. Ils restent à confirmer et sont distincts des renforts.</p>
-   </aside>
-  </div>
+   <p class="estimate-note">Estimation pour un événement final de 4 h. Déplacement en sus. Proposition finale adaptée à votre école.</p>
+   <label class="estimate-multiple"><input id="multiple-blocks" type="checkbox"> <span>J’envisage plusieurs blocs de 4 h</span></label>
+   <p id="estimate-block-help" class="estimate-short-note" hidden>Nous préciserons ensemble le budget des blocs supplémentaires.</p>
+   <p class="estimate-tax">Traitement des taxes à confirmer dans la proposition.</p>
+  </section>
   <div class="offer-financing" id="financement">
    <article class="offer-frame"><h3><span aria-hidden="true">01</span> FINANCEMENT DIRECT</h3><p>L’école finance sa participation.</p></article>
    <article class="offer-frame"><h3><span aria-hidden="true">02</span> FINANCEMENT EXTERNE</h3><p>Subventions admissibles · Fondations · Commandites · Partenaires</p><p class="offer-help">L’admissibilité et l’obtention de fonds ne sont pas garanties.</p></article>
    <p class="offer-help offer-funding-note">Une aide externe peut réduire la contribution de l’école, sans changer le prix du programme. Seules les contributions confirmées réduisent le montant à la charge de l’école.</p>
   </div>
-  <a class="offer-proposal" data-school-proposal href="#contact"><span>DEMANDER MA PROPOSITION</span><span aria-hidden="true">↗</span></a>
  </div>
 </section>
 
@@ -244,7 +233,7 @@
   <img class="schools-photo" src="/assets/homepage/ecole.png" width="1961" height="802" alt="Des élèves écoutent leur coach sur le terrain" loading="lazy" decoding="async">
  </div>
  <div class="schools-contact">
-    <details id="school-proposal" hidden><summary>Votre configuration à transmettre</summary><p>Cette configuration sera jointe à votre message. Les montants restent indicatifs.</p><pre id="school-proposal-summary"></pre></details>
+    <details id="school-proposal" hidden><summary>Votre estimation à transmettre</summary><p>Cette estimation sera jointe à votre message. Les montants restent indicatifs.</p><pre id="school-proposal-summary"></pre></details>
     <form id="schools-contact-form" action="/api/schools-contact" method="post">
       <label>Nom <input name="Nom" maxlength="100" autocomplete="name" required></label>
       <label>École <input name="École" maxlength="150" autocomplete="organization" required></label>

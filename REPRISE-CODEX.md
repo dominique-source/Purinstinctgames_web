@@ -1,7 +1,8 @@
-# Reprise — publication APP privée autorisée
-Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review, branche codex/app-coming-soon-private-access (PR31). Ancien checkout endommagé, app RFID et mission-control préservés.
-Autorisation actuelle : finaliser protection privée, fusionner et publier bouton APP À venir. Main actuel0f6626b (cartes/configurateur déjà live).
-Fait : Vercel projet purinstinct-app, équipe dominique-soucy-s-projects : SSO ALL activé. Anonyme /app/302SSO ; navigateur session existante ouvre accueil. Pas de nouveaux utilisateurs/partage/achat. Middleware web remplace proxy /app par redirection307no-store vers origine protégée fixe ; conserve paramètres et autres protections.54 tests passent.
-Firebase : règles historiques purinstinct-games lues uniquement, déjà expirées/fermées depuis29juin2026 ; pas de changement/donnée. Projet effectif du bundle non certifié par variables sensibles. Ne pas affirmer synchronisation tempsréel validée. Voir docs/app-private-entry/REVIEW.md.
-Prochaine action : vérifier aliases/routes/API anonymes et accès navigateur connecté, pousser commit, contrôler aperçu, fusion PR31 et vérifier production public/mobile FR/EN+accès privé. Pas de mail réel. Mise à jour finale des preuves après déploiement.
-Exécution locale ; travail sauvegardé par commits/branche GitHub. Pas d’exécution cloud autonome garantie.
+# Reprise — estimateur scolaire en revue
+Dépôt dominique-source/Purinstinctgames_web ; dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche codex/simple-school-estimator, base main34a899f.
+Production inchangée : ancien configurateur etAPPÀvenir protégé. Dernière demande utilisateur «est-ce live?» répondueNON ; aucune autorisation de fusion/publication de cet estimateur.
+Terminé :3réglagesHTML, calculcentimes10CADélève+400CADrenfort+forfaitscliniques0/400/750/1100/1400 ; surmesure/multiblocexclusclairement ; ratioélève ; aidefermée ;financementséparé ; reprisesanciennesURLutiles sansécraserchoix ; formulaire/récapitulatifFR/EN etendpointpréservés.
+Vérifié :62tests,syntaxediff ;browser1440/390,grillecomplète3550/17,75,plusmoins/saisie,vide—,custom2800/14,multiblocpremierseulement,FR/ENconservechampsetcontact,ancienlien400→4000extras0,menuCTA/résumé. Aucun courriel réel. Captures dans docs/simple-school-estimator/captures.
+Prochaineaction : commit/push, PRreview etaperçuhébergévérifié,puislivraisonSANSfusion ni production. Lire docs/simple-school-estimator/REVIEW.md pourdétails/pointscommerciauxouverts. Application/données/API/APPprotectionsintacts.
+Exécution locale, pas d’autonomiecloudgarantie. Branche à sauvegarderàdistance ; pasdenouveauxservices.
+Livraison terminée : PR32 ouverte, branche poussée. Aperçu vérifié https://purinstinct-keh1b4jmt-dominique-soucy-s-projects.vercel.app/#configuration, dpl_DpzCDniQAFsKHkChNYhxqbn5hpZj READY (code7329dd9). FR/EN,3550/17,75,résumé,CTA,Entrée+/− etmobile vérifiés,consolefraîchesanserreur. Production34a899f confirmée inchangée. Prochaineaction : attendre validation explicite pourfusion/publier ; aucune autre tâche nécessaire à l’aperçu.

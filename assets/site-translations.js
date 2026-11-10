@@ -103,7 +103,54 @@ window.piSchoolCommercial = (() => {
     return lines.join('\n');
   }
   function discountText(language){const discount=estimate(null).discount;return language==='en'?`A ${discount}% commercial discount provided by PürInstinct, before travel expenses and supplements.`:`Une réduction commerciale de ${discount} % offerte par PürInstinct, avant déplacement et suppléments.`;}
-  return Object.freeze({policy,limits,migrate,validate,configuration,capacity,staffing,calculate,estimate,formatMoney,blockName,summary,discountText});
+  // Compact public estimate. Legacy block helpers above remain available only
+  // for compatibility; no hidden block state participates in these calculations.
+  const estimatorPolicy = Object.freeze({version:'school-estimate-v1',currency:policy.currency,pilotRate:policy.pilotRate,baseStaff:policy.baseStaff,blockHours:policy.blockHours,
+    reinforcementHourlyRate:policy.reinforcementHourlyRate,reinforcementCents:policy.reinforcementBlockRate*100,
+    clinicCents:Object.freeze([0,40000,75000,110000,140000])});
+  function estimateConfiguration(raw) {
+    if(!raw || typeof raw!=='object' || Array.isArray(raw) || !integer(raw.students,1,limits.students) || !integer(raw.reinforcements,0,limits.adults))return null;
+    const classes=String(raw.extraClasses);
+    if(!['0','1','2','3','4','custom'].includes(classes) || typeof raw.multipleBlocks!=='boolean')return null;
+    return {version:estimatorPolicy.version,students:Number(raw.students),reinforcements:Number(raw.reinforcements),extraClasses:classes,multipleBlocks:raw.multipleBlocks};
+  }
+  function calculateEstimate(raw) {
+    const c=estimateConfiguration(raw);if(!c)return null;
+    const baseCents=c.students*estimatorPolicy.pilotRate*100,reinforcementCents=c.reinforcements*estimatorPolicy.reinforcementCents;
+    const clinicCents=c.extraClasses==='custom'?null:estimatorPolicy.clinicCents[Number(c.extraClasses)];
+    const estimatedCents=baseCents+reinforcementCents+(clinicCents??0);
+    return {configuration:c,baseCents,reinforcementCents,clinicCents,estimatedCents,perStudentCents:Math.round(estimatedCents/c.students),customClinics:clinicCents===null,firstBlockOnly:true};
+  }
+  function restoreEstimate(raw) {
+    if(!raw || typeof raw!=='object' || Array.isArray(raw))return null;
+    const current=estimateConfiguration(raw);if(current)return {value:current,legacy:false};
+    if(raw && ('reinforcements' in raw || 'extraClasses' in raw || raw.version===estimatorPolicy.version))return null;
+    // Restore useful legacy fields only. Old clinic counts do not mean extra
+    // classes; old staffing/blocks must never set the visitor's reinforcement choice.
+    if(!raw || !integer(raw.students,1,limits.students))return null;
+    return {value:{version:estimatorPolicy.version,students:Number(raw.students),reinforcements:0,extraClasses:'0',multipleBlocks:Array.isArray(raw.blocks)?raw.blocks.length>1:integer(raw.hours,1,999)&&Number(raw.hours)>4},legacy:true};
+  }
+  function estimateSummary(raw,language) {
+    const r=calculateEstimate(raw);if(!r)return '';
+    const en=language==='en',c=r.configuration,money=cents=>formatMoney(cents/100,language);
+    return [en?'School budget estimate':'Estimation du budget scolaire',
+      (en?'Rules: ':'Règles : ')+estimatorPolicy.version,
+      (en?'Students: ':'Élèves : ')+c.students,
+      (en?'Pilot program base: ':'Base du programme pilote : ')+money(r.baseCents),
+      (en?'Additional staff: ':'Intervenants supplémentaires : ')+c.reinforcements+' — '+money(r.reinforcementCents),
+      en?'3 base staff included; additional to school activity supervision.':'3 intervenants de base inclus ; en plus de l’encadrement des jeux par l’école.',
+      (en?'Additional clinic classes: ':'Classes supplémentaires de clinique : ')+(r.customClinics?(en?'Custom requirement — not priced':'Besoin sur mesure — non chiffré'):c.extraClasses+' — '+money(r.clinicCents)),
+      en?'Clinic packages: 75 minutes per class, on the same day only. Included clinics are not charged again.':'Forfaits cliniques : 75 minutes par classe, dans une même journée uniquement. Les cliniques incluses ne sont pas refacturées.',
+      (en?'Several 4-hour blocks requested: ':'Plusieurs blocs de 4 h envisagés : ')+(c.multipleBlocks?(en?'Yes':'Oui'):(en?'No':'Non')),
+      (r.customClinics?(en?'Estimate excluding custom clinics and travel: ':'Estimation hors cliniques sur mesure et déplacement : '):(en?'Estimated budget before travel: ':'Budget estimé avant déplacement : '))+money(r.estimatedCents),
+      (en?'Per student, same scope: ':'Par élève, même périmètre : ')+money(r.perStudentCents),
+      en?'Estimate for the first 4-hour final event. Travel excluded; tax treatment to be confirmed in the proposal.':'Estimation pour le premier événement final de 4 h. Déplacement exclu ; traitement des taxes à confirmer dans la proposition.',
+      ...(c.multipleBlocks?[en?'Additional block fees excluded; to be discussed together.':'Frais des blocs supplémentaires exclus ; à préciser ensemble.']:[]),
+      ...(r.customClinics?[en?'Custom clinic supplement remains to be added; not treated as free.':'Le supplément des cliniques sur mesure reste à ajouter ; il n’est pas considéré comme gratuit.']:[])
+    ].join('\n');
+  }
+  const estimator=Object.freeze({policy:estimatorPolicy,configuration:estimateConfiguration,calculate:calculateEstimate,restore:restoreEstimate,summary:estimateSummary});
+  return Object.freeze({policy,limits,migrate,validate,configuration,capacity,staffing,calculate,estimate,formatMoney,blockName,summary,discountText,estimator});
 })();
 
 window.piTranslations = {
@@ -519,3 +566,54 @@ Object.assign(window.piTranslations, {
 });
 
 Object.assign(window.piTranslations, {"À venir au printemps 2027": "Coming spring 2027", "Fermer": "Close"});
+
+Object.assign(window.piTranslations, {
+  "ESTIMEZ VOTRE": "ESTIMATE YOUR",
+  "BUDGET": "BUDGET",
+  "Voyez ce qui fait varier le coût de votre projet.": "See what affects the cost of your project.",
+  "Estimer mon budget": "Estimate my budget",
+  "Effectif repris de votre ancien lien. Vérifiez les suppléments et le besoin de plusieurs blocs.": "Student count restored from your previous link. Review extras and the need for additional blocks.",
+  "Réglages de l’estimation": "Estimate settings",
+  "Base pilote : 10 $ par élève": "Pilot base: $10 per student",
+  "Intervenants supplémentaires": "Additional staff",
+  "3 intervenants inclus. +400 $ par personne pour 4 h.": "3 staff included. +$400 per person for 4 hours.",
+  "Combien en prévoir ?": "How many should I plan for?",
+  "Les besoins dépendent des jeux installés et des adultes disponibles dans votre école. Nous les préciserons ensemble.": "Staffing needs depend on the games installed and the adults available at your school. We will work them out together.",
+  "Les trois intervenants inclus s’ajoutent à l’encadrement des jeux fourni par l’école.": "The three included staff are additional to the game supervision provided by the school.",
+  "Classes supplémentaires de clinique": "Additional clinic classes",
+  "75 minutes par classe. Tarifs pour une même journée.": "75 minutes per class. Rates apply to the same day.",
+  "Aucune": "None",
+  "1 classe": "1 class",
+  "2 classes": "2 classes",
+  "3 classes": "3 classes",
+  "4 classes": "4 classes",
+  "Autre besoin": "Other requirement",
+  "Plus de quatre classes ou plusieurs journées : formule à préciser ensemble.": "More than four classes or multiple days: we will work out the package together.",
+  "VOTRE ESTIMATION": "YOUR ESTIMATE",
+  "Programme · {count} élèves": "Program · {count} students",
+  "{count} intervenants supplémentaires": "{count} additional staff",
+  "{count} classes supplémentaires de clinique": "{count} additional clinic classes",
+  "1 intervenant supplémentaire": "1 additional staff member",
+  "1 classe supplémentaire de clinique": "1 additional clinic class",
+  "Programme · 200 élèves": "Program · 200 students",
+  "Aucun ajouté": "None added",
+  "Aucune ajoutée": "None added",
+  "Supplément à préciser": "Supplement to discuss",
+  "Budget estimé avant déplacement": "Estimated budget before travel",
+  "Estimation hors cliniques sur mesure et déplacement": "Estimate excluding custom clinics and travel",
+  "{amount} par élève": "{amount} per student",
+  "10 $ par élève": "$10 per student",
+  "Dollars canadiens (CAD)": "Canadian dollars (CAD)",
+  "DISCUTER DE MON PROJET": "DISCUSS MY PROJECT",
+  "Estimation pour un événement final de 4 h. Déplacement en sus. Proposition finale adaptée à votre école.": "Estimate for a 4-hour final event. Travel is additional. Final proposal tailored to your school.",
+  "J’envisage plusieurs blocs de 4 h": "I am considering several 4-hour blocks",
+  "Nous préciserons ensemble le budget des blocs supplémentaires.": "We will work out the budget for additional blocks together.",
+  "Montant pour le premier bloc de 4 h uniquement.": "Amount for the first 4-hour block only.",
+  "Saisissez un nombre entier d’élèves supérieur à zéro et un nombre entier d’intervenants égal ou supérieur à zéro.": "Enter a whole number of students greater than zero and a whole number of additional staff of zero or more.",
+  "Diminuer le nombre d’élèves": "Decrease the number of students",
+  "Augmenter le nombre d’élèves": "Increase the number of students",
+  "Diminuer les intervenants supplémentaires": "Decrease additional staff",
+  "Augmenter les intervenants supplémentaires": "Increase additional staff",
+  "Votre estimation à transmettre": "Your estimate to send",
+  "Cette estimation sera jointe à votre message. Les montants restent indicatifs.": "This estimate will be attached to your message. Amounts are indicative."
+});

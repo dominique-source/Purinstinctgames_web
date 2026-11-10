@@ -26,9 +26,10 @@ test('the illustrative portfolio is a four-image mosaic with no fake controls or
   const path=img[1].match(/src="\/([^"]+)"/)[1];assert.ok(readFileSync(new URL('../'+path,import.meta.url)).length>0);
  }
 });
-test('logistics remain within the existing package details rather than under the cards',()=>{
- const details=html.match(/<details class="config-method">[\s\S]*?<\/details>/)[0];
- for(const copy of ['Définir les besoins, les espaces, les ressources et le calendrier avec l’école.','Accompagnement et coordination','équipements et production','DJ et sonorisation','Les ballons pédagogiques restent à l’école.','Le matériel des Games est récupéré après l’événement.'])assert.ok(details.includes(copy),copy);
+test('the simplified estimate removes detailed planning while leaving the three presentation cards intact',()=>{
+ assert.doesNotMatch(html,/<details class="config-method">|id="config-staff"|id="config-activities"/);
+ assert.match(html,/Estimation pour un événement final de 4 h/);
+ assert.doesNotMatch(journey,/ballons pédagogiques|récupéré après/);
 });
 test('all approved English copy and new accessible descriptions use the existing dictionary',()=>{
  const context={window:{}};runInNewContext(read('assets/site-translations.js'),context);
