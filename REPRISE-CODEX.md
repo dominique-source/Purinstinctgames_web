@@ -8,3 +8,5 @@ Terminé : suppression de la case plusieurs blocs et de son message conditionnel
 Vérifications : 74 tests passent, syntaxe JS/diff propres ; navigateur 1440×900 et 390×844, FR/EN, fenêtres, commentaires conservés, montant 3 550 $ inchangé avec 200 élèves/2 intervenants/2 classes, formulaire sous l’en-tête. Aucun courriel réel.
 
 Prochaine action : revue utilisateur ; aucune fusion ni mise en production autorisée. Aperçu local http://127.0.0.1:4183/#financement, dépend de l’ordinateur. Aucun blocage fonctionnel connu. Branche précédente menu conservée séparément ; PR de financement à baser dessus pour un diff ciblé.
+
+Branches sauvegardées sur origin. PR #34 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/34 ; base codex/interschool-menu-notice, aucune fusion.

@@ -15,7 +15,7 @@ Cinq catégories compactes ouvrent un dialogue natif unique : icônes SVG décor
 
 - 74 tests Node réussis ; syntaxe JS et git diff --check.
 - Navigateur : 1440 × 900 et 390 × 844, cinq titres et descriptions, FR/EN, absence de débordement horizontal.
-- Fermeture Échap et bouton, retour du focus ; contrôle Tab dans le dialogue. Le clic extérieur est implémenté comme pour les services.
+- Fermeture Échap et bouton, retour du focus ; contrôle Tab dans le dialogue. Le clic extérieur est également vérifié sur téléphone avec retour du focus.
 - Commentaire préexistant conservé ; deux clics n’ajoutent qu’une mention ; FR/EN conserve les saisies. Le formulaire se positionne à environ 80 px du haut sur ordinateur.
 - Budget 200 élèves, 2 intervenants, 2 classes supplémentaires : 3 550 $ CA / 17,75 $ par élève avant et après le lien et FR/EN. Base initiale 2 000 $ CA. Aucun courriel envoyé.
 - Le bloc tarifaire, l’animation, le modèle de calcul dans site-translations.js, les styles de l’estimateur, ecoles-contact.js, l’API, les accès APP et les autres sections sont préservés. Seules deux nouvelles ressources statiques sont ajoutées à la liste publique du middleware.
@@ -27,3 +27,5 @@ Pas de script build dans ce dépôt statique : suite Node et syntaxe exécutées
 index.html ; assets/school-home.js (suppression des références à la case uniquement) ; assets/school-funding.js et .css ; assets/site-translations.js (nouveaux textes uniquement) ; middleware.js (ressources statiques) ; tests/school-funding.test.mjs et contrôles existants adaptés à la suppression de la case.
 
 Aperçu local : http://127.0.0.1:4183/#financement. Exécution locale dépendante de l’ordinateur. Captures dans captures/ : financement et pop-up, ordinateur et téléphone.
+
+PR de revue en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/34 (base : codex/interschool-menu-notice).
