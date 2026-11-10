@@ -1,8 +1,6 @@
-# Reprise — estimateur scolaire en revue
-Dépôt dominique-source/Purinstinctgames_web ; dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche codex/simple-school-estimator, base main34a899f.
-Production inchangée : ancien configurateur etAPPÀvenir protégé. Dernière demande utilisateur «est-ce live?» répondueNON ; aucune autorisation de fusion/publication de cet estimateur.
-Terminé :3réglagesHTML, calculcentimes10CADélève+400CADrenfort+forfaitscliniques0/400/750/1100/1400 ; surmesure/multiblocexclusclairement ; ratioélève ; aidefermée ;financementséparé ; reprisesanciennesURLutiles sansécraserchoix ; formulaire/récapitulatifFR/EN etendpointpréservés.
-Vérifié :62tests,syntaxediff ;browser1440/390,grillecomplète3550/17,75,plusmoins/saisie,vide—,custom2800/14,multiblocpremierseulement,FR/ENconservechampsetcontact,ancienlien400→4000extras0,menuCTA/résumé. Aucun courriel réel. Captures dans docs/simple-school-estimator/captures.
-Prochaineaction : commit/push, PRreview etaperçuhébergévérifié,puislivraisonSANSfusion ni production. Lire docs/simple-school-estimator/REVIEW.md pourdétails/pointscommerciauxouverts. Application/données/API/APPprotectionsintacts.
-Exécution locale, pas d’autonomiecloudgarantie. Branche à sauvegarderàdistance ; pasdenouveauxservices.
-Livraison terminée : PR32 ouverte, branche poussée. Aperçu vérifié https://purinstinct-keh1b4jmt-dominique-soucy-s-projects.vercel.app/#configuration, dpl_DpzCDniQAFsKHkChNYhxqbn5hpZj READY (code7329dd9). FR/EN,3550/17,75,résumé,CTA,Entrée+/− etmobile vérifiés,consolefraîchesanserreur. Production34a899f confirmée inchangée. Prochaineaction : attendre validation explicite pourfusion/publier ; aucune autre tâche nécessaire à l’aperçu.
+# Reprise — services et design estimateur en revue
+Dépôt dominique-source/Purinstinctgames_web, /Users/client/Documents/ChatGPT/purinstinct-web-app-review, branche codex/service-cards-estimator-design,base main40b6eaf. ProductionresteestimateurpubliéPR32,inchangée. Nouvellemissioninterditfusion/déploiement.
+Fait :6cartesphotographiques avecmodalsnatives,motionlégère/FR-EN/focus/scrolllock ;designestimateurpanneausombre+lime,calculs/defaults inchangés. 68tests passent dontcomparaisonblocprixHTML/CSS/animation/moteur etautresparcoursinchangés.
+Médias :sourcesexistantes ;conférencevue dedosillustrative,nondésignéecommeportraitréelDominique. Coordinationecole.png etéquipementsarena-hero.jpg remplacentmédiasdédiésmanquants. Images380pxnonagrandies(grille373/dialogue380),libellésillustratifs.
+En coursQAlocale4186 :conférencemodalFR/ENfonctionne/focuslangueconservé ;retour scrollsmoothglobaldétecté,corrigéinstant àrevérifieraprèsreload. Prochaineactiontester6cartesfermetures,scroll/focus,mobile/reducedmotion,estimateur/formulaire,captures,pushPRsansfusion. docs/service-cards-estimator/PROGRESS.md.
+Exécutionlocale,pasautonomiecloudpromise ;pasdemodificationapp/données,aucunmailréel.

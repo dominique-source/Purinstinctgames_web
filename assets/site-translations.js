@@ -617,3 +617,29 @@ Object.assign(window.piTranslations, {
   "Votre estimation à transmettre": "Your estimate to send",
   "Cette estimation sera jointe à votre message. Les montants restent indicatifs.": "This estimate will be attached to your message. Amounts are indicative."
 });
+
+Object.assign(window.piTranslations, {
+  "CE QUE COMPREND VOTRE PROGRAMME": "WHAT YOUR PROGRAM INCLUDES",
+  "Visuel illustratif": "Illustrative visual",
+  "Fermer les détails": "Close details",
+  "Ajustez les options. Le budget se met à jour instantanément.": "Adjust the options. Your budget updates instantly.",
+  "Événement final de 4 h. Déplacement en sus. Proposition adaptée à votre école.": "4-hour final event. Travel is additional. Proposal tailored to your school.",
+  "1 classe · 400 $": "1 class · $400",
+  "2 classes · 750 $": "2 classes · $750",
+  "3 classes · 1 100 $": "3 classes · $1,100",
+  "4 classes · 1 400 $": "4 classes · $1,400",
+  "Illustration d’une conférence, avec un intervenant vu de dos.": "Illustration of a talk, with a speaker seen from behind.",
+  "Une rencontre pour lancer le projet et découvrir l’univers PürInstinct.": "A meeting to launch the project and discover the world of PürInstinct.",
+  "Illustration d’élèves pratiquant leurs habiletés avec un ballon.": "Illustration of students practising their skills with a ball.",
+  "Les élèves découvrent le jeu et pratiquent leurs habiletés avant les Games.": "Students discover the game and practise their skills before the Games.",
+  "Illustration d’une équipe qui échange pendant une formation.": "Illustration of a team sharing ideas during training.",
+  "Les règles, les activités et les repères nécessaires pour accompagner les élèves.": "The rules, activities and guidance needed to support students.",
+  "Illustration d’un accompagnement de groupe sur le terrain.": "Illustration of a group receiving guidance on the field.",
+  "Le projet se prépare avec l’école : calendrier, ressources disponibles et rôles de chacun.": "The project is prepared with the school: schedule, available resources and everyone’s roles.",
+  "Illustration des installations et du matériel des Games.": "Illustration of the Games installations and equipment.",
+  "Le matériel, l’installation et la récupération après les Games. Les ballons pédagogiques restent à l’école pour poursuivre les activités.": "The equipment, setup and collection after the Games. Teaching balls stay at the school to continue the activities.",
+  "Illustration d’un match avec des élèves en action.": "Illustration of students playing a match.",
+  "Un événement final de quatre heures avec des zones d’habiletés, des matchs et de l’animation.": "A four-hour final event with skill zones, matches and entertainment."
+});
+
+Object.assign(window.piTranslations, {"Langue du site":"Site language"});

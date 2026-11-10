@@ -8,18 +8,20 @@
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js?v=private-entry-20261110" defer></script>
-  <link rel="stylesheet" href="/assets/school-home.css?v=estimate-20261110">
-  <link rel="stylesheet" href="/assets/ecoles.css?v=estimate-20261110">
+  <link rel="stylesheet" href="/assets/school-home.css?v=services-20261110">
+  <link rel="stylesheet" href="/assets/ecoles.css?v=services-20261110">
   <title>PürInstinct Games à l’école</title>
   <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/?lang=fr">
   <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/?lang=en">
   <link rel="alternate" hreflang="x-default" href="https://purinstinctgames.com/">
   <meta name="description" content="Découvrez les cinq zones et configurez les Games pour votre école.">
-  <script src="/assets/site-translations.js?v=estimate-20261110" defer></script>
+  <script src="/assets/site-translations.js?v=services-20261110" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css">
   <script src="/assets/site-language.js" defer></script>
-  <script src="/assets/school-home.js?v=estimate-20261110" defer></script>
-  <script src="/assets/ecoles-contact.js?v=estimate-20261110" defer></script>
+  <script src="/assets/school-home.js?v=services-20261110" defer></script>
+  <script src="/assets/ecoles-contact.js?v=services-20261110" defer></script>
+  <link rel="stylesheet" href="/assets/school-services.css?v=services-20261110">
+  <script src="/assets/school-services.js?v=services-20261110" defer></script>
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -178,39 +180,55 @@
    <p class="offer-price-note">Frais de déplacement en sus. Personnel supplémentaire selon les besoins d’encadrement.</p>
    <p class="offer-disclaimer">Cette réduction n’est pas une subvention gouvernementale.</p>
   </div>
-  <ul class="offer-frame offer-services" aria-label="Composantes du programme"><li><img src="/assets/hero-deck/icons/iq.svg" alt="" width="32" height="32"><span>Conférence de Dominique Soucy</span></li><li><img src="/assets/hero-deck/icons/agility.svg" alt="" width="32" height="32"><span>Cliniques préparatoires</span></li><li><img src="/assets/hero-deck/icons/hand.svg" alt="" width="32" height="32"><span>Formation des enseignants</span></li><li><img src="/assets/hero-deck/icons/speed.svg" alt="" width="32" height="32"><span>Accompagnement et coordination</span></li><li><img src="/assets/hero-deck/icons/foot.svg" alt="" width="32" height="32"><span>Équipements et production</span></li><li><img src="/assets/hero-deck/icons/field.svg" alt="" width="32" height="32"><span>Games à l’école</span></li></ul>
-  <section class="school-estimator" id="configuration" aria-labelledby="configuration-title">
-   <header class="estimate-heading"><h3 id="configuration-title">ESTIMEZ VOTRE <em>BUDGET</em></h3><p>Voyez ce qui fait varier le coût de votre projet.</p></header>
+  <section class="school-services" id="services" aria-labelledby="services-title">
+   <h3 id="services-title">CE QUE COMPREND VOTRE PROGRAMME</h3>
+   <div class="service-grid">
+    <button type="button" class="service-card" data-service="conference" aria-haspopup="dialog" aria-controls="service-dialog"><img src="/assets/school-home/conference.webp" width="380" height="378" alt="Illustration d’une conférence, avec un intervenant vu de dos." loading="lazy" decoding="async"><span class="service-card-shade" aria-hidden="true"></span><span class="service-card-title">Conférence de Dominique Soucy</span><span class="service-card-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="service-card" data-service="clinics" aria-haspopup="dialog" aria-controls="service-dialog"><img src="/assets/school-home/cliniques.webp" width="380" height="378" alt="Illustration d’élèves pratiquant leurs habiletés avec un ballon." loading="lazy" decoding="async"><span class="service-card-shade" aria-hidden="true"></span><span class="service-card-title">Cliniques préparatoires</span><span class="service-card-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="service-card" data-service="training" aria-haspopup="dialog" aria-controls="service-dialog"><img src="/assets/school-home/formation.webp" width="380" height="378" alt="Illustration d’une équipe qui échange pendant une formation." loading="lazy" decoding="async"><span class="service-card-shade" aria-hidden="true"></span><span class="service-card-title">Formation des enseignants</span><span class="service-card-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="service-card" data-service="coordination" aria-haspopup="dialog" aria-controls="service-dialog"><img src="/assets/homepage/ecole.png" width="1961" height="802" alt="Illustration d’un accompagnement de groupe sur le terrain." loading="lazy" decoding="async"><span class="service-card-shade" aria-hidden="true"></span><span class="service-card-title">Accompagnement et coordination</span><span class="service-card-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="service-card" data-service="equipment" aria-haspopup="dialog" aria-controls="service-dialog"><img src="/assets/arena-hero.jpg" width="1280" height="853" alt="Illustration des installations et du matériel des Games." loading="lazy" decoding="async"><span class="service-card-shade" aria-hidden="true"></span><span class="service-card-title">Équipements et production</span><span class="service-card-plus" aria-hidden="true">+</span></button>
+    <button type="button" class="service-card" data-service="games" aria-haspopup="dialog" aria-controls="service-dialog"><img src="/assets/school-home/games.webp" width="380" height="378" alt="Illustration d’un match avec des élèves en action." loading="lazy" decoding="async"><span class="service-card-shade" aria-hidden="true"></span><span class="service-card-title">Games à l’école</span><span class="service-card-plus" aria-hidden="true">+</span></button>
+   </div>
+   <p class="service-image-note">Visuels illustratifs</p>
+   <div class="service-library" hidden>
+    <p data-service-description="conference">Une rencontre pour lancer le projet et découvrir l’univers PürInstinct.</p>
+    <p data-service-description="clinics">Les élèves découvrent le jeu et pratiquent leurs habiletés avant les Games.</p>
+    <p data-service-description="training">Les règles, les activités et les repères nécessaires pour accompagner les élèves.</p>
+    <p data-service-description="coordination">Le projet se prépare avec l’école : calendrier, ressources disponibles et rôles de chacun.</p>
+    <p data-service-description="equipment">Le matériel, l’installation et la récupération après les Games. Les ballons pédagogiques restent à l’école pour poursuivre les activités.</p>
+    <p data-service-description="games">Un événement final de quatre heures avec des zones d’habiletés, des matchs et de l’animation.</p>
+   </div>
+  </section>
+  <section class="school-estimator estimate-integrated" id="configuration" aria-labelledby="configuration-title">
+   <header class="estimate-heading"><h3 id="configuration-title">ESTIMEZ VOTRE <em>BUDGET</em></h3><p>Ajustez les options. Le budget se met à jour instantanément.</p></header>
    <p id="estimate-restored" class="estimate-restored" hidden>Effectif repris de votre ancien lien. Vérifiez les suppléments et le besoin de plusieurs blocs.</p>
    <div class="estimate-grid">
     <div class="estimate-controls" role="group" aria-label="Réglages de l’estimation">
      <div class="estimate-setting">
-      <svg class="estimate-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="13" r="7"/><circle cx="8" cy="17" r="5"/><circle cx="40" cy="17" r="5"/><path d="M12 42v-8a12 12 0 0 1 24 0v8ZM0 39v-7a9 9 0 0 1 10-9l4 3a16 16 0 0 0-6 13Zm40 0a16 16 0 0 0-6-13l4-3a9 9 0 0 1 10 9v7Z"/></svg>
       <div class="estimate-description"><label for="students">Élèves participants</label><p id="students-help">Base pilote : 10 $ par élève</p></div>
       <div class="estimate-stepper"><button type="button" data-estimate-step="-1" aria-controls="students" aria-label="Diminuer le nombre d’élèves">−</button><input id="students" type="number" inputmode="numeric" min="1" max="999999" step="1" value="200" aria-describedby="students-help estimate-error" required><button type="button" data-estimate-step="1" aria-controls="students" aria-label="Augmenter le nombre d’élèves">+</button></div>
      </div>
      <div class="estimate-setting">
-      <svg class="estimate-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="11" r="8"/><path d="M5 46V35a19 19 0 0 1 38 0v11ZM17 24l7 12 7-12-3 18h-8Z"/></svg>
       <div class="estimate-description"><label for="reinforcements">Intervenants supplémentaires</label><p id="reinforcements-help">3 intervenants inclus. +400 $ par personne pour 4 h.</p><details class="estimate-help"><summary>Combien en prévoir ?</summary><p>Les besoins dépendent des jeux installés et des adultes disponibles dans votre école. Nous les préciserons ensemble.</p><p>Les trois intervenants inclus s’ajoutent à l’encadrement des jeux fourni par l’école.</p></details></div>
       <div class="estimate-stepper"><button type="button" data-estimate-step="-1" aria-controls="reinforcements" aria-label="Diminuer les intervenants supplémentaires">−</button><input id="reinforcements" type="number" inputmode="numeric" min="0" max="9999" step="1" value="0" aria-describedby="reinforcements-help estimate-error" required><button type="button" data-estimate-step="1" aria-controls="reinforcements" aria-label="Augmenter les intervenants supplémentaires">+</button></div>
      </div>
      <div class="estimate-setting">
-      <svg class="estimate-icon" viewBox="0 0 48 48" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" d="M8 40 19 6h10l11 34ZM15 18h18M11 30h26M3 42h42"/></svg>
       <div class="estimate-description"><label for="extra-classes">Classes supplémentaires de clinique</label><p id="classes-help">75 minutes par classe. Tarifs pour une même journée.</p></div>
-      <select id="extra-classes" aria-describedby="classes-help estimate-custom-help"><option value="0">Aucune</option><option value="1">1 classe</option><option value="2">2 classes</option><option value="3">3 classes</option><option value="4">4 classes</option><option value="custom">Autre besoin</option></select>
+      <select id="extra-classes" aria-describedby="classes-help estimate-custom-help"><option value="0">Aucune</option><option value="1">1 classe · 400 $</option><option value="2">2 classes · 750 $</option><option value="3">3 classes · 1 100 $</option><option value="4">4 classes · 1 400 $</option><option value="custom">Autre besoin</option></select>
      </div>
      <p id="estimate-custom-help" class="estimate-short-note" hidden>Plus de quatre classes ou plusieurs journées : formule à préciser ensemble.</p>
      <p id="estimate-error" class="estimate-error" role="status"></p>
     </div>
     <div class="estimate-result" id="budget" aria-labelledby="estimate-result-title"><span id="forfait"></span>
-     <h4 id="estimate-result-title">VOTRE ESTIMATION</h4>
+     <h4 class="offer-sr" id="estimate-result-title">VOTRE ESTIMATION</h4>
+     <div class="estimate-amount" role="status" aria-live="polite" aria-atomic="true"><p id="estimate-scope">Budget estimé avant déplacement</p><strong id="estimate-total">2 000 $</strong><p id="estimate-per-student">10 $ par élève</p><p id="estimate-first-block" class="estimate-short-note"></p></div>
      <dl class="estimate-breakdown"><div><dt id="estimate-program-label">Programme · 200 élèves</dt><dd id="estimate-base">2 000 $</dd></div><div><dt id="estimate-staff-label">Intervenants supplémentaires</dt><dd id="estimate-staff">Aucun ajouté</dd></div><div><dt id="estimate-clinics-label">Classes supplémentaires de clinique</dt><dd id="estimate-clinics">Aucune ajoutée</dd></div></dl>
-     <div class="estimate-amount" role="status" aria-live="polite" aria-atomic="true"><strong id="estimate-total">2 000 $</strong><p id="estimate-scope">Budget estimé avant déplacement</p><p id="estimate-per-student">10 $ par élève</p><p id="estimate-first-block" class="estimate-short-note"></p></div>
      <p class="estimate-currency">Dollars canadiens (CAD)</p>
      <a class="estimate-cta" data-school-proposal href="#contact"><span>DISCUTER DE MON PROJET</span><span aria-hidden="true">→</span></a>
     </div>
    </div>
-   <p class="estimate-note">Estimation pour un événement final de 4 h. Déplacement en sus. Proposition finale adaptée à votre école.</p>
+   <p class="estimate-note">Événement final de 4 h. Déplacement en sus. Proposition adaptée à votre école.</p>
    <label class="estimate-multiple"><input id="multiple-blocks" type="checkbox"> <span>J’envisage plusieurs blocs de 4 h</span></label>
    <p id="estimate-block-help" class="estimate-short-note" hidden>Nous préciserons ensemble le budget des blocs supplémentaires.</p>
    <p class="estimate-tax">Traitement des taxes à confirmer dans la proposition.</p>
@@ -249,5 +267,13 @@
 
 </main>
 <footer class="school-footer"><a href="#top">PürInstinct Games</a><a href="#contact">Contact</a><button type="button" data-app-entry class="nav-app-link" aria-label="App PürInstinct Games">App</button></footer>
+<dialog class="service-modal" id="service-dialog" aria-labelledby="service-dialog-title">
+ <div class="service-dialog-surface">
+  <button type="button" class="service-close" data-service-close autofocus>Fermer les détails</button>
+  <div class="service-dialog-language" role="group" aria-label="Langue du site"><button type="button" data-service-language="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" data-service-language="en" aria-label="English" aria-pressed="false">EN</button></div>
+  <figure><img id="service-dialog-image" width="380" height="378" alt=""><figcaption>Visuel illustratif</figcaption></figure>
+  <div class="service-dialog-copy"><h2 id="service-dialog-title"></h2><p id="service-dialog-description"></p></div>
+ </div>
+</dialog>
 </body>
 </html>
