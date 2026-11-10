@@ -37,3 +37,5 @@ PR32 : https://github.com/dominique-source/Purinstinctgames_web/pull/32
 Aperçu Vercel protégé existant : https://purinstinct-keh1b4jmt-dominique-soucy-s-projects.vercel.app/#configuration
 Déploiement dpl_DpzCDniQAFsKHkChNYhxqbn5hpZj READY, code7329dd9. Visite dans la session Vercel déjà autorisée, sans partage ni contournement. CalculFR3550/17,75 et résumé généré ; ENconserve200/2/2, montant3550/17.75, boutonCTA et résumé visibles. Commandes +/− déclenchées par Entrée et résultat ajusté puis rétabli. Mobile390 sans débordement ; console fraîche sans erreur. Aucun formulaire soumis.
 Production contrôlée séparément : purinstinctgames.com reste au commit34a899f, dpl_5ctqPh41M7srPz7T6TZNPBs93MVS. Aucune fusion ni publication de l’estimateur.
+
+Publication validée et réalisée le10novembre2026 :PR32fusionnée,main40b6eaf,dpl_93ahFoTqsTJJmTXJpWWh7iaSrDGbREADYsurpurinstinctgames.com. Cette miseàjour remplace les mentions «enrevue/sansproduction» ci-dessus. Voir PRODUCTION.md pour contrôlesréelsordinateur/mobileFR/ENetformulaire,sansmail.
