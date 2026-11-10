@@ -39,3 +39,5 @@ Ces modifications externes/de l’app ne sont PAS appliquées ici : mission inte
 
 ## Mise en ligne déjà réalisée, distincte
 PR30 fusionnée main0f6626b : trois cartes et configurateur, conformément à « rend tout live ». Vercel purinstinct-web dpl_E5VmDWKS8F99EqAzRW9tFYiycS6h READY, purinstinctgames.com. Calcul3200CAD + conservationEN confirmés en navigateur sur site réel. Aucun changement APP dans cette production.
+
+Captures locales de revue : captures/desktop-fr.jpg, captures/mobile-fr.jpg. PR31 : https://github.com/dominique-source/Purinstinctgames_web/pull/31 (brouillon).
