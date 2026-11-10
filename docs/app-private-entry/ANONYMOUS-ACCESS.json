@@ -1,0 +1,56 @@
+[
+  {
+    "url": "https://purinstinct-app.vercel.app/app/",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-app.vercel.app/app/competitions/ecole",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-app.vercel.app/app/ecole/demo-horizon/gerer",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-app.vercel.app/app/ecole/demo-horizon/projection",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-app.vercel.app/app/images/competitions/ecole-verticale.png",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-app.vercel.app/api/send-claim-code",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-app-dominique-soucy-s-projects.vercel.app/app/",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-app-git-main-dominique-soucy-s-projects.vercel.app/app/",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  },
+  {
+    "url": "https://purinstinct-5dnbx04p3-dominique-soucy-s-projects.vercel.app/app/",
+    "status": 302,
+    "vercel_sso": true,
+    "cache": "no-store, max-age=0"
+  }
+]

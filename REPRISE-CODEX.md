@@ -1,7 +1,9 @@
-# Reprise — publication APP privée autorisée
-Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review, branche codex/app-coming-soon-private-access (PR31). Ancien checkout endommagé, app RFID et mission-control préservés.
-Autorisation actuelle : finaliser protection privée, fusionner et publier bouton APP À venir. Main actuel0f6626b (cartes/configurateur déjà live).
-Fait : Vercel projet purinstinct-app, équipe dominique-soucy-s-projects : SSO ALL activé. Anonyme /app/302SSO ; navigateur session existante ouvre accueil. Pas de nouveaux utilisateurs/partage/achat. Middleware web remplace proxy /app par redirection307no-store vers origine protégée fixe ; conserve paramètres et autres protections.54 tests passent.
-Firebase : règles historiques purinstinct-games lues uniquement, déjà expirées/fermées depuis29juin2026 ; pas de changement/donnée. Projet effectif du bundle non certifié par variables sensibles. Ne pas affirmer synchronisation tempsréel validée. Voir docs/app-private-entry/REVIEW.md.
-Prochaine action : vérifier aliases/routes/API anonymes et accès navigateur connecté, pousser commit, contrôler aperçu, fusion PR31 et vérifier production public/mobile FR/EN+accès privé. Pas de mail réel. Mise à jour finale des preuves après déploiement.
-Exécution locale ; travail sauvegardé par commits/branche GitHub. Pas d’exécution cloud autonome garantie.
+# Reprise — APP privée en production
+Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche codex/app-coming-soon-private-access.
+PR31 FUSIONNÉE selon validation utilisateur. Main34a899f31f260919208bd54e8b01b1e202a625b3. Projet Vercel existant purinstinct-web, équipe dominique-soucy-s-projects, dpl_5ctqPh41M7srPz7T6TZNPBs93MVS READY et alias purinstinctgames.com confirmé.
+Terminé : APP pop-upFR/EN publié, modecentralcoming-soon ; app existante protégée par Vercel Authentication ALL sur toutes ses domains/aperçus. /app sur site public redirige307no-store vers origine privée fixe ; ancien proxy supprimé. Droits/utilisateurs existants conservés.
+Vérifié :54tests, builds, accueil public200,9accès APP/API anonymes302SSO ; navigateur1440/390, APPFR/EN etfocus/Échap, sans navigation au clic ; accès privé via session déjà connectée, accueil+sectionÉcole, parcours /app depuis public et Précédent. Nouvelle saisie de connexion non effectuée. Accès privé : https://purinstinct-app.vercel.app/app/ avec compte Vercel existant.
+Données : aucun utilisateur, donnée ou règle Firebase modifié ; ancien app RFID/mission-control/checkouts préservés. Règles historiques lues seules, déjà expirées/fermées ; projet effectif du bundle/synchrotempsréel non certifiés. Ne pas déployer le fichier rules local ni ouvrir Firebase pour contourner un problème.
+Preuves et limites : docs/app-private-entry/REVIEW.md, TESTS.txt, ANONYMOUS-ACCESS.json, captures/. Appel créant partage temporaire refusé, aucun lien généré ; vérifications sûres terminées sans ce mécanisme.
+Publication terminée. Notes postproduction à conserver sur branche, sans relancer un déploiement de code inutile. Prochaine action : aucune pour cette mission ; travailFirebase tempsréel éventuel à cadrer séparément.
+Exécution locale ; pas de travail garanti ordinateur arrêté. Branche distante sauvegardée.
