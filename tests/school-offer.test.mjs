@@ -57,6 +57,7 @@ test('the configurator never calculates a regular school budget, independently o
   m.tick(time);
   assert.equal(model.estimate(200).base,2000);
   assert.equal(model.estimate(2000).base,20000);
+  assert.equal(model.estimator.calculate({students:200,reinforcements:2,extraClasses:'2',multipleBlocks:false}).estimatedCents,355000);
   assert.equal('regular' in model.estimate(2000),false);
  }
  assert.match(read('assets/ecoles.css'),/\[data-reveal-state="complete"\] \.offer-regular strong[^}]+line-through/);

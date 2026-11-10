@@ -37,6 +37,7 @@ test('legacy staffing and clinic counts cannot override visible choices; links r
  assert.equal(e.calculate(explicit).estimatedCents,355000);
  assert.equal(e.restore(plan({reinforcements:-1})),null);
  assert.equal(e.restore({...old,students:0}),null);
+ for(const invalid of [null,1,'text',[],false])assert.equal(e.restore(invalid),null);
  assert.equal(e.restore(plan({reinforcements:2})).legacy,false);
 });
 test('FR and EN summaries include every selected cost and exclusion, never a 25-dollar school total',()=>{
@@ -55,8 +56,6 @@ test('public estimate replaces detailed planning, preserves funding separately a
  assert.match(html,/Classes supplémentaires de clinique/);assert.match(html,/DISCUTER DE MON PROJET/);
  assert.match(html,/<details class="estimate-help">/);
  assert.doesNotMatch(js.slice(js.indexOf('// Compact estimate:'),js.indexOf('const motion =')),/cfgBlocks|staffing\(|regularRate|localStorage|sessionStorage/);
- const initial=JSON.stringify(plan({reinforcements:2,extraClasses:'2'}));
- for(const rate of [25,20,10])assert.equal(e.calculate(JSON.parse(initial)).estimatedCents,355000,rate);
 });
 
 test('classic scripts share a compatible global scope on the actual public page',()=>{

@@ -122,6 +122,7 @@ window.piSchoolCommercial = (() => {
     return {configuration:c,baseCents,reinforcementCents,clinicCents,estimatedCents,perStudentCents:Math.round(estimatedCents/c.students),customClinics:clinicCents===null,firstBlockOnly:true};
   }
   function restoreEstimate(raw) {
+    if(!raw || typeof raw!=='object' || Array.isArray(raw))return null;
     const current=estimateConfiguration(raw);if(current)return {value:current,legacy:false};
     if(raw && ('reinforcements' in raw || 'extraClasses' in raw || raw.version===estimatorPolicy.version))return null;
     // Restore useful legacy fields only. Old clinic counts do not mean extra
