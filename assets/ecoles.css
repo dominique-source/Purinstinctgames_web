@@ -330,7 +330,7 @@ html[lang="en"] .offer-counter { flex-direction:row-reverse; }
 .school-estimator .estimate-stepper input { appearance:textfield; -moz-appearance:textfield; min-width:0; width:100%; height:40px; padding:2px; border:0; border-radius:3px; background:#f4f4ef; color:#0a0a0a; text-align:center; font:italic 900 29px/1 'Barlow Condensed',sans-serif; }
 .school-estimator .estimate-stepper input::-webkit-inner-spin-button,.school-estimator .estimate-stepper input::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
 .school-estimator .estimate-setting select { width:180px; max-width:100%; min-height:48px; border:1px solid #ccc; border-radius:6px; padding:8px; background:#f4f4ef; color:#0a0a0a; font:700 17px Barlow,sans-serif; }
-.school-estimator .estimate-help { margin-top:2px; }
+.school-estimator .estimate-help { grid-column:1 / -1; margin:0; }
 .school-estimator .estimate-help summary { min-height:44px; padding-block:10px; color:#ccff00; text-decoration:underline; font-size:16px; font-weight:700; cursor:pointer; }
 .school-estimator .estimate-help p { font-size:15px; }
 .school-estimator .estimate-result { min-width:0; display:flex; flex-direction:column; padding:24px; margin:6px; border-radius:11px; background:#ccff00; color:#0a0a0a; }

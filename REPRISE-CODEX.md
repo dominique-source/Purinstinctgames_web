@@ -1,6 +1,7 @@
-# Reprise — services et design estimateur en revue
-Dépôt dominique-source/Purinstinctgames_web, /Users/client/Documents/ChatGPT/purinstinct-web-app-review, branche codex/service-cards-estimator-design,base main40b6eaf. ProductionresteestimateurpubliéPR32,inchangée. Nouvellemissioninterditfusion/déploiement.
-Fait :6cartesphotographiques avecmodalsnatives,motionlégère/FR-EN/focus/scrolllock ;designestimateurpanneausombre+lime,calculs/defaults inchangés. 68tests passent dontcomparaisonblocprixHTML/CSS/animation/moteur etautresparcoursinchangés.
-Médias :sourcesexistantes ;conférencevue dedosillustrative,nondésignéecommeportraitréelDominique. Coordinationecole.png etéquipementsarena-hero.jpg remplacentmédiasdédiésmanquants. Images380pxnonagrandies(grille373/dialogue380),libellésillustratifs.
-En coursQAlocale4186 :conférencemodalFR/ENfonctionne/focuslangueconservé ;retour scrollsmoothglobaldétecté,corrigéinstant àrevérifieraprèsreload. Prochaineactiontester6cartesfermetures,scroll/focus,mobile/reducedmotion,estimateur/formulaire,captures,pushPRsansfusion. docs/service-cards-estimator/PROGRESS.md.
-Exécutionlocale,pasautonomiecloudpromise ;pasdemodificationapp/données,aucunmailréel.
+# Reprise — cartes services et design estimateur en revue
+Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review ; branche codex/service-cards-estimator-design,base main40b6eaf. AUCUNE fusion ni production autorisée pour cette mission.
+Fait :6cartesphotosHTMLboutons,dialoguenatifuniqueaniméFLIP,FR/ENinterne,Échap/extérieur/fermeture,bodylock/focus/Yrestauréinstant,Tabcaptif ;estimateurpanneausombreuniquerésultatlime/CTA noir,prixparélèvejustesousmontant. Modèlemaths/default200/0/0inchangés,blocprixHTML/CSS/JSentièrementinchangé. Aide lisible pleine largeur ;mentioncourte exacte.
+69tests passent. QAordinateur1440/mobile390 :6carteschacunecontenu correct,languefenêtreconservefocus,retourexact/focus. Estimation3550/17,75FR/EN,saisiesconservées,résumécorrectsansmail. APP/protections/API/formulaire/app/donnéesintacts. CSS/JSservicesseulsajoutslistedespagespubliques.
+Médias :380pxconférence/cliniques/formation/games(usage366px,380maxmodal),conférencevuede dosillustrative. Coordinationecole.pngetmatérielarena-hero.jpg fallbacksexplicites,photosdédiéesréellesmanquantes. Aucun média généré,nepasprétendrephoto réelleDominique.
+Prochaineaction :finircapturesordinateur/mobile+modal,créerPRreview/pousseretvérifieraperçu,décriremédiasmanquants,livrersansproduction. Serveurlocal4186. docs/service-cards-estimator/PROGRESS.md.
+Exécutionlocale,sauvegardeGitdistantenécessaire ;pasautonomiecloudgarantie. Ne pasfusionner/déployer.

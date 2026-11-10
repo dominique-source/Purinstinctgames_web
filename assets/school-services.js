@@ -50,7 +50,14 @@
   close.addEventListener('click',dismiss);
   for(const button of dialog.querySelectorAll('[data-service-language]'))button.addEventListener('click',()=>document.querySelector('.site-language button[lang="'+button.dataset.serviceLanguage+'"]').click());
   dialog.addEventListener('cancel',event=>{event.preventDefault();dismiss();});
-  dialog.addEventListener('keydown',event=>{if(event.key==='Escape')event.stopPropagation();});
+  dialog.addEventListener('keydown',event=>{
+    if(event.key==='Escape')event.stopPropagation();
+    if(event.key!=='Tab')return;
+    const controls=[...dialog.querySelectorAll('button:not([disabled])')];
+    const first=controls[0],last=controls.at(-1);
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+  });
   dialog.addEventListener('click',event=>{
     const r=dialog.getBoundingClientRect();
     if(event.target===dialog&&(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom))dismiss();

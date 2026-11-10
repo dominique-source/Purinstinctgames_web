@@ -19,11 +19,12 @@ function fixture(reducedMotion=false){
   return Object.assign(element(),{dataset:{service:data.id},data,image,name,querySelector:s=>s==='img'?image:name,getBoundingClientRect:()=>({left:80,top:180,width:360,height:270})});
  });
  const descriptions=Object.fromEntries(entries.map(e=>[e.id,{textContent:e.description}]));
- const dialog=Object.assign(element(),{open:false,querySelector:s=>({'[data-service-close]':close,img:photo,h2:title,'#service-dialog-description':description}[s]),querySelectorAll:()=>languageButtons,showModal(){this.open=true;},close(){this.open=false;this.handlers.close();},getBoundingClientRect:()=>({left:220,top:160,width:940,height:420}),animate(){animations++;return{finished:Promise.resolve(),cancel(){}};}});
+ const dialog=Object.assign(element(),{open:false,querySelector:s=>({'[data-service-close]':close,img:photo,h2:title,'#service-dialog-description':description}[s]),querySelectorAll:s=>s==='button:not([disabled])'?[close,...languageButtons]:languageButtons,showModal(){this.open=true;},close(){this.open=false;this.handlers.close();},getBoundingClientRect:()=>({left:220,top:160,width:940,height:420}),animate(){animations++;return{finished:Promise.resolve(),cancel(){}};}});
  const document={body,documentElement:{clientWidth:1425,lang:'fr'},querySelectorAll:()=>cards,getElementById:()=>dialog,addEventListener:(n,f)=>documentHandlers[n]=f,
  querySelector(s){if(s.startsWith('[data-service-description'))return descriptions[s.match(/="([^"]+)"/)[1]];
   const lang=s.includes('"en"')?'en':'fr';return{click(){document.documentElement.lang=lang;for(const c of cards){c.name.textContent=lang==='en'?dictionary[c.data.title]:c.data.title;c.image.alt=lang==='en'?dictionary[c.data.alt]:c.data.alt;}for(const e of entries)descriptions[e.id].textContent=lang==='en'?dictionary[e.description]:e.description;documentHandlers['pi:language']();}};
  }};
+ Object.defineProperty(document,'activeElement',{get:()=>focused});
  const preference={matches:reducedMotion,addEventListener:(n,f)=>handlers.motion=f};
  runInNewContext(source,{document,window:{scrollY:scroll,innerWidth:1440,scrollTo(x,y){scroll=typeof x==='object'?x.top:y;}},matchMedia:()=>preference,getComputedStyle:()=>({paddingRight:'0px'})});
  return {cards,dialog,close,photo,title,description,body,languageButtons,preference,handlers,get focused(){return focused},get scroll(){return scroll},get animations(){return animations}};
@@ -60,4 +61,12 @@ test('approved price markup, styles, reveal and estimator engine remain unchange
 test('only required service static resources are added to public access',async()=>{
  for(const path of ['/assets/school-services.js','/assets/school-services.css'])assert.equal((await middleware(new Request('https://purinstinctgames.com'+path))).headers.get('x-middleware-next'),'1');
  assert.equal((await middleware(new Request('https://purinstinctgames.com/app/admin'))).headers.get('location'),'https://purinstinct-app.vercel.app/app/admin');
+});
+
+test('Tab and Shift-Tab remain within the open service dialog',()=>{
+ const f=fixture();f.cards[0].handlers.click();let prevented=false;
+ f.dialog.handlers.keydown({key:'Tab',shiftKey:true,preventDefault(){prevented=true;}});
+ assert.equal(prevented,true);assert.equal(f.focused,f.languageButtons[1]);
+ prevented=false;f.dialog.handlers.keydown({key:'Tab',shiftKey:false,preventDefault(){prevented=true;}});
+ assert.equal(prevented,true);assert.equal(f.focused,f.close);
 });
