@@ -30,6 +30,8 @@ const publicPaths = new Set([
   '/assets/school-home.js',
   '/assets/interschool-notice.js',
   '/assets/interschool-notice.css',
+  '/assets/school-funding.js',
+  '/assets/school-funding.css',
   '/assets/school-services.js',
   '/assets/school-services.css',
   '/assets/school-home/arene-avec-reperes.webp',

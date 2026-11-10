@@ -1,14 +1,10 @@
-# Reprise — bouton Compétition interscolaire en revue
+# Reprise — financement et blocs supplémentaires en revue
 
-Dépôt : dominique-source/Purinstinctgames_web.
-Dossier : /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche : codex/interschool-menu-notice, basée sur origin/main 8b69bf1.
+Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche codex/funding-multiple-blocks, basée sur codex/interschool-menu-notice (63281ae, préservée).
 
-Terminé : bouton immédiatement avant APP dans les menus existants (accueil, zones, concept, Pür ID), avis natif bilingue printemps 2028. Réutilisation du style APP sans modifier assets/app-portal.js ni assets/app-portal.css. Scripts et styles dédiés, deux ressources publiques autorisées par le middleware. Aucune nouvelle route ni fonctionnalité de compétition.
+Terminé : suppression de la case plusieurs blocs et de son message conditionnel ; lien au formulaire avec mention modifiable, non dupliquée et sans envoi ; cinq catégories de financement avec dialogue natif bilingue et accessible. Calculs et design de l’estimateur conservés. Rapport docs/school-funding/REVIEW.md et captures enregistrées.
 
-Vérifié : 71 tests Node passent, syntaxe JS et git diff --check. Navigateur local : FR/EN, Entrée, Tab captif, Échap, fermeture par bouton et clic extérieur, focus restauré. APP conserve printemps 2027. Menu sans débordement à 1440, 1280, 1024, 390 et 320 pixels ; autres menus publics vérifiés à 1440 et Pür ID à 390. Menu replié sous 1200px pour accueillir le libellé long. Aucun déploiement effectué ; aucune fusion.
+Vérifications : 74 tests passent, syntaxe JS/diff propres ; navigateur 1440×900 et 390×844, FR/EN, fenêtres, commentaires conservés, montant 3 550 $ inchangé avec 200 élèves/2 intervenants/2 classes, formulaire sous l’en-tête. Aucun courriel réel.
 
-Aperçu : http://127.0.0.1:4183/ (serveur local, dépend de cet ordinateur).
-Captures : /Users/client/.codex/visualizations/2026/11/02/01a199a7-889a-70e0-ac64-b5ab2ee8e3ce/interschool-menu/.
-
-Problèmes ouverts : aucun. Prochaine action : attendre la validation avant toute fusion ou publication. Branche conservée localement ; non poussée pour éviter de déclencher un déploiement automatique.
+Prochaine action : revue utilisateur ; aucune fusion ni mise en production autorisée. Aperçu local http://127.0.0.1:4183/#financement, dépend de l’ordinateur. Aucun blocage fonctionnel connu. Branche précédente menu conservée séparément ; PR de financement à baser dessus pour un diff ciblé.

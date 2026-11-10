@@ -11,13 +11,13 @@ test('the unified public page distinguishes price, pilot discount, travel and ex
  for(const path of ['index.html']){
   const html=read(path);
   assert.ok(html.indexOf('Tarif régulier')<html.indexOf('Cohorte pilote'));
-  for(const phrase of ['25 $','10 $','Frais de déplacement en sus','réduction commerciale de 60 %','Cette réduction n’est pas une subvention gouvernementale.','contributions confirmées','plus d’un mois'])assert.ok(html.includes(phrase),path+': '+phrase);
+  for(const phrase of ['25 $','10 $','Frais de déplacement en sus','réduction commerciale de 60 %','Cette réduction n’est pas une subvention gouvernementale.','L’admissibilité et le financement ne sont pas garantis.','plus d’un mois'])assert.ok(html.includes(phrase),path+': '+phrase);
   assert.doesNotMatch(html,/14 500|7,25|data-cad="14500"/);
  }
 });
 test('the homepage keeps configuration inputs and interactive field controls',()=>{
  const html=read('index.html');
- for(const id of ['students','reinforcements','extra-classes','multiple-blocks'])assert.ok(html.includes('id="'+id+'"'));
+ for(const id of ['students','reinforcements','extra-classes'])assert.ok(html.includes('id="'+id+'"'));
  assert.doesNotMatch(html,/id="(?:block-count|config-schedule|config-activities|config-staff|indoors|outdoors)"/);
  assert.equal((html.match(/class="arena-pin"/g)||[]).length,6);
  assert.ok(html.includes('assets/app-portal.js'));
