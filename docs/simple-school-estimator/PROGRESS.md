@@ -7,3 +7,4 @@ Tests :62 réussis, dont grille/exemples/invalides/exclusions/reprise et message
 Aucune fusion ni production autorisée pour cette mission. APP et protections inchangés.
 
 QA locale terminée : résumé visible du vrai formulaire3550/17,75, puis custom2800/14 etmultiblocexclu, sansmail ;62tests passent. Tousforfaits etplusmoins vérifiés. FR/ENconserve200/2/2 etNom/Commentaires. Ancienlien400/2blocs reprend400,extras0,classes0,multibloctrue etnoticeexplicite. Capturesdesktopetmobilecontrôles/résultat sauvegardées. ProchaineactionpousserbranchePR et vérifieraperçuVercel ; pas deproduction.
+Aperçu7329dd9 READY et vérifiéFR/EN en navigateur, CTA/récapitulatif etplusmoinsauclavier, consoleaucuneerreur ;PR32 ouverte. Production toujours34a899f. Livraison prête, attendre validation avant toutefusion/publication.

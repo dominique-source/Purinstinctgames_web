@@ -31,3 +31,9 @@ Code : index.html ; assets/ecoles.css, assets/school-home.js, assets/site-transl
 ## Points restant à définir commercialement
 Tarif des cliniques au-delà de4classes ou réparties sur plusieurs journées, blocs supplémentaires, déplacement, traitement des taxes. Le nombre de cliniques incluses n’est pas inventé. Ces postes ne sont pas présentés comme compris dans le montant.
 Aperçu local : http://127.0.0.1:4184/#configuration (ordinateur nécessaire). Aperçu distant et PR à consigner après le push ; la branche ne doit pas être fusionnée sans validation.
+
+## Aperçu hébergé vérifié
+PR32 : https://github.com/dominique-source/Purinstinctgames_web/pull/32
+Aperçu Vercel protégé existant : https://purinstinct-keh1b4jmt-dominique-soucy-s-projects.vercel.app/#configuration
+Déploiement dpl_DpzCDniQAFsKHkChNYhxqbn5hpZj READY, code7329dd9. Visite dans la session Vercel déjà autorisée, sans partage ni contournement. CalculFR3550/17,75 et résumé généré ; ENconserve200/2/2, montant3550/17.75, boutonCTA et résumé visibles. Commandes +/− déclenchées par Entrée et résultat ajusté puis rétabli. Mobile390 sans débordement ; console fraîche sans erreur. Aucun formulaire soumis.
+Production contrôlée séparément : purinstinctgames.com reste au commit34a899f, dpl_5ctqPh41M7srPz7T6TZNPBs93MVS. Aucune fusion ni publication de l’estimateur.
