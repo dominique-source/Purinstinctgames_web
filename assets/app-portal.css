@@ -128,3 +128,16 @@ body.pi-portal-departure > footer {
     animation: none !important;
   }
 }
+
+/* Same navigation geometry for the enabled APP notice button. */
+button.nav-app-link { appearance:none; border:0; background:transparent; color:inherit; padding:0; cursor:pointer; display:flex; align-items:center; min-height:44px; font:italic 900 19px/1 var(--display, sans-serif); text-transform:uppercase; }
+.nav-links button.nav-app-link { font-size:clamp(16px,1.45vw,23px); }
+button.nav-app-link:hover { color:var(--lime,#ccff00); }
+button.nav-app-link:focus-visible,.pi-app-notice button:focus-visible { outline:2px solid #ccff00; outline-offset:5px; }
+.pi-app-notice { box-sizing:border-box; width:min(440px,calc(100% - 36px)); color:#f5f3e8; background:#071421; border:1px solid #00d9e8; border-radius:16px; padding:32px; box-shadow:0 0 30px #00d9e833; text-align:center; animation:pi-notice-in 150ms ease-out; }
+.pi-app-notice::backdrop { background:#000b; }
+.pi-app-notice p { font:italic 900 clamp(26px,5vw,38px)/1.15 var(--display,sans-serif); margin:0 0 24px; }
+.pi-app-notice-close { min-height:44px; padding:8px 24px; border:1px solid #ccff00; border-radius:6px; background:transparent; color:#ccff00; font:inherit; cursor:pointer; }
+@keyframes pi-notice-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+@media(max-width:760px) { .nav .nav-links button.nav-app-link { font-size:22px; } }
+@media(prefers-reduced-motion:reduce) { .pi-app-notice { animation:none; } }

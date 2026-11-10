@@ -5,7 +5,7 @@ import {runInNewContext} from 'node:vm';
 import middleware from '../middleware.js';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const html=read('index.html'),js=read('assets/school-home.js');
-test('discovery stays on one page, with unique IDs, one form and unchanged APP entry',()=>{
+test('discovery stays on one page, with unique IDs, one form and accessible APP notice entry',()=>{
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
  for(const match of html.matchAll(/href="([^"]+)"/g)){
   const href=match[1];if(href.startsWith('#'))assert.ok(ids.includes(href.slice(1)),href);
@@ -13,7 +13,7 @@ test('discovery stays on one page, with unique IDs, one form and unchanged APP e
  const nav=html.match(/<nav.*?<\/nav>/s)[0],footer=html.match(/<footer.*?<\/footer>/s)[0];
  assert.doesNotMatch(nav+footer,/L’Arène|Pür ID|pour-les-ecoles.html|concept.html|zones.html/);
  assert.doesNotMatch(html,/Explorer la zone|Explore the zone|href="\/(zones|concept|pur-id|pour-les-ecoles)\.html/);
- assert.match(nav,/href="\/app" class="nav-app-link"/);
+ assert.match(nav,/<button type="button" data-app-entry class="nav-app-link"/);
  assert.equal((html.match(/<form /g)||[]).length,1);
  assert.ok(html.indexOf('id="contact"')>html.indexOf('id="configuration"'));
  assert.match(html,/action="\/api\/schools-contact"/);

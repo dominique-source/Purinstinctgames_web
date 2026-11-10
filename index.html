@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preload" href="/assets/hero-deck/fonts/BarlowCondensed-BlackItalic.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="/assets/app-portal.css">
+  <link rel="stylesheet" href="/assets/app-portal.css?v=private-entry-20261110">
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
-  <script src="/assets/app-portal.js" defer></script>
+  <script src="/assets/app-portal.js?v=private-entry-20261110" defer></script>
   <link rel="stylesheet" href="/assets/school-home.css?v=config-blocks-20261109">
   <link rel="stylesheet" href="/assets/ecoles.css?v=config-blocks-20261109">
   <title>PürInstinct Games à l’école</title>
@@ -35,7 +35,7 @@
     <a href="#parcours">Le programme</a>
     <a href="#configuration">Configurer mon école</a>
     <a href="#contact">Contact</a>
-    <a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a>
+    <button type="button" data-app-entry class="nav-app-link" aria-label="App PürInstinct Games">App</button>
   </div>
   <div class="site-language" role="group" aria-label="Langue du site"><button type="button" lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" aria-label="English" aria-pressed="false">EN</button></div>
   <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -259,6 +259,6 @@
 </section>
 
 </main>
-<footer class="school-footer"><a href="#top">PürInstinct Games</a><a href="#contact">Contact</a><a href="/app" class="nav-app-link" aria-label="App PürInstinct Games">App</a></footer>
+<footer class="school-footer"><a href="#top">PürInstinct Games</a><a href="#contact">Contact</a><button type="button" data-app-entry class="nav-app-link" aria-label="App PürInstinct Games">App</button></footer>
 </body>
 </html>

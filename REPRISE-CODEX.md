@@ -1,8 +1,7 @@
 # Reprise
-Dépôt dominique-source/Purinstinctgames_web, /Users/client/Documents/ChatGPT/purinstinct-web-premium.
-Branche codex/school-configurator-blocks (inclut codex/school-journey-three-cards, PR29).
-Terminé : trois cartes, configurateur par blocs, base distincts×10, renforts400/bloc, coûts inconnus explicites, FR/EN et résumé complet. 49 tests passent. Navigateur ordinateur et téléphone, valeurs conservées au changement de langue. Aucun courriel réel envoyé.
-Autorisation : « rend tout live » pour cartes+configurateur. Prochaine action : PR combinée, fusion main puis vérifier déploiement existant purinstinct-web sur purinstinctgames.com.
-Mission suivante APP : bouton À venir + protection privée à préparer dans une branche distincte, SANS fusion ni production. Audit : proxy web permet actuellement APP explicitement ; hôte direct app répond200 anonyme ; règles Firebase exigent auth mais app utilise signInAnonymously ; protection propriétaire réelle à compléter/configurer, pas simplement masquer le lien. Aucun changement de données/règles Firebase réalisé.
-Points commerciaux ouverts : frais blocs supplémentaires, déplacement,taxes,dimensions/compatibilités,qualifications ; restent À confirmer.
-Exécution locale sur ordinateur, aucune continuité autonome cloud garantie.
+Dépôt dominique-source/Purinstinctgames_web. Checkout /tmp/purinstinct-web-app-review ; branche codex/app-coming-soon-private-access, base main0f6626b. Ancien dossier /Users/client/Documents/ChatGPT/purinstinct-web-premium préservé, référence Git locale endommagée ; aucun travail supprimé. Le dossier mission-control initial et le dépôt app RFID sont intacts.
+Production : PR30 cartes+configurateur fusionnée, commit0f6626b, dpl_E5VmDWKS8F99EqAzRW9tFYiycS6h READY sur purinstinctgames.com. Calcul3200CAD etFR/EN vérifiés.
+APP en revue SEULEMENT : boutons HTML, dialogueFR/EN accessible, mode centralcoming-soon, contrôle HMAC existant appliqué à toutes routes/assetsAPP côté proxy.53 tests passent, navigateur390/1440, focus/Échap/clicextérieur/URL stable. RéductionmotionCSS vérifiée.
+Ouvert : hôte directAPP encore200anonyme ; Firebase authanonyme/règlesauth!=null pasrestrictionpropriétaire, API mail cléclient pasauthréelle. Aucune modification données/règles/utilisateurs, aucun courriel réel. Détails et étapes exactes dans docs/app-private-entry/REVIEW.md.
+Prochaine action : sauvegarder/pousser branche, PRdraft, vérifier aperçu hébergé/refusAPPanonyme et sauvegarder captures. Puis livraison sans fusion ni productionAPP. Accès authentifié réel propriétaire non vérifié faute identité/session ; configurationALLdeployments et auditFirebase requis avant direprivé.
+Exécution locale ; pas de continuation garantie si ordinateur arrêté. Sauvegarde distante branche/PR nécessaire ; pas de secrets dans ces documents.

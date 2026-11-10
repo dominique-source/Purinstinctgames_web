@@ -22,6 +22,7 @@ function fixture({
     remove: (c) => classes.delete(c),
   };
   const link = {
+    tagName: "A",
     href: "http://localhost/app",
     target: "",
     classList,
@@ -45,7 +46,7 @@ function fixture({
       remove() {},
     }),
   };
-  runInNewContext(source, {
+  runInNewContext(source.replace('mode: "coming-soon"', 'mode: "accessible"'), {
     document,
     window: {
       matchMedia: () => ({ matches: reduced }),
