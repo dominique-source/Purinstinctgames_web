@@ -28,7 +28,7 @@ test('the illustrative portfolio is a four-image mosaic with no fake controls or
 });
 test('the simplified estimate removes detailed planning while leaving the three presentation cards intact',()=>{
  assert.doesNotMatch(html,/<details class="config-method">|id="config-staff"|id="config-activities"/);
- assert.match(html,/Estimation pour un événement final de 4 h/);
+ assert.match(html,/Événement final de 4 h/);
  assert.doesNotMatch(journey,/ballons pédagogiques|récupéré après/);
 });
 test('all approved English copy and new accessible descriptions use the existing dictionary',()=>{

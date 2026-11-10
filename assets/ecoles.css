@@ -310,78 +310,73 @@ html[lang="en"] .offer-counter { flex-direction:row-reverse; }
 .school-contact-section #school-proposal summary { min-height:44px; cursor:pointer; font-weight:700; color:#ccff00; }
 .school-contact-section #school-proposal { margin-bottom:20px; }
 
-/* Compact estimate; commercial offer and funding content remain separate. */
+/* Compact estimate; commercial offer and funding layout are unchanged. */
 .offer-layout { grid-template-columns:minmax(0,1fr); }
 .offer-layout>.offer-price,.offer-layout>.offer-services { grid-column:1; grid-row:auto; }
 .school-estimator { grid-column:1 / -1; min-width:0; padding-top:34px; scroll-margin-top:84px; }
-.estimate-heading { margin-bottom:24px; }
-.school-offer .estimate-heading h3 { font-size:clamp(40px,5.6vw,80px); line-height:1; color:#f4f4ef; border-left:10px solid #ccff00; padding-left:22px; }
-.estimate-heading h3 em { color:#ccff00; }
-.estimate-heading>p { font-size:clamp(18px,2.1vw,30px); font-weight:700; font-style:italic; margin:12px 0 0 32px; }
-.estimate-grid { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:22px; align-items:stretch; }
-.estimate-controls,.estimate-result { min-width:0; border:2px solid #65f5ff; border-radius:20px; background:linear-gradient(135deg,#09202a50,transparent 65%),#0a0a0a; padding:28px; }
-.estimate-controls { display:flex; flex-direction:column; justify-content:center; gap:28px; }
-.estimate-setting { display:grid; grid-template-columns:40px minmax(0,1fr) auto; column-gap:16px; row-gap:10px; align-items:start; }
-.estimate-icon { width:40px; height:48px; fill:currentColor; color:#ccff00; margin-top:5px; }
-.estimate-description { min-width:0; }
-.estimate-description>label { display:block; color:#f4f4ef; font:italic 900 clamp(22px,2.1vw,31px)/1.02 'Barlow Condensed',sans-serif; text-transform:uppercase; }
-.estimate-description>p,.estimate-help p { font-size:16px; line-height:1.3; margin:8px 0 0; }
-.estimate-stepper { display:grid; grid-template-columns:44px minmax(64px,90px) 44px; align-items:center; border:1px solid #65f5ff; border-radius:12px; overflow:hidden; margin-top:2px; }
-.estimate-stepper button { width:44px; min-height:48px; border:0; background:transparent; color:#f4f4ef; font:700 30px/1 Barlow,sans-serif; cursor:pointer; }
-.estimate-stepper input { appearance:textfield; -moz-appearance:textfield; min-width:0; width:100%; height:42px; padding:2px; border:0; border-radius:6px; background:#f4f4ef; color:#0a0a0a; text-align:center; font:italic 900 30px/1 'Barlow Condensed',sans-serif; }
-.estimate-stepper input::-webkit-inner-spin-button,.estimate-stepper input::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
-.estimate-setting select { width:180px; max-width:100%; min-height:48px; border:1px solid #65f5ff; border-radius:10px; padding:8px; background:#0a0a0a; color:#f4f4ef; font:700 18px Barlow,sans-serif; }
-.estimate-help { margin-top:6px; }
-.estimate-help summary { min-height:36px; padding-block:7px; color:#ccff00; text-decoration:underline; font-size:16px; font-weight:700; cursor:pointer; }
-.estimate-help p { font-size:15px; }
-.estimate-result { display:flex; flex-direction:column; }
-.estimate-result h4 { margin:0 0 22px; font:italic 900 clamp(30px,3.4vw,48px)/1 'Barlow Condensed',sans-serif; border-left:8px solid #ccff00; padding-left:16px; }
-.estimate-breakdown { margin:0; display:grid; gap:12px; font-size:clamp(16px,1.55vw,22px); line-height:1.2; }
-.estimate-breakdown>div { display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
-.estimate-breakdown dt { min-width:0; }
-.estimate-breakdown dd { margin:0; font-weight:700; text-align:right; flex-shrink:0; }
-.estimate-amount { border-top:2px solid #65f5ff; padding-top:16px; margin-top:24px; text-align:center; }
-.estimate-amount strong { display:block; font:italic 900 clamp(60px,6.2vw,90px)/1.05 'Barlow Condensed',sans-serif; color:#ccff00; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
-.estimate-amount p { margin:6px 0; font-size:clamp(17px,1.65vw,24px); font-style:italic; font-weight:700; line-height:1.15; }
-.estimate-amount #estimate-per-student { margin-top:12px; font:italic 900 clamp(30px,3.1vw,45px)/1.05 'Barlow Condensed',sans-serif; }
-.estimate-currency { text-align:center; color:#b7c8c8; font-size:13px; margin:10px 0 18px; }
-.estimate-cta { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 24px; background:#ccff00; color:#0a0a0a; border-radius:12px 3px; transform:skew(-9deg); text-decoration:none; font:italic 900 clamp(22px,2vw,30px)/1.05 'Barlow Condensed',sans-serif; }
-.estimate-cta>span { transform:skew(9deg); }
-.estimate-cta[aria-disabled=true] { opacity:.5; cursor:not-allowed; }
-.estimate-cta:focus-visible,.estimate-setting button:focus-visible,.estimate-setting input:focus-visible,.estimate-setting select:focus-visible { outline:3px solid #ccff00; outline-offset:3px; }
-.estimate-note { margin:18px 0; font-style:italic; font-weight:700; font-size:18px; }
-.estimate-multiple { display:flex; align-items:center; gap:12px; min-height:44px; font-size:18px; cursor:pointer; }
-.estimate-multiple input { width:24px; height:24px; accent-color:#ccff00; }
-.estimate-short-note,.estimate-tax,.estimate-restored { color:#c5cecc; font-size:15px; line-height:1.4; margin:10px 0; }
-.estimate-tax { font-size:13px; }
-.estimate-error { color:#ffd3a8; font-size:15px; margin:0; }
-.estimate-error:empty,.estimate-amount p:empty { display:none; }
-.estimate-setting input[aria-invalid=true] { outline:2px solid #ffd3a8; }
+.school-estimator .estimate-heading { margin-bottom:24px; }
+.school-estimator .estimate-heading h3 { font-size:clamp(40px,5.2vw,72px); line-height:1; color:#f4f4ef; margin:0; }
+.school-estimator .estimate-heading h3 em { color:inherit; }
+.school-estimator .estimate-heading h3::after { content:''; display:block; width:150px; height:5px; background:#ccff00; margin-top:8px; transform:skew(-16deg); }
+.school-estimator .estimate-heading>p { font-size:clamp(17px,1.65vw,24px); font-weight:700; font-style:italic; margin:10px 0 0; }
+.school-estimator .estimate-grid { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:0; align-items:stretch; border:1px solid #ffffff30; border-radius:16px; background:linear-gradient(120deg,#232323,#151515); overflow:hidden; }
+.school-estimator .estimate-controls { display:flex; flex-direction:column; justify-content:center; gap:24px; min-width:0; padding:28px; }
+.school-estimator .estimate-setting { display:grid; grid-template-columns:minmax(0,1fr) 180px; column-gap:24px; row-gap:8px; align-items:start; }
+.school-estimator .estimate-description { min-width:0; }
+.school-estimator .estimate-description>label { display:block; color:#f4f4ef; font:italic 900 clamp(22px,2.1vw,30px)/1 'Barlow Condensed',sans-serif; }
+.school-estimator .estimate-description>p,.school-estimator .estimate-help p { font-size:16px; line-height:1.3; margin:6px 0 0; }
+.school-estimator .estimate-stepper { display:grid; grid-template-columns:44px minmax(64px,90px) 44px; align-items:center; border:1px solid #ffffff24; border-radius:6px; overflow:hidden; background:#ffffff14; }
+.school-estimator .estimate-stepper button { width:44px; min-height:48px; border:0; background:transparent; color:#f4f4ef; font:700 28px/1 Barlow,sans-serif; cursor:pointer; }
+.school-estimator .estimate-stepper input { appearance:textfield; -moz-appearance:textfield; min-width:0; width:100%; height:40px; padding:2px; border:0; border-radius:3px; background:#f4f4ef; color:#0a0a0a; text-align:center; font:italic 900 29px/1 'Barlow Condensed',sans-serif; }
+.school-estimator .estimate-stepper input::-webkit-inner-spin-button,.school-estimator .estimate-stepper input::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
+.school-estimator .estimate-setting select { width:180px; max-width:100%; min-height:48px; border:1px solid #ccc; border-radius:6px; padding:8px; background:#f4f4ef; color:#0a0a0a; font:700 17px Barlow,sans-serif; }
+.school-estimator .estimate-help { grid-column:1 / -1; margin:0; }
+.school-estimator .estimate-help summary { min-height:44px; padding-block:10px; color:#ccff00; text-decoration:underline; font-size:16px; font-weight:700; cursor:pointer; }
+.school-estimator .estimate-help p { font-size:15px; }
+.school-estimator .estimate-result { min-width:0; display:flex; flex-direction:column; padding:24px; margin:6px; border-radius:11px; background:#ccff00; color:#0a0a0a; }
+.school-estimator .estimate-amount strong { display:block; font:italic 900 clamp(60px,6.2vw,90px)/.95 'Barlow Condensed',sans-serif; color:#0a0a0a; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.school-estimator .estimate-amount p { margin:0 0 6px; font-size:clamp(17px,1.5vw,21px); font-style:italic; font-weight:700; line-height:1.15; }
+.school-estimator .estimate-amount #estimate-per-student { margin:7px 0 0; font:italic 900 clamp(27px,2.7vw,38px)/1.05 'Barlow Condensed',sans-serif; }
+.school-estimator .estimate-breakdown { margin:18px 0 0; padding:12px 0; border-block:1px solid #0a0a0a99; display:grid; gap:8px; font-size:clamp(16px,1.4vw,20px); line-height:1.15; }
+.school-estimator .estimate-breakdown>div { display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
+.school-estimator .estimate-breakdown dt { min-width:0; }
+.school-estimator .estimate-breakdown dd { margin:0; font-weight:700; text-align:right; flex-shrink:0; }
+.school-estimator .estimate-currency { color:#263000; font-size:13px; margin:10px 0 14px; }
+.school-estimator .estimate-cta { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; min-height:48px; background:#0a0a0a; color:#f4f4ef; border-radius:6px; text-decoration:none; font:italic 900 clamp(22px,2vw,30px)/1.05 'Barlow Condensed',sans-serif; }
+.school-estimator .estimate-cta[aria-disabled=true] { opacity:.55; cursor:not-allowed; }
+.school-estimator .estimate-cta:focus-visible { outline:3px solid #0a0a0a; outline-offset:3px; }
+.school-estimator .estimate-setting button:focus-visible,.school-estimator .estimate-setting input:focus-visible,.school-estimator .estimate-setting select:focus-visible { outline:3px solid #ccff00; outline-offset:3px; }
+.school-estimator .estimate-note { margin:16px 0; font-style:italic; font-weight:700; font-size:18px; }
+.school-estimator .estimate-multiple { display:flex; align-items:center; gap:12px; min-height:44px; font-size:18px; cursor:pointer; }
+.school-estimator .estimate-multiple input { width:24px; height:24px; accent-color:#ccff00; }
+.school-estimator .estimate-short-note,.school-estimator .estimate-tax,.school-estimator .estimate-restored { color:#c5cecc; font-size:15px; line-height:1.4; margin:10px 0; }
+.school-estimator .estimate-result .estimate-short-note { color:#263000; font-size:15px; margin-top:10px; }
+.school-estimator .estimate-tax { font-size:13px; }
+.school-estimator .estimate-error { color:#ffd3a8; font-size:15px; margin:0; }
+.school-estimator .estimate-error:empty,.school-estimator .estimate-amount p:empty { display:none; }
+.school-estimator .estimate-setting input[aria-invalid=true] { outline:2px solid #ffd3a8; }
 .school-estimator [hidden] { display:none; }
 .offer-financing { grid-column:1 / -1; grid-row:auto; margin-top:10px; }
-@media(max-width:1150px) and (min-width:801px) {
- .estimate-setting { grid-template-columns:32px minmax(0,1fr); }
- .estimate-stepper,.estimate-setting select { grid-column:2; }
- .estimate-icon { width:32px; }
+@media(max-width:1000px) and (min-width:801px) {
+ .school-estimator .estimate-setting { grid-template-columns:minmax(0,1fr); }
 }
 @media(max-width:800px) {
  .school-estimator { padding-top:16px; }
- .school-offer .estimate-heading h3 { font-size:42px; padding-left:14px; border-left-width:7px; }
- .estimate-heading>p { margin-left:21px; font-size:18px; }
- .estimate-grid { grid-template-columns:minmax(0,1fr); gap:16px; }
- .estimate-controls,.estimate-result { padding:20px 16px; border-radius:16px; }
- .estimate-controls { gap:22px; }
- .estimate-setting { grid-template-columns:26px minmax(0,1fr); gap:8px 12px; }
- .estimate-icon { width:26px; height:36px; margin-top:0; }
- .estimate-description>label { font-size:25px; }
- .estimate-description>p { font-size:15px; margin-top:5px; }
- .estimate-stepper,.estimate-setting select { grid-column:2; justify-self:start; margin-top:0; }
- .estimate-help summary { min-height:44px; }
- .estimate-breakdown { font-size:16px; gap:14px; }
- .estimate-breakdown dd { max-width:45%; flex-shrink:1; }
- .estimate-result h4 { font-size:36px; }
- .estimate-amount strong { font-size:68px; }
- .estimate-amount #estimate-per-student { font-size:36px; }
- .estimate-note,.estimate-multiple { font-size:16px; }
- .estimate-cta { padding:16px 18px; font-size:25px; }
+ .school-estimator .estimate-heading h3 { font-size:42px; }
+ .school-estimator .estimate-heading>p { font-size:18px; }
+ .school-estimator .estimate-grid { grid-template-columns:minmax(0,1fr); }
+ .school-estimator .estimate-controls { padding:20px 16px; gap:18px; }
+ .school-estimator .estimate-setting { grid-template-columns:minmax(0,1fr) 154px; gap:8px 12px; }
+ .school-estimator .estimate-description>label { font-size:24px; }
+ .school-estimator .estimate-description>p { font-size:15px; }
+ .school-estimator .estimate-stepper { grid-template-columns:44px minmax(0,1fr) 44px; }
+ .school-estimator .estimate-setting select { width:154px; font:italic 900 18px 'Barlow Condensed',sans-serif; padding:8px 5px; }
+ .school-estimator .estimate-result { padding:20px; }
+ .school-estimator .estimate-amount strong { font-size:70px; }
+ .school-estimator .estimate-amount #estimate-per-student { font-size:32px; }
+ .school-estimator .estimate-breakdown { font-size:16px; }
+ .school-estimator .estimate-breakdown dd { max-width:45%; flex-shrink:1; }
+ .school-estimator .estimate-note,.school-estimator .estimate-multiple { font-size:16px; }
+ .school-estimator .estimate-cta { font-size:25px; }
 }
+@media(max-width:360px) { .school-estimator .estimate-setting { grid-template-columns:minmax(0,1fr); } }

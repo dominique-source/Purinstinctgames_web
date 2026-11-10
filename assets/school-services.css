@@ -1,0 +1,39 @@
+/* Service media stay at/below the native width of the small approved assets. */
+.school-services { grid-column:1 / -1; min-width:0; padding-top:20px; scroll-margin-top:84px; }
+.school-services>h3 { font:italic 900 clamp(32px,3.6vw,52px)/1.05 'Barlow Condensed',sans-serif; margin:0 0 24px; }
+.service-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; max-width:1140px; margin-inline:auto; }
+.service-card { min-width:0; max-width:380px; width:100%; position:relative; padding:0; border:1px solid #ffffff24; border-radius:8px; overflow:hidden; background:#111; color:#f4f4ef; aspect-ratio:4/3; cursor:pointer; text-align:center; isolation:isolate; }
+.service-card>img { width:100%; height:100%; object-fit:cover; object-position:50% 30%; display:block; transition:transform 220ms ease; }
+.service-card[data-service=coordination]>img { object-position:52% 40%; }
+.service-card-shade { position:absolute; inset:0; background:linear-gradient(180deg,#0000 20%,#0005 48%,#000f 100%); }
+.service-card-title { position:absolute; inset:auto 36px 22px 20px; font:italic 900 clamp(24px,2.3vw,32px)/1 'Barlow Condensed',sans-serif; text-wrap:balance; }
+.service-card-title::after { content:''; display:block; height:1px; background:#f4f4efb0; margin-top:12px; }
+.service-card-plus { position:absolute; right:12px; bottom:20px; color:#ccff00; font:400 28px/1 Barlow,sans-serif; transition:transform 180ms ease,color 180ms ease; }
+.service-card:focus-visible { outline:3px solid #ccff00; outline-offset:5px; }
+@media(hover:hover) { .service-card:hover>img { transform:scale(1.035); } .service-card:hover .service-card-plus { transform:rotate(90deg); color:#65f5ff; } }
+.service-image-note { text-align:right; font-size:13px; color:#bbc7c7; max-width:1140px; margin:10px auto 0; }
+.service-modal { padding:0; border:1px solid #65f5ff; border-radius:18px; background:#0a0a0a; color:#f4f4ef; width:min(940px,calc(100% - 32px)); max-height:calc(100dvh - 32px); overflow:auto; }
+.service-modal::backdrop { background:#000c; }
+.service-dialog-surface { position:relative; display:grid; grid-template-columns:minmax(0,380px) minmax(0,1fr); align-items:center; gap:30px; padding:68px 30px 30px; transform-origin:center; }
+.service-close { position:absolute; top:12px; right:14px; min-height:44px; padding:8px 14px; border:1px solid #ccff00; border-radius:6px; background:#0a0a0a; color:#ccff00; font:700 16px Barlow,sans-serif; cursor:pointer; }
+.service-modal figure { margin:0; min-width:0; }
+.service-modal figure img { display:block; width:100%; max-width:380px; height:auto; max-height:50dvh; object-fit:contain; margin:auto; border-radius:8px; }
+.service-modal figcaption { margin-top:8px; color:#bbc7c7; font:400 13px/1.3 Barlow,sans-serif; }
+.service-dialog-copy h2 { font:italic 900 clamp(30px,3.5vw,48px)/1.02 'Barlow Condensed',sans-serif; text-transform:uppercase; margin:0 0 18px; }
+.service-dialog-copy p { font:400 20px/1.5 Barlow,sans-serif; margin:0; }
+.service-modal button:focus-visible { outline:3px solid #65f5ff; outline-offset:3px; }
+@media(max-width:800px) {
+ .service-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+ .service-card-title { font-size:25px; inset:auto 28px 18px 12px; }
+ .service-dialog-surface { grid-template-columns:minmax(0,1fr); gap:20px; padding:66px 20px 24px; }
+ .service-modal figure img { max-height:34dvh; }
+ .service-dialog-copy p { font-size:18px; line-height:1.45; }
+}
+@media(max-width:500px) { .service-grid { grid-template-columns:minmax(0,1fr); max-width:380px; } .service-card-title { font-size:30px; } }
+@media(prefers-reduced-motion:reduce) { .service-card>img,.service-card-plus { transition:none; } .service-card:hover>img { transform:none; } .service-card:hover .service-card-plus { transform:none; } }
+
+.service-dialog-language { position:absolute; left:20px; top:12px; display:flex; gap:6px; }
+.service-dialog-language button { min-width:44px; min-height:44px; border:1px solid #65f5ff66; border-radius:5px; background:#0a0a0a; color:#f4f4ef; font:700 16px Barlow,sans-serif; cursor:pointer; }
+.service-dialog-language button[aria-pressed=true] { color:#ccff00; border-color:#ccff00; }
+
+.service-card[data-service=conference]>img,.service-card[data-service=training]>img { object-position:50% 0; }

@@ -59,6 +59,6 @@ test('public estimate replaces detailed planning, preserves funding separately a
 });
 
 test('classic scripts share a compatible global scope on the actual public page',()=>{
- const scripts=['app-portal.js','games-menu.js','site-translations.js','site-language.js','school-home.js','ecoles-contact.js'];
+ const scripts=['app-portal.js','games-menu.js','site-translations.js','site-language.js','school-home.js','ecoles-contact.js','school-services.js'];
  assert.doesNotThrow(()=>new Script(scripts.map(name=>read('assets/'+name)).join('\n;\n')));
 });
