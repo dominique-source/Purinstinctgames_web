@@ -30,7 +30,7 @@ test('legacy public school URLs preserve language, valid section and shared conf
   const response=await middleware(new Request('https://example.test'+path));assert.equal(response.headers.get('x-middleware-next'),'1');
  }
  for(const path of ['/zone-speed.mp4','/concept.html','/pur-id.html','/app/admin']){
-  const response=await middleware(new Request('https://example.test'+path));assert.equal(response.status,302,path);
+  const response=await middleware(new Request('https://example.test'+path));assert.equal(response.status,path.startsWith('/app/')?307:302,path);
  }
 });
 test('five distinct existing public zone images, plus a separate field, replace outbound buttons and empty players',()=>{

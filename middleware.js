@@ -61,7 +61,17 @@ function getCookie(request, name) {
 }
 
 export default async function middleware(request) {
-  const { pathname } = new URL(request.url);
+  const url = new URL(request.url);
+  const { pathname } = url;
+  // A cross-origin proxy cannot reuse the visitor's Vercel login cookie.
+  // Navigate to the protected origin instead; Vercel authenticates before
+  // serving any APP route, asset or API. This is independent of the APP button.
+  if (pathname === '/app' || pathname.startsWith('/app/')) {
+    const destination = new URL('https://purinstinct-app.vercel.app');
+    destination.pathname = pathname;
+    destination.search = url.search;
+    return new Response(null, { status: 307, headers: { Location: destination.href, 'Cache-Control': 'private, no-store' } });
+  }
   // Only public portal pages and their static resources bypass the email gate.
   // Organizer, projection and operational routes keep the existing session check.
   if (publicPaths.has(pathname)) return next();
