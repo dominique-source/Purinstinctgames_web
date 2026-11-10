@@ -517,3 +517,5 @@ Object.assign(window.piTranslations, {
  'J’ai vérifié les nouveaux blocs et disponibilités.':'I have checked the new blocks and availability.',
  'Vérifiez et confirmez les nouveaux blocs et disponibilités.':'Check and confirm the new blocks and availability.'
 });
+
+Object.assign(window.piTranslations, {"À venir au printemps 2027": "Coming spring 2027", "Fermer": "Close"});

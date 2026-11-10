@@ -1,8 +1,7 @@
-# Reprise
-Dépôt dominique-source/Purinstinctgames_web, /Users/client/Documents/ChatGPT/purinstinct-web-premium.
-Branche codex/school-configurator-blocks (inclut codex/school-journey-three-cards, PR29).
-Terminé : trois cartes, configurateur par blocs, base distincts×10, renforts400/bloc, coûts inconnus explicites, FR/EN et résumé complet. 49 tests passent. Navigateur ordinateur et téléphone, valeurs conservées au changement de langue. Aucun courriel réel envoyé.
-Autorisation : « rend tout live » pour cartes+configurateur. Prochaine action : PR combinée, fusion main puis vérifier déploiement existant purinstinct-web sur purinstinctgames.com.
-Mission suivante APP : bouton À venir + protection privée à préparer dans une branche distincte, SANS fusion ni production. Audit : proxy web permet actuellement APP explicitement ; hôte direct app répond200 anonyme ; règles Firebase exigent auth mais app utilise signInAnonymously ; protection propriétaire réelle à compléter/configurer, pas simplement masquer le lien. Aucun changement de données/règles Firebase réalisé.
-Points commerciaux ouverts : frais blocs supplémentaires, déplacement,taxes,dimensions/compatibilités,qualifications ; restent À confirmer.
-Exécution locale sur ordinateur, aucune continuité autonome cloud garantie.
+# Reprise — publication APP privée autorisée
+Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review, branche codex/app-coming-soon-private-access (PR31). Ancien checkout endommagé, app RFID et mission-control préservés.
+Autorisation actuelle : finaliser protection privée, fusionner et publier bouton APP À venir. Main actuel0f6626b (cartes/configurateur déjà live).
+Fait : Vercel projet purinstinct-app, équipe dominique-soucy-s-projects : SSO ALL activé. Anonyme /app/302SSO ; navigateur session existante ouvre accueil. Pas de nouveaux utilisateurs/partage/achat. Middleware web remplace proxy /app par redirection307no-store vers origine protégée fixe ; conserve paramètres et autres protections.54 tests passent.
+Firebase : règles historiques purinstinct-games lues uniquement, déjà expirées/fermées depuis29juin2026 ; pas de changement/donnée. Projet effectif du bundle non certifié par variables sensibles. Ne pas affirmer synchronisation tempsréel validée. Voir docs/app-private-entry/REVIEW.md.
+Prochaine action : vérifier aliases/routes/API anonymes et accès navigateur connecté, pousser commit, contrôler aperçu, fusion PR31 et vérifier production public/mobile FR/EN+accès privé. Pas de mail réel. Mise à jour finale des preuves après déploiement.
+Exécution locale ; travail sauvegardé par commits/branche GitHub. Pas d’exécution cloud autonome garantie.

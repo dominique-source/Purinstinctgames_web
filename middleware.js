@@ -8,17 +8,6 @@ export const config = {
 const publicPaths = new Set([
   '/',
   '/index.html',
-  '/app',
-  '/app/',
-  '/app/competitions/ecole',
-  '/app/competitions/ecole/',
-  '/app/competitions/interscolaire',
-  '/app/competitions/interscolaire/',
-  '/app/competitions/pour-tous',
-  '/app/competitions/pour-tous/',
-  '/app/activites/horizon',
-  '/app/activites/horizon/',
-  '/app/purinstinct-games-logo.png',
   '/assets/hero-deck/hero-desktop.webp',
   '/assets/hero-deck/hero-mobile.webp',
   '/assets/hero-deck/games-brush.png',
@@ -68,16 +57,24 @@ const publicPaths = new Set([
 function getCookie(request, name) {
   const header = request.headers.get('cookie') || '';
   const match = header.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
-  return match ? decodeURIComponent(match[1]) : null;
+  try { return match ? decodeURIComponent(match[1]) : null; } catch { return null; }
 }
 
 export default async function middleware(request) {
-  const { pathname } = new URL(request.url);
+  const url = new URL(request.url);
+  const { pathname } = url;
+  // A cross-origin proxy cannot reuse the visitor's Vercel login cookie.
+  // Navigate to the protected origin instead; Vercel authenticates before
+  // serving any APP route, asset or API. This is independent of the APP button.
+  if (pathname === '/app' || pathname.startsWith('/app/')) {
+    const destination = new URL('https://purinstinct-app.vercel.app');
+    destination.pathname = pathname;
+    destination.search = url.search;
+    return new Response(null, { status: 307, headers: { Location: destination.href, 'Cache-Control': 'private, no-store' } });
+  }
   // Only public portal pages and their static resources bypass the email gate.
   // Organizer, projection and operational routes keep the existing session check.
-  if (publicPaths.has(pathname) ||
-      pathname.startsWith('/app/assets/') ||
-      pathname.startsWith('/app/images/competitions/')) return next();
+  if (publicPaths.has(pathname)) return next();
 
   const session = getCookie(request, 'pig_session');
   const payload = session ? await verifyToken(session, process.env.AUTH_SECRET) : null;
