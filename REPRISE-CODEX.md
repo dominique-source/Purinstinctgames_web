@@ -1,15 +1,8 @@
-# Reprise — configurateur public par blocs
-
-Dépôt : dominique-source/Purinstinctgames_web
-Dossier : /Users/client/Documents/ChatGPT/purinstinct-web-premium
-Branche : codex/school-configurator-blocks ; base codex/school-journey-three-cards (PR #29 non fusionnée, préservée).
-Production reste main 8302de7. Aucune fusion/publication autorisée pour cette mission.
-
-Terminé : modèle commercial versionné, 3 étapes, blocs indépendants, capacités/surfaces/encadrement, base distincts×10 et renforts400/bloc, sous-total connu et coûts inconnus ; FR/EN ; récapitulatif complet vers le formulaire existant. 49 tests passent après remplacement des hypothèses anciennes. Cas réel navigateur 15jeux+2terrains :118/118/118,354mobilisés,21postes,18adultesécole→3renforts,3200CAD connus/16CADélève.
-
-Adaptation associée : commentaire visiteur inchangé à2000caractères ; payload commentaires+résumé autorisé jusqu’à14000, requête48000, même endpoint/destinataire. Tests sans envoi réel. Limite technique12blocs avec libellés60caractères et précisions300, aucune règle commerciale inventée.
-
-En cours : finition tests navigateur multi-blocs, mobile et captures, puis PR et aperçu. Voir docs/school-configurator-blocks/PROGRESS.md.
-Points à confirmer : frais des blocs supplémentaires, compatibilités intérieures/dimensions/montage, déplacements, taxes, qualifications et rôles. Anciennes disponibilités partagées conservées comme contexte et doivent être revérifiées.
-
-Prochaine action : finir le contrôle mobile, sauvegarder/pousser la branche, livrer la PR sans production.
+# Reprise
+Dépôt dominique-source/Purinstinctgames_web, /Users/client/Documents/ChatGPT/purinstinct-web-premium.
+Branche codex/school-configurator-blocks (inclut codex/school-journey-three-cards, PR29).
+Terminé : trois cartes, configurateur par blocs, base distincts×10, renforts400/bloc, coûts inconnus explicites, FR/EN et résumé complet. 49 tests passent. Navigateur ordinateur et téléphone, valeurs conservées au changement de langue. Aucun courriel réel envoyé.
+Autorisation : « rend tout live » pour cartes+configurateur. Prochaine action : PR combinée, fusion main puis vérifier déploiement existant purinstinct-web sur purinstinctgames.com.
+Mission suivante APP : bouton À venir + protection privée à préparer dans une branche distincte, SANS fusion ni production. Audit : proxy web permet actuellement APP explicitement ; hôte direct app répond200 anonyme ; règles Firebase exigent auth mais app utilise signInAnonymously ; protection propriétaire réelle à compléter/configurer, pas simplement masquer le lien. Aucun changement de données/règles Firebase réalisé.
+Points commerciaux ouverts : frais blocs supplémentaires, déplacement,taxes,dimensions/compatibilités,qualifications ; restent À confirmer.
+Exécution locale sur ordinateur, aucune continuité autonome cloud garantie.

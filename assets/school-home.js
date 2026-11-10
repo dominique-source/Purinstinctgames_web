@@ -198,7 +198,7 @@ function updateConfiguration() {
     if(!r){capacity.textContent=cfgText('Vérifiez les saisies pour afficher les capacités.');staffing.textContent='—';return;}
     const c=r.capacity,s=r.staffing;
     capacity.innerHTML=cfgRows([[cfgText('Surfaces nécessaires — minimum théorique'),c.minimumAreas],[cfgText('Surfaces physiques disponibles'),c.availableAreas],[cfgText('Élèves en jeu'),c.playing],[cfgText('Élèves en attente'),c.waiting],[cfgText('Élèves en transition'),c.transition],[cfgText('Capacité simultanée mobilisée'),c.mobilized],[cfgText('Adultes nécessaires aux jeux'),s.needed]])+
-      '<p class="config-caution">'+cfgEscape(cfgText('Répartition théorique extérieure : un terrain par plateau, deux jeux de zone par plateau compatible. Dimensions et montage à valider.'))+'</p>'+
+      '<p class="config-caution">'+cfgEscape(cfgText('Compatibilité à confirmer. Répartition théorique extérieure : un terrain par plateau, deux jeux de zone par plateau compatible. Dimensions et montage à valider.'))+'</p>'+
       (r.block.indoors>0?'<p class="config-warning">'+cfgEscape(cfgText('Compatibilité intérieure à confirmer. Aucun montage intérieur n’est certifié par ce calcul.'))+'</p>':'')+
       (c.availableAreas<c.minimumAreas?'<p class="config-warning">'+cfgEscape(cfgText('Surfaces insuffisantes pour cette répartition. Ajoutez des plateaux compatibles ou ajustez les installations souhaitées.'))+'</p>':'')+
       (c.mobilized<r.block.students?'<p class="config-warning">'+cfgEscape(cfgText('Capacité simultanée insuffisante : réduisez le groupe, ajoutez des surfaces et activités compatibles ou répartissez les élèves en blocs supplémentaires. Aucune rotation non documentée n’est supposée.'))+'</p>':'');

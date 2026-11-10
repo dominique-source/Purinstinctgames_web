@@ -7,3 +7,5 @@ Audit : ancien schéma neuf nombres, pas de blocs ni de renforts calculables ; m
 Règles à appliquer : distincts×10, blocs4h,3intervenants de base EN PLUS des adultes des jeux, renfort100/h donc400/bloc, capacités14/14/14 terrain et6/6/6 jeu, surfaces terrain+ceil(jeux/2). Frais blocs supplémentaires/déplacement/taxes et compatibilités restent inconnus.
 
 Prochaine action : modèle versionné, interface3étapes, transmission complète, tests et captures. Aucune fusion ni production.
+
+2026-11-10 — Reprise : 49/49 tests passent. Contrôle navigateur 390×844 et 1440×900 ; pas de débordement horizontal, données et calcul conservés FR/EN. Cas 200 élèves/2 terrains/15 jeux/18 adultes : 21 postes,3 renforts,3200 CAD connus. Saisie2000 affiche immédiatement base20000 même si horaire incomplet. Publication cartes+configurateur autorisée par « rend tout live » ; nouvelle mission APP explicitement séparée et sans production. Aucune soumission réelle du formulaire.

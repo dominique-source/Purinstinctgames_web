@@ -485,7 +485,7 @@ Object.assign(window.piTranslations, {
   "Élèves en transition": "Students transitioning",
   "Capacité simultanée mobilisée": "Simultaneously mobilized capacity",
   "Adultes nécessaires aux jeux": "Adults required for games",
-  "Répartition théorique extérieure : un terrain par plateau, deux jeux de zone par plateau compatible. Dimensions et montage à valider.": "Theoretical outdoor allocation: one field per play area, two zone games per compatible play area. Dimensions and setup require validation.",
+  "Compatibilité à confirmer. Répartition théorique extérieure : un terrain par plateau, deux jeux de zone par plateau compatible. Dimensions et montage à valider.": "Compatibility must be confirmed. Theoretical outdoor allocation: one field per play area, two zone games per compatible play area. Dimensions and setup require validation.",
   "Compatibilité intérieure à confirmer. Aucun montage intérieur n’est certifié par ce calcul.": "Indoor compatibility must be confirmed. This calculation does not certify any indoor setup.",
   "Surfaces insuffisantes pour cette répartition. Ajoutez des plateaux compatibles ou ajustez les installations souhaitées.": "Insufficient space for this allocation. Add compatible play areas or adjust the requested installations.",
   "Capacité simultanée insuffisante : réduisez le groupe, ajoutez des surfaces et activités compatibles ou répartissez les élèves en blocs supplémentaires. Aucune rotation non documentée n’est supposée.": "Insufficient simultaneous capacity: reduce the group, add compatible spaces and activities, or distribute students across additional blocks. No undocumented rotations are assumed.",
