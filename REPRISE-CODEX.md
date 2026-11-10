@@ -1,12 +1,7 @@
-# Reprise — financement et blocs supplémentaires en revue
+# Reprise — menu et financement publiés
 
 Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche codex/funding-multiple-blocks, basée sur codex/interschool-menu-notice (63281ae, préservée).
-
-Terminé : suppression de la case plusieurs blocs et de son message conditionnel ; lien au formulaire avec mention modifiable, non dupliquée et sans envoi ; cinq catégories de financement avec dialogue natif bilingue et accessible. Calculs et design de l’estimateur conservés. Rapport docs/school-funding/REVIEW.md et captures enregistrées.
-
-Vérifications : 74 tests passent, syntaxe JS/diff propres ; navigateur 1440×900 et 390×844, FR/EN, fenêtres, commentaires conservés, montant 3 550 $ inchangé avec 200 élèves/2 intervenants/2 classes, formulaire sous l’en-tête. Aucun courriel réel.
-
-Prochaine action : revue utilisateur ; aucune fusion ni mise en production autorisée. Aperçu local http://127.0.0.1:4183/#financement, dépend de l’ordinateur. Aucun blocage fonctionnel connu. Branche précédente menu conservée séparément ; PR de financement à baser dessus pour un diff ciblé.
-
-Branches sauvegardées sur origin. PR #34 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/34 ; base codex/interschool-menu-notice, aucune fusion.
+Branche locale codex/funding-multiple-blocks ; PR #34 et #35 intégrées à main d4c3936c304d06a90f4fa843f760308acfa12f9c après autorisation explicite.
+Production purinstinctgames.com : dpl_DZZCB6GZAztG6zFmgthsafejwE5u READY.
+Terminé : avis Compétition interscolaire 2028, financement interactif, invitation au formulaire sans duplication. Vérifié ordinateur et téléphone, FR/EN et valeurs conservées ; 74 tests passent. Aucun courriel envoyé. Rapport docs/school-funding/PRODUCTION.md.
+Problèmes ouverts : aucun blocage connu. Prochaine action : attendre la prochaine demande ; aucune publication supplémentaire nécessaire. Exécution locale.
