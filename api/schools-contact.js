@@ -1,4 +1,4 @@
-const limits = { Nom: 100, École: 150, Ville: 100, Courriel: 254, Commentaires: 2000 };
+const limits = { Nom: 100, École: 150, Ville: 100, Courriel: 254, Commentaires: 14000 };
 const recipient = 'dominique@purinstinct.com';
 
 export default {
@@ -10,7 +10,7 @@ export default {
     let fields;
     try {
       const raw = await request.text();
-      if (raw.length > 8000) return Response.json({ ok: false }, { status: 413 });
+      if (raw.length > 48000) return Response.json({ ok: false }, { status: 413 });
       const body = JSON.parse(raw);
       fields = Object.entries(limits).map(([label, max]) => {
         const value = body[label]?.trim() ?? '';

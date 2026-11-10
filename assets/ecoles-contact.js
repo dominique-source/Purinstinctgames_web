@@ -6,17 +6,7 @@ const policy = window.piSchoolCommercial;
 let proposal = null;
 try { proposal = policy.configuration(JSON.parse(new URL(location.href).searchParams.get('configuration'))); } catch { /* Invalid/shared links are ignored. */ }
 function currentProposal() {
-  // On the unified homepage, read current fields at update/submit time — never a stale URL copy.
-  if (document.getElementById('students')) {
-    const raw = {};
-    for (const key of Object.keys(policy.limits)) {
-      const input = document.getElementById(key);
-      if (!input.validity.valid) return null;
-      raw[key] = input.value === '' ? null : input.valueAsNumber;
-    }
-    return policy.configuration(raw);
-  }
-  return proposal;
+  return typeof window.piSchoolConfiguration === 'function' ? window.piSchoolConfiguration() : proposal;
 }
 function proposalSummary() {
   const current = currentProposal();
@@ -27,16 +17,14 @@ function updateProposal() {
   const summary = proposalSummary();
   document.getElementById('school-proposal').hidden = !summary;
   document.getElementById('school-proposal-summary').textContent = summary;
-  form.elements.namedItem('Commentaires').maxLength = 2000 - (summary ? summary.length + 2 : 0);
+  form.elements.namedItem('Commentaires').maxLength = 2000;
   for (const output of document.querySelectorAll('[data-commercial-rate]')) {
     const rate = policy.policy[output.dataset.commercialRate === 'regular' ? 'regularRate' : 'pilotRate'];
     output.textContent = policy.formatMoney(rate, document.documentElement.lang);
   }
 }
 document.addEventListener('pi:language', updateProposal);
-document.addEventListener('input', event => {
-  if (event.target.closest('.school-fields')) updateProposal();
-});
+document.addEventListener('pi:configuration', updateProposal);
 updateProposal();
 
 const messages = {
@@ -56,7 +44,7 @@ document.addEventListener("pi:language", () => showStatus());
 form.addEventListener("submit", async event => {
   event.preventDefault();
   if (submit.disabled) return;
-  if (document.getElementById("students") && !currentProposal()) { showStatus("configuration"); return; }
+  if (typeof window.piSchoolConfiguration === "function" && !currentProposal()) { showStatus("configuration"); return; }
   submit.disabled = true;
   showStatus("sending");
 
@@ -64,7 +52,7 @@ form.addEventListener("submit", async event => {
     const fields = Object.fromEntries(new FormData(form));
     const summary = proposalSummary();
     if (summary) fields.Commentaires = [fields.Commentaires, summary].filter(Boolean).join('\n\n');
-    if (fields.Commentaires.length > 2000) throw new Error('comments-too-long');
+    if (fields.Commentaires.length > 14000) throw new Error('comments-too-long');
     const response = await fetch(form.action, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

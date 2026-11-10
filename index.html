@@ -8,18 +8,18 @@
   <link rel="stylesheet" href="/assets/games.css">
   <script src="/assets/games-menu.js" defer></script>
   <script src="/assets/app-portal.js" defer></script>
-  <link rel="stylesheet" href="/assets/school-home.css?v=onepage-20261109-3">
-  <link rel="stylesheet" href="/assets/ecoles.css">
+  <link rel="stylesheet" href="/assets/school-home.css?v=config-blocks-20261109">
+  <link rel="stylesheet" href="/assets/ecoles.css?v=config-blocks-20261109">
   <title>PürInstinct Games à l’école</title>
   <link rel="alternate" hreflang="fr-CA" href="https://purinstinctgames.com/?lang=fr">
   <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/?lang=en">
   <link rel="alternate" hreflang="x-default" href="https://purinstinctgames.com/">
   <meta name="description" content="Découvrez les cinq zones et configurez les Games pour votre école.">
-  <script src="/assets/site-translations.js" defer></script>
+  <script src="/assets/site-translations.js?v=config-blocks-20261109" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css">
   <script src="/assets/site-language.js" defer></script>
-  <script src="/assets/school-home.js" defer></script>
-  <script src="/assets/ecoles-contact.js" defer></script>
+  <script src="/assets/school-home.js?v=config-blocks-20261109" defer></script>
+  <script src="/assets/ecoles-contact.js?v=config-blocks-20261109" defer></script>
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -132,28 +132,33 @@
     <div class="school-video-actions"><a class="games-cta" href="#parcours">Découvrir le programme scolaire</a></div>
   </div>
 </section>
-<section class="school-section" id="parcours">
-  <h2 class="section-title">De la découverte aux <em>Games</em></h2>
-  <div class="school-cards">
-    <article class="school-card pointer-surface" style="--accent:#00ecf5;--step:0">
-      <img src="/assets/school-home/conference.webp" width="380" height="378" alt="" loading="lazy">
-      <div><h3><em>01</em> Conférence</h3><p>Dominique Soucy présente le sport et lance le projet auprès des élèves.</p></div>
-    </article>
-    <article class="school-card pointer-surface" style="--accent:#ad74ff;--step:1">
-      <img src="/assets/school-home/cliniques.webp" width="380" height="378" alt="" loading="lazy">
-      <div><h3><em>02</em> Cliniques</h3><p>Les élèves découvrent le jeu en pratiquant les habiletés dans les cinq zones.</p></div>
-    </article>
-    <article class="school-card pointer-surface" style="--accent:#58ee77;--step:2">
-      <img src="/assets/school-home/formation.webp" width="380" height="378" alt="" loading="lazy">
-      <div><h3><em>03</em> Formation</h3><p>Les enseignants apprennent à animer les activités et à encadrer les zones.</p></div>
-    </article>
-    <article class="school-card pointer-surface" style="--accent:#ffdf36;--step:3">
-      <img src="/assets/school-home/games.webp" width="380" height="378" alt="" loading="lazy">
-      <div><h3><em>04</em> Games</h3><p>Les élèves mettent leurs habiletés en pratique dans les défis et les matchs.</p></div>
-    </article>
+<section class="school-section school-journey" id="parcours" aria-labelledby="journey-title">
+  <span id="deploiement" class="journey-anchor" aria-hidden="true"></span>
+  <header class="journey-heading">
+    <h2 id="journey-title"><span>DE LA DÉCOUVERTE AUX</span> <em>GAMES</em></h2>
+    <p>Un programme déployé sur plus d’un mois, selon le calendrier de votre école.</p>
+  </header>
+  <div class="school-cards journey-cards">
+    <article class="school-card journey-card" style="--accent:#00e6ef;--step:0" id="journey-before" aria-labelledby="journey-before-title"><div class="journey-shell">
+      <div class="journey-visual"><img src="/assets/homepage/ecole.png" width="1961" height="802" alt="Illustration d’un coach qui accompagne des élèves à l’école." loading="lazy" decoding="async"></div>
+      <div class="journey-copy"><h3 id="journey-before-title"><span class="journey-number" aria-hidden="true">01</span><span>AVANT LES GAMES</span></h3><p>Conférence, cliniques et formation des enseignants.</p></div>
+    </div><span class="journey-progress" aria-hidden="true">»</span></article>
+    <article class="school-card journey-card" style="--accent:#bd78ed;--step:1" id="journey-day" aria-labelledby="journey-day-title"><div class="journey-shell">
+      <div class="journey-visual"><img src="/assets/school-home/action-ecole.webp" width="850" height="660" alt="Illustration d’élèves en action avec le ballon PürInstinct." loading="lazy" decoding="async"></div>
+      <div class="journey-copy"><h3 id="journey-day-title"><span class="journey-number" aria-hidden="true">02</span><span>LE JOUR DES GAMES</span></h3><p>Installation, activités, matchs et animation.</p></div>
+    </div><span class="journey-progress" aria-hidden="true">»</span></article>
+    <article class="school-card journey-card journey-after" style="--accent:#a8f843;--step:2" id="journey-after" aria-labelledby="journey-after-title"><div class="journey-shell">
+      <div class="journey-visual journey-mosaic" data-portfolio-state="illustrative" role="group" aria-label="Mosaïque illustrative du projet scolaire">
+        <figure data-portfolio-id="activites" data-media-kind="illustration" data-media-src=""><img src="/assets/school-home/cliniques.webp" width="380" height="378" alt="Illustration des activités d’une clinique." loading="lazy" decoding="async"></figure>
+        <figure data-portfolio-id="rencontre" data-media-kind="illustration" data-media-src=""><img src="/assets/school-home/conference.webp" width="380" height="378" alt="Illustration d’une rencontre avec les élèves." loading="lazy" decoding="async"></figure>
+        <figure data-portfolio-id="accompagnement" data-media-kind="illustration" data-media-src=""><img src="/assets/school-home/formation.webp" width="380" height="378" alt="Illustration d’un échange pendant la formation." loading="lazy" decoding="async"></figure>
+        <figure data-portfolio-id="games" data-media-kind="illustration" data-media-src=""><img src="/assets/school-home/games.webp" width="380" height="378" alt="Illustration d’un moment des Games à l’école." loading="lazy" decoding="async"></figure>
+        <span class="journey-illustration-label">Visuels illustratifs</span>
+      </div>
+      <div class="journey-copy"><h3 id="journey-after-title"><span class="journey-number" aria-hidden="true">03</span><span>APRÈS LES GAMES</span></h3><p>Photos, vidéos et mini-documentaire : le projet raconté par les élèves.</p></div>
+    </div></article>
   </div>
 </section>
-<section class="school-section commercial-section" id="deploiement"><h2 class="section-title">Plus d’un mois. Un parcours préparé ensemble.</h2><ol class="commercial-timeline"><li><span class="commercial-step" aria-hidden="true">01</span><h3>Préparer</h3><p>Définir les besoins, les espaces, les ressources et le calendrier avec l’école.</p></li><li><span class="commercial-step" aria-hidden="true">02</span><h3>Former et accompagner</h3><p>Déployer la conférence, les cliniques et la formation des enseignants sur plusieurs semaines.</p></li><li><span class="commercial-step" aria-hidden="true">03</span><h3>Vivre les Games</h3><p>Réunir les élèves pour l’événement final, après la préparation.</p></li></ol><p>Accompagnement et coordination, équipements et production, DJ et sonorisation complètent la conférence, les cliniques et la formation. Les ballons pédagogiques restent à l’école. Le matériel des Games est récupéré après l’événement.</p></section>
 <section class="school-offer" id="offre-ecoles" aria-labelledby="offer-title">
  <header class="offer-intro">
   <img class="offer-panorama" src="/assets/school-home/action-ecole.webp" width="850" height="660" alt="Des élèves jouent ensemble, accompagnés de l’équipe PürInstinct." loading="lazy" decoding="async">
@@ -174,37 +179,51 @@
    <p class="offer-disclaimer">Cette réduction n’est pas une subvention gouvernementale.</p>
   </div>
   <ul class="offer-frame offer-services" aria-label="Composantes du programme"><li><img src="/assets/hero-deck/icons/iq.svg" alt="" width="32" height="32"><span>Conférence de Dominique Soucy</span></li><li><img src="/assets/hero-deck/icons/agility.svg" alt="" width="32" height="32"><span>Cliniques préparatoires</span></li><li><img src="/assets/hero-deck/icons/hand.svg" alt="" width="32" height="32"><span>Formation des enseignants</span></li><li><img src="/assets/hero-deck/icons/speed.svg" alt="" width="32" height="32"><span>Accompagnement et coordination</span></li><li><img src="/assets/hero-deck/icons/foot.svg" alt="" width="32" height="32"><span>Équipements et production</span></li><li><img src="/assets/hero-deck/icons/field.svg" alt="" width="32" height="32"><span>Games à l’école</span></li></ul>
-  <div class="offer-frame offer-config" id="configuration">
-   <h3>CONFIGUREZ VOTRE ÉCOLE</h3>
-   <div class="school-fields" role="group" aria-label="Configuration des Games"><div class="offer-field"><label><span id="students-label">Élèves participants</span><input type="number" id="students" value="200" min="1" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="students" data-step="-1" aria-label="Diminuer" aria-controls="students" aria-describedby="students-label">−</button><button type="button" data-step-target="students" data-step="1" aria-label="Augmenter" aria-controls="students" aria-describedby="students-label">+</button></span></div>
-<div class="offer-field"><label><span id="teachers-label">Enseignants disponibles</span><input type="number" id="teachers" value="12" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="teachers" data-step="-1" aria-label="Diminuer" aria-controls="teachers" aria-describedby="teachers-label">−</button><button type="button" data-step-target="teachers" data-step="1" aria-label="Augmenter" aria-controls="teachers" aria-describedby="teachers-label">+</button></span></div>
-<div class="offer-field"><label><span id="adults-label">Autres adultes ou bénévoles disponibles</span><input type="number" id="adults" value="3" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="adults" data-step="-1" aria-label="Diminuer" aria-controls="adults" aria-describedby="adults-label">−</button><button type="button" data-step-target="adults" data-step="1" aria-label="Augmenter" aria-controls="adults" aria-describedby="adults-label">+</button></span></div>
-<div class="offer-field"><label><span id="indoors-label">Plateaux intérieurs</span><input type="number" id="indoors" value="1" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="indoors" data-step="-1" aria-label="Diminuer" aria-controls="indoors" aria-describedby="indoors-label">−</button><button type="button" data-step-target="indoors" data-step="1" aria-label="Augmenter" aria-controls="indoors" aria-describedby="indoors-label">+</button></span></div>
-<div class="offer-field"><label><span id="outdoors-label">Plateaux extérieurs</span><input type="number" id="outdoors" value="2" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="outdoors" data-step="-1" aria-label="Diminuer" aria-controls="outdoors" aria-describedby="outdoors-label">−</button><button type="button" data-step-target="outdoors" data-step="1" aria-label="Augmenter" aria-controls="outdoors" aria-describedby="outdoors-label">+</button></span></div>
-    <p class="offer-help">Un plateau correspond à une surface approximativement équivalente à un terrain de basketball.</p>
-    <details><summary>Disponibilités et séances</summary><div class="offer-field"><label><span id="roles-label">Adultes de l’école disponibles en même temps</span><input type="number" id="roles" value="0" min="0" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="roles" data-step="-1" aria-label="Diminuer" aria-controls="roles" aria-describedby="roles-label">−</button><button type="button" data-step-target="roles" data-step="1" aria-label="Augmenter" aria-controls="roles" aria-describedby="roles-label">+</button></span></div>
-<div class="offer-field"><label><span id="zones-label">Zones ouvertes (zones)</span><input type="number" id="zones" value="5" min="1" max="5" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="zones" data-step="-1" aria-label="Diminuer" aria-controls="zones" aria-describedby="zones-label">−</button><button type="button" data-step-target="zones" data-step="1" aria-label="Augmenter" aria-controls="zones" aria-describedby="zones-label">+</button></span></div>
-<div class="offer-field"><label><span id="hours-label">Durée envisagée des Games (heures)</span><input type="number" id="hours" value="8" min="1" max="999999" step="1" required></label><span class="offer-stepper"><button type="button" data-step-target="hours" data-step="-1" aria-label="Diminuer" aria-controls="hours" aria-describedby="hours-label">−</button><button type="button" data-step-target="hours" data-step="1" aria-label="Augmenter" aria-controls="hours" aria-describedby="hours-label">+</button></span></div>
-<div class="offer-field"><label><span id="clinics-label">Cliniques envisagées (séances)</span><input type="number" id="clinics" min="1" max="999999" step="1" placeholder="À préciser"></label><span class="offer-stepper"><button type="button" data-step-target="clinics" data-step="-1" aria-label="Diminuer" aria-controls="clinics" aria-describedby="clinics-label">−</button><button type="button" data-step-target="clinics" data-step="1" aria-label="Augmenter" aria-controls="clinics" aria-describedby="clinics-label">+</button></span></div>
-     <p>Le nombre de séances de cliniques sera confirmé avec l’école.</p>
-     <p>Le total d’adultes, leur présence simultanée et leurs créneaux de disponibilité sont distincts. Les créneaux de chaque adulte seront précisés avec l’école.</p>
-     <p>Un bénévole ne remplace pas automatiquement un intervenant spécialisé. Les rôles seront confirmés avec vous.</p>
-    </details>
-    <p id="configuration-error" role="status"></p>
+  <div class="offer-config config-v2">
+   <div class="config-steps" id="configuration" aria-labelledby="configuration-title">
+    <h3 id="configuration-title">Configurez votre projet scolaire</h3>
+    <nav class="config-nav" aria-label="Étapes du configurateur"><a href="#config-step-1">01 · Élèves et horaire</a><a href="#config-step-2">02 · Espaces et activités</a><a href="#config-step-3">03 · Adultes disponibles</a></nav>
+    <div id="config-legacy" class="config-warning" hidden><p>Cette configuration partagée utilise l’ancien modèle. Vérifiez les activités, les blocs et les disponibilités simultanées. Les anciens effectifs adultes restent dans le contexte transmis, sans être déduits automatiquement.</p><label><input type="checkbox" id="config-legacy-confirm"> J’ai vérifié les nouveaux blocs et disponibilités.</label></div>
+    <div class="school-fields">
+     <fieldset class="config-step offer-frame" id="config-step-1"><legend>01 · Vos élèves et votre horaire</legend>
+      <div class="offer-field"><label for="students">Élèves participants distincts<input id="students" type="number" min="1" max="999999" step="1" value="200" required></label><span class="offer-stepper"><button type="button" data-step-target="students" data-step="-1" aria-label="Diminuer" aria-controls="students">−</button><button type="button" data-step-target="students" data-step="1" aria-label="Augmenter" aria-controls="students">+</button></span></div>
+      <p>Chaque élève compte une seule fois dans la base, même s’il participe à plusieurs blocs. La somme des présences peut dépasser l’effectif distinct.</p>
+      <label class="config-count" for="block-count">Nombre de blocs de quatre heures<input id="block-count" type="number" min="1" max="12" step="1" value="1" required></label>
+      <p id="config-technical-limit" class="config-caution"></p><div id="config-schedule"></div><button id="add-config-block" class="config-action" type="button">Ajouter un bloc</button>
+      <p>Le premier bloc est inclus. Les frais des blocs supplémentaires sont à confirmer, séparément de leurs renforts.</p>
+     </fieldset>
+     <fieldset class="config-step offer-frame" id="config-step-2"><legend>02 · Vos espaces et vos activités</legend>
+      <p>Un plateau physique correspond approximativement à un terrain de basketball. Une installation est un terrain PürInstinct ou un jeu de zone.</p>
+      <div class="config-pair">
+       <div class="offer-field"><label for="indoors">Plateaux intérieurs disponibles<input id="indoors" type="number" min="0" max="999" step="1" value="1" required></label></div>
+       <div class="offer-field"><label for="outdoors">Plateaux extérieurs disponibles<input id="outdoors" type="number" min="0" max="999" step="1" value="2" required></label></div>
+      </div>
+      <p>Configuration ajustable, à valider avec l’école. Aucun changement d’installation ou de bloc n’est appliqué automatiquement.</p>
+      <div id="config-activities"></div>
+      <label class="config-notes" for="config-notes">Précisions sur les espaces et le montage<textarea id="config-notes" maxlength="300" rows="3"></textarea></label>
+      <details class="config-method"><summary>Hypothèses de capacité et logistique</summary>
+       <p id="config-capacity-rules"></p>
+       <p>La transition comprend boire, consulter son score et rejoindre une activité. Attente et transition ne sont pas du temps physiquement actif.</p>
+       <p>Ce modèle de planification ne prouve pas que tous les élèves auront réalisé toutes les activités. Les durées de rotation ne sont pas confirmées.</p>
+       <p>Définir les besoins, les espaces, les ressources et le calendrier avec l’école.</p>
+       <p>Accompagnement et coordination, équipements et production, DJ et sonorisation complètent la conférence, les cliniques et la formation. Les ballons pédagogiques restent à l’école. Le matériel des Games est récupéré après l’événement.</p>
+       <label for="clinics">Cliniques envisagées (séances)<input id="clinics" type="number" min="1" max="999" step="1" placeholder="À préciser"></label><p>Le nombre de séances de cliniques sera confirmé avec l’école.</p>
+      </details>
+     </fieldset>
+     <fieldset class="config-step offer-frame" id="config-step-3"><legend>03 · Votre équipe disponible</legend>
+      <p>Déclarez les personnes présentes simultanément pour l’encadrement de chaque bloc. Ne comptez pas une même personne comme enseignant et bénévole.</p>
+      <p>Les intervenants PürInstinct de base s’ajoutent aux adultes des jeux. Les qualifications et les rôles restent à confirmer ; un bénévole ne remplace pas automatiquement un intervenant spécialisé.</p>
+      <div id="config-staff"></div>
+     </fieldset>
+     <p id="configuration-error" class="config-warning" role="status"></p>
+    </div>
    </div>
-   <p class="offer-resources"><span data-total="students">200</span> <span>élèves</span> · <span data-total="adults">15</span> <span>adultes disponibles</span> · <span data-total="spaces">3</span> <span>plateaux</span></p>
-   <div id="forfait"><div id="budget">
-    <dl class="offer-budget">
-     <div><dt>Base du programme</dt><dd data-pilot-total>2 000 $ CA</dd></div>
-     <div><dt>Personnel supplémentaire</dt><dd>À confirmer</dd></div>
-     <div><dt>Déplacement</dt><dd>À confirmer</dd></div>
-     <div class="offer-total"><dt>Total</dt><dd>À confirmer</dd></div>
-    </dl>
-    <p class="offer-base"><span>Base par élève</span> : <strong data-commercial-rate="pilot">10 $ CA</strong></p>
-    <p class="offer-help">Les ressources saisies servent à préparer la proposition. Elles ne réduisent pas la base du programme.</p>
-    <p class="offer-help">Estimation indicative. Le montant final sera confirmé selon l’encadrement, les installations, le calendrier et les déplacements nécessaires.</p>
-    <p class="offer-help">Traitement des taxes à confirmer dans la proposition.</p>
-   </div></div>
+   <aside class="offer-frame config-budget" id="budget" aria-labelledby="config-budget-title"><span id="forfait"></span>
+    <h3 id="config-budget-title">Votre budget indicatif</h3><div id="config-budget-lines"><p>Base cohorte pilote : 10 $ CA par élève distinct.</p><p>Suppléments et total à confirmer.</p></div>
+    <p>Le sous-total chiffré n’est pas un total final. Les frais inconnus ne sont pas égaux à zéro.</p>
+    <p>Frais de déplacement en sus.</p><p>Traitement des taxes à confirmer dans la proposition.</p>
+    <p>Les frais supplémentaires de bloc couvriront notamment la prolongation de l’équipe de base. Ils restent à confirmer et sont distincts des renforts.</p>
+   </aside>
   </div>
   <div class="offer-financing" id="financement">
    <article class="offer-frame"><h3><span aria-hidden="true">01</span> FINANCEMENT DIRECT</h3><p>L’école finance sa participation.</p></article>
