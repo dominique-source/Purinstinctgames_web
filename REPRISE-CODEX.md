@@ -1,12 +1,7 @@
-# Reprise — financement documenté en revue
+# Reprise — image conférence en revue
 
-Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche codex/funding-resources, base origin/main d4c3936. Production précédente inchangée.
-
-Terminé : cinq cartes enrichies, fenêtres structurées avec sources officielles vérifiées le 10 novembre 2026, traduction FR/EN, fermeture et langues visibles pendant le défilement ; nouveau lien financement au formulaire avec mention unique modifiable et saisies préservées.
-
-76 tests passent, syntaxe et diff propres. Navigateur 1440×900/390×844 : fenêtres, liens, clavier, défilement mobile, FR/EN, commentaire/école conservés, calcul 3 550 $ inchangé. Aucun courriel envoyé. Rapport docs/school-funding-resources/REVIEW.md et captures.
-
-À confirmer : admissibilité concrète du projet et budgets disponibles auprès de l’école et des organismes ; aucun blocage technique connu. Prochaine action : revue utilisateur, sans fusion ni production. Exécution locale, aperçu http://127.0.0.1:4183/#financement.
-
-PR de revue : https://github.com/dominique-source/Purinstinctgames_web/pull/36 (brouillon, sans fusion).
+Dépôt dominique-source/Purinstinctgames_web, /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche codex/dominique-conference-image, base main 60be746.
+Terminé : source PNG conservée à l’identique et WebP 174 ko sans retouche ; carte conférence et fenêtre liée utilisent la nouvelle image. Alt FR/EN exacts et point focal ciblé, autres sections inchangées.
+76 tests passent ; deux emplacements vérifiés à 1440×900 et 390×844 en FR/EN. Rapport docs/dominique-conference-image/REVIEW.md ; aperçu local http://127.0.0.1:4183/#services.
+Prochaine action : attendre validation, aucune fusion ni production. Aucun blocage connu. Exécution locale.
