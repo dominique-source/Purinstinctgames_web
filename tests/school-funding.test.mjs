@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-function fixture(value=''){
+function fixture(value='',selector='[data-multiple-blocks-inquiry]'){
  const events={},clicks={},comments={value,dispatchEvent(){}};
  const dialog={querySelector:()=>({addEventListener(){}}),querySelectorAll:()=>[],addEventListener(){}};
- const document={documentElement:{lang:'fr'},querySelector:s=>s.includes('inquiry')?{addEventListener:(name,fn)=>clicks[name]=fn}:comments,getElementById:()=>dialog,querySelectorAll:()=>[],addEventListener:(name,fn)=>events[name]=fn};
+ const document={documentElement:{lang:'fr'},querySelector:s=>s===selector?{addEventListener:(name,fn)=>clicks[name]=fn}:s.includes('inquiry')?null:comments,getElementById:()=>dialog,querySelectorAll:()=>[],addEventListener:(name,fn)=>events[name]=fn};
  const shared={window:{}};runInNewContext(read('assets/site-translations.js'),shared);
  runInNewContext(read('assets/school-funding.js'),{document,window:shared.window,Event:class{}});
  return {comments,document,click:()=>clicks.click(),language:lang=>{document.documentElement.lang=lang;events['pi:language']();}};
@@ -30,4 +30,19 @@ test('five funding notices are local and cannot calculate or send a message',()=
  assert.match(html,/Événement final de 4 h. Déplacement en sus. Proposition adaptée à votre école./);
  assert.doesNotMatch(js,/fetch\(|submit\(|requestSubmit|calculate\(|pi:configuration/);
  assert.match(read('assets/school-funding.css'),/prefers-reduced-motion:reduce/);
+});
+
+test('funding inquiry preserves authored content and adds one bilingual editable mention',()=>{
+ const f=fixture('Mon texte.', '[data-funding-inquiry]');f.click();f.click();
+ assert.equal(f.comments.value,'Mon texte.\n\nJ’aimerais discuter des possibilités de financement pour notre projet PürInstinct Games scolaires.');
+ f.language('en');f.click();assert.equal(f.comments.value,'Mon texte.\n\nI would like to discuss funding possibilities for our PürInstinct Games school project.');
+ f.comments.value='Texte libre modifié.';f.language('fr');f.click();assert.equal(f.comments.value,'Texte libre modifié.');
+});
+test('official resources identify grouped measures, French program names and four official sources',()=>{
+ const html=read('index.html');
+ for(const text of ['mesure 1330','15023','15028','15232','PAFILR','Une école montréalaise pour tous','Pour les établissements montréalais concernés','et non des subventions indépendantes'])assert.ok(html.includes(text));
+ assert.equal((html.match(/class="funding-explore"/g)||[]).length,5);
+ const section=html.slice(html.indexOf('<section class="funding-options"'),html.indexOf('<section class="school-contact-section"'));
+ assert.equal(section.split('href="https://www.quebec.ca/').length-1,4);
+ assert.match(read('assets/school-funding.js'),/button,a\[href\]/);
 });

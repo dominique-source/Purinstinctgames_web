@@ -1,12 +1,12 @@
-# Reprise — financement et blocs supplémentaires en revue
+# Reprise — financement documenté en revue
 
-Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche codex/funding-multiple-blocks, basée sur codex/interschool-menu-notice (63281ae, préservée).
+Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche codex/funding-resources, base origin/main d4c3936. Production précédente inchangée.
 
-Terminé : suppression de la case plusieurs blocs et de son message conditionnel ; lien au formulaire avec mention modifiable, non dupliquée et sans envoi ; cinq catégories de financement avec dialogue natif bilingue et accessible. Calculs et design de l’estimateur conservés. Rapport docs/school-funding/REVIEW.md et captures enregistrées.
+Terminé : cinq cartes enrichies, fenêtres structurées avec sources officielles vérifiées le 10 novembre 2026, traduction FR/EN, fermeture et langues visibles pendant le défilement ; nouveau lien financement au formulaire avec mention unique modifiable et saisies préservées.
 
-Vérifications : 74 tests passent, syntaxe JS/diff propres ; navigateur 1440×900 et 390×844, FR/EN, fenêtres, commentaires conservés, montant 3 550 $ inchangé avec 200 élèves/2 intervenants/2 classes, formulaire sous l’en-tête. Aucun courriel réel.
+76 tests passent, syntaxe et diff propres. Navigateur 1440×900/390×844 : fenêtres, liens, clavier, défilement mobile, FR/EN, commentaire/école conservés, calcul 3 550 $ inchangé. Aucun courriel envoyé. Rapport docs/school-funding-resources/REVIEW.md et captures.
 
-Prochaine action : revue utilisateur ; aucune fusion ni mise en production autorisée. Aperçu local http://127.0.0.1:4183/#financement, dépend de l’ordinateur. Aucun blocage fonctionnel connu. Branche précédente menu conservée séparément ; PR de financement à baser dessus pour un diff ciblé.
+À confirmer : admissibilité concrète du projet et budgets disponibles auprès de l’école et des organismes ; aucun blocage technique connu. Prochaine action : revue utilisateur, sans fusion ni production. Exécution locale, aperçu http://127.0.0.1:4183/#financement.
 
-Branches sauvegardées sur origin. PR #34 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/34 ; base codex/interschool-menu-notice, aucune fusion.
+PR de revue : https://github.com/dominique-source/Purinstinctgames_web/pull/36 (brouillon, sans fusion).
