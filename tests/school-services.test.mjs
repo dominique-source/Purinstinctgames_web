@@ -33,7 +33,7 @@ test('six real whole-card buttons use existing relevant images and translated co
  assert.equal(entries.length,6);assert.equal(new Set(entries.map(e=>e.id)).size,6);
  for(const e of entries){assert.ok(readFileSync(new URL('..'+e.src,import.meta.url)).length>0);assert.ok(dictionary[e.title],e.title);assert.ok(dictionary[e.description],e.description);assert.ok(dictionary[e.alt],e.alt);}
  const section=html.slice(html.indexOf('<section class="school-services"'),html.indexOf('<section class="school-estimator'));
- assert.doesNotMatch(section,/<a |<iframe|<video/);assert.match(section,/Visuels illustratifs/);assert.match(entries[0].alt,/vu de dos/);
+ assert.doesNotMatch(section,/<a |<iframe|<video/);assert.match(section,/Visuels illustratifs/);assert.match(entries[0].alt,/Dominique Soucy présentant PürInstinct Games/);
  assert.equal((html.match(/id="service-dialog"/g)||[]).length,1);assert.match(html,/data-service-language="fr"/);assert.match(html,/data-service-language="en"/);
 });
 test('every service opens its own content and closing restores scroll, styles and trigger focus',async()=>{

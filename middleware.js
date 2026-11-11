@@ -37,6 +37,7 @@ const publicPaths = new Set([
   '/assets/school-home/arene-avec-reperes.webp',
   '/assets/school-home/action-ecole.webp',
   '/assets/school-home/conference.webp',
+  '/assets/school-home/dominique-soucy-conference.webp',
   '/assets/school-home/cliniques.webp',
   '/assets/school-home/formation.webp',
   '/assets/school-home/games.webp',

@@ -37,3 +37,6 @@
 .service-dialog-language button[aria-pressed=true] { color:#ccff00; border-color:#ccff00; }
 
 .service-card[data-service=conference]>img,.service-card[data-service=training]>img { object-position:50% 0; }
+
+/* Approved conference photo: keep Dominique’s face clear in the card crop. */
+.service-card[data-service="conference"]>img { object-position:25% 0%; }

@@ -710,3 +710,5 @@ Object.assign(window.piTranslations, {
   "L’admissibilité et l’obtention de fonds ne sont pas garanties.": "Eligibility and funding are not guaranteed.",
   "J’aimerais discuter des possibilités de financement pour notre projet PürInstinct Games scolaires.": "I would like to discuss funding possibilities for our PürInstinct Games school project."
 });
+
+Object.assign(window.piTranslations, {"Illustration de Dominique Soucy présentant PürInstinct Games à des élèves dans un auditorium.":"Illustration of Dominique Soucy presenting PürInstinct Games to students in an auditorium."});
