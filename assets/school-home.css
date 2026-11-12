@@ -281,3 +281,10 @@ body>.nav { position:fixed; background:#041321; }
  .school-journey .journey-copy h3 { font-size:31px; min-height:64px; gap:12px; }
  .school-journey .journey-copy p { font-size:20px; }
 }
+
+/* Both variants share one grid cell, reserving the same space in either language. */
+.school-intro h1 { display:grid; }
+.signature-fr,.signature-en { grid-area:1 / 1; min-width:0; width:100%; }
+.signature-fr { align-self:center; }
+.signature-fr img { display:block; width:100%; height:auto; object-fit:contain; }
+html[lang="fr"] .signature-en,html[lang="en"] .signature-fr { visibility:hidden; }

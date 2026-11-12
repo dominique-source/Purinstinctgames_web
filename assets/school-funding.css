@@ -1,44 +1,38 @@
-.estimate-block-inquiry { display:flex; align-items:center; flex-wrap:wrap; gap:12px 24px; margin:24px 0; }
+.estimate-block-inquiry { grid-column:1 / -1; display:flex; align-items:center; flex-wrap:wrap; gap:12px 24px; margin:0; }
 .estimate-block-inquiry p { margin:0; }
 .funding-form-link { display:inline-flex; align-items:center; min-height:44px; padding:8px 18px; border:1px solid #ccff00; border-radius:6px; color:#ccff00; font-weight:700; text-decoration:none; }
-.funding-options { scroll-margin-top:84px; grid-column:1 / -1; min-width:0; padding-top:30px; color:#f4f4ef; }
-.funding-options h3 { font:italic 900 clamp(28px,3vw,42px)/1.1 'Barlow Condensed',sans-serif; margin:0 0 12px; }
-.funding-options>p { margin:0 0 22px; }
-.funding-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
-.funding-card { display:flex; align-items:center; gap:12px; min-width:0; padding:20px 16px; background:#0a1519; color:#f4f4ef; border:1px solid #778c8c; border-radius:10px; text-align:left; font:700 18px/1.2 Barlow,sans-serif; cursor:pointer; }
-.funding-card svg { width:28px; height:28px; flex-shrink:0; fill:none; stroke:#ccff00; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-.funding-label { flex:1; }
-.funding-plus { color:#ccff00; font:400 26px/1 Barlow,sans-serif; }
+/* Only the notes below the unchanged calculator are made compact. */
+.school-estimator>.estimate-note { margin-bottom:0; font-size:16px; line-height:1.4; }
+.school-estimator>.estimate-note span { font-size:14px; font-style:normal; font-weight:400; }
+.funding-options { scroll-margin-top:84px; grid-column:1 / -1; min-width:0; padding-top:0; color:#f4f4ef; }
+.funding-banner { padding:18px 24px; background:#ccff00; color:#0a0a0a; border-radius:8px; }
+.funding-banner h3 { font:italic 900 clamp(28px,3vw,42px)/1.05 'Barlow Condensed',sans-serif; margin:0 0 8px; }
+.funding-banner p { font:400 clamp(16px,1.5vw,20px)/1.35 Barlow,sans-serif; margin:0; max-width:1000px; }
+.funding-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin-top:18px; }
+.funding-card { position:relative; isolation:isolate; display:flex; flex-direction:column; justify-content:flex-end; align-items:stretch; min-width:0; width:100%; min-height:370px; aspect-ratio:.71; padding:18px 16px; overflow:hidden; background:#0a0a0a; color:#f4f4ef; border:1px solid #ffffff30; border-radius:12px; text-align:left; cursor:pointer; }
+.funding-card>img { position:absolute; z-index:-2; inset:0 0 auto; width:100%; height:auto; object-fit:cover; object-position:50% 0%; }
+.funding-shade { position:absolute; z-index:-1; inset:0; background:linear-gradient(180deg,transparent 28%,#0a0a0a33 40%,#0a0a0aeb 65%,#0a0a0a 79%); }
+.funding-label { display:block; font:italic 900 clamp(25px,2.35vw,38px)/1.02 'Barlow Condensed',sans-serif; text-transform:uppercase; min-height:2.04em; }
+.funding-label::after { content:''; display:block; width:70px; height:5px; margin-top:14px; border-radius:4px; background:#ccff00; }
+.funding-explore { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:14px; font:400 clamp(15px,1.3vw,20px)/1.2 Barlow,sans-serif; }
+.funding-plus { display:grid; place-items:center; flex:none; width:38px; height:38px; border-radius:50%; background:#ccff00; color:#0a0a0a; font:700 32px/1 Barlow,sans-serif; }
 .funding-card:hover { border-color:#ccff00; }
 .funding-card:focus-visible,.funding-form-link:focus-visible { outline:3px solid #ccff00; outline-offset:4px; }
-.funding-options .funding-note { margin:18px 0 0; font-size:16px; color:#c9cece; }
-.funding-modal { width:min(580px,calc(100% - 32px)); animation:funding-in 150ms ease-out; }
-.funding-dialog-surface { position:relative; padding:84px 28px 32px; }
-.funding-modal h2 { font:italic 900 clamp(28px,4vw,40px)/1.1 'Barlow Condensed',sans-serif; text-transform:uppercase; margin:0 0 18px; }
-.funding-modal p { font:400 20px/1.5 Barlow,sans-serif; margin:0; }
-@keyframes funding-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
-@media(max-width:1100px) { .funding-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
-@media(max-width:650px) { .funding-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .funding-card { flex-wrap:wrap; gap:8px; padding:16px 12px; font-size:17px; } .funding-card svg { width:24px; height:24px; } .funding-label { flex-basis:calc(100% - 34px); order:2; } .funding-plus { margin-left:auto; } .funding-modal p { font-size:18px; } .funding-dialog-surface { padding:82px 20px 24px; } }
-@media(prefers-reduced-motion:reduce) { .funding-modal { animation:none; } }
-
-/* Expanded explanations stay in the existing native funding dialog. */
-.funding-options>p { max-width:1000px; }
-.funding-options h3 { text-transform:uppercase; }
-.funding-grid { margin-top:24px; align-items:stretch; }
-.funding-card { display:grid; grid-template-columns:1fr; grid-template-rows:30px auto 1fr auto; align-content:stretch; gap:12px; padding:20px 16px; background:#0a0a0a; }
-.funding-card svg { width:30px; height:30px; }
-.funding-label { font:italic 900 25px/1.08 'Barlow Condensed',sans-serif; text-transform:uppercase; }
-.funding-summary { font:400 17px/1.4 Barlow,sans-serif; }
-.funding-explore { margin-top:auto; padding-top:8px; color:#ccff00; font:700 15px/1.3 Barlow,sans-serif; }
-.funding-explore span { margin-left:6px; font-size:22px; }
-.funding-options .funding-conclusion { margin:24px 0 18px; }
-.funding-modal { width:min(760px,calc(100% - 32px)); }
+.funding-options .funding-note { margin:14px 0; font:400 15px/1.4 Barlow,sans-serif; color:#c9cece; }
+@media(max-width:1100px) { .funding-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } .funding-label { font-size:32px; } }
+@media(max-width:650px) { .funding-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .funding-card { min-height:290px; padding:14px 12px; aspect-ratio:.64; } .funding-label { font-size:25px; } .funding-explore { font-size:15px; gap:6px; } .funding-plus { width:30px; height:30px; font-size:26px; } .funding-banner { padding:16px; } }
+@media(max-width:360px) { .funding-grid { grid-template-columns:minmax(0,1fr); } .funding-card { aspect-ratio:.9; min-height:330px; } .funding-label { font-size:34px; } }
+/* Existing funding window design and scrollable content. */
+.funding-modal { width:min(760px,calc(100% - 32px)); animation:funding-in 150ms ease-out; }
 .funding-dialog-tools { position:sticky; top:0; z-index:1; height:72px; background:#0a0a0a; border-bottom:1px solid #778c8c55; }
-.funding-dialog-surface { padding:24px 28px 32px; }
+.funding-dialog-surface { position:relative; padding:24px 28px 32px; }
+.funding-modal h2 { font:italic 900 clamp(28px,4vw,40px)/1.1 'Barlow Condensed',sans-serif; text-transform:uppercase; margin:0 0 18px; }
 .funding-modal h3 { margin:28px 0 12px; font:italic 900 27px/1.15 'Barlow Condensed',sans-serif; color:#ccff00; }
-.funding-modal p { margin:0 0 18px; }
+.funding-modal p { font:400 20px/1.5 Barlow,sans-serif; margin:0 0 18px; }
 .funding-modal .funding-context { border-left:2px solid #ccff00; padding-left:14px; font-size:17px; }
 .funding-modal .funding-action { font-weight:700; }
 .funding-modal a { display:block; padding:10px 0; min-height:44px; color:#ccff00; text-underline-offset:4px; font:700 17px/1.4 Barlow,sans-serif; overflow-wrap:anywhere; }
 .funding-modal a:focus-visible { outline:3px solid #ccff00; outline-offset:3px; }
-@media(max-width:650px) { .funding-card { padding:16px 12px; gap:10px; } .funding-label { font-size:23px; order:0; } .funding-summary { font-size:16px; } .funding-explore { font-size:14px; } .funding-dialog-surface { padding:22px 20px 24px; } }
+@keyframes funding-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+@media(max-width:650px) { .funding-modal p { font-size:18px; } .funding-dialog-surface { padding:22px 20px 24px; } }
+@media(prefers-reduced-motion:reduce) { .funding-modal { animation:none; } }
