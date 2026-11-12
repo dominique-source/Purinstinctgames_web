@@ -6,3 +6,5 @@ Terminé : section unique après hero/zones avant vidéo, panorama fourni sur ga
 83 tests passent ; comparaison de périmètre confirme toutes les autres sections et scripts inchangés. Navigateur 1440×900, 390×844, reflow720 FR/EN ; captures, textes lisibles, pas de débordement, saisies conservées et calcul 3 550 $ inchangé. Aucun courriel envoyé.
 Écart documenté : aucune fonte pinceau dans le repo, Games est un PNG ; signature HTML en Barlow Condensed Black Italic. Textures décoratives de coins non reproduites, panorama reconstruit fourni conservé.
 Rapport docs/school-logistics/REVIEW.md. Prochaine action : revue utilisateur ; aucune fusion ni production autorisée. Aperçu local http://127.0.0.1:4183/#logistique ; serveur session61443, dépend de cet ordinateur.
+
+PR #39 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/39. Branche sauvegardée sur origin ; aucune fusion.
