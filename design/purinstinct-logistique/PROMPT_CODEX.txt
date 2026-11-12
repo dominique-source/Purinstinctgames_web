@@ -1,0 +1,19 @@
+CODEX | AJOUT UNIQUEMENT : MOINS DE LOGISTIQUE, PLUS DE PLACE AU JEU
+
+Lis README.md et SPECIFICATIONS.md, examine la maquette reference/maquette-validee.png puis audite le code existant avant de modifier quoi que ce soit.
+
+Ajoute cette seule section après l’accueil immersif et sa barre de zones, avant la vidéo de présentation. Ne remplace et ne redessine aucune section existante. Préserve accueil, logo FR/EN, interactions, vidéo, programme, tarifs, calculateur, financement, contact et application.
+
+Reproduis fidèlement la maquette : trois scènes photographiques contiguës avec séparations diagonales, terrain gazonné, titres sportifs blanc/cyan, engagements en grandes lettres, symbole de matériel fourni, repère de localisation et grand 0 $ lime, bandeau des frais connexes puis immense signature lime au pinceau sur la fierté scolaire. Aucun onglet, accordéon ou pop-up.
+
+Utilise assets/panorama-sans-texte.png comme ressource photographique et la maquette uniquement comme référence. Tous les textes doivent être du vrai HTML, traduits avec le système FR/EN existant grâce à content.fr-en.json. Ne pas afficher la maquette complète comme une capture figée. Le panorama propre est une reconstruction générée : la maquette reste la référence de composition finale.
+
+Réutilise les fontes effectivement présentes dans le repo : titres condensés gras italiques et fonte pinceau déjà employée pour GAMES. Ne pas prétendre qu’une fonte fournie existe dans le kit. Consigner la correspondance des fontes. Reprendre les couleurs du site sans modifier les styles globaux. Limiter les styles à ce composant.
+
+Sur desktop conserver trois scènes et engagements sur une ligne; sur mobile empiler trois groupes image + engagement lisibles en conservant toute la copie, puis bandeau et signature. Aucun texte réduit à une taille illisible, aucun overflow horizontal. Ne pas déformer les photos.
+
+Le 0 $ concerne exclusivement le transport des élèves vers un autre lieu, pas le prix du programme ni le déplacement de PürInstinct. Ne pas promettre zéro travail pour l’école. Ne pas modifier les prix ni les calculs. Préserver la distinction matériel des Games récupéré / ballons pédagogiques laissés à l’école. Ne pas ajouter de nouvelles promesses commerciales.
+
+Préserver la diversité ethnique des personnages et ne pas identifier un personnage illustratif comme Dominique. Aucun ballon de basketball, aucun terrain asphalté.
+
+Exécuter l’implémentation complète, lancer les vérifications adaptées, contrôler FR/EN et desktop/mobile, livrer des captures à 1440px et 390px et un compte rendu des fichiers, des fontes réutilisées et des écarts éventuels. Ne pas fusionner ni publier en production.

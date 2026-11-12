@@ -716,3 +716,18 @@ Object.assign(window.piTranslations, {"Illustration de Dominique Soucy présenta
 Object.assign(window.piTranslations, {"ET POUR FINANCER VOTRE PROJET?": "AND HOW CAN YOU FUND YOUR PROJECT?", "Des programmes publics, des fondations et des commanditaires peuvent contribuer au financement.": "Public programs, foundations and sponsors may help fund the project.", "Programmes publics": "Public programs", "Selon les critères des organismes. Financement non garanti.": "Subject to the organizations’ criteria. Funding is not guaranteed."});
 
 Object.assign(window.piTranslations, {"Les Jeux PürInstinct à l’école": "PürInstinct Games at School"});
+
+Object.assign(window.piTranslations, {
+  "MOINS DE LOGISTIQUE.": "LESS LOGISTICS.",
+  "PLUS DE PLACE AU JEU.": "MORE ROOM TO PLAY.",
+  "Votre équipe en fait déjà beaucoup. Nous sommes là pour vous faciliter la tâche.": "Your team already does so much. We’re here to make things easier.",
+  "DES FRAIS CONNEXES RÉDUITS AU MINIMUM.": "KEEPING RELATED COSTS TO A MINIMUM.",
+  "Nous utilisons vos installations pour limiter les coûts autour du projet.": "We use your facilities to limit the costs surrounding the project.",
+  "UNE FIERTÉ POUR VOTRE ÉCOLE.": "A SOURCE OF PRIDE FOR YOUR SCHOOL.",
+  "Un projet que les jeunes et les enseignants s’approprient.": "A project students and teachers can make their own.",
+  "MATÉRIEL PORTABLE FOURNI": "PORTABLE EQUIPMENT PROVIDED",
+  "VOS PLATEAUX, VOTRE ÉCOLE": "YOUR FACILITIES, YOUR SCHOOL",
+  "0 $ DE TRANSPORT D’ÉLÈVES": "$0 IN STUDENT TRANSPORTATION COSTS",
+  "0 $": "$0",
+  "DE TRANSPORT D’ÉLÈVES": "IN STUDENT TRANSPORTATION COSTS"
+});

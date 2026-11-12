@@ -1,0 +1,30 @@
+{
+  "fr": {
+    "title": "MOINS DE LOGISTIQUE.",
+    "accent": "PLUS DE PLACE AU JEU.",
+    "intro": "Votre équipe en fait déjà beaucoup. Nous sommes là pour vous faciliter la tâche.",
+    "benefits": [
+      "MATÉRIEL PORTABLE FOURNI",
+      "VOS PLATEAUX, VOTRE ÉCOLE",
+      "0 $ DE TRANSPORT D’ÉLÈVES"
+    ],
+    "costTitle": "DES FRAIS CONNEXES RÉDUITS AU MINIMUM.",
+    "costText": "Nous utilisons vos installations pour limiter les coûts autour du projet.",
+    "pride": "UNE FIERTÉ POUR VOTRE ÉCOLE.",
+    "closing": "Un projet que les jeunes et les enseignants s’approprient."
+  },
+  "en": {
+    "title": "LESS LOGISTICS.",
+    "accent": "MORE ROOM TO PLAY.",
+    "intro": "Your team already does so much. We’re here to make things easier.",
+    "benefits": [
+      "PORTABLE EQUIPMENT PROVIDED",
+      "YOUR FACILITIES, YOUR SCHOOL",
+      "$0 IN STUDENT TRANSPORTATION COSTS"
+    ],
+    "costTitle": "KEEPING RELATED COSTS TO A MINIMUM.",
+    "costText": "We use your facilities to limit the costs surrounding the project.",
+    "pride": "A SOURCE OF PRIDE FOR YOUR SCHOOL.",
+    "closing": "A project students and teachers can make their own."
+  }
+}

@@ -1,10 +1,10 @@
-# Reprise — signature scolaire et transition financement en revue
+# Reprise — section logistique en revue
 
-Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche codex/school-signature-funding, base main 830120f ; aucun changement en production.
-Terminé : PNG français fourni intégré à l’identique et signature anglaise existante conservée, bascule CSS FR/EN sans changement de hauteur ; titre accessible unique. Demande précédente budget-financement terminée : bandeau lime, cinq photos extraites sans texte, notes compactes et question blocs déplacée après financement ; fenêtres et calculatrice préservées.
-80 tests réussis ; navigateur 1440×900 et 390×844, captures des quatre signatures et deux financements, zones, fenêtres, valeurs/commentaire conservés au changement de langue. Budget 3 550 $ vérifié. Aucun courriel envoyé.
-Rapports docs/school-signature/REVIEW.md et docs/budget-funding-transition/REVIEW.md.
-Prochaine action : revue utilisateur avant fusion/publication ; aucune production autorisée. Aperçu local http://127.0.0.1:4183/ ; serveur session 61443, dépend de cet ordinateur. Aucun blocage connu.
+Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche codex/school-logistics-section, base main 7956ac7.
+Terminé : section unique après hero/zones avant vidéo, panorama fourni sur gazon, trois scènes et engagements HTML/SVG, bandeau des frais et fierté scolaire, mobile empilé, FR/EN. Kit original conservé dans design/purinstinct-logistique/.
+83 tests passent ; comparaison de périmètre confirme toutes les autres sections et scripts inchangés. Navigateur 1440×900, 390×844, reflow720 FR/EN ; captures, textes lisibles, pas de débordement, saisies conservées et calcul 3 550 $ inchangé. Aucun courriel envoyé.
+Écart documenté : aucune fonte pinceau dans le repo, Games est un PNG ; signature HTML en Barlow Condensed Black Italic. Textures décoratives de coins non reproduites, panorama reconstruit fourni conservé.
+Rapport docs/school-logistics/REVIEW.md. Prochaine action : revue utilisateur ; aucune fusion ni production autorisée. Aperçu local http://127.0.0.1:4183/#logistique ; serveur session61443, dépend de cet ordinateur.
 
-Branche sauvegardée sur origin ; PR #38 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/38. Cinq fenêtres également revérifiées sur ordinateur.
+PR #39 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/39. Branche sauvegardée sur origin ; aucune fusion.
