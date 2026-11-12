@@ -6,3 +6,5 @@ Terminé : PNG français fourni intégré à l’identique et signature anglaise
 80 tests réussis ; navigateur 1440×900 et 390×844, captures des quatre signatures et deux financements, zones, fenêtres, valeurs/commentaire conservés au changement de langue. Budget 3 550 $ vérifié. Aucun courriel envoyé.
 Rapports docs/school-signature/REVIEW.md et docs/budget-funding-transition/REVIEW.md.
 Prochaine action : revue utilisateur avant fusion/publication ; aucune production autorisée. Aperçu local http://127.0.0.1:4183/ ; serveur session 61443, dépend de cet ordinateur. Aucun blocage connu.
+
+Branche sauvegardée sur origin ; PR #38 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/38. Cinq fenêtres également revérifiées sur ordinateur.
