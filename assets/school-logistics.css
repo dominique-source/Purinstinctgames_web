@@ -1,0 +1,46 @@
+.school-logistics { --logistics-lime:#ccff00; --logistics-cyan:var(--pi-cyan,#00d9e8); background:#0a0a0a; color:#f4f4ef; max-width:1800px; margin-inline:auto; padding-top:32px; scroll-margin-top:84px; }
+.school-logistics .logistics-heading { padding:0 24px 22px; text-align:center; }
+.school-logistics h2 { font:italic 900 clamp(36px,4.25vw,72px)/1.02 'Barlow Condensed',sans-serif; margin:0 0 10px; text-wrap:balance; }
+.school-logistics h2 em { color:var(--logistics-cyan); }
+.school-logistics .logistics-heading p { margin:0; font:italic 700 clamp(18px,1.9vw,28px)/1.35 Barlow,sans-serif; }
+.school-logistics .logistics-scenes { position:relative; }
+.school-logistics .logistics-panorama { display:block; width:100%; height:auto; }
+.school-logistics .logistics-benefits { position:absolute; inset:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); }
+.school-logistics .logistics-benefit { position:relative; min-width:0; display:flex; align-items:flex-end; }
+.school-logistics .logistics-benefit::before { content:''; position:absolute; inset:45% 0 0; background:linear-gradient(transparent,#0a0a0ae8); pointer-events:none; }
+.school-logistics .logistics-mobile-photo { display:none; }
+.school-logistics .logistics-commitment { position:relative; display:flex; align-items:center; gap:14px; width:100%; padding:20px 22px; }
+.school-logistics .logistics-commitment h3 { margin:0; font:italic 900 clamp(25px,2.7vw,46px)/1.02 'Barlow Condensed',sans-serif; text-wrap:balance; }
+.school-logistics .logistics-commitment svg { width:clamp(44px,5.5vw,92px); height:auto; flex:none; }
+.school-logistics .logistics-check { fill:none; stroke:var(--logistics-lime); stroke-width:11; stroke-linecap:square; stroke-linejoin:round; }
+.school-logistics .logistics-pin { fill:var(--logistics-cyan); }
+.school-logistics .logistics-pin circle { fill:#0a0a0a; }
+.school-logistics .logistics-transport h3 { display:flex; align-items:center; gap:16px; }
+.school-logistics .logistics-transport strong { color:var(--logistics-lime); font-size:clamp(62px,7.8vw,130px); line-height:.95; white-space:nowrap; }
+.school-logistics .logistics-costs { padding:16px 24px; text-align:center; border-block:2px solid var(--logistics-lime); }
+.school-logistics .logistics-costs h3 { color:var(--logistics-lime); font:italic 900 clamp(24px,3vw,48px)/1.05 'Barlow Condensed',sans-serif; margin:0 0 7px; }
+.school-logistics .logistics-costs p { font:italic 700 clamp(18px,1.8vw,28px)/1.35 Barlow,sans-serif; margin:0; }
+.school-logistics .logistics-pride { padding:24px 24px 28px; text-align:center; }
+.school-logistics .logistics-pride p { margin:0 0 14px; color:var(--logistics-lime); font:italic 900 clamp(34px,5.5vw,90px)/1 'Barlow Condensed',sans-serif; text-wrap:balance; }
+.school-logistics .logistics-pride p::after { content:''; display:block; width:min(260px,40%); height:5px; margin:10px auto 0; background:var(--logistics-lime); transform:skew(-20deg) rotate(-2deg); }
+.school-logistics .logistics-pride>span { font:italic 700 clamp(18px,1.9vw,28px)/1.35 Barlow,sans-serif; }
+@media(max-width:800px) {
+ .school-logistics { padding-top:26px; }
+ .school-logistics .logistics-heading { padding:0 18px 22px; }
+ .school-logistics h2 { font-size:clamp(34px,7.8vw,52px); }
+ .school-logistics .logistics-heading p { font-size:18px; }
+ .school-logistics .logistics-panorama { display:none; }
+ .school-logistics .logistics-benefits { position:static; grid-template-columns:minmax(0,1fr); }
+ .school-logistics .logistics-benefit { display:block; }
+ .school-logistics .logistics-mobile-photo { display:block; width:100%; height:auto; }
+ .school-logistics .logistics-commitment { position:absolute; bottom:0; left:0; padding:24px 22px; gap:18px; }
+ .school-logistics .logistics-commitment h3 { font-size:clamp(30px,7.4vw,48px); }
+ .school-logistics .logistics-commitment svg { width:68px; }
+ .school-logistics .logistics-transport strong { font-size:clamp(82px,20vw,120px); }
+ .school-logistics .logistics-costs { padding:20px 18px; }
+ .school-logistics .logistics-costs h3 { font-size:30px; }
+ .school-logistics .logistics-costs p { font-size:18px; }
+ .school-logistics .logistics-pride { padding:26px 18px 30px; }
+ .school-logistics .logistics-pride p { font-size:clamp(38px,10vw,64px); }
+ .school-logistics .logistics-pride>span { font-size:18px; }
+}
