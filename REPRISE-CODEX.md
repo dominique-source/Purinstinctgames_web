@@ -1,10 +1,7 @@
-# Reprise — signature scolaire et transition financement en revue
+# Reprise — signatures et cartes publiées
 
-Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche codex/school-signature-funding, base main 830120f ; aucun changement en production.
-Terminé : PNG français fourni intégré à l’identique et signature anglaise existante conservée, bascule CSS FR/EN sans changement de hauteur ; titre accessible unique. Demande précédente budget-financement terminée : bandeau lime, cinq photos extraites sans texte, notes compactes et question blocs déplacée après financement ; fenêtres et calculatrice préservées.
-80 tests réussis ; navigateur 1440×900 et 390×844, captures des quatre signatures et deux financements, zones, fenêtres, valeurs/commentaire conservés au changement de langue. Budget 3 550 $ vérifié. Aucun courriel envoyé.
-Rapports docs/school-signature/REVIEW.md et docs/budget-funding-transition/REVIEW.md.
-Prochaine action : revue utilisateur avant fusion/publication ; aucune production autorisée. Aperçu local http://127.0.0.1:4183/ ; serveur session 61443, dépend de cet ordinateur. Aucun blocage connu.
-
-Branche sauvegardée sur origin ; PR #38 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/38. Cinq fenêtres également revérifiées sur ordinateur.
+Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche locale codex/school-signature-funding. PR #38 intégrée à main 7956ac722b69afa5c35ea5811ac30124cfcef32f après validation explicite.
+Déploiement production dpl_HYMZeBUPBjDHgkfJEhsA6nt6NhQH READY sur purinstinctgames.com.
+Terminé : signature française PNG, signature anglaise conservée, bandeau financement, cinq cartes photo et question blocs déplacée. 80 tests passent ; contrôles publics ordinateur/téléphone : FR/EN, cinq fenêtres, saisies conservées et budget 3 550 $ inchangé. Aucun courriel envoyé.
+Rapport docs/school-signature/PRODUCTION.md. Prochaine action : attendre la prochaine demande ; aucune publication supplémentaire requise. Aucun blocage technique connu. Exécution locale.
