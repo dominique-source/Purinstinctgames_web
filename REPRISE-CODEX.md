@@ -1,10 +1,7 @@
-# Reprise — section logistique en revue
+# Reprise — section logistique publiée
 
 Dépôt dominique-source/Purinstinctgames_web ; /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche codex/school-logistics-section, base main 7956ac7.
-Terminé : section unique après hero/zones avant vidéo, panorama fourni sur gazon, trois scènes et engagements HTML/SVG, bandeau des frais et fierté scolaire, mobile empilé, FR/EN. Kit original conservé dans design/purinstinct-logistique/.
-83 tests passent ; comparaison de périmètre confirme toutes les autres sections et scripts inchangés. Navigateur 1440×900, 390×844, reflow720 FR/EN ; captures, textes lisibles, pas de débordement, saisies conservées et calcul 3 550 $ inchangé. Aucun courriel envoyé.
-Écart documenté : aucune fonte pinceau dans le repo, Games est un PNG ; signature HTML en Barlow Condensed Black Italic. Textures décoratives de coins non reproduites, panorama reconstruit fourni conservé.
-Rapport docs/school-logistics/REVIEW.md. Prochaine action : revue utilisateur ; aucune fusion ni production autorisée. Aperçu local http://127.0.0.1:4183/#logistique ; serveur session61443, dépend de cet ordinateur.
-
-PR #39 en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/39. Branche sauvegardée sur origin ; aucune fusion.
+Branche locale codex/school-logistics-section. PR #39 intégrée à main b3e3e52db6cb9d9765c2c09758107accd927d66f après validation explicite.
+Déploiement production dpl_HCuYcpc44mCwwjqdB5DSDbjBCpBv READY sur purinstinctgames.com.
+Terminé : section logistique après accueil avant vidéo ; FR/EN, desktop/mobile et saisies vérifiés sur le domaine public. 83 tests passent, montant 3 550 $ CA inchangé, aucun courriel envoyé. Rapport docs/school-logistics/PRODUCTION.md.
+Prochaine action : attendre la prochaine demande ; aucune publication supplémentaire requise. Aucun blocage connu. Exécution locale.
