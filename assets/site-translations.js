@@ -712,3 +712,7 @@ Object.assign(window.piTranslations, {
 });
 
 Object.assign(window.piTranslations, {"Illustration de Dominique Soucy présentant PürInstinct Games à des élèves dans un auditorium.":"Illustration of Dominique Soucy presenting PürInstinct Games to students in an auditorium."});
+
+Object.assign(window.piTranslations, {"ET POUR FINANCER VOTRE PROJET?": "AND HOW CAN YOU FUND YOUR PROJECT?", "Des programmes publics, des fondations et des commanditaires peuvent contribuer au financement.": "Public programs, foundations and sponsors may help fund the project.", "Programmes publics": "Public programs", "Selon les critères des organismes. Financement non garanti.": "Subject to the organizations’ criteria. Funding is not guaranteed."});
+
+Object.assign(window.piTranslations, {"Les Jeux PürInstinct à l’école": "PürInstinct Games at School"});

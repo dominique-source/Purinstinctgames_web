@@ -11,7 +11,7 @@ test('the unified public page distinguishes price, pilot discount, travel and ex
  for(const path of ['index.html']){
   const html=read(path);
   assert.ok(html.indexOf('Tarif régulier')<html.indexOf('Cohorte pilote'));
-  for(const phrase of ['25 $','10 $','Frais de déplacement en sus','réduction commerciale de 60 %','Cette réduction n’est pas une subvention gouvernementale.','L’admissibilité et l’obtention de fonds ne sont pas garanties.','plus d’un mois'])assert.ok(html.includes(phrase),path+': '+phrase);
+  for(const phrase of ['25 $','10 $','Frais de déplacement en sus','réduction commerciale de 60 %','Cette réduction n’est pas une subvention gouvernementale.','Selon les critères des organismes. Financement non garanti.','plus d’un mois'])assert.ok(html.includes(phrase),path+': '+phrase);
   assert.doesNotMatch(html,/14 500|7,25|data-cad="14500"/);
  }
 });
