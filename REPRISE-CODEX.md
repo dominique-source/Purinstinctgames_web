@@ -12,17 +12,18 @@ Branche : codex/school-calendar-wristband (base main b3e3e52)
 - API serveur, adaptateur Firestore avec contrôle de concurrence, persistance locale de test.
 
 ## Vérifié
-- 89 tests Node réussis au premier passage complet.
+- 92 tests Node réussis au passage final.
 - Navigateur : Vanier sans dates, comptes 1/10 et 0/10, filtre fictif, événement final.
 - Administration locale : clinique fictive enregistrée, conservée après rechargement puis publiée.
 - Aucun courriel envoyé ; aucune fusion ni publication en production.
 
 ## À terminer
-- Dernières captures ordinateur/mobile, changement FR/EN, dépublication et suppression de données QA.
-- Guide d’administration et configuration distante ; tests complémentaires, commit/push/PR de revue.
+- Vérifications FR/EN, captures et guide terminés (docs/school-calendar/STATUS.md).
+- Clinique QA supprimée, données réelles Vanier inchangées.
+- Dernière étape : pousser la branche et ouvrir la PR de revue.
 
 ## Blocage externe précis
 Aucun stockage commercial calendrier n’est configuré dans Vercel. Variables requises : CALENDAR_ADMIN_EMAILS, CALENDAR_FIRESTORE_PROJECT_ID, CALENDAR_SERVICE_ACCOUNT_KEY. Ne pas utiliser la base des compétitions. L’environnement est local : pas de garantie de poursuite ordinateur éteint.
 
 ## Prochaine action
-Terminer les vérifications navigateur sur http://127.0.0.1:4184/ (Vanier sans dates) et http://127.0.0.1:4185/ (démonstration fictive), puis documenter et pousser la branche sans fusion.
+Lire docs/school-calendar/STATUS.md et CONFIGURATION.md. Après revue, configurer le stockage et la liste explicite des administrateurs sur une Preview, puis vérifier la connexion réelle. Ne pas fusionner ni déployer sans instruction.

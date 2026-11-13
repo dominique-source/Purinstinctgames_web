@@ -51,3 +51,8 @@ test('school duplicates normalize spacing and accents; public response cannot co
  let s=seed();assert.throws(()=>save(s,'school',{...s.schools[0],id:'different',name:'Ecole  secondaire Vanier',city:'Quebec'}),/duplicate_school/);
  s=save(s,'school',{...s.schools[0],contactName:'PRIVATE CONTACT',email:'private@example.test',phone:'PRIVATE PHONE',notes:'PRIVATE NOTES'});const json=JSON.stringify(publicView(s));assert.ok(!json.includes('PRIVATE'));assert.ok(!json.includes('private@example.test'));
 });
+test('calendar insertion leaves every existing home section, calculation and form markup unchanged',async()=>{
+ const {readFile}=await import('node:fs/promises');const {createHash}=await import('node:crypto');let html=await readFile(new URL('../index.html',import.meta.url),'utf8');
+ html=html.replace('site-translations.js?v=calendar-20261113','site-translations.js?v=logistics-20261112').replace(/^  <link rel="stylesheet" href="\/assets\/school-calendar.css[^\n]+\n/m,'').replace(/^  <script type="module" src="\/assets\/school-calendar.js[^\n]+\n/m,'').replace(/<section class="school-wristband"[\s\S]*?(?=<section class="school-offer")/,'');
+ assert.equal(createHash('sha256').update(html).digest('hex'),'5c887b9ee0c66a15136f35e7940f1b75ca8fe62d3ca6e66714aedd0df701356f');
+});
