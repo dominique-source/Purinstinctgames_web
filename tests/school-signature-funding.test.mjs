@@ -10,7 +10,7 @@ const html=read('index.html');
 test('calculator markup, prices, modal content and interactive code stay unchanged',()=>{
  const grid=s=>s.slice(s.indexOf('   <div class="estimate-grid">'),s.indexOf('   <p class="estimate-note">'));
  assert.ok(grid(html).length>500);assert.equal(grid(html),grid(base('index.html')));
- const library=s=>s.slice(s.indexOf('<article data-funding-description="school"'),s.indexOf('</div></section>'));
+ const library=s=>[...s.matchAll(/<article data-funding-description="[^"]+"[\s\S]*?<\/article>/g)].map(m=>m[0]).join('');
  assert.equal(library(html),library(base('index.html')));
  for(const p of ['assets/school-home.js','assets/site-language.js','assets/school-funding.js','assets/ecoles.css','assets/ecoles-contact.js','assets/hero-deck/games-brush.png']){
   if(p.endsWith('.png'))assert.deepEqual(readFileSync(new URL('../'+p,import.meta.url)),execFileSync('git',['show','origin/main:'+p],{maxBuffer:10*1024*1024}));
