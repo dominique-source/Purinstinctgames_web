@@ -28,3 +28,10 @@ Aucun stockage commercial calendrier n’est configuré dans Vercel. Variables r
 
 ## Prochaine action
 Lire docs/school-calendar/STATUS.md et CONFIGURATION.md. Après revue, configurer le stockage et la liste explicite des administrateurs sur une Preview, puis vérifier la connexion réelle. Ne pas fusionner ni déployer sans instruction.
+
+## Reprise de publication — 13 novembre 2026
+Le propriétaire valide le bracelet et le calendrier et autorise la configuration, la fusion et la production. Nouvelle vérification : dépôt propre, 92 tests réussis, aucune variable CALENDAR_* sur Vercel. Firebase CLI dispose d’un accès en lecture aux projets, mais aucun projet calendrier dédié n’existe.
+
+La création proposée de `purinstinct-school-calendar` a été refusée par la vérification automatique avant exécution (création persistante et implications possibles de coûts/IAM, autorisation précise demandée). Aucune base n’a été créée, aucun secret ni droit modifié, aucune fusion ou production effectuée. Questions en attente : autoriser ce projet sans facturation/service payant ; confirmer l’adresse exacte administrateur.
+
+Prochaine action : après ces réponses, créer/configurer le stockage dédié, vérifier le parcours authentifié réel sur Preview, puis fusionner la PR40 et vérifier la production ordinateur/mobile. Ne pas publier un calendrier non configuré.
