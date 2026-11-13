@@ -20,7 +20,8 @@ Branche : codex/school-calendar-wristband (base main b3e3e52)
 ## À terminer
 - Vérifications FR/EN, captures et guide terminés (docs/school-calendar/STATUS.md).
 - Clinique QA supprimée, données réelles Vanier inchangées.
-- Dernière étape : pousser la branche et ouvrir la PR de revue.
+- Branche poussée sur GitHub ; PR de revue en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/40.
+- main est restée à b3e3e52 ; aucune fusion. Les intégrations Vercel existantes ont lancé leurs aperçus de branche automatiquement.
 
 ## Blocage externe précis
 Aucun stockage commercial calendrier n’est configuré dans Vercel. Variables requises : CALENDAR_ADMIN_EMAILS, CALENDAR_FIRESTORE_PROJECT_ID, CALENDAR_SERVICE_ACCOUNT_KEY. Ne pas utiliser la base des compétitions. L’environnement est local : pas de garantie de poursuite ordinateur éteint.
