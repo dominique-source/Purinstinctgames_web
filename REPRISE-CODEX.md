@@ -1,64 +1,23 @@
-# Reprise — bracelet et calendrier scolaire
+# Reprise — publication calendrier et bracelet
 
-Dépôt : dominique-source/Purinstinctgames_web
-Dossier : /Users/client/Documents/ChatGPT/purinstinct-web-app-review
-Branche : codex/school-calendar-wristband (base main b3e3e52)
+14 novembre 2026. Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
+Branche codex/calendar-wristband-release : intégration de codex/calendar-oidc et codex/wristband-app-preview, héritant du calendrier de PR40.
 
 ## Terminé
-- Section bracelet bilingue et assets extraits des références approuvées, sources conservées.
-- Calendrier public mensuel / agenda mobile, filtres, disponibilité explicite, détail et journée finale.
-- État initial : École secondaire Vanier, Québec, participante sans dates ; deux cohortes de 10.
-- Administration privée avec rôle explicite, CRUD, brouillons/publication, notes privées séparées.
-- API serveur, adaptateur Firestore avec contrôle de concurrence, persistance locale de test.
+- Calendrier et gestion privée, rôle serveur limité à dominique@purinstinct.com.
+- Firebase calendrier dédié sans facturation, OIDC strictement purinstinct-web/production, aucune clé permanente.
+- Connexion réelle et persistance d’un brouillon vérifiées sur déploiement isolé; données publiques filtrées.
+- Nouvelle section bracelet avec maquettes de téléphones explicitement illustratives et données fictives; FR/EN HTML.
+- Réunion des branches validées; seul conflit : ce document de reprise, actualisé sans toucher aux fonctionnalités.
 
-## Vérifié
-- 92 tests Node réussis au passage final.
-- Navigateur : Vanier sans dates, comptes 1/10 et 0/10, filtre fictif, événement final.
-- Administration locale : clinique fictive enregistrée, conservée après rechargement puis publiée.
-- Aucun courriel envoyé ; aucune fusion ni publication en production.
+## Vérifications
+Voir docs/school-calendar/OIDC-STATUS.md, CONFIGURATION.md et BRACELET-APP.md. Refaire la suite complète sur la branche intégrée avant fusion. Le domaine public est encore sur b3e3e52 au début de cette publication.
 
-## À terminer
-- Vérifications FR/EN, captures et guide terminés (docs/school-calendar/STATUS.md).
-- Clinique QA supprimée, données réelles Vanier inchangées.
-- Branche poussée sur GitHub ; PR de revue en brouillon : https://github.com/dominique-source/Purinstinctgames_web/pull/40.
-- main est restée à b3e3e52 ; aucune fusion. Les intégrations Vercel existantes ont lancé leurs aperçus de branche automatiquement.
-
-## Blocage externe précis
-Aucun stockage commercial calendrier n’est configuré dans Vercel. Variables requises : CALENDAR_ADMIN_EMAILS, CALENDAR_FIRESTORE_PROJECT_ID, CALENDAR_SERVICE_ACCOUNT_KEY. Ne pas utiliser la base des compétitions. L’environnement est local : pas de garantie de poursuite ordinateur éteint.
+## Autorisation
+Le propriétaire a demandé de tout publier, puis a demandé expressément pourquoi calendrier et bracelet ne sont pas en ligne. La mise en ligne de ces éléments validés est autorisée. Le serveur scolaire de répétition du dépôt purinstinct-app reste séparé et ne doit pas être présenté comme un backend de production.
 
 ## Prochaine action
-Lire docs/school-calendar/STATUS.md et CONFIGURATION.md. Après revue, configurer le stockage et la liste explicite des administrateurs sur une Preview, puis vérifier la connexion réelle. Ne pas fusionner ni déployer sans instruction.
+Valider tests et ressources publiques de la version combinée, fusionner dans main via GitHub, surveiller le déploiement du projet Vercel EXISTANT purinstinct-web, puis vérifier purinstinctgames.com/#bracelet et /#school-calendar sans connexion, ainsi que /calendar-admin.html après connexion normale. Consigner SHA et URL exacts.
 
-## Reprise de publication — 13 novembre 2026
-Le propriétaire valide le bracelet et le calendrier et autorise la configuration, la fusion et la production. Nouvelle vérification : dépôt propre, 92 tests réussis, aucune variable CALENDAR_* sur Vercel. Firebase CLI dispose d’un accès en lecture aux projets, mais aucun projet calendrier dédié n’existe.
-
-La création proposée de `purinstinct-school-calendar` a été refusée par la vérification automatique avant exécution (création persistante et implications possibles de coûts/IAM, autorisation précise demandée). Aucune base n’a été créée, aucun secret ni droit modifié, aucune fusion ou production effectuée. Questions en attente : autoriser ce projet sans facturation/service payant ; confirmer l’adresse exacte administrateur.
-
-Prochaine action : après ces réponses, créer/configurer le stockage dédié, vérifier le parcours authentifié réel sur Preview, puis fusionner la PR40 et vérifier la production ordinateur/mobile. Ne pas publier un calendrier non configuré.
-
-## Configuration réelle — projet créé (14 novembre 2026)
-Autorisations reçues : création du projet dédié sans facturation ni service payant ; administrateur exact dominique@purinstinct.com.
-- Projet Firebase créé : purinstinct-school-calendar, numéro 949360956465.
-- Firestore (default), northamerica-northeast1, STANDARD, freeTier=true. Billing API vérifiée : billingEnabled=false, aucun compte associé.
-- Règles docs/school-calendar/firestore.rules publiées : clients refusés. Lecture directe anonyme : 403.
-- Compte calendar-server@purinstinct-school-calendar.iam.gserviceaccount.com créé, rôle roles/datastore.user limité au projet calendrier.
-- Initialisation conditionnelle effectuée via le compte Firebase connecté : Vanier seule, zéro événement, places restantes 9 et 10.
-- Vercel purinstinct-web : CALENDAR_ADMIN_EMAILS et CALENDAR_FIRESTORE_PROJECT_ID créées en production. Aucun déploiement n’a eu lieu, domaine encore sur dpl_HCuYcpc44mCwwjqdB5DSDbjBCpBv.
-- Création de la clé serveur refusée avant exécution par la vérification automatique : autorisation distincte exigée pour la clé longue durée et son transfert comme secret Vercel. Question précise présentée et en attente. Aucune clé créée.
-- CLI Vercel : session expirée ; le connecteur Vercel fonctionne (création des deux variables réussie). Pour le secret, préférer le connecteur et ne jamais afficher la valeur. Ne demander aucun jeton dans le chat.
-
-Après accord pour la clé : créer une seule clé, conserver temporairement en mode0600, transférer confidentiellement dans CALENDAR_SERVICE_ACCOUNT_KEY du projet Vercel existant, vérifier la connexion puis fusionner PR40 et contrôler production et administration desktop/mobile. Supprimer le fichier temporaire après transfert et vérification. Ne pas contourner le refus en créant la clé autrement tant que l’accord manque.
-
-## OIDC autorisé et en cours (14 novembre 2026)
-Branche isolée codex/calendar-oidc, issue de codex/school-calendar-wristband ; les téléphones de PR41 ne sont pas inclus.
-- Fédération créée : pool vercel-calendar / fournisseur purinstinct-web-production. Conditions owner_id exact, project_id exact, production et sujet exact. STS activé sans facturation.
-- Rôle minimal projects/purinstinct-school-calendar/roles/calendarDocumentAccess (entities.get/update) appliqué, ancien datastore.user retiré du compte calendrier. Seul principal workloadIdentityUser de purinstinct-web production lié au compte.
-- OIDC Vercel activé pour purinstinct-web, issuer équipe. Variables non secrètes CALENDAR_OIDC_PROVIDER et CALENDAR_SERVICE_ACCOUNT_EMAIL en production seulement.
-- Adaptateur sans clé ajouté, jetons Google900s, erreurs expurgées. 95 tests réussis ; npm audit0 vulnérabilité après mises à jour transitives compatibles.
-- Restent : déploiement isolé, échange réel, connexion administrateur normale, persistance et confidentialité. Domaine public inchangé à ce stade. Aucune clé créée.
-
-## OIDC terminé et vérifié sur déploiement isolé
-Voir docs/school-calendar/OIDC-STATUS.md et CONFIGURATION.md. Déploiement READY dpl_EN6aj2cvre4WLjJ733WtxHS4jX8G, URL purinstinct-99lrbd7c8-dominique-soucy-s-projects.vercel.app, sans affectation des domaines (--skip-domain). Authentification normale dominique@purinstinct.com réussie ; activité privée sauvegardée, retrouvée après rechargement puis supprimée. Public : Vanier seule, zéro événement, notes/brouillons invisibles, places9/10. Réel token Development refusé par STS400 (condition). Zéro clé calendrier utilisateur ; billingfalse. Seules permissions entities.get/update. 96 tests réussis, auditnpm0.
-Le secret de contournement créé automatiquement par vercel curl a été révoqué et son absence confirmée ; ne pas réutiliser cette commande sans vérifier son comportement. SSO conservé. Aucun secret exposé.
-Les refus applicatifs d’un autre compte et d’écriture sans session sont testés sur le handler avec sessions unitaires, pas avec un second vrai compte en staging. Le staging protège lui-même les visiteurs anonymes. Aucun faux cookie live créé.
-Prochaine action : revue/fusion/publication des branches calendrier/OIDC puis vérification du domaine public ; aucun merge effectué pendant cette tâche. La branche bracelet-téléphones PR41 reste distincte, non validée pour production.
+## Limites
+Pas de dates inventées : Vanier seule, aucune activité publiée au dernier contrôle. Les téléphones illustrés gardent leurs libellés français incrustés; les textes HTML et alternatives sont bilingues. Aucun besoin de clé permanente. Ne jamais reprendre l’ancienne proposition de clé JSON, remplacée par OIDC.
