@@ -21,3 +21,7 @@ Valider tests et ressources publiques de la version combinée, fusionner dans ma
 
 ## Limites
 Pas de dates inventées : Vanier seule, aucune activité publiée au dernier contrôle. Les téléphones illustrés gardent leurs libellés français incrustés; les textes HTML et alternatives sont bilingues. Aucun besoin de clé permanente. Ne jamais reprendre l’ancienne proposition de clé JSON, remplacée par OIDC.
+
+## Publication terminée et vérifiée
+PR43 fusionnée dans main b49bd86ce1d718420efde99aebcc5b266e63955b. Projet Vercel purinstinct-web, déploiement READY dpl_4c8evckeDRE48NEkMXhLCDSPo3PT, alias purinstinctgames.com vérifié. Bracelet/téléphones et calendrier accessibles sans connexion; API privée401sanssession, gestion ouverte après authentification normale de Dominique. FR/EN et390×844 vérifiés;96tests réussis. Voir docs/school-calendar/PRODUCTION-20261114.md.
+Prochaine action : ajouter les dates réelles via la gestion privée lorsque Dominique les fournit; ne pas recréer le calendrier ou son OIDC. Les corrections de compétition sont dans un autre dépôt, non publiées.
