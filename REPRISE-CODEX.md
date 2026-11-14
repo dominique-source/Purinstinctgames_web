@@ -48,3 +48,12 @@ Autorisations reçues : création du projet dédié sans facturation ni service 
 - CLI Vercel : session expirée ; le connecteur Vercel fonctionne (création des deux variables réussie). Pour le secret, préférer le connecteur et ne jamais afficher la valeur. Ne demander aucun jeton dans le chat.
 
 Après accord pour la clé : créer une seule clé, conserver temporairement en mode0600, transférer confidentiellement dans CALENDAR_SERVICE_ACCOUNT_KEY du projet Vercel existant, vérifier la connexion puis fusionner PR40 et contrôler production et administration desktop/mobile. Supprimer le fichier temporaire après transfert et vérification. Ne pas contourner le refus en créant la clé autrement tant que l’accord manque.
+
+## Nouvelle demande — remplacement bracelet par les téléphones
+Branche active : codex/wristband-app-preview, base c28e30a de la branche calendrier. Le nouveau prompt exige un aperçu uniquement, sans fusion ni production.
+- Visuel officiel du bracelet conservé à l’identique ; deux photos remplacées par les téléphones extraits de la maquette fournie.
+- Textes HTML FR/EN mis à jour, mobiles empilés, anciennes images conservées sur disque.
+- 92 tests passent ; HTML hors bracelet strictement identique à la base. Vérification 1440 et390 pixels, saisies conservées au passage EN.
+- Captures et rapport : docs/school-calendar/BRACELET-APP.md.
+- La configuration privée du calendrier reste en attente de l’accord explicite pour créer/transférer la clé serveur ; aucune clé créée, aucun nouveau déploiement production.
+Prochaine action : revue du nouveau visuel. Ne pas fusionner/publier cette branche sans validation.
