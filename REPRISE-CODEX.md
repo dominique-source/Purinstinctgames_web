@@ -48,3 +48,11 @@ Autorisations reçues : création du projet dédié sans facturation ni service 
 - CLI Vercel : session expirée ; le connecteur Vercel fonctionne (création des deux variables réussie). Pour le secret, préférer le connecteur et ne jamais afficher la valeur. Ne demander aucun jeton dans le chat.
 
 Après accord pour la clé : créer une seule clé, conserver temporairement en mode0600, transférer confidentiellement dans CALENDAR_SERVICE_ACCOUNT_KEY du projet Vercel existant, vérifier la connexion puis fusionner PR40 et contrôler production et administration desktop/mobile. Supprimer le fichier temporaire après transfert et vérification. Ne pas contourner le refus en créant la clé autrement tant que l’accord manque.
+
+## OIDC autorisé et en cours (14 novembre 2026)
+Branche isolée codex/calendar-oidc, issue de codex/school-calendar-wristband ; les téléphones de PR41 ne sont pas inclus.
+- Fédération créée : pool vercel-calendar / fournisseur purinstinct-web-production. Conditions owner_id exact, project_id exact, production et sujet exact. STS activé sans facturation.
+- Rôle minimal projects/purinstinct-school-calendar/roles/calendarDocumentAccess (entities.get/update) appliqué, ancien datastore.user retiré du compte calendrier. Seul principal workloadIdentityUser de purinstinct-web production lié au compte.
+- OIDC Vercel activé pour purinstinct-web, issuer équipe. Variables non secrètes CALENDAR_OIDC_PROVIDER et CALENDAR_SERVICE_ACCOUNT_EMAIL en production seulement.
+- Adaptateur sans clé ajouté, jetons Google900s, erreurs expurgées. 95 tests réussis ; npm audit0 vulnérabilité après mises à jour transitives compatibles.
+- Restent : déploiement isolé, échange réel, connexion administrateur normale, persistance et confidentialité. Domaine public inchangé à ce stade. Aucune clé créée.
