@@ -29,4 +29,4 @@ Dans **Cohortes**, modifier intitulé, capacité, période et visibilité. Hypot
 - Persistance locale : fichiers `/tmp/purinstinct-calendar-local.json` et `/tmp/purinstinct-calendar-demo.json` (non versionnés). Ne pas les utiliser comme sauvegarde durable. Le serveur conserve le fichier existant au redémarrage.
 
 ## Avant une utilisation distante
-Suivre [CONFIGURATION.md](CONFIGURATION.md). Sans ces paramètres, l’interface signale l’indisponibilité ; elle ne prétend pas avoir enregistré. Ne pas publier cette branche comme un calendrier opérationnel avant vérification du stockage et de la connexion réelle de l’administrateur.
+La connexion distante OIDC et l’accès administrateur ont été vérifiés sur le déploiement isolé : voir [OIDC-STATUS.md](OIDC-STATUS.md). Le domaine public reste sur son ancienne version. Utiliser le lien de gestion de vérification indiqué dans ce rapport ; après expiration de la session, se reconnecter par le parcours habituel puis rouvrir la gestion. Voir [CONFIGURATION.md](CONFIGURATION.md) pour les paramètres actifs.

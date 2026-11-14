@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@vercel/functions": "^3.7.5",
+    "@vercel/oidc": "4.0.9",
     "google-auth-library": "^10.9.0"
   }
 }
