@@ -1,31 +1,38 @@
-# Configuration distante — non réalisée
+# Configuration active : OIDC sans clé permanente
 
-L’audit a trouvé l’authentification par courriel existante, mais aucun stockage commercial du calendrier ni liste de gestionnaires. Aucun secret n’a été déchiffré, aucun droit n’a été ajouté et aucune base de compétition n’a été modifiée.
+Voir [OIDC-STATUS.md](OIDC-STATUS.md) pour les contrôles réels du 14 novembre 2026. L’ancienne proposition de clé JSON est remplacée par la fédération autorisée dans [AUTH-DECISION.md](AUTH-DECISION.md). Ne jamais créer `CALENDAR_SERVICE_ACCOUNT_KEY`.
 
-## Paramètres indispensables
-Configurer côté serveur Vercel, séparément pour Preview puis Production lors d’une validation ultérieure :
+## Infrastructure effective
+- Projet Vercel existant : `purinstinct-web`, `prj_JV1BLXQpq12GTYjBsYlaSwpBuBRf`, équipe `team_u1gqksE34V1k4RRhLyoE5hok`.
+- Google : `purinstinct-school-calendar`, numéro949360956465 ; Firestore `(default)`, `northamerica-northeast1`, STANDARD/freeTier, aucune facturation associée.
+- Compte : `calendar-server@purinstinct-school-calendar.iam.gserviceaccount.com`.
+- Pool : `vercel-calendar` ; fournisseur : `purinstinct-web-production`.
+- Émetteur : `https://oidc.vercel.com/dominique-soucy-s-projects` ; audience autorisée : `https://vercel.com/dominique-soucy-s-projects`.
+- Contraintes cumulatives : owner_id équipe exact, project_id exact, environment=production, sub=`owner:dominique-soucy-s-projects:project:purinstinct-web:environment:production`.
+- Le seul principal correspondant possède `roles/iam.workloadIdentityUser` sur le compte calendrier. Aucun principalSet général.
+- Rôle personnalisé `projects/purinstinct-school-calendar/roles/calendarDocumentAccess` : `datastore.entities.get` et `datastore.entities.update` uniquement. L’ancien rôle `roles/datastore.user` a été retiré du compte calendrier.
 
-| Variable | Valeur à fournir par l’opérateur |
+## Variables Vercel — Production uniquement, toutes non secrètes
+| Nom | Valeur |
 | --- | --- |
-| `CALENDAR_ADMIN_EMAILS` | Adresses exactes des gestionnaires, séparées par des virgules. Aucun compte n’a été supposé. |
-| `CALENDAR_FIRESTORE_PROJECT_ID` | Projet Google Cloud/Firebase dédié au calendrier commercial, avec Firestore natif `(default)`. |
-| `CALENDAR_SERVICE_ACCOUNT_KEY` | JSON du compte de service serveur autorisé uniquement sur cette base dédiée. Secret Vercel ; jamais dans le client ni dans Git. |
-| `AUTH_SECRET` | Secret existant de signature des sessions, conservé inchangé. |
+| CALENDAR_ADMIN_EMAILS | dominique@purinstinct.com |
+| CALENDAR_FIRESTORE_PROJECT_ID | purinstinct-school-calendar |
+| CALENDAR_SERVICE_ACCOUNT_EMAIL | calendar-server@purinstinct-school-calendar.iam.gserviceaccount.com |
+| CALENDAR_OIDC_PROVIDER | projects/949360956465/locations/global/workloadIdentityPools/vercel-calendar/providers/purinstinct-web-production |
 
-Le compte administrateur doit également être autorisé dans la liste de connexion existante du site. Réutiliser le parcours `request-access` / `verify` sans élargir l’accès à tous les comptes connectés. Ne jamais copier la clé de délégation Gmail pour lui ajouter de nouveaux droits. Ne pas créer de variable publique `NEXT_PUBLIC_*` / `VITE_*` pour ces paramètres.
+Aucune variable calendrier en Preview/Development. OIDC est activé sur le projet Vercel en mode issuer équipe. Les identifiants ci-dessus ne sont pas des credentials ; l’autorisation dépend des assertions signées et validées par Google. Les secrets préexistants de connexion et courriel restent inchangés.
 
-## Base et initialisation
-1. Utiliser un projet dédié, sans données d’élèves/compétition. Le compte de service n’a besoin que des opérations Firestore documentaires sur ce projet ; limiter les permissions IAM à ce besoin. Les permissions IAM serveur contournent les règles client : le cloisonnement du projet est indispensable.
-2. Appliquer `firestore.rules` **uniquement dans ce nouveau projet** : aucun accès direct client. Ne pas appliquer ces règles dans une base existante de compétition.
-3. Exporter les variables dans un environnement opérateur sécurisé, puis lancer manuellement `node scripts/calendar-init.mjs --initialize-dedicated-calendar`.
-4. Le script lit avant d’écrire. S’il existe déjà un état, il ne fait rien. La création utilise `currentDocument.exists=false` : aucune réinitialisation concurrente ni remplacement des données existantes. Il initialise uniquement Vanier sans dates et les deux cohortes.
-5. Vérifier la connexion réelle de l’administrateur, une création en brouillon, publication, dépublication et confidentialité sur une Preview avant d’envisager la production. Les démonstrations ne peuvent pas être écrites par l’adaptateur distant.
+## Serveur
+`lib/calendar/oidc.js` emploie `@vercel/oidc` et `google-auth-library`, endpoints Google fixes et scope datastore. Les jetons Google sont demandés pour900secondes et renouvelés par la bibliothèque ; les requêtes concurrentes sont regroupées. Aucun retour vers une clé JSON ni journalisation des credentials. Les erreurs d’échange sont expurgées avant la réponse API.
 
-Stockage : document `schoolCalendar/state`, payload JSON versionné (`schema:1`) et révision. Les mises à jour utilisent la précondition Firestore `updateTime`. Un conflit retourne 409, sans écraser une autre modification. La projection GET publique utilise une liste explicite de champs ; contacts, notes et brouillons restent privés. POST impose session signée, rôle explicite, origine identique et JSON. Aucun cache public des réponses.
+Les accès fonctionnent uniquement avec la configuration dédiée exacte et VERCEL_ENV=production. Les tests locaux emploient le stockage de démonstration/injections unitaires sans accès à la base réelle.
 
-Cette architecture est adaptée à un petit calendrier commercial, pas à la télémétrie RFID : limite Firestore de taille d’un document, lectures globales et écritures concurrentes signalées plutôt que fusionnées. Prévoir une migration par collections si le calendrier grossit.
+## Données et migration
+Document existant : `schoolCalendar/state`, payload JSON schema1 avec révision. GET public : liste explicite de champs ; brouillons, contacts et notes privés exclus. Écritures : contrôle de concurrence updateTime, session signée avec purpose=session, adresse autorisée côté serveur, origine identique et JSON. Aucune session fabriquée pour les tests distants.
 
-Références : [API REST Firestore](https://firebase.google.com/docs/firestore/use-rest-api), [préconditions d’écriture](https://firebase.google.com/docs/firestore/reference/rest/v1/Precondition).
+Les droits IAM couvrent les documents de la base dédiée ; le chemin dans le code n’est pas une restriction IAM par document. La séparation avec les compétitions repose sur ce projet dédié et l’absence de rôles du compte ailleurs. Les règles clientes restent fermées. Ne rien stocker d’autre dans ce projet.
 
-## État vérifié ici
-La persistance locale et les contrôles de l’API sont testés. Le transport Firestore et ses préconditions ont des tests simulés ; **aucune synchronisation distante ni connexion réelle administrateur à cette nouvelle gestion n’a été vérifiée**, faute des trois variables dédiées. Aucun déploiement ou changement de configuration Vercel n’a été effectué.
+La base est initialisée avec Vanier sans dates. Le runtime ne peut pas créer ou supprimer de document Firestore : les opérations d’écoles/activités modifient le JSON existant. L’ancien outil d’initialisation est devenu une vérification en lecture (`--verify-existing-calendar`) ; une nouvelle migration doit être réalisée séparément par un opérateur autorisé, sans ajouter de droits au runtime.
+
+## Révocation
+Désactiver le fournisseur ou retirer le lien workloadIdentityUser bloque de nouveaux échanges. Pour bloquer aussi les appels des jetons déjà émis, retirer le rôle documentaire ou désactiver le compte. Prévoir la propagation IAM ; vérifier les refus jusqu’à confirmation. Les jetons expirent et se renouvellent automatiquement : aucune rotation manuelle de clé JSON.

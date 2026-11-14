@@ -15,3 +15,10 @@ test('temporary credentials coalesce concurrent requests and redact upstream fai
  let calls=0,release;const gate=new Promise(resolve=>release=resolve);const auth=createCalendarTokenProvider(env,{clientFactory:()=>({getAccessToken:async()=>{calls++;await gate;return {token:'short-lived-test'};}})});const a=auth(),b=auth();release();assert.deepEqual(await Promise.all([a,b]),['short-lived-test','short-lived-test']);assert.equal(calls,1);
  const failed=createCalendarTokenProvider(env,{clientFactory:()=>({getAccessToken:async()=>{throw Error('SENSITIVE UPSTREAM TOKEN');}})});await assert.rejects(failed(),e=>e.code==='storage_auth_failed'&&!e.message.includes('SENSITIVE'));
 });
+test('server authorization allows only the configured Dominique session, not another signed account',async()=>{
+ const {handler}=await import('../api/school-calendar.js');const {signToken}=await import('../lib/token.js');const {seed}=await import('../lib/calendar/model.js');const settings={AUTH_SECRET:'unit-test-only',CALENDAR_ADMIN_EMAILS:'dominique@purinstinct.com'};
+ const api=handler({env:settings,storeFactory:()=>({read:async()=>({state:seed(),tag:'0'})})});
+ const request=async(email,purpose='session')=>{const token=email?await signToken({email,purpose,exp:Date.now()+60000},settings.AUTH_SECRET):'';return api(new Request('https://example.test/api/school-calendar?admin=1',{headers:{cookie:'pig_session='+token}}));};
+ assert.equal((await request('dominique@purinstinct.com')).status,200);assert.equal((await request('other@example.test')).status,403);assert.equal((await request('dominique@purinstinct.com','magic')).status,401);assert.equal((await request('')).status,401);
+ const response=await api(new Request('https://example.test/api/school-calendar',{method:'POST',headers:{origin:'https://example.test','content-type':'application/json'},body:'{}'}));assert.equal(response.status,401);
+});

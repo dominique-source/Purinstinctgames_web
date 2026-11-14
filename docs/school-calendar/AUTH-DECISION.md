@@ -1,4 +1,6 @@
-# Proposition d’authentification — autorisation en attente
+# Décision OIDC autorisée — historique de proposition
+
+**Mise à jour :** option OIDC autorisée et configurée. Voir [OIDC-STATUS.md](OIDC-STATUS.md) pour les vérifications réelles et [CONFIGURATION.md](CONFIGURATION.md) pour les paramètres actifs. Le texte ci-dessous conserve la proposition présentée avant autorisation.
 
 Audit du 14 novembre 2026, lecture seule. Aucune clé créée, aucun pool configuré, aucun changement IAM ou de déploiement effectué pour cet audit.
 

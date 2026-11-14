@@ -56,3 +56,9 @@ Branche isolée codex/calendar-oidc, issue de codex/school-calendar-wristband ; 
 - OIDC Vercel activé pour purinstinct-web, issuer équipe. Variables non secrètes CALENDAR_OIDC_PROVIDER et CALENDAR_SERVICE_ACCOUNT_EMAIL en production seulement.
 - Adaptateur sans clé ajouté, jetons Google900s, erreurs expurgées. 95 tests réussis ; npm audit0 vulnérabilité après mises à jour transitives compatibles.
 - Restent : déploiement isolé, échange réel, connexion administrateur normale, persistance et confidentialité. Domaine public inchangé à ce stade. Aucune clé créée.
+
+## OIDC terminé et vérifié sur déploiement isolé
+Voir docs/school-calendar/OIDC-STATUS.md et CONFIGURATION.md. Déploiement READY dpl_EN6aj2cvre4WLjJ733WtxHS4jX8G, URL purinstinct-99lrbd7c8-dominique-soucy-s-projects.vercel.app, sans affectation des domaines (--skip-domain). Authentification normale dominique@purinstinct.com réussie ; activité privée sauvegardée, retrouvée après rechargement puis supprimée. Public : Vanier seule, zéro événement, notes/brouillons invisibles, places9/10. Réel token Development refusé par STS400 (condition). Zéro clé calendrier utilisateur ; billingfalse. Seules permissions entities.get/update. 96 tests réussis, auditnpm0.
+Le secret de contournement créé automatiquement par vercel curl a été révoqué et son absence confirmée ; ne pas réutiliser cette commande sans vérifier son comportement. SSO conservé. Aucun secret exposé.
+Les refus applicatifs d’un autre compte et d’écriture sans session sont testés sur le handler avec sessions unitaires, pas avec un second vrai compte en staging. Le staging protège lui-même les visiteurs anonymes. Aucun faux cookie live créé.
+Prochaine action : revue/fusion/publication des branches calendrier/OIDC puis vérification du domaine public ; aucun merge effectué pendant cette tâche. La branche bracelet-téléphones PR41 reste distincte, non validée pour production.
