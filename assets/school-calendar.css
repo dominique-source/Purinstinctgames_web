@@ -1,16 +1,26 @@
 .school-wristband,.school-calendar { background:#0a0a0a; color:#f4f4ef; --calendar-cyan:#00d9e8; --calendar-lime:#ccff00; scroll-margin-top:84px; }
-.school-wristband { display:grid; grid-template-columns:minmax(230px,.65fr) minmax(0,1.6fr); gap:30px; padding:42px clamp(18px,3vw,50px); max-width:1600px; margin:auto; align-items:center; }
+.school-wristband { display:grid; grid-template-columns:minmax(230px,.65fr) minmax(0,1.6fr); grid-template-areas:"product title" "product intro" "product screens" "product note" "product signature"; column-gap:30px; row-gap:12px; padding:42px clamp(18px,3vw,50px); max-width:1600px; margin:auto; align-items:center; }
 .school-wristband figure { margin:0; min-width:0; }
-.wristband-product img { display:block; width:100%; max-height:560px; object-fit:contain; }
-.wristband-copy h2 { font:italic 900 clamp(34px,4vw,62px)/1.02 'Barlow Condensed',sans-serif; text-transform:uppercase; margin:0 0 16px; }
-.wristband-copy h2 em { display:block; color:#00d9e8; }
-.wristband-copy>p { font:italic 400 21px/1.4 Barlow,sans-serif; }
-.wristband-scenes { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.wristband-scenes figure { position:relative; }
-.wristband-scenes img { width:100%; height:auto; display:block; }
-.wristband-scenes figcaption { padding:10px 6px; font:italic 900 26px/1.05 'Barlow Condensed',sans-serif; text-transform:uppercase; border-bottom:3px solid #00d9e8; }
-.wristband-copy .wristband-signature { font:italic 900 clamp(42px,5vw,76px)/1 'Barlow Condensed',sans-serif; color:#ccff00; text-transform:uppercase; margin:22px 0 12px; }
-.wristband-copy small { color:#b7c5c5; }
+.school-wristband .wristband-product { grid-area:product; }
+.school-wristband .wristband-product img { display:block; width:100%; height:auto; max-height:650px; object-fit:contain; }
+.school-wristband h2 { grid-area:title; font:italic 900 clamp(34px,3.8vw,62px)/1.02 'Barlow Condensed',sans-serif; text-transform:uppercase; margin:0; }
+.school-wristband h2 em { display:block; color:#00d9e8; }
+.school-wristband .wristband-intro { grid-area:intro; font:italic 400 21px/1.4 Barlow,sans-serif; margin:0; }
+.school-wristband .wristband-app-previews { grid-area:screens; min-width:0; position:relative; }
+.school-wristband .wristband-app-previews::before { content:""; position:absolute; left:-22px; top:55%; width:20px; height:2px; background:#00d9e8; box-shadow:0 0 10px #00d9e8; }
+.school-wristband .wristband-app-previews img { display:block; width:100%; height:auto; }
+.school-wristband .wristband-phones-mobile { display:none; }
+.school-wristband .wristband-preview-note { grid-area:note; color:#b7c5c5; font:italic 400 16px/1.4 Barlow,sans-serif; margin:0; text-align:center; }
+.school-wristband .wristband-signature { grid-area:signature; font:italic 900 clamp(42px,5vw,76px)/1 'Barlow Condensed',sans-serif; color:#ccff00; text-transform:uppercase; margin:6px 0 0; }
+@media(max-width:760px) {
+ .school-wristband { grid-template-columns:minmax(0,1fr); grid-template-areas:"title" "intro" "product" "screens" "note" "signature"; gap:20px; padding:30px 18px; }
+ .school-wristband h2 { font-size:38px; }
+ .school-wristband .wristband-product img { max-height:330px; }
+ .school-wristband .wristband-app-previews::before { display:none; }
+ .school-wristband .wristband-app-previews .wristband-phones-desktop { display:none; }
+ .school-wristband .wristband-phones-mobile { display:grid; gap:18px; }
+ .school-wristband .wristband-signature { font-size:44px; }
+}
 .school-calendar { padding:42px clamp(18px,3vw,50px); max-width:1600px; margin:auto; }
 .calendar-section-heading h2 { font:italic 900 clamp(36px,4.5vw,66px)/1.05 'Barlow Condensed',sans-serif; text-transform:uppercase; margin:0 0 16px; }
 .school-calendar button,#calendar-admin button,.calendar-event-dialog button,.calendar-delete-dialog button { min-height:44px; padding:9px 14px; cursor:pointer; background:#06121a; color:#f4f4ef; border:1px solid #00d9e8; border-radius:6px; font:700 16px/1.2 Barlow,sans-serif; }
@@ -70,10 +80,6 @@
 #calendar-admin .calendar-delete { margin-left:12px; border-color:#ff9393; }
 @media(max-width:1050px) { .calendar-workspace.with-final { grid-template-columns:170px minmax(0,1fr); } .calendar-final { grid-column:1 / -1; } }
 @media(max-width:760px) {
- .school-wristband { grid-template-columns:minmax(0,1fr); gap:20px; padding:30px 18px; }
- .wristband-product img { max-height:360px; }
- .wristband-copy h2 { font-size:38px; }
- .wristband-scenes { grid-template-columns:minmax(0,1fr); }
  .school-calendar { padding:32px 18px; }
  .calendar-cohorts,.calendar-workspace,.calendar-workspace.with-final,.admin-layout { grid-template-columns:minmax(0,1fr); }
  .calendar-workspace aside { display:flex; flex-direction:row; flex-wrap:wrap; }

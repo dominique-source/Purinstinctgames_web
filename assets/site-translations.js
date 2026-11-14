@@ -733,6 +733,11 @@ Object.assign(window.piTranslations, {
 });
 
 Object.assign(window.piTranslations, {
+  "Chaque jeune conserve son bracelet et joue avec différents coéquipiers au fil des activités.": "Each student keeps their wristband and plays with different teammates throughout the activities.",
+  "Aperçu illustratif de l’application · Données de démonstration": "Illustrative app preview · Demo data",
+  "Maquettes de deux téléphones : classement individuel et participation aux activités, avec des données fictives en français.": "Mockups of two phones: individual ranking and activity participation, with fictional data in French.",
+  "Maquette du classement individuel avec des noms fictifs abrégés, en français.": "Individual ranking mockup with abbreviated fictional names, in French.",
+  "Maquette des points et de la participation aux activités d’un participant fictif, en français.": "Points and activity participation mockup for a fictional participant, in French.",
   "Un bracelet pour chacun.": "One wristband for everyone.",
   "Des équipes qui changent.": "Teams that change.",
   "Chaque participant conserve son bracelet tout au long de la compétition. Les équipes changent au fil des parties.": "Each participant keeps their wristband throughout the competition. Teams change from one game to the next.",
