@@ -35,3 +35,16 @@ Le propriétaire valide le bracelet et le calendrier et autorise la configuratio
 La création proposée de `purinstinct-school-calendar` a été refusée par la vérification automatique avant exécution (création persistante et implications possibles de coûts/IAM, autorisation précise demandée). Aucune base n’a été créée, aucun secret ni droit modifié, aucune fusion ou production effectuée. Questions en attente : autoriser ce projet sans facturation/service payant ; confirmer l’adresse exacte administrateur.
 
 Prochaine action : après ces réponses, créer/configurer le stockage dédié, vérifier le parcours authentifié réel sur Preview, puis fusionner la PR40 et vérifier la production ordinateur/mobile. Ne pas publier un calendrier non configuré.
+
+## Configuration réelle — projet créé (14 novembre 2026)
+Autorisations reçues : création du projet dédié sans facturation ni service payant ; administrateur exact dominique@purinstinct.com.
+- Projet Firebase créé : purinstinct-school-calendar, numéro 949360956465.
+- Firestore (default), northamerica-northeast1, STANDARD, freeTier=true. Billing API vérifiée : billingEnabled=false, aucun compte associé.
+- Règles docs/school-calendar/firestore.rules publiées : clients refusés. Lecture directe anonyme : 403.
+- Compte calendar-server@purinstinct-school-calendar.iam.gserviceaccount.com créé, rôle roles/datastore.user limité au projet calendrier.
+- Initialisation conditionnelle effectuée via le compte Firebase connecté : Vanier seule, zéro événement, places restantes 9 et 10.
+- Vercel purinstinct-web : CALENDAR_ADMIN_EMAILS et CALENDAR_FIRESTORE_PROJECT_ID créées en production. Aucun déploiement n’a eu lieu, domaine encore sur dpl_HCuYcpc44mCwwjqdB5DSDbjBCpBv.
+- Création de la clé serveur refusée avant exécution par la vérification automatique : autorisation distincte exigée pour la clé longue durée et son transfert comme secret Vercel. Question précise présentée et en attente. Aucune clé créée.
+- CLI Vercel : session expirée ; le connecteur Vercel fonctionne (création des deux variables réussie). Pour le secret, préférer le connecteur et ne jamais afficher la valeur. Ne demander aucun jeton dans le chat.
+
+Après accord pour la clé : créer une seule clé, conserver temporairement en mode0600, transférer confidentiellement dans CALENDAR_SERVICE_ACCOUNT_KEY du projet Vercel existant, vérifier la connexion puis fusionner PR40 et contrôler production et administration desktop/mobile. Supprimer le fichier temporaire après transfert et vérification. Ne pas contourner le refus en créant la clé autrement tant que l’accord manque.
