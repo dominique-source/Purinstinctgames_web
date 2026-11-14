@@ -10,8 +10,8 @@ test('logistics is a single insertion between the unchanged hero and video',()=>
  assert.equal((html.match(/id="logistique"/g)||[]).length,1);
  assert.ok(html.indexOf('class="zone-grid"')<html.indexOf('id="logistique"'));
  assert.ok(html.indexOf('id="logistique"')<html.indexOf('id="video-games"'));
- const restored=html.replace(section,'').replace('  <link rel="stylesheet" href="/assets/school-logistics.css?v=20261112">\n','').replace('site-translations.js?v=logistics-20261112','site-translations.js?v=signature-20261112');
- assert.equal(restored,execFileSync('git',['show','origin/main:index.html'],{encoding:'utf8'}));
+ const previous=execFileSync('git',['show','origin/main:index.html'],{encoding:'utf8'}).match(/<section class="school-logistics"[\s\S]*?<\/section>\n\n/)[0];
+ assert.equal(section,previous);
  for(const p of ['assets/school-home.js','assets/ecoles-contact.js','assets/site-language.js','assets/school-home.css','assets/ecoles.css','assets/school-funding.js','api/schools-contact.js'])assert.equal(read(p),execFileSync('git',['show','origin/main:'+p],{encoding:'utf8'}),p);
 });
 test('all kit text remains selectable and bilingual with explicit student transport scope',()=>{

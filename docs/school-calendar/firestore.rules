@@ -1,0 +1,8 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  // This dedicated commercial calendar database is server-only.
+  // Admin SDK/REST service-account IAM bypasses these client rules.
+  match /{document=**} { allow read, write: if false; }
+ }
+}

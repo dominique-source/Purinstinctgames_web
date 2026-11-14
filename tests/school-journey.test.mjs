@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const html=read('index.html');
-const journey=html.slice(html.indexOf('<section class="school-section school-journey"'),html.indexOf('<section class="school-offer"'));
+const journey=html.match(/<section class="school-section school-journey"[\s\S]*?<\/section>/)[0];
 const normal=s=>s.replace(/\s+/g,' ').trim();
 test('one journey contains exactly the three approved phases and descriptions',()=>{
  assert.equal((html.match(/id="parcours"/g)||[]).length,1);

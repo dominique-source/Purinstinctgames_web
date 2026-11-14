@@ -15,7 +15,7 @@
   <link rel="alternate" hreflang="en-CA" href="https://purinstinctgames.com/?lang=en">
   <link rel="alternate" hreflang="x-default" href="https://purinstinctgames.com/">
   <meta name="description" content="Découvrez les cinq zones et configurez les Games pour votre école.">
-  <script src="/assets/site-translations.js?v=logistics-20261112" defer></script>
+  <script src="/assets/site-translations.js?v=calendar-20261113" defer></script>
   <link rel="stylesheet" href="/assets/site-language.css">
   <script src="/assets/site-language.js" defer></script>
   <script src="/assets/school-home.js?v=funding-20261110" defer></script>
@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="/assets/school-funding.css?v=photos-20261112">
   <script src="/assets/school-funding.js?v=resources-20261110" defer></script>
   <link rel="stylesheet" href="/assets/school-logistics.css?v=20261112">
+  <link rel="stylesheet" href="/assets/school-calendar.css?v=20261113">
+  <script type="module" src="/assets/school-calendar.js?v=20261113"></script>
 </head>
 <body>
 <nav class="nav" aria-label="Navigation principale">
@@ -181,6 +183,20 @@
     </div></article>
   </div>
 </section>
+<section class="school-wristband" id="bracelet" aria-labelledby="wristband-title">
+ <h2 id="wristband-title"><span>Un bracelet pour chacun.</span> <em>Des équipes qui changent.</em></h2>
+ <p class="wristband-intro">Chaque jeune conserve son bracelet et joue avec différents coéquipiers au fil des activités.</p>
+ <figure class="wristband-product"><img src="/assets/school-calendar/wristband.webp" width="550" height="819" alt="Bracelet officiel PürInstinct noir, sans bras." loading="lazy" decoding="async"></figure>
+ <div class="wristband-app-previews" aria-describedby="wristband-preview-note">
+  <img class="wristband-phones-desktop" src="/assets/school-calendar/app-phones.webp" width="1230" height="470" alt="Maquettes de deux téléphones : classement individuel et participation aux activités, avec des données fictives en français." loading="lazy" decoding="async">
+  <div class="wristband-phones-mobile"><img src="/assets/school-calendar/app-ranking.webp" width="704" height="470" alt="Maquette du classement individuel avec des noms fictifs abrégés, en français." loading="lazy" decoding="async"><img src="/assets/school-calendar/app-participation.webp" width="553" height="453" alt="Maquette des points et de la participation aux activités d’un participant fictif, en français." loading="lazy" decoding="async"></div>
+ </div>
+ <p id="wristband-preview-note" class="wristband-preview-note">Aperçu illustratif de l’application · Données de démonstration</p>
+ <p class="wristband-signature">Le jeu rassemble.</p>
+</section>
+<section class="school-calendar" id="school-calendar" aria-labelledby="school-calendar-title"><header class="calendar-section-heading"><h2 id="school-calendar-title">Les écoles. Les dates. Les Jeux.</h2><p>Découvrez le parcours des écoles participantes.</p><button type="button" data-calendar-reload>Actualiser le calendrier</button></header><p data-calendar-status role="status" aria-live="polite">Chargement du calendrier…</p><div data-calendar-content></div></section>
+<dialog id="calendar-event-dialog" class="service-modal calendar-event-dialog" aria-labelledby="calendar-event-title"><button type="button" data-event-close autofocus>Fermer les détails</button><div data-event-body></div></dialog>
+
 <section class="school-offer" id="offre-ecoles" aria-labelledby="offer-title">
  <header class="offer-intro">
   <img class="offer-panorama" src="/assets/school-home/action-ecole.webp" width="850" height="660" alt="Des élèves jouent ensemble, accompagnés de l’équipe PürInstinct." loading="lazy" decoding="async">
