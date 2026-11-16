@@ -106,7 +106,7 @@
     color: #555;
   }
 </style>
-</head>
+<script src="/assets/site-translations.js" defer></script><script src="/assets/site-language.js" defer></script></head>
 <body>
   <div class="card">
     <h1>Pür<span>Instinct</span> Games</h1>
@@ -131,6 +131,7 @@
     }
 
     const params = new URLSearchParams(window.location.search);
+    if(params.get('returnTo')?.startsWith('/calendar-admin.html'))document.querySelector('.subtitle').textContent='Connectez-vous pour gérer le calendrier scolaire. Le lien reçu par courriel ouvrira le portail sur cet appareil.';
     if (params.get('error') === 'expired') {
       showMessage("Ce lien a expiré ou n'est plus valide. Demandez-en un nouveau ci-dessus.", 'error');
     }
@@ -147,7 +148,7 @@
         const res = await fetch('/api/request-access', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, returnTo: params.get('returnTo') }),
         });
         const data = await res.json();
         if (data.ok) {

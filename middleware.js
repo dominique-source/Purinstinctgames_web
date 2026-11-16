@@ -113,5 +113,7 @@ export default async function middleware(request) {
     return next();
   }
 
-  return Response.redirect(new URL('/access.html', request.url), 302);
+  const login=new URL('/access.html',request.url);
+  if(pathname==='/calendar-admin.html')login.searchParams.set('returnTo',pathname+(url.searchParams.get('lang')==='en'?'?lang=en':''));
+  return Response.redirect(login,302);
 }
