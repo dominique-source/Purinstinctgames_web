@@ -1,3 +1,4 @@
+import {authDestination} from '../lib/auth-destination.js';
 import { signToken, verifyToken } from '../lib/token.js';
 
 const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
@@ -9,7 +10,7 @@ export default {
     const payload = token ? await verifyToken(token, process.env.AUTH_SECRET) : null;
 
     if (!payload || payload.purpose !== 'magic') {
-      return Response.redirect(new URL('/access.html?error=expired', request.url), 302);
+      return Response.redirect(new URL('/access.html?error=expired&returnTo='+encodeURIComponent(authDestination(url.searchParams.get('returnTo'))), request.url), 302);
     }
 
     const session = await signToken(
@@ -20,7 +21,8 @@ export default {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/',
+        Location: authDestination(payload.returnTo),
+        'Cache-Control':'private, no-store',
         'Set-Cookie': `pig_session=${session}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${Math.floor(
           SESSION_TTL_MS / 1000,
         )}`,

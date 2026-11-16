@@ -54,3 +54,8 @@
  .school-calendar[data-calendar-motion] .calendar-workspace { animation:none; }
  .school-calendar .calendar-disclosure-trigger:active { transform:none; }
 }
+
+.school-calendar .calendar-admin-entry { display:flex; align-items:center; gap:8px; min-height:44px; padding:8px 10px; color:#bdebf0; font:600 16px/1.3 Barlow,sans-serif; text-decoration:underline; text-underline-offset:4px; }
+.calendar-admin-entry:focus-visible { outline:3px solid var(--calendar-lime);outline-offset:3px; }
+.calendar-disclosure-copy { flex:1; }
+@media(max-width:1000px) { .calendar-disclosure-header { flex-wrap:wrap; }.calendar-disclosure-copy { flex-basis:100%; } }

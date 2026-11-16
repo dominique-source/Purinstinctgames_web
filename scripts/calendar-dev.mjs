@@ -1,13 +1,13 @@
 // Local-only harness. Never imported by deployed API routes.
 import http from 'node:http';import {readFile} from 'node:fs/promises';import path from 'node:path';import {randomBytes} from 'node:crypto';
 import {seed} from '../lib/calendar/model.js';import {localStore} from '../lib/calendar/local-store.js';import {handler} from '../api/school-calendar.js';import {signToken} from '../lib/token.js';
-const demo=process.argv.includes('--demo'),port=demo?4185:4184,root=process.cwd();
+const demo=process.argv.includes('--demo'),port=Number(process.env.CALENDAR_DEV_PORT)||(demo?4185:4184),root=process.cwd();
 const initial=seed();if(demo){initial.demo=true;for(const [id,name] of [['demo-horizon','École Horizon (démo)'],['demo-rivage','École du Rivage (démo)']])initial.schools.push({id,name,city:'Ville fictive',region:'Région fictive',cohortId:id==='demo-horizon'?'quebec-region':'quebec-elsewhere',status:'participating',visible:true});
  const iso=(day,time)=>`2027-05-${day}T${time}:00-04:00`;
  for(const [id,schoolId,type,day,time,end] of [['demo-conference','demo-horizon','conference','03','10:00','11:00'],['demo-clinic1','demo-horizon','clinic','10','09:00','10:15'],['demo-clinic2','demo-horizon','clinic','12','09:00','10:15'],['demo-training','demo-horizon','training','17','15:30','16:30'],['demo-final','demo-horizon','final','28','09:00','15:00'],['demo-rivage-conf','demo-rivage','conference','07','13:00','14:00']])initial.events.push({id,schoolId,type,title:'',start:new Date(iso(day,time)).toISOString(),end:new Date(iso(day,end)).toISOString(),visibility:'published',status:'confirmed',location:'Terrain gazonné — lieu fictif',privateNote:'Note privée de démonstration'});
  initial.slots.push({id:'demo-slot',start:new Date(iso('06','09:00')).toISOString(),end:new Date(iso('06','12:00')).toISOString(),types:['conference','clinic'],status:'available',visibility:'published',privateNote:'Privé'});
 }
-const file=demo?'/tmp/purinstinct-calendar-demo.json':'/tmp/purinstinct-calendar-local.json';const store=await localStore(file,initial);
+const file=process.env.CALENDAR_DEV_FILE|| (demo?'/tmp/purinstinct-calendar-demo.json':'/tmp/purinstinct-calendar-local.json');const store=await localStore(file,initial);
 const env={AUTH_SECRET:randomBytes(32).toString('hex'),CALENDAR_ADMIN_EMAILS:'calendar-admin@example.test'};const api=handler({env,storeFactory:()=>store});
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.ttf':'font/ttf','.ico':'image/x-icon'};
 http.createServer(async(req,res)=>{try{

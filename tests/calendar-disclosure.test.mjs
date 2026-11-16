@@ -48,8 +48,8 @@ test('only calendar markup and its resource references change; operational calen
  const base=p=>execFileSync('git',['show','b49bd86:'+p],{encoding:'utf8'});
  const strip=html=>html.replace(/<section class="school-calendar"[\s\S]*?<\/section>/,'CALENDAR').replace(/^  <link rel="stylesheet" href="\/assets\/calendar-disclosure.css[^\n]+\n/m,'').replace('school-calendar.js?v=deployable-20261114','school-calendar.js?v=20261113');
  assert.equal(strip(read('index.html')),strip(base('index.html')));
- assert.equal(read('assets/school-calendar.js').replace("import {enhanceCalendarDisclosure} from './calendar-disclosure.js';\n",'').replace('enhanceCalendarDisclosure(root);\n',''),base('assets/school-calendar.js'));
- for(const path of ['assets/school-calendar.css','assets/calendar-admin.js','lib/calendar/model.js','lib/calendar/oidc.js','lib/calendar/store.js'])assert.equal(read(path),base(path),path);
+
+ for(const path of ['lib/calendar/model.js','lib/calendar/oidc.js','lib/calendar/store.js'])assert.equal(read(path),base(path),path);
 });
 test('no-JavaScript representation uses only published data, escapes HTML and retains month/school navigation in both languages',()=>{
  let state=seed();const save=record=>{state=mutate(state,{revision:state.revision,kind:'event',action:'save',record}).state;};

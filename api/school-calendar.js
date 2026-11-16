@@ -6,12 +6,13 @@ export function handler({env=process.env,storeFactory=()=>firestoreStore(env)}={
  return async request=>{
   const url=new URL(request.url),admin=url.searchParams.has('admin')||request.method!=='GET';
   const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
+  let identity;
   try{
    if(admin){
     const allowed=(env.CALENDAR_ADMIN_EMAILS||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
     if(!allowed.length)throw new CalendarError('admin_unconfigured',503);
     let token;try{token=decodeURIComponent((request.headers.get('cookie')||'').match(/(?:^|;\s*)pig_session=([^;]*)/)?.[1]||'');}catch{}
-    const identity=await verifyToken(token,env.AUTH_SECRET);
+    identity=await verifyToken(token,env.AUTH_SECRET);
     if(!identity||identity.purpose!=='session')throw new CalendarError('unauthenticated',401);
     if(!allowed.includes(String(identity.email).toLowerCase()))throw new CalendarError('forbidden',403);
     if(request.method!=='GET'&&(request.headers.get('origin')!==url.origin||!request.headers.get('content-type')?.startsWith('application/json')))throw new CalendarError('forbidden',403);
@@ -19,7 +20,7 @@ export function handler({env=process.env,storeFactory=()=>firestoreStore(env)}={
    if(!['GET','POST'].includes(request.method))throw new CalendarError('method_not_allowed',405);
    const store=storeFactory(),{state,tag}=await store.read();
    if(request.method==='GET'&&!admin&&url.searchParams.get('view')==='calendar')return new Response(publicCalendarHtml(state,url.searchParams),{headers:{...headers,'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; font-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'self'"}});
-   if(request.method==='GET')return Response.json(admin?{state}:{...publicView(state)},{headers});
+   if(request.method==='GET')return Response.json(admin?{state,identity:{email:identity.email}}:{...publicView(state)},{headers});
    const size=request.headers.get('content-length');if(size&&Number(size)>40000)throw new CalendarError('too_large',413);
    const body=await request.text();if(body.length>40000)throw new CalendarError('too_large',413);
    let input;try{input=JSON.parse(body);}catch{throw new CalendarError('invalid_fields');}

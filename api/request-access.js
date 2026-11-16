@@ -1,3 +1,4 @@
+import {authDestination} from '../lib/auth-destination.js';
 import { JWT } from 'google-auth-library';
 import { signToken } from '../lib/token.js';
 
@@ -82,9 +83,10 @@ export default {
       return new Response('Method not allowed', { status: 405 });
     }
 
-    let email;
+    let email,returnTo;
     try {
       const body = await request.json();
+      returnTo=authDestination(body.returnTo);
       email = String(body.email || '').trim().toLowerCase();
     } catch {
       return Response.json({ ok: false, error: 'invalid_request' }, { status: 400 });
@@ -113,11 +115,11 @@ export default {
           await logAttempt({ accessToken, sheetId, email, status: 'Autorisé' });
 
           const token = await signToken(
-            { email, purpose: 'magic', exp: Date.now() + MAGIC_LINK_TTL_MS },
+            { email, returnTo, purpose: 'magic', exp: Date.now() + MAGIC_LINK_TTL_MS },
             process.env.AUTH_SECRET,
           );
           const origin = `https://${request.headers.get('host')}`;
-          const link = `${origin}/api/verify?token=${encodeURIComponent(token)}`;
+          const link = `${origin}/api/verify?token=${encodeURIComponent(token)}&returnTo=${encodeURIComponent(returnTo)}`;
 
           await sendEmail({
             to: email,

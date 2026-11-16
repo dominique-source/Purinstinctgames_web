@@ -857,5 +857,21 @@ Object.assign(window.piTranslations, {
  "Formations": "Training",
  "AFFICHER TOUT LE CALENDRIER": "VIEW FULL CALENDAR",
  "Voir le calendrier": "View calendar",
- "Réduire le calendrier": "Collapse calendar"
+ "Réduire le calendrier": "Collapse calendar",
+"Administrer le calendrier": "Manage calendar",
+"GESTION DU CALENDRIER": "CALENDAR MANAGEMENT",
+"Gérez les écoles et les activités affichées sur le site.": "Manage the schools and activities displayed on the website.",
+"Ajouter une école": "Add a school",
+"Ajouter une activité": "Add an activity",
+"Ajouter une activité à cette école": "Add an activity for this school",
+"Rechercher une école": "Search schools",
+"Enregistrer en brouillon": "Save draft",
+"Publier l’activité": "Publish activity",
+"Activité publiée": "Activity published",
+"Voir dans le calendrier": "View in calendar",
+"Voir le calendrier public": "View public calendar",
+"Se déconnecter / Changer de compte": "Sign out / Change account",
+"Se connecter pour gérer le calendrier": "Sign in to manage the calendar",
+"Activités à venir": "Upcoming activities",
+"Connectez-vous pour gérer le calendrier scolaire. Le lien reçu par courriel ouvrira le portail sur cet appareil.": "Sign in to manage the school calendar. The email link will open the portal on this device."
 });
