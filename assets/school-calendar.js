@@ -1,5 +1,7 @@
+import {enhanceCalendarDisclosure} from './calendar-disclosure.js';
 import {t,lang,locale,node,button,types,dateText,timeText,localInput,errorText,schoolInquiry,downloadEvent} from './calendar-shared.js';
 const root=document.getElementById('school-calendar');
+enhanceCalendarDisclosure(root);
 let data=null,selectedSchool='',selectedEvent='',period=localInput(new Date().toISOString()).slice(0,7),loaded=false,returnFocus;
 const content=root.querySelector('[data-calendar-content]'),status=root.querySelector('[data-calendar-status]');
 const modal=document.getElementById('calendar-event-dialog');

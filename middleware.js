@@ -42,6 +42,8 @@ const publicPaths = new Set([
   '/assets/school-logistics/pride.webp',
   '/assets/school-calendar.css',
   '/assets/school-calendar.js',
+  '/assets/calendar-disclosure.js',
+  '/assets/calendar-disclosure.css',
   '/assets/calendar-shared.js',
   '/assets/school-calendar/wristband.webp',
   '/assets/school-calendar/app-phones.webp',

@@ -31,7 +31,8 @@
   <script src="/assets/school-funding.js?v=resources-20261110" defer></script>
   <link rel="stylesheet" href="/assets/school-logistics.css?v=20261112">
   <link rel="stylesheet" href="/assets/school-calendar.css?v=20261113">
-  <script type="module" src="/assets/school-calendar.js?v=20261113"></script>
+  <script type="module" src="/assets/school-calendar.js?v=deployable-20261114"></script>
+  <link rel="stylesheet" href="/assets/calendar-disclosure.css?v=20261114">
 </head>
 <body>
 <nav class="nav" aria-label="Navigation principale">
@@ -194,7 +195,16 @@
  <p id="wristband-preview-note" class="wristband-preview-note">Aperçu illustratif de l’application · Données de démonstration</p>
  <p class="wristband-signature">Le jeu rassemble.</p>
 </section>
-<section class="school-calendar" id="school-calendar" aria-labelledby="school-calendar-title"><header class="calendar-section-heading"><h2 id="school-calendar-title">Les écoles. Les dates. Les Jeux.</h2><p>Découvrez le parcours des écoles participantes.</p><button type="button" data-calendar-reload>Actualiser le calendrier</button></header><p data-calendar-status role="status" aria-live="polite">Chargement du calendrier…</p><div data-calendar-content></div></section>
+<section class="school-calendar" id="school-calendar" aria-labelledby="school-calendar-title">
+<button type="button" class="calendar-disclosure-trigger" data-calendar-toggle hidden aria-expanded="true" aria-controls="school-calendar-panel">
+ <span class="calendar-disclosure-copy"><span id="calendar-disclosure-title" class="calendar-disclosure-title">LE CALENDRIER DES ÉCOLES</span><span class="calendar-disclosure-subtitle">Découvrez les écoles participantes et les prochaines dates.</span></span>
+ <span class="calendar-disclosure-action"><span data-calendar-toggle-label>Voir le calendrier</span><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg></span>
+</button>
+<div id="school-calendar-panel" class="calendar-disclosure-panel"><div class="calendar-disclosure-clip"><div class="calendar-disclosure-content">
+<header class="calendar-section-heading"><h2 id="school-calendar-title">Les écoles. Les dates. Les Jeux.</h2><p>Découvrez le parcours des écoles participantes.</p><button type="button" data-calendar-reload>Actualiser le calendrier</button></header><p data-calendar-status role="status" aria-live="polite">Chargement du calendrier…</p><div data-calendar-content></div>
+<noscript><style>.school-calendar [data-calendar-reload],.school-calendar [data-calendar-status]{display:none}</style><p class="calendar-note">Sans JavaScript, consultez le <a href="/api/school-calendar?view=calendar">calendrier public et ses dates publiées</a>.</p></noscript>
+</div></div></div>
+</section>
 <dialog id="calendar-event-dialog" class="service-modal calendar-event-dialog" aria-labelledby="calendar-event-title"><button type="button" data-event-close autofocus>Fermer les détails</button><div data-event-body></div></dialog>
 
 <section class="school-offer" id="offre-ecoles" aria-labelledby="offer-title">
