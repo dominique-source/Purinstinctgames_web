@@ -850,6 +850,12 @@ Object.assign(window.piTranslations, {"Conf.":"Talk", "Clin.":"Clinic", "Form.":
 Object.assign(window.piTranslations, {
  "LE CALENDRIER DES ÉCOLES": "SCHOOL CALENDAR",
  "Découvrez les écoles participantes et les prochaines dates.": "Discover participating schools and upcoming dates.",
+ "Les écoles. Les activités. Les prochaines dates.": "Schools. Activities. Upcoming dates.",
+ "Activités du calendrier": "Calendar activities",
+ "Conférences": "Conferences",
+ "Cliniques": "Clinics",
+ "Formations": "Training",
+ "AFFICHER TOUT LE CALENDRIER": "VIEW FULL CALENDAR",
  "Voir le calendrier": "View calendar",
  "Réduire le calendrier": "Collapse calendar"
 });
