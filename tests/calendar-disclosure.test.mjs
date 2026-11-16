@@ -11,20 +11,21 @@ function fixture(reduced=false) {
  const label={textContent:''};
  const trigger={hidden:true,querySelector:()=>label,setAttribute:(k,v)=>attrs[k]=v,addEventListener:(k,f)=>listeners['trigger-'+k]=f,focus:options=>{doc.activeElement=trigger;assert.equal(options.preventScroll,true);}};
  const inside={id:'focused-calendar-filter'};
+ const collapse={hidden:true,setAttribute:(k,v)=>attrs['collapse-'+k]=v,addEventListener:(k,f)=>listeners['collapse-'+k]=f,focus:()=>{doc.activeElement=collapse;}};
  const panel={inert:false,contains:el=>el===inside,setAttribute:(k,v)=>attrs['panel-'+k]=v,addEventListener:(k,f)=>listeners['panel-'+k]=f};
- const root={dataset:{},querySelector:q=>q==='[data-calendar-toggle]'?trigger:panel,setAttribute:(k,v)=>attrs['root-'+k]=v};
+ const root={dataset:{},querySelector:q=>q==='[data-calendar-toggle]'?trigger:q==='[data-calendar-collapse]'?collapse:panel,setAttribute:(k,v)=>attrs['root-'+k]=v};
  const doc={activeElement:null,addEventListener:(k,f)=>listeners[k]=f};
  const media={matches:reduced,addEventListener:(k,f)=>mediaListeners[k]=f};
  let language='fr',requests=0;
  const source=read('assets/calendar-disclosure.js').replace(/^import[^\n]+\n/,'').replace('export function','function');
- const init=new Function('t','window','document',source+'\nreturn enhanceCalendarDisclosure;')(fr=>language==='en'?({'Voir le calendrier':'View calendar','Réduire le calendrier':'Collapse calendar'}[fr]||fr):fr,{matchMedia:()=>media,fetch:()=>requests++},doc);
+ const init=new Function('t','window','document',source+'\nreturn enhanceCalendarDisclosure;')(fr=>language==='en'?({'AFFICHER TOUT LE CALENDRIER':'VIEW FULL CALENDAR','Réduire le calendrier':'Collapse calendar'}[fr]||fr):fr,{matchMedia:()=>media,fetch:()=>requests++},doc);
  return {root,panel,trigger,inside,attrs,doc,media,mediaListeners,listeners,label,init,get requests(){return requests;},language:lang=>{language=lang;listeners['pi:language']();}};
 }
 test('progressive shell starts compact/inert, keeps one button and does not touch the calendar model or fetch',()=>{
  const f=fixture();const result=f.init(f.root);
  assert.equal(f.trigger.hidden,false);assert.equal(f.panel.inert,true);assert.equal(f.attrs['aria-expanded'],'false');
  const content={period:'2027-05',school:'horizon',event:'finale'};f.root.calendarSelections=content;
- for(let i=0;i<15;i++)f.listeners['trigger-click']();
+ for(let i=0;i<15;i++){f.listeners['trigger-click']();f.listeners['collapse-click']();}f.listeners['trigger-click']();
  assert.equal(f.attrs['aria-expanded'],'true');assert.equal(f.panel.inert,false);assert.equal(f.root.calendarSelections,content);assert.equal(f.requests,0);
  result.setExpanded(false,false);assert.equal(f.panel.inert,true);assert.equal(f.attrs['panel-aria-hidden'],'true');
 });
@@ -37,8 +38,8 @@ test('Escape and programmatic close restore focused content without scrolling; n
 });
 test('language changes keep open state; reduced-motion skips activation effects and interrupts safely',()=>{
  const f=fixture(true);const controls=f.init(f.root);controls.setExpanded(true);
- assert.equal(f.root.dataset.calendarMotion,'idle');f.language('en');assert.equal(f.label.textContent,'Collapse calendar');assert.equal(f.attrs['aria-expanded'],'true');
- controls.setExpanded(false);assert.equal(f.label.textContent,'View calendar');assert.equal(f.panel.inert,true);
+ assert.equal(f.root.dataset.calendarMotion,'idle');f.language('en');assert.equal(f.label.textContent,'VIEW FULL CALENDAR');assert.equal(f.attrs['aria-expanded'],'true');
+ controls.setExpanded(false);assert.equal(f.label.textContent,'VIEW FULL CALENDAR');assert.equal(f.panel.inert,true);
  const normal=fixture();const n=normal.init(normal.root);n.setExpanded(true);normal.media.matches=true;normal.mediaListeners.change();assert.equal(normal.root.dataset.calendarMotion,'idle');n.setExpanded(false,false);
  assert.match(read('assets/calendar-disclosure.css'),/@media\(prefers-reduced-motion:reduce\)/);
  assert.doesNotMatch(read('assets/calendar-disclosure.css'),/max-height\s*:/);
@@ -68,4 +69,15 @@ test('HTML fallback is GET-only and never turns admin access into a public respo
  assert.equal((await api(new Request('https://example.test/api/school-calendar?admin=1&view=calendar'))).status,401);
  assert.equal((await api(new Request('https://example.test/api/school-calendar?view=calendar',{method:'POST'}))).status,401);
  const json=await api(new Request('https://example.test/api/school-calendar'));assert.match(json.headers.get('content-type'),/application\/json/);
+});
+
+test('peek has one real calendar, separate native controls and no clickable wrapper',()=>{
+ const html=read('index.html'),section=html.match(/<section class="school-calendar"[\s\S]*?<\/section>/)[0];
+ assert.equal((section.match(/id="school-calendar-panel"/g)||[]).length,1);
+ assert.equal((section.match(/data-calendar-content/g)||[]).length,1);
+ assert.equal((section.match(/data-calendar-toggle /g)||[]).length,1);
+ assert.equal((section.match(/data-calendar-collapse /g)||[]).length,1);
+ assert.match(section,/AFFICHER TOUT LE CALENDRIER/);
+ assert.match(section,/Les écoles. Les activités. Les prochaines dates./);
+ assert.doesNotMatch(section,/stéthoscope|manette|onclick=/);
 });
