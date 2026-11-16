@@ -1,0 +1,54 @@
+/* Only the public calendar's disclosure shell. No wristband/admin/global selectors. */
+.school-calendar[data-calendar-enhanced] { padding-top:20px; padding-bottom:20px; overflow-anchor:none; }
+.school-calendar .calendar-disclosure-trigger[hidden] { display:none; }
+.school-calendar .calendar-disclosure-trigger {
+  position:relative; isolation:isolate; display:flex; align-items:center; justify-content:space-between;
+  gap:28px; width:100%; padding:24px 28px; text-align:left; background:#0a0a0a; color:#f4f4ef;
+  border:1px solid #396269; border-left:4px solid var(--calendar-cyan); border-radius:4px;
+  overflow:hidden; touch-action:manipulation;
+}
+.school-calendar .calendar-disclosure-trigger::before {
+  content:""; position:absolute; inset:0 auto 0 -2px; width:2px;
+  background:linear-gradient(transparent,var(--calendar-cyan),transparent); pointer-events:none;
+  opacity:0;
+}
+.school-calendar .calendar-disclosure-trigger:hover { border-color:var(--calendar-cyan); }
+.school-calendar .calendar-disclosure-trigger:focus-visible { outline:3px solid var(--calendar-lime); outline-offset:5px; }
+.calendar-disclosure-copy { min-width:0; display:grid; gap:8px; }
+.calendar-disclosure-title { font:italic 900 clamp(29px,3.1vw,46px)/1.05 'Barlow Condensed',sans-serif; text-transform:uppercase; }
+.calendar-disclosure-subtitle { color:#c4cdcc; font:400 18px/1.4 Barlow,sans-serif; }
+.calendar-disclosure-action { display:flex; flex-shrink:0; align-items:center; gap:14px; color:var(--calendar-lime); font:italic 900 24px/1.1 'Barlow Condensed',sans-serif; }
+.calendar-disclosure-action svg { flex-shrink:0; transition:transform 300ms ease; }
+.school-calendar[data-calendar-open=true] .calendar-disclosure-action svg { transform:rotate(180deg); }
+.calendar-disclosure-panel { display:grid; grid-template-rows:1fr; }
+.calendar-disclosure-clip { min-height:0; }
+.school-calendar[data-calendar-enhanced] .calendar-disclosure-clip { overflow:clip; }
+.school-calendar[data-calendar-enhanced] .calendar-disclosure-panel { transition:grid-template-rows 360ms cubic-bezier(.25,.75,.25,1); }
+.school-calendar[data-calendar-enhanced][data-calendar-open=false] .calendar-disclosure-panel { grid-template-rows:0fr; }
+.school-calendar[data-calendar-open=true] .calendar-disclosure-panel { transition-duration:560ms; transition-timing-function:cubic-bezier(.2,.82,.25,1); }
+.school-calendar[data-calendar-enhanced] .calendar-disclosure-content {
+  padding:20px 4px 4px; opacity:0; transform:translateY(-8px);
+  transition:opacity 180ms ease,transform 300ms ease;
+}
+.school-calendar[data-calendar-open=true] .calendar-disclosure-content { opacity:1; transform:translateY(0); transition:opacity 320ms 55ms ease,transform 450ms 40ms cubic-bezier(.2,.8,.2,1); }
+.school-calendar[data-calendar-enhanced] .calendar-section-heading :is(h2,p) { display:none; }
+.school-calendar[data-calendar-enhanced] .calendar-section-heading { display:flex; justify-content:flex-end; }
+.school-calendar[data-calendar-motion=opening] .calendar-disclosure-trigger::before { animation:calendar-scan 330ms ease-out both; }
+.school-calendar[data-calendar-motion=opening] .calendar-section-heading { animation:calendar-reveal 240ms 30ms both; }
+.school-calendar[data-calendar-motion=opening] .calendar-cohort { animation:calendar-reveal 300ms 70ms both; }
+.school-calendar[data-calendar-motion=opening] .calendar-cohort:nth-child(2) { animation-delay:100ms; }
+.school-calendar[data-calendar-motion=opening] .calendar-workspace { animation:calendar-reveal 330ms 115ms both; }
+@keyframes calendar-scan { 0%{left:0;opacity:0} 15%{opacity:1} 85%{opacity:1} 100%{left:100%;opacity:0} }
+@keyframes calendar-reveal { from{opacity:.3;transform:translateY(-5px)} to{opacity:1;transform:translateY(0)} }
+@media(max-width:760px) {
+  .school-calendar[data-calendar-enhanced] { padding-top:16px; padding-bottom:16px; }
+  .school-calendar .calendar-disclosure-trigger { padding:18px; gap:14px; flex-wrap:wrap; }
+  .calendar-disclosure-copy { gap:8px; flex-basis:100%; }
+  .calendar-disclosure-title { font-size:clamp(24px,7.2vw,30px); }
+  .calendar-disclosure-subtitle { font-size:16px; }
+  .calendar-disclosure-action { width:100%; justify-content:space-between; font-size:22px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .school-calendar[data-calendar-enhanced] :is(.calendar-disclosure-panel,.calendar-disclosure-content,.calendar-disclosure-action svg) { transition:none; }
+  .school-calendar[data-calendar-motion] :is(.calendar-section-heading,.calendar-cohort,.calendar-workspace),.school-calendar[data-calendar-motion] .calendar-disclosure-trigger::before { animation:none; }
+}

@@ -1,23 +1,9 @@
-# Reprise — publication calendrier et bracelet
+# Reprise — calendrier déployable
 
-14 novembre 2026. Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review.
-Branche codex/calendar-wristband-release : intégration de codex/calendar-oidc et codex/wristband-app-preview, héritant du calendrier de PR40.
+16novembre2026. Dépôt dominique-source/Purinstinctgames_web, dossier /Users/client/Documents/ChatGPT/purinstinct-web-app-review, branche codex/calendar-deployable, base main b49bd86.
 
-## Terminé
-- Calendrier et gestion privée, rôle serveur limité à dominique@purinstinct.com.
-- Firebase calendrier dédié sans facturation, OIDC strictement purinstinct-web/production, aucune clé permanente.
-- Connexion réelle et persistance d’un brouillon vérifiées sur déploiement isolé; données publiques filtrées.
-- Nouvelle section bracelet avec maquettes de téléphones explicitement illustratives et données fictives; FR/EN HTML.
-- Réunion des branches validées; seul conflit : ce document de reprise, actualisé sans toucher aux fonctionnalités.
+Terminé : enveloppe compacte animée du calendrier, FR/EN, accessibilité et vue HTML publique sans JavaScript. Données/filtres/mois/connexion OIDC/permissions et autres sections préservés.102tests et syntaxe réussis le16novembre. Voir docs/school-calendar/DEPLOYABLE.md.
 
-## Vérifications
-Voir docs/school-calendar/OIDC-STATUS.md, CONFIGURATION.md et BRACELET-APP.md. Refaire la suite complète sur la branche intégrée avant fusion. Le domaine public est encore sur b3e3e52 au début de cette publication.
+Le propriétaire valide l’animation et autorise expressément fusion/main/production sur purinstinctgames.com. Prochaine action : pousser/créer PR/fusionner, vérifier Vercel READY et l’alias existant, puis tester le domaine réel sur ordinateur/mobile sans perte du mois ou des filtres. Consigner le résultat et les captures. Ne pas toucher à l’application de compétition ou au projet Firebase séparé.
 
-## Autorisation
-Le propriétaire a demandé de tout publier, puis a demandé expressément pourquoi calendrier et bracelet ne sont pas en ligne. La mise en ligne de ces éléments validés est autorisée. Le serveur scolaire de répétition du dépôt purinstinct-app reste séparé et ne doit pas être présenté comme un backend de production.
-
-## Prochaine action
-Valider tests et ressources publiques de la version combinée, fusionner dans main via GitHub, surveiller le déploiement du projet Vercel EXISTANT purinstinct-web, puis vérifier purinstinctgames.com/#bracelet et /#school-calendar sans connexion, ainsi que /calendar-admin.html après connexion normale. Consigner SHA et URL exacts.
-
-## Limites
-Pas de dates inventées : Vanier seule, aucune activité publiée au dernier contrôle. Les téléphones illustrés gardent leurs libellés français incrustés; les textes HTML et alternatives sont bilingues. Aucun besoin de clé permanente. Ne jamais reprendre l’ancienne proposition de clé JSON, remplacée par OIDC.
+La publication précédente bracelet/calendrier est déjà effective via PR43/mainb49bd86, OIDC sans clé permanente. Les anciens documents de livraison non publiée sont historiques.
