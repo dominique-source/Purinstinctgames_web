@@ -93,6 +93,8 @@ function getCookie(request, name) {
 export default async function middleware(request) {
   const url = new URL(request.url);
   const { pathname } = url;
+  // Public TV entry: navigate to the existing read-only screen, never a moderator route.
+  if(pathname==='/ecran'||pathname==='/ecran/'){const destination=new URL('https://purinstinct-app.vercel.app/app/ecran');destination.search=url.search;return new Response(null,{status:307,headers:{Location:destination.href,'Cache-Control':'no-store'}});}
   // A cross-origin proxy cannot reuse the visitor's Vercel login cookie.
   // Navigate to the protected origin instead; Vercel authenticates before
   // serving any APP route, asset or API. This is independent of the APP button.
