@@ -56,7 +56,7 @@ test('approved price markup, styles, reveal and estimator engine remain unchange
  const outsideEstimate=s=>s.split('// Compact estimate:')[0]+s.slice(s.indexOf('const motion ='));
  assert.equal(outsideEstimate(read('assets/school-home.js')),outsideEstimate(base('assets/school-home.js')));
  assert.equal(read('assets/site-translations.js').split('window.piTranslations =')[0],base('assets/site-translations.js').split('window.piTranslations =')[0]);
- for(const p of ['assets/ecoles-contact.js','assets/app-portal.js','assets/app-portal.css','api/schools-contact.js','vercel.json'])assert.equal(read(p),base(p),p);
+ for(const p of ['assets/ecoles-contact.js','assets/app-portal.css','api/schools-contact.js','vercel.json'])assert.equal(read(p),base(p),p);
  assert.doesNotMatch(read('assets/school-services.css'),/offer-price|offer-regular|data-reveal-state/);
 });
 test('only required service static resources are added to public access',async()=>{

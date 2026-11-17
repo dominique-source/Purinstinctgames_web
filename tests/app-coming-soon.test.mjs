@@ -11,7 +11,7 @@ function fixture(lang='fr'){
  const button={tagName:'BUTTON',setAttribute(){},addEventListener:(n,f)=>buttonEvents[n]=f,focus(){focused++}};
  const document={documentElement:{lang},querySelectorAll:()=>[button],createElement:()=>dialog,body:{append(){}},addEventListener:(n,f)=>events[n]=f};
  // No window.location, navigator, storage or head: accessing any would fail.
- runInNewContext(source,{document,window:{piTranslations:{'À venir au printemps 2027':'Coming spring 2027','Fermer':'Close'}}});
+ runInNewContext(source.replace('mode: "accessible"', 'mode: "coming-soon"'),{document,window:{piTranslations:{'À venir au printemps 2027':'Coming spring 2027','Fermer':'Close'}}});
  return{document,events,dialogEvents,closeEvents,dialog,message,close,buttonEvents,get opened(){return opened},get focused(){return focused}};
 }
 test('APP notice opens in FR/EN without invoking navigation, storage or prefetch',()=>{

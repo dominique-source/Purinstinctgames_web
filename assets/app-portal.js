@@ -1,6 +1,6 @@
 /* Navigation only. Server authentication remains independent of this setting.
- * Change mode to "accessible" to restore the existing native APP destination. */
-const PI_APP_ENTRY = Object.freeze({ mode: "coming-soon", destination: "/app" });
+ * Public APP navigation uses the existing application production domain. */
+const PI_APP_ENTRY = Object.freeze({ mode: "accessible", destination: "https://purinstinct-app.vercel.app/app/" });
 (() => {
   let links = [...document.querySelectorAll('[data-app-entry], a[href="/app"], a[href="/app/"]')];
   if (PI_APP_ENTRY.mode === "coming-soon") {
@@ -49,7 +49,7 @@ const PI_APP_ENTRY = Object.freeze({ mode: "coming-soon", destination: "/app" })
     return; // No prefetch, storage marker or navigation in coming-soon mode.
   }
   links = links.map(entry => {
-    if (entry.tagName === "A") return entry;
+    if (entry.tagName === "A") { entry.href = PI_APP_ENTRY.destination; return entry; }
     const link = document.createElement("a");
     link.href = PI_APP_ENTRY.destination;
     link.className = entry.className;
@@ -73,8 +73,8 @@ const PI_APP_ENTRY = Object.freeze({ mode: "coming-soon", destination: "/app" })
     warmed = true;
     // One document and the first visible photo, only on intent.
     for (const [href, as] of [
-      ["/app/", "document"],
-      ["/app/images/competitions/ecole-verticale.png", "image"],
+      [PI_APP_ENTRY.destination, "document"],
+      [new URL("images/competitions/ecole-verticale.png", PI_APP_ENTRY.destination).href, "image"],
     ]) {
       const link = document.createElement("link");
       link.rel = "prefetch";
