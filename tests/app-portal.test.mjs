@@ -63,6 +63,7 @@ function fixture({
     },
     clearTimeout() {},
     Date,
+    URL,
   });
   const click = (modifiers) => {
     let prevented = false;
@@ -83,7 +84,7 @@ test("prefetches only one document and one critical photo on intent", () => {
   f.handlers.pointerenter();
   assert.deepEqual(
     f.prefetched.map((e) => e.href),
-    ["/app/", "/app/images/competitions/ecole-verticale.png"],
+    ["https://purinstinct-app.vercel.app/app/", "https://purinstinct-app.vercel.app/app/images/competitions/ecole-verticale.png"],
   );
   const saver = fixture({ saveData: true });
   saver.handlers.focus();
