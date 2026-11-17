@@ -36,6 +36,8 @@ function fixture({
     },
   };
   const document = {
+    documentElement:{lang:"fr"},
+    addEventListener:(name,fn)=>{events["document:"+name]=fn;},
     querySelectorAll: () => [link],
     head: { append: (e) => prefetched.push(e) },
     body: { classList, append: () => {} },
@@ -76,7 +78,7 @@ function fixture({
     });
     return prevented;
   };
-  return { handlers, events, timers, prefetched, navigations, classes, click };
+  return { handlers, events, timers, prefetched, navigations, classes, click, link, document };
 }
 test("prefetches only one document and one critical photo on intent", () => {
   const f = fixture();
@@ -84,7 +86,7 @@ test("prefetches only one document and one critical photo on intent", () => {
   f.handlers.pointerenter();
   assert.deepEqual(
     f.prefetched.map((e) => e.href),
-    ["https://purinstinct-app.vercel.app/app/", "https://purinstinct-app.vercel.app/app/images/competitions/ecole-verticale.png"],
+    ["https://pi-ecole-test.vercel.app/app/ecole/test-remote-horizon/gerer", "https://pi-ecole-test.vercel.app/images/competitions/ecole-verticale.png"],
   );
   const saver = fixture({ saveData: true });
   saver.handlers.focus();
@@ -117,3 +119,4 @@ test("a failed visual still navigates", () => {
   assert.equal(f.click(), false);
   assert.deepEqual(f.navigations, []);
 });
+test('school test entry retains the selected FR/EN language without replacing native Back navigation',()=>{const f=fixture();assert.equal(new URL(f.link.href).searchParams.get('lang'),'fr');f.document.documentElement.lang='en';f.events['document:pi:language']();assert.equal(new URL(f.link.href).searchParams.get('lang'),'en');assert.equal(new URL(f.link.href).pathname,'/app/ecole/test-remote-horizon/gerer');assert.equal(f.click(),false);assert.deepEqual(f.navigations,[]);});

@@ -1,6 +1,6 @@
 /* Navigation only. Server authentication remains independent of this setting.
- * Public APP navigation uses the existing application production domain. */
-const PI_APP_ENTRY = Object.freeze({ mode: "accessible", destination: "https://purinstinct-app.vercel.app/app/" });
+ * Public APP navigation targets the isolated school test; moderator authorization stays server-side. */
+const PI_APP_ENTRY = Object.freeze({ mode: "accessible", destination: "https://pi-ecole-test.vercel.app/app/ecole/test-remote-horizon/gerer" });
 (() => {
   let links = [...document.querySelectorAll('[data-app-entry], a[href="/app"], a[href="/app/"]')];
   if (PI_APP_ENTRY.mode === "coming-soon") {
@@ -59,6 +59,8 @@ const PI_APP_ENTRY = Object.freeze({ mode: "accessible", destination: "https://p
     return link;
   });
   if (!links.length) return;
+  const updateLanguage=()=>{const target=new URL(PI_APP_ENTRY.destination);target.searchParams.set('lang',document.documentElement?.lang==='en'?'en':'fr');links.forEach(link=>{link.href=target.href;});};
+  updateLanguage();document.addEventListener?.('pi:language',updateLanguage);
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   let warmed = false;
   let departing = false;
@@ -74,7 +76,7 @@ const PI_APP_ENTRY = Object.freeze({ mode: "accessible", destination: "https://p
     // One document and the first visible photo, only on intent.
     for (const [href, as] of [
       [PI_APP_ENTRY.destination, "document"],
-      [new URL("images/competitions/ecole-verticale.png", PI_APP_ENTRY.destination).href, "image"],
+      [new URL("/images/competitions/ecole-verticale.png", PI_APP_ENTRY.destination).href, "image"],
     ]) {
       const link = document.createElement("link");
       link.rel = "prefetch";
