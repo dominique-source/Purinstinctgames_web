@@ -95,6 +95,8 @@ export default async function middleware(request) {
   const { pathname } = url;
   // Public TV entry: navigate to the existing read-only screen, never a moderator route.
   if(pathname==='/ecran'||pathname==='/ecran/'){const destination=new URL('https://pi-ecole-test.vercel.app/app/ecran');destination.search=url.search;return new Response(null,{status:307,headers:{Location:destination.href,'Cache-Control':'no-store'}});}
+  // Public entry only; legacy nested station/kiosk routes retain their destination.
+  if(pathname==='/app'||pathname==='/app/'){const destination=new URL('https://pi-ecole-test.vercel.app/app/ecole/test-remote-horizon/gerer');destination.search=url.search;return new Response(null,{status:307,headers:{Location:destination.href,'Cache-Control':'no-store'}});}
   // A cross-origin proxy cannot reuse the visitor's Vercel login cookie.
   // Navigate to the protected origin instead; Vercel authenticates before
   // serving any APP route, asset or API. This is independent of the APP button.

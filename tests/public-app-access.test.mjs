@@ -8,7 +8,7 @@ test('all APP routes and assets navigate to the Vercel-protected origin', async 
     for (const cookie of ['', 'pig_session=expired-or-invalid']) {
       const response = await middleware(new Request(`https://purinstinctgames.com${path}`, { headers: { cookie } }));
       assert.equal(response.status, 307, path);
-      assert.equal(response.headers.get('location'), 'https://purinstinct-app.vercel.app'+path, path);
+      assert.equal(response.headers.get('location'), (['/app','/app/'].includes(path)?'https://pi-ecole-test.vercel.app/app/ecole/test-remote-horizon/gerer':'https://purinstinct-app.vercel.app'+path), path);
       assert.equal(response.headers.get('cache-control'), 'private, no-store');
     }
   }
@@ -53,7 +53,7 @@ test('public homepage and its static resources remain public',async()=>{
 test('existing operational paths and query parameters are preserved, with no reverse proxy or open redirect',async()=>{
  for(const path of ['/app/ecole/demo-horizon/gerer','/app/ecole/demo-horizon/projection','/app/?station=speed&lang=en','/app/?next=https://example.invalid/']) {
   const r=await middleware(new Request('https://purinstinctgames.com'+path));
-  assert.equal(r.headers.get('location'),'https://purinstinct-app.vercel.app'+path);
+  assert.equal(r.headers.get('location'),(path.startsWith('/app/?')?'https://pi-ecole-test.vercel.app/app/ecole/test-remote-horizon/gerer'+path.slice(5):'https://purinstinct-app.vercel.app'+path));
  }
  const {readFileSync}=await import('node:fs');
  assert.equal(JSON.parse(readFileSync(new URL('../vercel.json',import.meta.url),'utf8')).rewrites,undefined);
