@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import middleware from '../middleware.js';
 import { signToken } from '../lib/token.js';
 
-test('all APP routes and assets navigate to the Vercel-protected origin', async () => {
+test('public App roots target the school test while nested legacy routes keep their origin', async () => {
   for (const path of ['/app', '/app/', '/app/competitions/ecole', '/app/competitions/interscolaire/', '/app/competitions/pour-tous', '/app/activites/horizon', '/app/assets/index.js', '/app/images/competitions/ecole-verticale.png', '/app/?lang=en']) {
     for (const cookie of ['', 'pig_session=expired-or-invalid']) {
       const response = await middleware(new Request(`https://purinstinctgames.com${path}`, { headers: { cookie } }));
       assert.equal(response.status, 307, path);
-      assert.equal(response.headers.get('location'), (['/app','/app/'].includes(path)?'https://pi-ecole-test.vercel.app/app/ecole/test-remote-horizon/gerer':'https://purinstinct-app.vercel.app'+path), path);
+      assert.equal(response.headers.get('location'), (['/app','/app/'].includes(path.split('?')[0])?'https://pi-ecole-test.vercel.app/app/ecole/test-remote-horizon/gerer'+new URL('https://purinstinctgames.com'+path).search:'https://purinstinct-app.vercel.app'+path), path);
       assert.equal(response.headers.get('cache-control'), 'private, no-store');
     }
   }
