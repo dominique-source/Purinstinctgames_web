@@ -18,7 +18,7 @@
     objective:{fr:"",en:""},equipment:{fr:[],en:[]},
     setup:{fr:"",en:""},steps:{fr:[],en:[]},scoring:{fr:"",en:""},
     levels:{fr:[],en:[]},safety:{fr:"",en:""},teacherTips:{fr:"",en:""},
-    videoUrl:"",imageUrl:""
+    videoUrl:"",imageUrl:"",durationMinutes:null,diagrams:[],mediaType:"video",quickVideoUrl:"",fullVideoUrl:"",approvedAt:null
   })));
   const byId = id => catalogue.find(game=>game.id===id);
   const zoneById = id => zones.find(zone=>zone.id===id);
@@ -32,7 +32,8 @@
     const q=new URLSearchParams();
     if(lang==="en")q.set("lang","en");
     for(const [k,v] of Object.entries(params))if(v)q.set(k,v);
-    return "/jeux.html"+(q.size?"?"+q.toString():"");
+    const base=params.jeu ? "/jeux/"+params.jeu.replace(/-\d+$/,"")+"/jeu-"+params.jeu.split("-").at(-1) : params.zone ? "/jeux/"+params.zone : "/jeux";
+    return base+(q.size?"?"+q.toString():"");
   };
   function pageTitle(fr,en){document.title=label(fr,en)+" | PürInstinct Games";}
   function zoneCard(zone){
@@ -47,10 +48,11 @@
     const name=approved?txt(game.title):label("Jeu "+String(game.number).padStart(2,"0"),"Game "+String(game.number).padStart(2,"0"));
     return `<article class="library-game"><span class="library-count">${escapeHtml(game.id.toUpperCase())}</span>
     <h3>${name}</h3><p>${approved?txt(game.summary):label("Tutoriel en préparation. Règles à valider.","Tutorial in preparation. Rules pending approval.")}</p>
-    ${approved?`<a class="library-button" href="${href({jeu:game.id})}">${label("VOIR LE TUTORIEL","VIEW TUTORIAL")} ↗</a>`:`<span class="library-status">${label("À VENIR","COMING SOON")}</span>`}</article>`;
+    <p class="library-game-meta">${game.durationMinutes?escapeHtml(game.durationMinutes)+" min · ":""}${label("Matériel","Equipment")} : ${approved&&game.equipment?.[lang]?.length?game.equipment[lang].map(escapeHtml).join(", "):label("À confirmer","To be confirmed")}</p>
+    ${approved?`<a class="library-button" href="${href({jeu:game.id})}">${label("VOIR LE TUTORIEL","VIEW TUTORIAL")} ↗</a>`:`<a class="library-status library-draft-link" href="${href({jeu:game.id})}">${label("FICHE EN PRÉPARATION","DRAFT TUTORIAL")} ↗</a>`}</article>`;
   }
   function videoBlock(game){
-    const video=game.videoUrl;
+    const video=game.fullVideoUrl || game.videoUrl;
     // Restrict embeds to secure hosts and local assets; never accept arbitrary HTML.
     if(video && (/^https:\/\/(www\.)?(youtube\.com\/embed\/|youtube-nocookie\.com\/embed\/|player\.vimeo\.com\/video\/)/.test(video))){
       return `<iframe loading="lazy" src="${escapeHtml(video)}" title="${label("Tutoriel vidéo","Video tutorial")}" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>`;
@@ -67,16 +69,15 @@
     const steps=(game.steps?.[lang]||[]).map(s=>`<li>${escapeHtml(s)}</li>`).join("");
     const equipment=(game.equipment?.[lang]||[]).map(s=>`<li>${escapeHtml(s)}</li>`).join("");
     const levels=(game.levels?.[lang]||[]).map(s=>`<li>${escapeHtml(s)}</li>`).join("");
-    const index=catalogue.filter(g=>g.zoneId===game.zoneId).findIndex(g=>g.id===game.id);
-    const siblings=catalogue.filter(g=>g.zoneId===game.zoneId && g.status==="published");
+    const siblings=catalogue.filter(g=>g.zoneId===game.zoneId);
     const pos=siblings.findIndex(g=>g.id===game.id);
     return `<div class="library-tutorial">
       <p class="library-eyebrow">${escapeHtml(label(zone.fr,zone.en))}</p>
-      <h2>${txt(game.title)}</h2>
-      <div class="library-video">${videoBlock(game)}</div>
+      <h2>${txt(game.title)||label("Jeu ","Game ")+String(game.number).padStart(2,"0")}</h2><p class="library-status">${game.status==="published"?label("OFFICIEL","OFFICIAL"):label("BROUILLON — NON VALIDÉ","DRAFT — UNAPPROVED")}</p>
+      <div class="library-video">${game.status==="published"?videoBlock(game):`<div class="library-video-placeholder">${label("VIDÉO EN PRÉPARATION","VIDEO COMING SOON")}</div>`}</div>
       ${section(label("OBJECTIF","OBJECTIVE"),`<p>${string(game.objective)}</p>`)}
       ${section(label("MATÉRIEL","EQUIPMENT"),equipment?`<ul>${equipment}</ul>`:"")}
-      ${section(label("INSTALLATION","SETUP"),`<p>${string(game.setup)}</p>`)}
+      ${section(label("PRÉPARATION DU TERRAIN","FIELD SETUP"),`<p>${string(game.setup)}</p>`)}
       ${section(label("COMMENT JOUER","HOW TO PLAY"),steps?`<ol>${steps}</ol>`:"")}
       ${section(label("POINTAGE","SCORING"),`<p>${string(game.scoring)}</p>`)}
       ${section(label("NIVEAUX","LEVELS"),levels?`<ul>${levels}</ul>`:"")}
@@ -87,8 +88,11 @@
       ${pos>=0 && pos<siblings.length-1?`<a href="${href({jeu:siblings[pos+1].id})}">${label("JEU SUIVANT","NEXT GAME")} →</a>`:""}</div></div>`;
   }
   function render(){
-    const chosenGame=byId(query.get("jeu")),chosenZone=zoneById(query.get("zone"));
-    const activeGame=chosenGame?.status==="published"?chosenGame:null;
+    const parts=location.pathname.split("/").filter(Boolean);
+    const pathZone=parts[0]==="jeux"?parts[1]:null;
+    const pathGame=parts[0]==="jeux" && /^jeu-\d{2}$/.test(parts[2]||"")?pathZone+"-"+parts[2].slice(4):null;
+    const chosenGame=byId(pathGame||query.get("jeu")),chosenZone=zoneById(pathZone||query.get("zone"));
+    const activeGame=chosenGame||null;
     const zone=activeGame?zoneById(activeGame.zoneId):chosenZone;
     const title=document.getElementById("library-title");
     const intro=document.getElementById("library-intro");
@@ -98,7 +102,9 @@
     document.getElementById("library-eyebrow").textContent=label("BIBLIOTHÈQUE PÉDAGOGIQUE","LEARNING LIBRARY");
     if(activeGame){
       title.innerHTML=txt(activeGame.title);intro.textContent=txt(activeGame.summary);
-      disclaimer.hidden=true;root.innerHTML=tutorial(activeGame);
+      disclaimer.hidden=activeGame.status==="published";
+      disclaimer.textContent=label("Fiche en préparation : les informations pédagogiques ne sont pas encore validées.","Draft tutorial: pedagogical information has not yet been approved.");
+      root.innerHTML=tutorial(activeGame);
       crumb.innerHTML=`<a href="${href()}">${label("Jeux","Games")}</a> / <a href="${href({zone:zone.id})}">${escapeHtml(label(zone.fr,zone.en))}</a>`;
       pageTitle(activeGame.title.fr,activeGame.title.en);
     }else if(zone){
@@ -107,20 +113,20 @@
       disclaimer.hidden=false;
       disclaimer.textContent=label("Les tutoriels apparaîtront après validation des jeux.","Tutorials will appear after the games have been approved.");
       crumb.innerHTML=`<a href="${href()}">${label("Jeux","Games")}</a> / ${escapeHtml(label(zone.fr,zone.en))}`;
-      root.innerHTML=`<div class="library-game-grid">${catalogue.filter(g=>g.zoneId===zone.id).map(gameCard).join("")}</div>`;
+      root.innerHTML=`<img class="library-zone-banner" src="/assets/homepage/${zone.image}" alt=""><div class="library-game-grid">${catalogue.filter(g=>g.zoneId===zone.id).map(gameCard).join("")}</div>`;
       pageTitle(zone.fr,zone.en);
     }else{
-      title.innerHTML=label("LES <em>JEUX.</em>","THE <em>GAMES.</em>");
-      intro.textContent=label("5 zones. 15 emplacements de jeux. Des tutoriels pour apprendre, enseigner et se préparer aux PürInstinct Games scolaires.","5 zones. 15 game slots. Tutorials to learn, teach and prepare for PürInstinct School Games.");
+      title.innerHTML=label("15 JEUX. <em>5 ZONES.</em> UNE EXPÉRIENCE.","15 GAMES. <em>5 ZONES.</em> ONE EXPERIENCE.");
+      intro.textContent=label("Découvre les jeux, apprends les règles et prépare-toi aux PürInstinct Games.","Discover the games, learn the rules and get ready for PürInstinct Games.");
       disclaimer.hidden=false;disclaimer.textContent=label("Bibliothèque en préparation : les règles et tutoriels seront publiés après leur validation.","Library in development: official rules and tutorials will be published after approval.");
       crumb.innerHTML="";root.innerHTML=`<div class="library-zone-grid">${zones.map(zoneCard).join("")}</div>`;
       pageTitle("Jeux et tutoriels","Games and tutorials");
     }
     document.querySelector('[data-library-nav-zones]').textContent=label("Les 5 zones","The 5 Zones");
-    document.querySelector('[data-library-nav-games]').textContent=label("Jeux","Games");
-    document.querySelector('[data-library-nav-arena]').textContent=label("L’Arène","The Arena");
-    document.querySelector('[data-library-nav-concept]').textContent=label("Le concept","The Concept");
-    document.querySelector('[data-library-nav-schools]').textContent=label("Pour les écoles","For Schools");
+    document.querySelector('[data-library-nav-games]').textContent=label("JEUX","GAMES");
+    document.querySelector('[data-library-nav-program]').textContent=label("Le programme","The Program");
+    document.querySelector('[data-library-nav-budget]').textContent=label("Estimer mon budget","Estimate My Budget");
+    document.querySelector('[data-library-nav-contact]').textContent="Contact";
     document.querySelectorAll(".site-language button").forEach(b=>b.setAttribute("aria-pressed",String(b.lang===lang)));
     document.documentElement.lang=lang;
     document.querySelectorAll('a[href^="/"]').forEach(a=>{
