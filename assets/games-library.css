@@ -35,3 +35,9 @@
 @media(max-width:850px){.library-zone-grid,.library-game-grid {grid-template-columns:1fr 1fr}.library-game-grid .library-game:last-child {grid-column:span 2}}
 @media(max-width:650px){.library-zone-grid,.library-game-grid {grid-template-columns:1fr}.library-zone:first-child,.library-game-grid .library-game:last-child {grid-column:auto}.library-zone,.library-zone:first-child {min-height:290px}.library-tutorial-section {grid-template-columns:1fr;gap:10px}.library {padding-bottom:65px}}
 @media(prefers-reduced-motion:reduce){.library-zone img{transition:none}}
+
+.library-hero h1{font-size:clamp(44px,7.3vw,112px);max-width:1200px;line-height:.93}
+.library-zone-banner{display:block;width:100%;max-height:350px;object-fit:cover;margin:0 0 28px}
+.library-game-meta{font-size:13px!important;color:#b9b9b2!important;flex:initial!important}
+.library-draft-link{display:inline-block;text-decoration:none}
+.library-game .library-status:hover{border-color:#ccff00;color:#ccff00}
