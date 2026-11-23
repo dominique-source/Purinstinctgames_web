@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="description" content="Phase 1 — prototype technique 3D fictif du PürInstinct Games Animation Engine.">
+  <title>PürInstinct Games — Animation Engine / Prototype 01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800;1,900&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark">P<span class="slashes">≡</span></span><div><strong>PÜRINSTINCT</strong><small>GAMES / ANIMATION ENGINE</small></div></div>
+      <div class="masthead-right"><span class="badge"><span class="badge-dot"></span> PROTOTYPE 01</span><span class="status">PHASE 1 / NON OFFICIEL</span></div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">PROTOTYPE TECHNIQUE <span>—</span> MOUVEMENT 3D</p>
+          <h1>LE JEU <em>PREND VIE.</em></h1>
+          <p class="lede">Une scène. Trois athlètes. Deux caméras. Un système de mouvements réutilisable.</p>
+        </div>
+        <div class="hero-count"><span>01</span><small>/ 06 PHASES</small></div>
+      </section>
+
+      <section class="viewer" aria-label="Scène d'animation 3D">
+        <div class="viewer-meta"><span class="label-live"><i></i> SCÈNE ACTIVE</span><span>DEMO-TECH-001</span></div>
+        <div class="scene-container" id="scene-container" role="img" aria-label="Animation 3D de trois athlètes dans un environnement technique fictif">
+          <div class="loading" id="loading"><span class="spinner"></span> Initialisation du moteur 3D…</div>
+        </div>
+        <div class="scene-watermark">PÜRINSTINCT <span>GAMES</span></div>
+        <div class="camera-badge" id="camera-badge">VUE ISOMÉTRIQUE</div>
+        <div class="demo-overlay">DÉMONSTRATION FICTIVE · TERRAIN NON OFFICIEL · ÉCHELLE ILLUSTRATIVE</div>
+      </section>
+
+      <section class="control-card" aria-label="Commandes du lecteur">
+        <div class="playback-bar">
+          <button class="control-main" id="play-pause" type="button" aria-label="Lire l'animation"><span id="play-icon">▶</span><span id="play-label">LECTURE</span></button>
+          <button class="control-minor" id="restart" type="button" aria-label="Recommencer l'animation">↺ <span>RECOMMENCER</span></button>
+          <div class="progress-block"><div class="times"><span id="current-time">00:00</span><span id="duration">00:13</span></div><div class="track" aria-label="Progression de l'animation"><div class="track-progress" id="track-progress"></div></div></div>
+          <div class="camera-controls" role="group" aria-label="Choisir l'angle de caméra"><span>CAMÉRA</span><button type="button" id="camera-iso" class="camera-btn selected" aria-pressed="true">3D ISO</button><button type="button" id="camera-aerial" class="camera-btn" aria-pressed="false">AÉRIENNE</button></div>
+        </div>
+        <div class="chapter"><span class="chapter-index" id="chapter-index">01 / POSITION INITIALE</span><p id="chapter-description">Trois athlètes et un ballon. Scénario fictif conçu pour valider le moteur.</p></div>
+      </section>
+
+      <section class="bottom-grid">
+        <article class="detail-card"><span class="tiny-label">TECHNOLOGIE</span><h2>UN MOTEUR.<br><em>DES SCÉNARIOS.</em></h2><p>Les positions, les déplacements, les passes et les textes viennent d'un fichier JSON indépendant de la scène. Aucun jeu officiel n'est encore modélisé.</p></article>
+        <article class="detail-card"><span class="tiny-label">DIRECTION ARTISTIQUE</span><div class="pills"><span class="pill"><b class="dot lime"></b> NOIR / LIME</span><span class="pill"><b class="dot red"></b> ÉQUIPE ROUGE</span><span class="pill"><b class="dot blue"></b> ÉQUIPE BLEUE</span></div><p>Les personnages sont des mannequins techniques provisoires, avec des apparences variées. Les équipements définitifs et le réalisme des gestes feront l'objet d'une validation séparée.</p></article>
+      </section>
+    </main>
+    <footer>© PÜRINSTINCT GAMES <span>ANIMATION ENGINE · EXPÉRIMENTAL · NE PAS PUBLIER COMME TUTORIEL</span></footer>
+  </div>
+  <script type="module" src="./engine.js"></script>
+</body>
+</html>
