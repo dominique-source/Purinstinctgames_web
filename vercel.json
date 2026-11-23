@@ -1,1 +1,16 @@
-{}
+{
+  "rewrites": [
+    {
+      "source": "/jeux",
+      "destination": "/jeux.html"
+    },
+    {
+      "source": "/jeux/:zone",
+      "destination": "/jeux.html"
+    },
+    {
+      "source": "/jeux/:zone/:game",
+      "destination": "/jeux.html"
+    }
+  ]
+}
