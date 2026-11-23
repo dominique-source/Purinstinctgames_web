@@ -16,3 +16,23 @@ document.addEventListener("keydown", event => {
     menuButton.focus();
   }
 });
+
+// Add the educational Games library to every existing site menu without
+// replacing page-specific navigation or rebuilding the existing pages.
+if (navigation && !navigation.querySelector('a[href^="/jeux.html"]')) {
+  const gamesLink = document.createElement("a");
+  gamesLink.href = "/jeux.html";
+  gamesLink.textContent = "Jeux";
+  gamesLink.dataset.gamesLibraryLink = "";
+  const zonesLink = [...navigation.querySelectorAll("a")].find(a =>
+    /zones\.html|decouvrir-zones/.test(a.getAttribute("href") || ""));
+  if (zonesLink) zonesLink.after(gamesLink);
+  else navigation.prepend(gamesLink);
+  const updateGamesLanguage = () => {
+    let en = document.documentElement.lang === "en";
+    gamesLink.textContent = en ? "Games" : "Jeux";
+    gamesLink.href = en ? "/jeux.html?lang=en" : "/jeux.html";
+  };
+  document.addEventListener("pi:language", updateGamesLanguage);
+  updateGamesLanguage();
+}
